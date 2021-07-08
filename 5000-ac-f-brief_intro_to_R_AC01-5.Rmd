@@ -86,7 +86,7 @@ x
 
 ## Variables in R
 
-There are several different types of objects in R with fancy math names, including **scalars**, **vectors**, **matrices** (singuler: **matrix), **arrays**,  **dataframes**, **tables**, and **lists**. The **scalar** variable x above is one example of an R object. While a scalar variable such as x has just one element, a **vector** consists of several elements. The elements in a vector are all of the same **type** (eg. numbers or alphabetic characters), while **lists** may include elements such as characters as well as numeric quantities.  Vectors and dataframes are the most common variables you'll use.  You'll also encounter matrices often, and lists are ubiquitous in R but beginning users often don't encounter them because they remain behind the scenes.
+There are several different types of objects in R with fancy math names, including **scalars**, **vectors**, **matrices** (singular: **matrix), **arrays**,  **dataframes**, **tables**, and **lists**. The **scalar** variable x above is one example of an R object. While a scalar variable such as x has just one element, a **vector** consists of several elements. The elements in a vector are all of the same **type** (e.g.. numbers or alphabetic characters), while **lists** may include elements such as characters as well as numeric quantities.  Vectors and dataframes are the most common variables you'll use.  You'll also encounter matrices often, and lists are ubiquitous in R but beginning users often don't encounter them because they remain behind the scenes.
 
 
 ### Vectors
@@ -187,11 +187,13 @@ attributes(mylist)
 
 When you use the `attributes()` function to find the named elements of a list variable, the named elements are always listed under a heading “\$names”. Therefore, we see that the named elements of the list variable `mylist` are called “name” and “wife”, and we can retrieve their values by typing mylist\$name and mylist\$wife, respectively.
 
-### Tables
+### Tables 
 
-**NOTE**: Tables are a common 
+Another type of object that you will encounter in R is a **table**.  The `table()` function allows you to total up or tabulate the number of times a value occurs within a vector.  Tables are typically used on vectors containing **character data**, such as letters, words, or names, but can work on numeric data data.
 
-Another type of object that you will encounter in R is a **table**. For example, if we made a vector variable "nucleotides" containing the of a DNA molecule, we can use the `table()` function to produce a **table variable** that contains the number of bases with each possible nucleotides:
+#### Tables - The basics
+
+If we made a vector variable "nucleotides" containing the of a DNA molecule, we can use the `table()` function to produce a **table variable** that contains the number of bases with each possible nucleotides:
 
 ```{r}
 bases <- c("A", "T", "A", "A", "T", "C", "G", "C", "G")
@@ -207,12 +209,26 @@ We can store the table variable produced by the function `table()`, and call the
 bases.table <- table(bases)
 ```
 
+Tables also work on vectors containing numbers.  First, a vector of numbers.
+
+```{r}
+numeric.vecter <- c(1,1,1,1,3,4,4,4,4)
+```
+
+Second, a table, showing how many times each number occurs.
+
+```{r}
+table(numeric.vecter)
+```
+
+
+#### Tables - further details
 
 To access elements in a table variable, you need to use double square brackets, just like accessing elements in a list. For example, to access the fourth element in the table bases.table (the number of Ts in the sequence), we type:
 
 
 ```{r}
-bases.table[[4]]  # double backets!
+bases.table[[4]]  # double brackets!
 ```
 
 Alternatively, you can use the name of the fourth element in the table (“John”) to find the value of that table element:
@@ -222,62 +238,95 @@ Alternatively, you can use the name of the fourth element in the table (“John�
 bases.table[["T"]]
 ```
 
-Functions in R usually require arguments, which are input variables (ie. objects) that are passed to them, which they then carry out some operation on. For example, the log10() function is passed a number, and it then calculates the log to the base 10 of that number:
+
+## Arguments 
+
+Functions in R usually require **arguments**, which are input variables (i.e.. objects) that are **passed** to them, which they then carry out some operation on. For example, the `log10()` function is passed a number, and it then calculates the log to the base 10 of that number:
 
 ```{r}
 log10(100)
 ```
 
-In R, you can get help about a particular function by using the help() function. For example, if you want help about the log10() function, you can type:
+There's a more generic function, `log()`, where we pass it not only a number to take the log of, but also the specific **base** of the logarithm.  To take the log base 10 with the `log()` function we do this
+
+```{r}
+log(100, base = 10)
+```
+
+We can also take logs with other bases, such as 2:
+
+```{r}
+log(100, base = 2)
+```
+
+## Help files with `help()` and `?`
+
+In *R*, you can get help about a particular function by using the `help()` function. For example, if you want help about the `log10()` function, you can type:
 
 ```{r, eval = F}
 help("log10")
 ```
  
-When you use the help() function, a box or webpage will show up in one of the panes of RStudio with information about the function that you asked for help with.  You can also use the ? next to the fuctnion
+When you use the `help()` function, a box or web pag will show up in one of the panes of RStudio with information about the function that you asked for help with.  You can also use the `?` next to the function like this
 
 ```{r, eval = F}
 ?log10
 ```
 
+Help files are a mixed bag in R, and it can take some getting used to them.  An excellent overview of this is Kieran Healy's ["How to read an R help page."](https://socviz.co/appendix.html)
 
-If you are not sure of the name of a function, but think you know part of its name, you can search for the function name using the help.search() and RSiteSearch() functions. The help.search() function searches to see if you already have a function installed (from one of the R packages that you have installed) that may be related to some topic you’re interested in. The RSiteSearch() function searches all R functions (including those in packages that you haven’t yet installed) for functions related to the topic you are interested in.
 
-For example, if you want to know if there is a function to calculate the standard deviation of a set of numbers, you can search for the names of all installed functions containing the word “deviation” in their description by typing:
+## Searching for functions with `help.search()` and `RSiteSearch()`
+
+If you are not sure of the name of a function, but think you know part of its name, you can search for the function name using the `help.search()` and `RSiteSearch()` functions. The `help.search()` function searches to see if you already have a function installed (from one of the R packages that you have installed) that may be related to some topic you’re interested in.  `RSiteSearch()`  searches *all* R functions (including those in packages that you haven’t yet installed) for functions related to the topic you are interested in.
+
+For example, if you want to know if there is a function to calculate the standard deviation (SD) of a set of numbers, you can search for the names of all installed functions containing the word “deviation” in their description by typing:
 
 ```{r, eval = F}
 help.search("deviation")
 ```
 
-Among the functions that were found, is the function sd() in the “stats” package (an R package that comes with the standard R installation), which is used for calculating the standard deviation.
+Among the functions that were found, is the function `sd()` in the `stats` package (an R package that comes with the base R installation), which is used for calculating the standard deviation.
 
-In the example above, the help.search() function found a relevant function (sd() here). However, if you did not find what you were looking for with help.search(), you could then use the RSiteSearch() function to see if a search of all functions described on the R website may find something relevant to the topic that you’re interested in:
+Now, instead of searching just the packages we've have on our computer let's search all R packages on CRAN.  Let's look for things related to DNA.  Note that `RSiteSearch()` doesn't provide output within RStudio, but rather opens up your web browser for you to display the results.
 
 ```{r, eval = F}
-RSiteSearch("deviation")
+RSiteSearch("DNA")
 ```
 
-The results of the RSiteSearch() function will be hits to descriptions of R functions, as well as to R mailing list discussions of those functions.
+The results of the `RSiteSearch()` function will be hits to descriptions of R functions, as well as to R mailing list discussions of those functions.
 
-We can perform computations with R using objects such as scalars and vectors. For example, to calculate the average of the values in the vector myvector (ie. the average of 8, 6, 9, 10 and 5), we can use the mean() function:
+
+## More on functions 
+
+We can perform computations with R using objects such as scalars and vectors. For example, to calculate the average of the values in the vector `myvector` (i.e.. the average of 8, 6, 9, 10 and 5), we can use the `mean()` function:
 
 ```{r}
-mean(myvector)
+mean(myvector) # note: no " "
 ```
 
-We have been using built-in R functions such as mean(), length(), print(), plot(), etc. We can also create our own functions in R to do calculations that you want to carry out very often on different input data sets. For example, we can create a function to calculate the value of 20 plus square of some input number:
+We have been using built-in R functions such as mean(), length(), print(), plot(), etc. 
+
+### Writing your own functions
+
+**NOTE**: *Writing your own functions is an advanced skills.  New users can skip this section.
+
+We can also create our own functions in R to do calculations that you want to carry out very often on different input data sets. For example, we can create a function to calculate the value of 20 plus square of some input number:
 
 ```{r}
 myfunction <- function(x) { return(20 + (x*x)) }
 ```
 
-This function will calculate the square of a number (x), and then add 20 to that value. The return() statement returns the calculated value. Once you have typed in this function, the function is then available for use. For example, we can use the function for different input numbers (eg. 10, 25):
+This function will calculate the square of a number (x), and then add 20 to that value. The `return()` statement returns the calculated value. Once you have typed in this function, the function is then available for use. For example, we can use the function for different input numbers (e.g.. 10, 25):
 
 ```{r}
 myfunction(10)
 ```
 
-To quit R, type:
+
+## Quiting R
+
+To quit R either close the program, or type:
 
 ```{r,eval = F}
 q()
@@ -292,6 +341,8 @@ For a more in-depth introduction to R, a good online tutorial is available on th
 There is another nice (slightly more in-depth) tutorial to R available on the “Introduction to R” website, cran.r-project.org/doc/manuals/R-intro.html.
 
 [Chapter 3](https://learningstatisticswithr.com/book/introR.html) of Danielle Navarro's book is an excellent intro to the basics of R.
+
+<!-- Add compbio4all -->
 
 ```{r}
 

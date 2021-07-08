@@ -40,22 +40,6 @@ Nathan Brouwer, June 2021
 1. Change from British to American English (Sorry!  Couldn't help myself.)
 
 
-
-
-
-
-
-The following introduction to *R* is based on the first part of ["How to install *R* and a Brief Introduction to R"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html) by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  For additional information see ["Getting *R* onto your computer"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html).
-
-
-**By**: Avril Coghlan  
-
-**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
-
-
-
-
-
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
