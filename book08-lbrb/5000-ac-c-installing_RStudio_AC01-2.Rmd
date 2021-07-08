@@ -1,0 +1,18 @@
+# Installing the RStudio IDE
+
+**By:** Nathan Brouwer
+
+R is a programming language, and when you download it there is also a basic **GUI** (graphical user interface) that you can access via the R icon.
+
+A brief overview of installing RStudio can be found here ["Getting RStudio on to your computer"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-rstudio-on-to-your-computer.html)
+
+## Getting to know RStudio
+
+For a brief overview of RStudio see ["Getting started with RStudio"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-started-with-rstudio.html)
+
+A good overview of what the different parts of RStudio can be seen in the image in this tweet: https://twitter.com/RLadiesNCL/status/1138812826917724160?s=20
+
+
+## RStudio versus RStudio Cloud
+
+RStudio and RStudio cloud work almost identically, so anything you read about RStudio will apply to RStudio Cloud.

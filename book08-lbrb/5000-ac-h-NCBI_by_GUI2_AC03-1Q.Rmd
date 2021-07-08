@@ -1,0 +1,247 @@
+# Introduction to biological sequences databases
+
+```{r , eval = F}
+library(compbio4all)
+```
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+## To do
+
+* replicate these searches in R using rentrez and make into a separate chapter?
+* expand background info?
+* make graph of increase in amount of sequence info on NCBI
+* check relationship between NCBI, entrez, GenBank, etc
+
+
+**NCBI** is the National Center for Biotechnology Information.  The [NCBI Webiste](www.ncbi.nlm.nih.gov/) is the entry point to a large number of databases giving access to **biological sequences** (DNA, RNA, protein) and biology-related publications.
+
+When scientists sequence DNA, RNA and proteins they typically publish their data via databases with the NCBI.  Each is given a unique identification number known as an **accession number**.  For example, each time a unique human genome sequence is produced it is uploaded to the relevant databases, assigned a unique **accession**, and a website created to access it.  Sequence are also cross-referenced to related papers, so you can start with a sequence and find out what scientific paper it was used in, or start with a paper and see if any sequences are associated with it.
+
+
+This chapter provides an introduction to the general search features of the NCBI databases via the interface on the website, including how to locate sequences using accession numbers and other search parameters, such as specific authors or papers.  Subsequent chapters will introduce advanced search features, and how to carry out searches using R commands.
+
+One consequence of the explosion of biological sequences used in publications is that the system of databases has become fairly complex.  There are databases for different types of data, different types of molecules, data from individual experiments showing **genetic variation** and also the **consensus sequence** for a given molecule.  Luckily, if you know the accession number of the sequence you are looking for -- which will be our starting point throughout this book -- its fairly straight forward.  There are numerous other books on bioinformatics and genomics that provide all details if you need to do more complex searches.
+
+In this chapter we'll typically refer generically to "NCBI data" and "NCBI databases."  This is a simplification, since NCBI is the name of the organization and the databases and search engines often have specific names.  
+
+
+
+## Biological sequence databases
+
+Almost published biological sequences are available online, as it is a requirement of every scientific journal that any published DNA or RNA or protein sequence must be deposited in a public database. The main resources for storing and distributing sequence data are three large databases: 
+
+1. USA: **[NCBI database](www.ncbi.nlm.nih.gov/)** (www.ncbi.nlm.nih.gov/)
+1. Europe: **European Molecular Biology Laboratory (EMBL)** database (https://www.ebi.ac.uk/ena)
+1. Japan: **DNA Database of Japan (DDBJ)** database (www.ddbj.nig.ac.jp/). 
+These databases collect all publicly available DNA, RNA and protein sequence data and make it available for free. They exchange data nightly, so contain essentially the same data.  The redundancy among the databases allows them to serve different communities (e.g. native languages), provide different additioal services such as tutorials, and assure that the world's scientists have their data backed up in different physical locations -- a key component of good data management!
+
+## The NCBI Sequence Database
+
+In this chapter we will explore the **NCBI sequence database** using the accession number NC_001477, which is for the complete DEN-1 Dengue virus genome sequence. The accession number is reported in scientific papers originally describing the sequence, and also in subsequent papers that use that particular sequence.
+
+In addition to the sequence itself, for each sequence the NCBI database also stores some additional **annotation** data, such as the name of the species it comes from, references to publications describing that sequence, information on the structure of the proteins coded by the sequence, etc. Some of this annotation data was added by the person who sequenced a sequence and submitted it to the NCBI database, while some may have been added later by a human curator working for NCBI.  
+
+
+## The NCBI Sub-Databases
+
+TODO: Set this up
+
+```{r, echo = F, eval = F}
+knitr::include_graphics(here::here("images/NCBI_search_bar.png"))
+```
+
+
+
+
+The NCBI database contains several sub-databases, the most important of which are:
+
+* **Nucleotide database**: contains DNA and RNA sequences
+* **Protein database**: contains protein sequences
+* **EST database**: contains ESTs (expressed sequence tags), which are short sequences derived from mRNAs.  (This terminology is likely to be unfamiliar because it is not often used in introductory biology courses.  The "Expressed" of EST comes from the fact that mRNA is the result of gene expression.)
+* **Genome database**: contains the DNA sequences for entire genomes
+* **PubMed**: contains data on scientific publications 
+
+From the main NCBI website you can initiate a search and it will look for hits accross all the databases.  You can narrow your search by selecting a particular database.
+
+
+## NCBI GenBank Record Format
+
+As mentioned above, for each sequence the NCBI database stores some extra information such as the species that it came from, publications describing the sequence, etc. This information is stored in the GenBank entry (aka GenBank Record) for the sequence. The GenBank entry for a sequence can be viewed by searching the NCBI database for the accession number for that sequence. 
+
+To view the GenBank entry for the DEN-1 Dengue virus, follow these steps:
+
+1. Go to the [NCBI website](www.ncbi.nlm.nih.gov) (www.ncbi.nlm.nih.gov).
+1. Search for the accession number NC_001477.
+1. Since we searched for a particular accession we are only returned a single main result which is titled "NUCLEOTIDE SEQUENCE: Dengue virus 1, complete genome."
+1. Click on "Dengue virus 1, complete genome" to go to the GenBank entry.
+
+TODO: Set this up
+
+
+```{r, echo = F, eval = FALSE}
+knitr::include_graphics(here::here("images/NCBI_accesssion_NC_001477_main_result.png"))
+```
+
+
+
+The GenBank entry for an accession contains a LOT of information about the sequence, such as papers describing it, features in the sequence, etc. The **DEFINITION** field gives a short description for the sequence. The **ORGANISM** field in the NCBI entry identifies the species that the sequence came from. The **REFERENCE** field contains scientific publications describing the sequence. The **FEATURES** field contains information about the location of features of interest inside the sequence, such as regulatory sequences or genes that lie inside the sequence. The **ORIGIN** field gives the sequence itself.
+
+
+```{r, echo = F, eval = F}
+knitr::include_graphics(here::here("images/NCBI_accesssion_NC_001477_genbank.png"))
+```
+
+
+
+
+
+
+## The FASTA file format
+
+The **FASTA** file format is a simple file format commonly used to store and share sequence information.  When you download sequences from databases such as NCBI you usually want FASTA files.  
+
+The first line of a FASTA file starts with the "greater than" character (>) followed by a name and/or description for the sequence. Subsequent lines contain the sequence itself.  A short FASTA file might contain just something like this:
+
+```{r, echo = F}
+cat(">mysequence1
+ACATGAGACAGACAGACCCCCAGAGACAGACCCCTAGACACAGAGAGAG\nTATGCAGGACAGGGTTTTTGCCCAGGGTGGCAGTATG")
+```
+
+
+A FASTA file can contain the sequence for a single, an entire genome, or more than one sequence. If a FASTA file contains many sequences, then for each sequence it will have a **header line** starting with a greater than character followed by the sequence itself.
+
+This is what a FASTA file with two sequence looks like.
+
+```{r, echo = F}
+cat(">mysequence1
+ACATGAGACAGACAGACCCCCAGAGACAGACCCCTAGACACAGAGAGAG\nTATGCAGGACAGGGTTTTTGCCCAGGGTGGCAGTATG\n
+>mysequence2
+AGGATTGAGGTATGGGTATGTTCCCGATTGAGTAGCCAGTATGAGCCAG\nAGTTTTTTACAAGTATTTTTCCCAGTAGCCAGAGAGAGAGTCACCCAGT\nACAGAGAGC")
+```
+
+TODO: Set this up
+
+
+
+```{r, echo = F, eval = F}
+knitr::include_graphics(here::here("images/NCBI_accesssion_NC_001477_fasta.png"))
+```
+
+
+## Graphics
+
+TODO: Set this up
+
+
+```{r, echo = F, eval = F}
+knitr::include_graphics(here::here("images/NCBI_accesssion_NC_001477_graphics.png"))
+```
+
+
+
+## RefSeq
+
+When carrying out searches of the NCBI database, it is important to bear in mind that the database may contain **redundant sequences** for the same gene that were sequenced by different laboratories and experimenta.  This is bbecause many different labs have sequenced the gene, and submitted their sequences to the NCBI database, and variation exists between individual organisms due to population-level variation due to previous mutations and also potentiall recent spontaneous mutations.  There also can be some error in the sequencing process that results in differences between sequences. 
+
+There are also many different types of nucleotide sequences and protein sequences in the NCBI database. With respect to nucleotide sequences, some many be entire genomic DNA sequences, some may be mRNAs, and some may be lower quality sequences such as expressed sequence tags (ESTs, which are derived from parts of mRNAs), or DNA sequences of **contigs** from genome projects.  That is, you can end up with an entry in the protein database based on sequence derived from a genomic sequence, from sequencing just the gene, and from other routes.  Furthermore, some sequences may be **manually curated** by NCBI staff so that the associated entries contain extra information, but the majority of sequences are **uncurated.**
+
+Therefore, NCBI databases often contains redundant information for a gene, contains sequences of varying quality, and contains both uncurated and curated data.  As a result, NCBI has made a special database called **RefSeq (reference sequence database)**, which is a subset of the NCBI database. The data in RefSeq is manually curated, is high quality sequence data, and is non-redundant; this means that each gene (or **splice-form / isoform** of a gene, in the case of eukaryotes), protein, or genome sequence is only represented once.
+
+The data in RefSeq is curated and is of much higher quality than the rest of the NCBI Sequence Database. However, unfortunately, because of the high level of manual curation required, RefSeq does not cover all species, and is not comprehensive for the species that are covered so far.  To speed up searches and simplify the results in to can be very useful to just search RefSeq.  However, for detailed and thorough work the full database should probably be searched and the results scrutinized.
+
+You can easily tell that a sequence comes from RefSeq because its accession number starts with particular sequence of letters. That is, accessions of RefSeq sequences corresponding to protein records usually start with **NP_**, and accessions of RefSeq curated complete genome sequences usually start with **NC_** or **NS_**.
+
+
+
+
+## Querying the NCBI Database
+
+You may need to interrogate the NCBI Database to find particular sequences or a set of sequences matching given criteria, such as:
+
+* The sequence with accession NC_001477
+* The sequences published in Nature 460:352-358
+* All sequences from *Chlamydia trachomatis*
+* Sequences submitted by Caroline Cameron, a syphyllis researcher
+* Flagellin or fibrinogen sequences
+* The glutamine synthetase gene from *Mycobacteriuma leprae*
+* Just the upstream control region of the *Mycobacterium leprae* dnaA gene
+* The sequence of the *Mycobacterium leprae* DnaA protein
+* The genome sequence of syphilis, *Treponema pallidum* subspp. *pallidum*
+* All human nucleotide sequences associated with malaria
+
+There are two main ways that you can query the NCBI database to find these sets of sequences. The first possibility is to carry out searches on the NCBI website. The second possibility is to carry out searches from R using one of several packages that can interface with NCBI.  As of October 2019 rentrez seems to be the best package for this..
+
+Below, I will explain how to manually carry out queries on the NCBI database.
+
+## Querying the NCBI Database via the NCBI Website (for reference)
+
+**NOTE**: The following section is here for reference; you need to know its possible to refine searches but do not need to know any of these actual tags.
+
+If you are carrying out searches on the NCBI website, to narrow down your searches to specific types of sequences or to specific organisms, you will need to use **“search tags”.**
+
+For example, the search tags “[PROP]” and “[ORGN]” let you restrict your search to a specific subset of the NCBI Sequence Database, or to sequences from a particular taxon, respectively. Here is a list of useful search tags, which we will explain how to use below:
+
+* [AC]    NC_001477[AC]	With a particular accession number
+* [ORGN]    Fungi[ORGN]	From a particular organism or taxon
+* [PROP]    biomol_mRNA[PROP]	Of a specific type (eg. mRNA) or from a specific database (eg. RefSeq)
+* [JOUR]    Nature[JOUR]	Described in a paper published in a particular journal
+* [VOL]    531[VOL]	Described in a paper published in a particular journal volume
+* [PAGE]    27[PAGE]	Described in a paper with a particular start-page in a journal
+* [AU]	“Smith J”[AU]	Described in a paper, or submitted to NCBI, by a particular author
+
+To carry out searches of the NCBI database, you first need to go to the NCBI website, and type your search query into the search box at the top. For example, to search for all sequences from Fungi, you would type “Fungi[ORGN]” into the search box on the NCBI website.
+
+You can combine the search tags above by using “AND”, to make more complex searches. For example, to find all mRNA sequences from Fungi, you could type “Fungi[ORGN] AND biomol_mRNA[PROP]” in the search box on the NCBI website.
+
+Likewise, you can also combine search tags by using “OR”, for example, to search for all mRNA sequences from Fungi or Bacteria, you would type “(Fungi[ORGN] OR Bacteria[ORGN]) AND biomol_mRNA[PROP]” in the search box. Note that you need to put brackets around “Fungi[ORGN] OR Bacteria[ORGN]” to specify that the word “OR” refers to these two search tags.
+
+Here are some examples of searches, some of them made by combining search terms using “AND”:
+
+* NC_001477[AC]	 - With accession number NC_001477
+* Nature[JOUR] AND 460[VOL] AND 352[PAGE]	- Published in Nature 460:352-358
+* “Chlamydia trachomatis”[ORGN] -	From the bacterium Chlamydia trachomatis
+* “Berriman M”[AU] -	Published in a paper, or submitted to NCBI, by M. Berriman
+* flagellin OR fibrinogen -	Which contain the word "flagellin" or "fibrinogen" in their NCBI record
+* “Mycobacterium leprae”[ORGN] AND dnaA	- Which are from M. leprae, and contain “dnaA” in their NCBI record
+* “Homo sapiens”[ORGN] AND “colon cancer”	- Which are from human, and contain “colon cancer” in their NCBI record
+* “Homo sapiens”[ORGN] AND malaria	- Which are from human, and contain “malaria” in their NCBI record
+* “Homo sapiens”[ORGN] AND biomol_mrna[PROP]	- Which are mRNA sequences from human
+* “Bacteria”[ORGN] AND srcdb_refseq[PROP] -	Which are RefSeq sequences from Bacteria
+* “colon cancer” AND srcdb_refseq[PROP] -	From RefSeq, which contain “colon cancer” in their NCBI record
+
+Note that if you are searching for a phrase such as “colon cancer” or “Chlamydia trachomatis", you need to put the phrase in quotes when typing it into the search box. This is because if you type the phrase in the search box without quotes, the search will be for NCBI records that contain either of the two words "colon" or "cancer" (or either of the two words "Chlamydia" or "trachomatis"), not necessarily both words.
+
+As mentioned above, the NCBI database contains several sub-databases, including the NCBI **Nucleotide database** and the NCBI **Protein database**. If you go to the NCBI website, and type one of the search queries above in the search box at the top of the page, the results page will tell you how many matching NCBI records were found in each of the NCBI sub-databases.
+
+For example, if you search for “Chlamydia trachomatis[ORGN]”, you will get matches to proteins from C. trachomatis in the NCBI Protein database, matches to DNA and RNA sequences from *C. trachomatis* in the NCBI Nucleotide database, matches to whole genome sequences for C. trachomatis strains in the NCBI Genome database, and so on:
+
+Alternatively, if you know in advance that you want to search a particular sub-database, for example, the NCBI Protein database, when you go to the NCBI website, you can select that sub-database from the drop-down list above the search box, so that you will search that sub-database.
+
+## Example: finding the sequences published in Nature 460:352-358 (for reference)
+
+**NOTE**: The following section is here for reference; you need to know its possible to refine searches but do not need to know any of these actual tags.
+
+For example, if you want to find sequences published in Nature 460:352-358, you can use the “[JOUR]”, “[VOL]” and “[PAGE]” search terms. That is, you would go to the NCBI website and type in the search box on the top: “Nature”[JOUR] AND 460[VOL] AND 352[PAGE], where [JOUR] specifies the journal name, [VOL] the volume of the journal the paper is in, and [PAGE] the page number.
+
+This should bring up a results page with “50890” beside the word “Nucleotide”, and “1” beside the word “Genome”, and “25701” beside the word “Protein”, indicating that there were 50890 hits to sequence records in the Nucleotide database, which contains DNA and RNA sequences, and 1 hit to the Genome database, which contains genome sequences, and 25701 hits to the Protein database, which contains protein sequences.
+
+If you click on the word “Nucleotide”, it will bring up a webpage with a list of links to the NCBI sequence records for those 50890 hits. The 50890 hits are all contigs from the schistosome worm *Schistosoma mansoni*.
+
+Likewise, if you click on the word “Protein”, it will bring up a webpage with a list of links to the NCBI sequence records for the 25701 hits, and you will see that the hits are all predicted proteins for *Schistosoma mansoni*.
+
+If you click on the word “Genome”, it will bring you to the NCBI record for the *Schistosoma mansoni* genome sequence, which has NCBI accession NS_00200. Note that the accession starts with “NS_”, which indicates that it is a RefSeq accession.
+
+Therefore, in Nature volume 460, page 352, the *Schistosoma mansoni* genome sequence was published, along with all the DNA sequence contigs that were sequenced for the genome project, and all the predicted proteins for the gene predictions made in the genome sequence. You can view the original paper on the Nature website at http://www.nature.com/nature/journal/v460/n7253/abs/nature08160.html.
+
+Note: *Schistmosoma mansoni* is a parasitic worm that is responsible for causing **schistosomiasis**, which is classified by the WHO as a **neglected tropical disease**.
+
+
+
+```{r}
+
+```
+

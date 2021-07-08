@@ -1,0 +1,383 @@
+# Mini tutorial: Vectors in R
+
+This is a modification of part of["DNA Sequence Statistics (2)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter2.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  Most of text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
+
+## Vocab and functions
+
+* base R
+* scalar, vector, matrix
+* regular expressions
+* seq()
+* is(), is.vector(), is.matrix()
+* gsub()
+
+
+
+
+## Vectors in R
+
+**Variables** in R include **scalars**, **vectors**, and **lists**.  **Functions** in R carry out operations on variables, for example, using the log10() function to calculate the log to the base 10 of a scalar variable x, or using the mean() function to calculate the average of the values in a vector variable myvector.  For example, we can use log10() on a scalar like this:
+
+```{r}
+
+x <- 100
+log10(x)
+
+```
+
+Note that while mathematically x is a single number, or a scalar, R considers it to be a vector:
+
+```{r}
+
+is.vector(x)
+
+```
+
+
+There are many "is" commands.  What is returned when you run is.matrix() on a vector?
+```{r}
+
+
+
+```
+
+
+Mathematically this is a bit odd, since often a vector is defined as a one dimenionsal matrix, eg, a single column or single row  of a matrix.  But in R land, a vector is a vector, and matrix is a matrix, and there are no explicit scalars.
+
+
+## Math on vectors
+
+Vectors can serve as the input for mathematical operations. When this is done R does the mathematical operation seperately on each element of the vector. 
+
+Let's make a vector of numbers
+
+```{r}
+
+myvector <- c(30,16,303,99,11,111)
+
+```
+
+What happens when we multiply myvector by 10?
+
+```{r}
+
+myvector*10
+
+
+```
+
+
+The normal order of operations rules apply to vectors as they do to operations were more used to.   So multplying myvector by 10 is the same whether you put he 10 before or after vector.  Write the code below to check this:
+
+```{r}
+
+
+
+```
+
+
+What happen when you sutract 30 from myvector?  Write the code below.
+
+```{r}
+
+
+
+```
+
+
+You can also square a vector
+
+```{r}
+
+myvector^2
+
+```
+
+
+Take the square root of a vector
+
+```{r}
+
+sqrt(myvector)
+
+```
+
+
+and take the log of a vector
+
+```{r}
+
+log(myvector)
+
+```
+
+
+Here we are working on a seperate vector object; all of these rules apply to a column in a matrix or a dataframe.
+
+
+## Functions on vectors
+
+
+We can use functions on vectors. Typically these use the vectors as an input and all the numbers are procssed into an output.  Call the mean() function  on the vector we made called myvector
+```{r}
+
+
+
+```
+ 
+ 
+The function sd() calcualtes the standard deviation. Apply the sd() to myvector:
+
+```{r}
+
+
+
+```
+
+
+## Operations with two vectors
+
+You can also subtract one vector from another vector.  Make another vector with the numbers 5, 10, 15, 20, 25, 30.  Call this myvector2:
+
+```{r}
+
+
+
+
+```
+
+
+Now subtract myvector2 from myvector.  What happens?
+
+```{r}
+
+
+
+```
+
+
+ 
+## Subsetting vectors
+ 
+You can extract an **element** of a vector by typing the vector name with the index of that element given in **square brackets**. For example, to get the value of the 3rd element in the vector myvector, we type:
+
+
+```{r}
+myvector[3]
+```
+
+
+Extract the 4th element of the vector
+
+```{r}
+
+
+```
+
+
+You extract more than one element by using a vector in the brackets:
+
+First, say I want to extract the 3rd and the 4th element.  I can make a vector with 3 and 4 in it:
+```{r}
+
+nums <- c(3,4)
+
+```
+
+
+Then put that vector in the brackets:
+```{r}
+
+myvector[nums]
+
+```
+
+
+We can also do it directly like this:
+
+```{r}
+
+myvector[c(3,4)]
+
+
+```
+
+
+When numbers are consecutive you can do this:
+```{r}
+
+myvector[3:4]
+
+```
+
+
+In the chunk below extract tghe 1st and 2nd elements
+
+```{r}
+
+
+
+```
+
+
+
+
+## Sequences of numbers
+
+Often we want a vectors of numbers in sequential order.  The easiest way to do this is using a colo
+```{r}
+
+1:20
+
+```
+
+Note that in R 1:20 is equivalent to c(1:20)
+```{r}
+
+c(1:20)
+
+```
+
+Usually to empaphasize that a vector is being created I will use c(1:20)
+
+We can do any number to any numbers
+```{r}
+
+c(20:40)
+
+```
+
+
+We can also do it in reverse.  In the code below put 40 before 20:
+
+```{r}
+
+
+
+```
+
+
+A useful function in R is the seq() function, which is an explicit function that can be used to create a vector containing a sequence of numbers that run from a particular number to another particular number.
+
+```{r}
+
+seq(1, 10)
+
+```
+
+Using seq() instead of a : can be useful for readability to make is explicity what is going on.  More importantly, seq has an arguement by =   For example, if we want to create the sequence of numbers from 1-10 in steps of 1 (ie. 1, 2, 3, 4, ... 10), we can type:
+
+```{r}
+seq(1, 10, by = 1)
+```
+
+
+We can change the **step size** by altering the value of the “by” argument given to the function seq(). For example, if we want to create a sequence of numbers from 1-100 in steps of 20 (ie. 1, 21, 41, ... 101), we can type:
+
+```{r}
+seq(1, 101, by = 20)
+```
+
+
+
+## Vectors can hold numeric or character data
+
+The vector we created above holds numeric data, as indicated by is()
+
+```{r}
+
+
+
+```
+
+As we've seen, vectors can holder character data, like the genetic code
+
+```{r}
+myvector <- c("A","T","G")
+
+myvector
+```
+
+## Regular expressions can modify character data
+
+We can use **regular expressions** to modify character data. For example, change the Ts to Us
+
+```{r}
+myvector <- gsub("T", "U", myvector)
+```
+
+Now check it out
+```{r}
+myvector
+```
+
+
+
+## Plotting vectors in base R
+
+R allows the production of a variety of plots, including scatterplots, histograms, piecharts, and boxplots. For example, if you have two vectors of numbers myvector1 and myvector2, you can plot a scatterplot of the values in myvector1 against the values in myvector2 using the **base R** plot() function. 
+
+First, let's make up some data in put it in vectors:
+
+```{r}
+
+myvector1 <- c(10, 15, 22, 35, 43)
+myvector2 <- c(3, 3.2, 3.9, 4.1, 5.2)
+
+
+```
+
+Not plot with the base R plot() function:
+```{r}
+plot(myvector1, myvector2)
+```
+
+If you want to label the axes on the plot, you can do this by giving the plot() function values for its optional arguments xlab and ylab:
+```{r}
+
+plot(myvector1, 
+     myvector2, 
+     xlab="vector1", 
+     ylab="vector2")
+
+```
+
+We can store character data in vectors so if we want we could do this to set up our labels:
+```{r}
+mylabels <-  c("vector1","vector2")
+```
+
+Then use bracket notation to call the labels from nthe vector
+```{r}
+
+plot(myvector1, 
+     myvector2, 
+     xlab=mylabels[1],
+     ylab=mylabels[1])
+
+```
+
+
+The above plot has an error: I intentionlly made it so that "vector1" is printed on both axes.  In the chunk below make it so that "vector2" is printed on the y axis.
+
+```{r}
+
+plot(myvector1, 
+     myvector2, 
+     xlab=mylabels[1],
+     ylab=mylabels[1])
+
+```
+
+
+Base R has lots of plotting functions; additionally, people have written packages to implement new plotting capabilities. ggplot2 is currently the most popular plotting package, and ggpubr is a package which makes ggplot2 easier to use.  For quick plots we'll use base R functions, and when we get to more important things we'll use ggplot2 and ggpubr.
+
+
+# NOTE: please save this file with a new file name to your documents folder or desktop
+
+
+```{r}
+
+
+```
+

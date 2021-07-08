@@ -1,0 +1,28 @@
+--- 
+title: "Computational Biology for All!  Data science, bioinformatics, and other life-sciences awesomeness in R"
+author: "Nathan L. Brouwer"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "An entry-level text for computational biology"
+---
+
+# Preface {-}
+
+This book grew out of exercises I've written for courses taught at the University of Pittsburgh, California University of Pennsylvania, and Duquesne University.  The goal is to walk students step by step through the process of working with data in R.  
+
+A major influence in how this book is written is th online book [Program MARK: a gentle introduction](http://www.phidot.org/software/mark/docs/book/), edited [Evan Cooch](http://canuck.dnr.cornell.edu/) and [Gary White](https://sites.warnercnr.colostate.edu/gwhite/).  That book patiently walks users through the basic of these models step by step, concept by concept, and click by click.  I have sought to adopt a similar thorough and holistic approach in this book.
+
+
+
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+

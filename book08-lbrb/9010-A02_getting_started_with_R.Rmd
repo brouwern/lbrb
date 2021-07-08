@@ -1,0 +1,270 @@
+# Getting started with R itself (or not) {-}
+
+## Vocabulary {-}
+
+* console
+* script editor / source viewer
+* interactive programming
+* scripts / script files
+* .R files
+* text files / plain text files
+* command execution / execute a command from script editor
+* comments / code comments
+* commenting out / commenting out code
+* stackoverflow.com
+* the rstats hashtag
+
+## R commands {-}
+
+* c(...)
+* mean(...)
+* sd(...)
+* ?
+* read.csv(...)
+
+
+This  is a walk-through of a very basic R session. It assumes you have successfully installed R and RStudio onto your computer, and nothing else.
+
+Most people who use R do not actually use the program itself - they use a GUI (graphical user interface) "front end" that make R a bit easier to use.  However, you will probably run into the icon for the underlying R program on your desktop or elsewhere on your computer.  It usually looks like this:
+
+
+ADD IMAGE HERE
+
+```{r, eval = F, echo=FALSE, fig.cap = "The R logo"}
+knitr::include_graphics(here::here("images/R_logo_on_desktop.png"))
+```
+
+The long string of numbers have to do with the version and whether is 32 or 64 bit (not important for what we do).
+
+If you are curious you can open it up and take a look - it actually looks a lot like RStudio, where we will do all our work (or rather, RStudio looks like R).  Sometimes when people are getting started with R they will accidentally open R instead of RStudio; if things don't seem to look or be working the way you think they should, you might be in R, not RStudio
+
+
+
+
+
+
+#### R's console as a scientific calculator
+
+You can interact with R's console similar to a scientific calculator.  For example, you can use parentheses to set up mathematical statements like
+
+```{r}
+5*(1+1)
+```
+
+Note however that you have to be explicit about multiplication.  If you try the following it won't work.
+
+```{r eval=FALSE}
+5(1+1)
+```
+
+
+R also has built-in functions that work similar to what you might have used in Excel.  For example, in Excel you can calculate the average of a set of numbers by typing "=average(1,2,3)" into a cell.  R can do the same thing except
+
+* The command is "mean"
+* You don't start with "="
+* You have to package up the numbers like what is shown below using "c(...)"
+
+```{r}
+mean(c(1,2,3))
+```
+
+Where "c(...)" packages up the numbers the way the mean() function wants to see them.
+
+If you just do the following R will give you an answer, but its the wrong one
+
+```{r eval=FALSE}
+mean(1,2,3)
+```
+
+**This is a common issue with R -- and many programs, really -- it won't always tell you when somethind didn't go as planned.  This is because it doesn't know something didn't go as planned; you have to learn the rules R plays by.**
+
+
+#### Practice: math in the console
+
+See if you can reproduce the following results
+
+**Division**
+```{r}
+10/3
+```
+
+**The standard deviation**
+```{r}
+sd(c(5,10,15)) # note the use of "c(...)"
+```
+
+
+#### The script editor
+
+While you can interact with R directly within the console, the standard way to work in R is to write what are known as **scripts.**  These are computer code instructions written to R in a **script file.**  These are save with the extension **.R** but area really just a form of **plain text file.**
+
+To work with scripts, what you do is type commands in the script editor, then tell R to **excute** the command.  This can be done several ways.  
+
+First, you tell RStudio the line of code you want to run by either
+* Placing the cursor at the end a line of code, OR
+* Clicking and dragging over the code you want to run in order highlight it.
+
+Second, you tell RStudio to run the code by
+* Clicking the "Run" icon in the upper right hand side of the script editor (a grey box with a green error emerging from it)
+* pressing the control key ("ctrl)" and then then enter key on the keyboard
+
+The code you've chosen to run will be sent by RStudio from the script editor over to the console.  The console will show you both the code and then the output.
+
+You can run several lines of code if you want; the console will run a line, print the output, and then run the next line.  First I'll use the command mean(), and then the command sd() for the standard deviation:
+```{r}
+mean(c(1,2,3))
+sd(c(1,2,3))
+```
+
+#### Comments 
+
+One of the reasons we use script files is that we can combine R code with **comments** that tell us what the R code is doing.  Comments are preceded by the hashtag symbol **#**.  Frequently we'll write code like this:
+
+```{r eval = FALSE}
+#The mean of 3 numbers
+mean(c(1,2,3))
+```
+
+If you highlight all of this code (including the comment) and then click on "run", you'll see that RStudio sends all of the code over console.
+```{r echo=FALSE}
+#The mean of 3 numbers
+mean(c(1,2,3))
+```
+
+Comments can also be placed at the *end* of a line of code
+
+```{r eval = FALSE}
+mean(c(1,2,3)) #Note  the use of c(...)
+```
+
+Sometimes we write code and then don't want R to run it.  We can prevent R from executing the code even if its sent to the console by putting a "#" *infront* of the code.
+
+If I run this code, I will get just the mean but not the sd.  
+
+```{r eval = FALSE}
+mean(c(1,2,3))
+#sd(c(1,2,3))
+```
+
+Doing this is called **commenting out** a line of code.
+
+## Help!
+
+There are many resource for figuring out R and RStudio, including
+
+* R's built in "help" function
+* Q&A websites like **stackoverflow.com**
+* twitter, using the hashtag #rstats
+* blogs
+* online books and course materials
+
+### Getting "help" from R
+
+If you are using a function in R you can get info about how it works like this
+```{r eval = FALSE}
+?mean
+```
+
+In RStudio the help screen should appear, probably above your console.  If you start reading this help file, though, you don't have to go far until you start seeing lots of R lingo, like "S3 method","na.rm", "vectors".  Unfortunately, the R help files are usually not written for beginners, and reading help files is a skill you have to acquire.
+
+For example, when we load data into R in subsequent lessons we will use a function called "read.csv"
+
+Access the help file by typing "?read.csv" into the console and pressing enter.  Surprisingly, the function that R give you the help file isn't what you asked for, but is read.table().  This is a related function to read.csv, but when you're a beginner thing like this can really throw you off.
+
+Kieran Healy as produced a great cheatsheet for reading R's help pages as part of his forthcoming book.  It should be available online at http://socviz.co/appendix.html#a-little-more-about-r
+
+### Getting help from the internet
+
+The best way to get help for any topic is to just do an internet search like this: "R read.csv".  Usually the first thing on the results list will be the R help file, but the second or third will be a blog post or something else where a usually helpful person has discussed how that function works.
+
+Sometimes for very basic R commands like this might not always be productive but its always work a try.  For but things related to stats, plotting, and programming there is frequently lots of information.  Also try searching YouTube.
+
+### Getting help from online forums
+
+Often when you do an internet search for an R topic you'll see results from the website www.stackoverflow.com, or maybe www.crossvalidated.com if its a statistics topic.  These are excellent resources and many questions that you may have already have answers on them.  Stackoverflow has an internal search function and also suggests potentially relevant posts.
+
+Before posting to one of these sites yourself, however, do some research; there is a particular type and format of question that is most likely to get a useful response.  Sadly, people new to the site often get "flamed" by impatient pros.
+
+### Getting help from twitter
+
+Twitter is a surprisingly good place to get information or to find other people knew to R.  Its often most useful to ask people for learning resources or general reference, but you can also post direct questions and see if anyone responds, though usually its more advanced users who engage in twitter-based code discussion.  
+
+A standard tweet might be 
+"Hey #rstats twitter, am knew to #rstats and really stuck on some of the basics.  Any suggestions for good resources for someone starting from scratch?"
+
+
+## Other features of RStudio
+
+### Ajusting pane the layout
+
+You can adjust the location of each of RStudio 4 window panes, as well as their size.
+
+To set the pane layout go to
+1. ”Tools” on the top menu
+1. ”Global options”
+1. "Pane Layout"
+
+Use the drop-down menus to set things up. I recommend
+1. Lower left: "Console""
+1. Top right: "Source"
+1. Top left: "Plot, Packages, Help Viewer"
+1. This will leave the "Environment..." panel in the lower right.
+
+
+### Adjusting size of windows
+
+You can clicked on the edge of a pane and adjust its size.  For most R work we want the console to be big.  For beginners, the "Environment, history, files" panel can be made really small.
+
+
+## Practice (OPTIONAL)
+
+Practice the following operations.  Type the directly into the console and execute them.  Also write them in a script in the script editor and run them.
+
+**Square roots**
+```{r}
+sqrt(42)
+```
+
+**The date**
+Some functions in R can be executed within nothing in the parentheses.  
+```{r}
+date()
+```
+
+**Exponents**
+The **^** is used for exponents
+```{r}
+42^2
+```
+
+**A series of numbers**
+A colon between two numbers creates a series of numbers.
+```{r}
+1:42
+```
+
+**logs**
+The default for the log() function is the natural log.
+```{r}
+log(42)
+```
+
+log10() gives the base-10 log.
+```{r}
+log10(42)
+```
+
+**exp() raises e to a power**
+```{r}
+exp(3.73767)
+```
+
+**Multiple commands can be nested**
+```{r eval = F}
+sqrt(42)^2
+log(sqrt(42)^2)
+exp(log(sqrt(42)^2))
+```
+
+
+

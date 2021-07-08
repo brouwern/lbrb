@@ -1,0 +1,392 @@
+# Downloading DNA sequences with R
+
+This is a modification of ["DNA Sequence Statistics"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  Almost all of text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license.  
+
+
+### Functions
+
+* library()
+* help()
+* length
+* table
+* seqinr::GC
+* seqinr::count
+* seqinr::write.fasta
+
+### Software/websites
+
+* www.ncbi.nlm.nih.gov
+* Text editor (eg Notepad++, TextWrangler)
+
+### R vocabulary
+
+* list
+* library
+* package
+* CRAN
+* wrapper
+
+
+### File types
+
+* FASTA
+
+### Bioinformatics vocabulary
+
+* accession
+* NCBI
+* NCBI Sequence Database
+* EMBL Sequence Database
+* FASTA file
+
+### Organisms and Sequence accessions
+
+Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. 
+
+The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are NC_001477, NC_001474, NC_001475 and NC_002640, respectively.
+
+According to Wikipedia
+
+> "Dengue virus (DENV) is the cause of dengue fever. It is a mosquito-borne, single positive-stranded RNA virus .... Five serotypes of the virus have been found, all of which can cause the full spectrum of disease. Nevertheless, scientists' understanding of dengue virus may be simplistic, as rather than distinct ... groups, a continuum appears to exist. ... [A] study identified 47 strains of dengue virus." https://en.wikipedia.org/wiki/Dengue_virus
+
+### Preliminaries
+
+```{r}
+library(rentrez)
+library(compbio4all)
+```
+
+
+## DNA Sequence Statistics: Part 1
+
+### Using R for Bioinformatics
+
+These tutorials tell you how to use  R  to carry out  simple analyses that are common in bioinformatics and computational biology.  In particular, the focus is on computational analysis of biological sequence data such as genome sequences and protein sequences. The programming approaches, however, are broadly generalizable to statistics and data science.
+
+The tutorials assume that the reader has some basic knowledge of biology, but not necessarily of bioinformatics. The focus is to explain simple bioinformatics analysis, and to explain how to carry out these analyses using *R*.
+
+
+### R packages for bioinformatics: Bioconductor and SeqinR
+
+Many authors have written *R* packages for performing a wide variety of analyses. These do not come with the standard *R* installation, but must be installed and loaded as “add-ons”.  Loading the dayoff package will automatically load most of the packages we need.
+
+Bioinformaticians have written numerous specialized packages for R. In this tutorial, you will learn to use some of the function in the [*SeqinR*](https://cran.r-project.org/web/packages/seqinr/index.html) package to to carry out simple analyses of DNA sequences.  (SeqinR can retrieve sequences from a DNA sequence database, but this has largely been replaced by the functions in the package *rentrez*)
+
+Many well-known bioinformatics packages for *R* are in the Bioconductor set of R packages (www.bioconductor.org), which contains  packages with many *R* functions for analyzing biological data sets such as microarray data; and the [*SeqinR*](https://cran.r-project.org/web/packages/seqinr/index.html) package from CRAN, which contains R functions for obtaining sequences from DNA and protein sequence databases, and for analyzing DNA and protein sequences.  
+
+SequinR will automatically load when you load dayoff.   For instructions on how to install an R package on your own see [How to install an R package](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html).
+
+We will also use functions from the *rentrez* and *ape* packages. Both of these also are loaded automatically by the dayoff package.
+
+
+Remember that you can ask for more information about a particular R command by using the `help() eval = F` function. For example, to ask for more information about the `library() eval = F function`, you can type:
+
+```{r, eval = F}
+help("library")
+```
+
+You can also do this
+```{r, eval = F}
+?library
+```
+
+
+### FASTA file format
+
+The FASTA format is a simple and widely used format for storing biological (eg DNA or protein) sequences. It was first used by the [FASTA program](https://en.wikipedia.org/wiki/FASTA) for sequence alignment in the 1980s and has been adopted as standard by many other programs. 
+
+FASTA files begin with a single-line description starting with a greater-than sign “>” character, followed on the next line with the sequences. Here is an example of a FASTA file.  (The cat() command is just a text display function used format the text when you run the code).
+```{r, eval = T, echo = F}
+cat("A06852 183 residues MPRLFSYLLGVWLLLSQLPREIPGQSTNDFIKACGRELVRLWVEICGSVSWGRTALSLEEPQLETGPPAETMPSSITKDAEILKMMLEFVPNLPQELKATLSERQPSLRELQQSASKDSNLNFEEFKKIILNRQNEAEDKSLLELKNLGLDKHSRKKRLFRMTLSEKCCQVGCIRKDIARLC")
+```
+
+
+### The NCBI sequence database
+
+The [National Centre for Biotechnology Information (NCBI)](www.ncbi.nlm.nih.gov) in the US maintains a huge database of all the DNA and protein sequence data that has been collected, the NCBI Sequence Database. This also a similar database in Europe, the [European Molecular Biology Laboratory (EMBL) Sequence Database](www.ebi.ac.uk/embl), and also a similar database in Japan, the [DNA Data Bank of Japan (DDBJ)](www.ddbj.nig.ac.jp). These three databases exchange data every night, so at any one point in time, they contain almost identical data.
+
+Each sequence in the NCBI Sequence Database is stored in a separate **record**, and is assigned a unique identifier that can be used to refer to that sequence record. The identifier is known as an **accession**, and consists of a mixture of numbers and letters. For example, Dengue virus causes Dengue fever, which is classified as a neglected tropical disease by the World Health Organization (WHO), is classified by any one of four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are NC_001477, NC_001474, NC_001475 and NC_002640, respectively.
+
+Note that because the NCBI Sequence Database, the EMBL Sequence Database, and DDBJ exchange data every night, the DEN-1 (and DEN-2, DEN-3, DEN-4) Dengue virus sequence will be present in all three databases, but it will have different accessions in each database, as they each use their own numbering systems for referring to their own sequence records.
+
+
+### Retrieving genome sequence data using rentrez
+
+You can retrieve sequence data from NCBI directly from *R* using the *rentrez* package.  The DEN-1 Dengue virus genome sequence has NCBI accession NC_001477. To retrieve a sequence with a particular NCBI accession, you can use an R function entrez_fetch() from the rentrez package.
+
+```{r}
+dengueseq_fasta <- entrez_fetch(db = "nucleotide", 
+                          id = "NC_001477", 
+                          rettype = "fasta")
+```
+
+
+Note that the "_" in the name is just an arbitrary way to separate two words.  Another common format would be dengueseq.fasta. Some people like dengueseqFasta, called "camel case" because the capital letter makes a hump in the middle of the word.  Underscores are becoming most common and are favored by developers associated with RStudio and the "tidyverse" of packages that many data scientists user.  I switch between "." and "_" as separators, usually favoring "_" for function names and "." for objects; I personally find camel case hard to read and harder to type.
+
+
+Ok, so what exactly have we done when we made dengueseq_fasta?  We have an R object "dengueseq_fasta" which has the sequence linked to the accession number "NC_001477."  So where is the sequence, and what is it?
+
+First, what is it?
+```{r}
+
+
+```
+
+How big is it?  Try the dim() and length() commands and see which one works.  Do you know why?
+```{r}
+
+```
+
+The size of the object is 1.  Why is this?  We'll use another function to explore that.  Thing about this: how many pieces of unique information are in the dengueseq object?  In what sense is there only 1 piece of information?
+
+
+If we want to actually we can type just type "dengueseq_fasta" and press enter.  This will print the WHOLE genomic sequence out but it will probably run of your screen.
+```{r}
+dengueseq_fasta
+```
+
+This is a whole genome sequence, but its stored as single entry in a vector, so length() just tells us how many entries there are in the vector, which is just! If we want to actually know how long the sequence is, we need to use the function nchar()
+```{r}
+
+nchar(dengueseq_fasta)
+
+```
+
+
+If we want to see just part of the sequence we can use the strtrim() function.  Before you run the code below, predict what the 100 means.
+
+```{r, echo = F}
+
+strtrim(dengueseq_fasta, 100)
+
+```
+
+
+
+Note that at the end of the  name is a slah follwed by an n, which indicates to the computer that this is a newline; this is read by text editor, but is ignored by R in this context.
+```{r, echo = F}
+
+strtrim(dengueseq_fasta, 45)
+
+```
+
+After the "\\n" will begin the sequence, which will continue on for a LOOOOOONG way.  Let's just print a little bit.
+```{r, echo = F}
+
+strtrim(dengueseq_fasta, 52)
+
+```
+
+Let's print some more.  Do you notice anything beside A, T, C and G in the sequence?
+```{r}
+strtrim(dengueseq_fasta, 200)
+
+```
+
+
+Now that we a sense of what we're looking at let's explore the dengueseq_fasta a bit more.
+
+We can find out more information about what it is using the class() command.  
+```{r}
+class(dengueseq_fasta)
+```
+
+Many things in R are vectors so we can ask R is.vector()
+
+```{r}
+
+
+```
+
+Yup, that's true.
+
+Ok, let's see what else.  A handy though often verbose command is is(), which tells us what an object, well, what it is:
+
+```{r}
+
+
+```
+
+There is a lot here but if you scan for some key words you will see "character" and "vector" at the top.  The other stuff you can ignore.  The first two things, though, tell us the dengueseq_fasta is a **vector** of the class **character**: a **character vector**.
+
+Another handy function is str(), which gives us a peak at the context and structure of an R object.  This is most useful when you are working in the R console or with dataframes, but is a useful function to run on all R objects.  How does this output differ from other ways we've displayed dengueseq_fasta?
+```{r}
+
+
+```
+
+We know it contains character data - how many?  nchar() for "number of characters" answers that:
+```{r}
+nchar(dengueseq_fasta)
+```
+
+
+
+
+
+## Convert FASTA sequence to an R variable
+
+We can't actually do much with the contents of the dengueseq_fasta we downloaded with the rentrez package except read them.  If we want do address some biological questions with the data we need is to convert it into a data structure R can work with.  
+There are several things we need to remove: 
+
+1. The **meta data** line ">NC_001477.1 Dengue virus 1, complete genome" (metadata is "data" about data, such as where it came from, what it is, who made it, etc.).
+1. All the "\\n" that show up in the file (these are the line breaks).
+1. Put each nucleotide of the sequence into its own spot in a vector.
+
+There are functions that can do this automatically, but I haven't found one I like, and walking through this will help you understand the types of operations you can do on text data.
+
+The first two steps involve removing things from the existing **character string** that contains the sequence.  The third step will split the single continuous character string like "AGTTGTTAGTCTACGT..." into a **character vector** like c("A","G","T","T","G","T","T","A","G","T","C","T","A","C","G","T"...), where each element of the vector is a single character.
+
+
+The second item is the easiest to take care of.   R and many programming languages have tools called **regular expressions** that allow you to manipulate text.  R has a function called gsub() which allows you to substitute or delete character data from a string.  First I'll remove all those "\\n" values.
+
+```{r}
+dengueseq_vector <- gsub("\\n", "", dengueseq_fasta)
+```
+
+We can use strtrim() to see if it worked
+
+```{r}
+
+
+```
+
+Now for the metadata header.  This is a bit complex, but the following code is going to take all the that occurs before the beginning of the sequence ("AGTTGTTAGTC") and delete it.
+
+First, I'll define what I want to get rid of in an R object
+```{r}
+header. <- ">NC_001477.1 Dengue virus 1, complete genome"
+```
+
+
+Now I'll get rid of it.
+```{r}
+dengueseq_vector <- gsub(header.,"", dengueseq_vector)
+```
+
+
+See if it worked:
+```{r}
+
+
+```
+
+
+
+Now the more complex part.  We need to split up a continuous string of letters into a vector. This can be done with the str_split() function ("string split") from the stringr package.  The notation stringr::str_split mean "use the str_split function from from the stringr package."  More specifically, it temporarily loads the stringr package and gives R access to just the str_split function.  These allows you to call a single function without loading the whole library.
+
+There are several arguments to str_split, and I've tacked a "[[1]]" on to the end.  
+
+First, run the command
+
+```{r}
+dengueseq_vector_split <- stringr::str_split(dengueseq_vector,
+                                       pattern = "",
+                                       simplify = FALSE)[[1]]
+```
+
+Look at the output with str()
+```{r}
+
+
+```
+
+
+We can explore what the different arguments do by modifying them.  Change pattern = "" to pattern = "A".  Can you figure out what happened?
+```{r}
+# re-run the command without "pattern  = ""
+dengueseq_vector_split2 <- stringr::str_split(dengueseq_vector,
+                                       pattern = "A",
+                                       simplify = FALSE)[[1]]
+str(dengueseq_vector_split2)
+```
+
+
+Run this code (don't worry what it does).  Does this help you see what's up?
+```{r}
+options(str = strOptions(vec.len = 10))
+str(list(dengueseq_vector_split[1:20],
+     dengueseq_vector_split2[1:10]))
+```
+
+
+So, what does the pattern = argument do?
+
+Something cool which we will explore in the next exercise is that we can do summaries on vectors of nucleotides, like this:
+```{r}
+table(dengueseq_vector_split)
+```
+
+
+## Saving FASTA files
+
+We can save our data as .fasta file for safe keeping
+
+```{r, eval = F}
+write(dengueseq_fasta, file="dengueseq.fasta")
+```
+
+## Reading in FASTA files
+
+We can read in FASTA files
+
+NOTE: this code needs to be updated to have a call to the compbio package itself
+
+```{r, echo = F, eval = F}
+fi. <- here::here("inst/extdata/dengueseq.fasta")
+# dengueseq <- seqinr::read.fasta(file = fi.,
+#                              seqtype  = "DNA",
+#                              as.string = FALSE)
+
+dengueseq_matrix <- ape::read.dna(file = here::here("inst/extdata/dengueseq.fasta"),
+              format = "fasta",
+              as.character = TRUE)
+```
+
+
+```{r, eval = F}
+dengueseq_matrix <- ape::read.dna(file = system.file("dengueseq.fasta"),
+              format = "fasta",
+              as.character = TRUE)
+```
+
+
+Note that reading it back in like this results in a change from its original format
+
+```{r, eval = F}
+class(dengueseq_matrix)
+```
+
+Now we have a matrix instead of a vector.  str() will give us a peak at it
+```{, eval = Fr}
+str(dengueseq_matrix)
+```
+
+Matrices are squares of data - how big is this square?
+
+```{r, eval = F}
+dim(dengueseq_matrix)
+```
+
+We have a 1 x 10737 matrix.
+
+To print out a certain subsequence of the sequence, we just need to type the name of the vector dengueseq_reload followed by the square brackets [ ] containing the **indices** for the nucleotides we want to see. For example, the following command prints out the first 50 nucleotides of the DEN-1 Dengue virus genome sequence:
+
+```{r, eval = F}
+dengueseq_matrix[1:50]
+```
+
+Note that dengueseq_matrix[1:50] refers to the elements of the vector dengueseq_matrix with indices from 1-50. These elements contain the first 50 nucleotides of the DEN-1 Dengue virus sequence.
+
+
+We can run table() on this 
+```{r, eval = F}
+table(dengueseq_matrix)
+```
+
+
+```{r}
+
+```
+
+

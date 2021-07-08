@@ -1,0 +1,51 @@
+# Installing Bioconductor
+
+```{r , eval = F}
+library(compbio4all)
+```
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+## Bioconductor
+
+R **packages** (aka "libraries") can live in many places.  Most are accessed via **CRAN**, the **Comprehensive R Archieve Network**.  The bioinformatics and computational biology community also has its own package hosting system called [Bioconductor](www.bioconductor.org).  R has played an important part in the development and application of bioinformatics techniques in the 21th century.  Bioconductor 1.0 was released in 2002 with 15 packages.  As of winter 2021, there are almost 2000 packages in the current release!
+
+>**NOTE**: If you are working in an RStudio Cloud environment organized by someone else (eg a course instructor), they likely are taking care of most of package management issues, inlcuding setting up Bioconductor.  The following information is still useful to be familiar with.
+
+
+To interface with Bioconductor you need the [BiocManager](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html) package.  The Bioconductor people have put BiocManager on CRAN to allow you to set up interactions with Bioconductor.
+
+Note that if you have an old version of R you will need to upate it to interact with bioconductor.
+
+
+## Installing BiocManager
+
+BiocManager can be installed using the install.packages() packages command.
+
+```{r, eval = F}
+install.packages("BiocManager")
+```
+
+Once downloaded, BioManager needs to be explicitly loaded into your active R session
+```{r, eval = F}
+library(BiocManager)
+```
+
+Individual packages can then be downloaded using the install() command.
+```{r, eval=F}
+BiocManager::install("Biostrings")
+```
+
+Bioconductor has many **dependencies** - other packages which is relies on.  When you install Bioconductor packages you may need to update these packages.  If something seems to not be working during this process, restart R and being the Bioconductor installation process until things seem to work.
+
+
+Again, to actually load the Biostrings package into your active R sessions requires the libary() command:
+```{r, eval = F}
+library(Biostrings)
+```
+
+For more information on BiocManager see the vignette: https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html
+

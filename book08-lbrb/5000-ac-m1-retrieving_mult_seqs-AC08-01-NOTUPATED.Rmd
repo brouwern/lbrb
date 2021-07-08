@@ -1,0 +1,127 @@
+# Retrieving multiple sequences in R
+
+```{r eval = T}
+library(compbio4all)
+```
+
+
+**By**: Avril Coghlan.  
+Multiple Alignment and Phylogenetic trees
+https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+## Prelminaries
+
+
+```{r}
+library(rentrez)
+```
+
+
+
+## Retrieving a list of sequences from UniProt
+
+Using websites or R you can search fort DNA or protein sequences in sequence databases such as the **NCBI** database and **UniProt**.  Oftentimes, it is useful to retrieve several sequences at once. The R function entrez_fetch() from the *rentrez* package is useful for this purpose.  (Other packages can also, this but *rentrez* has the cleanset interface).
+
+As its input, you need to give the entrez_fetch() a vector containing the **accessions** for the sequences you wish to retrieve, as well as the name of the **ACNUC sub-database** that the sequences should be retrieved from. In this case, we want to retrieve sequences from **UniProt**, so the sequences should be in the “swissprot” ACNUC sub-database.  (It can be tricky to know exactly where to get sequences from sometimes so I will usually give you the code to do this).
+
+The entrez_fetch() function returns a **list** variable, in which each element is a separate **vector** containing one of the sequences of interest.  **Lists* are a common data structure in R and can take some getting used to, but by working with them we will become familiar with how they work.  Unfortunately there are some quirks to have R likes you to write code referring to lists, so I will frequently provide the necessary code for this.
+
+To retrieve the protein sequences for UniProt accessions P06747, P0C569, O56773 and Q5VKP1 (the accessions for rabies virus phosphoprotein, Mokola virus phosphoprotein, Lagos bat virus phosphoprotein and Western Caucasian bat virus phosphoprotein, respectively), you can type:ake a vector containing the names of the sequences.   Note that the accessions aren't numbers but are **quoted character strings**: 
+
+```{r}
+seqnames <- c("P06747", "P0C569", "O56773", "Q5VKP1")  
+```
+
+
+Confirm that we are working with character data using is.character()
+
+```{r}
+
+is.character(seqnames)
+
+```
+
+
+We can access the first element of the vector using bracket notation like this:
+```{r}
+seqnames[1]
+```
+
+
+Write the code to access the second and third elements of the vector of accessions:
+
+```{r}
+# 2nd accession
+
+
+# 3rd accession
+
+
+```
+
+This code retrieves the first sequence and store them in list variable "seqs"
+```{r}
+seq1 <- rentrez::entrez_fetch(db = "protein", 
+                          id = seqnames[1], 
+                          rettype = "fasta")      
+
+```
+
+```{r}
+
+seq2 <- rentrez::entrez_fetch(db = "protein", 
+                          id = seqnames[2], 
+                          rettype = "fasta") 
+
+seq3 <- rentrez::entrez_fetch(db = "protein", 
+                          id = seqnames[3], 
+                          rettype = "fasta")
+```
+
+
+
+```{r}
+seq1 <- fasta_cleaner(seq1, parse = T)  
+seq2 <- fasta_cleaner(seq2, parse = T)  
+seq3 <- fasta_cleaner(seq3, parse = T)  
+```
+
+Print out the first 20 letters of the first sequence
+```{r}
+seq1[1:20]                                   
+```
+
+Print out the first 20 letters of the second sequence
+```{r}
+seq2[1:20]                                   
+```
+
+
+```{r}
+seq_1_2_3_4 <- rentrez::entrez_fetch(db = "protein", 
+                          id = seqnames, 
+                          rettype = "fasta")
+```
+
+
+```{r}
+cat(seq_1_2_3_4)
+```
+
+
+
+Rabies virus is the virus responsible for rabies, which is classified by the WHO as a neglected tropical disease. Mokola virus and rabies virus are closely related viruses that both belong to a group of viruses called the Lyssaviruses. Mokola virus causes a rabies-like infection in mammals including humans.
+
+Once you have retrieved the sequences using entrez_fetch(), you can then use the function write.fasta() from the SeqinR package to write the sequences to a FASTA-format file. As its arguments (inputs), the write.fasta() function takes the list variable containing the sequences, and a vector containing the names of the sequences, and the name that you want to give to the FASTA-format file. For example:
+
+TODO: make this a data object in package
+TODO: where should students write this to?
+```{r. eval = F}
+seqinr::write.fasta(seq_1_2_3_4, seqnames,file="data-raw/phosphoproteins.fasta")
+```
+
+The command above will write the sequences in list variable seqs to a FASTA-format file called “phosphoproteins.fasta” in the “My Documents” folder on your computer.
+

@@ -1,0 +1,6 @@
+book_filename: "lbrb"
+delete_merged_file: false
+rmd_subdir: true
+language:
+  ui:
+    chapter_name: "Chapter "

@@ -1,0 +1,216 @@
+# Multiple alignment with Clustal
+
+```{r }
+library(compbio4all)
+```
+
+
+**By**: Avril Coghlan.  
+Multiple Alignment and Phylogenetic trees
+https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html
+
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+## Installing the CLUSTAL multiple alignment software
+
+A common task in bioinformatics is to download a set of related sequences from a database, and then to align those sequences using multiple alignment software. This is the first step in most phylogenetic analyses.
+
+One commonly used multiple alignment software package is CLUSTAL. In order to build an alignment using CLUSTAL, you first need to install the CLUSTAL program on your computer.
+
+To install CLUSTAL on your computer, you need to follow these steps:
+
+Go to the http://www.clustal.org/download/current/ website.
+
+Right-click on the link to file clustalx-Z.Z.Z-win.msi (where Z represents some number) and choose “Save link as...” and then save the file in your “My Documents” folder.
+Once the file has downloaded, double-click on the icon for file clustalx-Z.Z.Z-win.msi (where Z is some number).
+
+You will be asked “Are you sure you want to run this software?” Press “Run”.
+You will then see “Welcome to the ClustalX2 setup wizard”. Press “Next”.
+You will be asked where to install ClustalX2. Select your “My Documents” folder.
+Keep pressing ‘yes’ or ‘Next’ until the screen says “Completing the ClustalX2 setup wizard”. Then press “Finish”.
+CLUSTAL should now be installed on your computer.
+
+Creating a multiple alignment of protein, DNA or mRNA sequences using CLUSTAL
+Once you have installed CLUSTAL, you can now align your sequences using CLUSTAL by following these steps:
+
+Go to the “Start” menu on the bottom left of your Windows screen. Select “All Programs” from the menu, then select “ClustalX2” from the menu that appears. This will start up CLUSTAL.
+The CLUSTAL window should appear. To load the DNA or protein sequences that you want to align into CLUSTAL, go to the CLUSTAL “File” menu, and choose “Load sequences”.
+Select the FASTA-format file containing your sequences (eg. phosphoproteins.fasta) to load it into CLUSTAL.
+
+This should read the sequences into CLUSTAL. They have not been aligned yet, but will be displayed in the CLUSTAL window.
+
+You can use the scrollbar on the right to scroll down and look at all the sequences. You can use the scrollbar on the bottom to scroll from left to right, and look along the length of the sequences.
+
+Before you align the sequences using CLUSTAL, you need to tell CLUSTAL to make the output alignment file in PHYLIP alignment format, so that you can read it into R. To do this, go to the “Alignment” menu in CLUSTAL, choose “Output Format Options”. A form will appear, and in this form you should select “PHYLIP format” and deselect “CLUSTAL format”, and then press “OK”.
+
+To now align the sequences using CLUSTAL, go to the CLUSTAL “Alignment” menu, and choose “Do Complete Alignment”.
+
+A menu box will pop up, asking you where to save the output guide-tree file (eg. “phosphoproteins.dnd”) and the output alignment file (called “phosphoproteins.phy”). You should choose to save them in your “My Documents” folder (so that you can easily read them into R from “My Documents” at a later stage).
+CLUSTAL will now align the sequences. This will take a couple of minutes (eg. 2-5 minutes). You will see that at the bottom of the CLUSTAL window, it tells you which pair of sequences it is aligning at a particular point in time. If the numbers keep changing, it means that CLUSTAL is still working away, and the alignment is not finished yet. Be patient!
+Once CLUSTAL has finished making the alignment, it will be displayed in the CLUSTAL window. For example, here is the CLUSTAL alignment for rabies virus phosphoprotein, Mokola virus phosphoprotein, and Lagos bat virus phosphoprotein:
+
+
+The alignment displayed in CLUSTAL has a row for each of your sequences. CLUSTAL colours sets of chemically similar amino acids in similar colours. For example, tyrosine (Y) is coloured blue-green, while the chemically similar amino acid phenylalanine (F) is coloured blue. You can scroll to the right and left along the alignment using the scrollbar at the bottom of the Jalview window.
+
+Below the alignment, you can see a grey plot, showing the level of conservation at each point of the sequence. This shows a high grey bar if the conservation in a region is high (there is high percent identity between the sequence), and a low grey bar if it is low (there is low percent identity). This can give you an idea of which are the best conserved regions of the alginment.
+
+For example, for the alignment of the four virus phosphoproteins, we can see that the region in alignment columns 35 to 45 approximately is very well conserved, while the region in alignment columns 60 to 70 is poorly conserved.
+
+The CLUSTAL alignment will have been saved in a file in your “My Documents” folder called “something.phy” (eg. phosphoproteins.phy). This is a PHYLIP-format alignment file, which you can now read into R for further analysis.
+
+
+
+
+
+
+Reading a multiple alignment file into R
+To read a sequence alignment into R from a file, you can use the read.alignment() function in the SeqinR package. For example, to read in the multiple sequence alignment of the virus phosphoproteins into R, we type:
+
+```{r, eval = F}
+virusaln  <- read.alignment(file = "phosphoproteins.phy", format = "phylip")
+```
+
+The virusaln variable is a list variable that stores the alignment.
+
+An R list variable can have named elements, and you can access the named elements of a list variable by typing the variable name, followed by “$”, followed by the name of the named element.
+
+The list variable virusaln has named elements “nb”, “nam”, “seq”, and “com”.
+
+In fact, the named element “seq” contains the alignment, which you can view by typing:
+
+```{r, eval = F}
+virusaln$seq
+```
+
+Only the first part of the alignment stored in virusaln$seq is shown here, as it is very long.
+
+Viewing a long multiple alignment
+If you want to view a long multiple alignment, it is convenient to view the multiple alignment in blocks.
+
+The R function “printMultipleAlignment()” below will do this for you:N
+As its inputs, the function “printMultipleAlignment()” takes the input alignment, and the number of columns to print out in each block.
+
+For example, to print out the multiple alignment of virus phosphoproteins (which we stored in variable virusaln, see above) in blocks of 60 columns, we type:
+
+```{r, eval = F}
+printMultipleAlignment(virusaln, 60)
+```
+
+
+## Discarding very poorly conserved regions from an alignment
+It is often a good idea to discard very poorly conserved regions from a mulitple alignment before building a phylogenetic tree, as the very poorly conserved regions are likely to be regions that are either not homologous between the sequences being considered (and so do not add any phylogenetic signal), or are homologous but are so diverged that they are very difficult to align accurately (and so may add noise to the phylogenetic analysis, and decrease the accuracy of the inferred tree).
+
+To discard very poorly conserved regions from a multiple alignment, you can use the following R function, “cleanAlignment()”:
+
+
+The function cleanAlignment() takes three arguments (inputs): the input alignment; the minimum percent of letters in an alignment column that must be non-gap characters for the column to be kept; and the minimum percent of pairs of letters in an alignment column that must be identical for the column to be kept.
+
+For example, if we have a column with letters “T”, “A”, “T”, “-” (in four sequences), then 75% of the letters are non-gap characters; and the pairs of letters are “T,A”, “T,T”, and “A,T”, and 33% of the pairs of letters are identical.
+
+We can use the function cleanAlignment() to discard the very poorly aligned columns from a multiple alignment.
+
+For example, if you look at the multiple alignment for the virus phosphoprotein sequences (which we printed out using function printMultipleAlignment(), see above), we can see that the last few columns are poorly aligned (contain many gaps and mismatches), and probably add noise to the phylogenetic analysis.
+
+Therefore, to filter out the well conserved columns of the alignment, and discard the very poorly conserved columns, we can type:
+
+```{r, eval = F}
+cleanedvirusaln <- cleanAlignment(virusaln, 30, 30)
+```
+
+In this case, we required that at least 30% of letters in a column are not gap characters for that column to be kept, and that at least 30% of pairs of letters in an alignment column must be identical for the column to be kept.
+
+We can print out the filtered alignment by typing:
+
+```{r, eval = F}
+printMultipleAlignment(cleanedvirusaln)
+```
+
+The filtered alignment is shorter, but is missing some of the poorly conserved regions of the original alignment.
+
+Note that it is not a good idea to filter out too much of your alignment, as if you are left with few columns in your filtered alignment, you will be basing your phylogenetic tree upon a very short alignment (little data), and so the tree may be unreliable. Therefore, you need to achieve a balance between discarding the dodgy (poorly aligned) parts of your alignment, and retaining enough columns of the alignment that you will have enough data to based your tree upon.
+
+## Calculating genetic distances between protein sequences
+
+A common first step in performing a phylogenetic analysis is to calculate the pairwise genetic distances between sequences. The genetic distance is an estimate of the divergence between two sequences, and is usually measured in quantity of evolutionary change (an estimate of the number of mutations that have occurred since the two sequences shared a common ancestor).
+
+We can calculate the genetic distances between protein sequences using the “dist.alignment()” function in the SeqinR package. The dist.alignment() function takes a multiple alignment as input. Based on the multiple alignment that you give it, dist.alignment() calculates the genetic distance between each pair of proteins in the multiple alignment. For example, to calculate genetic distances between the virus phosphoproteins based on the multiple sequence alignment stored in virusaln, we type:
+
+```{r, eval = F}
+virusdist <- dist.alignment(virusaln)                 # Calculate the genetic distances
+```
+
+Print out the genetic distance
+```{r, eval = F}
+virusdist
+```
+
+
+The genetic distance matrix above shows the genetic distance between each pair of proteins.
+
+The sequences are referred to by their UniProt accessions. If you remember from above, P06747 is rabies virus phosphoprotein, P0C569 is Mokola virus phosphoprotein, O56773 is Lagos bat virus phosphoprotein and Q5VKP1 is Western Caucasian bat virus phosphoprotein.
+
+Based on the genetic distance matrix above, we can see that the genetic distance between Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein (P0C569) is smallest (about 0.414).
+
+Similarly, the genetic distance between Western Caucasian bat virus phosphoprotein (Q5VKP1) and Lagos bat virus phosphoprotein (O56773) is the biggest (about 0.507).
+
+The larger the genetic distance between two sequences, the more amino acid changes or indels that have occurred since they shared a common ancestor, and the longer ago their common ancestor probably lived.
+
+Calculating genetic distances between DNA/mRNA sequences
+Just like for protein sequences, you can calculate genetic distances between DNA (or mRNA) sequences based on an alignment of the sequences.
+
+For example, the NCBI accession AF049118 contains mRNA sequence for Mokola virus phosphoprotein, RefSeq AF049114 contains mRNA sequence for Mokola virus phosphoprotein, and AF049119 contains the mRNA sequence for Lagos bat virus phosphoprotein, while AF049115 contains the mRNA sequence for Duvenhage virus phosphoprotein.
+
+To retrieve these sequences from the NCBI database, we can search the ACNUC “genbank” sub-database (since these are nucleotide sequences), by typing:
+
+Make a vector containing the names of the sequences
+```{r, eval = F}
+seqnames <- c("AF049118", "AF049114", "AF049119", "AF049115")  # 
+```
+
+
+ Retrieve the sequences and store them in list variable "seqs"
+```{r, eval = F}
+seqs <- retrieveseqs(seqnames,"genbank")                       #
+```
+
+We can then write out the sequences to a FASTA-format file by typing:
+
+```{r, eval = F}
+write.fasta(seqs, seqnames, file="virusmRNA.fasta")
+```
+
+We can then use CLUSTAL to create a PHYLIP-format alignment of the sequences, and store it in the alignment file “virusmRNA.phy”. This picture shows part of the alignment:
+
+
+We can then read the alignment into R:
+
+```{r, eval = F}
+virusmRNAaln  <- read.alignment(file = "virusmRNA.phy", format = "phylip")
+```
+
+We saw above that the function dist.alignment() can be used to calculate a genetic distance matrix based on a protein sequence alignment.
+
+You can calculate a genetic distance for DNA or mRNA sequences using the dist.dna() function in the Ape R package. dist.dna()</tt> takes a multiple alignment of DNA or mRNA sequences as its input, and calculates the genetic distance between each pair of DNA sequences in the multiple alignment.
+
+The dist.dna() function requires the input alignment to be in a special format known as “DNAbin” format, so we must use the as.DNAbin() function to convert our DNA alignment into this format before using the dist.dna() function.
+
+For example, to calculate the genetic distance between each pair of mRNA sequences for the virus phosphoproteins, we type:
+
+Convert the alignment to "DNAbin" format
+```{r, eval = F}
+virusmRNAalnbin <- as.DNAbin(virusmRNAaln) 
+```
+
+Calculate the genetic distance matrix
+```{r, eval = F}
+virusmRNAdist <- dist.dna(virusmRNAalnbin) 
+```
+ 
+Print out the genetic distance matrix
+```{r, eval = F}
+virusmRNAdist                              
+```
+
+

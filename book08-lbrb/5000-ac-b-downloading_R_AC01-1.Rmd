@@ -1,0 +1,65 @@
+# Downloading R
+
+**By**: Avril Coghlan  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+## Preface
+
+The following introduction to *R* is based on the first part of ["How to install *R* and a Brief Introduction to R"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html) by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  For additional information see ["Getting *R* onto your computer"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html).
+
+
+## Introduction to R
+
+_R_ (www.r-project.org) is a commonly used free statistics software. _R_ allows you to carry out statistical analyses in an interactive mode, as well as allowing simple programming.
+
+## Installing R
+
+To use R, you first need to install the _R_ program on your computer.
+
+### Installing *R* on a Windows PC
+
+These instructions will focus on installing *R* on a Windows PC. However, I will also briefly mention how to install *R* on a Macintosh or Linux computer (see below).  
+
+**These steps have not been checked as of 8/13/2019 so there may be small variations in what the prompts are.  Installing R, however, is basically that same as any other program.  Clicking "Yes" etc on everything should work.**
+
+> **PROTIP:** Even if you have used *R* before its good to regularly update it to avoid conflicts with recently produced software.
+
+New releases of *R* are made very regularly (approximately once a month), as *R* is actively being improved all the time. It is worthwhile installing new versions of *R* regularly, to make sure that you have a recent version of *R* (to ensure compatibility with all the latest versions of the *R* packages that you have downloaded).
+
+To install *R* on your **Windows** computer, follow these steps:
+
+1. Go to https://cran.r-project.org/
+1. Under “Download and Install R”, click on the “Windows” link.
+1. Under “Subdirectories”, click on the **“base”** link.
+1. On the next page, you should see a link saying something like “Download *R* 4.1.0 for Windows” (or *R* X.X.X, where X.X.X gives the version of the program). Click on this link.
+1. You may be asked if you want to save or run a file “R-x.x.x-win32.exe”. Choose “Save” and save the file. Then double-click on the icon for the file to run it.
+1. You will be asked what language to install it in.
+1. The *R* Setup Wizard will appear in a window. Click “Next” at the bottom of the *R* Setup wizard window.
+1. The next page says “Information” at the top. Click “Next” again.
+1. The next page says “Select Destination Location” at the top. By default, it will suggest to install *R* on the C drive in the  “Program Files” directory on your computer.
+1. Click “Next” at the bottom of the *R* Setup wizard window.
+1. The next page says “Select components” at the top. Click “Next” again.
+1. The next page says “Startup options” at the top. Click “Next” again.
+1. The next page says “Select start menu folder” at the top. Click “Next” again.
+1. The next page says “Select additional tasks” at the top. Click “Next” again.
+1. *R* should now be installing. This will take about a minute. When *R* has finished, you will see “Completing the *R* for Windows Setup Wizard” appear. Click “Finish”.
+1. To start R, you can do one of the following steps:
+1. Check if there is an “R” icon on the desktop of the computer that you are using. If so, double-click on the “R” icon to start R. If you cannot find an “R” icon, try the next step instead.
+1. Click on the “Start” button at the bottom left of your computer screen, and then choose “All programs”, and start *R* by selecting “R” (or *R* X.X.X, where X.X.X gives the version of R) from the menu of programs.
+1. The *R* console (a rectangle) should pop up:
+
+
+### How to install *R* on non-Windows computers (eg. Macintosh or Linux computers)
+
+**These steps have not been checked as of 8/13/2019 so there may be small variations in what the prompts are.  Installing R, however, is basically that same as any other program.  Clicking "Yes" etc on everything should work.**
+
+The instructions above are for installing *R* on a Windows PC. If you want to install *R* on a computer that has a non-Windows operating system (for example, a Macintosh or computer running Linux, you should download the appropriate *R* installer for that operating system at https://cran.r-project.org/ and follow the *R* installation instructions for the appropriate operating system at https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-can-R-be-installed_003f .
+
+## Starting *R* 
+
+To start R,  Check if there is an “R” icon on the desktop of the computer that you are using. If so, double-click on the “R” icon to start R. If you cannot find an “R” icon, try the next step instead.
+
+You can also start *R* from the Start menu.  Click on the “Start” button at the bottom left of your computer screen, and then choose “All programs”, and start *R* by selecting “R” (or *R* X.X.X, where X.X.X gives the version of R, e.g.. *R* 2.10.0) from the menu of programs.
+
+Say "Hi" to *R* and take a quick look at how it looks.  Now say "Goodbye", because we will never actually do any work in this version of R; instead, we'll use the RStudio IDE (integrated development environment).
