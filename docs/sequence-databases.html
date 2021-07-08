@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 14 Sequence Databases | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</title>
+  <meta name="description" content="An entry-level text for computational biology" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 14 Sequence Databases | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="An entry-level text for computational biology" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 14 Sequence Databases | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  
+  <meta name="twitter:description" content="An entry-level text for computational biology" />
+  
+
+<meta name="author" content="Nathan L. Brouwer" />
+
+
+<meta name="date" content="2021-07-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="downloading-sequences-from-uniprot-by-hand.html"/>
+<link rel="next" href="local-variation-in-gc-content.html"/>
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Computational Biology for All!</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="downloading-r.html"><a href="downloading-r.html"><i class="fa fa-check"></i><b>1</b> Downloading R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface-1"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
+<li class="chapter" data-level="1.2" data-path="downloading-r.html"><a href="downloading-r.html#introduction-to-r"><i class="fa fa-check"></i><b>1.2</b> Introduction to R</a></li>
+<li class="chapter" data-level="1.3" data-path="downloading-r.html"><a href="downloading-r.html#installing-r"><i class="fa fa-check"></i><b>1.3</b> Installing R</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="downloading-r.html"><a href="downloading-r.html#installing-r-on-a-windows-pc"><i class="fa fa-check"></i><b>1.3.1</b> Installing <em>R</em> on a Windows PC</a></li>
+<li class="chapter" data-level="1.3.2" data-path="downloading-r.html"><a href="downloading-r.html#how-to-install-r-on-non-windows-computers-eg.-macintosh-or-linux-computers"><i class="fa fa-check"></i><b>1.3.2</b> How to install <em>R</em> on non-Windows computers (eg. Macintosh or Linux computers)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="downloading-r.html"><a href="downloading-r.html#starting-r"><i class="fa fa-check"></i><b>1.4</b> Starting <em>R</em></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html"><i class="fa fa-check"></i><b>2</b> Installing the RStudio IDE</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>2.1</b> Getting to know RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html#rstudio-versus-rstudio-cloud"><i class="fa fa-check"></i><b>2.2</b> RStudio versus RStudio Cloud</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>3</b> Installing <em>R</em> packages</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>3.1</b> Downloading packages with the RStudio IDE</a></li>
+<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function install.packages()</a></li>
+<li class="chapter" data-level="3.3" data-path="installing-r-packages.html"><a href="installing-r-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>3.3</b> Using packages after they are downloaded</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>4</b> Installing Bioconductor</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>4.1</b> Bioconductor</a></li>
+<li class="chapter" data-level="4.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>4.2</b> Installing BiocManager</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html"><i class="fa fa-check"></i><b>5</b> A Brief introduction to R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vocabulary"><i class="fa fa-check"></i><b>5.1</b> Vocabulary</a></li>
+<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions-etc"><i class="fa fa-check"></i><b>5.2</b> R functions etc</a></li>
+<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#a-brief-introduction-to-r-1"><i class="fa fa-check"></i><b>5.3</b> A brief introduction to R</a></li>
+<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.4</b> Links and Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="downloading-ncbi-sequence-data-by-hand.html"><a href="downloading-ncbi-sequence-data-by-hand.html"><i class="fa fa-check"></i><b>6</b> Downloading NCBI sequence data by hand</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="downloading-ncbi-sequence-data-by-hand.html"><a href="downloading-ncbi-sequence-data-by-hand.html#retrieving-genome-sequence-data-via-the-ncbi-website"><i class="fa fa-check"></i><b>6.1</b> Retrieving genome sequence data via the NCBI website</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html"><i class="fa fa-check"></i><b>7</b> DNA descriptive statics - Part 1</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#introduction"><i class="fa fa-check"></i><b>7.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#note-on-the-biology-in-this-section"><i class="fa fa-check"></i><b>7.1.1</b> Note on the biology in this section</a></li>
+<li class="chapter" data-level="7.1.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#vocabulary-1"><i class="fa fa-check"></i><b>7.1.2</b> Vocabulary</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#preliminaries"><i class="fa fa-check"></i><b>7.2</b> Preliminaries</a></li>
+<li class="chapter" data-level="7.3" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#converting-dna-from-fasta-format"><i class="fa fa-check"></i><b>7.3</b> Converting DNA from FASTA format</a></li>
+<li class="chapter" data-level="7.4" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#length-of-a-dna-sequence"><i class="fa fa-check"></i><b>7.4</b> Length of a DNA sequence</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#base-composition-of-a-dna-sequence"><i class="fa fa-check"></i><b>7.4.1</b> Base composition of a DNA sequence</a></li>
+<li class="chapter" data-level="7.4.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#gc-content-of-dna"><i class="fa fa-check"></i><b>7.4.2</b> GC Content of DNA</a></li>
+<li class="chapter" data-level="7.4.3" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#dna-words"><i class="fa fa-check"></i><b>7.4.3</b> DNA words</a></li>
+<li class="chapter" data-level="7.4.4" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#summary"><i class="fa fa-check"></i><b>7.4.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#acknowledgements"><i class="fa fa-check"></i><b>7.5</b> Acknowledgements</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#license"><i class="fa fa-check"></i><b>7.5.1</b> License</a></li>
+<li class="chapter" data-level="7.5.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#exercises"><i class="fa fa-check"></i><b>7.5.2</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html"><i class="fa fa-check"></i><b>8</b> Downloading DNA sequences with R</a>
+<ul>
+<li class="chapter" data-level="8.0.1" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#functions"><i class="fa fa-check"></i><b>8.0.1</b> Functions</a></li>
+<li class="chapter" data-level="8.0.2" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#softwarewebsites"><i class="fa fa-check"></i><b>8.0.2</b> Software/websites</a></li>
+<li class="chapter" data-level="8.0.3" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#r-vocabulary"><i class="fa fa-check"></i><b>8.0.3</b> R vocabulary</a></li>
+<li class="chapter" data-level="8.0.4" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#file-types"><i class="fa fa-check"></i><b>8.0.4</b> File types</a></li>
+<li class="chapter" data-level="8.0.5" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#bioinformatics-vocabulary"><i class="fa fa-check"></i><b>8.0.5</b> Bioinformatics vocabulary</a></li>
+<li class="chapter" data-level="8.0.6" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#organisms-and-sequence-accessions"><i class="fa fa-check"></i><b>8.0.6</b> Organisms and Sequence accessions</a></li>
+<li class="chapter" data-level="8.0.7" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#preliminaries-1"><i class="fa fa-check"></i><b>8.0.7</b> Preliminaries</a></li>
+<li class="chapter" data-level="8.1" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#dna-sequence-statistics-part-1"><i class="fa fa-check"></i><b>8.1</b> DNA Sequence Statistics: Part 1</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#using-r-for-bioinformatics"><i class="fa fa-check"></i><b>8.1.1</b> Using R for Bioinformatics</a></li>
+<li class="chapter" data-level="8.1.2" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#r-packages-for-bioinformatics-bioconductor-and-seqinr"><i class="fa fa-check"></i><b>8.1.2</b> R packages for bioinformatics: Bioconductor and SeqinR</a></li>
+<li class="chapter" data-level="8.1.3" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#fasta-file-format"><i class="fa fa-check"></i><b>8.1.3</b> FASTA file format</a></li>
+<li class="chapter" data-level="8.1.4" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#the-ncbi-sequence-database"><i class="fa fa-check"></i><b>8.1.4</b> The NCBI sequence database</a></li>
+<li class="chapter" data-level="8.1.5" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#retrieving-genome-sequence-data-using-rentrez"><i class="fa fa-check"></i><b>8.1.5</b> Retrieving genome sequence data using rentrez</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#convert-fasta-sequence-to-an-r-variable"><i class="fa fa-check"></i><b>8.2</b> Convert FASTA sequence to an R variable</a></li>
+<li class="chapter" data-level="8.3" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#saving-fasta-files"><i class="fa fa-check"></i><b>8.3</b> Saving FASTA files</a></li>
+<li class="chapter" data-level="8.4" data-path="downloading-dna-sequences-with-r.html"><a href="downloading-dna-sequences-with-r.html#reading-in-fasta-files"><i class="fa fa-check"></i><b>8.4</b> Reading in FASTA files</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html"><i class="fa fa-check"></i><b>9</b> Introduction to biological sequences databases</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#to-do"><i class="fa fa-check"></i><b>9.1</b> To do</a></li>
+<li class="chapter" data-level="9.2" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#biological-sequence-databases"><i class="fa fa-check"></i><b>9.2</b> Biological sequence databases</a></li>
+<li class="chapter" data-level="9.3" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#the-ncbi-sequence-database-1"><i class="fa fa-check"></i><b>9.3</b> The NCBI Sequence Database</a></li>
+<li class="chapter" data-level="9.4" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#the-ncbi-sub-databases"><i class="fa fa-check"></i><b>9.4</b> The NCBI Sub-Databases</a></li>
+<li class="chapter" data-level="9.5" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#ncbi-genbank-record-format"><i class="fa fa-check"></i><b>9.5</b> NCBI GenBank Record Format</a></li>
+<li class="chapter" data-level="9.6" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#the-fasta-file-format"><i class="fa fa-check"></i><b>9.6</b> The FASTA file format</a></li>
+<li class="chapter" data-level="9.7" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#graphics"><i class="fa fa-check"></i><b>9.7</b> Graphics</a></li>
+<li class="chapter" data-level="9.8" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#refseq"><i class="fa fa-check"></i><b>9.8</b> RefSeq</a></li>
+<li class="chapter" data-level="9.9" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#querying-the-ncbi-database"><i class="fa fa-check"></i><b>9.9</b> Querying the NCBI Database</a></li>
+<li class="chapter" data-level="9.10" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#querying-the-ncbi-database-via-the-ncbi-website-for-reference"><i class="fa fa-check"></i><b>9.10</b> Querying the NCBI Database via the NCBI Website (for reference)</a></li>
+<li class="chapter" data-level="9.11" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#example-finding-the-sequences-published-in-nature-460352-358-for-reference"><i class="fa fa-check"></i><b>9.11</b> Example: finding the sequences published in Nature 460:352-358 (for reference)</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="programming-in-r-for-loops-and-functions.html"><a href="programming-in-r-for-loops-and-functions.html"><i class="fa fa-check"></i><b>10</b> Programming in R: for loops and functions</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="programming-in-r-for-loops-and-functions.html"><a href="programming-in-r-for-loops-and-functions.html#vocab"><i class="fa fa-check"></i><b>10.1</b> Vocab</a></li>
+<li class="chapter" data-level="10.2" data-path="programming-in-r-for-loops-and-functions.html"><a href="programming-in-r-for-loops-and-functions.html#basic-programming-in-r"><i class="fa fa-check"></i><b>10.2</b> Basic programming in R</a></li>
+<li class="chapter" data-level="10.3" data-path="programming-in-r-for-loops-and-functions.html"><a href="programming-in-r-for-loops-and-functions.html#functions-in-r"><i class="fa fa-check"></i><b>10.3</b> Functions in R</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html"><i class="fa fa-check"></i><b>11</b> Mini tutorial: Vectors in R</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#vocab-and-functions"><i class="fa fa-check"></i><b>11.1</b> Vocab and functions</a></li>
+<li class="chapter" data-level="11.2" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#vectors-in-r"><i class="fa fa-check"></i><b>11.2</b> Vectors in R</a></li>
+<li class="chapter" data-level="11.3" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#math-on-vectors"><i class="fa fa-check"></i><b>11.3</b> Math on vectors</a></li>
+<li class="chapter" data-level="11.4" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#functions-on-vectors"><i class="fa fa-check"></i><b>11.4</b> Functions on vectors</a></li>
+<li class="chapter" data-level="11.5" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#operations-with-two-vectors"><i class="fa fa-check"></i><b>11.5</b> Operations with two vectors</a></li>
+<li class="chapter" data-level="11.6" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#subsetting-vectors"><i class="fa fa-check"></i><b>11.6</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="11.7" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#sequences-of-numbers"><i class="fa fa-check"></i><b>11.7</b> Sequences of numbers</a></li>
+<li class="chapter" data-level="11.8" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#vectors-can-hold-numeric-or-character-data"><i class="fa fa-check"></i><b>11.8</b> Vectors can hold numeric or character data</a></li>
+<li class="chapter" data-level="11.9" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#regular-expressions-can-modify-character-data"><i class="fa fa-check"></i><b>11.9</b> Regular expressions can modify character data</a></li>
+<li class="chapter" data-level="11.10" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#plotting-vectors-in-base-r"><i class="fa fa-check"></i><b>11.10</b> Plotting vectors in base R</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="note-please-save-this-file-with-a-new-file-name-to-your-documents-folder-or-desktop.html"><a href="note-please-save-this-file-with-a-new-file-name-to-your-documents-folder-or-desktop.html"><i class="fa fa-check"></i><b>12</b> NOTE: please save this file with a new file name to your documents folder or desktop</a></li>
+<li class="chapter" data-level="13" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html"><i class="fa fa-check"></i><b>13</b> Downloading sequences from UniProt by hand</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#vocab-1"><i class="fa fa-check"></i><b>13.1</b> Vocab</a></li>
+<li class="chapter" data-level="13.2" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#uniprot"><i class="fa fa-check"></i><b>13.2</b> UniProt</a></li>
+<li class="chapter" data-level="13.3" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#viewing-the-uniprot-webpage-for-a-protein-sequence"><i class="fa fa-check"></i><b>13.3</b> Viewing the UniProt webpage for a protein sequence</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#protein-function"><i class="fa fa-check"></i><b>13.3.1</b> Protein function</a></li>
+<li class="chapter" data-level="13.3.2" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#protein-sequence-and-size"><i class="fa fa-check"></i><b>13.3.2</b> Protein sequence and size</a></li>
+<li class="chapter" data-level="13.3.3" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#other-information"><i class="fa fa-check"></i><b>13.3.3</b> Other information</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#retrieving-a-uniprot-protein-sequence-via-the-uniprot-website"><i class="fa fa-check"></i><b>13.4</b> Retrieving a UniProt protein sequence via the UniProt website</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="sequence-databases.html"><a href="sequence-databases.html"><i class="fa fa-check"></i><b>14</b> Sequence Databases</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="sequence-databases.html"><a href="sequence-databases.html#querying-the-ncbi-database-via-r"><i class="fa fa-check"></i><b>14.1</b> Querying the NCBI Database via R</a></li>
+<li class="chapter" data-level="14.2" data-path="sequence-databases.html"><a href="sequence-databases.html#summary-1"><i class="fa fa-check"></i><b>14.2</b> Summary</a></li>
+<li class="chapter" data-level="14.3" data-path="sequence-databases.html"><a href="sequence-databases.html#acknowledgements-1"><i class="fa fa-check"></i><b>14.3</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="local-variation-in-gc-content.html"><a href="local-variation-in-gc-content.html"><i class="fa fa-check"></i><b>15</b> Local variation in GC content</a>
+<ul>
+<li class="chapter" data-level="15.0.1" data-path="local-variation-in-gc-content.html"><a href="local-variation-in-gc-content.html#note-on-the-biology-in-this-section-1"><i class="fa fa-check"></i><b>15.0.1</b> Note on the biology in this section</a></li>
+<li class="chapter" data-level="15.1" data-path="local-variation-in-gc-content.html"><a href="local-variation-in-gc-content.html#vocabulary-2"><i class="fa fa-check"></i><b>15.1</b> Vocabulary</a></li>
+<li class="chapter" data-level="15.2" data-path="local-variation-in-gc-content.html"><a href="local-variation-in-gc-content.html#reading-sequence-data-with-rentrezentrez_fetch"><i class="fa fa-check"></i><b>15.2</b> Reading sequence data with rentrez::entrez_fetch</a></li>
+<li class="chapter" data-level="15.3" data-path="local-variation-in-gc-content.html"><a href="local-variation-in-gc-content.html#local-variation-in-gc-content-1"><i class="fa fa-check"></i><b>15.3</b> Local variation in GC content</a></li>
+<li class="chapter" data-level="15.4" data-path="local-variation-in-gc-content.html"><a href="local-variation-in-gc-content.html#a-sliding-window-analysis-of-gc-content"><i class="fa fa-check"></i><b>15.4</b> A sliding window analysis of GC content</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="local-variation-in-gc-content.html"><a href="local-variation-in-gc-content.html#over-represented-and-under-represented-dna-words"><i class="fa fa-check"></i><b>15.4.1</b> Over-represented and under-represented DNA words</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="local-variation-in-gc-content.html"><a href="local-variation-in-gc-content.html#summary-2"><i class="fa fa-check"></i><b>15.5</b> Summary</a></li>
+<li class="chapter" data-level="15.6" data-path="local-variation-in-gc-content.html"><a href="local-variation-in-gc-content.html#further-reading"><i class="fa fa-check"></i><b>15.6</b> Further Reading</a></li>
+<li class="chapter" data-level="15.7" data-path="local-variation-in-gc-content.html"><a href="local-variation-in-gc-content.html#acknowledgements-2"><i class="fa fa-check"></i><b>15.7</b> Acknowledgements</a>
+<ul>
+<li class="chapter" data-level="15.7.1" data-path="local-variation-in-gc-content.html"><a href="local-variation-in-gc-content.html#license-1"><i class="fa fa-check"></i><b>15.7.1</b> License</a></li>
+</ul></li>
+<li class="chapter" data-level="15.8" data-path="local-variation-in-gc-content.html"><a href="local-variation-in-gc-content.html#exercises-1"><i class="fa fa-check"></i><b>15.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="aligments-in-r.html"><a href="aligments-in-r.html"><i class="fa fa-check"></i><b>16</b> Aligments in R</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="aligments-in-r.html"><a href="aligments-in-r.html#retrieving-a-uniprot-protein-sequence-using-seqinr"><i class="fa fa-check"></i><b>16.1</b> Retrieving a UniProt protein sequence using SeqinR</a></li>
+<li class="chapter" data-level="16.2" data-path="aligments-in-r.html"><a href="aligments-in-r.html#comparing-two-sequences-using-a-dotplot"><i class="fa fa-check"></i><b>16.2</b> Comparing two sequences using a dotplot</a></li>
+<li class="chapter" data-level="16.3" data-path="aligments-in-r.html"><a href="aligments-in-r.html#aligning-uniprot-sequences"><i class="fa fa-check"></i><b>16.3</b> Aligning UniProt sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html"><i class="fa fa-check"></i><b>17</b> Retrieving multiple sequences in R</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#prelminaries"><i class="fa fa-check"></i><b>17.1</b> Prelminaries</a></li>
+<li class="chapter" data-level="17.2" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#retrieving-a-list-of-sequences-from-uniprot"><i class="fa fa-check"></i><b>17.2</b> Retrieving a list of sequences from UniProt</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="multiple-alignment-with-clustal.html"><a href="multiple-alignment-with-clustal.html"><i class="fa fa-check"></i><b>18</b> Multiple alignment with Clustal</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="multiple-alignment-with-clustal.html"><a href="multiple-alignment-with-clustal.html#installing-the-clustal-multiple-alignment-software"><i class="fa fa-check"></i><b>18.1</b> Installing the CLUSTAL multiple alignment software</a></li>
+<li class="chapter" data-level="18.2" data-path="multiple-alignment-with-clustal.html"><a href="multiple-alignment-with-clustal.html#discarding-very-poorly-conserved-regions-from-an-alignment"><i class="fa fa-check"></i><b>18.2</b> Discarding very poorly conserved regions from an alignment</a></li>
+<li class="chapter" data-level="18.3" data-path="multiple-alignment-with-clustal.html"><a href="multiple-alignment-with-clustal.html#calculating-genetic-distances-between-protein-sequences"><i class="fa fa-check"></i><b>18.3</b> Calculating genetic distances between protein sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="rooted-neighbor-joining-phylogenetic-trees.html"><a href="rooted-neighbor-joining-phylogenetic-trees.html"><i class="fa fa-check"></i><b>19</b> Rooted Neighbor-joining Phylogenetic trees</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="rooted-neighbor-joining-phylogenetic-trees.html"><a href="rooted-neighbor-joining-phylogenetic-trees.html#building-a-rooted-phylogenetic-tree-for-protein-sequences"><i class="fa fa-check"></i><b>19.1</b> Building a rooted phylogenetic tree for protein sequences</a></li>
+<li class="chapter" data-level="19.2" data-path="rooted-neighbor-joining-phylogenetic-trees.html"><a href="rooted-neighbor-joining-phylogenetic-trees.html#building-a-phylogenetic-tree-for-dna-or-mrna-sequences"><i class="fa fa-check"></i><b>19.2</b> Building a phylogenetic tree for DNA or mRNA sequences</a></li>
+<li class="chapter" data-level="19.3" data-path="rooted-neighbor-joining-phylogenetic-trees.html"><a href="rooted-neighbor-joining-phylogenetic-trees.html#summary-3"><i class="fa fa-check"></i><b>19.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="unrooted-neighbor-joining-phylogenetic-trees.html"><a href="unrooted-neighbor-joining-phylogenetic-trees.html"><i class="fa fa-check"></i><b>20</b> Unrooted Neighbor-joining Phylogenetic trees</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="unrooted-neighbor-joining-phylogenetic-trees.html"><a href="unrooted-neighbor-joining-phylogenetic-trees.html#building-an-unrooted-phylogenetic-tree-for-protein-sequences"><i class="fa fa-check"></i><b>20.1</b> Building an unrooted phylogenetic tree for protein sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="testing-the-significance-of-an-alignment.html"><a href="testing-the-significance-of-an-alignment.html"><i class="fa fa-check"></i><b>21</b> Testing the significance of an alignment</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="testing-the-significance-of-an-alignment.html"><a href="testing-the-significance-of-an-alignment.html#calculating-the-statistical-significance-of-a-pairwise-global-alignment"><i class="fa fa-check"></i><b>21.1</b> Calculating the statistical significance of a pairwise global alignment</a></li>
+<li class="chapter" data-level="21.2" data-path="testing-the-significance-of-an-alignment.html"><a href="testing-the-significance-of-an-alignment.html#summary-4"><i class="fa fa-check"></i><b>21.2</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="computational-gene-finding.html"><a href="computational-gene-finding.html"><i class="fa fa-check"></i><b>22</b> Computational gene finding</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="computational-gene-finding.html"><a href="computational-gene-finding.html#the-genetic-code"><i class="fa fa-check"></i><b>22.1</b> The genetic code</a></li>
+<li class="chapter" data-level="22.2" data-path="computational-gene-finding.html"><a href="computational-gene-finding.html#reading-frames"><i class="fa fa-check"></i><b>22.2</b> Reading frames</a></li>
+<li class="chapter" data-level="22.3" data-path="computational-gene-finding.html"><a href="computational-gene-finding.html#finding-open-reading-frames-on-the-forward-strand-of-a-dna-sequence"><i class="fa fa-check"></i><b>22.3</b> Finding open reading frames on the forward strand of a DNA sequence</a></li>
+<li class="chapter" data-level="22.4" data-path="computational-gene-finding.html"><a href="computational-gene-finding.html#lengths-of-open-reading-frames"><i class="fa fa-check"></i><b>22.4</b> Lengths of open reading frames</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="significance-of-orfs.html"><a href="significance-of-orfs.html"><i class="fa fa-check"></i><b>23</b> Significance of ORFs</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="significance-of-orfs.html"><a href="significance-of-orfs.html#identifying-significant-open-reading-frames"><i class="fa fa-check"></i><b>23.1</b> Identifying significant open reading frames</a></li>
+<li class="chapter" data-level="23.2" data-path="significance-of-orfs.html"><a href="significance-of-orfs.html#summary-5"><i class="fa fa-check"></i><b>23.2</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="comparative-genomics.html"><a href="comparative-genomics.html"><i class="fa fa-check"></i><b>24</b> Comparative Genomics</a></li>
+<li class="chapter" data-level="25" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>25</b> Introduction</a></li>
+<li class="chapter" data-level="26" data-path="using-the-biomart-r-library-to-query-the-ensembl-database.html"><a href="using-the-biomart-r-library-to-query-the-ensembl-database.html"><i class="fa fa-check"></i><b>26</b> Using the biomaRt R Library to Query the Ensembl Database</a></li>
+<li class="chapter" data-level="27" data-path="comparing-the-number-of-genes-in-two-species.html"><a href="comparing-the-number-of-genes-in-two-species.html"><i class="fa fa-check"></i><b>27</b> Comparing the number of genes in two species</a></li>
+<li class="chapter" data-level="28" data-path="identifying-homologous-genes-between-two-species.html"><a href="identifying-homologous-genes-between-two-species.html"><i class="fa fa-check"></i><b>28</b> Identifying homologous genes between two species</a></li>
+<li class="chapter" data-level="29" data-path="summary-6.html"><a href="summary-6.html"><i class="fa fa-check"></i><b>29</b> Summary</a></li>
+<li class="chapter" data-level="30" data-path="links-and-further-reading-1.html"><a href="links-and-further-reading-1.html"><i class="fa fa-check"></i><b>30</b> Links and Further Reading</a></li>
+<li class="chapter" data-level="31" data-path="acknowledgements-3.html"><a href="acknowledgements-3.html"><i class="fa fa-check"></i><b>31</b> Acknowledgements</a></li>
+<li class="chapter" data-level="32" data-path="contact.html"><a href="contact.html"><i class="fa fa-check"></i><b>32</b> Contact</a></li>
+<li class="chapter" data-level="33" data-path="license-2.html"><a href="license-2.html"><i class="fa fa-check"></i><b>33</b> License</a></li>
+<li class="chapter" data-level="34" data-path="exercises-2.html"><a href="exercises-2.html"><i class="fa fa-check"></i><b>34</b> Exercises</a></li>
+<li class="chapter" data-level="35" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html"><i class="fa fa-check"></i><b>35</b> Hidden Markov Models</a>
+<ul>
+<li class="chapter" data-level="35.1" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#r-programming-101-initializing-vectors"><i class="fa fa-check"></i><b>35.1</b> R Programming 101: Initializing vectors</a></li>
+<li class="chapter" data-level="35.2" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#a-multinomial-model-of-dna-sequence-evolution"><i class="fa fa-check"></i><b>35.2</b> A multinomial model of DNA sequence evolution</a></li>
+<li class="chapter" data-level="35.3" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#generating-a-dna-sequence-using-a-multinomial-model"><i class="fa fa-check"></i><b>35.3</b> Generating a DNA sequence using a multinomial model</a></li>
+<li class="chapter" data-level="35.4" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#a-markov-model-of-dna-sequence-evolution"><i class="fa fa-check"></i><b>35.4</b> A Markov model of DNA sequence evolution</a></li>
+<li class="chapter" data-level="35.5" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#the-transition-matrix-for-a-markov-model"><i class="fa fa-check"></i><b>35.5</b> The transition matrix for a Markov model</a></li>
+<li class="chapter" data-level="35.6" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#generating-a-dna-sequence-using-a-markov-model"><i class="fa fa-check"></i><b>35.6</b> Generating a DNA sequence using a Markov model</a></li>
+<li class="chapter" data-level="35.7" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#a-hidden-markov-model-of-dna-sequence-evolution"><i class="fa fa-check"></i><b>35.7</b> A Hidden Markov Model of DNA sequence evolution</a></li>
+<li class="chapter" data-level="35.8" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#the-transition-matrix-and-emission-matrix-for-a-hmm"><i class="fa fa-check"></i><b>35.8</b> The transition matrix and emission matrix for a HMM</a></li>
+<li class="chapter" data-level="35.9" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#generating-a-dna-sequence-using-a-hmm"><i class="fa fa-check"></i><b>35.9</b> Generating a DNA sequence using a HMM</a></li>
+<li class="chapter" data-level="35.10" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#inferring-the-states-of-a-hmm-that-generated-a-dna-sequence"><i class="fa fa-check"></i><b>35.10</b> Inferring the states of a HMM that generated a DNA sequence</a></li>
+<li class="chapter" data-level="35.11" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#a-hidden-markov-model-of-protein-sequence-evolution"><i class="fa fa-check"></i><b>35.11</b> A Hidden Markov Model of protein sequence evolution</a></li>
+<li class="chapter" data-level="35.12" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#summary-7"><i class="fa fa-check"></i><b>35.12</b> Summary</a></li>
+<li class="chapter" data-level="35.13" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#links-and-further-reading-2"><i class="fa fa-check"></i><b>35.13</b> Links and Further Reading</a></li>
+<li class="chapter" data-level="35.14" data-path="hidden-markov-models.html"><a href="hidden-markov-models.html#exercises-3"><i class="fa fa-check"></i><b>35.14</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#part-appendices"><i class="fa fa-check"></i>(PART) Appendices</a>
+<ul>
+<li><a href="#section"></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html"><i class="fa fa-check"></i>Appendix 01: Getting access to R</a>
+<ul>
+<li class="chapter" data-level="35.15" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-started-with-r-and-rstudio"><i class="fa fa-check"></i><b>35.15</b> Getting Started With R and RStudio</a>
+<ul>
+<li class="chapter" data-level="35.15.1" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#rstudio-cloud"><i class="fa fa-check"></i><b>35.15.1</b> RStudio Cloud</a></li>
+<li class="chapter" data-level="35.15.2" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-r-onto-your-own-computer"><i class="fa fa-check"></i><b>35.15.2</b> Getting R onto your own computer</a></li>
+<li class="chapter" data-level="35.15.3" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-rstudio-onto-your-computer"><i class="fa fa-check"></i><b>35.15.3</b> Getting RStudio onto your computer</a></li>
+<li class="chapter" data-level="35.15.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#keep-r-and-rstudio-current"><i class="fa fa-check"></i><b>35.15.4</b> Keep R and RStudio current</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html"><i class="fa fa-check"></i>Getting started with R itself (or not)</a>
+<ul>
+<li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#vocabulary-3"><i class="fa fa-check"></i>Vocabulary</a></li>
+<li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#r-commands"><i class="fa fa-check"></i>R commands</a></li>
+<li class="chapter" data-level="35.16" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#help"><i class="fa fa-check"></i><b>35.16</b> Help!</a>
+<ul>
+<li class="chapter" data-level="35.16.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-r"><i class="fa fa-check"></i><b>35.16.1</b> Getting “help” from R</a></li>
+<li class="chapter" data-level="35.16.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-the-internet"><i class="fa fa-check"></i><b>35.16.2</b> Getting help from the internet</a></li>
+<li class="chapter" data-level="35.16.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-online-forums"><i class="fa fa-check"></i><b>35.16.3</b> Getting help from online forums</a></li>
+<li class="chapter" data-level="35.16.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-twitter"><i class="fa fa-check"></i><b>35.16.4</b> Getting help from twitter</a></li>
+</ul></li>
+<li class="chapter" data-level="35.17" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#other-features-of-rstudio"><i class="fa fa-check"></i><b>35.17</b> Other features of RStudio</a>
+<ul>
+<li class="chapter" data-level="35.17.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#ajusting-pane-the-layout"><i class="fa fa-check"></i><b>35.17.1</b> Ajusting pane the layout</a></li>
+<li class="chapter" data-level="35.17.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#adjusting-size-of-windows"><i class="fa fa-check"></i><b>35.17.2</b> Adjusting size of windows</a></li>
+</ul></li>
+<li class="chapter" data-level="35.18" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>35.18</b> Practice (OPTIONAL)</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sequence-databases" class="section level1" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Sequence Databases</h1>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="sequence-databases.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
+<p><strong>By</strong>: Avril Coghlan.</p>
+<p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
+<div id="querying-the-ncbi-database-via-r" class="section level2" number="14.1">
+<h2><span class="header-section-number">14.1</span> Querying the NCBI Database via R</h2>
+<p>Instead of carrying out searches of the NCBI database on the NCBI website, you can carry out searches directly from R by using the SeqinR R package.</p>
+<p>It is possible to use the SeqinR R package to retrieve sequences from these databases. The SeqinR package was written by the group that created the ACNUC database in Lyon, France (<a href="http://pbil.univ-lyon1.fr/databases/acnuc/acnuc.html" class="uri">http://pbil.univ-lyon1.fr/databases/acnuc/acnuc.html</a>). The ACNUC database is a database that contains most of the data from the NCBI Sequence Database, as well as data from other sequence databases such as UniProt and Ensembl.</p>
+<p>An advantage of the ACNUC database is that it brings together data from various different sources, and makes it easy to search, for example, by using the SeqinR R package.</p>
+<p>As will be explained below, the ACNUC database is organised into various different ACNUC (sub)-databases, which contain different parts of the NCBI database, and when you want to search the NCBI database via R, you will need to specify which ACNUC sub-database the NCBI data that you want to query is stored in.</p>
+<p>To obtain a full list of the ACNUC sub-databases that you can access using SeqinR, you can use the “choosebank()” function from SeqinR:</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="sequence-databases.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;seqinr&quot;</span>) <span class="co"># Load the SeqinR R package</span></span>
+<span id="cb192-2"><a href="sequence-databases.html#cb192-2" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>()      <span class="co"># List all the sub-databases in ACNUC</span></span></code></pre></div>
+<p>Alas, the ACNUC sub-databases do not have a one-to-one correspondence with the NCBI sub-databases (the NCBI Protein database, NCBI EST database, NCBI Genome database, etc.)!</p>
+<p>Three of the most important sub-databases in ACNUC which can be searched from R are:</p>
+<p>“genbank”: this contains DNA and RNA sequences from the NCBI Sequence Database, except for certain classes of sequences (eg. draft genome sequence data from genome sequencing projects)
+“refseq”: this contains DNA and RNA sequences from Refseq, the curated part of the NCBI Sequence Database
+“refseqViruses”: this contains DNA, RNA and proteins sequences from viruses from RefSeq
+You can find more information about what each of these ACNUC databases contains by looking at the ACNUC website.</p>
+<p>You can carry out complex queries using the “query()” function from the SeqinR package. If you look at the help page for the query() function (by typing “help(query),” you will see that it allows you to specify criteria that you require the sequences to fulfill.</p>
+<p>For example, to search for a sequence with a particular NCBI accession, you can use the “AC=” argument in “query().” The “query()” function will then search for sequences in the NCBI Sequence Database that match your criteria.</p>
+<p>Just as you can use “AC=” to specify an accession in a search, you can specify that you want to find sequences whose NCBI records contain a certain keywords by using “K=” as an argument (input) to the “query()” function. Likewise you can limit a search to either DNA or mRNA sequences by using the “M=” argument for the “query()” function. Here are some more possible arguments you can use in the “query()” function:</p>
+<p>Argument Example Restricts your search to sequences:
+“AC=” “AC=NC_001477” With a particular accession number
+“SP=” “SP=Chlamydia” From a particular organism or taxon
+“M=” “M=mRNA” Of a specific type (eg. mRNA)
+“J=” “J=Nature” Described in a paper published in a particular journal
+“R=” “R=Nature/460/352” Described in a paper in a particular journal, volume and start-page
+“AU=” “AU=Smith” Described in a paper, or submitted to NCBI, by a particular author
+The full list of possible arguments for the “query()” funtion are given on its help page. Here are some examples using the query function:</p>
+<p>Input to the query() function Searches for sequences:
+“AC=NC_001477” With accession number NC_001477
+“R=Nature/460/352” Published in Nature 460:352-358
+“SP=Chlamydia trachomatis” From the bacterium Chlamydia trachomatis
+“AU=Berriman” Published in a paper, or submitted to NCBI, by someone called Berriman
+“K=flagellin OR K=fibrinogen” Which have the keyword ‘flagellin’ or ‘fibrinogen’
+“SP=Mycobacterium leprae AND K=dnaA” Which are from M. leprae, and have the keyword “dnaA”
+“SP=Homo sapiens AND K=colon cancer” Which are from human, and have the keyword “colon cancer”
+“SP=Homo sapiens AND K=malaria” Which are from human, and have the keyword “malaria”
+“SP=Homo sapiens AND M=mrna” Which are mRNA sequences from human
+“SP=Bacteria” Which are sequences from Bacteria
+As explained above, the ACNUC database contains the NCBI sequence data organised into several sub-databases, and you can view the list of those sub-databases by using the “choosebank()” function from the SeqinR package. When you want to use “query()” to carry out a particular sub-database (eg. “genbank,” which contains DNA and RNA sequences from the NCBI Sequence Database), you need to first specify the database that you want to search by using the “choosebank()” function, for example:</p>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="sequence-databases.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;genbank&quot;</span>) <span class="co"># Specify that we want to search the &#39;genbank&#39; ACNUC sub-database</span></span></code></pre></div>
+<p>Likewise, to specify that we want to search the ‘refseq’ ACNUC sub-database, which contains sequences from the NCBI RefSeq database, we would type:</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="sequence-databases.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;refseq&quot;</span>) <span class="co"># Specify that we want to search the &#39;refseq&#39; ACNUC sub-database</span></span></code></pre></div>
+<p>Once you have specified which ACNUC sub-database you want to search, you can carry out a search of that sub-database by using the “query()” function. You need to pass the “query()” function both a name for your query (which you can make up), and the query itself (which will be in the format of the examples in the table above). For example, if we want to search for RefSeq sequences from Bacteria, we might decide to call our query “RefSeqBact,” and we would call the “query()” function as follows:</p>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="sequence-databases.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&quot;RefSeqBact&quot;</span>, <span class="st">&quot;SP=Bacteria&quot;</span>)</span></code></pre></div>
+<p>As explained below, the results of the search are stored in a list variable called “RefSeqBact,” and can be retrieved from that list variable. The last thing to do once you have completed your search is to close the connection to the ACNUC sub-database that you were searching, by typing:</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="sequence-databases.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
+<p>Thus, there are three steps involved in carrying out a query using SeqinR: first use “choosebank()” to select the ACNUC sub-database to search, secondly use “query()” to query the database, and thirdly use “closebank()” to close the connection to the ACNUC sub-database.</p>
+<p>Another example could be to search for mRNA sequences from the parasitic worm Schistosoma mansoni in the NCBI Nucleotide database. The appropriate ACNUC sub-database to search is the “genbank” ACNUC sub-database. We may decide to call our search “SchistosomamRNA.” Therefore, to carry out the search, we type in R:</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="sequence-databases.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;genbank&quot;</span>)</span>
+<span id="cb197-2"><a href="sequence-databases.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&quot;SchistosomamRNA&quot;</span>, <span class="st">&quot;SP=Schistosoma mansoni AND M=mrna&quot;</span>)</span>
+<span id="cb197-3"><a href="sequence-databases.html#cb197-3" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
+<p>Example: finding the sequence for the DEN-1 Dengue virus genome
+Another example could be to search for the DEN-1 Dengue virus genome sequence, which has accession NC_001477. This is a viral genome sequence, and so should be in the ACNUC sub-database “refSeqViruses.” Thus to search for this sequence, calling our search “Dengue1,” we type in R:</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="sequence-databases.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;refseqViruses&quot;</span>)</span>
+<span id="cb198-2"><a href="sequence-databases.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&quot;Dengue1&quot;</span>, <span class="st">&quot;AC=NC_001477&quot;</span>)</span></code></pre></div>
+<p>The result of the search is now stored in the list variable Dengue1. Remember that a list is an R object that is like a vector, but can contain elements that are numeric and/or contain characters. In this case, the list Dengue1 contains information on the NCBI records that match the query (ie. information on the NCBI record for accession NC_001477).</p>
+<p>If you look at the help page for “query(),” the details of the arguments are given under the heading “Arguments,” and the details of the results (outputs) are given under the heading “Value.” If you read this now, you will see that it tells us that the result of the “query()” function is a list with six different named elements, named “call,” “name,” “nelem,” “typelist,” “req,” and “socket.” The content of each of these six named elements is explained, for example, the “nelem” element contains the number of sequences that match the query, and the “req” element contains their accession numbers.</p>
+<p>In our example, the list object Dengue1 is an output of the “query()” function, and so has each of these six named elements, as we can find out by using the “attributes()” function, and looking at the named elements listed under the heading “$names”:</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="sequence-databases.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(Dengue1)</span></code></pre></div>
+<p>As explained in the brief introduction to R, we can retrieve the value for each of the named elements in the list Dengue1 by using “$,” followed by the element’s name, for example, to get the value of the element named “nelem” in the list Dengue1, we type:</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="sequence-databases.html#cb200-1" aria-hidden="true" tabindex="-1"></a>Dengue1<span class="sc">$</span>nelem</span></code></pre></div>
+<p>This tells us that there was one sequence in the ‘refseqViruses’ ACNUC database that matched the query. This is what we would expect, as there should only be one sequence corresponding to accession NC_001477.</p>
+<p>To obtain the accession numbers of the sequence found, we can type:</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="sequence-databases.html#cb201-1" aria-hidden="true" tabindex="-1"></a>Dengue1<span class="sc">$</span>req</span></code></pre></div>
+<p>As expected, the accession number of the matching sequence is NC_001477.</p>
+<p>When you type “attributes(Dengue1)” you can see that there are two headings, “$names,” and “$class.” As explained above, the named elements of the list variable Dengue1 are listed under the heading “$names.” In fact, the headings “$names” and “$class” are two attributes of the list variable Dengue1. We can retrieve the values of the attributes of a variable using the “attr()” function. For example, to retrieve the value of the attribute “$names” of Dengue1, we type:</p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="sequence-databases.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(Dengue1, <span class="st">&quot;names&quot;</span>)</span></code></pre></div>
+<p>This gives us the value of the attribute “$names,” which contains the the names of the named elements of the list variable Dengue1. Similarly, we can retrieve the value of the a attribute “$class” of Dengue1, we type:</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="sequence-databases.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(Dengue1, <span class="st">&quot;class&quot;</span>)</span></code></pre></div>
+<p>This tells us that the value of the attribute “$class” is “qaw.”</p>
+<p>The final step in retrieving a genomic DNA sequence is to use the “getSequence()” function to tell R to retrieve the sequence data. The command below uses “getSequence()” to retrieve the sequence data for the DEN-1 Dengue virus genome, and puts the sequence into a variable dengueseq:</p>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="sequence-databases.html#cb204-1" aria-hidden="true" tabindex="-1"></a> dengueseq <span class="ot">&lt;-</span> <span class="fu">getSequence</span>(Dengue1<span class="sc">$</span>req[[<span class="dv">1</span>]])</span></code></pre></div>
+<p>Note that the input to the getSequence() command is Dengue1$req[[1]], which contains the name of the NCBI record that the list Dengue1 contains information about.</p>
+<p>Once you have retrieved a sequence, you can then print it out. The variable dengueseq is a vector containing the nucleotide sequence. Each element of the vector contains one nucleotide of the sequence. Therefore, we can print out the first 50 nucleotides of the DEN-1 Dengue genome sequence by typing:</p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="sequence-databases.html#cb205-1" aria-hidden="true" tabindex="-1"></a>dengueseq[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>]</span></code></pre></div>
+<p>Note that dengueseq[1:50] refers to the elements of the vector dengueseq with indices from 1-50. These elements contain the first 50 nucleotides of the DEN-1 Dengue virus genome sequence.</p>
+<p>As well as retrieving the DNA (or RNA or protein) sequence itself, SeqinR can also retrieve all the annotations for the sequence, for example, information on when the sequence was sequenced, who sequenced it, what organism is it from, what paper was it described in, what genes were identified in the sequence, and so on.</p>
+<p>Once you have retrieved a sequence using SeqinR, you can retrieved its annotations by using the “getAnnot()” function. For example, to view the annotations for the DEN-1 Dengue virus genome sequence, we type:</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="sequence-databases.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="do">## annots &lt;- getAnnot(Dengue1$req[[1]])</span></span></code></pre></div>
+<p>This stores the annotations information from the NCBI record for the DEN-1 Dengue virus sequence in a vector variable annots, with one line of the NCBI record in each element of the vector. Therefore, we can print out the first 20 lines of the NCBI record by typing:</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="sequence-databases.html#cb207-1" aria-hidden="true" tabindex="-1"></a>annots[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code></pre></div>
+<p>The line with “ORGANISM” in the left column is the organism field, and usually contains the Latin name for the organism (“Dengue virus 1” here). The line with “AUTHORS” in the left column is the authors field, and contain the names of authors that wrote papers to describe the sequence and/or the names of the people who submitted the sequence to the NCBI Database.</p>
+<p>When you have finished your running your query and getting the corresponding sequences and annotations, close the connection to the ACNUC sub-database:</p>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="sequence-databases.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
+<p>Example: finding the sequences published in Nature 460:352-358
+We described above how to search for the sequences published in Nature 460:352-358, using the NCBI website. A second method is to use the SeqinR R package to search the ACNUC databases (which contain the NCBI sequence data) from R.</p>
+<p>If you look at the help page the “query()” function, you see that you can query for sequences published in a particular paper using R=refcode, specifying the reference as refcode such as in jcode/volume/page (e.g., JMB/13/5432 or R=Nature/396/133). For the paper Nature 460:352-358, we would need to use the refcode ‘R=Nature/460/352.’</p>
+<p>First we need to specify which of the ACNUC databases we want to search. For example, to specify that we want to search the “genbank” ACNUC database, which contains DNA and RNA sequences from the NCBI Nucleotide database, we type:</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="sequence-databases.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;genbank&quot;</span>) <span class="co"># Specify that we want to search the &#39;genbank&#39; ACNUC sub-database</span></span></code></pre></div>
+<p>We can then search the ‘genbank’ database for sequences that match a specific set of criteria by using the “query()” function. For example, to search for sequences that were published in Nature 460:352-358, we type:</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="sequence-databases.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&#39;naturepaper&#39;</span>, <span class="st">&#39;R=Nature/460/352&#39;</span>)</span></code></pre></div>
+<p>The line above tells R that we want to store the results of the query in an R list variable called naturepaper. To get the value of the element named “nelem” in the list naturepaper, we type:</p>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="sequence-databases.html#cb211-1" aria-hidden="true" tabindex="-1"></a>naturepaper<span class="sc">$</span>nelem</span></code></pre></div>
+<p>This tells us that there were 19022 sequences in the ‘genbank’ ACNUC database that matched the query. The ‘genbank’ ACNUC database contains DNA or RNA sequences from the NCBI Nucleotide database. Why don’t we get the same number of sequences as found by carrying out the search on the NCBI website (where we found 50890 hits to the NCBI Nucleotide database)? The reason is that the ACNUC ‘genbank’ database does not contain all the sequences in the NCBI Nucleotide database, for example, it does not contain sequences that are in RefSeq or many short DNA sequences from sequencing projects.</p>
+<p>To obtain the accession numbers of the first five of the 19022 sequences, we can type:</p>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="sequence-databases.html#cb212-1" aria-hidden="true" tabindex="-1"></a>accessions <span class="ot">&lt;-</span> naturepaper<span class="sc">$</span>req</span>
+<span id="cb212-2"><a href="sequence-databases.html#cb212-2" aria-hidden="true" tabindex="-1"></a>accessions[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<p>This tells us that the NCBI accessions of the first five sequences (of the 19022 DNA or RNA sequences found that were published in Nature 460:352-358) are FN357292, FN357293, FN357294, FN357295, and FN357296.</p>
+<p>To retrieve these first five sequences, and print out the first 10 nucleotide bases of each sequence, we use the getSequence() command, typing:</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="sequence-databases.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb213-2"><a href="sequence-databases.html#cb213-2" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb213-3"><a href="sequence-databases.html#cb213-3" aria-hidden="true" tabindex="-1"></a>     seqi <span class="ot">&lt;-</span> <span class="fu">getSequence</span>(naturepaper<span class="sc">$</span>req[[i]])</span>
+<span id="cb213-4"><a href="sequence-databases.html#cb213-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">print</span>(seqi[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
+<span id="cb213-5"><a href="sequence-databases.html#cb213-5" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<p>Note that the input to the getSequence() command is Dengue1$req[[i]], which contains the name of i th NCBI record that the list naturepaper contains information about.</p>
+<p>Once we have carried out our queries and retrieved the sequences, the final step is to close the connection to the ACNUC sub-database that we searched (“genbank” here):</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="sequence-databases.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
+<p>Saving sequence data in a FASTA-format file
+Once you have retrieved a sequence, or set of sequences from the NCBI Database, using SeqinR, it is conveninent to save the sequences in a file in FASTA format. This can be done using the “write.fasta()” function in the SeqinR package, which was introduced in Chapter 1.</p>
+<p>If you look at the help page for the “write.fasta()” function, you will see that as input it takes a list of vectors, where each vector contains one DNA, RNA or protein sequence.</p>
+<p>For example, if you retrieve the sequences of human tRNAs from the NCBI Database by querying the ACNUC “genbank” sub-database, you can save the sequences in a FASTA format file called “humantRNAs.fasta” by typing:</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="sequence-databases.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;genbank&quot;</span>)                             <span class="co"># select the ACNUC sub-database to be searched</span></span>
+<span id="cb215-2"><a href="sequence-databases.html#cb215-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&quot;humtRNAs&quot;</span>, <span class="st">&quot;SP=homo sapiens AND M=TRNA&quot;</span>)   <span class="co"># specify the query</span></span>
+<span id="cb215-3"><a href="sequence-databases.html#cb215-3" aria-hidden="true" tabindex="-1"></a>myseqs <span class="ot">&lt;-</span> <span class="fu">getSequence</span>(humtRNAs)                   <span class="co"># get the sequences</span></span>
+<span id="cb215-4"><a href="sequence-databases.html#cb215-4" aria-hidden="true" tabindex="-1"></a>mynames <span class="ot">&lt;-</span> <span class="fu">getName</span>(humtRNAs)                      <span class="co"># get the names of the sequences</span></span>
+<span id="cb215-5"><a href="sequence-databases.html#cb215-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.fasta</span>(myseqs, mynames, <span class="at">file.out=</span><span class="st">&quot;humantRNAs.fasta&quot;</span>)</span>
+<span id="cb215-6"><a href="sequence-databases.html#cb215-6" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
+<p>In the above code, we get the sequences of the human tRNAs using the function “getSequence()” from the SeqinR package. We also use a function “getName()” from the SeqinR package to get the sequences’ names. Then we use the “write.fasta()” function to write the sequences to a FASTA file “humantRNAs.fasta.” The “write.fasta()” takes as arguments: the list myseqs containing the sequences, the list mynames containing the names of the sequences, and the name of the output file (“humantRNAs.fasta” here).</p>
+<p>Finding the genome sequence for a particular species
+Microbial genomes are generally smaller than eukaryotic genomes (Escherichia coli has about 5 million base pair in its genome, while the human genome is about 3 billion base pairs). Because they are considerably less expensive to sequence, many microbial genome sequencing projects have been completed.</p>
+<p>If you don’t know the accession number for a genome sequence (eg. for Mycobacterium leprae, the bacterium that causes leprosy), how can you find it out?</p>
+<p>The easiest way to do this is to look at the NCBI Genome website, which lists all fully sequenced genomes and gives the accession numbers for the corresponding DNA sequences.</p>
+<p>If you didn’t know the accession number for the Mycobacterium leprae genome, you could find it on the NCBI Genome website by following these steps:</p>
+<p>Go to the NCBI Genome website (<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome" class="uri">http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome</a>)
+On the homepage of the NCBI Genome website, it gives links to the major subdivisions of the Genome database, which include Eukaryota, Prokaryota (Bacteria and Archaea), and Viruses. Click on ‘Prokaryota,’ since Mycobacterium leprae is a bacterium. This will bring up a list of all fully sequenced bacterial genomes, with the corresponding accession numbers. Note that more than one genome (from various strains) may have been sequenced for a particular species.
+Use ‘Find’ in the ‘Edit’ menu of your web browser to search for ‘Mycobacterium leprae’ on the webpage. You should find that the genomes of several different M. leprae strains have been sequenced. One of these is M. leprae TN, which has accession number NC_002677.
+The list of sequenced genomes on the NCBI Genomes website is not a definitive list; that is, some sequenced genomes may be missing from this list. If you want to find out whether a particular genome has been sequenced, but you don’t find it NCBI Genomes website’s list, you should search for it by following these steps:</p>
+<p>Go to the NCBI website (www.ncbi.nlm.nih.gov).
+Select ‘Genome’ from the drop-down list above the search box.
+Type the name of the species you are interested in in the search box (eg. “Mycobacterium leprae”[ORGN]). Press ‘Search.’
+Note that you could also have found the Mycobacterium leprae genome sequence by searching the NCBI Nucleotide database, as the NCBI Genome database is just a subset of the NCBI Nucleotide database.</p>
+<p>How many genomes have been sequenced, or are being sequenced now?
+On the NCBI Genome website (<a href="http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome" class="uri">http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome</a>), the front page gives a link to a list of all sequenced genomes in the groups Eukaryota, Prokaryota (Bacteria and Archaea) and Viruses. If you click on one of these links (eg. Prokaryota), at the top of the page it will give the number of sequenced genomes in that group (eg. number of sequenced prokaryotic genomes). For example, in this screenshot (from January 2011), we see that there were 1409 complete prokaryotic genomes (94 archaeal, 1315 bacterial):</p>
+<p>image1</p>
+<p>Another useful website that lists genome sequencing projects is the Genomes OnLine Database (GOLD), which lists genomes that have been completely sequenced, or are currently being sequenced. To find the number of complete or ongoing bacterial sequencing projects, follow these steps:</p>
+<p>Go to the GOLD website (<a href="http://genomesonline.org/" class="uri">http://genomesonline.org/</a>).
+Click on the yellow ‘Enter GOLD’ button in the centre of the webpage. On the subsequent page, it will give the number of ongoing bacterial, archaeal and eukaryotic genome sequencing projects.</p>
+<p>Click on the ‘Bacterial Ongoing’ link to see the list of ongoing bacterial genome sequencing projects. By default, just the first 100 projects are listed, and the rest are listed on subsequent pages. In one of the columns of the page, this gives the university or institute that the genome was sequenced in. Other columns give the taxonomic information for the organism, and links to the sequence data.
+Find the number of published genome sequencing projects. Go back one page, to the page with the ‘Bacterial Ongoing’ link. You will see that this page also lists the number of complete published genomes. To see a list of these genomes, click on ‘Complete Published.’ This will bring up a page that gives the number of published genomes at the top of the page. In one column of the page, this gives the university or institute that the genome was sequenced in.
+As explained above, it is possible to identify genome sequence data in the NCBI Genome database. The GOLD database also gives some information about ongoing genome projects. Often, the GOLD database lists some ongoing projects that are not yet present in the NCBI Genome Database, because the sequence data has not yet been submitted to the NCBI Database. If you are interested in finding out how many genomes have been sequenced or are currently being sequenced for a particular species (eg. Mycobacterium leprae), it is a good idea to look at both the NCBI Genome database and at GOLD.</p>
+</div>
+<div id="summary-1" class="section level2" number="14.2">
+<h2><span class="header-section-number">14.2</span> Summary</h2>
+<p>In this chapter, you have learnt how to retrieve sequences from the NCBI Sequence database, as well as to find out how many genomes have been sequenced or are currently being sequenced for a particular species.</p>
+<p>Links and Further Reading
+There is detailed information on how to search the NCBI database on the NCBI Help website at <a href="http://www.ncbi.nlm.nih.gov/bookshelf/br.fcgi?book=helpentrez?part=EntrezHelp" class="uri">http://www.ncbi.nlm.nih.gov/bookshelf/br.fcgi?book=helpentrez?part=EntrezHelp</a>.</p>
+<p>There is more information about the GOLD database in the paper describing GOLD by Liolios et al, which is available at <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2808860/?tool=pubmed" class="uri">http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2808860/?tool=pubmed</a>.</p>
+<p>For more in-depth information and more examples on using the SeqinR package for sequence analysis, look at the SeqinR documentation, <a href="http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng" class="uri">http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng</a>.</p>
+<p>There is also a very nice chapter on “Analyzing Sequences,” which includes examples of using SeqinR for sequence analysis, in the book Applied statistics for bioinformatics using R by Krijnen (available online at cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf).</p>
+</div>
+<div id="acknowledgements-1" class="section level2" number="14.3">
+<h2><span class="header-section-number">14.3</span> Acknowledgements</h2>
+<p>’
+Contact
+I will be grateful if you will send me (Avril Coghlan) corrections or suggestions for improvements to my email address <a href="mailto:alc@sanger.ac.uk" class="email">alc@sanger.ac.uk</a></p>
+<p>License
+The content in this book is licensed under a Creative Commons Attribution 3.0 License.</p>
+<p>Exercises
+Answer the following questions. For each question, please record your answer, and what you did/typed to get this answer.</p>
+<p>Model answers to the exercises are given in Answers to the exercises on Sequence Databases.</p>
+<ol style="list-style-type: decimal">
+<li>What information about the rabies virus sequence (NCBI accession NC_001542) can you obtain from its annotations in the NCBI Sequence Database?
+What does it say in the DEFINITION and ORGANISM fields of its NCBI record? Note: rabies virus is the virus responsible for rabies, which is classified by the WHO as a neglected tropical disease.</li>
+<li>How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the NCBI Sequence Database?
+Note: the bacterium Chlamydia trachomatis is responsible for causing trachoma, which is classified by the WHO as a neglected tropical disease.</li>
+<li>How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the RefSeq part of the NCBI Sequence Database?</li>
+<li>How many nucleotide sequences were submitted to NCBI by Matthew Berriman?</li>
+<li>How many nucleotide sequences from nematode worms are there in the RefSeq Database?
+Note that several parasitic nematode worms cause neglected tropical diseases, including <em>Brugia malayi</em> and <em>Wucheria bancrofti</em>, which cause lymphatic filariasis; Loa loa, which causes subcutaneous filariasis; Onchocerca volvulus, which causes onchocerciasis; and Necator americanus, which causes soil-transmitted helminthiasis.</li>
+<li>How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database?</li>
+<li>How many mRNA sequences for collagen genes from nematode worms are there in the NCBI Database?</li>
+<li>How many protein sequences for collagen proteins from nematode worms are there in the NCBI database?</li>
+<li>What is the accession number for the <em>Trypanosoma cruzi</em> genome in NCBI?
+Do you see genome sequences for more than one strain of Trypanosoma cruzi? Note that the Trypanosoma cruzi causes Chagas disease, which is classified as a neglected tropical disease by the WHO.</li>
+<li>How many fully sequenced nematode worm species are represented in the NCBI Genome database?</li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="downloading-sequences-from-uniprot-by-hand.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="local-variation-in-gc-content.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["lbrb.pdf", "lbrb.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
