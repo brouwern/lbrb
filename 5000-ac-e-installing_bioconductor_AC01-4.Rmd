@@ -1,0 +1,123 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Installing Bioconductor
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/), including details on install Bioconductor and common prompts and error messages that appear during installation. 
+
+
+## Bioconductor
+
+*R* **packages** (aka "libraries") can live in many places.  Most are accessed via **CRAN**, the **Comprehensive R Archive Network**.  The bioinformatics and computational biology community also has its own package hosting system called [Bioconductor](www.bioconductor.org).  *R* has played an important part in the development and application of bioinformatics techniques in the 21th century.  Bioconductor 1.0 was released in 2002 with 15 packages.  As of winter 2021, there are almost 2000 packages in the current release!
+
+>**NOTE**: If you are working in an RStudio Cloud environment organized by someone else (eg a course instructor), they likely are taking care of most of package management issues, inlcuding setting up Bioconductor.  The following information is still useful to be familiar with.
+
+
+To interface with Bioconductor you need the [BiocManager](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html) package.  The Bioconductor people have put [BiocManager](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html) on CRAN to allow you to set up interactions with Bioconductor.  See the [BiocManager documentation](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html) for more information ([https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html)).
+
+Note that if you have an old version of R you will need to update it to interact with Bioconductor.
+
+
+## Installing BiocManager
+
+BiocManager can be installed using the `install.packages()` packages command.
+
+```{r, eval = F}
+install.packages("BiocManager") # Remember the "  "; don't worry about the red text
+```
+
+
+Once downloaded, BioManager needs to be explicitly loaded into your active R session using `library()`
+```{r, eval = F}
+library(BiocManager) # no quotes; again, ignore the red text
+```
+
+Individual Bioconductor packages can then be downloaded using the `install()` command.  An essential packages is `Biostrings`.  To do this , 
+```{r, eval=F}
+BiocManager::install("Biostrings")
+```
+
+
+## The ins and outs of package installation
+
+**IMPORANT** Bioconductor has many **dependencies** - other packages which is relies on.  When you install Bioconductor packages you may need to update these packages.  If something seems to not be working during this process, restart R and begin the Bioconductor installation process until things seem to work.
+
+Below I discuss the series of prompts I had to deal with while re-installing Biostrings while editing this chapter.  
+
+### Updating other packages when downloading a package
+
+When I re-installed `Biostrings` while writing this I was given a HUGE blog of red test that contained this:
+```{r, eval = F}
+'getOption("repos")' replaces Bioconductor standard repositories, see '?repositories' for
+details
+
+replacement repositories:
+    CRAN: https://cran.rstudio.com/
+
+Bioconductor version 3.11 (BiocManager 1.30.16), R 4.0.5 (2021-03-31)
+Old packages: 'ade4', 'ape', 'aster', 'bayestestR', 'bio3d', 'bitops', 'blogdown',
+  'bookdown', 'brio', 'broom', 'broom.mixed', 'broomExtra', 'bslib', 'cachem', 'callr',
+  'car', 'circlize', 'class', 'cli', 'cluster', 'colorspace', 'corrplot', 'cpp11', 'curl',
+  'devtools', 'DHARMa', 'doBy', 'dplyr', 'DT', 'e1071', 'ellipsis', 'emmeans', 'emojifont',
+  'extRemes', 'fansi', 'flextable', 'forecast', 'formatR', 'gap', 'gargle', 'gert', 'GGally',
+  'ggfortify', 'ggplot2', 'ggsignif', 'ggVennDiagram', 'gh', 'glmmTMB', 'googledrive',
+  'gtools', 'haven', 'highr', 'hms', 'htmlTable', 'httpuv', 'huxtable', 'jquerylib',
+  'KernSmooth', 'knitr', 'later', 'lattice', 'lme4', 'magick', 'manipulateWidget', 'MASS',
+  'Matrix', 'matrixcalc', 'matrixStats', 'mgcv', 'mime', 'multcomp', 'mvtnorm', 'nnet',
+  'openssl', 'openxlsx', 'parameters', 'pBrackets', 'pdftools', 'phangorn', 'phytools',
+  'pillar', 'plotly', 'processx', 'proxy', 'qgam', 'quantreg', 'ragg', 'Rcpp',
+  'RcppArmadillo', 'remotes', 'rgl', 'rio', 'rJava', 'rlang', 'rmarkdown', 'robustbase',
+  'rsconnect', 'rversions', 'sandwich', 'sass', 'segmented', 'seqinr', 'seqmagick', 'servr',
+  'sf', 'shape', 'spatial', 'statmod', 'stringi', 'systemfonts', 'testthat', 'textshaping',
+  'tibble', 'tidyselect', 'tidytree', 'tinytex', 'tufte', 'UniprotR', 'units', 'vctrs',
+  'viridis', 'viridisLite', 'withr', 'xfun', 'zip'
+```
+
+Hidden at the bottom was a prompt: "Update all/some/none? [a/s/n]:"
+
+Its a little vague, but what it wants me to do is type in a, s or n  and press enter to tell it what to do.  I almost always chose "a", though this may take a while to update everything.
+
+### Packages "from source"
+
+You are likely to get lots of random-looking feedback from R when doing Bioconductor-related installations.  Look carefully for any prompts as the very last line.  While updating `Biostrings` I was told: "*There are binary versions available but the source versions are later:*" and given a table of packages.  I was then asked "*Do you want to install from sources the packages which need compilation? (Yes/no/cancel)*"
+
+I almost always chose "no".
+
+### More on angry red text
+
+After the prompt about packages from source, R proceeded to download a lot of updates to packages, which took a few minutes.  Lots of red text scrolled by, but this is normal.
+
+<!-- TODO: add example of angry red text -->
+
+```{r echo = F}
+knitr::include_graphics("images/angry_red_text_download_biostrings.png")
+```
+
+
+## Actually loading a package
+
+Again, to actually load the `Biostrings` package into your active R sessions requires the `libary()` command:
+
+```{r, eval = F}
+library(Biostrings)
+```
+
+As you might expect, there's more red text scrolling up my screen!
+
+```{r echo = F}
+knitr::include_graphics("images/angry_red_text_library_biostrings.png")
+```
+
+I can tell that is actually worked because at the end of all the red stuff is the R prompt of ">" and my cursor.
+
+```{r echo = F}
+knitr::include_graphics("images/R_cursor.png")
+
+```
+
+
+

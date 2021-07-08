@@ -4,24 +4,24 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 15 Local variation in GC content | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</title>
-  <meta name="description" content="An entry-level text for computational biology" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Chapter 15 Local variation in GC content | A Little Book of R for Bioinformatics 2.0</title>
+  <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 15 Local variation in GC content | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta property="og:title" content="Chapter 15 Local variation in GC content | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="An entry-level text for computational biology" />
+  <meta property="og:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 15 Local variation in GC content | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta name="twitter:title" content="Chapter 15 Local variation in GC content | A Little Book of R for Bioinformatics 2.0" />
   
-  <meta name="twitter:description" content="An entry-level text for computational biology" />
+  <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
-<meta name="author" content="Nathan L. Brouwer" />
+<meta name="author" content="Avirl Coghlan, with contributions by Nathan L. Brouwer" />
 
 
 <meta name="date" content="2021-07-08" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="sequence-databases.html"/>
 <link rel="next" href="aligments-in-r.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -118,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -131,13 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Computational Biology for All!</a></li>
+<li><a href="./">A Little Book of R for Bioinformatics</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface to version 2.0</a></li>
 <li class="chapter" data-level="1" data-path="downloading-r.html"><a href="downloading-r.html"><i class="fa fa-check"></i><b>1</b> Downloading R</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface-1"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
+<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
 <li class="chapter" data-level="1.2" data-path="downloading-r.html"><a href="downloading-r.html#introduction-to-r"><i class="fa fa-check"></i><b>1.2</b> Introduction to R</a></li>
 <li class="chapter" data-level="1.3" data-path="downloading-r.html"><a href="downloading-r.html#installing-r"><i class="fa fa-check"></i><b>1.3</b> Installing R</a>
 <ul>
@@ -154,20 +157,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>3</b> Installing <em>R</em> packages</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>3.1</b> Downloading packages with the RStudio IDE</a></li>
-<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function install.packages()</a></li>
+<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function <code>install.packages()</code></a></li>
 <li class="chapter" data-level="3.3" data-path="installing-r-packages.html"><a href="installing-r-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>3.3</b> Using packages after they are downloaded</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>4</b> Installing Bioconductor</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>4.1</b> Bioconductor</a></li>
 <li class="chapter" data-level="4.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>4.2</b> Installing BiocManager</a></li>
+<li class="chapter" data-level="4.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#the-ins-and-outs-of-package-installation"><i class="fa fa-check"></i><b>4.3</b> The ins and outs of package installation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#updating-other-packages-when-downloading-a-package"><i class="fa fa-check"></i><b>4.3.1</b> Updating other packages when downloading a package</a></li>
+<li class="chapter" data-level="4.3.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#packages-from-source"><i class="fa fa-check"></i><b>4.3.2</b> Packages “from source”</a></li>
+<li class="chapter" data-level="4.3.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#more-on-angry-red-text"><i class="fa fa-check"></i><b>4.3.3</b> More on angry red text</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#actually-loading-a-package"><i class="fa fa-check"></i><b>4.4</b> Actually loading a package</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html"><i class="fa fa-check"></i><b>5</b> A Brief introduction to R</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vocabulary"><i class="fa fa-check"></i><b>5.1</b> Vocabulary</a></li>
-<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions-etc"><i class="fa fa-check"></i><b>5.2</b> R functions etc</a></li>
-<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#a-brief-introduction-to-r-1"><i class="fa fa-check"></i><b>5.3</b> A brief introduction to R</a></li>
-<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.4</b> Links and Further Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions"><i class="fa fa-check"></i><b>5.2</b> R functions</a></li>
+<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#interacting-with-r"><i class="fa fa-check"></i><b>5.3</b> Interacting with R</a></li>
+<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#variables-in-r"><i class="fa fa-check"></i><b>5.4</b> Variables in R</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>5.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="5.4.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vector-indexing"><i class="fa fa-check"></i><b>5.4.2</b> Vector indexing</a></li>
+<li class="chapter" data-level="5.4.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#character-vectors"><i class="fa fa-check"></i><b>5.4.3</b> Character vectors</a></li>
+<li class="chapter" data-level="5.4.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#lists"><i class="fa fa-check"></i><b>5.4.4</b> Lists</a></li>
+<li class="chapter" data-level="5.4.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#tables"><i class="fa fa-check"></i><b>5.4.5</b> Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.5</b> Links and Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="downloading-ncbi-sequence-data-by-hand.html"><a href="downloading-ncbi-sequence-data-by-hand.html"><i class="fa fa-check"></i><b>6</b> Downloading NCBI sequence data by hand</a>
 <ul>
@@ -391,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="35.18" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>35.18</b> Practice (OPTIONAL)</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
 
 </ul>
 
@@ -402,7 +420,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Little Book of R for Bioinformatics 2.0</a>
           </h1>
         </div>
 
@@ -412,12 +430,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="local-variation-in-gc-content" class="section level1" number="15">
 <h1><span class="header-section-number">Chapter 15</span> Local variation in GC content</h1>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="local-variation-in-gc-content.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="local-variation-in-gc-content.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
 <p><strong>By</strong>: Avril Coghlan.</p>
 <p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
 <p>Preliminaries</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="local-variation-in-gc-content.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rentrez)</span>
-<span id="cb217-2"><a href="local-variation-in-gc-content.html#cb217-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(seqinr)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="local-variation-in-gc-content.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rentrez)</span>
+<span id="cb221-2"><a href="local-variation-in-gc-content.html#cb221-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(seqinr)</span></code></pre></div>
 <div id="note-on-the-biology-in-this-section-1" class="section level3" number="15.0.1">
 <h3><span class="header-section-number">15.0.1</span> Note on the biology in this section</h3>
 <p>Some of the biology in this tutorial appears to be out of date. For example, using variation in GC content to ID horizontal gene transfer is currently considered to be biased. The examples are still good for practicing R skills.</p>
@@ -434,43 +452,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">15.2</span> Reading sequence data with rentrez::entrez_fetch</h2>
 <p>In a previous section you learned how to use to search for and download the sequence data for a given NCBI accession from the NCBI Sequence Database, either via the NCBI website using entrez_fetch() from the rentrez package.</p>
 <p>For example, you could have downloaded the sequence data for a the DEN-1 Dengue virus sequence (NCBI accession NC_001477), and stored it on a file on your computer (eg. “dengue_fasta.fasta”).</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="local-variation-in-gc-content.html#cb218-1" aria-hidden="true" tabindex="-1"></a>dengueseq_fasta <span class="ot">&lt;-</span> <span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;nucleotide&quot;</span>, </span>
-<span id="cb218-2"><a href="local-variation-in-gc-content.html#cb218-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> <span class="st">&quot;NC_001477&quot;</span>, </span>
-<span id="cb218-3"><a href="local-variation-in-gc-content.html#cb218-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="local-variation-in-gc-content.html#cb222-1" aria-hidden="true" tabindex="-1"></a>dengueseq_fasta <span class="ot">&lt;-</span> <span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;nucleotide&quot;</span>, </span>
+<span id="cb222-2"><a href="local-variation-in-gc-content.html#cb222-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> <span class="st">&quot;NC_001477&quot;</span>, </span>
+<span id="cb222-3"><a href="local-variation-in-gc-content.html#cb222-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
 <p>As noted before, the file gets downloaded in FASTA format, which isn’t directly useable in R</p>
 <pre><code>## [1] &quot;&gt;NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTAACAGT\nTTTTTATTAGAGAGCAGATCTCTGATGAACAACCAACGGAAAAAGACGGGTCGACCGTCTTTCAATATGC\nTGAAACGCGCGAGAAACCGCGTGTCAACTGTTTCACAGTTGGCGAAGAGATTCTCAAAAGGAT&quot;</code></pre>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="local-variation-in-gc-content.html#cb220-1" aria-hidden="true" tabindex="-1"></a>fasta_cleaner <span class="ot">&lt;-</span> <span class="cf">function</span>(fasta_object, <span class="at">parse =</span> <span class="cn">TRUE</span>){</span>
-<span id="cb220-2"><a href="local-variation-in-gc-content.html#cb220-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb220-3"><a href="local-variation-in-gc-content.html#cb220-3" aria-hidden="true" tabindex="-1"></a>         <span class="co">#header &lt;- gsub(&quot;\\|&quot;,&quot;&quot;,header)</span></span>
-<span id="cb220-4"><a href="local-variation-in-gc-content.html#cb220-4" aria-hidden="true" tabindex="-1"></a>         <span class="co">#header &lt;- gsub(&quot;\\+&quot;,&quot;&quot;,header)</span></span>
-<span id="cb220-5"><a href="local-variation-in-gc-content.html#cb220-5" aria-hidden="true" tabindex="-1"></a>         <span class="co">#header &lt;- gsub(&quot;\\=&quot;,&quot;&quot;,header)</span></span>
-<span id="cb220-6"><a href="local-variation-in-gc-content.html#cb220-6" aria-hidden="true" tabindex="-1"></a>         <span class="co">#header &lt;- gsub(&quot;\\:&quot;,&quot;&quot;,header)</span></span>
-<span id="cb220-7"><a href="local-variation-in-gc-content.html#cb220-7" aria-hidden="true" tabindex="-1"></a>         <span class="co">#header &lt;- gsub(&quot;\\;&quot;,&quot;&quot;,header)</span></span>
-<span id="cb220-8"><a href="local-variation-in-gc-content.html#cb220-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb220-9"><a href="local-variation-in-gc-content.html#cb220-9" aria-hidden="true" tabindex="-1"></a>         <span class="co">#fasta_object &lt;- gsub(&quot;\\|&quot;,&quot;&quot;,fasta_object)</span></span>
-<span id="cb220-10"><a href="local-variation-in-gc-content.html#cb220-10" aria-hidden="true" tabindex="-1"></a>         <span class="co">#fasta_object &lt;- gsub(&quot;\\+&quot;,&quot;&quot;,fasta_object)</span></span>
-<span id="cb220-11"><a href="local-variation-in-gc-content.html#cb220-11" aria-hidden="true" tabindex="-1"></a>         <span class="co">#fasta_object &lt;- gsub(&quot;\\=&quot;,&quot;&quot;,fasta_object)</span></span>
-<span id="cb220-12"><a href="local-variation-in-gc-content.html#cb220-12" aria-hidden="true" tabindex="-1"></a>         <span class="co">#fasta_object &lt;- gsub(&quot;\\:&quot;,&quot;&quot;,fasta_object)</span></span>
-<span id="cb220-13"><a href="local-variation-in-gc-content.html#cb220-13" aria-hidden="true" tabindex="-1"></a>         <span class="co">#fasta_object &lt;- gsub(&quot;\\;&quot;,&quot;&quot;,fasta_object)</span></span>
-<span id="cb220-14"><a href="local-variation-in-gc-content.html#cb220-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb220-15"><a href="local-variation-in-gc-content.html#cb220-15" aria-hidden="true" tabindex="-1"></a>         <span class="co">#fasta_object &lt;- gsub(header, &quot;&quot;, fasta_object)</span></span>
-<span id="cb220-16"><a href="local-variation-in-gc-content.html#cb220-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb220-17"><a href="local-variation-in-gc-content.html#cb220-17" aria-hidden="true" tabindex="-1"></a>        fasta_object <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;^(&gt;)(.*?)(</span><span class="sc">\\</span><span class="st">n)(.*)(</span><span class="sc">\\</span><span class="st">n</span><span class="sc">\\</span><span class="st">n)&quot;</span>,<span class="st">&quot;</span><span class="sc">\\</span><span class="st">4&quot;</span>,fasta_object)</span>
-<span id="cb220-18"><a href="local-variation-in-gc-content.html#cb220-18" aria-hidden="true" tabindex="-1"></a>        fasta_object <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="st">&quot;&quot;</span>, fasta_object)</span>
-<span id="cb220-19"><a href="local-variation-in-gc-content.html#cb220-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb220-20"><a href="local-variation-in-gc-content.html#cb220-20" aria-hidden="true" tabindex="-1"></a>         <span class="cf">if</span>(parse <span class="sc">==</span> <span class="cn">TRUE</span>){</span>
-<span id="cb220-21"><a href="local-variation-in-gc-content.html#cb220-21" aria-hidden="true" tabindex="-1"></a>         fasta_object <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_split</span>(fasta_object,</span>
-<span id="cb220-22"><a href="local-variation-in-gc-content.html#cb220-22" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">pattern =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb220-23"><a href="local-variation-in-gc-content.html#cb220-23" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb220-24"><a href="local-variation-in-gc-content.html#cb220-24" aria-hidden="true" tabindex="-1"></a>         }</span>
-<span id="cb220-25"><a href="local-variation-in-gc-content.html#cb220-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb220-26"><a href="local-variation-in-gc-content.html#cb220-26" aria-hidden="true" tabindex="-1"></a>         <span class="fu">return</span>(fasta_object[[<span class="dv">1</span>]])</span>
-<span id="cb220-27"><a href="local-variation-in-gc-content.html#cb220-27" aria-hidden="true" tabindex="-1"></a> }</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="local-variation-in-gc-content.html#cb224-1" aria-hidden="true" tabindex="-1"></a>fasta_cleaner <span class="ot">&lt;-</span> <span class="cf">function</span>(fasta_object, <span class="at">parse =</span> <span class="cn">TRUE</span>){</span>
+<span id="cb224-2"><a href="local-variation-in-gc-content.html#cb224-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-3"><a href="local-variation-in-gc-content.html#cb224-3" aria-hidden="true" tabindex="-1"></a>         <span class="co">#header &lt;- gsub(&quot;\\|&quot;,&quot;&quot;,header)</span></span>
+<span id="cb224-4"><a href="local-variation-in-gc-content.html#cb224-4" aria-hidden="true" tabindex="-1"></a>         <span class="co">#header &lt;- gsub(&quot;\\+&quot;,&quot;&quot;,header)</span></span>
+<span id="cb224-5"><a href="local-variation-in-gc-content.html#cb224-5" aria-hidden="true" tabindex="-1"></a>         <span class="co">#header &lt;- gsub(&quot;\\=&quot;,&quot;&quot;,header)</span></span>
+<span id="cb224-6"><a href="local-variation-in-gc-content.html#cb224-6" aria-hidden="true" tabindex="-1"></a>         <span class="co">#header &lt;- gsub(&quot;\\:&quot;,&quot;&quot;,header)</span></span>
+<span id="cb224-7"><a href="local-variation-in-gc-content.html#cb224-7" aria-hidden="true" tabindex="-1"></a>         <span class="co">#header &lt;- gsub(&quot;\\;&quot;,&quot;&quot;,header)</span></span>
+<span id="cb224-8"><a href="local-variation-in-gc-content.html#cb224-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-9"><a href="local-variation-in-gc-content.html#cb224-9" aria-hidden="true" tabindex="-1"></a>         <span class="co">#fasta_object &lt;- gsub(&quot;\\|&quot;,&quot;&quot;,fasta_object)</span></span>
+<span id="cb224-10"><a href="local-variation-in-gc-content.html#cb224-10" aria-hidden="true" tabindex="-1"></a>         <span class="co">#fasta_object &lt;- gsub(&quot;\\+&quot;,&quot;&quot;,fasta_object)</span></span>
+<span id="cb224-11"><a href="local-variation-in-gc-content.html#cb224-11" aria-hidden="true" tabindex="-1"></a>         <span class="co">#fasta_object &lt;- gsub(&quot;\\=&quot;,&quot;&quot;,fasta_object)</span></span>
+<span id="cb224-12"><a href="local-variation-in-gc-content.html#cb224-12" aria-hidden="true" tabindex="-1"></a>         <span class="co">#fasta_object &lt;- gsub(&quot;\\:&quot;,&quot;&quot;,fasta_object)</span></span>
+<span id="cb224-13"><a href="local-variation-in-gc-content.html#cb224-13" aria-hidden="true" tabindex="-1"></a>         <span class="co">#fasta_object &lt;- gsub(&quot;\\;&quot;,&quot;&quot;,fasta_object)</span></span>
+<span id="cb224-14"><a href="local-variation-in-gc-content.html#cb224-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-15"><a href="local-variation-in-gc-content.html#cb224-15" aria-hidden="true" tabindex="-1"></a>         <span class="co">#fasta_object &lt;- gsub(header, &quot;&quot;, fasta_object)</span></span>
+<span id="cb224-16"><a href="local-variation-in-gc-content.html#cb224-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-17"><a href="local-variation-in-gc-content.html#cb224-17" aria-hidden="true" tabindex="-1"></a>        fasta_object <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">&quot;^(&gt;)(.*?)(</span><span class="sc">\\</span><span class="st">n)(.*)(</span><span class="sc">\\</span><span class="st">n</span><span class="sc">\\</span><span class="st">n)&quot;</span>,<span class="st">&quot;</span><span class="sc">\\</span><span class="st">4&quot;</span>,fasta_object)</span>
+<span id="cb224-18"><a href="local-variation-in-gc-content.html#cb224-18" aria-hidden="true" tabindex="-1"></a>        fasta_object <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="st">&quot;&quot;</span>, fasta_object)</span>
+<span id="cb224-19"><a href="local-variation-in-gc-content.html#cb224-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-20"><a href="local-variation-in-gc-content.html#cb224-20" aria-hidden="true" tabindex="-1"></a>         <span class="cf">if</span>(parse <span class="sc">==</span> <span class="cn">TRUE</span>){</span>
+<span id="cb224-21"><a href="local-variation-in-gc-content.html#cb224-21" aria-hidden="true" tabindex="-1"></a>         fasta_object <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_split</span>(fasta_object,</span>
+<span id="cb224-22"><a href="local-variation-in-gc-content.html#cb224-22" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">pattern =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb224-23"><a href="local-variation-in-gc-content.html#cb224-23" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">simplify =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb224-24"><a href="local-variation-in-gc-content.html#cb224-24" aria-hidden="true" tabindex="-1"></a>         }</span>
+<span id="cb224-25"><a href="local-variation-in-gc-content.html#cb224-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb224-26"><a href="local-variation-in-gc-content.html#cb224-26" aria-hidden="true" tabindex="-1"></a>         <span class="fu">return</span>(fasta_object[[<span class="dv">1</span>]])</span>
+<span id="cb224-27"><a href="local-variation-in-gc-content.html#cb224-27" aria-hidden="true" tabindex="-1"></a> }</span></code></pre></div>
 <p>We can convert our FASTA object into a vector using the function fasta_cleaner()</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="local-variation-in-gc-content.html#cb221-1" aria-hidden="true" tabindex="-1"></a>header. <span class="ot">&lt;-</span> <span class="st">&quot;&gt;NC_001477.1 Dengue virus 1, complete genome&quot;</span></span>
-<span id="cb221-2"><a href="local-variation-in-gc-content.html#cb221-2" aria-hidden="true" tabindex="-1"></a>dengueseq_vector <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(dengueseq_fasta)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="local-variation-in-gc-content.html#cb225-1" aria-hidden="true" tabindex="-1"></a>header. <span class="ot">&lt;-</span> <span class="st">&quot;&gt;NC_001477.1 Dengue virus 1, complete genome&quot;</span></span>
+<span id="cb225-2"><a href="local-variation-in-gc-content.html#cb225-2" aria-hidden="true" tabindex="-1"></a>dengueseq_vector <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(dengueseq_fasta)</span></code></pre></div>
 <p>Once you have retrieved a sequence from the NCBI Sequence Database and stored it in a vector variable such as dengueseq_vector in the example above, it is possible to extract <strong>subsequence</strong> of the sequence by typing the name of the vector (eg. dengueseq_vector) followed by the square brackets containing the indices for those nucleotides. For example, to obtain nucleotides 452-535 of the DEN-1 Dengue virus genome, we can type:</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="local-variation-in-gc-content.html#cb222-1" aria-hidden="true" tabindex="-1"></a>dengueseq_vector[<span class="dv">452</span><span class="sc">:</span><span class="dv">535</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="local-variation-in-gc-content.html#cb226-1" aria-hidden="true" tabindex="-1"></a>dengueseq_vector[<span class="dv">452</span><span class="sc">:</span><span class="dv">535</span>]</span></code></pre></div>
 <pre><code>##  [1] &quot;C&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot;
 ## [20] &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;T&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;A&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot;
 ## [39] &quot;A&quot; &quot;A&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;C&quot; &quot;A&quot; &quot;C&quot; &quot;T&quot; &quot;T&quot; &quot;T&quot; &quot;T&quot; &quot;G&quot;
@@ -480,10 +498,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="local-variation-in-gc-content-1" class="section level2" number="15.3">
 <h2><span class="header-section-number">15.3</span> Local variation in GC content</h2>
 <p>In a previous section, you learned that to find out the <a href="https://en.wikipedia.org/wiki/GC-content"><strong>GC content</strong></a> of a genome sequence (percentage of nucleotides in a genome sequence that are Gs or Cs), you can use the GC() function in the SeqinR package. For example, to find the GC content of the DEN-1 Dengue virus sequence that we have stored in the vector dengueseq_vector, we can type:</p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="local-variation-in-gc-content.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GC</span>(dengueseq_vector)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="local-variation-in-gc-content.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GC</span>(dengueseq_vector)</span></code></pre></div>
 <pre><code>## [1] 0.4666977</code></pre>
 <p>The output of the GC() is the fraction of nucleotides in a sequence that are Gs or Cs, so to convert it to a percentage we need to multiply by 100.</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="local-variation-in-gc-content.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GC</span>(dengueseq_vector)<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="local-variation-in-gc-content.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GC</span>(dengueseq_vector)<span class="sc">*</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>## [1] 46.66977</code></pre>
 <p>Thus, the GC content of the DEN-1 Dengue virus genome is about 0.467 or 46.7%.</p>
 <p>Although the GC content of the whole DEN-1 Dengue virus genome sequence is about 46.7%, there is probably <strong>local variation</strong> in GC content within the genome. That is, some regions of the genome sequence may have GC contents quite a bit higher than 46.7%, while some regions of the genome sequence may have GC contents that are quite a big lower than 46.7%. Local fluctuations in GC content within the genome sequence can provide different interesting information, for example, they may reveal cases of <a href="en.wikipedia.org/wiki/Horizontal_gene_transfer"><strong>horizontal transfer</strong></a> or reveal biases in mutation.</p>
@@ -493,21 +511,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="a-sliding-window-analysis-of-gc-content" class="section level2" number="15.4">
 <h2><span class="header-section-number">15.4</span> A sliding window analysis of GC content</h2>
 <p>In order to study local variation in GC content within a genome sequence, we could calculate the GC content for small chunks of the genome sequence. The DEN-1 Dengue virus genome sequence is 10735 nucleotides long. To study variation in GC content within the genome sequence, we could calculate the GC content of chunks of the DEN-1 Dengue virus genome, for example, for each 2000-nucleotide chunk of the genome sequence:</p>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="local-variation-in-gc-content.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GC</span>(dengueseq_vector[<span class="dv">1</span><span class="sc">:</span><span class="dv">2000</span>])      <span class="co"># Calculate the GC content of nucleotides 1-2000 of the Dengue genome</span></span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="local-variation-in-gc-content.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GC</span>(dengueseq_vector[<span class="dv">1</span><span class="sc">:</span><span class="dv">2000</span>])      <span class="co"># Calculate the GC content of nucleotides 1-2000 of the Dengue genome</span></span></code></pre></div>
 <pre><code>## [1] 0.465</code></pre>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="local-variation-in-gc-content.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GC</span>(dengueseq_vector[<span class="dv">2001</span><span class="sc">:</span><span class="dv">4000</span>])   <span class="co"># Calculate the GC content of nucleotides 2001-4000 of the Dengue genome</span></span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="local-variation-in-gc-content.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GC</span>(dengueseq_vector[<span class="dv">2001</span><span class="sc">:</span><span class="dv">4000</span>])   <span class="co"># Calculate the GC content of nucleotides 2001-4000 of the Dengue genome</span></span></code></pre></div>
 <pre><code>## [1] 0.4525</code></pre>
 <p>From the output of the above calculations, we see that the region of the DEN-1 Dengue virus genome from nucleotides 1-2000 has a GC content of 46.5%, while the region of the Dengue genome from nucleotides 2001-4000 has a GC content of about 45.3%. Thus, there seems to be some local variation in GC content within the Dengue genome sequence.</p>
 <p>Instead of typing in the commands above to tell R to calculate the GC content for each 2000-nucleotide chunk of the DEN-1 Dengue genome, we can use a for loop to carry out the same calculations, but by typing far fewer commands. That is, we can use a for loop to take each 2000-nucleotide chunk of the DEN-1 Dengue virus genome, and to calculate the GC content of each 2000-nucleotide chunk. Below we will explain the following for loop that has been written for this purpose:</p>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="local-variation-in-gc-content.html#cb232-1" aria-hidden="true" tabindex="-1"></a>starts <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">length</span>(dengueseq_vector)<span class="sc">-</span><span class="dv">2000</span>, <span class="at">by =</span> <span class="dv">2000</span>)</span>
-<span id="cb232-2"><a href="local-variation-in-gc-content.html#cb232-2" aria-hidden="true" tabindex="-1"></a>starts</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="local-variation-in-gc-content.html#cb236-1" aria-hidden="true" tabindex="-1"></a>starts <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">length</span>(dengueseq_vector)<span class="sc">-</span><span class="dv">2000</span>, <span class="at">by =</span> <span class="dv">2000</span>)</span>
+<span id="cb236-2"><a href="local-variation-in-gc-content.html#cb236-2" aria-hidden="true" tabindex="-1"></a>starts</span></code></pre></div>
 <pre><code>## [1]    1 2001 4001 6001 8001</code></pre>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="local-variation-in-gc-content.html#cb234-1" aria-hidden="true" tabindex="-1"></a> n <span class="ot">&lt;-</span> <span class="fu">length</span>(starts)    <span class="co"># Find the length of the vector &quot;starts&quot;</span></span>
-<span id="cb234-2"><a href="local-variation-in-gc-content.html#cb234-2" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb234-3"><a href="local-variation-in-gc-content.html#cb234-3" aria-hidden="true" tabindex="-1"></a>        chunk <span class="ot">&lt;-</span> dengueseq_vector[starts[i]<span class="sc">:</span>(starts[i]<span class="sc">+</span><span class="dv">1999</span>)]</span>
-<span id="cb234-4"><a href="local-variation-in-gc-content.html#cb234-4" aria-hidden="true" tabindex="-1"></a>        chunkGC <span class="ot">&lt;-</span> <span class="fu">GC</span>(chunk)</span>
-<span id="cb234-5"><a href="local-variation-in-gc-content.html#cb234-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span> (chunkGC)</span>
-<span id="cb234-6"><a href="local-variation-in-gc-content.html#cb234-6" aria-hidden="true" tabindex="-1"></a>     }</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="local-variation-in-gc-content.html#cb238-1" aria-hidden="true" tabindex="-1"></a> n <span class="ot">&lt;-</span> <span class="fu">length</span>(starts)    <span class="co"># Find the length of the vector &quot;starts&quot;</span></span>
+<span id="cb238-2"><a href="local-variation-in-gc-content.html#cb238-2" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb238-3"><a href="local-variation-in-gc-content.html#cb238-3" aria-hidden="true" tabindex="-1"></a>        chunk <span class="ot">&lt;-</span> dengueseq_vector[starts[i]<span class="sc">:</span>(starts[i]<span class="sc">+</span><span class="dv">1999</span>)]</span>
+<span id="cb238-4"><a href="local-variation-in-gc-content.html#cb238-4" aria-hidden="true" tabindex="-1"></a>        chunkGC <span class="ot">&lt;-</span> <span class="fu">GC</span>(chunk)</span>
+<span id="cb238-5"><a href="local-variation-in-gc-content.html#cb238-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span> (chunkGC)</span>
+<span id="cb238-6"><a href="local-variation-in-gc-content.html#cb238-6" aria-hidden="true" tabindex="-1"></a>     }</span></code></pre></div>
 <pre><code>## [1] 0.465
 ## [1] 0.4525
 ## [1] 0.4705
@@ -522,45 +540,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note that this sliding window analysis of GC content is a slightly simplified version of the method usually carried out by bioinformaticians. In this simplified version, we have calculated the GC content in non-overlapping windows along a DNA sequence. However, it is more usual to calculate GC content in overlapping windows along a sequence, although that makes the code slightly more complicated.</p>
 <p>A sliding window plot of GC content
 It is common to use the data generated from a sliding window analysis to create a sliding window plot of GC content. To create a sliding window plot of GC content, you plot the local GC content in each window of the genome, versus the nucleotide position of the start of each window. We can create a sliding window plot of GC content by typing:</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="local-variation-in-gc-content.html#cb236-1" aria-hidden="true" tabindex="-1"></a> starts <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">length</span>(dengueseq_vector)<span class="sc">-</span><span class="dv">2000</span>, <span class="at">by =</span> <span class="dv">2000</span>)</span>
-<span id="cb236-2"><a href="local-variation-in-gc-content.html#cb236-2" aria-hidden="true" tabindex="-1"></a> n <span class="ot">&lt;-</span> <span class="fu">length</span>(starts)    <span class="co"># Find the length of the vector &quot;starts&quot;</span></span>
-<span id="cb236-3"><a href="local-variation-in-gc-content.html#cb236-3" aria-hidden="true" tabindex="-1"></a> chunkGCs <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n) <span class="co"># Make a vector of the same length as vector &quot;starts&quot;, but just containing zeroes</span></span>
-<span id="cb236-4"><a href="local-variation-in-gc-content.html#cb236-4" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb236-5"><a href="local-variation-in-gc-content.html#cb236-5" aria-hidden="true" tabindex="-1"></a>        chunk <span class="ot">&lt;-</span> dengueseq_vector[starts[i]<span class="sc">:</span>(starts[i]<span class="sc">+</span><span class="dv">1999</span>)]</span>
-<span id="cb236-6"><a href="local-variation-in-gc-content.html#cb236-6" aria-hidden="true" tabindex="-1"></a>        chunkGC <span class="ot">&lt;-</span> <span class="fu">GC</span>(chunk)</span>
-<span id="cb236-7"><a href="local-variation-in-gc-content.html#cb236-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(chunkGC)</span>
-<span id="cb236-8"><a href="local-variation-in-gc-content.html#cb236-8" aria-hidden="true" tabindex="-1"></a>        chunkGCs[i] <span class="ot">&lt;-</span> chunkGC</span>
-<span id="cb236-9"><a href="local-variation-in-gc-content.html#cb236-9" aria-hidden="true" tabindex="-1"></a>     }</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="local-variation-in-gc-content.html#cb240-1" aria-hidden="true" tabindex="-1"></a> starts <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">length</span>(dengueseq_vector)<span class="sc">-</span><span class="dv">2000</span>, <span class="at">by =</span> <span class="dv">2000</span>)</span>
+<span id="cb240-2"><a href="local-variation-in-gc-content.html#cb240-2" aria-hidden="true" tabindex="-1"></a> n <span class="ot">&lt;-</span> <span class="fu">length</span>(starts)    <span class="co"># Find the length of the vector &quot;starts&quot;</span></span>
+<span id="cb240-3"><a href="local-variation-in-gc-content.html#cb240-3" aria-hidden="true" tabindex="-1"></a> chunkGCs <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n) <span class="co"># Make a vector of the same length as vector &quot;starts&quot;, but just containing zeroes</span></span>
+<span id="cb240-4"><a href="local-variation-in-gc-content.html#cb240-4" aria-hidden="true" tabindex="-1"></a> <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb240-5"><a href="local-variation-in-gc-content.html#cb240-5" aria-hidden="true" tabindex="-1"></a>        chunk <span class="ot">&lt;-</span> dengueseq_vector[starts[i]<span class="sc">:</span>(starts[i]<span class="sc">+</span><span class="dv">1999</span>)]</span>
+<span id="cb240-6"><a href="local-variation-in-gc-content.html#cb240-6" aria-hidden="true" tabindex="-1"></a>        chunkGC <span class="ot">&lt;-</span> <span class="fu">GC</span>(chunk)</span>
+<span id="cb240-7"><a href="local-variation-in-gc-content.html#cb240-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(chunkGC)</span>
+<span id="cb240-8"><a href="local-variation-in-gc-content.html#cb240-8" aria-hidden="true" tabindex="-1"></a>        chunkGCs[i] <span class="ot">&lt;-</span> chunkGC</span>
+<span id="cb240-9"><a href="local-variation-in-gc-content.html#cb240-9" aria-hidden="true" tabindex="-1"></a>     }</span></code></pre></div>
 <pre><code>## [1] 0.465
 ## [1] 0.4525
 ## [1] 0.4705
 ## [1] 0.479
 ## [1] 0.4545</code></pre>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="local-variation-in-gc-content.html#cb238-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">plot</span>(starts,chunkGCs,<span class="at">type=</span><span class="st">&quot;b&quot;</span>,<span class="at">xlab=</span><span class="st">&quot;Nucleotide start position&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;GC content&quot;</span>)</span></code></pre></div>
-<p><img src="lbrb_files/figure-html/unnamed-chunk-201-1.png" width="672" /></p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="local-variation-in-gc-content.html#cb242-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">plot</span>(starts,chunkGCs,<span class="at">type=</span><span class="st">&quot;b&quot;</span>,<span class="at">xlab=</span><span class="st">&quot;Nucleotide start position&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;GC content&quot;</span>)</span></code></pre></div>
+<p><img src="lbrb_files/figure-html/unnamed-chunk-207-1.png" width="672" /></p>
 <p>In the code above, the line “chunkGCs &lt;- numeric(n)” makes a new vector chunkGCs which has the same number of elements as the vector starts (5 elements here). This vector chunkGCs is then used within the for loop for storing the GC content of each chunk of DNA.</p>
 <p>After the loop, the vector starts can be plotted against the vector chunkGCs using the plot() function, to get a plot of GC content against nucleotide position in the genome sequence. This is a sliding window plot of GC content.</p>
 <p>You may want to use the code above to create sliding window plots of GC content of different species’ genomes, using different windowsizes. Therefore, it makes sense to write a function to do the sliding window plot, that can take the windowsize that the user wants to use and the sequence that the user wants to study as arguments (inputs):</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="local-variation-in-gc-content.html#cb239-1" aria-hidden="true" tabindex="-1"></a> slidingwindowplot <span class="ot">&lt;-</span> <span class="cf">function</span>(windowsize, inputseq)</span>
-<span id="cb239-2"><a href="local-variation-in-gc-content.html#cb239-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb239-3"><a href="local-variation-in-gc-content.html#cb239-3" aria-hidden="true" tabindex="-1"></a>   starts <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">length</span>(inputseq)<span class="sc">-</span>windowsize, <span class="at">by =</span> windowsize)</span>
-<span id="cb239-4"><a href="local-variation-in-gc-content.html#cb239-4" aria-hidden="true" tabindex="-1"></a>   n <span class="ot">&lt;-</span> <span class="fu">length</span>(starts)    <span class="co"># Find the length of the vector &quot;starts&quot;</span></span>
-<span id="cb239-5"><a href="local-variation-in-gc-content.html#cb239-5" aria-hidden="true" tabindex="-1"></a>   chunkGCs <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n) <span class="co"># Make a vector of the same length as vector &quot;starts&quot;, but just containing zeroes</span></span>
-<span id="cb239-6"><a href="local-variation-in-gc-content.html#cb239-6" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb239-7"><a href="local-variation-in-gc-content.html#cb239-7" aria-hidden="true" tabindex="-1"></a>        chunk <span class="ot">&lt;-</span> inputseq[starts[i]<span class="sc">:</span>(starts[i]<span class="sc">+</span>windowsize<span class="dv">-1</span>)]</span>
-<span id="cb239-8"><a href="local-variation-in-gc-content.html#cb239-8" aria-hidden="true" tabindex="-1"></a>        chunkGC <span class="ot">&lt;-</span> <span class="fu">GC</span>(chunk)</span>
-<span id="cb239-9"><a href="local-variation-in-gc-content.html#cb239-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(chunkGC)</span>
-<span id="cb239-10"><a href="local-variation-in-gc-content.html#cb239-10" aria-hidden="true" tabindex="-1"></a>        chunkGCs[i] <span class="ot">&lt;-</span> chunkGC</span>
-<span id="cb239-11"><a href="local-variation-in-gc-content.html#cb239-11" aria-hidden="true" tabindex="-1"></a>   }</span>
-<span id="cb239-12"><a href="local-variation-in-gc-content.html#cb239-12" aria-hidden="true" tabindex="-1"></a>   <span class="fu">plot</span>(starts,chunkGCs,<span class="at">type=</span><span class="st">&quot;b&quot;</span>,<span class="at">xlab=</span><span class="st">&quot;Nucleotide start position&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;GC content&quot;</span>)</span>
-<span id="cb239-13"><a href="local-variation-in-gc-content.html#cb239-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="local-variation-in-gc-content.html#cb243-1" aria-hidden="true" tabindex="-1"></a> slidingwindowplot <span class="ot">&lt;-</span> <span class="cf">function</span>(windowsize, inputseq)</span>
+<span id="cb243-2"><a href="local-variation-in-gc-content.html#cb243-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb243-3"><a href="local-variation-in-gc-content.html#cb243-3" aria-hidden="true" tabindex="-1"></a>   starts <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fu">length</span>(inputseq)<span class="sc">-</span>windowsize, <span class="at">by =</span> windowsize)</span>
+<span id="cb243-4"><a href="local-variation-in-gc-content.html#cb243-4" aria-hidden="true" tabindex="-1"></a>   n <span class="ot">&lt;-</span> <span class="fu">length</span>(starts)    <span class="co"># Find the length of the vector &quot;starts&quot;</span></span>
+<span id="cb243-5"><a href="local-variation-in-gc-content.html#cb243-5" aria-hidden="true" tabindex="-1"></a>   chunkGCs <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n) <span class="co"># Make a vector of the same length as vector &quot;starts&quot;, but just containing zeroes</span></span>
+<span id="cb243-6"><a href="local-variation-in-gc-content.html#cb243-6" aria-hidden="true" tabindex="-1"></a>   <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb243-7"><a href="local-variation-in-gc-content.html#cb243-7" aria-hidden="true" tabindex="-1"></a>        chunk <span class="ot">&lt;-</span> inputseq[starts[i]<span class="sc">:</span>(starts[i]<span class="sc">+</span>windowsize<span class="dv">-1</span>)]</span>
+<span id="cb243-8"><a href="local-variation-in-gc-content.html#cb243-8" aria-hidden="true" tabindex="-1"></a>        chunkGC <span class="ot">&lt;-</span> <span class="fu">GC</span>(chunk)</span>
+<span id="cb243-9"><a href="local-variation-in-gc-content.html#cb243-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(chunkGC)</span>
+<span id="cb243-10"><a href="local-variation-in-gc-content.html#cb243-10" aria-hidden="true" tabindex="-1"></a>        chunkGCs[i] <span class="ot">&lt;-</span> chunkGC</span>
+<span id="cb243-11"><a href="local-variation-in-gc-content.html#cb243-11" aria-hidden="true" tabindex="-1"></a>   }</span>
+<span id="cb243-12"><a href="local-variation-in-gc-content.html#cb243-12" aria-hidden="true" tabindex="-1"></a>   <span class="fu">plot</span>(starts,chunkGCs,<span class="at">type=</span><span class="st">&quot;b&quot;</span>,<span class="at">xlab=</span><span class="st">&quot;Nucleotide start position&quot;</span>,<span class="at">ylab=</span><span class="st">&quot;GC content&quot;</span>)</span>
+<span id="cb243-13"><a href="local-variation-in-gc-content.html#cb243-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>This function will make a sliding window plot of GC content for a particular input sequence inputseq specified by the user, using a particular windowsize windowsize specified by the user. Once you have typed in this function once, you can use it again and again to make sliding window plots of GC contents for different input DNA sequences, with different windowsizes. For example, you could create two different sliding window plots of the DEN-1 Dengue virus genome sequence, using windowsizes of 3000 and 300 nucleotides, respectively:</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="local-variation-in-gc-content.html#cb240-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">slidingwindowplot</span>(<span class="dv">3000</span>, dengueseq_vector)</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="local-variation-in-gc-content.html#cb244-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">slidingwindowplot</span>(<span class="dv">3000</span>, dengueseq_vector)</span></code></pre></div>
 <pre><code>## [1] 0.4646667
 ## [1] 0.4606667
 ## [1] 0.4653333</code></pre>
-<p><img src="lbrb_files/figure-html/unnamed-chunk-203-1.png" width="672" /></p>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="local-variation-in-gc-content.html#cb242-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">slidingwindowplot</span>(<span class="dv">300</span>, dengueseq_vector)</span></code></pre></div>
+<p><img src="lbrb_files/figure-html/unnamed-chunk-209-1.png" width="672" /></p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="local-variation-in-gc-content.html#cb246-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">slidingwindowplot</span>(<span class="dv">300</span>, dengueseq_vector)</span></code></pre></div>
 <pre><code>## [1] 0.4366667
 ## [1] 0.4766667
 ## [1] 0.5
@@ -596,11 +614,11 @@ It is common to use the data generated from a sliding window analysis to create 
 ## [1] 0.4733333
 ## [1] 0.4966667
 ## [1] 0.4833333</code></pre>
-<p><img src="lbrb_files/figure-html/unnamed-chunk-204-1.png" width="672" /></p>
+<p><img src="lbrb_files/figure-html/unnamed-chunk-210-1.png" width="672" /></p>
 <div id="over-represented-and-under-represented-dna-words" class="section level3" number="15.4.1">
 <h3><span class="header-section-number">15.4.1</span> Over-represented and under-represented DNA words</h3>
 <p>In the previous chapter, you learned that the count() function in the SeqinR R package can calculate the frequency of all DNA words of a certain length in a DNA sequence. For example, if you want to know the frequency of all DNA words that are 2 nucleotides long in the Dengue virus genome sequence, you can type:</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="local-variation-in-gc-content.html#cb244-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">count</span>(dengueseq_vector, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="local-variation-in-gc-content.html#cb248-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">count</span>(dengueseq_vector, <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## 
 ## aa ac ag at ca cc cg ct ga gc gg gt ta tc tg tt 
 ##  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</code></pre>
@@ -612,21 +630,21 @@ It is common to use the data generated from a sliding window analysis to create 
 <p>For example, say that your input sequence has only 5% Ts (ie. fT = 0.05). In a random DNA sequence with 5% Ts, you would expect to see the word “TT” very infrequently. In fact, we would only expect 0.05 * 0.05=0.0025 (0.25%) of 2-nucleotide words to be TTs (ie. we expect fTT = fT* fT). This is because Ts are rare, so they are expected to be adjacent to each other very infrequently if the few Ts are randomly scattered throughout the DNA. Therefore, if you see lots of TT 2-nucleotide words in your real input sequence (eg. fTT = 0.3, so p = 0.3/0.0025 = 120), you would suspect that natural selection has acted to increase the number of occurrences of the TT word in the sequence (presumably because it has some beneficial biological function).</p>
 <p>To find over-represented and under-represented DNA words that are 2 nucleotides long in the DEN-1 Dengue virus sequence, we can calculate the p statistic for each 2-nucleotide word in the sequence. For example, given the number of occurrences of the individual nucleotides A, C, G and T in the Dengue sequence, and the number of occurrences of the DNA word GC in the sequence (500, from above), we can calculate the value of p for the 2-nucleotide DNA word “GC,” using the formula p(GC) = fGC/(fG * fC), where fGC, fG and fC are the frequencies of the DNA words “GC,” “G” and “C” in the DNA sequence:</p>
 <p>TODO: is this messed up?</p>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="local-variation-in-gc-content.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(dengueseq_vector, <span class="dv">1</span>) <span class="co"># Get the number of occurrences of 1-nucleotide DNA words</span></span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="local-variation-in-gc-content.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(dengueseq_vector, <span class="dv">1</span>) <span class="co"># Get the number of occurrences of 1-nucleotide DNA words</span></span></code></pre></div>
 <pre><code>## 
 ## a c g t 
 ## 0 0 0 0</code></pre>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="local-variation-in-gc-content.html#cb248-1" aria-hidden="true" tabindex="-1"></a> <span class="dv">2770</span><span class="sc">/</span>(<span class="dv">3426</span><span class="sc">+</span><span class="dv">2240</span><span class="sc">+</span><span class="dv">2770</span><span class="sc">+</span><span class="dv">2299</span>) <span class="co"># Get fG</span></span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="local-variation-in-gc-content.html#cb252-1" aria-hidden="true" tabindex="-1"></a> <span class="dv">2770</span><span class="sc">/</span>(<span class="dv">3426</span><span class="sc">+</span><span class="dv">2240</span><span class="sc">+</span><span class="dv">2770</span><span class="sc">+</span><span class="dv">2299</span>) <span class="co"># Get fG</span></span></code></pre></div>
 <pre><code>## [1] 0.2580345</code></pre>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="local-variation-in-gc-content.html#cb250-1" aria-hidden="true" tabindex="-1"></a> <span class="dv">2240</span><span class="sc">/</span>(<span class="dv">3426</span><span class="sc">+</span><span class="dv">2240</span><span class="sc">+</span><span class="dv">2770</span><span class="sc">+</span><span class="dv">2299</span>) <span class="co"># Get fC</span></span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="local-variation-in-gc-content.html#cb254-1" aria-hidden="true" tabindex="-1"></a> <span class="dv">2240</span><span class="sc">/</span>(<span class="dv">3426</span><span class="sc">+</span><span class="dv">2240</span><span class="sc">+</span><span class="dv">2770</span><span class="sc">+</span><span class="dv">2299</span>) <span class="co"># Get fC</span></span></code></pre></div>
 <pre><code>## [1] 0.2086633</code></pre>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="local-variation-in-gc-content.html#cb252-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">count</span>(dengueseq_vector, <span class="dv">2</span>) <span class="co"># Get the number of occurrences of 2-nucleotide DNA words</span></span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="local-variation-in-gc-content.html#cb256-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">count</span>(dengueseq_vector, <span class="dv">2</span>) <span class="co"># Get the number of occurrences of 2-nucleotide DNA words</span></span></code></pre></div>
 <pre><code>## 
 ## aa ac ag at ca cc cg ct ga gc gg gt ta tc tg tt 
 ##  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0</code></pre>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="local-variation-in-gc-content.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="dv">500</span><span class="sc">/</span>(<span class="dv">1108</span><span class="sc">+</span><span class="dv">720</span><span class="sc">+</span><span class="dv">890</span><span class="sc">+</span><span class="dv">708</span><span class="sc">+</span><span class="dv">901</span><span class="sc">+</span><span class="dv">523</span><span class="sc">+</span><span class="dv">261</span><span class="sc">+</span><span class="dv">555</span><span class="sc">+</span><span class="dv">976</span><span class="sc">+</span><span class="dv">500</span><span class="sc">+</span><span class="dv">787</span><span class="sc">+</span><span class="dv">507</span><span class="sc">+</span><span class="dv">440</span><span class="sc">+</span><span class="dv">497</span><span class="sc">+</span><span class="dv">832</span><span class="sc">+</span><span class="dv">529</span>) <span class="co"># Get fGC</span></span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="local-variation-in-gc-content.html#cb258-1" aria-hidden="true" tabindex="-1"></a><span class="dv">500</span><span class="sc">/</span>(<span class="dv">1108</span><span class="sc">+</span><span class="dv">720</span><span class="sc">+</span><span class="dv">890</span><span class="sc">+</span><span class="dv">708</span><span class="sc">+</span><span class="dv">901</span><span class="sc">+</span><span class="dv">523</span><span class="sc">+</span><span class="dv">261</span><span class="sc">+</span><span class="dv">555</span><span class="sc">+</span><span class="dv">976</span><span class="sc">+</span><span class="dv">500</span><span class="sc">+</span><span class="dv">787</span><span class="sc">+</span><span class="dv">507</span><span class="sc">+</span><span class="dv">440</span><span class="sc">+</span><span class="dv">497</span><span class="sc">+</span><span class="dv">832</span><span class="sc">+</span><span class="dv">529</span>) <span class="co"># Get fGC</span></span></code></pre></div>
 <pre><code>## [1] 0.04658096</code></pre>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="local-variation-in-gc-content.html#cb256-1" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.04658096</span><span class="sc">/</span>(<span class="fl">0.2580345</span><span class="sc">*</span><span class="fl">0.2086633</span>) <span class="co"># Get rho(GC)</span></span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="local-variation-in-gc-content.html#cb260-1" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.04658096</span><span class="sc">/</span>(<span class="fl">0.2580345</span><span class="sc">*</span><span class="fl">0.2086633</span>) <span class="co"># Get rho(GC)</span></span></code></pre></div>
 <pre><code>## [1] 0.8651364</code></pre>
 <p>We calculate a value of p(GC) of approximately 0.865. This means that the DNA word “GC” is about 0.865 times as common in the DEN-1 Dengue virus sequence than expected. That is, it seems to be slightly under-represented.</p>
 <p>Note that if the ratio of the observed to expected frequency of a particular DNA word is very low or very high, then we would suspect that there is a statistical under-representation or over-representation of that DNA word. However, to be sure that this over- or under-representation is statistically significant, we would need to do a statistical test. We will not deal with the topic of how to carry out the statistical test here.</p>
@@ -702,6 +720,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -729,20 +748,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

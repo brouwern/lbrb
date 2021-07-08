@@ -4,24 +4,24 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 19 Rooted Neighbor-joining Phylogenetic trees | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</title>
-  <meta name="description" content="An entry-level text for computational biology" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Chapter 19 Rooted Neighbor-joining Phylogenetic trees | A Little Book of R for Bioinformatics 2.0</title>
+  <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 19 Rooted Neighbor-joining Phylogenetic trees | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta property="og:title" content="Chapter 19 Rooted Neighbor-joining Phylogenetic trees | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="An entry-level text for computational biology" />
+  <meta property="og:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 19 Rooted Neighbor-joining Phylogenetic trees | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta name="twitter:title" content="Chapter 19 Rooted Neighbor-joining Phylogenetic trees | A Little Book of R for Bioinformatics 2.0" />
   
-  <meta name="twitter:description" content="An entry-level text for computational biology" />
+  <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
-<meta name="author" content="Nathan L. Brouwer" />
+<meta name="author" content="Avirl Coghlan, with contributions by Nathan L. Brouwer" />
 
 
 <meta name="date" content="2021-07-08" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="multiple-alignment-with-clustal.html"/>
 <link rel="next" href="unrooted-neighbor-joining-phylogenetic-trees.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -118,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -131,13 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Computational Biology for All!</a></li>
+<li><a href="./">A Little Book of R for Bioinformatics</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface to version 2.0</a></li>
 <li class="chapter" data-level="1" data-path="downloading-r.html"><a href="downloading-r.html"><i class="fa fa-check"></i><b>1</b> Downloading R</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface-1"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
+<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
 <li class="chapter" data-level="1.2" data-path="downloading-r.html"><a href="downloading-r.html#introduction-to-r"><i class="fa fa-check"></i><b>1.2</b> Introduction to R</a></li>
 <li class="chapter" data-level="1.3" data-path="downloading-r.html"><a href="downloading-r.html#installing-r"><i class="fa fa-check"></i><b>1.3</b> Installing R</a>
 <ul>
@@ -154,20 +157,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>3</b> Installing <em>R</em> packages</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>3.1</b> Downloading packages with the RStudio IDE</a></li>
-<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function install.packages()</a></li>
+<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function <code>install.packages()</code></a></li>
 <li class="chapter" data-level="3.3" data-path="installing-r-packages.html"><a href="installing-r-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>3.3</b> Using packages after they are downloaded</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>4</b> Installing Bioconductor</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>4.1</b> Bioconductor</a></li>
 <li class="chapter" data-level="4.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>4.2</b> Installing BiocManager</a></li>
+<li class="chapter" data-level="4.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#the-ins-and-outs-of-package-installation"><i class="fa fa-check"></i><b>4.3</b> The ins and outs of package installation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#updating-other-packages-when-downloading-a-package"><i class="fa fa-check"></i><b>4.3.1</b> Updating other packages when downloading a package</a></li>
+<li class="chapter" data-level="4.3.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#packages-from-source"><i class="fa fa-check"></i><b>4.3.2</b> Packages “from source”</a></li>
+<li class="chapter" data-level="4.3.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#more-on-angry-red-text"><i class="fa fa-check"></i><b>4.3.3</b> More on angry red text</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#actually-loading-a-package"><i class="fa fa-check"></i><b>4.4</b> Actually loading a package</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html"><i class="fa fa-check"></i><b>5</b> A Brief introduction to R</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vocabulary"><i class="fa fa-check"></i><b>5.1</b> Vocabulary</a></li>
-<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions-etc"><i class="fa fa-check"></i><b>5.2</b> R functions etc</a></li>
-<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#a-brief-introduction-to-r-1"><i class="fa fa-check"></i><b>5.3</b> A brief introduction to R</a></li>
-<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.4</b> Links and Further Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions"><i class="fa fa-check"></i><b>5.2</b> R functions</a></li>
+<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#interacting-with-r"><i class="fa fa-check"></i><b>5.3</b> Interacting with R</a></li>
+<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#variables-in-r"><i class="fa fa-check"></i><b>5.4</b> Variables in R</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>5.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="5.4.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vector-indexing"><i class="fa fa-check"></i><b>5.4.2</b> Vector indexing</a></li>
+<li class="chapter" data-level="5.4.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#character-vectors"><i class="fa fa-check"></i><b>5.4.3</b> Character vectors</a></li>
+<li class="chapter" data-level="5.4.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#lists"><i class="fa fa-check"></i><b>5.4.4</b> Lists</a></li>
+<li class="chapter" data-level="5.4.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#tables"><i class="fa fa-check"></i><b>5.4.5</b> Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.5</b> Links and Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="downloading-ncbi-sequence-data-by-hand.html"><a href="downloading-ncbi-sequence-data-by-hand.html"><i class="fa fa-check"></i><b>6</b> Downloading NCBI sequence data by hand</a>
 <ul>
@@ -391,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="35.18" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>35.18</b> Practice (OPTIONAL)</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
 
 </ul>
 
@@ -402,7 +420,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Little Book of R for Bioinformatics 2.0</a>
           </h1>
         </div>
 
@@ -412,7 +430,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="rooted-neighbor-joining-phylogenetic-trees" class="section level1" number="19">
 <h1><span class="header-section-number">Chapter 19</span> Rooted Neighbor-joining Phylogenetic trees</h1>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
 <p><strong>By</strong>: Avril Coghlan.<br />
 Multiple Alignment and Phylogenetic trees
 <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html" class="uri">https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html</a></p>
@@ -424,18 +442,18 @@ Multiple Alignment and Phylogenetic trees
 <p>Note that <em>Caenorhabditis elegans</em> is a <strong>model organism</strong> commonly studied in molecular biology. The nematodes <em>Loa loa</em>, and *Brugia malayi() are parasitic nematodes that cause filariasis, which is classified by the WHO as a <strong>neglected tropical disease</strong>.</p>
 <p>The UniProt database contains a distantly related sequence from the fruit fly <em>Drosophila melanogaster</em> (UniProt accession Q9VT99). If we were to build a phylogenetic tree of the nematode worm Fox-1 homologues, the distantly related sequence from fruitfly would probably be a good choice of outgroup, since the protein is from a different animal group (insects) than the nematode worms. Thus, it is likely that the fruitfly protein is more distantly related to all the nematode proteins than they are to each other.</p>
 <p>To retrieve the sequences from UniProt we can use the “retrieveseqs()” function (see above):</p>
-<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb348-1" aria-hidden="true" tabindex="-1"></a>seqnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Q10572&quot;</span>,<span class="st">&quot;E3M2K8&quot;</span>,<span class="st">&quot;Q8WS01&quot;</span>,<span class="st">&quot;E1FUV2&quot;</span>,<span class="st">&quot;A8NSK3&quot;</span>,<span class="st">&quot;Q9VT99&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb349-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">retrieveseqs</span>(seqnames,<span class="st">&quot;swissprot&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb352-1" aria-hidden="true" tabindex="-1"></a>seqnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Q10572&quot;</span>,<span class="st">&quot;E3M2K8&quot;</span>,<span class="st">&quot;Q8WS01&quot;</span>,<span class="st">&quot;E1FUV2&quot;</span>,<span class="st">&quot;A8NSK3&quot;</span>,<span class="st">&quot;Q9VT99&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb353-1" aria-hidden="true" tabindex="-1"></a>seqs <span class="ot">&lt;-</span> <span class="fu">retrieveseqs</span>(seqnames,<span class="st">&quot;swissprot&quot;</span>)</span></code></pre></div>
 <p>We can then write out the sequences to a FASTA file:</p>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.fasta</span>(seqs, seqnames, <span class="at">file=</span><span class="st">&quot;fox1.fasta&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.fasta</span>(seqs, seqnames, <span class="at">file=</span><span class="st">&quot;fox1.fasta&quot;</span>)</span></code></pre></div>
 <p>We can then use CLUSTAL to create a PHYLIP-format alignment of the sequences, and store it in the alignment file “fox1.phy.” This picture shows part of the alignment (the alignment is quite long, so not all of it is shown):</p>
 <p>image10</p>
 <p>We can then read the alignment into R:</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb351-1" aria-hidden="true" tabindex="-1"></a>fox1aln  <span class="ot">&lt;-</span> <span class="fu">read.alignment</span>(<span class="at">file =</span> <span class="st">&quot;fox1.phy&quot;</span>, <span class="at">format =</span> <span class="st">&quot;phylip&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb355-1" aria-hidden="true" tabindex="-1"></a>fox1aln  <span class="ot">&lt;-</span> <span class="fu">read.alignment</span>(<span class="at">file =</span> <span class="st">&quot;fox1.phy&quot;</span>, <span class="at">format =</span> <span class="st">&quot;phylip&quot;</span>)</span></code></pre></div>
 <p>The next step is to build a phylogenetic tree of the proteins, which again we can do using the neighbour-joining algorithm.</p>
 <p>This time we have an outgroup in our set of sequences, so we can build a rooted tree. The function “rootedNJtree()” can be used to build a rooted tree. It returns the phylogenetic tree, and also makes a picture of the tree:</p>
 <p>The function takes the alignment and the name of the outgroup as its inputs. For example, to use it to make a phylogenetic tree of the C. elegans Fox-1 protein and its homologues, using the fruitfly protein (UniProt Q9VT99) as the outgroup, we type:</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb352-1" aria-hidden="true" tabindex="-1"></a>fox1alntree <span class="ot">&lt;-</span> <span class="fu">rootedNJtree</span>(fox1aln, <span class="st">&quot;Q9VT99&quot;</span>,<span class="at">type=</span><span class="st">&quot;protein&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb356-1" aria-hidden="true" tabindex="-1"></a>fox1alntree <span class="ot">&lt;-</span> <span class="fu">rootedNJtree</span>(fox1aln, <span class="st">&quot;Q9VT99&quot;</span>,<span class="at">type=</span><span class="st">&quot;protein&quot;</span>)</span></code></pre></div>
 <p>Here we can see that E3M2K8 (C. remanei Fox-1 homologue) and Q10572 (C. elegans Fox-1) have been grouped together with bootstrap 100%, and A8NSK3 (Brugia malayi Fox-1 homologue) and E1FUV2 (Loa loa Fox-1 homologue) have been grouped together with bootstrap 100%. These four proteins have also been grouped together in a larger clade with bootstrap 100%.</p>
 <p>Compared to these four proteins, the Q8WS01 (C. briggsae Fox-1 homologue) and Q9VT99 (fruitfly outgroup) seem to be relatively distantly related.</p>
 <p>As this is a rooted tree, we know the direction that evolutionary time ran. Say we call the ancestor of the four sequences (E3M2K8, Q10572, A8NSK3, E1FUV2) ancestor1, the ancestor of the two sequences (E3M2K8, Q10572) ancestor2, and the ancestor of the two sequences (A8NSK3, E1FUV2) ancestor3.</p>
@@ -451,12 +469,12 @@ Multiple Alignment and Phylogenetic trees
 <p>If you are studying closely related organisms such as primates, few mutations will have occurred since they diverged. As a result, if you use protein sequences for a phylogenetic analysis, there may be too few amino acid substitutions to provide enough ‘signal’ to use for the phylogenetic analysis. Therefore, it is often preferable to use DNA sequences for a phylogenetic analysis of closely related organisms such as primates.</p>
 <p>We can use the functions unrootedNJtree() and rootedNJtree() described above to build unrooted or rooted neighbour-joining phylogenetic trees based on an alignment of DNA or mRNA sequences. In this case, we need to use “type=DNA” as an argument in these functions, to tell them that we are making a tree of nucleotide sequences, not protein sequences.</p>
 <p>For example, to build an unrooted phylogenetic tree based on the alignment of the virus phosphoprotein mRNA sequences, we type in R:</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb353-1" aria-hidden="true" tabindex="-1"></a>virusmRNAaln  <span class="ot">&lt;-</span> <span class="fu">read.alignment</span>(<span class="at">file =</span> <span class="st">&quot;virusmRNA.phy&quot;</span>, <span class="at">format =</span> <span class="st">&quot;phylip&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb354-1" aria-hidden="true" tabindex="-1"></a>virusmRNAalntree <span class="ot">&lt;-</span> <span class="fu">unrootedNJtree</span>(virusmRNAaln, <span class="at">type=</span><span class="st">&quot;DNA&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb357-1" aria-hidden="true" tabindex="-1"></a>virusmRNAaln  <span class="ot">&lt;-</span> <span class="fu">read.alignment</span>(<span class="at">file =</span> <span class="st">&quot;virusmRNA.phy&quot;</span>, <span class="at">format =</span> <span class="st">&quot;phylip&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb358-1" aria-hidden="true" tabindex="-1"></a>virusmRNAalntree <span class="ot">&lt;-</span> <span class="fu">unrootedNJtree</span>(virusmRNAaln, <span class="at">type=</span><span class="st">&quot;DNA&quot;</span>)</span></code></pre></div>
 <p>Saving a phylogenetic tree as a Newick-format tree file
 A commonly used format for representing phylogenetic trees is the Newick format. Once you have built a phylogenetic tree using R, it is convenient to store it as a Newick-format tree file. This can be done using the “write.tree()” function in the Ape R package.</p>
 <p>For example, to save the unrooted phylogenetic tree of virus phosphoprotein mRNA sequences as a Newick-format tree file called “virusmRNA.tre,” we type:</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.tree</span>(virusmRNAalntree, <span class="st">&quot;virusmRNA.tre&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="rooted-neighbor-joining-phylogenetic-trees.html#cb359-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.tree</span>(virusmRNAalntree, <span class="st">&quot;virusmRNA.tre&quot;</span>)</span></code></pre></div>
 <p>The Newick-format file “virusmRNA.tre” should now appear in your “My Documents” folder.</p>
 </div>
 <div id="summary-3" class="section level2" number="19.3">
@@ -525,6 +543,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -552,20 +571,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

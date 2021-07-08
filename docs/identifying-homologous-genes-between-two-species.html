@@ -4,24 +4,24 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 28 Identifying homologous genes between two species | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</title>
-  <meta name="description" content="An entry-level text for computational biology" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Chapter 28 Identifying homologous genes between two species | A Little Book of R for Bioinformatics 2.0</title>
+  <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 28 Identifying homologous genes between two species | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta property="og:title" content="Chapter 28 Identifying homologous genes between two species | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="An entry-level text for computational biology" />
+  <meta property="og:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 28 Identifying homologous genes between two species | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta name="twitter:title" content="Chapter 28 Identifying homologous genes between two species | A Little Book of R for Bioinformatics 2.0" />
   
-  <meta name="twitter:description" content="An entry-level text for computational biology" />
+  <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
-<meta name="author" content="Nathan L. Brouwer" />
+<meta name="author" content="Avirl Coghlan, with contributions by Nathan L. Brouwer" />
 
 
 <meta name="date" content="2021-07-08" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="comparing-the-number-of-genes-in-two-species.html"/>
 <link rel="next" href="summary-6.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -118,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -131,13 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Computational Biology for All!</a></li>
+<li><a href="./">A Little Book of R for Bioinformatics</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface to version 2.0</a></li>
 <li class="chapter" data-level="1" data-path="downloading-r.html"><a href="downloading-r.html"><i class="fa fa-check"></i><b>1</b> Downloading R</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface-1"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
+<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
 <li class="chapter" data-level="1.2" data-path="downloading-r.html"><a href="downloading-r.html#introduction-to-r"><i class="fa fa-check"></i><b>1.2</b> Introduction to R</a></li>
 <li class="chapter" data-level="1.3" data-path="downloading-r.html"><a href="downloading-r.html#installing-r"><i class="fa fa-check"></i><b>1.3</b> Installing R</a>
 <ul>
@@ -154,20 +157,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>3</b> Installing <em>R</em> packages</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>3.1</b> Downloading packages with the RStudio IDE</a></li>
-<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function install.packages()</a></li>
+<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function <code>install.packages()</code></a></li>
 <li class="chapter" data-level="3.3" data-path="installing-r-packages.html"><a href="installing-r-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>3.3</b> Using packages after they are downloaded</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>4</b> Installing Bioconductor</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>4.1</b> Bioconductor</a></li>
 <li class="chapter" data-level="4.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>4.2</b> Installing BiocManager</a></li>
+<li class="chapter" data-level="4.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#the-ins-and-outs-of-package-installation"><i class="fa fa-check"></i><b>4.3</b> The ins and outs of package installation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#updating-other-packages-when-downloading-a-package"><i class="fa fa-check"></i><b>4.3.1</b> Updating other packages when downloading a package</a></li>
+<li class="chapter" data-level="4.3.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#packages-from-source"><i class="fa fa-check"></i><b>4.3.2</b> Packages “from source”</a></li>
+<li class="chapter" data-level="4.3.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#more-on-angry-red-text"><i class="fa fa-check"></i><b>4.3.3</b> More on angry red text</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#actually-loading-a-package"><i class="fa fa-check"></i><b>4.4</b> Actually loading a package</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html"><i class="fa fa-check"></i><b>5</b> A Brief introduction to R</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vocabulary"><i class="fa fa-check"></i><b>5.1</b> Vocabulary</a></li>
-<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions-etc"><i class="fa fa-check"></i><b>5.2</b> R functions etc</a></li>
-<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#a-brief-introduction-to-r-1"><i class="fa fa-check"></i><b>5.3</b> A brief introduction to R</a></li>
-<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.4</b> Links and Further Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions"><i class="fa fa-check"></i><b>5.2</b> R functions</a></li>
+<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#interacting-with-r"><i class="fa fa-check"></i><b>5.3</b> Interacting with R</a></li>
+<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#variables-in-r"><i class="fa fa-check"></i><b>5.4</b> Variables in R</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>5.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="5.4.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vector-indexing"><i class="fa fa-check"></i><b>5.4.2</b> Vector indexing</a></li>
+<li class="chapter" data-level="5.4.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#character-vectors"><i class="fa fa-check"></i><b>5.4.3</b> Character vectors</a></li>
+<li class="chapter" data-level="5.4.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#lists"><i class="fa fa-check"></i><b>5.4.4</b> Lists</a></li>
+<li class="chapter" data-level="5.4.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#tables"><i class="fa fa-check"></i><b>5.4.5</b> Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.5</b> Links and Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="downloading-ncbi-sequence-data-by-hand.html"><a href="downloading-ncbi-sequence-data-by-hand.html"><i class="fa fa-check"></i><b>6</b> Downloading NCBI sequence data by hand</a>
 <ul>
@@ -391,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="35.18" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>35.18</b> Practice (OPTIONAL)</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
 
 </ul>
 
@@ -402,7 +420,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Little Book of R for Bioinformatics 2.0</a>
           </h1>
         </div>
 
@@ -418,45 +436,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Another possible feature that you can search for is “pfalciparum_eg_homology_orthology_type,” which describes the type of orthology relationship between a particular Leishmania major gene and its Plasmodium falciparum orthologue. For example, if a particular Leishmania major gene has two Plasmodium falciparum orthologues, the relationship between the Leishmania major gene and each of the Plasmodium falciparum orthologues will be “ortholog_one2many” (one-to-many orthology).</p>
 <p>This can arise in the case where there was a duplication in the Plasmodium falciparum lineage after Plasmodium and Leishmania diverged, which means that two different Plasmodium falciparum genes (which are paralogues of each other) are both orthologues of the same Leishmania major gene.</p>
 <p>Therefore, we can retrive the Ensembl identifiers of the Plasmodium falciparum orthologues of all Leishmania major genes by typing:</p>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="identifying-homologous-genes-between-two-species.html#cb457-1" aria-hidden="true" tabindex="-1"></a>leishmaniagenes <span class="ot">&lt;-</span> <span class="fu">getBM</span>(<span class="at">attributes =</span> <span class="fu">c</span>(<span class="st">&quot;ensembl_gene_id&quot;</span>, <span class="st">&quot;pfalciparum_eg_homolog_ensembl_gene&quot;</span>,</span>
-<span id="cb457-2"><a href="identifying-homologous-genes-between-two-species.html#cb457-2" aria-hidden="true" tabindex="-1"></a>   <span class="st">&quot;pfalciparum_eg_homolog_orthology_type&quot;</span>), <span class="at">mart=</span>ensemblleishmania)</span></code></pre></div>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="identifying-homologous-genes-between-two-species.html#cb461-1" aria-hidden="true" tabindex="-1"></a>leishmaniagenes <span class="ot">&lt;-</span> <span class="fu">getBM</span>(<span class="at">attributes =</span> <span class="fu">c</span>(<span class="st">&quot;ensembl_gene_id&quot;</span>, <span class="st">&quot;pfalciparum_eg_homolog_ensembl_gene&quot;</span>,</span>
+<span id="cb461-2"><a href="identifying-homologous-genes-between-two-species.html#cb461-2" aria-hidden="true" tabindex="-1"></a>   <span class="st">&quot;pfalciparum_eg_homolog_orthology_type&quot;</span>), <span class="at">mart=</span>ensemblleishmania)</span></code></pre></div>
 <p>This will return an R list variable leishmaniagenes, the first element of which is a vector of Ensembl identifiers for all Leishmania major coding genes, and the second element of which is a vector of Ensembl identifiers for their Plasmodium falciparum orthologues, and the third element of which is a vector with information on the orthology types.</p>
 <p>We can print out the names of the first 10 Leishmania major genes and their Plasmodium falciparum orthologues, and their orthology types, by typing:</p>
-<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="identifying-homologous-genes-between-two-species.html#cb458-1" aria-hidden="true" tabindex="-1"></a>leishmaniagenenames <span class="ot">&lt;-</span> leishmaniagenes[[<span class="dv">1</span>]]      <span class="co"># Get the names of all Leishmania major genes</span></span>
-<span id="cb458-2"><a href="identifying-homologous-genes-between-two-species.html#cb458-2" aria-hidden="true" tabindex="-1"></a>leishmaniaPforthologues <span class="ot">&lt;-</span> leishmaniagenes[[<span class="dv">2</span>]]  <span class="co"># Get the P. falciparum orthologues of all L. major genes</span></span>
-<span id="cb458-3"><a href="identifying-homologous-genes-between-two-species.html#cb458-3" aria-hidden="true" tabindex="-1"></a>leishmaniaPforthologuetypes <span class="ot">&lt;-</span> leishmaniagenes[[<span class="dv">3</span>]] <span class="co"># Get the orthology relationship type</span></span>
-<span id="cb458-4"><a href="identifying-homologous-genes-between-two-species.html#cb458-4" aria-hidden="true" tabindex="-1"></a>leishmaniagenenames[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="identifying-homologous-genes-between-two-species.html#cb462-1" aria-hidden="true" tabindex="-1"></a>leishmaniagenenames <span class="ot">&lt;-</span> leishmaniagenes[[<span class="dv">1</span>]]      <span class="co"># Get the names of all Leishmania major genes</span></span>
+<span id="cb462-2"><a href="identifying-homologous-genes-between-two-species.html#cb462-2" aria-hidden="true" tabindex="-1"></a>leishmaniaPforthologues <span class="ot">&lt;-</span> leishmaniagenes[[<span class="dv">2</span>]]  <span class="co"># Get the P. falciparum orthologues of all L. major genes</span></span>
+<span id="cb462-3"><a href="identifying-homologous-genes-between-two-species.html#cb462-3" aria-hidden="true" tabindex="-1"></a>leishmaniaPforthologuetypes <span class="ot">&lt;-</span> leishmaniagenes[[<span class="dv">3</span>]] <span class="co"># Get the orthology relationship type</span></span>
+<span id="cb462-4"><a href="identifying-homologous-genes-between-two-species.html#cb462-4" aria-hidden="true" tabindex="-1"></a>leishmaniagenenames[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code>##  [1] &quot;LMJF_01_0780&quot; &quot;LMJF_01_0350&quot; &quot;LMJF_01_0280&quot; &quot;LMJF_01_0290&quot; &quot;LMJF_01_0335&quot;
 ##  [6] &quot;LMJF_01_0600&quot; &quot;LMJF_01_0220&quot; &quot;LMJF_01_0220&quot; &quot;LMJF_01_0220&quot; &quot;LMJF_01_0220&quot;</code></pre>
-<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="identifying-homologous-genes-between-two-species.html#cb460-1" aria-hidden="true" tabindex="-1"></a>leishmaniaPforthologues[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="identifying-homologous-genes-between-two-species.html#cb464-1" aria-hidden="true" tabindex="-1"></a>leishmaniaPforthologues[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;              &quot;&quot;              &quot;&quot;              &quot;&quot;             
 ##  [5] &quot;&quot;              &quot;&quot;              &quot;PF3D7_0528700&quot; &quot;PF3D7_1116300&quot;
 ##  [9] &quot;PF3D7_0804800&quot; &quot;PF3D7_1423200&quot;</code></pre>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="identifying-homologous-genes-between-two-species.html#cb462-1" aria-hidden="true" tabindex="-1"></a>leishmaniaPforthologuetypes[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="identifying-homologous-genes-between-two-species.html#cb466-1" aria-hidden="true" tabindex="-1"></a>leishmaniaPforthologuetypes[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code>##  [1] &quot;&quot;                   &quot;&quot;                   &quot;&quot;                  
 ##  [4] &quot;&quot;                   &quot;&quot;                   &quot;&quot;                  
 ##  [7] &quot;ortholog_many2many&quot; &quot;ortholog_many2many&quot; &quot;ortholog_many2many&quot;
 ## [10] &quot;ortholog_many2many&quot;</code></pre>
 <p>Not all Leishmania major genes have Plasmodium falciparum orthologues; this is why when we print out the first 10 elements of the vector leishmaniaPforthologues, some of the elements are empty.</p>
 <p>To find out how many Leishmania major genes have orthologues in Plasmodium falciparum, we can first find the indices of the elements of the vector leishmaniaPforthologues that are empty:</p>
-<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="identifying-homologous-genes-between-two-species.html#cb464-1" aria-hidden="true" tabindex="-1"></a>myindex <span class="ot">&lt;-</span> leishmaniaPforthologues<span class="sc">==</span><span class="st">&quot;&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="identifying-homologous-genes-between-two-species.html#cb468-1" aria-hidden="true" tabindex="-1"></a>myindex <span class="ot">&lt;-</span> leishmaniaPforthologues<span class="sc">==</span><span class="st">&quot;&quot;</span></span></code></pre></div>
 <p>We can then find out the names of the Leishmania gene genes corresponding to those indices:</p>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="identifying-homologous-genes-between-two-species.html#cb465-1" aria-hidden="true" tabindex="-1"></a>leishmaniagenenames2 <span class="ot">&lt;-</span> leishmaniagenenames[myindex]</span>
-<span id="cb465-2"><a href="identifying-homologous-genes-between-two-species.html#cb465-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(leishmaniagenenames2)</span></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="identifying-homologous-genes-between-two-species.html#cb469-1" aria-hidden="true" tabindex="-1"></a>leishmaniagenenames2 <span class="ot">&lt;-</span> leishmaniagenenames[myindex]</span>
+<span id="cb469-2"><a href="identifying-homologous-genes-between-two-species.html#cb469-2" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(leishmaniagenenames2)</span></code></pre></div>
 <pre><code>## [1] 8191</code></pre>
 <p>This tells us that 8191 Leishmania major genes do not have Plasmodium falciparum orthologues.</p>
 <p>How many of the 8191 Leishmania major genes that do not have Plasmodium falaciparum orthologues are protein-coding genes? To answer this question, we can merge together the information in the R list variable leishmaniagenes2 (which contains information on the name of each Leishmania major gene and its type; see above), and the R list variable leishmaniagenes (which contains information on the name of each L. major gene and its Plasmodium falciparum orthologues).</p>
 <p>Remember that leishmaniagenes2 was created by typing:</p>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="identifying-homologous-genes-between-two-species.html#cb467-1" aria-hidden="true" tabindex="-1"></a>leishmaniagenes2 <span class="ot">&lt;-</span> <span class="fu">getBM</span>(<span class="at">attributes =</span> <span class="fu">c</span>(<span class="st">&quot;ensembl_gene_id&quot;</span>, <span class="st">&quot;gene_biotype&quot;</span>), <span class="at">mart=</span>ensemblleishmania)</span></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="identifying-homologous-genes-between-two-species.html#cb471-1" aria-hidden="true" tabindex="-1"></a>leishmaniagenes2 <span class="ot">&lt;-</span> <span class="fu">getBM</span>(<span class="at">attributes =</span> <span class="fu">c</span>(<span class="st">&quot;ensembl_gene_id&quot;</span>, <span class="st">&quot;gene_biotype&quot;</span>), <span class="at">mart=</span>ensemblleishmania)</span></code></pre></div>
 <p>To combine leishmaniagenes and leishmaniagenes2, we can use the merge() function in R, which can merge together two list variables that contain some named elements in common (in this case, both list variables contain a vector that has the names of Leishmania major genes):</p>
-<div class="sourceCode" id="cb468"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb468-1"><a href="identifying-homologous-genes-between-two-species.html#cb468-1" aria-hidden="true" tabindex="-1"></a>leishmaniagenes3 <span class="ot">&lt;-</span> <span class="fu">merge</span>(leishmaniagenes2, leishmaniagenes)</span></code></pre></div>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="identifying-homologous-genes-between-two-species.html#cb472-1" aria-hidden="true" tabindex="-1"></a>leishmaniagenes3 <span class="ot">&lt;-</span> <span class="fu">merge</span>(leishmaniagenes2, leishmaniagenes)</span></code></pre></div>
 <p>The first element of the merged list variable leishmaniagenes3 contains a vector of the Leishmania major gene names, the second has a vector of the types of those genes (eg. protein-coding, pseudogene etc.), and the third element has a vector of the Plasmodium falciparum orthologues’ names. We can therefore find out how many protein-coding Leishmania major genes lack Plasmodium falciparum orthologues by typing:</p>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="identifying-homologous-genes-between-two-species.html#cb469-1" aria-hidden="true" tabindex="-1"></a>leishmaniagenenames <span class="ot">&lt;-</span> leishmaniagenes3[[<span class="dv">1</span>]]</span>
-<span id="cb469-2"><a href="identifying-homologous-genes-between-two-species.html#cb469-2" aria-hidden="true" tabindex="-1"></a>leishmaniagenebiotypes <span class="ot">&lt;-</span> leishmaniagenes3[[<span class="dv">2</span>]]</span>
-<span id="cb469-3"><a href="identifying-homologous-genes-between-two-species.html#cb469-3" aria-hidden="true" tabindex="-1"></a>leishmaniaPforthologues <span class="ot">&lt;-</span> leishmaniagenes3[[<span class="dv">3</span>]]</span>
-<span id="cb469-4"><a href="identifying-homologous-genes-between-two-species.html#cb469-4" aria-hidden="true" tabindex="-1"></a>myindex <span class="ot">&lt;-</span> leishmaniaPforthologues<span class="sc">==</span><span class="st">&quot;&quot;</span> <span class="sc">&amp;</span> leishmaniagenebiotypes<span class="sc">==</span><span class="st">&quot;protein_coding&quot;</span></span>
-<span id="cb469-5"><a href="identifying-homologous-genes-between-two-species.html#cb469-5" aria-hidden="true" tabindex="-1"></a>leishmaniagenenames2 <span class="ot">&lt;-</span> leishmaniagenenames[myindex]</span>
-<span id="cb469-6"><a href="identifying-homologous-genes-between-two-species.html#cb469-6" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(leishmaniagenenames2)</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="identifying-homologous-genes-between-two-species.html#cb473-1" aria-hidden="true" tabindex="-1"></a>leishmaniagenenames <span class="ot">&lt;-</span> leishmaniagenes3[[<span class="dv">1</span>]]</span>
+<span id="cb473-2"><a href="identifying-homologous-genes-between-two-species.html#cb473-2" aria-hidden="true" tabindex="-1"></a>leishmaniagenebiotypes <span class="ot">&lt;-</span> leishmaniagenes3[[<span class="dv">2</span>]]</span>
+<span id="cb473-3"><a href="identifying-homologous-genes-between-two-species.html#cb473-3" aria-hidden="true" tabindex="-1"></a>leishmaniaPforthologues <span class="ot">&lt;-</span> leishmaniagenes3[[<span class="dv">3</span>]]</span>
+<span id="cb473-4"><a href="identifying-homologous-genes-between-two-species.html#cb473-4" aria-hidden="true" tabindex="-1"></a>myindex <span class="ot">&lt;-</span> leishmaniaPforthologues<span class="sc">==</span><span class="st">&quot;&quot;</span> <span class="sc">&amp;</span> leishmaniagenebiotypes<span class="sc">==</span><span class="st">&quot;protein_coding&quot;</span></span>
+<span id="cb473-5"><a href="identifying-homologous-genes-between-two-species.html#cb473-5" aria-hidden="true" tabindex="-1"></a>leishmaniagenenames2 <span class="ot">&lt;-</span> leishmaniagenenames[myindex]</span>
+<span id="cb473-6"><a href="identifying-homologous-genes-between-two-species.html#cb473-6" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(leishmaniagenenames2)</span></code></pre></div>
 <pre><code>## [1] 6476</code></pre>
 <p>This tells us that there are 6476 Leishmania major protein-coding genes that lack Plasmodium falciparum orthologues.</p>
 </div>
@@ -489,6 +507,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -516,20 +535,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

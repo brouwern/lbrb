@@ -2,20 +2,22 @@
 
 **By**: Avril Coghlan  
 
-**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
 ## Preface
 
-The following introduction to *R* is based on the first part of ["How to install *R* and a Brief Introduction to R"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html) by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  For additional information see ["Getting *R* onto your computer"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html).
+The following introduction to *R* is based on the first part of ["How to install *R* and a Brief Introduction to R"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html) by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  For additional information see the Appendices and ["Getting *R* onto your computer"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html).
+
+<!-- TODO: Update links to send to Comp Bio 4 All -->
 
 
 ## Introduction to R
 
-_R_ (www.r-project.org) is a commonly used free statistics software. _R_ allows you to carry out statistical analyses in an interactive mode, as well as allowing simple programming.
+_R_ (www.r-project.org) is a commonly used free statistics software. _R_ allows you to carry out statistical analyses in an interactive mode, as well as allowing  programming.
 
 ## Installing R
 
-To use R, you first need to install the _R_ program on your computer.
+To use R, you first need to install the _R_ program on your computer.  
 
 ### Installing *R* on a Windows PC
 
@@ -25,7 +27,7 @@ These instructions will focus on installing *R* on a Windows PC. However, I will
 
 > **PROTIP:** Even if you have used *R* before its good to regularly update it to avoid conflicts with recently produced software.
 
-New releases of *R* are made very regularly (approximately once a month), as *R* is actively being improved all the time. It is worthwhile installing new versions of *R* regularly, to make sure that you have a recent version of *R* (to ensure compatibility with all the latest versions of the *R* packages that you have downloaded).
+Minor updates of *R* are made very regularly (approximately every 6 months), as *R* is actively being improved all the time. It is worthwhile installing new versions of *R* a couple times a year, to make sure that you have a recent version of *R* (to ensure compatibility with all the latest versions of the *R* packages that you have downloaded).
 
 To install *R* on your **Windows** computer, follow these steps:
 
@@ -58,8 +60,8 @@ The instructions above are for installing *R* on a Windows PC. If you want to in
 
 ## Starting *R* 
 
-To start R,  Check if there is an “R” icon on the desktop of the computer that you are using. If so, double-click on the “R” icon to start R. If you cannot find an “R” icon, try the next step instead.
+To start R,  Check if there is an *R* icon on the desktop of the computer that you are using. If so, double-click on the *R* icon to start *R*. If you cannot find an *R* icon, try the next step instead.
 
-You can also start *R* from the Start menu.  Click on the “Start” button at the bottom left of your computer screen, and then choose “All programs”, and start *R* by selecting “R” (or *R* X.X.X, where X.X.X gives the version of R, e.g.. *R* 2.10.0) from the menu of programs.
+You can also start *R* from the Start menu in Windows.  Click on the “Start” button at the bottom left of your computer screen, and then choose “All programs”, and start *R* by selecting “R” (or *R* X.X.X, where X.X.X gives the version of R, e.g.. *R* 2.10.0) from the menu of programs.
 
-Say "Hi" to *R* and take a quick look at how it looks.  Now say "Goodbye", because we will never actually do any work in this version of R; instead, we'll use the RStudio IDE (integrated development environment).
+Say "Hi" to *R* and take a quick look at how it looks.  Now say "Goodbye", because we will never actually do any work in this version of *R*; instead, we'll use the **RStudio IDE (integrated development environment)**.

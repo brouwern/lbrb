@@ -1,20 +1,57 @@
 --- 
-title: "Computational Biology for All!  Data science, bioinformatics, and other life-sciences awesomeness in R"
-author: "Nathan L. Brouwer"
+title: "A Little Book of R for Bioinformatics 2.0"
+author: "Avirl Coghlan, with contributions by Nathan L. Brouwer"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-description: "An entry-level text for computational biology"
+description: "An entry-level text for bioinformatics and computational biology"
 ---
 
-# Preface {-}
+# Preface to version 2.0 {-}
 
-This book grew out of exercises I've written for courses taught at the University of Pittsburgh, California University of Pennsylvania, and Duquesne University.  The goal is to walk students step by step through the process of working with data in R.  
+Welcome to *A Little Book of R for Bioinformatics 2.0*!.
 
-A major influence in how this book is written is th online book [Program MARK: a gentle introduction](http://www.phidot.org/software/mark/docs/book/), edited [Evan Cooch](http://canuck.dnr.cornell.edu/) and [Gary White](https://sites.warnercnr.colostate.edu/gwhite/).  That book patiently walks users through the basic of these models step by step, concept by concept, and click by click.  I have sought to adopt a similar thorough and holistic approach in this book.
+This book is based on the original [*A Little Book of R for Bioinformatics*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/) by Dr. Avril Coghlan (Hereafter "ALBRB 1.0").  Dr. Coghlan's book was one of the first and most thorough introductions to using R for bioinformatics, and was generously published under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  In addition to describing how to do bioinformatics in R, Coghlan provided numerous functions to facilitate important tasks, practice questions, and references to further reading. 
+
+[ALBRB 1.0](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/) was extremely useful to me when I was learning bioinformatics and computational biology.  In this version of the book, which I'll refer to as ALBRB 2.0, I have adapted Dr. Coghlan's original book to suit my own teaching needs.  
+
+
+Below I've outlined the general types of changes I've made to the original book.  I have tried to link back to the original content that these updates are derived from and note how changes were made.  Any errors or inconsistencies should be ascribed to me, not Dr. Coghlan.  If you have any feedback, please email me at brouwern@gmail.com
+
+Nathan Brouwer, June 2021
+
+
+**Changes implemented in ALBRB 2.0 by Nathan Brouwer**
+
+1. Converted the entire book to RMarkdown and published it via bookdown.
+1. Added instructions for using RStudio and RStudio Cloud.
+1. Updated instructions to reflect any changes in software, including changes to how the bioinformatics  repository Bioconductor now works.
+1. Split up chapters into smaller units.
+1. Reorganized the order of some material.
+1. Added links to the book I am developing, *Computational Biology for All*.
+1. Moved most functions and datasets to my teaching package [compbio4all](https://github.com/brouwern/compbio4all).
+1. Changed some plotting to ggplot2 or ggpubr.
+1. Added additional subheadings
+1. Added vocab and function lists
+1. At times replaced non-biological examples with biological ones.
+1. Change from British to American English (Sorry!  Couldn't help myself.)
+
+
+
+
+
+
+
+The following introduction to *R* is based on the first part of ["How to install *R* and a Brief Introduction to R"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html) by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  For additional information see ["Getting *R* onto your computer"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html).
+
+
+**By**: Avril Coghlan  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
 
 
 

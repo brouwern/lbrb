@@ -1,0 +1,48 @@
+# Installing *R* packages
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+*R* is a programming language, and **packages**  (aka **libraries**) are bundles of software built using *R*.  Most sessions using *R* involve using additional *R*  packages.  This is especially true for bioinformatics and computational biology.
+
+>**NOTE**: If you are working in an RStudio Cloud environment organized by someone else (e.g. a course instructor), they likely are taking care of many of the package management issues.  The following information is still useful to be familiar with.
+
+<!-- TODO: link to compbio4all -->
+
+## Downloading packages with the RStudio IDE
+
+There is a point-and-click interface for installing *R*  packages in RStudio.  There is a brief introduction to downloading packages on this site: http://web.cs.ucla.edu/~gulzar/rstudio/ 
+
+I've summarized it here:
+
+1. "Click on the "Packages" tab in the bottom-right section and then click on "Install". The following dialog box will appear.
+1. In the "Install Packages" dialog, write the package name you want to install under the Packages field and then click install. This will install the package you searched for or give you a list of matching package based on your package text.
+
+## Downloading packages with the function `install.packages()`
+
+The easiest way to install a package if you know its name is to use the *R* function `install.packages(`)`. Note that it might be better to call this “download.packages” since after you install it, you also have to load it!
+
+Frequently I will include `install.packages(...)` at the beginning of a chapter the first time we use a package to make sure the package is downloaded. Note, however, that if you already have downloaded the package, running `install.packages(...)` will download a new copy.  While packages do get updated from time to time, but its best to re-run `install.packages(...)` only occassionaly. 
+
+We’ll download a package used for plotting called `ggplot2`, which stands for “Grammar of Graphics.”  `ggplot2` was developed by Dr. [Hadley Wickham](http://hadley.nz/), who is now the Chief Scientists for RStudio.
+
+
+To download `ggplot2`, run the following command: 
+
+```{r, eval = F}
+install.packages("ggplot2") # note the " "
+```
+
+Often when you download a package you’ll see a fair bit of angry-looking red text, and sometime other things will pop up. Usually there’s nothing of interest here, but sometimes you need to read things carefully over it for hints about why something didn’t work.
+
+
+## Using packages after they are downloaded
+
+To actually make the functions in package accessible you need to use the `library()` command.  Note that this is *not* in quotes.
+
+```{r, eval = F}
+library(ggplot2) # note: NO " "
+```
+
+

@@ -1,20 +1,57 @@
 --- 
-title: "Computational Biology for All!  Data science, bioinformatics, and other life-sciences awesomeness in R"
-author: "Nathan L. Brouwer"
+title: "A Little Book of R for Bioinformatics 2.0"
+author: "Avirl Coghlan, with contributions by Nathan L. Brouwer"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-description: "An entry-level text for computational biology"
+description: "An entry-level text for bioinformatics and computational biology"
 ---
 
-# Preface {-}
+# Preface to version 2.0 {-}
 
-This book grew out of exercises I've written for courses taught at the University of Pittsburgh, California University of Pennsylvania, and Duquesne University.  The goal is to walk students step by step through the process of working with data in R.  
+Welcome to *A Little Book of R for Bioinformatics 2.0*!.
 
-A major influence in how this book is written is th online book [Program MARK: a gentle introduction](http://www.phidot.org/software/mark/docs/book/), edited [Evan Cooch](http://canuck.dnr.cornell.edu/) and [Gary White](https://sites.warnercnr.colostate.edu/gwhite/).  That book patiently walks users through the basic of these models step by step, concept by concept, and click by click.  I have sought to adopt a similar thorough and holistic approach in this book.
+This book is based on the original [*A Little Book of R for Bioinformatics*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/) by Dr. Avril Coghlan (Hereafter "ALBRB 1.0").  Dr. Coghlan's book was one of the first and most thorough introductions to using R for bioinformatics, and was generously published under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  In addition to describing how to do bioinformatics in R, Coghlan provided numerous functions to facilitate important tasks, practice questions, and references to further reading. 
+
+[ALBRB 1.0](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/) was extremely useful to me when I was learning bioinformatics and computational biology.  In this version of the book, which I'll refer to as ALBRB 2.0, I have adapted Dr. Coghlan's original book to suit my own teaching needs.  
+
+
+Below I've outlined the general types of changes I've made to the original book.  I have tried to link back to the original content that these updates are derived from and note how changes were made.  Any errors or inconsistencies should be ascribed to me, not Dr. Coghlan.  If you have any feedback, please email me at brouwern@gmail.com
+
+Nathan Brouwer, June 2021
+
+
+**Changes implemented in ALBRB 2.0 by Nathan Brouwer**
+
+1. Converted the entire book to RMarkdown and published it via bookdown.
+1. Added instructions for using RStudio and RStudio Cloud.
+1. Updated instructions to reflect any changes in software, including changes to how the bioinformatics  repository Bioconductor now works.
+1. Split up chapters into smaller units.
+1. Reorganized the order of some material.
+1. Added links to the book I am developing, *Computational Biology for All*.
+1. Moved most functions and datasets to my teaching package [compbio4all](https://github.com/brouwern/compbio4all).
+1. Changed some plotting to ggplot2 or ggpubr.
+1. Added additional subheadings
+1. Added vocab and function lists
+1. At times replaced non-biological examples with biological ones.
+1. Change from British to American English (Sorry!  Couldn't help myself.)
+
+
+
+
+
+
+
+The following introduction to *R* is based on the first part of ["How to install *R* and a Brief Introduction to R"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html) by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  For additional information see ["Getting *R* onto your computer"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html).
+
+
+**By**: Avril Coghlan  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
 
 
 
@@ -33,20 +70,22 @@ knitr::write_bib(c(
 
 **By**: Avril Coghlan  
 
-**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
 ## Preface
 
-The following introduction to *R* is based on the first part of ["How to install *R* and a Brief Introduction to R"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html) by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  For additional information see ["Getting *R* onto your computer"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html).
+The following introduction to *R* is based on the first part of ["How to install *R* and a Brief Introduction to R"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html) by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  For additional information see the Appendices and ["Getting *R* onto your computer"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html).
+
+<!-- TODO: Update links to send to Comp Bio 4 All -->
 
 
 ## Introduction to R
 
-_R_ (www.r-project.org) is a commonly used free statistics software. _R_ allows you to carry out statistical analyses in an interactive mode, as well as allowing simple programming.
+_R_ (www.r-project.org) is a commonly used free statistics software. _R_ allows you to carry out statistical analyses in an interactive mode, as well as allowing  programming.
 
 ## Installing R
 
-To use R, you first need to install the _R_ program on your computer.
+To use R, you first need to install the _R_ program on your computer.  
 
 ### Installing *R* on a Windows PC
 
@@ -56,7 +95,7 @@ These instructions will focus on installing *R* on a Windows PC. However, I will
 
 > **PROTIP:** Even if you have used *R* before its good to regularly update it to avoid conflicts with recently produced software.
 
-New releases of *R* are made very regularly (approximately once a month), as *R* is actively being improved all the time. It is worthwhile installing new versions of *R* regularly, to make sure that you have a recent version of *R* (to ensure compatibility with all the latest versions of the *R* packages that you have downloaded).
+Minor updates of *R* are made very regularly (approximately every 6 months), as *R* is actively being improved all the time. It is worthwhile installing new versions of *R* a couple times a year, to make sure that you have a recent version of *R* (to ensure compatibility with all the latest versions of the *R* packages that you have downloaded).
 
 To install *R* on your **Windows** computer, follow these steps:
 
@@ -89,19 +128,23 @@ The instructions above are for installing *R* on a Windows PC. If you want to in
 
 ## Starting *R* 
 
-To start R,  Check if there is an “R” icon on the desktop of the computer that you are using. If so, double-click on the “R” icon to start R. If you cannot find an “R” icon, try the next step instead.
+To start R,  Check if there is an *R* icon on the desktop of the computer that you are using. If so, double-click on the *R* icon to start *R*. If you cannot find an *R* icon, try the next step instead.
 
-You can also start *R* from the Start menu.  Click on the “Start” button at the bottom left of your computer screen, and then choose “All programs”, and start *R* by selecting “R” (or *R* X.X.X, where X.X.X gives the version of R, e.g.. *R* 2.10.0) from the menu of programs.
+You can also start *R* from the Start menu in Windows.  Click on the “Start” button at the bottom left of your computer screen, and then choose “All programs”, and start *R* by selecting “R” (or *R* X.X.X, where X.X.X gives the version of R, e.g.. *R* 2.10.0) from the menu of programs.
 
-Say "Hi" to *R* and take a quick look at how it looks.  Now say "Goodbye", because we will never actually do any work in this version of R; instead, we'll use the RStudio IDE (integrated development environment).
+Say "Hi" to *R* and take a quick look at how it looks.  Now say "Goodbye", because we will never actually do any work in this version of *R*; instead, we'll use the **RStudio IDE (integrated development environment)**.
 
-<!--chapter:end:book08-lbrb/5000-ac-b-downloading_R_AC01-1.Rmd-->
+<!--chapter:end:5000-ac-b-downloading_R_AC01-1.Rmd-->
 
 # Installing the RStudio IDE
 
 **By:** Nathan Brouwer
 
-R is a programming language, and when you download it there is also a basic **GUI** (graphical user interface) that you can access via the R icon.
+<!-- TODO: UPDATE with comp bio 4 all -->
+
+The name "R" refers both to the programming language and the program that runs that language.  When you download *it*R* there is also a basic **GUI** (graphical user interface) that you can access via the *R* icon.
+
+Other GUIs are available, and the most popular currently is **RStudio.**  RStudio a for-profit company that is a main driver of development of R.  Much of what they produce has free basic versions or is entirely free.  They produce software (RStudio), cloud-based applications (**RStudio Cloud**), and web server infrastructure for business applications of R. 
 
 A brief overview of installing RStudio can be found here ["Getting RStudio on to your computer"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-rstudio-on-to-your-computer.html)
 
@@ -114,24 +157,21 @@ A good overview of what the different parts of RStudio can be seen in the image 
 
 ## RStudio versus RStudio Cloud
 
-RStudio and RStudio cloud work almost identically, so anything you read about RStudio will apply to RStudio Cloud.
+RStudio and RStudio cloud work almost identically, so anything you read about RStudio will apply to RStudio Cloud.  RStudio is easy to download an use, but RStudio Cloud eliminates even the minor hiccups that occur.  Free accounts with RStudio Cloud allow up to 15 hours per month, which is enough for you to get a taste for using R. 
 
-<!--chapter:end:book08-lbrb/5000-ac-c-installing_RStudio_AC01-2.Rmd-->
+<!--chapter:end:5000-ac-c-installing_RStudio_AC01-2.Rmd-->
 
-# Installing *R*  packages
-
-```{r , eval = F}
-library(compbio4all)
-```
+# Installing *R* packages
 
 **By**: Avril Coghlan.  
 
 **Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
-R is a programming language, and **packages** or **libraries** are bundles of software built using R.  Most sessions using *R*  involve using additional *R*  packages.  This is especially true for bioinformatics and computational biology.
+*R* is a programming language, and **packages**  (aka **libraries**) are bundles of software built using *R*.  Most sessions using *R* involve using additional *R*  packages.  This is especially true for bioinformatics and computational biology.
 
 >**NOTE**: If you are working in an RStudio Cloud environment organized by someone else (e.g. a course instructor), they likely are taking care of many of the package management issues.  The following information is still useful to be familiar with.
 
+<!-- TODO: link to compbio4all -->
 
 ## Downloading packages with the RStudio IDE
 
@@ -139,105 +179,179 @@ There is a point-and-click interface for installing *R*  packages in RStudio.  T
 
 I've summarized it here:
 
-1. "Click on the Packages tab in the bottom-right section and then click on install. The following dialog box will appear
-1. "In the Install Packages dialog, write the package name you want to install under the Packages field and then click install. This will install the package you searched for or give you a list of matching package based on your package text."
+1. "Click on the "Packages" tab in the bottom-right section and then click on "Install". The following dialog box will appear.
+1. In the "Install Packages" dialog, write the package name you want to install under the Packages field and then click install. This will install the package you searched for or give you a list of matching package based on your package text.
 
-## Downloading packages with the function install.packages()
+## Downloading packages with the function `install.packages()`
 
-The easiest way to install a package if you know its name is to use the function install.packages(). Note that it might be better to call this “download.packages” since after you install it, you also have to load it!
+The easiest way to install a package if you know its name is to use the *R* function `install.packages(`)`. Note that it might be better to call this “download.packages” since after you install it, you also have to load it!
 
-Frequently I will include install.packages(…) at the beginning of a lesson the first time we use a package to make sure the package is downloaded. Note, however, that if you already have downloaded the package, running install.packages(…) will download a new copy.
+Frequently I will include `install.packages(...)` at the beginning of a chapter the first time we use a package to make sure the package is downloaded. Note, however, that if you already have downloaded the package, running `install.packages(...)` will download a new copy.  While packages do get updated from time to time, but its best to re-run `install.packages(...)` only occassionaly. 
 
-We’ll download a package used for plotting called ggplot2, which stands for “Grammar of Graphics.”
+We’ll download a package used for plotting called `ggplot2`, which stands for “Grammar of Graphics.”  `ggplot2` was developed by Dr. [Hadley Wickham](http://hadley.nz/), who is now the Chief Scientists for RStudio.
 
 
-To download ggplot, run the following command: 
+To download `ggplot2`, run the following command: 
 
 ```{r, eval = F}
-install.packages("ggplot2")
+install.packages("ggplot2") # note the " "
 ```
 
-Often when you download a package you’ll see a fair bit of red text, and sometime other things will pop up. Usually there’s nothing of interest here, but sometimes you need to read things carefully over it for hints about why something didn’t work.
+Often when you download a package you’ll see a fair bit of angry-looking red text, and sometime other things will pop up. Usually there’s nothing of interest here, but sometimes you need to read things carefully over it for hints about why something didn’t work.
 
 
 ## Using packages after they are downloaded
 
-To actually make the functions in package accessible you need to use the library() command.  Note that this is not in quotes.
+To actually make the functions in package accessible you need to use the `library()` command.  Note that this is *not* in quotes.
 
 ```{r, eval = F}
-library(ggplot2)
+library(ggplot2) # note: NO " "
 ```
 
 
 
-<!--chapter:end:book08-lbrb/5000-ac-d-installing_packages_in_RStudio_AC01-3.Rmd-->
+<!--chapter:end:5000-ac-d-installing_packages_in_RStudio_AC01-3.Rmd-->
 
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Installing Bioconductor
-
-```{r , eval = F}
-library(compbio4all)
-```
 
 **By**: Avril Coghlan.  
 
-**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/), including details on install Bioconductor and common prompts and error messages that appear during installation. 
 
 
 ## Bioconductor
 
-R **packages** (aka "libraries") can live in many places.  Most are accessed via **CRAN**, the **Comprehensive R Archieve Network**.  The bioinformatics and computational biology community also has its own package hosting system called [Bioconductor](www.bioconductor.org).  R has played an important part in the development and application of bioinformatics techniques in the 21th century.  Bioconductor 1.0 was released in 2002 with 15 packages.  As of winter 2021, there are almost 2000 packages in the current release!
+*R* **packages** (aka "libraries") can live in many places.  Most are accessed via **CRAN**, the **Comprehensive R Archive Network**.  The bioinformatics and computational biology community also has its own package hosting system called [Bioconductor](www.bioconductor.org).  *R* has played an important part in the development and application of bioinformatics techniques in the 21th century.  Bioconductor 1.0 was released in 2002 with 15 packages.  As of winter 2021, there are almost 2000 packages in the current release!
 
 >**NOTE**: If you are working in an RStudio Cloud environment organized by someone else (eg a course instructor), they likely are taking care of most of package management issues, inlcuding setting up Bioconductor.  The following information is still useful to be familiar with.
 
 
-To interface with Bioconductor you need the [BiocManager](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html) package.  The Bioconductor people have put BiocManager on CRAN to allow you to set up interactions with Bioconductor.
+To interface with Bioconductor you need the [BiocManager](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html) package.  The Bioconductor people have put [BiocManager](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html) on CRAN to allow you to set up interactions with Bioconductor.  See the [BiocManager documentation](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html) for more information ([https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html](https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html)).
 
-Note that if you have an old version of R you will need to upate it to interact with bioconductor.
+Note that if you have an old version of R you will need to update it to interact with Bioconductor.
 
 
 ## Installing BiocManager
 
-BiocManager can be installed using the install.packages() packages command.
+BiocManager can be installed using the `install.packages()` packages command.
 
 ```{r, eval = F}
-install.packages("BiocManager")
+install.packages("BiocManager") # Remember the "  "; don't worry about the red text
 ```
 
-Once downloaded, BioManager needs to be explicitly loaded into your active R session
+
+Once downloaded, BioManager needs to be explicitly loaded into your active R session using `library()`
 ```{r, eval = F}
-library(BiocManager)
+library(BiocManager) # no quotes; again, ignore the red text
 ```
 
-Individual packages can then be downloaded using the install() command.
+Individual Bioconductor packages can then be downloaded using the `install()` command.  An essential packages is `Biostrings`.  To do this , 
 ```{r, eval=F}
 BiocManager::install("Biostrings")
 ```
 
-Bioconductor has many **dependencies** - other packages which is relies on.  When you install Bioconductor packages you may need to update these packages.  If something seems to not be working during this process, restart R and being the Bioconductor installation process until things seem to work.
+
+## The ins and outs of package installation
+
+**IMPORANT** Bioconductor has many **dependencies** - other packages which is relies on.  When you install Bioconductor packages you may need to update these packages.  If something seems to not be working during this process, restart R and begin the Bioconductor installation process until things seem to work.
+
+Below I discuss the series of prompts I had to deal with while re-installing Biostrings while editing this chapter.  
+
+### Updating other packages when downloading a package
+
+When I re-installed `Biostrings` while writing this I was given a HUGE blog of red test that contained this:
+```{r, eval = F}
+'getOption("repos")' replaces Bioconductor standard repositories, see '?repositories' for
+details
+
+replacement repositories:
+    CRAN: https://cran.rstudio.com/
+
+Bioconductor version 3.11 (BiocManager 1.30.16), R 4.0.5 (2021-03-31)
+Old packages: 'ade4', 'ape', 'aster', 'bayestestR', 'bio3d', 'bitops', 'blogdown',
+  'bookdown', 'brio', 'broom', 'broom.mixed', 'broomExtra', 'bslib', 'cachem', 'callr',
+  'car', 'circlize', 'class', 'cli', 'cluster', 'colorspace', 'corrplot', 'cpp11', 'curl',
+  'devtools', 'DHARMa', 'doBy', 'dplyr', 'DT', 'e1071', 'ellipsis', 'emmeans', 'emojifont',
+  'extRemes', 'fansi', 'flextable', 'forecast', 'formatR', 'gap', 'gargle', 'gert', 'GGally',
+  'ggfortify', 'ggplot2', 'ggsignif', 'ggVennDiagram', 'gh', 'glmmTMB', 'googledrive',
+  'gtools', 'haven', 'highr', 'hms', 'htmlTable', 'httpuv', 'huxtable', 'jquerylib',
+  'KernSmooth', 'knitr', 'later', 'lattice', 'lme4', 'magick', 'manipulateWidget', 'MASS',
+  'Matrix', 'matrixcalc', 'matrixStats', 'mgcv', 'mime', 'multcomp', 'mvtnorm', 'nnet',
+  'openssl', 'openxlsx', 'parameters', 'pBrackets', 'pdftools', 'phangorn', 'phytools',
+  'pillar', 'plotly', 'processx', 'proxy', 'qgam', 'quantreg', 'ragg', 'Rcpp',
+  'RcppArmadillo', 'remotes', 'rgl', 'rio', 'rJava', 'rlang', 'rmarkdown', 'robustbase',
+  'rsconnect', 'rversions', 'sandwich', 'sass', 'segmented', 'seqinr', 'seqmagick', 'servr',
+  'sf', 'shape', 'spatial', 'statmod', 'stringi', 'systemfonts', 'testthat', 'textshaping',
+  'tibble', 'tidyselect', 'tidytree', 'tinytex', 'tufte', 'UniprotR', 'units', 'vctrs',
+  'viridis', 'viridisLite', 'withr', 'xfun', 'zip'
+```
+
+Hidden at the bottom was a prompt: "Update all/some/none? [a/s/n]:"
+
+Its a little vague, but what it wants me to do is type in a, s or n  and press enter to tell it what to do.  I almost always chose "a", though this may take a while to update everything.
+
+### Packages "from source"
+
+You are likely to get lots of random-looking feedback from R when doing Bioconductor-related installations.  Look carefully for any prompts as the very last line.  While updating `Biostrings` I was told: "*There are binary versions available but the source versions are later:*" and given a table of packages.  I was then asked "*Do you want to install from sources the packages which need compilation? (Yes/no/cancel)*"
+
+I almost always chose "no".
+
+### More on angry red text
+
+After the prompt about packages from source, R proceeded to download a lot of updates to packages, which took a few minutes.  Lots of red text scrolled by, but this is normal.
+
+<!-- TODO: add example of angry red text -->
+
+```{r echo = F}
+knitr::include_graphics("images/angry_red_text_download_biostrings.png")
+```
 
 
-Again, to actually load the Biostrings package into your active R sessions requires the libary() command:
+## Actually loading a package
+
+Again, to actually load the `Biostrings` package into your active R sessions requires the `libary()` command:
+
 ```{r, eval = F}
 library(Biostrings)
 ```
 
-For more information on BiocManager see the vignette: https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html
+As you might expect, there's more red text scrolling up my screen!
 
-
-<!--chapter:end:book08-lbrb/5000-ac-e-installing_bioconductor_AC01-4.Rmd-->
-
-# A Brief introduction to R
-
-```{r , eval = F}
-library(compbio4all)
+```{r echo = F}
+knitr::include_graphics("images/angry_red_text_library_biostrings.png")
 ```
 
+I can tell that is actually worked because at the end of all the red stuff is the R prompt of ">" and my cursor.
+
+```{r echo = F}
+knitr::include_graphics("images/R_cursor.png")
+
+```
+
+
+
+
+<!--chapter:end:5000-ac-e-installing_bioconductor_AC01-4.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# A Brief introduction to R
 
 **By**: Avril Coghlan.  
 
 **Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
 This chapter provides a brief introduction to R.  At the end of are links to additional resources for getting started with R.
+
+<!-- Add link to compbio4all -->
 
 
 ## Vocabulary
@@ -248,13 +362,13 @@ This chapter provides a brief introduction to R.  At the end of are links to add
 * class
 * numeric
 * character
-* assignmnet
+* assignment
 * elements of an object
 * indices
 * attributes of an object
-* arguement of a function
+* argument of a function
 
-## R functions etc
+## R functions 
 
 * <-
 * [ ]
@@ -270,13 +384,18 @@ This chapter provides a brief introduction to R.  At the end of are links to add
 * return()
 * q()
 
-## A brief introduction to R
+## Interacting with R
 
-You will type R commands into the RStudio console in order to carry out analyses in R. In the RStudio console you will see the R prompt starting with the symbol ">".  ">" will always be there at the beginning of each new command - don't try to delete it. 
+You will type *R* commands into the RStudio **console** in order to carry out analyses in *R*. In the RStudio console you will see the R prompt starting with the symbol ">".  ">" will always be there at the beginning of each new command - don't try to delete it!  Moreover, you never need to type it.
 
-We type the commands needed for a particular task after this prompt. The command is carried out after you hit the Return key.
+```{r echo = F}
+knitr::include_graphics("images/R_cursor.png")
+```
 
-Once you have started R, you can start typing in commands, and the results will be calculated immediately, for example:
+
+We type the **commands** needed for a particular task after this prompt. The command is carried out by *R* after you hit the Return key.
+
+Once you have started R, you can start typing commands into the RStudio console, and the results will be calculated immediately, for example:
 
 ```{r}
 2*3
@@ -284,14 +403,15 @@ Once you have started R, you can start typing in commands, and the results will 
 
 Note that prior to the output of "6" it shows "[1]".
 
+Now subtraction:
+
 ```{r}
 10-3
 ```
 
 Again, prior to the output of "7" it shows "[1]".
 
-
-R can act like a basic calculator that you type command in to.  You can also use it like a scientific calcualtor and create **variables** that store information. All variables (scalars, vectors, matrices, etc.) created by R are called objects. In R, we assign values to variables using an arrow. For example, we can assign the value 2*3 to the variable x using the command:
+*R* can act like a basic calculator that you type commands in to.  You can also use it like a more advanced scientific calculator and create **variables** that store information. All variables created by R are called **objects**. In R, we assign values to variables using an arrow-looking function `<-` the **assignment operator**. For example, we can **assign** the value 2*3 to the variable x using the command:
 
 
 ```{r}
@@ -299,99 +419,147 @@ x <- 2*3
 ```
 
 
-To view the contents of any R object, just type its name, and the contents of that R object will be displayed:
+To view the contents of any R object, just type its name, press enter, and the contents of that R object will be displayed:
 ```{r}
 x
 ```
 
+## Variables in R
 
-There are several possible different types of objects in R with fancy math names, including scalars, vectors, matrices, arrays, data frames, tables, and lists. The **scalar** variable x above is one example of an R object. While a scalar variable such as x has just one element, a **vector** consists of several elements. The elements in a vector are all of the same **type** (eg. numeric or characters), while **lists** may include elements such as characters as well as numeric quantities.
+There are several different types of objects in R with fancy math names, including **scalars**, **vectors**, **matrices** (singuler: **matrix), **arrays**,  **dataframes**, **tables**, and **lists**. The **scalar** variable x above is one example of an R object. While a scalar variable such as x has just one element, a **vector** consists of several elements. The elements in a vector are all of the same **type** (eg. numbers or alphabetic characters), while **lists** may include elements such as characters as well as numeric quantities.  Vectors and dataframes are the most common variables you'll use.  You'll also encounter matrices often, and lists are ubiquitous in R but beginning users often don't encounter them because they remain behind the scenes.
 
-To create a vector, we can use the c() (combine) function. For example, to create a vector called myvector that has elements with values 8, 6, 9, 10, and 5, we type:
+
+### Vectors
+
+To create a vector, we can use the `c()` (combine) function. For example, to create a vector called `myvector` that has elements with values 8, 6, 9, 10, and 5, we type:
 
 ```{r}
-myvector <- c(8, 6, 9, 10, 5)
+myvector <- c(8, 6, 9, 10, 5) # note: commas between each number!
 ```
 
  
-To see the contents of the variable myvector, we can just type its name and press enter
+To see the contents of the variable `myvector`, we can just type its name and press enter:
 
 ```{r}
 myvector
 ```
 
+### Vector indexing
 
-The [1] is the index of the first element in the vector. We can extract any element of the vector by typing the vector name with the index of that element given in square brackets. For example, to get the value of the 4th element in the vector myvector, we type:
+The `[1]` is the **index** of the first **element** in the vector. We can **extract** any element of the vector by typing the vector name with the index of that element given in **square brackets** `[...]`. 
+
+For example, to get the value of the 4th element in the vector `myvector`, we type:
 
 ```{r}
 myvector[4]
 ```
 
 
-In contrast to a vector, a **list** can contain elements of different types, for example, both numeric and character elements. A list can also include other variables such as a vector. The list() function is used to create a list. For example, we could create a list mylist by typing:
+### Character vectors
+
+Vectors can contain letters, such as those designating nucleic acids
 
 ```{r}
-mylist <- list(name="Fred", wife="Mary", myvector)
+my.seq <- c("A","T","C","G")
 ```
 
- We can then print out the contents of the list mylist by typing its name:
+They can also contain multi-letter **strings**:
+
+```{r}
+my.oligos <- c("ATCGC","TTTCGC","CCCGCG","GGGCGC")
+```
+
+
+### Lists 
+
+**NOTE**: *below is a discussion of lists in R.  This is excellent information, but not necessary if this is your very very first time using R.*
+
+In contrast to a vector, a **list** can contain elements of different types, for example, both numbers and letters. A list can even include other variables such as a vector. The `list()` function is used to create a list. For example, we could create a list `mylist` by typing:
+
+```{r}
+mylist <- list(name="Charles Darwin", 
+               wife="Emma Darwin", 
+               myvector)
+```
+
+We can then print out the contents of the list mylist by typing its name:
 
 ```{r}
 mylist
 ```
 
-The **elements** in a list are numbered, and can be referred to using **indices**. We can extract an element of a list by typing the list name with the index of the element given in double **square brackets** (in contrast to a vector, where we only use single square brackets). Thus, we can extract the second and third elements from mylist by typing:
+The **elements** in a list are numbered, and can be referred to using **indices**. We can extract an element of a list by typing the list name with the index of the element given in double **square brackets** (in contrast to a vector, where we only use single square brackets). 
+
+We can extract the second element from `mylist` by typing:
 
 ```{r}
-mylist[c(2,3)]
+mylist[[2]]  # note the double square brackets [[...]]
 ```
 
-Elements of lists may also be named, and in this case the elements may be referred to by giving the list name, followed by “$”, followed by the element name. For example, mylist$name is the same as mylist[[1]] and mylist$wife is the same as mylist[[2]]:
+
+As a baby step towards our next task, we can wrap index values as in the `c()` command like this: 
+
+```{r}
+mylist[[c(2)]]  # note the double square brackets [[...]]
+```
+
+
+The number `2` and `c(2)` mean the same thing.
+
+
+Now, we can extract the second AND third elements from `mylist`.  First, we put the indices 2 and 3 into a vector `c(2,3)`, then wrap that vector in double square brackets: `[c(2,3)]`.  All together it looks like this.
+
+```{r}
+mylist[c(2,3)] # note the double brackets
+```
+
+Elements of lists may also be named, resulting in a **named lists**.  The elements may then be referred to by giving the list name, followed by “\$”, followed by the element name. For example, mylist\$name is the same as mylist[[1]] and mylist$wife is the same as mylist[[2]]:
 
 ```{r}
 mylist$wife
 ```
 
-We can find out the names of the named elements in a list by using the attributes() function, for example:
+We can find out the names of the named elements in a list by using the `attributes()` function, for example:
 
 ```{r}
 attributes(mylist)
 ```
 
-When you use the attributes() function to find the named elements of a list variable, the named elements are always listed under a heading “$names”. Therefore, we see that the named elements of the list variable mylist are called “name” and “wife”, and we can retrieve their values by typing mylist$name and mylist$wife, respectively.
+When you use the `attributes()` function to find the named elements of a list variable, the named elements are always listed under a heading “\$names”. Therefore, we see that the named elements of the list variable `mylist` are called “name” and “wife”, and we can retrieve their values by typing mylist\$name and mylist\$wife, respectively.
 
-Another type of object that you will encounter in R is a **table**. For example, if we made a vector variable "mynames" containing the names of children in a class, we can use the table() function to produce a table variable that contains the number of children with each possible name:
+### Tables
+
+**NOTE**: Tables are a common 
+
+Another type of object that you will encounter in R is a **table**. For example, if we made a vector variable "nucleotides" containing the of a DNA molecule, we can use the `table()` function to produce a **table variable** that contains the number of bases with each possible nucleotides:
 
 ```{r}
-mynames <- c("Mary", "John", "Ann", "Sinead", "Joe", "Mary", "Jim", "John", "Simon")
+bases <- c("A", "T", "A", "A", "T", "C", "G", "C", "G")
 ```
 
 Now make the table
 ```{r}
-table(mynames)
+table(bases)
 ```
 
-Note that there are two Johns and two Marys.
-
-
-We can store the table variable produced by the function table(), and call the stored table “mytable”, by typing:
+We can store the table variable produced by the function `table()`, and call the stored table “bases.table”, by typing:
 ```{r}
-mytable <- table(mynames)
+bases.table <- table(bases)
 ```
 
 
-To access elements in a table variable, you need to use double square brackets, just like accessing elements in a list. For example, to access the fourth element in the table mytable (the number of children called “John”), we type:
+To access elements in a table variable, you need to use double square brackets, just like accessing elements in a list. For example, to access the fourth element in the table bases.table (the number of Ts in the sequence), we type:
 
 
 ```{r}
-mytable[[4]]
+bases.table[[4]]  # double backets!
 ```
 
 Alternatively, you can use the name of the fourth element in the table (“John”) to find the value of that table element:
 
 
 ```{r}
-mytable[["John"]]
+bases.table[["T"]]
 ```
 
 Functions in R usually require arguments, which are input variables (ie. objects) that are passed to them, which they then carry out some operation on. For example, the log10() function is passed a number, and it then calculates the log to the base 10 of that number:
@@ -470,7 +638,7 @@ There is another nice (slightly more in-depth) tutorial to R available on the �
 ```
 
 
-<!--chapter:end:book08-lbrb/5000-ac-f-brief_intro_to_R_AC01-5.Rmd-->
+<!--chapter:end:5000-ac-f-brief_intro_to_R_AC01-5.Rmd-->
 
 # Downloading NCBI sequence data by hand
 
@@ -508,7 +676,7 @@ After you click on **Send to** you can pick several options. and then choose “
 
 You can now open the FASTA file containing the DEN-1 Dengue virus genome sequence using a text editor like Notepad, WordPad, Notepad++, or even RStudio on your computer.  To find a text editor on your computer search for "text" from the start menu (Windows) and usually one will come up. (Opening the file in a word processor like word isn't recommended).
 
-<!--chapter:end:book08-lbrb/5000-ac-g-NCBI_by_GUI1_AC03-1.Rmd-->
+<!--chapter:end:5000-ac-g-NCBI_by_GUI1_AC03-1.Rmd-->
 
 # DNA descriptive statics - Part 1
 
@@ -778,7 +946,7 @@ Hint: look at the help page for the GC() function to find out how it deals with 
 ```
 
 
-<!--chapter:end:book08-lbrb/5000-ac-h-DNA_sequence_descriptive_stats-AC03-02-.Rmd-->
+<!--chapter:end:5000-ac-h-DNA_sequence_descriptive_stats-AC03-02-.Rmd-->
 
 # Downloading DNA sequences with R
 
@@ -1173,7 +1341,7 @@ table(dengueseq_matrix)
 
 
 
-<!--chapter:end:book08-lbrb/5000-ac-h-downloading_DNA_seq_in_R-AC03-01.Rmd-->
+<!--chapter:end:5000-ac-h-downloading_DNA_seq_in_R-AC03-01.Rmd-->
 
 # Introduction to biological sequences databases
 
@@ -1423,7 +1591,7 @@ Note: *Schistmosoma mansoni* is a parasitic worm that is responsible for causing
 ```
 
 
-<!--chapter:end:book08-lbrb/5000-ac-h-NCBI_by_GUI2_AC03-1Q.Rmd-->
+<!--chapter:end:5000-ac-h-NCBI_by_GUI2_AC03-1Q.Rmd-->
 
 # Programming in R: for loops and functions
 
@@ -1529,7 +1697,7 @@ log10(x) # Finds the log to the base 10 of variable x.
 ```
 
 
-<!--chapter:end:book08-lbrb/5000-ac-h-programming_in_R-AC04-02.Rmd-->
+<!--chapter:end:5000-ac-h-programming_in_R-AC04-02.Rmd-->
 
 # Mini tutorial: Vectors in R
 
@@ -1915,7 +2083,7 @@ Base R has lots of plotting functions; additionally, people have written package
 ```
 
 
-<!--chapter:end:book08-lbrb/5000-ac-h-vectors-AC04-01.Rmd-->
+<!--chapter:end:5000-ac-h-vectors-AC04-01.Rmd-->
 
 # Downloading sequences from UniProt by hand
 
@@ -2029,7 +2197,7 @@ ulceransseq <- ulcerans[[1]]
 
 
 
-<!--chapter:end:book08-lbrb/5000-ac-i-uniprot_by_GUI-AC07-01.Rmd-->
+<!--chapter:end:5000-ac-i-uniprot_by_GUI-AC07-01.Rmd-->
 
 # Sequence Databases
 
@@ -2380,7 +2548,7 @@ Do you see genome sequences for more than one strain of Trypanosoma cruzi? Note 
 ```
 
 
-<!--chapter:end:book08-lbrb/5000-ac-j-advanced_NCBI_AC05-01.Rmd-->
+<!--chapter:end:5000-ac-j-advanced_NCBI_AC05-01.Rmd-->
 
 # Local variation in GC content
 
@@ -2721,7 +2889,7 @@ Make a sketch of each plot that you draw. At what position (in base-pairs) in th
 ```
 
 
-<!--chapter:end:book08-lbrb/5000-ac-k-GC_content_local_variation.Rmd-->
+<!--chapter:end:5000-ac-k-GC_content_local_variation.Rmd-->
 
 # Aligments in R
 
@@ -3021,7 +3189,7 @@ We see that the optimal local alignment is quite similar to the optimal global a
 
 
 
-<!--chapter:end:book08-lbrb/5000-ac-l-alignment_in_R-AC07-02.Rmd-->
+<!--chapter:end:5000-ac-l-alignment_in_R-AC07-02.Rmd-->
 
 # Retrieving multiple sequences in R
 
@@ -3151,7 +3319,7 @@ seqinr::write.fasta(seq_1_2_3_4, seqnames,file="data-raw/phosphoproteins.fasta")
 The command above will write the sequences in list variable seqs to a FASTA-format file called “phosphoproteins.fasta” in the “My Documents” folder on your computer.
 
 
-<!--chapter:end:book08-lbrb/5000-ac-m1-retrieving_mult_seqs-AC08-01-NOTUPATED.Rmd-->
+<!--chapter:end:5000-ac-m1-retrieving_mult_seqs-AC08-01-NOTUPATED.Rmd-->
 
 # Multiple alignment with Clustal
 
@@ -3370,7 +3538,7 @@ virusmRNAdist
 
 
 
-<!--chapter:end:book08-lbrb/5000-ac-m2-mult_align_CLUSTAL-AC08-02-NEEDS_MAJOR_REWRITE.Rmd-->
+<!--chapter:end:5000-ac-m2-mult_align_CLUSTAL-AC08-02-NEEDS_MAJOR_REWRITE.Rmd-->
 
 # Rooted Neighbor-joining Phylogenetic trees
 
@@ -3531,7 +3699,7 @@ Note: Dengue virus causes Dengue fever, which is classified by the WHO as a negl
 1. Build an unrooted phylogenetic tree of the NS1 proteins from Dengue viruses 1-4, based on a filtered alignment of the four proteins (keeping alignment columns in which at least 30% of letters are not gaps, and in which at least 30% of pairs of letters are identical). Does this differ from the tree based on the unfiltered alignment (in Q2)? Can you explain why?
 1. The Zika virus is related to Dengue viruses, but is not a Dengue virus, and so therefore can be used as an outgroup in phylogenetic trees of Dengue virus sequences. UniProt accession Q32ZE1 consists of a sequence with similarity to the Dengue NS1 protein, so seems to be a related protein from Zika virus. Build a rooted phylogenetic tree of the Dengue NS1 proteins based on a filtered alignment (keeping alignment columns in which at least 30% of letters are not gaps, and in which at least 30% of pairs of letters are identical), using the Zika virus protein as the outgroup. Which are the most closely related Dengue virus proteins, based on the tree? What extra information does this tree tell you, compared to the unrooted tree in Q2?
 
-<!--chapter:end:book08-lbrb/5000-ac-m3-rooted_tree_NJ-AC08-04-NOTUPATED.Rmd-->
+<!--chapter:end:5000-ac-m3-rooted_tree_NJ-AC08-04-NOTUPATED.Rmd-->
 
 # Unrooted Neighbor-joining Phylogenetic trees
 
@@ -3617,7 +3785,7 @@ Here O56773 and P0C569 are grouped together, and Q5VKP1 and P06747 are grouped t
 If we had found a difference in the trees made using the unfiltered and filtered multiple alignments, we would have to examine the multiple alignments closely, to see if the unfiltered multiple alignment contains a lot of very poorly aligned regions that might be adding noise to the phylogenetic analysis (if this is true, the tree based on the filtered alignment is likely to be more reliable).
 
 
-<!--chapter:end:book08-lbrb/5000-ac-m4-unrooted_tree_NJ_tree-AC08-03-NEEDS_MAJOR_REWRITE.Rmd-->
+<!--chapter:end:5000-ac-m4-unrooted_tree_NJ_tree-AC08-03-NEEDS_MAJOR_REWRITE.Rmd-->
 
 # Testing the significance of an alignment
 
@@ -3806,7 +3974,7 @@ In other words, what is the probability of getting a score as large as the real 
 1. What is the optimal global alignment score between the Brugia malayi Vab-6 protein and the Mycobacterium leprae chorismate lyase protein?
 Is the alignment score statistically significant (what is the P- value?)? Does this surprise you?
 
-<!--chapter:end:book08-lbrb/5000-ac-o-test_alignment_sig_pvalue-AC07-03-NOT_UPATED.Rmd-->
+<!--chapter:end:5000-ac-o-test_alignment_sig_pvalue-AC07-03-NOT_UPATED.Rmd-->
 
 # Computational gene finding
 
@@ -4168,7 +4336,7 @@ y definition, an ORF is a stretch of DNA that starts with a potential start codo
 In other words, long ORFs that are hundreds of codons long are unlikely to occur due to chance alone, and therefore we can be fairly confident that such long ORFs probably correspond to real genes.
 
 
-<!--chapter:end:book08-lbrb/5000-ac-q-comp_gene_find-AC10-01-NOTUPATED.Rmd-->
+<!--chapter:end:5000-ac-q-comp_gene_find-AC10-01-NOTUPATED.Rmd-->
 
 ---
 output: html_document
@@ -4355,7 +4523,7 @@ Model answers to the exercises are given in Answers to the exercises on Computat
 1. What is the length of the longest ORF among the 99% of longest ORFs in 10 random sequences of the same lengths and composition as the rabies virus genome sequence?
 1. How many ORFs are there in the rabies virus genome that are longer than the threshold length that you found in Q8?
 
-<!--chapter:end:book08-lbrb/5000-ac-r-sig_of_ORFs-AC10-02-NOTUPATED.Rmd-->
+<!--chapter:end:5000-ac-r-sig_of_ORFs-AC10-02-NOTUPATED.Rmd-->
 
 # Comparative Genomics
 
@@ -4639,7 +4807,7 @@ Q9. Are the numbers of copies of some domains different in the two species?
 
 Q10. Of the differences found in Q9, are any of the differencess statistically significant?
 
-<!--chapter:end:book08-lbrb/5000-ac-t-comparative_genomics.Rmd-->
+<!--chapter:end:5000-ac-t-comparative_genomics.Rmd-->
 
 # Hidden Markov Models
 
@@ -5048,7 +5216,7 @@ the HMM is most likely to have generated each nucleotide position in the Bacteri
 Q3. Make a two-state HMM to model protein sequence evolution, with “hydrophilic” and “hydrophobic” states.
 For the hydrophilic state, set pA= 0.02, pR= 0.068, pN= 0.068, pD= 0.068, pC= 0.02, pQ= 0.068, pE= 0.068, pG= 0.068, pH= 0.068, pI= 0.012, pL= 0.012, pK= 0.068, pM= 0.02, pF= 0.02, pP= 0.068, pS= 0.068, pT= 0.068, pW= 0.068, pY= 0.068, and pV= 0.012. For the hydrophobic state, set pA= 0.114, pR= 0.007, pN= 0.007, pD= 0.007, pC= 0.114, pQ= 0.007, pE= 0.007, pG= 0.025, pH= 0.007, pI= 0.114, pL= 0.114, pK= 0.007, pM= 0.114, pF= 0.114, pP= 0.025, pS= 0.026, pT= 0.026, pW= 0.025, pY= 0.026, and pV= 0.114. Set the probability of switching from the hydrophilic state to the hydrophobic state to be 0.01. Set the probability of switching from the hydrophobic state to the hydrophilic state to be 0.01. Now infer which state of the HMM is most likely to have generated each amino acid position in the the human odorant receptor 5BF1 protein (UniProt accession Q8NHC7). What is the most probable state path? The odorant receptor is a 7-transmembrane protein, meaning that it crosses the cell membrane seven times. As a consequence the protein has seven hydrophobic regions that cross the fatty cell membrane, and seven hydrophilic segments that touch the watery cytoplasm and extracellular environments. What do you think are the coordinates in the protein of the seven transmembrane regions?
 
-<!--chapter:end:book08-lbrb/5000-ac-u-HMM_sequence_evolution.Rmd-->
+<!--chapter:end:5000-ac-u-HMM_sequence_evolution.Rmd-->
 
 ---
 output: html_document
@@ -5104,7 +5272,7 @@ Run the installer after it downloads and accept the default.  RStudio will autom
 Both R and RStudio undergo regular updates and you will occasionally have to re-download and install one or both of them.  In practice I probably do this about every 6 months.
 
 
-<!--chapter:end:book08-lbrb/9010-A01_getting_access_to_R.Rmd-->
+<!--chapter:end:9010-A01_getting_access_to_R.Rmd-->
 
 # Getting started with R itself (or not) {-}
 
@@ -5377,5 +5545,5 @@ exp(log(sqrt(42)^2))
 
 
 
-<!--chapter:end:book08-lbrb/9010-A02_getting_started_with_R.Rmd-->
+<!--chapter:end:9010-A02_getting_started_with_R.Rmd-->
 

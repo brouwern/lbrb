@@ -4,24 +4,24 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Installing Bioconductor | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</title>
-  <meta name="description" content="An entry-level text for computational biology" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Chapter 4 Installing Bioconductor | A Little Book of R for Bioinformatics 2.0</title>
+  <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Installing Bioconductor | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta property="og:title" content="Chapter 4 Installing Bioconductor | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="An entry-level text for computational biology" />
+  <meta property="og:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Installing Bioconductor | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta name="twitter:title" content="Chapter 4 Installing Bioconductor | A Little Book of R for Bioinformatics 2.0" />
   
-  <meta name="twitter:description" content="An entry-level text for computational biology" />
+  <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
-<meta name="author" content="Nathan L. Brouwer" />
+<meta name="author" content="Avirl Coghlan, with contributions by Nathan L. Brouwer" />
 
 
 <meta name="date" content="2021-07-08" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="installing-r-packages.html"/>
 <link rel="next" href="a-brief-introduction-to-r.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -118,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -131,13 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Computational Biology for All!</a></li>
+<li><a href="./">A Little Book of R for Bioinformatics</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface to version 2.0</a></li>
 <li class="chapter" data-level="1" data-path="downloading-r.html"><a href="downloading-r.html"><i class="fa fa-check"></i><b>1</b> Downloading R</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface-1"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
+<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
 <li class="chapter" data-level="1.2" data-path="downloading-r.html"><a href="downloading-r.html#introduction-to-r"><i class="fa fa-check"></i><b>1.2</b> Introduction to R</a></li>
 <li class="chapter" data-level="1.3" data-path="downloading-r.html"><a href="downloading-r.html#installing-r"><i class="fa fa-check"></i><b>1.3</b> Installing R</a>
 <ul>
@@ -154,20 +157,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>3</b> Installing <em>R</em> packages</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>3.1</b> Downloading packages with the RStudio IDE</a></li>
-<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function install.packages()</a></li>
+<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function <code>install.packages()</code></a></li>
 <li class="chapter" data-level="3.3" data-path="installing-r-packages.html"><a href="installing-r-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>3.3</b> Using packages after they are downloaded</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>4</b> Installing Bioconductor</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>4.1</b> Bioconductor</a></li>
 <li class="chapter" data-level="4.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>4.2</b> Installing BiocManager</a></li>
+<li class="chapter" data-level="4.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#the-ins-and-outs-of-package-installation"><i class="fa fa-check"></i><b>4.3</b> The ins and outs of package installation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#updating-other-packages-when-downloading-a-package"><i class="fa fa-check"></i><b>4.3.1</b> Updating other packages when downloading a package</a></li>
+<li class="chapter" data-level="4.3.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#packages-from-source"><i class="fa fa-check"></i><b>4.3.2</b> Packages “from source”</a></li>
+<li class="chapter" data-level="4.3.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#more-on-angry-red-text"><i class="fa fa-check"></i><b>4.3.3</b> More on angry red text</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#actually-loading-a-package"><i class="fa fa-check"></i><b>4.4</b> Actually loading a package</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html"><i class="fa fa-check"></i><b>5</b> A Brief introduction to R</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vocabulary"><i class="fa fa-check"></i><b>5.1</b> Vocabulary</a></li>
-<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions-etc"><i class="fa fa-check"></i><b>5.2</b> R functions etc</a></li>
-<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#a-brief-introduction-to-r-1"><i class="fa fa-check"></i><b>5.3</b> A brief introduction to R</a></li>
-<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.4</b> Links and Further Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions"><i class="fa fa-check"></i><b>5.2</b> R functions</a></li>
+<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#interacting-with-r"><i class="fa fa-check"></i><b>5.3</b> Interacting with R</a></li>
+<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#variables-in-r"><i class="fa fa-check"></i><b>5.4</b> Variables in R</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>5.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="5.4.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vector-indexing"><i class="fa fa-check"></i><b>5.4.2</b> Vector indexing</a></li>
+<li class="chapter" data-level="5.4.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#character-vectors"><i class="fa fa-check"></i><b>5.4.3</b> Character vectors</a></li>
+<li class="chapter" data-level="5.4.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#lists"><i class="fa fa-check"></i><b>5.4.4</b> Lists</a></li>
+<li class="chapter" data-level="5.4.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#tables"><i class="fa fa-check"></i><b>5.4.5</b> Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.5</b> Links and Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="downloading-ncbi-sequence-data-by-hand.html"><a href="downloading-ncbi-sequence-data-by-hand.html"><i class="fa fa-check"></i><b>6</b> Downloading NCBI sequence data by hand</a>
 <ul>
@@ -391,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="35.18" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>35.18</b> Practice (OPTIONAL)</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
 
 </ul>
 
@@ -402,7 +420,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Little Book of R for Bioinformatics 2.0</a>
           </h1>
         </div>
 
@@ -412,30 +430,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="installing-bioconductor" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Installing Bioconductor</h1>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="installing-bioconductor.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
 <p><strong>By</strong>: Avril Coghlan.</p>
-<p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
+<p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>, including details on install Bioconductor and common prompts and error messages that appear during installation.</p>
 <div id="bioconductor" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Bioconductor</h2>
-<p>R <strong>packages</strong> (aka “libraries”) can live in many places. Most are accessed via <strong>CRAN</strong>, the <strong>Comprehensive R Archieve Network</strong>. The bioinformatics and computational biology community also has its own package hosting system called <a href="www.bioconductor.org">Bioconductor</a>. R has played an important part in the development and application of bioinformatics techniques in the 21th century. Bioconductor 1.0 was released in 2002 with 15 packages. As of winter 2021, there are almost 2000 packages in the current release!</p>
+<p><em>R</em> <strong>packages</strong> (aka “libraries”) can live in many places. Most are accessed via <strong>CRAN</strong>, the <strong>Comprehensive R Archive Network</strong>. The bioinformatics and computational biology community also has its own package hosting system called <a href="www.bioconductor.org">Bioconductor</a>. <em>R</em> has played an important part in the development and application of bioinformatics techniques in the 21th century. Bioconductor 1.0 was released in 2002 with 15 packages. As of winter 2021, there are almost 2000 packages in the current release!</p>
 <blockquote>
 <p><strong>NOTE</strong>: If you are working in an RStudio Cloud environment organized by someone else (eg a course instructor), they likely are taking care of most of package management issues, inlcuding setting up Bioconductor. The following information is still useful to be familiar with.</p>
 </blockquote>
-<p>To interface with Bioconductor you need the <a href="https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html">BiocManager</a> package. The Bioconductor people have put BiocManager on CRAN to allow you to set up interactions with Bioconductor.</p>
-<p>Note that if you have an old version of R you will need to upate it to interact with bioconductor.</p>
+<p>To interface with Bioconductor you need the <a href="https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html">BiocManager</a> package. The Bioconductor people have put <a href="https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html">BiocManager</a> on CRAN to allow you to set up interactions with Bioconductor. See the <a href="https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html">BiocManager documentation</a> for more information (<a href="https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html">https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html</a>).</p>
+<p>Note that if you have an old version of R you will need to update it to interact with Bioconductor.</p>
 </div>
 <div id="installing-biocmanager" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Installing BiocManager</h2>
-<p>BiocManager can be installed using the install.packages() packages command.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="installing-bioconductor.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span></code></pre></div>
-<p>Once downloaded, BioManager needs to be explicitly loaded into your active R session</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="installing-bioconductor.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BiocManager)</span></code></pre></div>
-<p>Individual packages can then be downloaded using the install() command.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="installing-bioconductor.html#cb7-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;Biostrings&quot;</span>)</span></code></pre></div>
-<p>Bioconductor has many <strong>dependencies</strong> - other packages which is relies on. When you install Bioconductor packages you may need to update these packages. If something seems to not be working during this process, restart R and being the Bioconductor installation process until things seem to work.</p>
-<p>Again, to actually load the Biostrings package into your active R sessions requires the libary() command:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="installing-bioconductor.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biostrings)</span></code></pre></div>
-<p>For more information on BiocManager see the vignette: <a href="https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html" class="uri">https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html</a></p>
+<p>BiocManager can be installed using the <code>install.packages()</code> packages command.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="installing-bioconductor.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>) <span class="co"># Remember the &quot;  &quot;; don&#39;t worry about the red text</span></span></code></pre></div>
+<p>Once downloaded, BioManager needs to be explicitly loaded into your active R session using <code>library()</code></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="installing-bioconductor.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(BiocManager) <span class="co"># no quotes; again, ignore the red text</span></span></code></pre></div>
+<p>Individual Bioconductor packages can then be downloaded using the <code>install()</code> command. An essential packages is <code>Biostrings</code>. To do this ,</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="installing-bioconductor.html#cb5-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;Biostrings&quot;</span>)</span></code></pre></div>
+</div>
+<div id="the-ins-and-outs-of-package-installation" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> The ins and outs of package installation</h2>
+<p><strong>IMPORANT</strong> Bioconductor has many <strong>dependencies</strong> - other packages which is relies on. When you install Bioconductor packages you may need to update these packages. If something seems to not be working during this process, restart R and begin the Bioconductor installation process until things seem to work.</p>
+<p>Below I discuss the series of prompts I had to deal with while re-installing Biostrings while editing this chapter.</p>
+<div id="updating-other-packages-when-downloading-a-package" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Updating other packages when downloading a package</h3>
+<p>When I re-installed <code>Biostrings</code> while writing this I was given a HUGE blog of red test that contained this:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="installing-bioconductor.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;getOption(&quot;repos&quot;)&#39;</span> replaces Bioconductor standard repositories, see <span class="st">&#39;?repositories&#39;</span> <span class="cf">for</span></span>
+<span id="cb6-2"><a href="installing-bioconductor.html#cb6-2" aria-hidden="true" tabindex="-1"></a>details</span>
+<span id="cb6-3"><a href="installing-bioconductor.html#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="installing-bioconductor.html#cb6-4" aria-hidden="true" tabindex="-1"></a>replacement repositories<span class="sc">:</span></span>
+<span id="cb6-5"><a href="installing-bioconductor.html#cb6-5" aria-hidden="true" tabindex="-1"></a>    CRAN<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>cran.rstudio.com<span class="sc">/</span></span>
+<span id="cb6-6"><a href="installing-bioconductor.html#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="installing-bioconductor.html#cb6-7" aria-hidden="true" tabindex="-1"></a>Bioconductor version <span class="fl">3.11</span> (BiocManager <span class="dv">1</span>.<span class="fl">30.16</span>), R <span class="dv">4</span>.<span class="fl">0.5</span> (<span class="dv">2021-03-31</span>)</span>
+<span id="cb6-8"><a href="installing-bioconductor.html#cb6-8" aria-hidden="true" tabindex="-1"></a>Old packages<span class="sc">:</span> <span class="st">&#39;ade4&#39;</span>, <span class="st">&#39;ape&#39;</span>, <span class="st">&#39;aster&#39;</span>, <span class="st">&#39;bayestestR&#39;</span>, <span class="st">&#39;bio3d&#39;</span>, <span class="st">&#39;bitops&#39;</span>, <span class="st">&#39;blogdown&#39;</span>,</span>
+<span id="cb6-9"><a href="installing-bioconductor.html#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;bookdown&#39;</span>, <span class="st">&#39;brio&#39;</span>, <span class="st">&#39;broom&#39;</span>, <span class="st">&#39;broom.mixed&#39;</span>, <span class="st">&#39;broomExtra&#39;</span>, <span class="st">&#39;bslib&#39;</span>, <span class="st">&#39;cachem&#39;</span>, <span class="st">&#39;callr&#39;</span>,</span>
+<span id="cb6-10"><a href="installing-bioconductor.html#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;car&#39;</span>, <span class="st">&#39;circlize&#39;</span>, <span class="st">&#39;class&#39;</span>, <span class="st">&#39;cli&#39;</span>, <span class="st">&#39;cluster&#39;</span>, <span class="st">&#39;colorspace&#39;</span>, <span class="st">&#39;corrplot&#39;</span>, <span class="st">&#39;cpp11&#39;</span>, <span class="st">&#39;curl&#39;</span>,</span>
+<span id="cb6-11"><a href="installing-bioconductor.html#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;devtools&#39;</span>, <span class="st">&#39;DHARMa&#39;</span>, <span class="st">&#39;doBy&#39;</span>, <span class="st">&#39;dplyr&#39;</span>, <span class="st">&#39;DT&#39;</span>, <span class="st">&#39;e1071&#39;</span>, <span class="st">&#39;ellipsis&#39;</span>, <span class="st">&#39;emmeans&#39;</span>, <span class="st">&#39;emojifont&#39;</span>,</span>
+<span id="cb6-12"><a href="installing-bioconductor.html#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;extRemes&#39;</span>, <span class="st">&#39;fansi&#39;</span>, <span class="st">&#39;flextable&#39;</span>, <span class="st">&#39;forecast&#39;</span>, <span class="st">&#39;formatR&#39;</span>, <span class="st">&#39;gap&#39;</span>, <span class="st">&#39;gargle&#39;</span>, <span class="st">&#39;gert&#39;</span>, <span class="st">&#39;GGally&#39;</span>,</span>
+<span id="cb6-13"><a href="installing-bioconductor.html#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;ggfortify&#39;</span>, <span class="st">&#39;ggplot2&#39;</span>, <span class="st">&#39;ggsignif&#39;</span>, <span class="st">&#39;ggVennDiagram&#39;</span>, <span class="st">&#39;gh&#39;</span>, <span class="st">&#39;glmmTMB&#39;</span>, <span class="st">&#39;googledrive&#39;</span>,</span>
+<span id="cb6-14"><a href="installing-bioconductor.html#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;gtools&#39;</span>, <span class="st">&#39;haven&#39;</span>, <span class="st">&#39;highr&#39;</span>, <span class="st">&#39;hms&#39;</span>, <span class="st">&#39;htmlTable&#39;</span>, <span class="st">&#39;httpuv&#39;</span>, <span class="st">&#39;huxtable&#39;</span>, <span class="st">&#39;jquerylib&#39;</span>,</span>
+<span id="cb6-15"><a href="installing-bioconductor.html#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;KernSmooth&#39;</span>, <span class="st">&#39;knitr&#39;</span>, <span class="st">&#39;later&#39;</span>, <span class="st">&#39;lattice&#39;</span>, <span class="st">&#39;lme4&#39;</span>, <span class="st">&#39;magick&#39;</span>, <span class="st">&#39;manipulateWidget&#39;</span>, <span class="st">&#39;MASS&#39;</span>,</span>
+<span id="cb6-16"><a href="installing-bioconductor.html#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;Matrix&#39;</span>, <span class="st">&#39;matrixcalc&#39;</span>, <span class="st">&#39;matrixStats&#39;</span>, <span class="st">&#39;mgcv&#39;</span>, <span class="st">&#39;mime&#39;</span>, <span class="st">&#39;multcomp&#39;</span>, <span class="st">&#39;mvtnorm&#39;</span>, <span class="st">&#39;nnet&#39;</span>,</span>
+<span id="cb6-17"><a href="installing-bioconductor.html#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;openssl&#39;</span>, <span class="st">&#39;openxlsx&#39;</span>, <span class="st">&#39;parameters&#39;</span>, <span class="st">&#39;pBrackets&#39;</span>, <span class="st">&#39;pdftools&#39;</span>, <span class="st">&#39;phangorn&#39;</span>, <span class="st">&#39;phytools&#39;</span>,</span>
+<span id="cb6-18"><a href="installing-bioconductor.html#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;pillar&#39;</span>, <span class="st">&#39;plotly&#39;</span>, <span class="st">&#39;processx&#39;</span>, <span class="st">&#39;proxy&#39;</span>, <span class="st">&#39;qgam&#39;</span>, <span class="st">&#39;quantreg&#39;</span>, <span class="st">&#39;ragg&#39;</span>, <span class="st">&#39;Rcpp&#39;</span>,</span>
+<span id="cb6-19"><a href="installing-bioconductor.html#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;RcppArmadillo&#39;</span>, <span class="st">&#39;remotes&#39;</span>, <span class="st">&#39;rgl&#39;</span>, <span class="st">&#39;rio&#39;</span>, <span class="st">&#39;rJava&#39;</span>, <span class="st">&#39;rlang&#39;</span>, <span class="st">&#39;rmarkdown&#39;</span>, <span class="st">&#39;robustbase&#39;</span>,</span>
+<span id="cb6-20"><a href="installing-bioconductor.html#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;rsconnect&#39;</span>, <span class="st">&#39;rversions&#39;</span>, <span class="st">&#39;sandwich&#39;</span>, <span class="st">&#39;sass&#39;</span>, <span class="st">&#39;segmented&#39;</span>, <span class="st">&#39;seqinr&#39;</span>, <span class="st">&#39;seqmagick&#39;</span>, <span class="st">&#39;servr&#39;</span>,</span>
+<span id="cb6-21"><a href="installing-bioconductor.html#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;sf&#39;</span>, <span class="st">&#39;shape&#39;</span>, <span class="st">&#39;spatial&#39;</span>, <span class="st">&#39;statmod&#39;</span>, <span class="st">&#39;stringi&#39;</span>, <span class="st">&#39;systemfonts&#39;</span>, <span class="st">&#39;testthat&#39;</span>, <span class="st">&#39;textshaping&#39;</span>,</span>
+<span id="cb6-22"><a href="installing-bioconductor.html#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;tibble&#39;</span>, <span class="st">&#39;tidyselect&#39;</span>, <span class="st">&#39;tidytree&#39;</span>, <span class="st">&#39;tinytex&#39;</span>, <span class="st">&#39;tufte&#39;</span>, <span class="st">&#39;UniprotR&#39;</span>, <span class="st">&#39;units&#39;</span>, <span class="st">&#39;vctrs&#39;</span>,</span>
+<span id="cb6-23"><a href="installing-bioconductor.html#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;viridis&#39;</span>, <span class="st">&#39;viridisLite&#39;</span>, <span class="st">&#39;withr&#39;</span>, <span class="st">&#39;xfun&#39;</span>, <span class="st">&#39;zip&#39;</span></span></code></pre></div>
+<p>Hidden at the bottom was a prompt: “Update all/some/none? [a/s/n]:”</p>
+<p>Its a little vague, but what it wants me to do is type in a, s or n and press enter to tell it what to do. I almost always chose “a,” though this may take a while to update everything.</p>
+</div>
+<div id="packages-from-source" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Packages “from source”</h3>
+<p>You are likely to get lots of random-looking feedback from R when doing Bioconductor-related installations. Look carefully for any prompts as the very last line. While updating <code>Biostrings</code> I was told: “<em>There are binary versions available but the source versions are later:</em>” and given a table of packages. I was then asked “<em>Do you want to install from sources the packages which need compilation? (Yes/no/cancel)</em>”</p>
+<p>I almost always chose “no.”</p>
+</div>
+<div id="more-on-angry-red-text" class="section level3" number="4.3.3">
+<h3><span class="header-section-number">4.3.3</span> More on angry red text</h3>
+<p>After the prompt about packages from source, R proceeded to download a lot of updates to packages, which took a few minutes. Lots of red text scrolled by, but this is normal.</p>
+<!-- TODO: add example of angry red text -->
+<p><img src="images/angry_red_text_download_biostrings.png" width="729" /></p>
+</div>
+</div>
+<div id="actually-loading-a-package" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Actually loading a package</h2>
+<p>Again, to actually load the <code>Biostrings</code> package into your active R sessions requires the <code>libary()</code> command:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="installing-bioconductor.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biostrings)</span></code></pre></div>
+<p>As you might expect, there’s more red text scrolling up my screen!</p>
+<p><img src="images/angry_red_text_library_biostrings.png" width="733" /></p>
+<p>I can tell that is actually worked because at the end of all the red stuff is the R prompt of “&gt;” and my cursor.</p>
+<p><img src="images/R_cursor.png" width="51" /></p>
 
 </div>
 </div>
@@ -468,6 +535,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -495,20 +563,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

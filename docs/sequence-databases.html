@@ -4,24 +4,24 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 14 Sequence Databases | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</title>
-  <meta name="description" content="An entry-level text for computational biology" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Chapter 14 Sequence Databases | A Little Book of R for Bioinformatics 2.0</title>
+  <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 14 Sequence Databases | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta property="og:title" content="Chapter 14 Sequence Databases | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="An entry-level text for computational biology" />
+  <meta property="og:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 14 Sequence Databases | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta name="twitter:title" content="Chapter 14 Sequence Databases | A Little Book of R for Bioinformatics 2.0" />
   
-  <meta name="twitter:description" content="An entry-level text for computational biology" />
+  <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
-<meta name="author" content="Nathan L. Brouwer" />
+<meta name="author" content="Avirl Coghlan, with contributions by Nathan L. Brouwer" />
 
 
 <meta name="date" content="2021-07-08" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="downloading-sequences-from-uniprot-by-hand.html"/>
 <link rel="next" href="local-variation-in-gc-content.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -118,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -131,13 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Computational Biology for All!</a></li>
+<li><a href="./">A Little Book of R for Bioinformatics</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface to version 2.0</a></li>
 <li class="chapter" data-level="1" data-path="downloading-r.html"><a href="downloading-r.html"><i class="fa fa-check"></i><b>1</b> Downloading R</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface-1"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
+<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
 <li class="chapter" data-level="1.2" data-path="downloading-r.html"><a href="downloading-r.html#introduction-to-r"><i class="fa fa-check"></i><b>1.2</b> Introduction to R</a></li>
 <li class="chapter" data-level="1.3" data-path="downloading-r.html"><a href="downloading-r.html#installing-r"><i class="fa fa-check"></i><b>1.3</b> Installing R</a>
 <ul>
@@ -154,20 +157,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>3</b> Installing <em>R</em> packages</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>3.1</b> Downloading packages with the RStudio IDE</a></li>
-<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function install.packages()</a></li>
+<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function <code>install.packages()</code></a></li>
 <li class="chapter" data-level="3.3" data-path="installing-r-packages.html"><a href="installing-r-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>3.3</b> Using packages after they are downloaded</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>4</b> Installing Bioconductor</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>4.1</b> Bioconductor</a></li>
 <li class="chapter" data-level="4.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>4.2</b> Installing BiocManager</a></li>
+<li class="chapter" data-level="4.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#the-ins-and-outs-of-package-installation"><i class="fa fa-check"></i><b>4.3</b> The ins and outs of package installation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#updating-other-packages-when-downloading-a-package"><i class="fa fa-check"></i><b>4.3.1</b> Updating other packages when downloading a package</a></li>
+<li class="chapter" data-level="4.3.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#packages-from-source"><i class="fa fa-check"></i><b>4.3.2</b> Packages “from source”</a></li>
+<li class="chapter" data-level="4.3.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#more-on-angry-red-text"><i class="fa fa-check"></i><b>4.3.3</b> More on angry red text</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#actually-loading-a-package"><i class="fa fa-check"></i><b>4.4</b> Actually loading a package</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html"><i class="fa fa-check"></i><b>5</b> A Brief introduction to R</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vocabulary"><i class="fa fa-check"></i><b>5.1</b> Vocabulary</a></li>
-<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions-etc"><i class="fa fa-check"></i><b>5.2</b> R functions etc</a></li>
-<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#a-brief-introduction-to-r-1"><i class="fa fa-check"></i><b>5.3</b> A brief introduction to R</a></li>
-<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.4</b> Links and Further Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions"><i class="fa fa-check"></i><b>5.2</b> R functions</a></li>
+<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#interacting-with-r"><i class="fa fa-check"></i><b>5.3</b> Interacting with R</a></li>
+<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#variables-in-r"><i class="fa fa-check"></i><b>5.4</b> Variables in R</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>5.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="5.4.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vector-indexing"><i class="fa fa-check"></i><b>5.4.2</b> Vector indexing</a></li>
+<li class="chapter" data-level="5.4.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#character-vectors"><i class="fa fa-check"></i><b>5.4.3</b> Character vectors</a></li>
+<li class="chapter" data-level="5.4.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#lists"><i class="fa fa-check"></i><b>5.4.4</b> Lists</a></li>
+<li class="chapter" data-level="5.4.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#tables"><i class="fa fa-check"></i><b>5.4.5</b> Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.5</b> Links and Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="downloading-ncbi-sequence-data-by-hand.html"><a href="downloading-ncbi-sequence-data-by-hand.html"><i class="fa fa-check"></i><b>6</b> Downloading NCBI sequence data by hand</a>
 <ul>
@@ -391,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="35.18" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>35.18</b> Practice (OPTIONAL)</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
 
 </ul>
 
@@ -402,7 +420,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Little Book of R for Bioinformatics 2.0</a>
           </h1>
         </div>
 
@@ -412,7 +430,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="sequence-databases" class="section level1" number="14">
 <h1><span class="header-section-number">Chapter 14</span> Sequence Databases</h1>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="sequence-databases.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="sequence-databases.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
 <p><strong>By</strong>: Avril Coghlan.</p>
 <p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
 <div id="querying-the-ncbi-database-via-r" class="section level2" number="14.1">
@@ -422,8 +440,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>An advantage of the ACNUC database is that it brings together data from various different sources, and makes it easy to search, for example, by using the SeqinR R package.</p>
 <p>As will be explained below, the ACNUC database is organised into various different ACNUC (sub)-databases, which contain different parts of the NCBI database, and when you want to search the NCBI database via R, you will need to specify which ACNUC sub-database the NCBI data that you want to query is stored in.</p>
 <p>To obtain a full list of the ACNUC sub-databases that you can access using SeqinR, you can use the “choosebank()” function from SeqinR:</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="sequence-databases.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;seqinr&quot;</span>) <span class="co"># Load the SeqinR R package</span></span>
-<span id="cb192-2"><a href="sequence-databases.html#cb192-2" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>()      <span class="co"># List all the sub-databases in ACNUC</span></span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="sequence-databases.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;seqinr&quot;</span>) <span class="co"># Load the SeqinR R package</span></span>
+<span id="cb196-2"><a href="sequence-databases.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>()      <span class="co"># List all the sub-databases in ACNUC</span></span></code></pre></div>
 <p>Alas, the ACNUC sub-databases do not have a one-to-one correspondence with the NCBI sub-databases (the NCBI Protein database, NCBI EST database, NCBI Genome database, etc.)!</p>
 <p>Three of the most important sub-databases in ACNUC which can be searched from R are:</p>
 <p>“genbank”: this contains DNA and RNA sequences from the NCBI Sequence Database, except for certain classes of sequences (eg. draft genome sequence data from genome sequencing projects)
@@ -453,84 +471,84 @@ The full list of possible arguments for the “query()” funtion are given on i
 “SP=Homo sapiens AND M=mrna” Which are mRNA sequences from human
 “SP=Bacteria” Which are sequences from Bacteria
 As explained above, the ACNUC database contains the NCBI sequence data organised into several sub-databases, and you can view the list of those sub-databases by using the “choosebank()” function from the SeqinR package. When you want to use “query()” to carry out a particular sub-database (eg. “genbank,” which contains DNA and RNA sequences from the NCBI Sequence Database), you need to first specify the database that you want to search by using the “choosebank()” function, for example:</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="sequence-databases.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;genbank&quot;</span>) <span class="co"># Specify that we want to search the &#39;genbank&#39; ACNUC sub-database</span></span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="sequence-databases.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;genbank&quot;</span>) <span class="co"># Specify that we want to search the &#39;genbank&#39; ACNUC sub-database</span></span></code></pre></div>
 <p>Likewise, to specify that we want to search the ‘refseq’ ACNUC sub-database, which contains sequences from the NCBI RefSeq database, we would type:</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="sequence-databases.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;refseq&quot;</span>) <span class="co"># Specify that we want to search the &#39;refseq&#39; ACNUC sub-database</span></span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="sequence-databases.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;refseq&quot;</span>) <span class="co"># Specify that we want to search the &#39;refseq&#39; ACNUC sub-database</span></span></code></pre></div>
 <p>Once you have specified which ACNUC sub-database you want to search, you can carry out a search of that sub-database by using the “query()” function. You need to pass the “query()” function both a name for your query (which you can make up), and the query itself (which will be in the format of the examples in the table above). For example, if we want to search for RefSeq sequences from Bacteria, we might decide to call our query “RefSeqBact,” and we would call the “query()” function as follows:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="sequence-databases.html#cb195-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&quot;RefSeqBact&quot;</span>, <span class="st">&quot;SP=Bacteria&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="sequence-databases.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&quot;RefSeqBact&quot;</span>, <span class="st">&quot;SP=Bacteria&quot;</span>)</span></code></pre></div>
 <p>As explained below, the results of the search are stored in a list variable called “RefSeqBact,” and can be retrieved from that list variable. The last thing to do once you have completed your search is to close the connection to the ACNUC sub-database that you were searching, by typing:</p>
-<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="sequence-databases.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="sequence-databases.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
 <p>Thus, there are three steps involved in carrying out a query using SeqinR: first use “choosebank()” to select the ACNUC sub-database to search, secondly use “query()” to query the database, and thirdly use “closebank()” to close the connection to the ACNUC sub-database.</p>
 <p>Another example could be to search for mRNA sequences from the parasitic worm Schistosoma mansoni in the NCBI Nucleotide database. The appropriate ACNUC sub-database to search is the “genbank” ACNUC sub-database. We may decide to call our search “SchistosomamRNA.” Therefore, to carry out the search, we type in R:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="sequence-databases.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;genbank&quot;</span>)</span>
-<span id="cb197-2"><a href="sequence-databases.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&quot;SchistosomamRNA&quot;</span>, <span class="st">&quot;SP=Schistosoma mansoni AND M=mrna&quot;</span>)</span>
-<span id="cb197-3"><a href="sequence-databases.html#cb197-3" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="sequence-databases.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;genbank&quot;</span>)</span>
+<span id="cb201-2"><a href="sequence-databases.html#cb201-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&quot;SchistosomamRNA&quot;</span>, <span class="st">&quot;SP=Schistosoma mansoni AND M=mrna&quot;</span>)</span>
+<span id="cb201-3"><a href="sequence-databases.html#cb201-3" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
 <p>Example: finding the sequence for the DEN-1 Dengue virus genome
 Another example could be to search for the DEN-1 Dengue virus genome sequence, which has accession NC_001477. This is a viral genome sequence, and so should be in the ACNUC sub-database “refSeqViruses.” Thus to search for this sequence, calling our search “Dengue1,” we type in R:</p>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="sequence-databases.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;refseqViruses&quot;</span>)</span>
-<span id="cb198-2"><a href="sequence-databases.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&quot;Dengue1&quot;</span>, <span class="st">&quot;AC=NC_001477&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="sequence-databases.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;refseqViruses&quot;</span>)</span>
+<span id="cb202-2"><a href="sequence-databases.html#cb202-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&quot;Dengue1&quot;</span>, <span class="st">&quot;AC=NC_001477&quot;</span>)</span></code></pre></div>
 <p>The result of the search is now stored in the list variable Dengue1. Remember that a list is an R object that is like a vector, but can contain elements that are numeric and/or contain characters. In this case, the list Dengue1 contains information on the NCBI records that match the query (ie. information on the NCBI record for accession NC_001477).</p>
 <p>If you look at the help page for “query(),” the details of the arguments are given under the heading “Arguments,” and the details of the results (outputs) are given under the heading “Value.” If you read this now, you will see that it tells us that the result of the “query()” function is a list with six different named elements, named “call,” “name,” “nelem,” “typelist,” “req,” and “socket.” The content of each of these six named elements is explained, for example, the “nelem” element contains the number of sequences that match the query, and the “req” element contains their accession numbers.</p>
 <p>In our example, the list object Dengue1 is an output of the “query()” function, and so has each of these six named elements, as we can find out by using the “attributes()” function, and looking at the named elements listed under the heading “$names”:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="sequence-databases.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(Dengue1)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="sequence-databases.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(Dengue1)</span></code></pre></div>
 <p>As explained in the brief introduction to R, we can retrieve the value for each of the named elements in the list Dengue1 by using “$,” followed by the element’s name, for example, to get the value of the element named “nelem” in the list Dengue1, we type:</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="sequence-databases.html#cb200-1" aria-hidden="true" tabindex="-1"></a>Dengue1<span class="sc">$</span>nelem</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="sequence-databases.html#cb204-1" aria-hidden="true" tabindex="-1"></a>Dengue1<span class="sc">$</span>nelem</span></code></pre></div>
 <p>This tells us that there was one sequence in the ‘refseqViruses’ ACNUC database that matched the query. This is what we would expect, as there should only be one sequence corresponding to accession NC_001477.</p>
 <p>To obtain the accession numbers of the sequence found, we can type:</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="sequence-databases.html#cb201-1" aria-hidden="true" tabindex="-1"></a>Dengue1<span class="sc">$</span>req</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="sequence-databases.html#cb205-1" aria-hidden="true" tabindex="-1"></a>Dengue1<span class="sc">$</span>req</span></code></pre></div>
 <p>As expected, the accession number of the matching sequence is NC_001477.</p>
 <p>When you type “attributes(Dengue1)” you can see that there are two headings, “$names,” and “$class.” As explained above, the named elements of the list variable Dengue1 are listed under the heading “$names.” In fact, the headings “$names” and “$class” are two attributes of the list variable Dengue1. We can retrieve the values of the attributes of a variable using the “attr()” function. For example, to retrieve the value of the attribute “$names” of Dengue1, we type:</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="sequence-databases.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(Dengue1, <span class="st">&quot;names&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="sequence-databases.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(Dengue1, <span class="st">&quot;names&quot;</span>)</span></code></pre></div>
 <p>This gives us the value of the attribute “$names,” which contains the the names of the named elements of the list variable Dengue1. Similarly, we can retrieve the value of the a attribute “$class” of Dengue1, we type:</p>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="sequence-databases.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(Dengue1, <span class="st">&quot;class&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="sequence-databases.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(Dengue1, <span class="st">&quot;class&quot;</span>)</span></code></pre></div>
 <p>This tells us that the value of the attribute “$class” is “qaw.”</p>
 <p>The final step in retrieving a genomic DNA sequence is to use the “getSequence()” function to tell R to retrieve the sequence data. The command below uses “getSequence()” to retrieve the sequence data for the DEN-1 Dengue virus genome, and puts the sequence into a variable dengueseq:</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="sequence-databases.html#cb204-1" aria-hidden="true" tabindex="-1"></a> dengueseq <span class="ot">&lt;-</span> <span class="fu">getSequence</span>(Dengue1<span class="sc">$</span>req[[<span class="dv">1</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="sequence-databases.html#cb208-1" aria-hidden="true" tabindex="-1"></a> dengueseq <span class="ot">&lt;-</span> <span class="fu">getSequence</span>(Dengue1<span class="sc">$</span>req[[<span class="dv">1</span>]])</span></code></pre></div>
 <p>Note that the input to the getSequence() command is Dengue1$req[[1]], which contains the name of the NCBI record that the list Dengue1 contains information about.</p>
 <p>Once you have retrieved a sequence, you can then print it out. The variable dengueseq is a vector containing the nucleotide sequence. Each element of the vector contains one nucleotide of the sequence. Therefore, we can print out the first 50 nucleotides of the DEN-1 Dengue genome sequence by typing:</p>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="sequence-databases.html#cb205-1" aria-hidden="true" tabindex="-1"></a>dengueseq[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="sequence-databases.html#cb209-1" aria-hidden="true" tabindex="-1"></a>dengueseq[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>]</span></code></pre></div>
 <p>Note that dengueseq[1:50] refers to the elements of the vector dengueseq with indices from 1-50. These elements contain the first 50 nucleotides of the DEN-1 Dengue virus genome sequence.</p>
 <p>As well as retrieving the DNA (or RNA or protein) sequence itself, SeqinR can also retrieve all the annotations for the sequence, for example, information on when the sequence was sequenced, who sequenced it, what organism is it from, what paper was it described in, what genes were identified in the sequence, and so on.</p>
 <p>Once you have retrieved a sequence using SeqinR, you can retrieved its annotations by using the “getAnnot()” function. For example, to view the annotations for the DEN-1 Dengue virus genome sequence, we type:</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="sequence-databases.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="do">## annots &lt;- getAnnot(Dengue1$req[[1]])</span></span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="sequence-databases.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="do">## annots &lt;- getAnnot(Dengue1$req[[1]])</span></span></code></pre></div>
 <p>This stores the annotations information from the NCBI record for the DEN-1 Dengue virus sequence in a vector variable annots, with one line of the NCBI record in each element of the vector. Therefore, we can print out the first 20 lines of the NCBI record by typing:</p>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="sequence-databases.html#cb207-1" aria-hidden="true" tabindex="-1"></a>annots[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="sequence-databases.html#cb211-1" aria-hidden="true" tabindex="-1"></a>annots[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]</span></code></pre></div>
 <p>The line with “ORGANISM” in the left column is the organism field, and usually contains the Latin name for the organism (“Dengue virus 1” here). The line with “AUTHORS” in the left column is the authors field, and contain the names of authors that wrote papers to describe the sequence and/or the names of the people who submitted the sequence to the NCBI Database.</p>
 <p>When you have finished your running your query and getting the corresponding sequences and annotations, close the connection to the ACNUC sub-database:</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="sequence-databases.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="sequence-databases.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
 <p>Example: finding the sequences published in Nature 460:352-358
 We described above how to search for the sequences published in Nature 460:352-358, using the NCBI website. A second method is to use the SeqinR R package to search the ACNUC databases (which contain the NCBI sequence data) from R.</p>
 <p>If you look at the help page the “query()” function, you see that you can query for sequences published in a particular paper using R=refcode, specifying the reference as refcode such as in jcode/volume/page (e.g., JMB/13/5432 or R=Nature/396/133). For the paper Nature 460:352-358, we would need to use the refcode ‘R=Nature/460/352.’</p>
 <p>First we need to specify which of the ACNUC databases we want to search. For example, to specify that we want to search the “genbank” ACNUC database, which contains DNA and RNA sequences from the NCBI Nucleotide database, we type:</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="sequence-databases.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;genbank&quot;</span>) <span class="co"># Specify that we want to search the &#39;genbank&#39; ACNUC sub-database</span></span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="sequence-databases.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;genbank&quot;</span>) <span class="co"># Specify that we want to search the &#39;genbank&#39; ACNUC sub-database</span></span></code></pre></div>
 <p>We can then search the ‘genbank’ database for sequences that match a specific set of criteria by using the “query()” function. For example, to search for sequences that were published in Nature 460:352-358, we type:</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="sequence-databases.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&#39;naturepaper&#39;</span>, <span class="st">&#39;R=Nature/460/352&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="sequence-databases.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&#39;naturepaper&#39;</span>, <span class="st">&#39;R=Nature/460/352&#39;</span>)</span></code></pre></div>
 <p>The line above tells R that we want to store the results of the query in an R list variable called naturepaper. To get the value of the element named “nelem” in the list naturepaper, we type:</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="sequence-databases.html#cb211-1" aria-hidden="true" tabindex="-1"></a>naturepaper<span class="sc">$</span>nelem</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="sequence-databases.html#cb215-1" aria-hidden="true" tabindex="-1"></a>naturepaper<span class="sc">$</span>nelem</span></code></pre></div>
 <p>This tells us that there were 19022 sequences in the ‘genbank’ ACNUC database that matched the query. The ‘genbank’ ACNUC database contains DNA or RNA sequences from the NCBI Nucleotide database. Why don’t we get the same number of sequences as found by carrying out the search on the NCBI website (where we found 50890 hits to the NCBI Nucleotide database)? The reason is that the ACNUC ‘genbank’ database does not contain all the sequences in the NCBI Nucleotide database, for example, it does not contain sequences that are in RefSeq or many short DNA sequences from sequencing projects.</p>
 <p>To obtain the accession numbers of the first five of the 19022 sequences, we can type:</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="sequence-databases.html#cb212-1" aria-hidden="true" tabindex="-1"></a>accessions <span class="ot">&lt;-</span> naturepaper<span class="sc">$</span>req</span>
-<span id="cb212-2"><a href="sequence-databases.html#cb212-2" aria-hidden="true" tabindex="-1"></a>accessions[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="sequence-databases.html#cb216-1" aria-hidden="true" tabindex="-1"></a>accessions <span class="ot">&lt;-</span> naturepaper<span class="sc">$</span>req</span>
+<span id="cb216-2"><a href="sequence-databases.html#cb216-2" aria-hidden="true" tabindex="-1"></a>accessions[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code></pre></div>
 <p>This tells us that the NCBI accessions of the first five sequences (of the 19022 DNA or RNA sequences found that were published in Nature 460:352-358) are FN357292, FN357293, FN357294, FN357295, and FN357296.</p>
 <p>To retrieve these first five sequences, and print out the first 10 nucleotide bases of each sequence, we use the getSequence() command, typing:</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="sequence-databases.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb213-2"><a href="sequence-databases.html#cb213-2" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb213-3"><a href="sequence-databases.html#cb213-3" aria-hidden="true" tabindex="-1"></a>     seqi <span class="ot">&lt;-</span> <span class="fu">getSequence</span>(naturepaper<span class="sc">$</span>req[[i]])</span>
-<span id="cb213-4"><a href="sequence-databases.html#cb213-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">print</span>(seqi[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
-<span id="cb213-5"><a href="sequence-databases.html#cb213-5" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="sequence-databases.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb217-2"><a href="sequence-databases.html#cb217-2" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb217-3"><a href="sequence-databases.html#cb217-3" aria-hidden="true" tabindex="-1"></a>     seqi <span class="ot">&lt;-</span> <span class="fu">getSequence</span>(naturepaper<span class="sc">$</span>req[[i]])</span>
+<span id="cb217-4"><a href="sequence-databases.html#cb217-4" aria-hidden="true" tabindex="-1"></a>     <span class="fu">print</span>(seqi[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>])</span>
+<span id="cb217-5"><a href="sequence-databases.html#cb217-5" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
 <p>Note that the input to the getSequence() command is Dengue1$req[[i]], which contains the name of i th NCBI record that the list naturepaper contains information about.</p>
 <p>Once we have carried out our queries and retrieved the sequences, the final step is to close the connection to the ACNUC sub-database that we searched (“genbank” here):</p>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="sequence-databases.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="sequence-databases.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
 <p>Saving sequence data in a FASTA-format file
 Once you have retrieved a sequence, or set of sequences from the NCBI Database, using SeqinR, it is conveninent to save the sequences in a file in FASTA format. This can be done using the “write.fasta()” function in the SeqinR package, which was introduced in Chapter 1.</p>
 <p>If you look at the help page for the “write.fasta()” function, you will see that as input it takes a list of vectors, where each vector contains one DNA, RNA or protein sequence.</p>
 <p>For example, if you retrieve the sequences of human tRNAs from the NCBI Database by querying the ACNUC “genbank” sub-database, you can save the sequences in a FASTA format file called “humantRNAs.fasta” by typing:</p>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="sequence-databases.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;genbank&quot;</span>)                             <span class="co"># select the ACNUC sub-database to be searched</span></span>
-<span id="cb215-2"><a href="sequence-databases.html#cb215-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&quot;humtRNAs&quot;</span>, <span class="st">&quot;SP=homo sapiens AND M=TRNA&quot;</span>)   <span class="co"># specify the query</span></span>
-<span id="cb215-3"><a href="sequence-databases.html#cb215-3" aria-hidden="true" tabindex="-1"></a>myseqs <span class="ot">&lt;-</span> <span class="fu">getSequence</span>(humtRNAs)                   <span class="co"># get the sequences</span></span>
-<span id="cb215-4"><a href="sequence-databases.html#cb215-4" aria-hidden="true" tabindex="-1"></a>mynames <span class="ot">&lt;-</span> <span class="fu">getName</span>(humtRNAs)                      <span class="co"># get the names of the sequences</span></span>
-<span id="cb215-5"><a href="sequence-databases.html#cb215-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.fasta</span>(myseqs, mynames, <span class="at">file.out=</span><span class="st">&quot;humantRNAs.fasta&quot;</span>)</span>
-<span id="cb215-6"><a href="sequence-databases.html#cb215-6" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="sequence-databases.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">choosebank</span>(<span class="st">&quot;genbank&quot;</span>)                             <span class="co"># select the ACNUC sub-database to be searched</span></span>
+<span id="cb219-2"><a href="sequence-databases.html#cb219-2" aria-hidden="true" tabindex="-1"></a><span class="fu">query</span>(<span class="st">&quot;humtRNAs&quot;</span>, <span class="st">&quot;SP=homo sapiens AND M=TRNA&quot;</span>)   <span class="co"># specify the query</span></span>
+<span id="cb219-3"><a href="sequence-databases.html#cb219-3" aria-hidden="true" tabindex="-1"></a>myseqs <span class="ot">&lt;-</span> <span class="fu">getSequence</span>(humtRNAs)                   <span class="co"># get the sequences</span></span>
+<span id="cb219-4"><a href="sequence-databases.html#cb219-4" aria-hidden="true" tabindex="-1"></a>mynames <span class="ot">&lt;-</span> <span class="fu">getName</span>(humtRNAs)                      <span class="co"># get the names of the sequences</span></span>
+<span id="cb219-5"><a href="sequence-databases.html#cb219-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.fasta</span>(myseqs, mynames, <span class="at">file.out=</span><span class="st">&quot;humantRNAs.fasta&quot;</span>)</span>
+<span id="cb219-6"><a href="sequence-databases.html#cb219-6" aria-hidden="true" tabindex="-1"></a><span class="fu">closebank</span>()</span></code></pre></div>
 <p>In the above code, we get the sequences of the human tRNAs using the function “getSequence()” from the SeqinR package. We also use a function “getName()” from the SeqinR package to get the sequences’ names. Then we use the “write.fasta()” function to write the sequences to a FASTA file “humantRNAs.fasta.” The “write.fasta()” takes as arguments: the list myseqs containing the sequences, the list mynames containing the names of the sequences, and the name of the output file (“humantRNAs.fasta” here).</p>
 <p>Finding the genome sequence for a particular species
 Microbial genomes are generally smaller than eukaryotic genomes (Escherichia coli has about 5 million base pair in its genome, while the human genome is about 3 billion base pairs). Because they are considerably less expensive to sequence, many microbial genome sequencing projects have been completed.</p>
@@ -622,6 +640,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -649,20 +668,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

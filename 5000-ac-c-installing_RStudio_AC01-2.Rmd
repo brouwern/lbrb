@@ -1,0 +1,22 @@
+# Installing the RStudio IDE
+
+**By:** Nathan Brouwer
+
+<!-- TODO: UPDATE with comp bio 4 all -->
+
+The name "R" refers both to the programming language and the program that runs that language.  When you download *it*R* there is also a basic **GUI** (graphical user interface) that you can access via the *R* icon.
+
+Other GUIs are available, and the most popular currently is **RStudio.**  RStudio a for-profit company that is a main driver of development of R.  Much of what they produce has free basic versions or is entirely free.  They produce software (RStudio), cloud-based applications (**RStudio Cloud**), and web server infrastructure for business applications of R. 
+
+A brief overview of installing RStudio can be found here ["Getting RStudio on to your computer"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-rstudio-on-to-your-computer.html)
+
+## Getting to know RStudio
+
+For a brief overview of RStudio see ["Getting started with RStudio"](https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-started-with-rstudio.html)
+
+A good overview of what the different parts of RStudio can be seen in the image in this tweet: https://twitter.com/RLadiesNCL/status/1138812826917724160?s=20
+
+
+## RStudio versus RStudio Cloud
+
+RStudio and RStudio cloud work almost identically, so anything you read about RStudio will apply to RStudio Cloud.  RStudio is easy to download an use, but RStudio Cloud eliminates even the minor hiccups that occur.  Free accounts with RStudio Cloud allow up to 15 hours per month, which is enough for you to get a taste for using R. 

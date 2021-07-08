@@ -4,24 +4,24 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 22 Computational gene finding | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</title>
-  <meta name="description" content="An entry-level text for computational biology" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Chapter 22 Computational gene finding | A Little Book of R for Bioinformatics 2.0</title>
+  <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 22 Computational gene finding | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta property="og:title" content="Chapter 22 Computational gene finding | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="An entry-level text for computational biology" />
+  <meta property="og:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 22 Computational gene finding | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta name="twitter:title" content="Chapter 22 Computational gene finding | A Little Book of R for Bioinformatics 2.0" />
   
-  <meta name="twitter:description" content="An entry-level text for computational biology" />
+  <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
-<meta name="author" content="Nathan L. Brouwer" />
+<meta name="author" content="Avirl Coghlan, with contributions by Nathan L. Brouwer" />
 
 
 <meta name="date" content="2021-07-08" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="testing-the-significance-of-an-alignment.html"/>
 <link rel="next" href="significance-of-orfs.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -118,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -131,13 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Computational Biology for All!</a></li>
+<li><a href="./">A Little Book of R for Bioinformatics</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface to version 2.0</a></li>
 <li class="chapter" data-level="1" data-path="downloading-r.html"><a href="downloading-r.html"><i class="fa fa-check"></i><b>1</b> Downloading R</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface-1"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
+<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
 <li class="chapter" data-level="1.2" data-path="downloading-r.html"><a href="downloading-r.html#introduction-to-r"><i class="fa fa-check"></i><b>1.2</b> Introduction to R</a></li>
 <li class="chapter" data-level="1.3" data-path="downloading-r.html"><a href="downloading-r.html#installing-r"><i class="fa fa-check"></i><b>1.3</b> Installing R</a>
 <ul>
@@ -154,20 +157,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>3</b> Installing <em>R</em> packages</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>3.1</b> Downloading packages with the RStudio IDE</a></li>
-<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function install.packages()</a></li>
+<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function <code>install.packages()</code></a></li>
 <li class="chapter" data-level="3.3" data-path="installing-r-packages.html"><a href="installing-r-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>3.3</b> Using packages after they are downloaded</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>4</b> Installing Bioconductor</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>4.1</b> Bioconductor</a></li>
 <li class="chapter" data-level="4.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>4.2</b> Installing BiocManager</a></li>
+<li class="chapter" data-level="4.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#the-ins-and-outs-of-package-installation"><i class="fa fa-check"></i><b>4.3</b> The ins and outs of package installation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#updating-other-packages-when-downloading-a-package"><i class="fa fa-check"></i><b>4.3.1</b> Updating other packages when downloading a package</a></li>
+<li class="chapter" data-level="4.3.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#packages-from-source"><i class="fa fa-check"></i><b>4.3.2</b> Packages “from source”</a></li>
+<li class="chapter" data-level="4.3.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#more-on-angry-red-text"><i class="fa fa-check"></i><b>4.3.3</b> More on angry red text</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#actually-loading-a-package"><i class="fa fa-check"></i><b>4.4</b> Actually loading a package</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html"><i class="fa fa-check"></i><b>5</b> A Brief introduction to R</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vocabulary"><i class="fa fa-check"></i><b>5.1</b> Vocabulary</a></li>
-<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions-etc"><i class="fa fa-check"></i><b>5.2</b> R functions etc</a></li>
-<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#a-brief-introduction-to-r-1"><i class="fa fa-check"></i><b>5.3</b> A brief introduction to R</a></li>
-<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.4</b> Links and Further Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions"><i class="fa fa-check"></i><b>5.2</b> R functions</a></li>
+<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#interacting-with-r"><i class="fa fa-check"></i><b>5.3</b> Interacting with R</a></li>
+<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#variables-in-r"><i class="fa fa-check"></i><b>5.4</b> Variables in R</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>5.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="5.4.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vector-indexing"><i class="fa fa-check"></i><b>5.4.2</b> Vector indexing</a></li>
+<li class="chapter" data-level="5.4.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#character-vectors"><i class="fa fa-check"></i><b>5.4.3</b> Character vectors</a></li>
+<li class="chapter" data-level="5.4.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#lists"><i class="fa fa-check"></i><b>5.4.4</b> Lists</a></li>
+<li class="chapter" data-level="5.4.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#tables"><i class="fa fa-check"></i><b>5.4.5</b> Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.5</b> Links and Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="downloading-ncbi-sequence-data-by-hand.html"><a href="downloading-ncbi-sequence-data-by-hand.html"><i class="fa fa-check"></i><b>6</b> Downloading NCBI sequence data by hand</a>
 <ul>
@@ -391,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="35.18" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>35.18</b> Practice (OPTIONAL)</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
 
 </ul>
 
@@ -402,7 +420,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Little Book of R for Bioinformatics 2.0</a>
           </h1>
         </div>
 
@@ -412,24 +430,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="computational-gene-finding" class="section level1" number="22">
 <h1><span class="header-section-number">Chapter 22</span> Computational gene finding</h1>
-<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="computational-gene-finding.html#cb371-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="computational-gene-finding.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
 <p><strong>By</strong>: Avril Coghlan.</p>
 <p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
 <div id="the-genetic-code" class="section level2" number="22.1">
 <h2><span class="header-section-number">22.1</span> The genetic code</h2>
 <p>A protein-coding gene starts with an “ATG,” which is followed by an integer (whole) number of codons (DNA triplets) that code for amino acids, and ends with a “TGA,” “TAA,” or “TAG.” That is, the start codon of a gene is always “ATG,” while the stop codon of a gene can be “TGA,” “TAA” or “TAG.”</p>
 <p>In R, you can view the standard genetic code, the correspondence between codons and the amino acids that they are translated into, by using the tablecode() function in the SeqinR package:</p>
-<div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="computational-gene-finding.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(seqinr)</span>
-<span id="cb372-2"><a href="computational-gene-finding.html#cb372-2" aria-hidden="true" tabindex="-1"></a>seqinr<span class="sc">::</span><span class="fu">tablecode</span>()</span></code></pre></div>
-<p><img src="lbrb_files/figure-html/unnamed-chunk-289-1.png" width="672" /></p>
+<div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="computational-gene-finding.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(seqinr)</span>
+<span id="cb376-2"><a href="computational-gene-finding.html#cb376-2" aria-hidden="true" tabindex="-1"></a>seqinr<span class="sc">::</span><span class="fu">tablecode</span>()</span></code></pre></div>
+<p><img src="lbrb_files/figure-html/unnamed-chunk-295-1.png" width="672" /></p>
 <p>You can see from this table that “ATG” is translated to Met (the amino acid methionine), and that “TAA,” “TGA” and “TAG” correspond to Stp (stop codons, which are not translated to any amino acid, but signal the end of translation).</p>
 <p>Finding start and stop codons in a DNA sequence
 To look for all the potential start and stop codons in a DNA sequence, we need to find all the “ATG”s, “TGA”s, “TAA”s, and “TAG”s in the sequence.</p>
 <p>To do this, we can use the “matchPattern()” function from the Biostrings R package, which identifies all occurrences of a particular motif (eg. “ATG”) in a sequence. As input, the matchPattern() function requires that the sequences be in the form of a string of single characters.</p>
 <p>For example, we can look for all “ATG”s in the sequence “AAAATGCAGTAACCCATGCCC” by typing:</p>
-<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="computational-gene-finding.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;Biostrings&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="computational-gene-finding.html#cb374-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="st">&quot;aaaatgcagtaacccatgccc&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="computational-gene-finding.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matchPattern</span>(<span class="st">&quot;atg&quot;</span>, s1) <span class="co"># Find all ATGs in the sequence s1</span></span></code></pre></div>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="computational-gene-finding.html#cb377-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;Biostrings&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="computational-gene-finding.html#cb378-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="st">&quot;aaaatgcagtaacccatgccc&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="computational-gene-finding.html#cb379-1" aria-hidden="true" tabindex="-1"></a><span class="fu">matchPattern</span>(<span class="st">&quot;atg&quot;</span>, s1) <span class="co"># Find all ATGs in the sequence s1</span></span></code></pre></div>
 <pre><code>## Views on a 21-letter BString subject
 ## subject: aaaatgcagtaacccatgccc
 ## views:
@@ -440,8 +458,8 @@ To look for all the potential start and stop codons in a DNA sequence, we need t
 <p>Similarly, if you use matchPattern() to find the positions of “TAA”s, “TGA”s, and “TAG”s in the sequence “AAAATGCAGTAACCCATGCCC,” you will find that it has one “TAA” at nucleotides 10-12, but no “TAG”s or “TGA”s.</p>
 <p>The following R function “findPotentialStartsAndStops()” can be used to find all potential start and stop codons in a DNA sequence:</p>
 <p>To use the function, you will need to copy and paste it into R. For example, we can use this function to find potential start and stop codons in sequence s1:</p>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="computational-gene-finding.html#cb377-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="st">&quot;aaaatgcagtaacccatgccc&quot;</span></span>
-<span id="cb377-2"><a href="computational-gene-finding.html#cb377-2" aria-hidden="true" tabindex="-1"></a><span class="fu">findPotentialStartsAndStops</span>(s1)</span></code></pre></div>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="computational-gene-finding.html#cb381-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="st">&quot;aaaatgcagtaacccatgccc&quot;</span></span>
+<span id="cb381-2"><a href="computational-gene-finding.html#cb381-2" aria-hidden="true" tabindex="-1"></a><span class="fu">findPotentialStartsAndStops</span>(s1)</span></code></pre></div>
 <pre><code>## [[1]]
 ## [1]  4 10 16
 ## 
@@ -451,27 +469,27 @@ To look for all the potential start and stop codons in a DNA sequence, we need t
 <p>The output for sequence s1 tells us that sequence s1 has an “ATG” starting at nucleotide 4, a “TAA” starting at nucleotide 10, and another “ATG” starting at nucleotide 16.</p>
 <p>We can use the function findPotentialStartsAndStops() to find all potential start and stop codons in longer sequences. For example, say we want to find all potential start and stop codons in the first 500 nucleotides of the genome sequence of the DEN-1 Dengue virus (NCBI accession NC_001477).</p>
 <p>In a previous chapter, you learned that you can retrieve a sequence for an NCBI accession using the “getncbiseq()” function. Thus, to retrieve the genome sequence of the DEN-1 Dengue virus (NCBI accession NC_001477), we can type:</p>
-<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="computational-gene-finding.html#cb379-1" aria-hidden="true" tabindex="-1"></a>dengueseq <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;nucleotide&quot;</span>, </span>
-<span id="cb379-2"><a href="computational-gene-finding.html#cb379-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> <span class="st">&quot;NC_001477&quot;</span>, </span>
-<span id="cb379-3"><a href="computational-gene-finding.html#cb379-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span>
-<span id="cb379-4"><a href="computational-gene-finding.html#cb379-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb379-5"><a href="computational-gene-finding.html#cb379-5" aria-hidden="true" tabindex="-1"></a>dengueseq <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="st">&quot;&quot;</span>, dengueseq)</span>
-<span id="cb379-6"><a href="computational-gene-finding.html#cb379-6" aria-hidden="true" tabindex="-1"></a>header. <span class="ot">&lt;-</span> <span class="st">&quot;&gt;NC_001477.1 Dengue virus 1, complete genome&quot;</span></span>
-<span id="cb379-7"><a href="computational-gene-finding.html#cb379-7" aria-hidden="true" tabindex="-1"></a>dengueseq <span class="ot">&lt;-</span> <span class="fu">gsub</span>(header.,<span class="st">&quot;&quot;</span>, dengueseq)</span></code></pre></div>
+<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="computational-gene-finding.html#cb383-1" aria-hidden="true" tabindex="-1"></a>dengueseq <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;nucleotide&quot;</span>, </span>
+<span id="cb383-2"><a href="computational-gene-finding.html#cb383-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> <span class="st">&quot;NC_001477&quot;</span>, </span>
+<span id="cb383-3"><a href="computational-gene-finding.html#cb383-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span>
+<span id="cb383-4"><a href="computational-gene-finding.html#cb383-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb383-5"><a href="computational-gene-finding.html#cb383-5" aria-hidden="true" tabindex="-1"></a>dengueseq <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, <span class="st">&quot;&quot;</span>, dengueseq)</span>
+<span id="cb383-6"><a href="computational-gene-finding.html#cb383-6" aria-hidden="true" tabindex="-1"></a>header. <span class="ot">&lt;-</span> <span class="st">&quot;&gt;NC_001477.1 Dengue virus 1, complete genome&quot;</span></span>
+<span id="cb383-7"><a href="computational-gene-finding.html#cb383-7" aria-hidden="true" tabindex="-1"></a>dengueseq <span class="ot">&lt;-</span> <span class="fu">gsub</span>(header.,<span class="st">&quot;&quot;</span>, dengueseq)</span></code></pre></div>
 <p>The variable dengueseq is a vector variable, and each letter in the DEN-1 Dengue virus DNA sequence is stored in one element of this vector.</p>
 <p>Dengue virus causes Dengue fever, which is classified as a neglected tropical disease by the WHO.</p>
 <p>To cut out the first 500 nucleotides of the DEN-1 Dengue virus sequence, we can just take the first 500 elements of this vector:</p>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="computational-gene-finding.html#cb380-1" aria-hidden="true" tabindex="-1"></a>dengueseqstart <span class="ot">&lt;-</span> dengueseq[<span class="dv">1</span><span class="sc">:</span><span class="dv">500</span>] </span></code></pre></div>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="computational-gene-finding.html#cb384-1" aria-hidden="true" tabindex="-1"></a>dengueseqstart <span class="ot">&lt;-</span> dengueseq[<span class="dv">1</span><span class="sc">:</span><span class="dv">500</span>] </span></code></pre></div>
 <p>Find the length of the “dengueseqstart” start vector</p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="computational-gene-finding.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(dengueseqstart)             </span></code></pre></div>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="computational-gene-finding.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(dengueseqstart)             </span></code></pre></div>
 <p>Next we want to find potential start and stop codons in the first 500 nucleotides of the Dengue virus sequence. We can do this using the findPotentialStartsAndStops() function described above. However, the findPotentialStartsAndStops() function requires that the input sequence be in the format of a string of characters, rather than a vector. Therefore, we first need to convert the vector dengueseqstart into a string of characters. We can do that using the c2s() function in the SeqinR package:</p>
-<div class="sourceCode" id="cb382"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb382-1"><a href="computational-gene-finding.html#cb382-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;seqinr&quot;</span>)                 <span class="co"># Load the SeqinR package</span></span></code></pre></div>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="computational-gene-finding.html#cb383-1" aria-hidden="true" tabindex="-1"></a>dengueseqstart                    <span class="co"># Print out the vector dengueseqstart</span></span></code></pre></div>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="computational-gene-finding.html#cb384-1" aria-hidden="true" tabindex="-1"></a>dengueseqstartstring <span class="ot">&lt;-</span> <span class="fu">c2s</span>(dengueseqstart) <span class="co"># Convert the vector &quot;dengueseqstart&quot; to a string of characters</span></span></code></pre></div>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="computational-gene-finding.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;seqinr&quot;</span>)                 <span class="co"># Load the SeqinR package</span></span></code></pre></div>
+<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="computational-gene-finding.html#cb387-1" aria-hidden="true" tabindex="-1"></a>dengueseqstart                    <span class="co"># Print out the vector dengueseqstart</span></span></code></pre></div>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="computational-gene-finding.html#cb388-1" aria-hidden="true" tabindex="-1"></a>dengueseqstartstring <span class="ot">&lt;-</span> <span class="fu">c2s</span>(dengueseqstart) <span class="co"># Convert the vector &quot;dengueseqstart&quot; to a string of characters</span></span></code></pre></div>
 <p>Print out the variable string of characters “dengueseqstartstring”</p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="computational-gene-finding.html#cb385-1" aria-hidden="true" tabindex="-1"></a>dengueseqstartstring                      </span></code></pre></div>
+<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="computational-gene-finding.html#cb389-1" aria-hidden="true" tabindex="-1"></a>dengueseqstartstring                      </span></code></pre></div>
 <p>We can then find potential start and stop codons in the first 500 nucleotides of the DEN-1 Dengue virus sequence by typing:</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="computational-gene-finding.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findPotentialStartsAndStops</span>(dengueseqstartstring)</span></code></pre></div>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="computational-gene-finding.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findPotentialStartsAndStops</span>(dengueseqstartstring)</span></code></pre></div>
 <p>We see that the lambda sequence has many different potential start and stop codons, for example, a potential stop codon (TAG) at nucleotide 7, a potential stop codon (TAA) at nucleotide 53, a potential stop codon (TAG) at nucleotide 58, and so on.</p>
 </div>
 <div id="reading-frames" class="section level2" number="22.2">
@@ -482,7 +500,7 @@ To look for all the potential start and stop codons in a DNA sequence, we need t
 <p>For a potential start and stop codon to be part of the same gene, they must be in the same reading frame.</p>
 <p>From the output of findPotentialStartsAndStops() for the first 500 nucleotides of the genome of DEN-1 Dengue virus (see above), you can see that there is a potential start codon (ATG) that starts at nucleotide 137, and a potential stop codon (TGA) that starts at nucleotide 141. That is, the potential start codon is from nucleotides 137-139 and the potential stop codon is from nucleotides 141-143. Could the region from nucleotides 137 to 143 possibly be a gene?</p>
 <p>We can cut out the region from nucleotides 137 to 143 of the sequence dengueseqstartstring to have a look, by using the substring() function. If you look at the help page for the substring() function, you will see that its arguments (inputs) are the name of the variable containing the string of characters (ie., the DNA sequence), and the coordinates of the substring that you want:</p>
-<div class="sourceCode" id="cb387"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb387-1"><a href="computational-gene-finding.html#cb387-1" aria-hidden="true" tabindex="-1"></a><span class="fu">substring</span>(dengueseqstartstring,<span class="dv">137</span>,<span class="dv">143</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="computational-gene-finding.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">substring</span>(dengueseqstartstring,<span class="dv">137</span>,<span class="dv">143</span>)</span></code></pre></div>
 <p>If we look at the sequence from nucleotides 137-143, “ATGCTGA,” we see that it starts with a potential start codon (ATG) and ends with a potential stop codon (TGA).</p>
 <p>However, the ribosome reads the sequence by scanning the codons (triplets) one-by-one from left to right, and when we break up the sequence into codons (triplets) we see that it does not contain an integer (whole) number of triplets: “ATG CTG A.”</p>
 <p>This means that even if the ribosome will not recognise the region from 137-143 as a potential gene, as the ATG at nucleotide 137 is not separated from the TGA at nucleotide 141 by an integer number of codons. That is, this ATG and TGA are not in the same reading frame, and so cannot be the start and stop codon of the same gene.</p>
@@ -496,64 +514,64 @@ To look for all the potential start and stop codons in a DNA sequence, we need t
 <p>The following function plotPotentialStartsAndStops() plots the potential start and stop codons in the three different reading frames of a DNA sequence:</p>
 <p>To use this function, you will first need to copy and paste it into R.</p>
 <p>For example, to plot the potential start and stop codons in the first 500 nucleotides of the DEN-1 Dengue virus genome, we type:</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="computational-gene-finding.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotPotentialStartsAndStops</span>(dengueseqstartstring)</span></code></pre></div>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="computational-gene-finding.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotPotentialStartsAndStops</span>(dengueseqstartstring)</span></code></pre></div>
 <p>In the picture produced by plotPotentialStartsAndStops(), the x-axis represents the input sequence (dengueseqstartstring here). The potential start codons are represented by vertical red lines, and potential stop codons are represented by vertical blue lines.</p>
 <p>Three different layers in the picture show potential start/stop codons in the +1 reading frame (bottom layer), +2 reading frame (middle layer), and +3 reading frame (top layer).</p>
 <p>We can see that the start codon at nucleotide 137 is represented by a vertical red line in the layer corresponding to the +2 reading frame (middle layer). There are no potential stop codons in the +2 reading frame to the right of that start codon. Thus, the start codon at nucleotide 137 does not seem to be part of an open reading frame.</p>
 <p>We can see however that in the +3 reading frame (top layer) there is a predicted start codon (red line) at position 318 and that this is followed by a predicted stop codon (blue line) at position 371. Thus, the region from nucleotides 318 to 371 could be a potential gene in the +3 reading frame. In other words, the region from nucleotides 318 to 371 is an open reading frame, or ORF.</p>
 <p>For example, we can use findORFsinSeq to find all ORFs in the sequence s1:</p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="computational-gene-finding.html#cb389-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="st">&quot;aaaatgcagtaacccatgccc&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="computational-gene-finding.html#cb390-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findORFsinSeq</span>(s1)</span></code></pre></div>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="computational-gene-finding.html#cb393-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="st">&quot;aaaatgcagtaacccatgccc&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="computational-gene-finding.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findORFsinSeq</span>(s1)</span></code></pre></div>
 <p>The function findORFsinSeq() returns a list variable, where the first element of the list is a vector of the start positions of ORFs, the second element of the list is a vector of the end positions of those ORFs, and the third element is a vector containing the lengths of the ORFs.</p>
 <p>The output for the findORFsinSeq() function for s1 tells us that there is one ORF in the sequence s1, and that the predicted start codon starts at nucleotide 4 in the sequence, and that the predicted stop codon ends at nucleotide 12 in the sequence.</p>
 <p>We can use the function findORFsinSeq() to find the ORFs in the first 500 nucleotides of the DEN-1 Dengue virus genome sequence by typing:</p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb391-1"><a href="computational-gene-finding.html#cb391-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findORFsinSeq</span>(dengueseqstartstring)</span></code></pre></div>
+<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="computational-gene-finding.html#cb395-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findORFsinSeq</span>(dengueseqstartstring)</span></code></pre></div>
 <p>The result from findORFsinSeq() indicates that there are two ORFs in the first 500 nucleotides of the DEN-1 Dengue virus genome, at nucleotides 298-480 (start codon at 298-300, stop codon at 478-480), and 318-371 (start codon at 318-320, stop codon at 369-371).</p>
 <p>The following function “plotORFsinSeq()” plots the positions of ORFs in a sequence:</p>
 <p>To use this function, you will first need to copy and paste it into R. You can then use this function to plot the positions of the ORFs in dengueseqstartstring by typing:</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="computational-gene-finding.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotORFsinSeq</span>(dengueseqstartstring)</span></code></pre></div>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="computational-gene-finding.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotORFsinSeq</span>(dengueseqstartstring)</span></code></pre></div>
 <p>The picture produced by plotORFsinSeq() represents the two ORFs in the first 500 nucleotides of the lambda genome as blue rectangles.</p>
 <p>One of the ORFs is in the +3 reading frame, and one is in the +1 reading frame. There are no ORFs in the +2 reading frame, as there are no potential stop codons to the right (3’) of the potential start codons in the +2 reading frame, as we can see from the picture produced by plotPotentialStartsAndStops() above.</p>
 <p>Predicting the protein sequence for an ORF
 If you find an ORF in a DNA sequence, it is interesting to find the DNA sequence of the ORF. For example, the function findORFsinSeq() indicates that there is an ORF from nucleotides 4-12 of the sequence s1 (aaaatgcagtaacccatgccc). To look at the DNA sequence for just the ORF, we can use the substring() function to cut out that piece of DNA. For example, to cut out the substring of sequence s1 that corresponds to the ORF from nucleotides 4-12, we type:</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb393-1"><a href="computational-gene-finding.html#cb393-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="st">&quot;aaaatgcagtaacccatgccc&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="computational-gene-finding.html#cb394-1" aria-hidden="true" tabindex="-1"></a>myorf <span class="ot">&lt;-</span> <span class="fu">substring</span>(s1, <span class="dv">4</span>, <span class="dv">12</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb395-1"><a href="computational-gene-finding.html#cb395-1" aria-hidden="true" tabindex="-1"></a>myorf <span class="co"># Print out the sequence of &quot;myorf&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="computational-gene-finding.html#cb397-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="st">&quot;aaaatgcagtaacccatgccc&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="computational-gene-finding.html#cb398-1" aria-hidden="true" tabindex="-1"></a>myorf <span class="ot">&lt;-</span> <span class="fu">substring</span>(s1, <span class="dv">4</span>, <span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="computational-gene-finding.html#cb399-1" aria-hidden="true" tabindex="-1"></a>myorf <span class="co"># Print out the sequence of &quot;myorf&quot;</span></span></code></pre></div>
 <p>As you can see, the ORF starts with a predicted start codon (ATG), is followed by an integer number of codons (just one codon, CAG, in this case), and ends with a predicted stop codon (TAA).</p>
 <p>If you have the DNA sequence of an ORF, you can predict the protein sequence for the ORF by using the translate() function from the SeqinR package. Note that as there is a function called translate() in both the Biostrings and SeqinR packages, we need to type seqinr::translate() to specify that we want to use the SeqinR translate() function.</p>
 <p>The translate() function requires that the input sequence be in the form of a vector of characters. If your sequence is in the form of a string of characters, you can convert it to a vector of characters using the s2c() function from the SeqinR package. For example, to predict the protein sequence of the ORF myorf, you would type:</p>
-<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="computational-gene-finding.html#cb396-1" aria-hidden="true" tabindex="-1"></a>myorfvector <span class="ot">&lt;-</span> <span class="fu">s2c</span>(myorf) <span class="co"># Convert the sequence of characters to a vector</span></span></code></pre></div>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="computational-gene-finding.html#cb397-1" aria-hidden="true" tabindex="-1"></a>myorfvector               <span class="co"># Print out the value of &quot;myorfvector&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="computational-gene-finding.html#cb398-1" aria-hidden="true" tabindex="-1"></a>seqinr<span class="sc">::</span><span class="fu">translate</span>(myorfvector)</span></code></pre></div>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="computational-gene-finding.html#cb400-1" aria-hidden="true" tabindex="-1"></a>myorfvector <span class="ot">&lt;-</span> <span class="fu">s2c</span>(myorf) <span class="co"># Convert the sequence of characters to a vector</span></span></code></pre></div>
+<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="computational-gene-finding.html#cb401-1" aria-hidden="true" tabindex="-1"></a>myorfvector               <span class="co"># Print out the value of &quot;myorfvector&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="computational-gene-finding.html#cb402-1" aria-hidden="true" tabindex="-1"></a>seqinr<span class="sc">::</span><span class="fu">translate</span>(myorfvector)</span></code></pre></div>
 <p>From the output of the seqinr::translate() function, we see that the predicted start codon (ATG) is translated as a Methionine (M), and that this is followed by a Glutamine (Q). The predicted stop codon is represented as “*” as it is not translated into any amino acid.</p>
 <p>Finding open reading frames on the reverse strand of a DNA sequence
 Genes in a genome sequence can occur either on the forward (plus) strand of the DNA, or on the reverse (minus) strand. To find ORFs on the reverse strand of a sequence, we must first infer the reverse strand sequence, and then use our findORFsinSeq() function to find ORFs on the reverse strand.</p>
 <p>The reverse strand sequence easily can be inferred from the forward strand sequence, as it is always the reverse complement sequence of the forward strand sequence. We can use the comp() function from the SeqinR package to calculate the complement of a sequence, and the rev() function to reverse that sequence in order to give us the reverse complement sequence.</p>
 <p>The comp() and rev() functions require that the input sequence is in the form of a vector of characters. The s2c() function can be used to convert a sequence in the form of a string of characters to a vector, while the c2s() function is useful for convering a vector back to a string of characters.</p>
 <p>For example, if our forward strand sequence is “AAAATGCTTAAACCATTGCCC,” and we want to find the reverse strand sequence, we type:</p>
-<div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="computational-gene-finding.html#cb399-1" aria-hidden="true" tabindex="-1"></a>forward <span class="ot">&lt;-</span> <span class="st">&quot;AAAATGCTTAAACCATTGCCC&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="computational-gene-finding.html#cb400-1" aria-hidden="true" tabindex="-1"></a>forwardvector <span class="ot">&lt;-</span> <span class="fu">s2c</span>(forward)                <span class="co"># Convert the string of characters to a vector</span></span></code></pre></div>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="computational-gene-finding.html#cb401-1" aria-hidden="true" tabindex="-1"></a>forwardvector                                <span class="co"># Print out the vector containing the forward strand sequence</span></span></code></pre></div>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="computational-gene-finding.html#cb403-1" aria-hidden="true" tabindex="-1"></a>forward <span class="ot">&lt;-</span> <span class="st">&quot;AAAATGCTTAAACCATTGCCC&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="computational-gene-finding.html#cb404-1" aria-hidden="true" tabindex="-1"></a>forwardvector <span class="ot">&lt;-</span> <span class="fu">s2c</span>(forward)                <span class="co"># Convert the string of characters to a vector</span></span></code></pre></div>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="computational-gene-finding.html#cb405-1" aria-hidden="true" tabindex="-1"></a>forwardvector                                <span class="co"># Print out the vector containing the forward strand sequence</span></span></code></pre></div>
 <pre><code>##  [1] &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;C&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;C&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;G&quot; &quot;C&quot;
 ## [20] &quot;C&quot; &quot;C&quot;</code></pre>
-<div class="sourceCode" id="cb403"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb403-1"><a href="computational-gene-finding.html#cb403-1" aria-hidden="true" tabindex="-1"></a>reversevector <span class="ot">&lt;-</span> <span class="fu">rev</span>(<span class="fu">comp</span>(forwardvector))    <span class="co"># Find the reverse strand sequence, by finding the reverse complement</span></span></code></pre></div>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="computational-gene-finding.html#cb407-1" aria-hidden="true" tabindex="-1"></a>reversevector <span class="ot">&lt;-</span> <span class="fu">rev</span>(<span class="fu">comp</span>(forwardvector))    <span class="co"># Find the reverse strand sequence, by finding the reverse complement</span></span></code></pre></div>
 <p>Print out the vector containing the reverse strand sequence</p>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb404-1"><a href="computational-gene-finding.html#cb404-1" aria-hidden="true" tabindex="-1"></a>reversevector                             </span></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="computational-gene-finding.html#cb408-1" aria-hidden="true" tabindex="-1"></a>reversevector                             </span></code></pre></div>
 <pre><code>##  [1] &quot;g&quot; &quot;g&quot; &quot;g&quot; &quot;c&quot; &quot;a&quot; &quot;a&quot; &quot;t&quot; &quot;g&quot; &quot;g&quot; &quot;t&quot; &quot;t&quot; &quot;t&quot; &quot;a&quot; &quot;a&quot; &quot;g&quot; &quot;c&quot; &quot;a&quot; &quot;t&quot; &quot;t&quot;
 ## [20] &quot;t&quot; &quot;t&quot;</code></pre>
 <p>Convert the vector to a string of characters</p>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb406-1"><a href="computational-gene-finding.html#cb406-1" aria-hidden="true" tabindex="-1"></a>reverse <span class="ot">&lt;-</span> <span class="fu">c2s</span>(reversevector)                </span></code></pre></div>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="computational-gene-finding.html#cb410-1" aria-hidden="true" tabindex="-1"></a>reverse <span class="ot">&lt;-</span> <span class="fu">c2s</span>(reversevector)                </span></code></pre></div>
 <p>Print out the string of characters containing the reverse strand sequence</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="computational-gene-finding.html#cb407-1" aria-hidden="true" tabindex="-1"></a>reverse                                      </span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="computational-gene-finding.html#cb411-1" aria-hidden="true" tabindex="-1"></a>reverse                                      </span></code></pre></div>
 <pre><code>## [1] &quot;gggcaatggtttaagcatttt&quot;</code></pre>
 <p>In the command reversevector &lt;- rev(comp(forwardvector)) above, we are first using the comp() function to find the complement of the forward strand sequence. We are then using the rev() function to take the output sequence given by comp() and reverse the order of the letters in that sequence. An equivalent way of doing the same thing would be to type:</p>
 <p>Find the complement of the forward strand sequence</p>
-<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="computational-gene-finding.html#cb409-1" aria-hidden="true" tabindex="-1"></a>complement <span class="ot">&lt;-</span> <span class="fu">comp</span>(forwardvector)            </span></code></pre></div>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="computational-gene-finding.html#cb413-1" aria-hidden="true" tabindex="-1"></a>complement <span class="ot">&lt;-</span> <span class="fu">comp</span>(forwardvector)            </span></code></pre></div>
 <p>Reverse the order of the letters in sequence “complement,” to
 find the reverse strand sequence (the reverse complement sequence)</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="computational-gene-finding.html#cb410-1" aria-hidden="true" tabindex="-1"></a>reversevector <span class="ot">&lt;-</span> <span class="fu">rev</span>(complement)             <span class="co"># </span></span></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="computational-gene-finding.html#cb414-1" aria-hidden="true" tabindex="-1"></a>reversevector <span class="ot">&lt;-</span> <span class="fu">rev</span>(complement)             <span class="co"># </span></span></code></pre></div>
 <p>Once we have inferred the reverse strand sequence, we can then use the findORFsinSeq() function to find ORFs in the reverse strand sequence:</p>
-<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="computational-gene-finding.html#cb411-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findORFsinSeq</span>(reverse)</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="computational-gene-finding.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">findORFsinSeq</span>(reverse)</span></code></pre></div>
 <p>This indicates that there is one ORF of length 9 bp in the reverse strand of sequence “AAAATGCTTAAACCATTGCCC,” that has a predicted start codon that starts at nucleotide 6 in the reverse strand sequence and a predicted stop codon that ends at nucleotide 14 in the reverse strand sequence.</p>
 </div>
 <div id="lengths-of-open-reading-frames" class="section level2" number="22.4">
@@ -598,6 +616,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -625,20 +644,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

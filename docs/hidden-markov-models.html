@@ -4,24 +4,24 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 35 Hidden Markov Models | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</title>
-  <meta name="description" content="An entry-level text for computational biology" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <title>Chapter 35 Hidden Markov Models | A Little Book of R for Bioinformatics 2.0</title>
+  <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 35 Hidden Markov Models | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta property="og:title" content="Chapter 35 Hidden Markov Models | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="An entry-level text for computational biology" />
+  <meta property="og:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 35 Hidden Markov Models | Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R" />
+  <meta name="twitter:title" content="Chapter 35 Hidden Markov Models | A Little Book of R for Bioinformatics 2.0" />
   
-  <meta name="twitter:description" content="An entry-level text for computational biology" />
+  <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
 
-<meta name="author" content="Nathan L. Brouwer" />
+<meta name="author" content="Avirl Coghlan, with contributions by Nathan L. Brouwer" />
 
 
 <meta name="date" content="2021-07-08" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="exercises-2.html"/>
 <link rel="next" href="appendix-01-getting-access-to-r.html"/>
-<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,6 +51,8 @@
 
 
 
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -118,6 +120,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
 
@@ -131,13 +134,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Computational Biology for All!</a></li>
+<li><a href="./">A Little Book of R for Bioinformatics</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface to version 2.0</a></li>
 <li class="chapter" data-level="1" data-path="downloading-r.html"><a href="downloading-r.html"><i class="fa fa-check"></i><b>1</b> Downloading R</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface-1"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
+<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
 <li class="chapter" data-level="1.2" data-path="downloading-r.html"><a href="downloading-r.html#introduction-to-r"><i class="fa fa-check"></i><b>1.2</b> Introduction to R</a></li>
 <li class="chapter" data-level="1.3" data-path="downloading-r.html"><a href="downloading-r.html#installing-r"><i class="fa fa-check"></i><b>1.3</b> Installing R</a>
 <ul>
@@ -154,20 +157,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>3</b> Installing <em>R</em> packages</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>3.1</b> Downloading packages with the RStudio IDE</a></li>
-<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function install.packages()</a></li>
+<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function <code>install.packages()</code></a></li>
 <li class="chapter" data-level="3.3" data-path="installing-r-packages.html"><a href="installing-r-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>3.3</b> Using packages after they are downloaded</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>4</b> Installing Bioconductor</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>4.1</b> Bioconductor</a></li>
 <li class="chapter" data-level="4.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>4.2</b> Installing BiocManager</a></li>
+<li class="chapter" data-level="4.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#the-ins-and-outs-of-package-installation"><i class="fa fa-check"></i><b>4.3</b> The ins and outs of package installation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#updating-other-packages-when-downloading-a-package"><i class="fa fa-check"></i><b>4.3.1</b> Updating other packages when downloading a package</a></li>
+<li class="chapter" data-level="4.3.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#packages-from-source"><i class="fa fa-check"></i><b>4.3.2</b> Packages “from source”</a></li>
+<li class="chapter" data-level="4.3.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#more-on-angry-red-text"><i class="fa fa-check"></i><b>4.3.3</b> More on angry red text</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#actually-loading-a-package"><i class="fa fa-check"></i><b>4.4</b> Actually loading a package</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html"><i class="fa fa-check"></i><b>5</b> A Brief introduction to R</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vocabulary"><i class="fa fa-check"></i><b>5.1</b> Vocabulary</a></li>
-<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions-etc"><i class="fa fa-check"></i><b>5.2</b> R functions etc</a></li>
-<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#a-brief-introduction-to-r-1"><i class="fa fa-check"></i><b>5.3</b> A brief introduction to R</a></li>
-<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.4</b> Links and Further Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions"><i class="fa fa-check"></i><b>5.2</b> R functions</a></li>
+<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#interacting-with-r"><i class="fa fa-check"></i><b>5.3</b> Interacting with R</a></li>
+<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#variables-in-r"><i class="fa fa-check"></i><b>5.4</b> Variables in R</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>5.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="5.4.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vector-indexing"><i class="fa fa-check"></i><b>5.4.2</b> Vector indexing</a></li>
+<li class="chapter" data-level="5.4.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#character-vectors"><i class="fa fa-check"></i><b>5.4.3</b> Character vectors</a></li>
+<li class="chapter" data-level="5.4.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#lists"><i class="fa fa-check"></i><b>5.4.4</b> Lists</a></li>
+<li class="chapter" data-level="5.4.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#tables"><i class="fa fa-check"></i><b>5.4.5</b> Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.5</b> Links and Further Reading</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="downloading-ncbi-sequence-data-by-hand.html"><a href="downloading-ncbi-sequence-data-by-hand.html"><i class="fa fa-check"></i><b>6</b> Downloading NCBI sequence data by hand</a>
 <ul>
@@ -391,7 +409,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="35.18" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>35.18</b> Practice (OPTIONAL)</a></li>
 </ul></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
 
 </ul>
 
@@ -402,7 +420,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Little Book of R for Bioinformatics 2.0</a>
           </h1>
         </div>
 
@@ -412,46 +430,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="hidden-markov-models" class="section level1" number="35">
 <h1><span class="header-section-number">Chapter 35</span> Hidden Markov Models</h1>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="hidden-markov-models.html#cb471-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="hidden-markov-models.html#cb475-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
 <p><strong>By</strong>: Avril Coghlan.</p>
 <p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a> with assistant from Havannah Tung.</p>
 <div id="r-programming-101-initializing-vectors" class="section level2" number="35.1">
 <h2><span class="header-section-number">35.1</span> R Programming 101: Initializing vectors</h2>
 <p>In previous practicals, you learnt how to create different types of variables in R such as scalars, vectors and lists. Sometimes it is useful to create a variable before you actually need to store any data in the variable. To create a vector without actually storing any data in it, you can use the numeric() command to create a vector for storing numbers, or the character() command to create a vector for storing characters (eg. “A,” “hello,” etc.) For example, you may want to create a vector variable for storing the square of a number, and then store numbers in its elements afterwards:</p>
-<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="hidden-markov-models.html#cb472-1" aria-hidden="true" tabindex="-1"></a>myvector <span class="ot">&lt;-</span> <span class="fu">numeric</span>()                  <span class="co"># Create a vector &quot;myvector&quot; for storing numbers</span></span>
-<span id="cb472-2"><a href="hidden-markov-models.html#cb472-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) { myvector[i] <span class="ot">&lt;-</span> i<span class="sc">*</span>i } <span class="co"># Fill in the values in the vector &quot;myvector&quot;</span></span>
-<span id="cb472-3"><a href="hidden-markov-models.html#cb472-3" aria-hidden="true" tabindex="-1"></a>myvector                               <span class="co"># Print out the vector &quot;myvector&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="hidden-markov-models.html#cb476-1" aria-hidden="true" tabindex="-1"></a>myvector <span class="ot">&lt;-</span> <span class="fu">numeric</span>()                  <span class="co"># Create a vector &quot;myvector&quot; for storing numbers</span></span>
+<span id="cb476-2"><a href="hidden-markov-models.html#cb476-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) { myvector[i] <span class="ot">&lt;-</span> i<span class="sc">*</span>i } <span class="co"># Fill in the values in the vector &quot;myvector&quot;</span></span>
+<span id="cb476-3"><a href="hidden-markov-models.html#cb476-3" aria-hidden="true" tabindex="-1"></a>myvector                               <span class="co"># Print out the vector &quot;myvector&quot;</span></span></code></pre></div>
 <pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
 <p>Note that if you try to store numbers in the elements of a vector that you have not yet created, you will get an error message, for example:</p>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="hidden-markov-models.html#cb474-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) { </span>
-<span id="cb474-2"><a href="hidden-markov-models.html#cb474-2" aria-hidden="true" tabindex="-1"></a>  avector[i] <span class="ot">&lt;-</span> i<span class="sc">*</span>i </span>
-<span id="cb474-3"><a href="hidden-markov-models.html#cb474-3" aria-hidden="true" tabindex="-1"></a>  }  <span class="co"># Try to store values in the vector &quot;avector&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="hidden-markov-models.html#cb478-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) { </span>
+<span id="cb478-2"><a href="hidden-markov-models.html#cb478-2" aria-hidden="true" tabindex="-1"></a>  avector[i] <span class="ot">&lt;-</span> i<span class="sc">*</span>i </span>
+<span id="cb478-3"><a href="hidden-markov-models.html#cb478-3" aria-hidden="true" tabindex="-1"></a>  }  <span class="co"># Try to store values in the vector &quot;avector&quot;</span></span></code></pre></div>
 <p>Another very useful type of variable is a matrix. You can create a matrix in R using the matrix() command. If you look at the help page for the matrix() command, you will see that its arguments (inputs) are the data to store in the matrix, the number of rows to store it in, the number of columns to store it in, and whether to fill the matrix with data column-by-column or row-by-row. For example, say you have the heights and weights of eight patients in a hospital in two different vectors:</p>
-<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="hidden-markov-models.html#cb475-1" aria-hidden="true" tabindex="-1"></a>heights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">180</span>, <span class="dv">170</span>, <span class="dv">175</span>, <span class="dv">160</span>, <span class="dv">183</span>, <span class="dv">177</span>, <span class="dv">179</span>, <span class="dv">182</span>)</span>
-<span id="cb475-2"><a href="hidden-markov-models.html#cb475-2" aria-hidden="true" tabindex="-1"></a>weights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">88</span>, <span class="dv">100</span>, <span class="dv">68</span>, <span class="dv">95</span>, <span class="dv">120</span>, <span class="dv">88</span>, <span class="dv">93</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb479"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb479-1"><a href="hidden-markov-models.html#cb479-1" aria-hidden="true" tabindex="-1"></a>heights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">180</span>, <span class="dv">170</span>, <span class="dv">175</span>, <span class="dv">160</span>, <span class="dv">183</span>, <span class="dv">177</span>, <span class="dv">179</span>, <span class="dv">182</span>)</span>
+<span id="cb479-2"><a href="hidden-markov-models.html#cb479-2" aria-hidden="true" tabindex="-1"></a>weights <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">90</span>, <span class="dv">88</span>, <span class="dv">100</span>, <span class="dv">68</span>, <span class="dv">95</span>, <span class="dv">120</span>, <span class="dv">88</span>, <span class="dv">93</span>)</span></code></pre></div>
 <p>To store this data in a matrix that has one column per person, and one row for heights and one row for weights, we type:</p>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="hidden-markov-models.html#cb476-1" aria-hidden="true" tabindex="-1"></a>mymatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(heights,weights), <span class="dv">2</span>, <span class="dv">8</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
-<span id="cb476-2"><a href="hidden-markov-models.html#cb476-2" aria-hidden="true" tabindex="-1"></a>mymatrix <span class="co"># Print out the matrix</span></span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="hidden-markov-models.html#cb480-1" aria-hidden="true" tabindex="-1"></a>mymatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(heights,weights), <span class="dv">2</span>, <span class="dv">8</span>, <span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb480-2"><a href="hidden-markov-models.html#cb480-2" aria-hidden="true" tabindex="-1"></a>mymatrix <span class="co"># Print out the matrix</span></span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
 ## [1,]  180  170  175  160  183  177  179  182
 ## [2,]   90   88  100   68   95  120   88   93</code></pre>
 <p>We needed to use the argument “byrow=TRUE” to tell the matrix() command to fill the matrix row-by-row (ie. to put the values from the vector heights into the first row of the matrix, and the values from the vector weights into the second row of the matrix).</p>
 <p>You can assign names to the rows and columns of a matrix using the rownames() and colnames() commands, respectively. For example, to assign names to the rows and columns of matrix mymatrix, you could type:</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="hidden-markov-models.html#cb478-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mymatrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>)</span>
-<span id="cb478-2"><a href="hidden-markov-models.html#cb478-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mymatrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;patient1&quot;</span>, <span class="st">&quot;patient2&quot;</span>, <span class="st">&quot;patient3&quot;</span>, <span class="st">&quot;patient4&quot;</span>, <span class="st">&quot;patient5&quot;</span>, <span class="st">&quot;patient6&quot;</span>, <span class="st">&quot;patient7&quot;</span>, <span class="st">&quot;patient8&quot;</span>)</span>
-<span id="cb478-3"><a href="hidden-markov-models.html#cb478-3" aria-hidden="true" tabindex="-1"></a>mymatrix <span class="co"># Print out the matrix now</span></span></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="hidden-markov-models.html#cb482-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mymatrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;height&quot;</span>, <span class="st">&quot;weight&quot;</span>)</span>
+<span id="cb482-2"><a href="hidden-markov-models.html#cb482-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mymatrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;patient1&quot;</span>, <span class="st">&quot;patient2&quot;</span>, <span class="st">&quot;patient3&quot;</span>, <span class="st">&quot;patient4&quot;</span>, <span class="st">&quot;patient5&quot;</span>, <span class="st">&quot;patient6&quot;</span>, <span class="st">&quot;patient7&quot;</span>, <span class="st">&quot;patient8&quot;</span>)</span>
+<span id="cb482-3"><a href="hidden-markov-models.html#cb482-3" aria-hidden="true" tabindex="-1"></a>mymatrix <span class="co"># Print out the matrix now</span></span></code></pre></div>
 <pre><code>##        patient1 patient2 patient3 patient4 patient5 patient6 patient7 patient8
 ## height      180      170      175      160      183      177      179      182
 ## weight       90       88      100       68       95      120       88       93</code></pre>
 <p>Once you have created a matrix, you can access the values in the elements of the matrix by using square brackets containing the indices of the row and column of the element. For example, if you want to access the value in the second row and fourth column of matrix mymatrix, you can type:</p>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="hidden-markov-models.html#cb480-1" aria-hidden="true" tabindex="-1"></a>mymatrix[<span class="dv">2</span>,<span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="hidden-markov-models.html#cb484-1" aria-hidden="true" tabindex="-1"></a>mymatrix[<span class="dv">2</span>,<span class="dv">4</span>]</span></code></pre></div>
 <pre><code>## [1] 68</code></pre>
 <p>If you want to access all the values in a particular row of the matrix, you can just type the index for the row, and leave out the index for the column. For example, if you want to get the values in the second row of the matrix mymatrix, type:</p>
-<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="hidden-markov-models.html#cb482-1" aria-hidden="true" tabindex="-1"></a>mymatrix[<span class="dv">2</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="hidden-markov-models.html#cb486-1" aria-hidden="true" tabindex="-1"></a>mymatrix[<span class="dv">2</span>,]</span></code></pre></div>
 <pre><code>## patient1 patient2 patient3 patient4 patient5 patient6 patient7 patient8 
 ##       90       88      100       68       95      120       88       93</code></pre>
 <p>Likewise, if you want to get the values in a particular column of a matrix, leave out the index for the row, and just type the column index. For example, if you want to get the values in the fourth row of the mymatrix, type:</p>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="hidden-markov-models.html#cb484-1" aria-hidden="true" tabindex="-1"></a>mymatrix[,<span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="hidden-markov-models.html#cb488-1" aria-hidden="true" tabindex="-1"></a>mymatrix[,<span class="dv">4</span>]</span></code></pre></div>
 <pre><code>## height weight 
 ##    160     68</code></pre>
 </div>
@@ -464,21 +482,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="generating-a-dna-sequence-using-a-multinomial-model" class="section level2" number="35.3">
 <h2><span class="header-section-number">35.3</span> Generating a DNA sequence using a multinomial model</h2>
 <p>We can use R to generate a DNA sequence using a particular multinomial model. First we need to set the values of the four parameters of the multinomial model, the probabilities pA, pC, pG, and pT of choosing the nucleotides A, C, G and T, respectively, at a particular position in the DNA sequence. For example, say we decide to set pA=0.2, pC=0.3, pG=0.3, and pT=0.2. We can use the function sample() in R to generate a DNA sequence of a certain length, by selecting a nucleotide at each position according to this probability distribution:</p>
-<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="hidden-markov-models.html#cb486-1" aria-hidden="true" tabindex="-1"></a>nucleotides    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>) <span class="co"># Define the alphabet of nucleotides</span></span>
-<span id="cb486-2"><a href="hidden-markov-models.html#cb486-2" aria-hidden="true" tabindex="-1"></a>probabilities1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>) <span class="co"># Set the values of the probabilities</span></span>
-<span id="cb486-3"><a href="hidden-markov-models.html#cb486-3" aria-hidden="true" tabindex="-1"></a>seqlength      <span class="ot">&lt;-</span> <span class="dv">30</span>                    <span class="co"># Set the length of the sequence</span></span>
-<span id="cb486-4"><a href="hidden-markov-models.html#cb486-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(nucleotides, seqlength, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities1) <span class="co"># Generate a sequence</span></span></code></pre></div>
-<pre><code>##  [1] &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;T&quot; &quot;T&quot; &quot;T&quot; &quot;G&quot;
-## [20] &quot;T&quot; &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;C&quot; &quot;T&quot; &quot;A&quot; &quot;T&quot; &quot;C&quot;</code></pre>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="hidden-markov-models.html#cb490-1" aria-hidden="true" tabindex="-1"></a>nucleotides    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>) <span class="co"># Define the alphabet of nucleotides</span></span>
+<span id="cb490-2"><a href="hidden-markov-models.html#cb490-2" aria-hidden="true" tabindex="-1"></a>probabilities1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>) <span class="co"># Set the values of the probabilities</span></span>
+<span id="cb490-3"><a href="hidden-markov-models.html#cb490-3" aria-hidden="true" tabindex="-1"></a>seqlength      <span class="ot">&lt;-</span> <span class="dv">30</span>                    <span class="co"># Set the length of the sequence</span></span>
+<span id="cb490-4"><a href="hidden-markov-models.html#cb490-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(nucleotides, seqlength, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities1) <span class="co"># Generate a sequence</span></span></code></pre></div>
+<pre><code>##  [1] &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;A&quot;
+## [20] &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;G&quot; &quot;T&quot; &quot;G&quot; &quot;T&quot;</code></pre>
 <p>If you look at the help page for the function(), you will find that its inputs are the vector to sample from (nucleotides here), the size of the sample (seqlength here), and a vector of probabilities for obtaining the elements of the vector being sampled (probabilities1 here). If we use the sample() function to generate a sequence again, it will create a different sequence using the same multinomial model:</p>
-<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="hidden-markov-models.html#cb488-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(nucleotides, seqlength, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities1) <span class="co"># Generate another sequence</span></span></code></pre></div>
-<pre><code>##  [1] &quot;A&quot; &quot;C&quot; &quot;C&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;T&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot;
-## [20] &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;A&quot; &quot;T&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;A&quot;</code></pre>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="hidden-markov-models.html#cb492-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(nucleotides, seqlength, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities1) <span class="co"># Generate another sequence</span></span></code></pre></div>
+<pre><code>##  [1] &quot;C&quot; &quot;T&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;T&quot; &quot;G&quot;
+## [20] &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;A&quot; &quot;A&quot;</code></pre>
 <p>In the same way, we can generate a sequence using a different multinomial model, where pA=0.1, pC=0.41, pG=0.39, and pT=0.1:</p>
-<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="hidden-markov-models.html#cb490-1" aria-hidden="true" tabindex="-1"></a>probabilities2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.41</span>, <span class="fl">0.39</span>, <span class="fl">0.1</span>) <span class="co"># Set the values of the probabilities for the new model</span></span>
-<span id="cb490-2"><a href="hidden-markov-models.html#cb490-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(nucleotides, seqlength, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities2) <span class="co"># Generate a sequence</span></span></code></pre></div>
-<pre><code>##  [1] &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot;
-## [20] &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;T&quot; &quot;C&quot;</code></pre>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="hidden-markov-models.html#cb494-1" aria-hidden="true" tabindex="-1"></a>probabilities2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.41</span>, <span class="fl">0.39</span>, <span class="fl">0.1</span>) <span class="co"># Set the values of the probabilities for the new model</span></span>
+<span id="cb494-2"><a href="hidden-markov-models.html#cb494-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(nucleotides, seqlength, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities2) <span class="co"># Generate a sequence</span></span></code></pre></div>
+<pre><code>##  [1] &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;C&quot;
+## [20] &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot;</code></pre>
 <p>As you would expect, the sequences generated using this second multinomial model have a higher fraction of Cs and Gs compared to the sequences generated using the first multinomial model above. This is because pC and GT are higher for this second model than for the first model (pC=0.41 and GT=0.39 in the second model, versus pC=0.3 and GT=0.3 in the first model). That is, in the second multinomial model we are using a roulette wheel that has large slices labelled “C” and “G,” while in the first multinomial model we were using a roulette wheel with relatively smaller slices labelled “C” and “G” (SEE THE PICTURE BELOW).</p>
 </div>
 <div id="a-markov-model-of-dna-sequence-evolution" class="section level2" number="35.4">
@@ -492,15 +510,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">35.5</span> The transition matrix for a Markov model</h2>
 <p>A multinomial model of DNA sequence evolution just has four parameters: the probabilities pA, pC, pG, and pT. In contrast, a Markov model has many more parameters: four sets of probabilities pA, pC, pG, and pT, that differ according to whether the previous nucleotide was “A,” “G,” “T” or “C.” The symbols pAA, pAC, pAG, and pAT are usually used to represent the four probabilities for the case where the previous nucleotide was “A,” the symbols pCA, pCC, pCG, and pCT for the case when the previous nucleotide was “C,” and so on.</p>
 <p>It is common to store the probability parameters for a Markov model of a DNA sequence in a square matrix, which is known as a Markov transition matrix. The rows of the transition matrix represent the nucleotide found at the previous position in the sequence, while the columns represent the nucleotides that could be found at the current position in the sequence. In R, you can create a matrix using the matrix() command, and the rownames() and colnames() functions can be used to label the rows and columns of the matrix. For example, to create a transition matrix, we type:</p>
-<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="hidden-markov-models.html#cb492-1" aria-hidden="true" tabindex="-1"></a>nucleotides         <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>) <span class="co"># Define the alphabet of nucleotides</span></span>
-<span id="cb492-2"><a href="hidden-markov-models.html#cb492-2" aria-hidden="true" tabindex="-1"></a>afterAprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>)         <span class="co"># Set the values of the probabilities, where the previous nucleotide was &quot;A&quot;</span></span>
-<span id="cb492-3"><a href="hidden-markov-models.html#cb492-3" aria-hidden="true" tabindex="-1"></a>afterCprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.41</span>, <span class="fl">0.39</span>, <span class="fl">0.1</span>)       <span class="co"># Set the values of the probabilities, where the previous nucleotide was &quot;C&quot;</span></span>
-<span id="cb492-4"><a href="hidden-markov-models.html#cb492-4" aria-hidden="true" tabindex="-1"></a>afterGprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>)     <span class="co"># Set the values of the probabilities, where the previous nucleotide was &quot;G&quot;</span></span>
-<span id="cb492-5"><a href="hidden-markov-models.html#cb492-5" aria-hidden="true" tabindex="-1"></a>afterTprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.17</span>, <span class="fl">0.17</span>, <span class="fl">0.17</span>)      <span class="co"># Set the values of the probabilities, where the previous nucleotide was &quot;T&quot;</span></span>
-<span id="cb492-6"><a href="hidden-markov-models.html#cb492-6" aria-hidden="true" tabindex="-1"></a>mytransitionmatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(afterAprobs, afterCprobs, afterGprobs, afterTprobs), <span class="dv">4</span>, <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>) <span class="co"># Create a 4 x 4 matrix</span></span>
-<span id="cb492-7"><a href="hidden-markov-models.html#cb492-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mytransitionmatrix) <span class="ot">&lt;-</span> nucleotides</span>
-<span id="cb492-8"><a href="hidden-markov-models.html#cb492-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mytransitionmatrix) <span class="ot">&lt;-</span> nucleotides</span>
-<span id="cb492-9"><a href="hidden-markov-models.html#cb492-9" aria-hidden="true" tabindex="-1"></a>mytransitionmatrix                           <span class="co"># Print out the transition matrix</span></span></code></pre></div>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="hidden-markov-models.html#cb496-1" aria-hidden="true" tabindex="-1"></a>nucleotides         <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>) <span class="co"># Define the alphabet of nucleotides</span></span>
+<span id="cb496-2"><a href="hidden-markov-models.html#cb496-2" aria-hidden="true" tabindex="-1"></a>afterAprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.3</span>, <span class="fl">0.2</span>)         <span class="co"># Set the values of the probabilities, where the previous nucleotide was &quot;A&quot;</span></span>
+<span id="cb496-3"><a href="hidden-markov-models.html#cb496-3" aria-hidden="true" tabindex="-1"></a>afterCprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.41</span>, <span class="fl">0.39</span>, <span class="fl">0.1</span>)       <span class="co"># Set the values of the probabilities, where the previous nucleotide was &quot;C&quot;</span></span>
+<span id="cb496-4"><a href="hidden-markov-models.html#cb496-4" aria-hidden="true" tabindex="-1"></a>afterGprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>)     <span class="co"># Set the values of the probabilities, where the previous nucleotide was &quot;G&quot;</span></span>
+<span id="cb496-5"><a href="hidden-markov-models.html#cb496-5" aria-hidden="true" tabindex="-1"></a>afterTprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.17</span>, <span class="fl">0.17</span>, <span class="fl">0.17</span>)      <span class="co"># Set the values of the probabilities, where the previous nucleotide was &quot;T&quot;</span></span>
+<span id="cb496-6"><a href="hidden-markov-models.html#cb496-6" aria-hidden="true" tabindex="-1"></a>mytransitionmatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(afterAprobs, afterCprobs, afterGprobs, afterTprobs), <span class="dv">4</span>, <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>) <span class="co"># Create a 4 x 4 matrix</span></span>
+<span id="cb496-7"><a href="hidden-markov-models.html#cb496-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mytransitionmatrix) <span class="ot">&lt;-</span> nucleotides</span>
+<span id="cb496-8"><a href="hidden-markov-models.html#cb496-8" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mytransitionmatrix) <span class="ot">&lt;-</span> nucleotides</span>
+<span id="cb496-9"><a href="hidden-markov-models.html#cb496-9" aria-hidden="true" tabindex="-1"></a>mytransitionmatrix                           <span class="co"># Print out the transition matrix</span></span></code></pre></div>
 <pre><code>##      A    C    G    T
 ## A 0.20 0.30 0.30 0.20
 ## C 0.10 0.41 0.39 0.10
@@ -512,31 +530,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">35.6</span> Generating a DNA sequence using a Markov model</h2>
 <p>Just as you can generate a DNA sequence using a particular multinomial model, you can generate a DNA sequence using a particular Markov model. When you are generating a DNA sequence using a Markov model, the nucleotide chosen at each position at the sequence depends on the nucleotide chosen at the previous position. As there is no previous nucleotide at the first position in the new sequence, we need to define the probabilities of choosing “A,” “C,” “G” or “T” for the first position. The symbols ΠA, ΠC, ΠG, and ΠT are used to represent the probabilities of choosing “A,” “C,” “G,” or “T” at the first position.</p>
 <p>We can define an R function generatemarkovseq() to generate a DNA sequence using a particular Markov model:</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="hidden-markov-models.html#cb494-1" aria-hidden="true" tabindex="-1"></a>generatemarkovseq <span class="ot">&lt;-</span> <span class="cf">function</span>(transitionmatrix, initialprobs, seqlength)</span>
-<span id="cb494-2"><a href="hidden-markov-models.html#cb494-2" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb494-3"><a href="hidden-markov-models.html#cb494-3" aria-hidden="true" tabindex="-1"></a>nucleotides     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>) <span class="co"># Define the alphabet of nucleotides</span></span>
-<span id="cb494-4"><a href="hidden-markov-models.html#cb494-4" aria-hidden="true" tabindex="-1"></a>mysequence      <span class="ot">&lt;-</span> <span class="fu">character</span>()           <span class="co"># Create a vector for storing the new sequence</span></span>
-<span id="cb494-5"><a href="hidden-markov-models.html#cb494-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose the nucleotide for the first position in the sequence:</span></span>
-<span id="cb494-6"><a href="hidden-markov-models.html#cb494-6" aria-hidden="true" tabindex="-1"></a>firstnucleotide <span class="ot">&lt;-</span> <span class="fu">sample</span>(nucleotides, <span class="dv">1</span>, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>initialprobs)</span>
-<span id="cb494-7"><a href="hidden-markov-models.html#cb494-7" aria-hidden="true" tabindex="-1"></a>mysequence[<span class="dv">1</span>]   <span class="ot">&lt;-</span> firstnucleotide       <span class="co"># Store the nucleotide for the first position of the sequence</span></span>
-<span id="cb494-8"><a href="hidden-markov-models.html#cb494-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>seqlength)</span>
-<span id="cb494-9"><a href="hidden-markov-models.html#cb494-9" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb494-10"><a href="hidden-markov-models.html#cb494-10" aria-hidden="true" tabindex="-1"></a>prevnucleotide <span class="ot">&lt;-</span> mysequence[i<span class="dv">-1</span>]     <span class="co"># Get the previous nucleotide in the new sequence</span></span>
-<span id="cb494-11"><a href="hidden-markov-models.html#cb494-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the probabilities of the current nucleotide, given previous nucleotide &quot;prevnucleotide&quot;:</span></span>
-<span id="cb494-12"><a href="hidden-markov-models.html#cb494-12" aria-hidden="true" tabindex="-1"></a>probabilities  <span class="ot">&lt;-</span> transitionmatrix[prevnucleotide,]</span>
-<span id="cb494-13"><a href="hidden-markov-models.html#cb494-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose the nucleotide at the current position of the sequence:</span></span>
-<span id="cb494-14"><a href="hidden-markov-models.html#cb494-14" aria-hidden="true" tabindex="-1"></a>nucleotide     <span class="ot">&lt;-</span> <span class="fu">sample</span>(nucleotides, <span class="dv">1</span>, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities)</span>
-<span id="cb494-15"><a href="hidden-markov-models.html#cb494-15" aria-hidden="true" tabindex="-1"></a>mysequence[i]  <span class="ot">&lt;-</span> nucleotide          <span class="co"># Store the nucleotide for the current position of the sequence</span></span>
-<span id="cb494-16"><a href="hidden-markov-models.html#cb494-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb494-17"><a href="hidden-markov-models.html#cb494-17" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(mysequence)</span>
-<span id="cb494-18"><a href="hidden-markov-models.html#cb494-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="hidden-markov-models.html#cb498-1" aria-hidden="true" tabindex="-1"></a>generatemarkovseq <span class="ot">&lt;-</span> <span class="cf">function</span>(transitionmatrix, initialprobs, seqlength)</span>
+<span id="cb498-2"><a href="hidden-markov-models.html#cb498-2" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb498-3"><a href="hidden-markov-models.html#cb498-3" aria-hidden="true" tabindex="-1"></a>nucleotides     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>) <span class="co"># Define the alphabet of nucleotides</span></span>
+<span id="cb498-4"><a href="hidden-markov-models.html#cb498-4" aria-hidden="true" tabindex="-1"></a>mysequence      <span class="ot">&lt;-</span> <span class="fu">character</span>()           <span class="co"># Create a vector for storing the new sequence</span></span>
+<span id="cb498-5"><a href="hidden-markov-models.html#cb498-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose the nucleotide for the first position in the sequence:</span></span>
+<span id="cb498-6"><a href="hidden-markov-models.html#cb498-6" aria-hidden="true" tabindex="-1"></a>firstnucleotide <span class="ot">&lt;-</span> <span class="fu">sample</span>(nucleotides, <span class="dv">1</span>, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>initialprobs)</span>
+<span id="cb498-7"><a href="hidden-markov-models.html#cb498-7" aria-hidden="true" tabindex="-1"></a>mysequence[<span class="dv">1</span>]   <span class="ot">&lt;-</span> firstnucleotide       <span class="co"># Store the nucleotide for the first position of the sequence</span></span>
+<span id="cb498-8"><a href="hidden-markov-models.html#cb498-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>seqlength)</span>
+<span id="cb498-9"><a href="hidden-markov-models.html#cb498-9" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb498-10"><a href="hidden-markov-models.html#cb498-10" aria-hidden="true" tabindex="-1"></a>prevnucleotide <span class="ot">&lt;-</span> mysequence[i<span class="dv">-1</span>]     <span class="co"># Get the previous nucleotide in the new sequence</span></span>
+<span id="cb498-11"><a href="hidden-markov-models.html#cb498-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the probabilities of the current nucleotide, given previous nucleotide &quot;prevnucleotide&quot;:</span></span>
+<span id="cb498-12"><a href="hidden-markov-models.html#cb498-12" aria-hidden="true" tabindex="-1"></a>probabilities  <span class="ot">&lt;-</span> transitionmatrix[prevnucleotide,]</span>
+<span id="cb498-13"><a href="hidden-markov-models.html#cb498-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose the nucleotide at the current position of the sequence:</span></span>
+<span id="cb498-14"><a href="hidden-markov-models.html#cb498-14" aria-hidden="true" tabindex="-1"></a>nucleotide     <span class="ot">&lt;-</span> <span class="fu">sample</span>(nucleotides, <span class="dv">1</span>, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities)</span>
+<span id="cb498-15"><a href="hidden-markov-models.html#cb498-15" aria-hidden="true" tabindex="-1"></a>mysequence[i]  <span class="ot">&lt;-</span> nucleotide          <span class="co"># Store the nucleotide for the current position of the sequence</span></span>
+<span id="cb498-16"><a href="hidden-markov-models.html#cb498-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb498-17"><a href="hidden-markov-models.html#cb498-17" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(mysequence)</span>
+<span id="cb498-18"><a href="hidden-markov-models.html#cb498-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>The function generatemarkovseq() takes as its arguments (inputs) the transition matrix for the particular Markov model; a vector containing the values of ΠA, ΠC, ΠG, and ΠT; and the length of the DNA sequence to be generated.</p>
 <p>The probabilities of choosing each of the four nucleotides at the first position in the sequence are ΠA, ΠC, ΠG, and ΠT. The probabilities of choosing each of the four nucleotides at the second position in the sequence depend on the particular nucleotide that was chosen at the first position in the sequence. The probabilities of choosing each of the four nucleotides at the third position depend on the nucleotide chosen at the second position, and so on.</p>
 <p>We can use the generatemarkovseq() function to generate a sequence using a particular Markov model. For example, to create a sequence of 30 nucleotides using the Markov model described in the transition matrix mytransitionmatrix, using uniform starting probabilities (ie. ΠA = 0.25, ΠC = 0.25, ΠG = 0.25, and ΠT = 0.25) , we type:</p>
-<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb495-1"><a href="hidden-markov-models.html#cb495-1" aria-hidden="true" tabindex="-1"></a>myinitialprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>)</span>
-<span id="cb495-2"><a href="hidden-markov-models.html#cb495-2" aria-hidden="true" tabindex="-1"></a><span class="fu">generatemarkovseq</span>(mytransitionmatrix, myinitialprobs, <span class="dv">30</span>)</span></code></pre></div>
-<pre><code>##  [1] &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;T&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot;
-## [20] &quot;G&quot; &quot;T&quot; &quot;A&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;G&quot; &quot;C&quot;</code></pre>
+<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="hidden-markov-models.html#cb499-1" aria-hidden="true" tabindex="-1"></a>myinitialprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>)</span>
+<span id="cb499-2"><a href="hidden-markov-models.html#cb499-2" aria-hidden="true" tabindex="-1"></a><span class="fu">generatemarkovseq</span>(mytransitionmatrix, myinitialprobs, <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;A&quot; &quot;T&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;G&quot; &quot;T&quot; &quot;A&quot; &quot;T&quot; &quot;C&quot; &quot;G&quot;
+## [20] &quot;A&quot; &quot;T&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot;</code></pre>
 <p>As you can see, there are many “A”s after “T”s in the sequence. This is because pTA has a high value (0.5) in the Markov transition matrix mytransitionmatrix. Similarly, there are few “A”s or “T”s after “C”s, which is because pCA and pCT have low values (0.1) in this transition matrix.</p>
 </div>
 <div id="a-hidden-markov-model-of-dna-sequence-evolution" class="section level2" number="35.7">
@@ -548,25 +566,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="the-transition-matrix-and-emission-matrix-for-a-hmm" class="section level2" number="35.8">
 <h2><span class="header-section-number">35.8</span> The transition matrix and emission matrix for a HMM</h2>
 <p>A HMM has two important matrices that hold its parameters. The first is the HMM transition matrix, which contains the probabilities of switching from one state to another. For example, in a HMM with two states, an AT-rich state and a GC-rich state, the transition matrix will hold the probabilities of switching from the AT-rich state to the GC-rich state, and of switching from the GC-rich state to the AT-rich state. For example, if the previous nucleotide was in the AT-rich state there may be a probability of 0.3 that the current nucleotide will be in the GC-rich state, and if the previous nucleotide was in the GC-rich state there may be a probability of 0.1 that the current nucleotide will be in the AT-rich state:</p>
-<div class="sourceCode" id="cb497"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb497-1"><a href="hidden-markov-models.html#cb497-1" aria-hidden="true" tabindex="-1"></a>states              <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AT-rich&quot;</span>, <span class="st">&quot;GC-rich&quot;</span>) <span class="co"># Define the names of the states</span></span>
-<span id="cb497-2"><a href="hidden-markov-models.html#cb497-2" aria-hidden="true" tabindex="-1"></a>ATrichprobs         <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.3</span>)             <span class="co"># Set the probabilities of switching states, where the previous state was &quot;AT-rich&quot;</span></span>
-<span id="cb497-3"><a href="hidden-markov-models.html#cb497-3" aria-hidden="true" tabindex="-1"></a>GCrichprobs         <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)             <span class="co"># Set the probabilities of switching states, where the previous state was &quot;GC-rich&quot;</span></span>
-<span id="cb497-4"><a href="hidden-markov-models.html#cb497-4" aria-hidden="true" tabindex="-1"></a>thetransitionmatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(ATrichprobs, GCrichprobs), <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>) <span class="co"># Create a 2 x 2 matrix</span></span>
-<span id="cb497-5"><a href="hidden-markov-models.html#cb497-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(thetransitionmatrix) <span class="ot">&lt;-</span> states</span>
-<span id="cb497-6"><a href="hidden-markov-models.html#cb497-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(thetransitionmatrix) <span class="ot">&lt;-</span> states</span>
-<span id="cb497-7"><a href="hidden-markov-models.html#cb497-7" aria-hidden="true" tabindex="-1"></a>thetransitionmatrix                            <span class="co"># Print out the transition matrix</span></span></code></pre></div>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="hidden-markov-models.html#cb501-1" aria-hidden="true" tabindex="-1"></a>states              <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AT-rich&quot;</span>, <span class="st">&quot;GC-rich&quot;</span>) <span class="co"># Define the names of the states</span></span>
+<span id="cb501-2"><a href="hidden-markov-models.html#cb501-2" aria-hidden="true" tabindex="-1"></a>ATrichprobs         <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="fl">0.3</span>)             <span class="co"># Set the probabilities of switching states, where the previous state was &quot;AT-rich&quot;</span></span>
+<span id="cb501-3"><a href="hidden-markov-models.html#cb501-3" aria-hidden="true" tabindex="-1"></a>GCrichprobs         <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.9</span>)             <span class="co"># Set the probabilities of switching states, where the previous state was &quot;GC-rich&quot;</span></span>
+<span id="cb501-4"><a href="hidden-markov-models.html#cb501-4" aria-hidden="true" tabindex="-1"></a>thetransitionmatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(ATrichprobs, GCrichprobs), <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>) <span class="co"># Create a 2 x 2 matrix</span></span>
+<span id="cb501-5"><a href="hidden-markov-models.html#cb501-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(thetransitionmatrix) <span class="ot">&lt;-</span> states</span>
+<span id="cb501-6"><a href="hidden-markov-models.html#cb501-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(thetransitionmatrix) <span class="ot">&lt;-</span> states</span>
+<span id="cb501-7"><a href="hidden-markov-models.html#cb501-7" aria-hidden="true" tabindex="-1"></a>thetransitionmatrix                            <span class="co"># Print out the transition matrix</span></span></code></pre></div>
 <pre><code>##         AT-rich GC-rich
 ## AT-rich     0.7     0.3
 ## GC-rich     0.1     0.9</code></pre>
 <p>There is a row in the transition matrix for each of the possible states at the previous position in the nucleotide sequence. For example, in this transition matrix, the first row corresponds to the case where the previous position was in the “AT-rich” state, and the second row corresponds to the case where the previous position was in the “GC-rich” state. The columns give the probabilities of switching to different states at the current position. For example, the value in the second row and first column of the transition matrix above is 0.1, which is the probability of switching to the AT-rich state, if the previous position of the sequence was in the GC-rich state.</p>
 <p>The second important matrix is the HMM emission matrix, which holds the probabilities of choosing the four nucleotides “A,” “C,” “G,” and “T,” in each of the states. In a HMM with an AT-rich state and a GC-rich state, the emission matrix will hold the probabilities of choosing each of the four nucleotides “A,” “C,” “G” and “T” in the AT-rich state (for example, pA=0.39, pC=0.1, pG=0.1, and pT=0.41 for the AT-rich state), and the probabilities of choosing “A,” “C,” “G,” and “T” in the GC-rich state (for example, pA=0.1, pC=0.41, pG=0.39, and pT=0.1 for the GC-rich state).</p>
-<div class="sourceCode" id="cb499"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb499-1"><a href="hidden-markov-models.html#cb499-1" aria-hidden="true" tabindex="-1"></a>nucleotides         <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>)   <span class="co"># Define the alphabet of nucleotides</span></span>
-<span id="cb499-2"><a href="hidden-markov-models.html#cb499-2" aria-hidden="true" tabindex="-1"></a>ATrichstateprobs    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.39</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.41</span>) <span class="co"># Set the values of the probabilities, for the AT-rich state</span></span>
-<span id="cb499-3"><a href="hidden-markov-models.html#cb499-3" aria-hidden="true" tabindex="-1"></a>GCrichstateprobs    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.41</span>, <span class="fl">0.39</span>, <span class="fl">0.1</span>) <span class="co"># Set the values of the probabilities, for the GC-rich state</span></span>
-<span id="cb499-4"><a href="hidden-markov-models.html#cb499-4" aria-hidden="true" tabindex="-1"></a>theemissionmatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(ATrichstateprobs, GCrichstateprobs), <span class="dv">2</span>, <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>) <span class="co"># Create a 2 x 4 matrix</span></span>
-<span id="cb499-5"><a href="hidden-markov-models.html#cb499-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(theemissionmatrix) <span class="ot">&lt;-</span> states</span>
-<span id="cb499-6"><a href="hidden-markov-models.html#cb499-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(theemissionmatrix) <span class="ot">&lt;-</span> nucleotides</span>
-<span id="cb499-7"><a href="hidden-markov-models.html#cb499-7" aria-hidden="true" tabindex="-1"></a>theemissionmatrix                              <span class="co"># Print out the emission matrix</span></span></code></pre></div>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="hidden-markov-models.html#cb503-1" aria-hidden="true" tabindex="-1"></a>nucleotides         <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>)   <span class="co"># Define the alphabet of nucleotides</span></span>
+<span id="cb503-2"><a href="hidden-markov-models.html#cb503-2" aria-hidden="true" tabindex="-1"></a>ATrichstateprobs    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.39</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span>, <span class="fl">0.41</span>) <span class="co"># Set the values of the probabilities, for the AT-rich state</span></span>
+<span id="cb503-3"><a href="hidden-markov-models.html#cb503-3" aria-hidden="true" tabindex="-1"></a>GCrichstateprobs    <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.41</span>, <span class="fl">0.39</span>, <span class="fl">0.1</span>) <span class="co"># Set the values of the probabilities, for the GC-rich state</span></span>
+<span id="cb503-4"><a href="hidden-markov-models.html#cb503-4" aria-hidden="true" tabindex="-1"></a>theemissionmatrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(ATrichstateprobs, GCrichstateprobs), <span class="dv">2</span>, <span class="dv">4</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>) <span class="co"># Create a 2 x 4 matrix</span></span>
+<span id="cb503-5"><a href="hidden-markov-models.html#cb503-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(theemissionmatrix) <span class="ot">&lt;-</span> states</span>
+<span id="cb503-6"><a href="hidden-markov-models.html#cb503-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(theemissionmatrix) <span class="ot">&lt;-</span> nucleotides</span>
+<span id="cb503-7"><a href="hidden-markov-models.html#cb503-7" aria-hidden="true" tabindex="-1"></a>theemissionmatrix                              <span class="co"># Print out the emission matrix</span></span></code></pre></div>
 <pre><code>##            A    C    G    T
 ## AT-rich 0.39 0.10 0.10 0.41
 ## GC-rich 0.10 0.41 0.39 0.10</code></pre>
@@ -575,79 +593,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="generating-a-dna-sequence-using-a-hmm" class="section level2" number="35.9">
 <h2><span class="header-section-number">35.9</span> Generating a DNA sequence using a HMM</h2>
 <p>The following function generatehmmseq() can be used to generate a DNA sequence using a particular HMM. As its arguments (inputs), it requires the parameters of the HMM: the HMM transmission matrix and HMM emission matrix.</p>
-<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="hidden-markov-models.html#cb501-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to generate a DNA sequence, given a HMM and the length of the sequence to be generated.</span></span>
-<span id="cb501-2"><a href="hidden-markov-models.html#cb501-2" aria-hidden="true" tabindex="-1"></a>  generatehmmseq <span class="ot">&lt;-</span> <span class="cf">function</span>(transitionmatrix, emissionmatrix, initialprobs, seqlength)</span>
-<span id="cb501-3"><a href="hidden-markov-models.html#cb501-3" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb501-4"><a href="hidden-markov-models.html#cb501-4" aria-hidden="true" tabindex="-1"></a>     nucleotides     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>)   <span class="co"># Define the alphabet of nucleotides</span></span>
-<span id="cb501-5"><a href="hidden-markov-models.html#cb501-5" aria-hidden="true" tabindex="-1"></a>     states          <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AT-rich&quot;</span>, <span class="st">&quot;GC-rich&quot;</span>) <span class="co"># Define the names of the states</span></span>
-<span id="cb501-6"><a href="hidden-markov-models.html#cb501-6" aria-hidden="true" tabindex="-1"></a>     mysequence      <span class="ot">&lt;-</span> <span class="fu">character</span>()             <span class="co"># Create a vector for storing the new sequence</span></span>
-<span id="cb501-7"><a href="hidden-markov-models.html#cb501-7" aria-hidden="true" tabindex="-1"></a>     mystates        <span class="ot">&lt;-</span> <span class="fu">character</span>()             <span class="co"># Create a vector for storing the state that each position in the new sequence</span></span>
-<span id="cb501-8"><a href="hidden-markov-models.html#cb501-8" aria-hidden="true" tabindex="-1"></a>                                                <span class="co"># was generated by</span></span>
-<span id="cb501-9"><a href="hidden-markov-models.html#cb501-9" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Choose the state for the first position in the sequence:</span></span>
-<span id="cb501-10"><a href="hidden-markov-models.html#cb501-10" aria-hidden="true" tabindex="-1"></a>     firststate      <span class="ot">&lt;-</span> <span class="fu">sample</span>(states, <span class="dv">1</span>, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>initialprobs)</span>
-<span id="cb501-11"><a href="hidden-markov-models.html#cb501-11" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Get the probabilities of the current nucleotide, given that we are in the state &quot;firststate&quot;:</span></span>
-<span id="cb501-12"><a href="hidden-markov-models.html#cb501-12" aria-hidden="true" tabindex="-1"></a>     probabilities   <span class="ot">&lt;-</span> emissionmatrix[firststate,]</span>
-<span id="cb501-13"><a href="hidden-markov-models.html#cb501-13" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Choose the nucleotide for the first position in the sequence:</span></span>
-<span id="cb501-14"><a href="hidden-markov-models.html#cb501-14" aria-hidden="true" tabindex="-1"></a>     firstnucleotide <span class="ot">&lt;-</span> <span class="fu">sample</span>(nucleotides, <span class="dv">1</span>, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities)</span>
-<span id="cb501-15"><a href="hidden-markov-models.html#cb501-15" aria-hidden="true" tabindex="-1"></a>     mysequence[<span class="dv">1</span>]   <span class="ot">&lt;-</span> firstnucleotide         <span class="co"># Store the nucleotide for the first position of the sequence</span></span>
-<span id="cb501-16"><a href="hidden-markov-models.html#cb501-16" aria-hidden="true" tabindex="-1"></a>     mystates[<span class="dv">1</span>]     <span class="ot">&lt;-</span> firststate              <span class="co"># Store the state that the first position in the sequence was generated by</span></span>
-<span id="cb501-17"><a href="hidden-markov-models.html#cb501-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb501-18"><a href="hidden-markov-models.html#cb501-18" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>seqlength)</span>
-<span id="cb501-19"><a href="hidden-markov-models.html#cb501-19" aria-hidden="true" tabindex="-1"></a>     {</span>
-<span id="cb501-20"><a href="hidden-markov-models.html#cb501-20" aria-hidden="true" tabindex="-1"></a>        prevstate    <span class="ot">&lt;-</span> mystates[i<span class="dv">-1</span>]           <span class="co"># Get the state that the previous nucleotide in the sequence was generated by</span></span>
-<span id="cb501-21"><a href="hidden-markov-models.html#cb501-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the probabilities of the current state, given that the previous nucleotide was generated by state &quot;prevstate&quot;</span></span>
-<span id="cb501-22"><a href="hidden-markov-models.html#cb501-22" aria-hidden="true" tabindex="-1"></a>        stateprobs   <span class="ot">&lt;-</span> transitionmatrix[prevstate,]</span>
-<span id="cb501-23"><a href="hidden-markov-models.html#cb501-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Choose the state for the ith position in the sequence:</span></span>
-<span id="cb501-24"><a href="hidden-markov-models.html#cb501-24" aria-hidden="true" tabindex="-1"></a>        state        <span class="ot">&lt;-</span> <span class="fu">sample</span>(states, <span class="dv">1</span>, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>stateprobs)</span>
-<span id="cb501-25"><a href="hidden-markov-models.html#cb501-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the probabilities of the current nucleotide, given that we are in the state &quot;state&quot;:</span></span>
-<span id="cb501-26"><a href="hidden-markov-models.html#cb501-26" aria-hidden="true" tabindex="-1"></a>        probabilities <span class="ot">&lt;-</span> emissionmatrix[state,]</span>
-<span id="cb501-27"><a href="hidden-markov-models.html#cb501-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Choose the nucleotide for the ith position in the sequence:</span></span>
-<span id="cb501-28"><a href="hidden-markov-models.html#cb501-28" aria-hidden="true" tabindex="-1"></a>        nucleotide   <span class="ot">&lt;-</span> <span class="fu">sample</span>(nucleotides, <span class="dv">1</span>, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities)</span>
-<span id="cb501-29"><a href="hidden-markov-models.html#cb501-29" aria-hidden="true" tabindex="-1"></a>        mysequence[i] <span class="ot">&lt;-</span> nucleotide             <span class="co"># Store the nucleotide for the current position of the sequence</span></span>
-<span id="cb501-30"><a href="hidden-markov-models.html#cb501-30" aria-hidden="true" tabindex="-1"></a>        mystates[i]  <span class="ot">&lt;-</span> state                   <span class="co"># Store the state that the current position in the sequence was generated by</span></span>
-<span id="cb501-31"><a href="hidden-markov-models.html#cb501-31" aria-hidden="true" tabindex="-1"></a>     }</span>
-<span id="cb501-32"><a href="hidden-markov-models.html#cb501-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb501-33"><a href="hidden-markov-models.html#cb501-33" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(mysequence))</span>
-<span id="cb501-34"><a href="hidden-markov-models.html#cb501-34" aria-hidden="true" tabindex="-1"></a>     {</span>
-<span id="cb501-35"><a href="hidden-markov-models.html#cb501-35" aria-hidden="true" tabindex="-1"></a>        nucleotide   <span class="ot">&lt;-</span> mysequence[i]</span>
-<span id="cb501-36"><a href="hidden-markov-models.html#cb501-36" aria-hidden="true" tabindex="-1"></a>        state        <span class="ot">&lt;-</span> mystates[i]</span>
-<span id="cb501-37"><a href="hidden-markov-models.html#cb501-37" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Position&quot;</span>, i, <span class="st">&quot;, State&quot;</span>, state, <span class="st">&quot;, Nucleotide = &quot;</span>, nucleotide))</span>
-<span id="cb501-38"><a href="hidden-markov-models.html#cb501-38" aria-hidden="true" tabindex="-1"></a>     }</span>
-<span id="cb501-39"><a href="hidden-markov-models.html#cb501-39" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="hidden-markov-models.html#cb505-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to generate a DNA sequence, given a HMM and the length of the sequence to be generated.</span></span>
+<span id="cb505-2"><a href="hidden-markov-models.html#cb505-2" aria-hidden="true" tabindex="-1"></a>  generatehmmseq <span class="ot">&lt;-</span> <span class="cf">function</span>(transitionmatrix, emissionmatrix, initialprobs, seqlength)</span>
+<span id="cb505-3"><a href="hidden-markov-models.html#cb505-3" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb505-4"><a href="hidden-markov-models.html#cb505-4" aria-hidden="true" tabindex="-1"></a>     nucleotides     <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>)   <span class="co"># Define the alphabet of nucleotides</span></span>
+<span id="cb505-5"><a href="hidden-markov-models.html#cb505-5" aria-hidden="true" tabindex="-1"></a>     states          <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AT-rich&quot;</span>, <span class="st">&quot;GC-rich&quot;</span>) <span class="co"># Define the names of the states</span></span>
+<span id="cb505-6"><a href="hidden-markov-models.html#cb505-6" aria-hidden="true" tabindex="-1"></a>     mysequence      <span class="ot">&lt;-</span> <span class="fu">character</span>()             <span class="co"># Create a vector for storing the new sequence</span></span>
+<span id="cb505-7"><a href="hidden-markov-models.html#cb505-7" aria-hidden="true" tabindex="-1"></a>     mystates        <span class="ot">&lt;-</span> <span class="fu">character</span>()             <span class="co"># Create a vector for storing the state that each position in the new sequence</span></span>
+<span id="cb505-8"><a href="hidden-markov-models.html#cb505-8" aria-hidden="true" tabindex="-1"></a>                                                <span class="co"># was generated by</span></span>
+<span id="cb505-9"><a href="hidden-markov-models.html#cb505-9" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Choose the state for the first position in the sequence:</span></span>
+<span id="cb505-10"><a href="hidden-markov-models.html#cb505-10" aria-hidden="true" tabindex="-1"></a>     firststate      <span class="ot">&lt;-</span> <span class="fu">sample</span>(states, <span class="dv">1</span>, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>initialprobs)</span>
+<span id="cb505-11"><a href="hidden-markov-models.html#cb505-11" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Get the probabilities of the current nucleotide, given that we are in the state &quot;firststate&quot;:</span></span>
+<span id="cb505-12"><a href="hidden-markov-models.html#cb505-12" aria-hidden="true" tabindex="-1"></a>     probabilities   <span class="ot">&lt;-</span> emissionmatrix[firststate,]</span>
+<span id="cb505-13"><a href="hidden-markov-models.html#cb505-13" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Choose the nucleotide for the first position in the sequence:</span></span>
+<span id="cb505-14"><a href="hidden-markov-models.html#cb505-14" aria-hidden="true" tabindex="-1"></a>     firstnucleotide <span class="ot">&lt;-</span> <span class="fu">sample</span>(nucleotides, <span class="dv">1</span>, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities)</span>
+<span id="cb505-15"><a href="hidden-markov-models.html#cb505-15" aria-hidden="true" tabindex="-1"></a>     mysequence[<span class="dv">1</span>]   <span class="ot">&lt;-</span> firstnucleotide         <span class="co"># Store the nucleotide for the first position of the sequence</span></span>
+<span id="cb505-16"><a href="hidden-markov-models.html#cb505-16" aria-hidden="true" tabindex="-1"></a>     mystates[<span class="dv">1</span>]     <span class="ot">&lt;-</span> firststate              <span class="co"># Store the state that the first position in the sequence was generated by</span></span>
+<span id="cb505-17"><a href="hidden-markov-models.html#cb505-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb505-18"><a href="hidden-markov-models.html#cb505-18" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>seqlength)</span>
+<span id="cb505-19"><a href="hidden-markov-models.html#cb505-19" aria-hidden="true" tabindex="-1"></a>     {</span>
+<span id="cb505-20"><a href="hidden-markov-models.html#cb505-20" aria-hidden="true" tabindex="-1"></a>        prevstate    <span class="ot">&lt;-</span> mystates[i<span class="dv">-1</span>]           <span class="co"># Get the state that the previous nucleotide in the sequence was generated by</span></span>
+<span id="cb505-21"><a href="hidden-markov-models.html#cb505-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the probabilities of the current state, given that the previous nucleotide was generated by state &quot;prevstate&quot;</span></span>
+<span id="cb505-22"><a href="hidden-markov-models.html#cb505-22" aria-hidden="true" tabindex="-1"></a>        stateprobs   <span class="ot">&lt;-</span> transitionmatrix[prevstate,]</span>
+<span id="cb505-23"><a href="hidden-markov-models.html#cb505-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Choose the state for the ith position in the sequence:</span></span>
+<span id="cb505-24"><a href="hidden-markov-models.html#cb505-24" aria-hidden="true" tabindex="-1"></a>        state        <span class="ot">&lt;-</span> <span class="fu">sample</span>(states, <span class="dv">1</span>, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>stateprobs)</span>
+<span id="cb505-25"><a href="hidden-markov-models.html#cb505-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get the probabilities of the current nucleotide, given that we are in the state &quot;state&quot;:</span></span>
+<span id="cb505-26"><a href="hidden-markov-models.html#cb505-26" aria-hidden="true" tabindex="-1"></a>        probabilities <span class="ot">&lt;-</span> emissionmatrix[state,]</span>
+<span id="cb505-27"><a href="hidden-markov-models.html#cb505-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Choose the nucleotide for the ith position in the sequence:</span></span>
+<span id="cb505-28"><a href="hidden-markov-models.html#cb505-28" aria-hidden="true" tabindex="-1"></a>        nucleotide   <span class="ot">&lt;-</span> <span class="fu">sample</span>(nucleotides, <span class="dv">1</span>, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities)</span>
+<span id="cb505-29"><a href="hidden-markov-models.html#cb505-29" aria-hidden="true" tabindex="-1"></a>        mysequence[i] <span class="ot">&lt;-</span> nucleotide             <span class="co"># Store the nucleotide for the current position of the sequence</span></span>
+<span id="cb505-30"><a href="hidden-markov-models.html#cb505-30" aria-hidden="true" tabindex="-1"></a>        mystates[i]  <span class="ot">&lt;-</span> state                   <span class="co"># Store the state that the current position in the sequence was generated by</span></span>
+<span id="cb505-31"><a href="hidden-markov-models.html#cb505-31" aria-hidden="true" tabindex="-1"></a>     }</span>
+<span id="cb505-32"><a href="hidden-markov-models.html#cb505-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb505-33"><a href="hidden-markov-models.html#cb505-33" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(mysequence))</span>
+<span id="cb505-34"><a href="hidden-markov-models.html#cb505-34" aria-hidden="true" tabindex="-1"></a>     {</span>
+<span id="cb505-35"><a href="hidden-markov-models.html#cb505-35" aria-hidden="true" tabindex="-1"></a>        nucleotide   <span class="ot">&lt;-</span> mysequence[i]</span>
+<span id="cb505-36"><a href="hidden-markov-models.html#cb505-36" aria-hidden="true" tabindex="-1"></a>        state        <span class="ot">&lt;-</span> mystates[i]</span>
+<span id="cb505-37"><a href="hidden-markov-models.html#cb505-37" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Position&quot;</span>, i, <span class="st">&quot;, State&quot;</span>, state, <span class="st">&quot;, Nucleotide = &quot;</span>, nucleotide))</span>
+<span id="cb505-38"><a href="hidden-markov-models.html#cb505-38" aria-hidden="true" tabindex="-1"></a>     }</span>
+<span id="cb505-39"><a href="hidden-markov-models.html#cb505-39" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
 <p>When you are generating a DNA sequence using a HMM, the nucleotide is chosen at each position depending on the state at the previous position in the sequence. As there is no previous nucleotide at the first position in the sequence, the function generatehmmseq() also requires the probabilities of the choosing each of the states at the first position (eg. ΠAT-rich and ΠGC-rich being the probability of the choosing the “AT-rich” or “GC-rich” states at the first position for a HMM with these two states).</p>
 <p>We can use the generatehmmseq() function to generate a sequence using a particular HMM. For example, to create a sequence of 30 nucleotides using the HMM with “AT-rich” and “GC-rich” states described in the transition matrix thetransitionmatrix, the emission matrix theemissionmatrix, and uniform starting probabilities (ie. ΠAT-rich = 0.5, ΠGC-rich = 0.5), we type:</p>
-<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb502-1"><a href="hidden-markov-models.html#cb502-1" aria-hidden="true" tabindex="-1"></a>theinitialprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
-<span id="cb502-2"><a href="hidden-markov-models.html#cb502-2" aria-hidden="true" tabindex="-1"></a><span class="fu">generatehmmseq</span>(thetransitionmatrix, theemissionmatrix, theinitialprobs, <span class="dv">30</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="hidden-markov-models.html#cb506-1" aria-hidden="true" tabindex="-1"></a>theinitialprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb506-2"><a href="hidden-markov-models.html#cb506-2" aria-hidden="true" tabindex="-1"></a><span class="fu">generatehmmseq</span>(thetransitionmatrix, theemissionmatrix, theinitialprobs, <span class="dv">30</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;Position 1 , State AT-rich , Nucleotide =  A&quot;
-## [1] &quot;Position 2 , State AT-rich , Nucleotide =  A&quot;
-## [1] &quot;Position 3 , State AT-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 4 , State AT-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 5 , State AT-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 6 , State AT-rich , Nucleotide =  A&quot;
-## [1] &quot;Position 7 , State AT-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 8 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 9 , State AT-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 10 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 11 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 12 , State GC-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 13 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 14 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 15 , State GC-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 16 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 17 , State GC-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 18 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 19 , State GC-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 2 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 3 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 4 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 5 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 6 , State GC-rich , Nucleotide =  T&quot;
+## [1] &quot;Position 7 , State GC-rich , Nucleotide =  G&quot;
+## [1] &quot;Position 8 , State AT-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 9 , State AT-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 10 , State AT-rich , Nucleotide =  T&quot;
+## [1] &quot;Position 11 , State GC-rich , Nucleotide =  G&quot;
+## [1] &quot;Position 12 , State AT-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 13 , State GC-rich , Nucleotide =  G&quot;
+## [1] &quot;Position 14 , State GC-rich , Nucleotide =  T&quot;
+## [1] &quot;Position 15 , State GC-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 16 , State GC-rich , Nucleotide =  T&quot;
+## [1] &quot;Position 17 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 18 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 19 , State GC-rich , Nucleotide =  G&quot;
 ## [1] &quot;Position 20 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 21 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 22 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 23 , State GC-rich , Nucleotide =  A&quot;
-## [1] &quot;Position 24 , State GC-rich , Nucleotide =  G&quot;
+## [1] &quot;Position 21 , State AT-rich , Nucleotide =  T&quot;
+## [1] &quot;Position 22 , State AT-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 23 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 24 , State GC-rich , Nucleotide =  C&quot;
 ## [1] &quot;Position 25 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 26 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 27 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 28 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 29 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 30 , State GC-rich , Nucleotide =  C&quot;</code></pre>
+## [1] &quot;Position 26 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 27 , State GC-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 28 , State GC-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 29 , State GC-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 30 , State GC-rich , Nucleotide =  G&quot;</code></pre>
 <p>As you can see, the nucleotides generated by the GC-rich state are mostly but not all “G”s and “C”s (because of the high values of pG and pC for the GC-rich state in the HMM emission matrix), while the nucleotides generated by the AT-rich state are mostly but not all “A”s and “T”s (because of the high values of pT and pA for the AT-rics state in the HMM emission matrix).</p>
 <p>Furthermore, there tends to be runs of nucleotides that are either all in the GC-rich state or all in the AT-rich state, as the transition matrix specifies that the probabilities of switching from the AT-rich to GC-rich state (probability 0.3), or GC-rich to AT-rich state (probability 0.1) are relatively low.</p>
 </div>
@@ -656,88 +674,88 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>If we have a HMM with two states, “GC-rich” and “AT-rich,” and we know the transmission and emission matrices of the HMM, can we take some new DNA sequence, and figure out which state (GC-rich or AT-rich) is the most likely to have generated each nucleotide position in that DNA sequence? This is a common problem in bioinformatics. It is called the problem of finding the most probable state path, as it essentially consists of assigning the most likely state to each position in the DNA sequence. The problem of finding the most probable state path is also sometimes called segmentation. For example, give a DNA sequence of 1000 nucleotides, you may wish to use your HMM to segment the sequence into blocks that were probably generated by the “GC-rich” state or by the “AT-rich” state.</p>
 <p>The problem of finding the most probable state path given a HMM and a sequence (ie. the problem of segmenting a sequence using a HMM), can be solved by an algorithm called the Viterbi algorithm. As its output, the Viterbi algorithm gives for each nucleotide position in a DNA sequence, the state of your HMM that most probably generated the nucleotide in that position. For example, if you segmented a particular DNA sequence of 1000 nucleotides using a HMM with “AT-rich” and “GC-rich” states, the Viterbi algorithm may tell you that nucleotides 1-343 were most probably generated by the AT-rich state, nucleotides 344-900 were most probably generated by the GC-rich state, and 901-1000 were most probably generated by the AT-rich state.</p>
 <p>The following function viterbi() is a function for the Viterbi algorithm:</p>
-<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb504-1"><a href="hidden-markov-models.html#cb504-1" aria-hidden="true" tabindex="-1"></a>viterbi <span class="ot">&lt;-</span> <span class="cf">function</span>(sequence, transitionmatrix, emissionmatrix)</span>
-<span id="cb504-2"><a href="hidden-markov-models.html#cb504-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># This carries out the Viterbi algorithm.</span></span>
-<span id="cb504-3"><a href="hidden-markov-models.html#cb504-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adapted from &quot;Applied Statistics for Bioinformatics using R&quot; by Wim P. Krijnen, page 209</span></span>
-<span id="cb504-4"><a href="hidden-markov-models.html#cb504-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ( cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf )</span></span>
-<span id="cb504-5"><a href="hidden-markov-models.html#cb504-5" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb504-6"><a href="hidden-markov-models.html#cb504-6" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Get the names of the states in the HMM:</span></span>
-<span id="cb504-7"><a href="hidden-markov-models.html#cb504-7" aria-hidden="true" tabindex="-1"></a>     states <span class="ot">&lt;-</span> <span class="fu">rownames</span>(theemissionmatrix)</span>
-<span id="cb504-8"><a href="hidden-markov-models.html#cb504-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb504-9"><a href="hidden-markov-models.html#cb504-9" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Make the Viterbi matrix v:</span></span>
-<span id="cb504-10"><a href="hidden-markov-models.html#cb504-10" aria-hidden="true" tabindex="-1"></a>     v <span class="ot">&lt;-</span> <span class="fu">makeViterbimat</span>(sequence, transitionmatrix, emissionmatrix)</span>
-<span id="cb504-11"><a href="hidden-markov-models.html#cb504-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb504-12"><a href="hidden-markov-models.html#cb504-12" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Go through each of the rows of the matrix v (where each row represents</span></span>
-<span id="cb504-13"><a href="hidden-markov-models.html#cb504-13" aria-hidden="true" tabindex="-1"></a>     <span class="co"># a position in the DNA sequence), and find out which column has the</span></span>
-<span id="cb504-14"><a href="hidden-markov-models.html#cb504-14" aria-hidden="true" tabindex="-1"></a>     <span class="co"># maximum value for that row (where each column represents one state of</span></span>
-<span id="cb504-15"><a href="hidden-markov-models.html#cb504-15" aria-hidden="true" tabindex="-1"></a>     <span class="co"># the HMM):</span></span>
-<span id="cb504-16"><a href="hidden-markov-models.html#cb504-16" aria-hidden="true" tabindex="-1"></a>     mostprobablestatepath <span class="ot">&lt;-</span> <span class="fu">apply</span>(v, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="fu">which.max</span>(x))</span>
-<span id="cb504-17"><a href="hidden-markov-models.html#cb504-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb504-18"><a href="hidden-markov-models.html#cb504-18" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Print out the most probable state path:</span></span>
-<span id="cb504-19"><a href="hidden-markov-models.html#cb504-19" aria-hidden="true" tabindex="-1"></a>     prevnucleotide <span class="ot">&lt;-</span> sequence[<span class="dv">1</span>]</span>
-<span id="cb504-20"><a href="hidden-markov-models.html#cb504-20" aria-hidden="true" tabindex="-1"></a>     prevmostprobablestate <span class="ot">&lt;-</span> mostprobablestatepath[<span class="dv">1</span>]</span>
-<span id="cb504-21"><a href="hidden-markov-models.html#cb504-21" aria-hidden="true" tabindex="-1"></a>     prevmostprobablestatename <span class="ot">&lt;-</span> states[prevmostprobablestate]</span>
-<span id="cb504-22"><a href="hidden-markov-models.html#cb504-22" aria-hidden="true" tabindex="-1"></a>     startpos <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb504-23"><a href="hidden-markov-models.html#cb504-23" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(sequence))</span>
-<span id="cb504-24"><a href="hidden-markov-models.html#cb504-24" aria-hidden="true" tabindex="-1"></a>     {</span>
-<span id="cb504-25"><a href="hidden-markov-models.html#cb504-25" aria-hidden="true" tabindex="-1"></a>        nucleotide <span class="ot">&lt;-</span> sequence[i]</span>
-<span id="cb504-26"><a href="hidden-markov-models.html#cb504-26" aria-hidden="true" tabindex="-1"></a>        mostprobablestate <span class="ot">&lt;-</span> mostprobablestatepath[i]</span>
-<span id="cb504-27"><a href="hidden-markov-models.html#cb504-27" aria-hidden="true" tabindex="-1"></a>        mostprobablestatename <span class="ot">&lt;-</span> states[mostprobablestate]</span>
-<span id="cb504-28"><a href="hidden-markov-models.html#cb504-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (mostprobablestatename <span class="sc">!=</span> prevmostprobablestatename)</span>
-<span id="cb504-29"><a href="hidden-markov-models.html#cb504-29" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="cb504-30"><a href="hidden-markov-models.html#cb504-30" aria-hidden="true" tabindex="-1"></a>           <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Positions&quot;</span>,startpos,<span class="st">&quot;-&quot;</span>,(i<span class="dv">-1</span>), <span class="st">&quot;Most probable state = &quot;</span>, prevmostprobablestatename))</span>
-<span id="cb504-31"><a href="hidden-markov-models.html#cb504-31" aria-hidden="true" tabindex="-1"></a>           startpos <span class="ot">&lt;-</span> i</span>
-<span id="cb504-32"><a href="hidden-markov-models.html#cb504-32" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb504-33"><a href="hidden-markov-models.html#cb504-33" aria-hidden="true" tabindex="-1"></a>        prevnucleotide <span class="ot">&lt;-</span> nucleotide</span>
-<span id="cb504-34"><a href="hidden-markov-models.html#cb504-34" aria-hidden="true" tabindex="-1"></a>        prevmostprobablestatename <span class="ot">&lt;-</span> mostprobablestatename</span>
-<span id="cb504-35"><a href="hidden-markov-models.html#cb504-35" aria-hidden="true" tabindex="-1"></a>     }</span>
-<span id="cb504-36"><a href="hidden-markov-models.html#cb504-36" aria-hidden="true" tabindex="-1"></a>     <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Positions&quot;</span>,startpos,<span class="st">&quot;-&quot;</span>,i, <span class="st">&quot;Most probable state = &quot;</span>, prevmostprobablestatename))</span>
-<span id="cb504-37"><a href="hidden-markov-models.html#cb504-37" aria-hidden="true" tabindex="-1"></a>   }</span></code></pre></div>
+<div class="sourceCode" id="cb508"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb508-1"><a href="hidden-markov-models.html#cb508-1" aria-hidden="true" tabindex="-1"></a>viterbi <span class="ot">&lt;-</span> <span class="cf">function</span>(sequence, transitionmatrix, emissionmatrix)</span>
+<span id="cb508-2"><a href="hidden-markov-models.html#cb508-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># This carries out the Viterbi algorithm.</span></span>
+<span id="cb508-3"><a href="hidden-markov-models.html#cb508-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adapted from &quot;Applied Statistics for Bioinformatics using R&quot; by Wim P. Krijnen, page 209</span></span>
+<span id="cb508-4"><a href="hidden-markov-models.html#cb508-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ( cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf )</span></span>
+<span id="cb508-5"><a href="hidden-markov-models.html#cb508-5" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb508-6"><a href="hidden-markov-models.html#cb508-6" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Get the names of the states in the HMM:</span></span>
+<span id="cb508-7"><a href="hidden-markov-models.html#cb508-7" aria-hidden="true" tabindex="-1"></a>     states <span class="ot">&lt;-</span> <span class="fu">rownames</span>(theemissionmatrix)</span>
+<span id="cb508-8"><a href="hidden-markov-models.html#cb508-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb508-9"><a href="hidden-markov-models.html#cb508-9" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Make the Viterbi matrix v:</span></span>
+<span id="cb508-10"><a href="hidden-markov-models.html#cb508-10" aria-hidden="true" tabindex="-1"></a>     v <span class="ot">&lt;-</span> <span class="fu">makeViterbimat</span>(sequence, transitionmatrix, emissionmatrix)</span>
+<span id="cb508-11"><a href="hidden-markov-models.html#cb508-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb508-12"><a href="hidden-markov-models.html#cb508-12" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Go through each of the rows of the matrix v (where each row represents</span></span>
+<span id="cb508-13"><a href="hidden-markov-models.html#cb508-13" aria-hidden="true" tabindex="-1"></a>     <span class="co"># a position in the DNA sequence), and find out which column has the</span></span>
+<span id="cb508-14"><a href="hidden-markov-models.html#cb508-14" aria-hidden="true" tabindex="-1"></a>     <span class="co"># maximum value for that row (where each column represents one state of</span></span>
+<span id="cb508-15"><a href="hidden-markov-models.html#cb508-15" aria-hidden="true" tabindex="-1"></a>     <span class="co"># the HMM):</span></span>
+<span id="cb508-16"><a href="hidden-markov-models.html#cb508-16" aria-hidden="true" tabindex="-1"></a>     mostprobablestatepath <span class="ot">&lt;-</span> <span class="fu">apply</span>(v, <span class="dv">1</span>, <span class="cf">function</span>(x) <span class="fu">which.max</span>(x))</span>
+<span id="cb508-17"><a href="hidden-markov-models.html#cb508-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb508-18"><a href="hidden-markov-models.html#cb508-18" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Print out the most probable state path:</span></span>
+<span id="cb508-19"><a href="hidden-markov-models.html#cb508-19" aria-hidden="true" tabindex="-1"></a>     prevnucleotide <span class="ot">&lt;-</span> sequence[<span class="dv">1</span>]</span>
+<span id="cb508-20"><a href="hidden-markov-models.html#cb508-20" aria-hidden="true" tabindex="-1"></a>     prevmostprobablestate <span class="ot">&lt;-</span> mostprobablestatepath[<span class="dv">1</span>]</span>
+<span id="cb508-21"><a href="hidden-markov-models.html#cb508-21" aria-hidden="true" tabindex="-1"></a>     prevmostprobablestatename <span class="ot">&lt;-</span> states[prevmostprobablestate]</span>
+<span id="cb508-22"><a href="hidden-markov-models.html#cb508-22" aria-hidden="true" tabindex="-1"></a>     startpos <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb508-23"><a href="hidden-markov-models.html#cb508-23" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(sequence))</span>
+<span id="cb508-24"><a href="hidden-markov-models.html#cb508-24" aria-hidden="true" tabindex="-1"></a>     {</span>
+<span id="cb508-25"><a href="hidden-markov-models.html#cb508-25" aria-hidden="true" tabindex="-1"></a>        nucleotide <span class="ot">&lt;-</span> sequence[i]</span>
+<span id="cb508-26"><a href="hidden-markov-models.html#cb508-26" aria-hidden="true" tabindex="-1"></a>        mostprobablestate <span class="ot">&lt;-</span> mostprobablestatepath[i]</span>
+<span id="cb508-27"><a href="hidden-markov-models.html#cb508-27" aria-hidden="true" tabindex="-1"></a>        mostprobablestatename <span class="ot">&lt;-</span> states[mostprobablestate]</span>
+<span id="cb508-28"><a href="hidden-markov-models.html#cb508-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (mostprobablestatename <span class="sc">!=</span> prevmostprobablestatename)</span>
+<span id="cb508-29"><a href="hidden-markov-models.html#cb508-29" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb508-30"><a href="hidden-markov-models.html#cb508-30" aria-hidden="true" tabindex="-1"></a>           <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Positions&quot;</span>,startpos,<span class="st">&quot;-&quot;</span>,(i<span class="dv">-1</span>), <span class="st">&quot;Most probable state = &quot;</span>, prevmostprobablestatename))</span>
+<span id="cb508-31"><a href="hidden-markov-models.html#cb508-31" aria-hidden="true" tabindex="-1"></a>           startpos <span class="ot">&lt;-</span> i</span>
+<span id="cb508-32"><a href="hidden-markov-models.html#cb508-32" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb508-33"><a href="hidden-markov-models.html#cb508-33" aria-hidden="true" tabindex="-1"></a>        prevnucleotide <span class="ot">&lt;-</span> nucleotide</span>
+<span id="cb508-34"><a href="hidden-markov-models.html#cb508-34" aria-hidden="true" tabindex="-1"></a>        prevmostprobablestatename <span class="ot">&lt;-</span> mostprobablestatename</span>
+<span id="cb508-35"><a href="hidden-markov-models.html#cb508-35" aria-hidden="true" tabindex="-1"></a>     }</span>
+<span id="cb508-36"><a href="hidden-markov-models.html#cb508-36" aria-hidden="true" tabindex="-1"></a>     <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&quot;Positions&quot;</span>,startpos,<span class="st">&quot;-&quot;</span>,i, <span class="st">&quot;Most probable state = &quot;</span>, prevmostprobablestatename))</span>
+<span id="cb508-37"><a href="hidden-markov-models.html#cb508-37" aria-hidden="true" tabindex="-1"></a>   }</span></code></pre></div>
 <p>The viterbi() function requires a second function makeViterbimat():</p>
-<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="hidden-markov-models.html#cb505-1" aria-hidden="true" tabindex="-1"></a>makeViterbimat <span class="ot">&lt;-</span> <span class="cf">function</span>(sequence, transitionmatrix, emissionmatrix)</span>
-<span id="cb505-2"><a href="hidden-markov-models.html#cb505-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># This makes the matrix v using the Viterbi algorithm.</span></span>
-<span id="cb505-3"><a href="hidden-markov-models.html#cb505-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adapted from &quot;Applied Statistics for Bioinformatics using R&quot; by Wim P. Krijnen, page 209</span></span>
-<span id="cb505-4"><a href="hidden-markov-models.html#cb505-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ( cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf )</span></span>
-<span id="cb505-5"><a href="hidden-markov-models.html#cb505-5" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb505-6"><a href="hidden-markov-models.html#cb505-6" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Change the sequence to uppercase</span></span>
-<span id="cb505-7"><a href="hidden-markov-models.html#cb505-7" aria-hidden="true" tabindex="-1"></a>     sequence <span class="ot">&lt;-</span> <span class="fu">toupper</span>(sequence)</span>
-<span id="cb505-8"><a href="hidden-markov-models.html#cb505-8" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Find out how many states are in the HMM</span></span>
-<span id="cb505-9"><a href="hidden-markov-models.html#cb505-9" aria-hidden="true" tabindex="-1"></a>     numstates <span class="ot">&lt;-</span> <span class="fu">dim</span>(transitionmatrix)[<span class="dv">1</span>]</span>
-<span id="cb505-10"><a href="hidden-markov-models.html#cb505-10" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Make a matrix with as many rows as positions in the sequence, and as many</span></span>
-<span id="cb505-11"><a href="hidden-markov-models.html#cb505-11" aria-hidden="true" tabindex="-1"></a>     <span class="co"># columns as states in the HMM</span></span>
-<span id="cb505-12"><a href="hidden-markov-models.html#cb505-12" aria-hidden="true" tabindex="-1"></a>     v <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="fu">length</span>(sequence), <span class="at">ncol =</span> <span class="fu">dim</span>(transitionmatrix)[<span class="dv">1</span>])</span>
-<span id="cb505-13"><a href="hidden-markov-models.html#cb505-13" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Set the values in the first row of matrix v (representing the first position of the sequence) to 0</span></span>
-<span id="cb505-14"><a href="hidden-markov-models.html#cb505-14" aria-hidden="true" tabindex="-1"></a>     v[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb505-15"><a href="hidden-markov-models.html#cb505-15" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Set the value in the first row of matrix v, first column to 1</span></span>
-<span id="cb505-16"><a href="hidden-markov-models.html#cb505-16" aria-hidden="true" tabindex="-1"></a>     v[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb505-17"><a href="hidden-markov-models.html#cb505-17" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Fill in the matrix v:</span></span>
-<span id="cb505-18"><a href="hidden-markov-models.html#cb505-18" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(sequence)) <span class="co"># For each position in the DNA sequence:</span></span>
-<span id="cb505-19"><a href="hidden-markov-models.html#cb505-19" aria-hidden="true" tabindex="-1"></a>     {</span>
-<span id="cb505-20"><a href="hidden-markov-models.html#cb505-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numstates) <span class="co"># For each of the states of in the HMM:</span></span>
-<span id="cb505-21"><a href="hidden-markov-models.html#cb505-21" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="cb505-22"><a href="hidden-markov-models.html#cb505-22" aria-hidden="true" tabindex="-1"></a>           <span class="co"># Find the probabilility, if we are in state l, of choosing the nucleotide at position in the sequence</span></span>
-<span id="cb505-23"><a href="hidden-markov-models.html#cb505-23" aria-hidden="true" tabindex="-1"></a>           statelprobnucleotidei <span class="ot">&lt;-</span> emissionmatrix[l,sequence[i]]</span>
-<span id="cb505-24"><a href="hidden-markov-models.html#cb505-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb505-25"><a href="hidden-markov-models.html#cb505-25" aria-hidden="true" tabindex="-1"></a>           <span class="co"># v[(i-1),] gives the values of v for the (i-1)th row of v, ie. the (i-1)th position in the sequence.</span></span>
-<span id="cb505-26"><a href="hidden-markov-models.html#cb505-26" aria-hidden="true" tabindex="-1"></a>           <span class="co"># In v[(i-1),] there are values of v at the (i-1)th row of the sequence for each possible state k.</span></span>
-<span id="cb505-27"><a href="hidden-markov-models.html#cb505-27" aria-hidden="true" tabindex="-1"></a>           <span class="co"># v[(i-1),k] gives the value of v at the (i-1)th row of the sequence for a particular state k.</span></span>
-<span id="cb505-28"><a href="hidden-markov-models.html#cb505-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb505-29"><a href="hidden-markov-models.html#cb505-29" aria-hidden="true" tabindex="-1"></a>           <span class="co"># transitionmatrix[l,] gives the values in the lth row of the transition matrix, xx should not be transitionmatrix[,l]?</span></span>
-<span id="cb505-30"><a href="hidden-markov-models.html#cb505-30" aria-hidden="true" tabindex="-1"></a>           <span class="co"># probabilities of changing from a previous state k to a current state l.</span></span>
-<span id="cb505-31"><a href="hidden-markov-models.html#cb505-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb505-32"><a href="hidden-markov-models.html#cb505-32" aria-hidden="true" tabindex="-1"></a>           <span class="co"># max(v[(i-1),] * transitionmatrix[l,]) is the maximum probability for the nucleotide observed</span></span>
-<span id="cb505-33"><a href="hidden-markov-models.html#cb505-33" aria-hidden="true" tabindex="-1"></a>           <span class="co"># at the previous position in the sequence in state k, followed by a transition from previous</span></span>
-<span id="cb505-34"><a href="hidden-markov-models.html#cb505-34" aria-hidden="true" tabindex="-1"></a>           <span class="co"># state k to current state l at the current nucleotide position.</span></span>
-<span id="cb505-35"><a href="hidden-markov-models.html#cb505-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb505-36"><a href="hidden-markov-models.html#cb505-36" aria-hidden="true" tabindex="-1"></a>           <span class="co"># Set the value in matrix v for row i (nucleotide position i), column l (state l) to be:</span></span>
-<span id="cb505-37"><a href="hidden-markov-models.html#cb505-37" aria-hidden="true" tabindex="-1"></a>           v[i,l] <span class="ot">&lt;-</span>  statelprobnucleotidei <span class="sc">*</span> <span class="fu">max</span>(v[(i<span class="dv">-1</span>),] <span class="sc">*</span> transitionmatrix[,l])</span>
-<span id="cb505-38"><a href="hidden-markov-models.html#cb505-38" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb505-39"><a href="hidden-markov-models.html#cb505-39" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb505-40"><a href="hidden-markov-models.html#cb505-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(v)</span>
-<span id="cb505-41"><a href="hidden-markov-models.html#cb505-41" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="hidden-markov-models.html#cb509-1" aria-hidden="true" tabindex="-1"></a>makeViterbimat <span class="ot">&lt;-</span> <span class="cf">function</span>(sequence, transitionmatrix, emissionmatrix)</span>
+<span id="cb509-2"><a href="hidden-markov-models.html#cb509-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># This makes the matrix v using the Viterbi algorithm.</span></span>
+<span id="cb509-3"><a href="hidden-markov-models.html#cb509-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adapted from &quot;Applied Statistics for Bioinformatics using R&quot; by Wim P. Krijnen, page 209</span></span>
+<span id="cb509-4"><a href="hidden-markov-models.html#cb509-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ( cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf )</span></span>
+<span id="cb509-5"><a href="hidden-markov-models.html#cb509-5" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb509-6"><a href="hidden-markov-models.html#cb509-6" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Change the sequence to uppercase</span></span>
+<span id="cb509-7"><a href="hidden-markov-models.html#cb509-7" aria-hidden="true" tabindex="-1"></a>     sequence <span class="ot">&lt;-</span> <span class="fu">toupper</span>(sequence)</span>
+<span id="cb509-8"><a href="hidden-markov-models.html#cb509-8" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Find out how many states are in the HMM</span></span>
+<span id="cb509-9"><a href="hidden-markov-models.html#cb509-9" aria-hidden="true" tabindex="-1"></a>     numstates <span class="ot">&lt;-</span> <span class="fu">dim</span>(transitionmatrix)[<span class="dv">1</span>]</span>
+<span id="cb509-10"><a href="hidden-markov-models.html#cb509-10" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Make a matrix with as many rows as positions in the sequence, and as many</span></span>
+<span id="cb509-11"><a href="hidden-markov-models.html#cb509-11" aria-hidden="true" tabindex="-1"></a>     <span class="co"># columns as states in the HMM</span></span>
+<span id="cb509-12"><a href="hidden-markov-models.html#cb509-12" aria-hidden="true" tabindex="-1"></a>     v <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">nrow =</span> <span class="fu">length</span>(sequence), <span class="at">ncol =</span> <span class="fu">dim</span>(transitionmatrix)[<span class="dv">1</span>])</span>
+<span id="cb509-13"><a href="hidden-markov-models.html#cb509-13" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Set the values in the first row of matrix v (representing the first position of the sequence) to 0</span></span>
+<span id="cb509-14"><a href="hidden-markov-models.html#cb509-14" aria-hidden="true" tabindex="-1"></a>     v[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb509-15"><a href="hidden-markov-models.html#cb509-15" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Set the value in the first row of matrix v, first column to 1</span></span>
+<span id="cb509-16"><a href="hidden-markov-models.html#cb509-16" aria-hidden="true" tabindex="-1"></a>     v[<span class="dv">1</span>,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb509-17"><a href="hidden-markov-models.html#cb509-17" aria-hidden="true" tabindex="-1"></a>     <span class="co"># Fill in the matrix v:</span></span>
+<span id="cb509-18"><a href="hidden-markov-models.html#cb509-18" aria-hidden="true" tabindex="-1"></a>     <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(sequence)) <span class="co"># For each position in the DNA sequence:</span></span>
+<span id="cb509-19"><a href="hidden-markov-models.html#cb509-19" aria-hidden="true" tabindex="-1"></a>     {</span>
+<span id="cb509-20"><a href="hidden-markov-models.html#cb509-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> (l <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>numstates) <span class="co"># For each of the states of in the HMM:</span></span>
+<span id="cb509-21"><a href="hidden-markov-models.html#cb509-21" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb509-22"><a href="hidden-markov-models.html#cb509-22" aria-hidden="true" tabindex="-1"></a>           <span class="co"># Find the probabilility, if we are in state l, of choosing the nucleotide at position in the sequence</span></span>
+<span id="cb509-23"><a href="hidden-markov-models.html#cb509-23" aria-hidden="true" tabindex="-1"></a>           statelprobnucleotidei <span class="ot">&lt;-</span> emissionmatrix[l,sequence[i]]</span>
+<span id="cb509-24"><a href="hidden-markov-models.html#cb509-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb509-25"><a href="hidden-markov-models.html#cb509-25" aria-hidden="true" tabindex="-1"></a>           <span class="co"># v[(i-1),] gives the values of v for the (i-1)th row of v, ie. the (i-1)th position in the sequence.</span></span>
+<span id="cb509-26"><a href="hidden-markov-models.html#cb509-26" aria-hidden="true" tabindex="-1"></a>           <span class="co"># In v[(i-1),] there are values of v at the (i-1)th row of the sequence for each possible state k.</span></span>
+<span id="cb509-27"><a href="hidden-markov-models.html#cb509-27" aria-hidden="true" tabindex="-1"></a>           <span class="co"># v[(i-1),k] gives the value of v at the (i-1)th row of the sequence for a particular state k.</span></span>
+<span id="cb509-28"><a href="hidden-markov-models.html#cb509-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb509-29"><a href="hidden-markov-models.html#cb509-29" aria-hidden="true" tabindex="-1"></a>           <span class="co"># transitionmatrix[l,] gives the values in the lth row of the transition matrix, xx should not be transitionmatrix[,l]?</span></span>
+<span id="cb509-30"><a href="hidden-markov-models.html#cb509-30" aria-hidden="true" tabindex="-1"></a>           <span class="co"># probabilities of changing from a previous state k to a current state l.</span></span>
+<span id="cb509-31"><a href="hidden-markov-models.html#cb509-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb509-32"><a href="hidden-markov-models.html#cb509-32" aria-hidden="true" tabindex="-1"></a>           <span class="co"># max(v[(i-1),] * transitionmatrix[l,]) is the maximum probability for the nucleotide observed</span></span>
+<span id="cb509-33"><a href="hidden-markov-models.html#cb509-33" aria-hidden="true" tabindex="-1"></a>           <span class="co"># at the previous position in the sequence in state k, followed by a transition from previous</span></span>
+<span id="cb509-34"><a href="hidden-markov-models.html#cb509-34" aria-hidden="true" tabindex="-1"></a>           <span class="co"># state k to current state l at the current nucleotide position.</span></span>
+<span id="cb509-35"><a href="hidden-markov-models.html#cb509-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb509-36"><a href="hidden-markov-models.html#cb509-36" aria-hidden="true" tabindex="-1"></a>           <span class="co"># Set the value in matrix v for row i (nucleotide position i), column l (state l) to be:</span></span>
+<span id="cb509-37"><a href="hidden-markov-models.html#cb509-37" aria-hidden="true" tabindex="-1"></a>           v[i,l] <span class="ot">&lt;-</span>  statelprobnucleotidei <span class="sc">*</span> <span class="fu">max</span>(v[(i<span class="dv">-1</span>),] <span class="sc">*</span> transitionmatrix[,l])</span>
+<span id="cb509-38"><a href="hidden-markov-models.html#cb509-38" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb509-39"><a href="hidden-markov-models.html#cb509-39" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb509-40"><a href="hidden-markov-models.html#cb509-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(v)</span>
+<span id="cb509-41"><a href="hidden-markov-models.html#cb509-41" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
 <p>Given a HMM, and a particular DNA sequence, you can use the Viterbi function to find the state of that HMM that was most likely to have generated the nucleotide at each position in the DNA sequence:</p>
-<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb506-1"><a href="hidden-markov-models.html#cb506-1" aria-hidden="true" tabindex="-1"></a>myseq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;T&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
-<span id="cb506-2"><a href="hidden-markov-models.html#cb506-2" aria-hidden="true" tabindex="-1"></a><span class="fu">viterbi</span>(myseq, thetransitionmatrix, theemissionmatrix)</span></code></pre></div>
+<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb510-1"><a href="hidden-markov-models.html#cb510-1" aria-hidden="true" tabindex="-1"></a>myseq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;A&quot;</span>, <span class="st">&quot;T&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb510-2"><a href="hidden-markov-models.html#cb510-2" aria-hidden="true" tabindex="-1"></a><span class="fu">viterbi</span>(myseq, thetransitionmatrix, theemissionmatrix)</span></code></pre></div>
 <pre><code>## [1] &quot;Positions 1 - 2 Most probable state =  AT-rich&quot;
 ## [1] &quot;Positions 3 - 21 Most probable state =  GC-rich&quot;
 ## [1] &quot;Positions 22 - 22 Most probable state =  AT-rich&quot;
@@ -814,6 +832,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -841,20 +860,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

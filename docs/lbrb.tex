@@ -36,8 +36,8 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R},
-  pdfauthor={Nathan L. Brouwer},
+  pdftitle={A Little Book of R for Bioinformatics 2.0},
+  pdfauthor={Avirl Coghlan, with contributions by Nathan L. Brouwer},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -115,8 +115,8 @@
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
-\title{Computational Biology for All! Data science, bioinformatics, and other life-sciences awesomeness in R}
-\author{Nathan L. Brouwer}
+\title{A Little Book of R for Bioinformatics 2.0}
+\author{Avirl Coghlan, with contributions by Nathan L. Brouwer}
 \date{2021-07-08}
 
 \begin{document}
@@ -126,30 +126,73 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{preface}{%
-\chapter*{Preface}\label{preface}}
-\addcontentsline{toc}{chapter}{Preface}
+\hypertarget{preface-to-version-2.0}{%
+\chapter*{Preface to version 2.0}\label{preface-to-version-2.0}}
+\addcontentsline{toc}{chapter}{Preface to version 2.0}
 
-This book grew out of exercises I've written for courses taught at the University of Pittsburgh, California University of Pennsylvania, and Duquesne University. The goal is to walk students step by step through the process of working with data in R.
+Welcome to \emph{A Little Book of R for Bioinformatics 2.0}!.
 
-A major influence in how this book is written is th online book \href{http://www.phidot.org/software/mark/docs/book/}{Program MARK: a gentle introduction}, edited \href{http://canuck.dnr.cornell.edu/}{Evan Cooch} and \href{https://sites.warnercnr.colostate.edu/gwhite/}{Gary White}. That book patiently walks users through the basic of these models step by step, concept by concept, and click by click. I have sought to adopt a similar thorough and holistic approach in this book.
+This book is based on the original \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/}{\emph{A Little Book of R for Bioinformatics}} by Dr.~Avril Coghlan (Hereafter ``ALBRB 1.0''). Dr.~Coghlan's book was one of the first and most thorough introductions to using R for bioinformatics, and was generously published under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}. In addition to describing how to do bioinformatics in R, Coghlan provided numerous functions to facilitate important tasks, practice questions, and references to further reading.
+
+\href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/}{ALBRB 1.0} was extremely useful to me when I was learning bioinformatics and computational biology. In this version of the book, which I'll refer to as ALBRB 2.0, I have adapted Dr.~Coghlan's original book to suit my own teaching needs.
+
+Below I've outlined the general types of changes I've made to the original book. I have tried to link back to the original content that these updates are derived from and note how changes were made. Any errors or inconsistencies should be ascribed to me, not Dr.~Coghlan. If you have any feedback, please email me at \href{mailto:brouwern@gmail.com}{\nolinkurl{brouwern@gmail.com}}
+
+Nathan Brouwer, June 2021
+
+\textbf{Changes implemented in ALBRB 2.0 by Nathan Brouwer}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Converted the entire book to RMarkdown and published it via bookdown.
+\item
+  Added instructions for using RStudio and RStudio Cloud.
+\item
+  Updated instructions to reflect any changes in software, including changes to how the bioinformatics repository Bioconductor now works.
+\item
+  Split up chapters into smaller units.
+\item
+  Reorganized the order of some material.
+\item
+  Added links to the book I am developing, \emph{Computational Biology for All}.
+\item
+  Moved most functions and datasets to my teaching package \href{https://github.com/brouwern/compbio4all}{compbio4all}.
+\item
+  Changed some plotting to ggplot2 or ggpubr.
+\item
+  Added additional subheadings
+\item
+  Added vocab and function lists
+\item
+  At times replaced non-biological examples with biological ones.
+\item
+  Change from British to American English (Sorry! Couldn't help myself.)
+\end{enumerate}
+
+The following introduction to \emph{R} is based on the first part of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html}{``How to install \emph{R} and a Brief Introduction to R''} by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}. For additional information see \href{https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html}{``Getting \emph{R} onto your computer''}.
+
+\textbf{By}: Avril Coghlan
+
+\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
 
 \hypertarget{downloading-r}{%
 \chapter{Downloading R}\label{downloading-r}}
 
 \textbf{By}: Avril Coghlan
 
-\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+\textbf{Adapted, edited and expanded}: Nathan Brouwer (\href{mailto:brouwern@gmail.com}{\nolinkurl{brouwern@gmail.com}}) under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
 
-\hypertarget{preface-1}{%
-\section{Preface}\label{preface-1}}
+\hypertarget{preface}{%
+\section{Preface}\label{preface}}
 
-The following introduction to \emph{R} is based on the first part of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html}{``How to install \emph{R} and a Brief Introduction to R''} by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}. For additional information see \href{https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html}{``Getting \emph{R} onto your computer''}.
+The following introduction to \emph{R} is based on the first part of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html}{``How to install \emph{R} and a Brief Introduction to R''} by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}. For additional information see the Appendices and \href{https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html}{``Getting \emph{R} onto your computer''}.
 
 \hypertarget{introduction-to-r}{%
 \section{Introduction to R}\label{introduction-to-r}}
 
-\emph{R} (www.r-project.org) is a commonly used free statistics software. \emph{R} allows you to carry out statistical analyses in an interactive mode, as well as allowing simple programming.
+\emph{R} (www.r-project.org) is a commonly used free statistics software. \emph{R} allows you to carry out statistical analyses in an interactive mode, as well as allowing programming.
 
 \hypertarget{installing-r}{%
 \section{Installing R}\label{installing-r}}
@@ -167,7 +210,7 @@ These instructions will focus on installing \emph{R} on a Windows PC. However, I
 \textbf{PROTIP:} Even if you have used \emph{R} before its good to regularly update it to avoid conflicts with recently produced software.
 \end{quote}
 
-New releases of \emph{R} are made very regularly (approximately once a month), as \emph{R} is actively being improved all the time. It is worthwhile installing new versions of \emph{R} regularly, to make sure that you have a recent version of \emph{R} (to ensure compatibility with all the latest versions of the \emph{R} packages that you have downloaded).
+Minor updates of \emph{R} are made very regularly (approximately every 6 months), as \emph{R} is actively being improved all the time. It is worthwhile installing new versions of \emph{R} a couple times a year, to make sure that you have a recent version of \emph{R} (to ensure compatibility with all the latest versions of the \emph{R} packages that you have downloaded).
 
 To install \emph{R} on your \textbf{Windows} computer, follow these steps:
 
@@ -224,18 +267,20 @@ The instructions above are for installing \emph{R} on a Windows PC. If you want 
 \hypertarget{starting-r}{%
 \section{\texorpdfstring{Starting \emph{R}}{Starting R}}\label{starting-r}}
 
-To start R, Check if there is an ``R'' icon on the desktop of the computer that you are using. If so, double-click on the ``R'' icon to start R. If you cannot find an ``R'' icon, try the next step instead.
+To start R, Check if there is an \emph{R} icon on the desktop of the computer that you are using. If so, double-click on the \emph{R} icon to start \emph{R}. If you cannot find an \emph{R} icon, try the next step instead.
 
-You can also start \emph{R} from the Start menu. Click on the ``Start'' button at the bottom left of your computer screen, and then choose ``All programs'', and start \emph{R} by selecting ``R'' (or \emph{R} X.X.X, where X.X.X gives the version of R, e.g.. \emph{R} 2.10.0) from the menu of programs.
+You can also start \emph{R} from the Start menu in Windows. Click on the ``Start'' button at the bottom left of your computer screen, and then choose ``All programs'', and start \emph{R} by selecting ``R'' (or \emph{R} X.X.X, where X.X.X gives the version of R, e.g.. \emph{R} 2.10.0) from the menu of programs.
 
-Say ``Hi'' to \emph{R} and take a quick look at how it looks. Now say ``Goodbye'', because we will never actually do any work in this version of R; instead, we'll use the RStudio IDE (integrated development environment).
+Say ``Hi'' to \emph{R} and take a quick look at how it looks. Now say ``Goodbye'', because we will never actually do any work in this version of \emph{R}; instead, we'll use the \textbf{RStudio IDE (integrated development environment)}.
 
 \hypertarget{installing-the-rstudio-ide}{%
 \chapter{Installing the RStudio IDE}\label{installing-the-rstudio-ide}}
 
 \textbf{By:} Nathan Brouwer
 
-R is a programming language, and when you download it there is also a basic \textbf{GUI} (graphical user interface) that you can access via the R icon.
+The name ``R'' refers both to the programming language and the program that runs that language. When you download \emph{it}R* there is also a basic \textbf{GUI} (graphical user interface) that you can access via the \emph{R} icon.
+
+Other GUIs are available, and the most popular currently is \textbf{RStudio.} RStudio a for-profit company that is a main driver of development of R. Much of what they produce has free basic versions or is entirely free. They produce software (RStudio), cloud-based applications (\textbf{RStudio Cloud}), and web server infrastructure for business applications of R.
 
 A brief overview of installing RStudio can be found here \href{https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-rstudio-on-to-your-computer.html}{``Getting RStudio on to your computer''}
 
@@ -249,22 +294,16 @@ A good overview of what the different parts of RStudio can be seen in the image 
 \hypertarget{rstudio-versus-rstudio-cloud}{%
 \section{RStudio versus RStudio Cloud}\label{rstudio-versus-rstudio-cloud}}
 
-RStudio and RStudio cloud work almost identically, so anything you read about RStudio will apply to RStudio Cloud.
+RStudio and RStudio cloud work almost identically, so anything you read about RStudio will apply to RStudio Cloud. RStudio is easy to download an use, but RStudio Cloud eliminates even the minor hiccups that occur. Free accounts with RStudio Cloud allow up to 15 hours per month, which is enough for you to get a taste for using R.
 
 \hypertarget{installing-r-packages}{%
 \chapter{\texorpdfstring{Installing \emph{R} packages}{Installing R packages}}\label{installing-r-packages}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(compbio4all)}
-\end{Highlighting}
-\end{Shaded}
 
 \textbf{By}: Avril Coghlan.
 
 \textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
 
-R is a programming language, and \textbf{packages} or \textbf{libraries} are bundles of software built using R. Most sessions using \emph{R} involve using additional \emph{R} packages. This is especially true for bioinformatics and computational biology.
+\emph{R} is a programming language, and \textbf{packages} (aka \textbf{libraries}) are bundles of software built using \emph{R}. Most sessions using \emph{R} involve using additional \emph{R} packages. This is especially true for bioinformatics and computational biology.
 
 \begin{quote}
 \textbf{NOTE}: If you are working in an RStudio Cloud environment organized by someone else (e.g.~a course instructor), they likely are taking care of many of the package management issues. The following information is still useful to be familiar with.
@@ -281,87 +320,81 @@ I've summarized it here:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  "Click on the Packages tab in the bottom-right section and then click on install. The following dialog box will appear
+  ``Click on the''Packages" tab in the bottom-right section and then click on ``Install''. The following dialog box will appear.
 \item
-  ``In the Install Packages dialog, write the package name you want to install under the Packages field and then click install. This will install the package you searched for or give you a list of matching package based on your package text.''
+  In the ``Install Packages'' dialog, write the package name you want to install under the Packages field and then click install. This will install the package you searched for or give you a list of matching package based on your package text.
 \end{enumerate}
 
 \hypertarget{downloading-packages-with-the-function-install.packages}{%
-\section{Downloading packages with the function install.packages()}\label{downloading-packages-with-the-function-install.packages}}
+\section{\texorpdfstring{Downloading packages with the function \texttt{install.packages()}}{Downloading packages with the function install.packages()}}\label{downloading-packages-with-the-function-install.packages}}
 
-The easiest way to install a package if you know its name is to use the function install.packages(). Note that it might be better to call this ``download.packages'' since after you install it, you also have to load it!
+The easiest way to install a package if you know its name is to use the \emph{R} function \texttt{install.packages(})`. Note that it might be better to call this ``download.packages'' since after you install it, you also have to load it!
 
-Frequently I will include install.packages(\ldots) at the beginning of a lesson the first time we use a package to make sure the package is downloaded. Note, however, that if you already have downloaded the package, running install.packages(\ldots) will download a new copy.
+Frequently I will include \texttt{install.packages(...)} at the beginning of a chapter the first time we use a package to make sure the package is downloaded. Note, however, that if you already have downloaded the package, running \texttt{install.packages(...)} will download a new copy. While packages do get updated from time to time, but its best to re-run \texttt{install.packages(...)} only occassionaly.
 
-We'll download a package used for plotting called ggplot2, which stands for ``Grammar of Graphics.''
+We'll download a package used for plotting called \texttt{ggplot2}, which stands for ``Grammar of Graphics.'' \texttt{ggplot2} was developed by Dr.~\href{http://hadley.nz/}{Hadley Wickham}, who is now the Chief Scientists for RStudio.
 
-To download ggplot, run the following command:
+To download \texttt{ggplot2}, run the following command:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{) }\CommentTok{\# note the " "}
 \end{Highlighting}
 \end{Shaded}
 
-Often when you download a package you'll see a fair bit of red text, and sometime other things will pop up. Usually there's nothing of interest here, but sometimes you need to read things carefully over it for hints about why something didn't work.
+Often when you download a package you'll see a fair bit of angry-looking red text, and sometime other things will pop up. Usually there's nothing of interest here, but sometimes you need to read things carefully over it for hints about why something didn't work.
 
 \hypertarget{using-packages-after-they-are-downloaded}{%
 \section{Using packages after they are downloaded}\label{using-packages-after-they-are-downloaded}}
 
-To actually make the functions in package accessible you need to use the library() command. Note that this is not in quotes.
+To actually make the functions in package accessible you need to use the \texttt{library()} command. Note that this is \emph{not} in quotes.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(ggplot2) }\CommentTok{\# note: NO " "}
 \end{Highlighting}
 \end{Shaded}
 
 \hypertarget{installing-bioconductor}{%
 \chapter{Installing Bioconductor}\label{installing-bioconductor}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(compbio4all)}
-\end{Highlighting}
-\end{Shaded}
-
 \textbf{By}: Avril Coghlan.
 
-\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}, including details on install Bioconductor and common prompts and error messages that appear during installation.
 
 \hypertarget{bioconductor}{%
 \section{Bioconductor}\label{bioconductor}}
 
-R \textbf{packages} (aka ``libraries'') can live in many places. Most are accessed via \textbf{CRAN}, the \textbf{Comprehensive R Archieve Network}. The bioinformatics and computational biology community also has its own package hosting system called \href{www.bioconductor.org}{Bioconductor}. R has played an important part in the development and application of bioinformatics techniques in the 21th century. Bioconductor 1.0 was released in 2002 with 15 packages. As of winter 2021, there are almost 2000 packages in the current release!
+\emph{R} \textbf{packages} (aka ``libraries'') can live in many places. Most are accessed via \textbf{CRAN}, the \textbf{Comprehensive R Archive Network}. The bioinformatics and computational biology community also has its own package hosting system called \href{www.bioconductor.org}{Bioconductor}. \emph{R} has played an important part in the development and application of bioinformatics techniques in the 21th century. Bioconductor 1.0 was released in 2002 with 15 packages. As of winter 2021, there are almost 2000 packages in the current release!
 
 \begin{quote}
 \textbf{NOTE}: If you are working in an RStudio Cloud environment organized by someone else (eg a course instructor), they likely are taking care of most of package management issues, inlcuding setting up Bioconductor. The following information is still useful to be familiar with.
 \end{quote}
 
-To interface with Bioconductor you need the \href{https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html}{BiocManager} package. The Bioconductor people have put BiocManager on CRAN to allow you to set up interactions with Bioconductor.
+To interface with Bioconductor you need the \href{https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html}{BiocManager} package. The Bioconductor people have put \href{https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html}{BiocManager} on CRAN to allow you to set up interactions with Bioconductor. See the \href{https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html}{BiocManager documentation} for more information (\url{https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html}).
 
-Note that if you have an old version of R you will need to upate it to interact with bioconductor.
+Note that if you have an old version of R you will need to update it to interact with Bioconductor.
 
 \hypertarget{installing-biocmanager}{%
 \section{Installing BiocManager}\label{installing-biocmanager}}
 
-BiocManager can be installed using the install.packages() packages command.
+BiocManager can be installed using the \texttt{install.packages()} packages command.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{install.packages}\NormalTok{(}\StringTok{"BiocManager"}\NormalTok{)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"BiocManager"}\NormalTok{) }\CommentTok{\# Remember the "  "; don\textquotesingle{}t worry about the red text}
 \end{Highlighting}
 \end{Shaded}
 
-Once downloaded, BioManager needs to be explicitly loaded into your active R session
+Once downloaded, BioManager needs to be explicitly loaded into your active R session using \texttt{library()}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(BiocManager)}
+\FunctionTok{library}\NormalTok{(BiocManager) }\CommentTok{\# no quotes; again, ignore the red text}
 \end{Highlighting}
 \end{Shaded}
 
-Individual packages can then be downloaded using the install() command.
+Individual Bioconductor packages can then be downloaded using the \texttt{install()} command. An essential packages is \texttt{Biostrings}. To do this ,
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -369,9 +402,68 @@ Individual packages can then be downloaded using the install() command.
 \end{Highlighting}
 \end{Shaded}
 
-Bioconductor has many \textbf{dependencies} - other packages which is relies on. When you install Bioconductor packages you may need to update these packages. If something seems to not be working during this process, restart R and being the Bioconductor installation process until things seem to work.
+\hypertarget{the-ins-and-outs-of-package-installation}{%
+\section{The ins and outs of package installation}\label{the-ins-and-outs-of-package-installation}}
 
-Again, to actually load the Biostrings package into your active R sessions requires the libary() command:
+\textbf{IMPORANT} Bioconductor has many \textbf{dependencies} - other packages which is relies on. When you install Bioconductor packages you may need to update these packages. If something seems to not be working during this process, restart R and begin the Bioconductor installation process until things seem to work.
+
+Below I discuss the series of prompts I had to deal with while re-installing Biostrings while editing this chapter.
+
+\hypertarget{updating-other-packages-when-downloading-a-package}{%
+\subsection{Updating other packages when downloading a package}\label{updating-other-packages-when-downloading-a-package}}
+
+When I re-installed \texttt{Biostrings} while writing this I was given a HUGE blog of red test that contained this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\StringTok{\textquotesingle{}getOption("repos")\textquotesingle{}}\NormalTok{ replaces Bioconductor standard repositories, see }\StringTok{\textquotesingle{}?repositories\textquotesingle{}} \ControlFlowTok{for}
+\NormalTok{details}
+
+\NormalTok{replacement repositories}\SpecialCharTok{:}
+\NormalTok{    CRAN}\SpecialCharTok{:}\NormalTok{ https}\SpecialCharTok{:}\ErrorTok{//}\NormalTok{cran.rstudio.com}\SpecialCharTok{/}
+
+\NormalTok{Bioconductor version }\FloatTok{3.11}\NormalTok{ (BiocManager }\DecValTok{1}\NormalTok{.}\FloatTok{30.16}\NormalTok{), R }\DecValTok{4}\NormalTok{.}\FloatTok{0.5}\NormalTok{ (}\DecValTok{2021{-}03{-}31}\NormalTok{)}
+\NormalTok{Old packages}\SpecialCharTok{:} \StringTok{\textquotesingle{}ade4\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ape\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}aster\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bayestestR\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bio3d\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bitops\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}blogdown\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}bookdown\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}brio\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}broom\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}broom.mixed\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}broomExtra\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}bslib\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}cachem\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}callr\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}car\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}circlize\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}class\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}cli\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}cluster\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}colorspace\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}corrplot\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}cpp11\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}curl\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}devtools\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}DHARMa\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}doBy\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}dplyr\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}DT\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}e1071\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ellipsis\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}emmeans\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}emojifont\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}extRemes\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}fansi\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}flextable\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}forecast\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}formatR\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}gap\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}gargle\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}gert\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}GGally\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}ggfortify\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ggplot2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ggsignif\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ggVennDiagram\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}gh\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}glmmTMB\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}googledrive\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}gtools\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}haven\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}highr\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}hms\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}htmlTable\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}httpuv\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}huxtable\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}jquerylib\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}KernSmooth\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}knitr\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}later\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lattice\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}lme4\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}magick\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}manipulateWidget\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}MASS\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}Matrix\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}matrixcalc\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}matrixStats\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}mgcv\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}mime\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}multcomp\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}mvtnorm\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}nnet\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}openssl\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}openxlsx\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}parameters\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}pBrackets\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}pdftools\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}phangorn\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}phytools\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}pillar\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}plotly\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}processx\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}proxy\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}qgam\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}quantreg\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ragg\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Rcpp\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}RcppArmadillo\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}remotes\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rgl\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rio\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rJava\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rlang\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rmarkdown\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}robustbase\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}rsconnect\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}rversions\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}sandwich\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}sass\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}segmented\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}seqinr\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}seqmagick\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}servr\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}sf\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}shape\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}spatial\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}statmod\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}stringi\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}systemfonts\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}testthat\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}textshaping\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}tibble\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tidyselect\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tidytree\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tinytex\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}tufte\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}UniprotR\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}units\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}vctrs\textquotesingle{}}\NormalTok{,}
+  \StringTok{\textquotesingle{}viridis\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}viridisLite\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}withr\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}xfun\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}zip\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+Hidden at the bottom was a prompt: ``Update all/some/none? {[}a/s/n{]}:''
+
+Its a little vague, but what it wants me to do is type in a, s or n and press enter to tell it what to do. I almost always chose ``a'', though this may take a while to update everything.
+
+\hypertarget{packages-from-source}{%
+\subsection{Packages ``from source''}\label{packages-from-source}}
+
+You are likely to get lots of random-looking feedback from R when doing Bioconductor-related installations. Look carefully for any prompts as the very last line. While updating \texttt{Biostrings} I was told: ``\emph{There are binary versions available but the source versions are later:}'' and given a table of packages. I was then asked ``\emph{Do you want to install from sources the packages which need compilation? (Yes/no/cancel)}''
+
+I almost always chose ``no''.
+
+\hypertarget{more-on-angry-red-text}{%
+\subsection{More on angry red text}\label{more-on-angry-red-text}}
+
+After the prompt about packages from source, R proceeded to download a lot of updates to packages, which took a few minutes. Lots of red text scrolled by, but this is normal.
+
+\includegraphics[width=20.25in]{images/angry_red_text_download_biostrings}
+
+\hypertarget{actually-loading-a-package}{%
+\section{Actually loading a package}\label{actually-loading-a-package}}
+
+Again, to actually load the \texttt{Biostrings} package into your active R sessions requires the \texttt{libary()} command:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -379,16 +471,16 @@ Again, to actually load the Biostrings package into your active R sessions requi
 \end{Highlighting}
 \end{Shaded}
 
-For more information on BiocManager see the vignette: \url{https://cran.r-project.org/web/packages/BiocManager/vignettes/BiocManager.html}
+As you might expect, there's more red text scrolling up my screen!
+
+\includegraphics[width=20.36in]{images/angry_red_text_library_biostrings}
+
+I can tell that is actually worked because at the end of all the red stuff is the R prompt of ``\textgreater{}'' and my cursor.
+
+\includegraphics[width=1.42in]{images/R_cursor}
 
 \hypertarget{a-brief-introduction-to-r}{%
 \chapter{A Brief introduction to R}\label{a-brief-introduction-to-r}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(compbio4all)}
-\end{Highlighting}
-\end{Shaded}
 
 \textbf{By}: Avril Coghlan.
 
@@ -414,7 +506,7 @@ This chapter provides a brief introduction to R. At the end of are links to addi
 \item
   character
 \item
-  assignmnet
+  assignment
 \item
   elements of an object
 \item
@@ -422,11 +514,11 @@ This chapter provides a brief introduction to R. At the end of are links to addi
 \item
   attributes of an object
 \item
-  arguement of a function
+  argument of a function
 \end{itemize}
 
-\hypertarget{r-functions-etc}{%
-\section{R functions etc}\label{r-functions-etc}}
+\hypertarget{r-functions}{%
+\section{R functions}\label{r-functions}}
 
 \begin{itemize}
 \tightlist
@@ -458,14 +550,16 @@ This chapter provides a brief introduction to R. At the end of are links to addi
   q()
 \end{itemize}
 
-\hypertarget{a-brief-introduction-to-r-1}{%
-\section{A brief introduction to R}\label{a-brief-introduction-to-r-1}}
+\hypertarget{interacting-with-r}{%
+\section{Interacting with R}\label{interacting-with-r}}
 
-You will type R commands into the RStudio console in order to carry out analyses in R. In the RStudio console you will see the R prompt starting with the symbol ``\textgreater{}''. ``\textgreater{}'' will always be there at the beginning of each new command - don't try to delete it.
+You will type \emph{R} commands into the RStudio \textbf{console} in order to carry out analyses in \emph{R}. In the RStudio console you will see the R prompt starting with the symbol ``\textgreater{}''. ``\textgreater{}'' will always be there at the beginning of each new command - don't try to delete it! Moreover, you never need to type it.
 
-We type the commands needed for a particular task after this prompt. The command is carried out after you hit the Return key.
+\includegraphics[width=1.42in]{images/R_cursor}
 
-Once you have started R, you can start typing in commands, and the results will be calculated immediately, for example:
+We type the \textbf{commands} needed for a particular task after this prompt. The command is carried out by \emph{R} after you hit the Return key.
+
+Once you have started R, you can start typing commands into the RStudio console, and the results will be calculated immediately, for example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -479,6 +573,8 @@ Once you have started R, you can start typing in commands, and the results will 
 
 Note that prior to the output of ``6'' it shows ``{[}1{]}''.
 
+Now subtraction:
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \DecValTok{10{-}3}
@@ -491,7 +587,7 @@ Note that prior to the output of ``6'' it shows ``{[}1{]}''.
 
 Again, prior to the output of ``7'' it shows ``{[}1{]}''.
 
-R can act like a basic calculator that you type command in to. You can also use it like a scientific calcualtor and create \textbf{variables} that store information. All variables (scalars, vectors, matrices, etc.) created by R are called objects. In R, we assign values to variables using an arrow. For example, we can assign the value 2*3 to the variable x using the command:
+\emph{R} can act like a basic calculator that you type commands in to. You can also use it like a more advanced scientific calculator and create \textbf{variables} that store information. All variables created by R are called \textbf{objects}. In R, we assign values to variables using an arrow-looking function \texttt{\textless{}-} the \textbf{assignment operator}. For example, we can \textbf{assign} the value 2*3 to the variable x using the command:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -499,7 +595,7 @@ R can act like a basic calculator that you type command in to. You can also use 
 \end{Highlighting}
 \end{Shaded}
 
-To view the contents of any R object, just type its name, and the contents of that R object will be displayed:
+To view the contents of any R object, just type its name, press enter, and the contents of that R object will be displayed:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -511,17 +607,23 @@ To view the contents of any R object, just type its name, and the contents of th
 ## [1] 6
 \end{verbatim}
 
-There are several possible different types of objects in R with fancy math names, including scalars, vectors, matrices, arrays, data frames, tables, and lists. The \textbf{scalar} variable x above is one example of an R object. While a scalar variable such as x has just one element, a \textbf{vector} consists of several elements. The elements in a vector are all of the same \textbf{type} (eg. numeric or characters), while \textbf{lists} may include elements such as characters as well as numeric quantities.
+\hypertarget{variables-in-r}{%
+\section{Variables in R}\label{variables-in-r}}
 
-To create a vector, we can use the c() (combine) function. For example, to create a vector called myvector that has elements with values 8, 6, 9, 10, and 5, we type:
+There are several different types of objects in R with fancy math names, including \textbf{scalars}, \textbf{vectors}, \textbf{matrices} (singuler: \textbf{matrix), }arrays\textbf{, }dataframes\textbf{, }tables\textbf{, and }lists\textbf{. The }scalar** variable x above is one example of an R object. While a scalar variable such as x has just one element, a \textbf{vector} consists of several elements. The elements in a vector are all of the same \textbf{type} (eg. numbers or alphabetic characters), while \textbf{lists} may include elements such as characters as well as numeric quantities. Vectors and dataframes are the most common variables you'll use. You'll also encounter matrices often, and lists are ubiquitous in R but beginning users often don't encounter them because they remain behind the scenes.
+
+\hypertarget{vectors}{%
+\subsection{Vectors}\label{vectors}}
+
+To create a vector, we can use the \texttt{c()} (combine) function. For example, to create a vector called \texttt{myvector} that has elements with values 8, 6, 9, 10, and 5, we type:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{myvector }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{)}
+\NormalTok{myvector }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{5}\NormalTok{) }\CommentTok{\# note: commas between each number!}
 \end{Highlighting}
 \end{Shaded}
 
-To see the contents of the variable myvector, we can just type its name and press enter
+To see the contents of the variable \texttt{myvector}, we can just type its name and press enter:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -533,7 +635,12 @@ To see the contents of the variable myvector, we can just type its name and pres
 ## [1]  8  6  9 10  5
 \end{verbatim}
 
-The {[}1{]} is the index of the first element in the vector. We can extract any element of the vector by typing the vector name with the index of that element given in square brackets. For example, to get the value of the 4th element in the vector myvector, we type:
+\hypertarget{vector-indexing}{%
+\subsection{Vector indexing}\label{vector-indexing}}
+
+The \texttt{{[}1{]}} is the \textbf{index} of the first \textbf{element} in the vector. We can \textbf{extract} any element of the vector by typing the vector name with the index of that element given in \textbf{square brackets} \texttt{{[}...{]}}.
+
+For example, to get the value of the 4th element in the vector \texttt{myvector}, we type:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -545,11 +652,37 @@ The {[}1{]} is the index of the first element in the vector. We can extract any 
 ## [1] 10
 \end{verbatim}
 
-In contrast to a vector, a \textbf{list} can contain elements of different types, for example, both numeric and character elements. A list can also include other variables such as a vector. The list() function is used to create a list. For example, we could create a list mylist by typing:
+\hypertarget{character-vectors}{%
+\subsection{Character vectors}\label{character-vectors}}
+
+Vectors can contain letters, such as those designating nucleic acids
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mylist }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{name=}\StringTok{"Fred"}\NormalTok{, }\AttributeTok{wife=}\StringTok{"Mary"}\NormalTok{, myvector)}
+\NormalTok{my.seq }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{,}\StringTok{"T"}\NormalTok{,}\StringTok{"C"}\NormalTok{,}\StringTok{"G"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+They can also contain multi-letter \textbf{strings}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{my.oligos }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"ATCGC"}\NormalTok{,}\StringTok{"TTTCGC"}\NormalTok{,}\StringTok{"CCCGCG"}\NormalTok{,}\StringTok{"GGGCGC"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{lists}{%
+\subsection{Lists}\label{lists}}
+
+\textbf{NOTE}: \emph{below is a discussion of lists in R. This is excellent information, but not necessary if this is your very very first time using R.}
+
+In contrast to a vector, a \textbf{list} can contain elements of different types, for example, both numbers and letters. A list can even include other variables such as a vector. The \texttt{list()} function is used to create a list. For example, we could create a list \texttt{mylist} by typing:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mylist }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\AttributeTok{name=}\StringTok{"Charles Darwin"}\NormalTok{, }
+               \AttributeTok{wife=}\StringTok{"Emma Darwin"}\NormalTok{, }
+\NormalTok{               myvector)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -563,32 +696,60 @@ We can then print out the contents of the list mylist by typing its name:
 
 \begin{verbatim}
 ## $name
-## [1] "Fred"
+## [1] "Charles Darwin"
 ## 
 ## $wife
-## [1] "Mary"
+## [1] "Emma Darwin"
 ## 
 ## [[3]]
 ## [1]  8  6  9 10  5
 \end{verbatim}
 
-The \textbf{elements} in a list are numbered, and can be referred to using \textbf{indices}. We can extract an element of a list by typing the list name with the index of the element given in double \textbf{square brackets} (in contrast to a vector, where we only use single square brackets). Thus, we can extract the second and third elements from mylist by typing:
+The \textbf{elements} in a list are numbered, and can be referred to using \textbf{indices}. We can extract an element of a list by typing the list name with the index of the element given in double \textbf{square brackets} (in contrast to a vector, where we only use single square brackets).
+
+We can extract the second element from \texttt{mylist} by typing:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mylist[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)]}
+\NormalTok{mylist[[}\DecValTok{2}\NormalTok{]]  }\CommentTok{\# note the double square brackets [[...]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Emma Darwin"
+\end{verbatim}
+
+As a baby step towards our next task, we can wrap index values as in the \texttt{c()} command like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mylist[[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{)]]  }\CommentTok{\# note the double square brackets [[...]]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "Emma Darwin"
+\end{verbatim}
+
+The number \texttt{2} and \texttt{c(2)} mean the same thing.
+
+Now, we can extract the second AND third elements from \texttt{mylist}. First, we put the indices 2 and 3 into a vector \texttt{c(2,3)}, then wrap that vector in double square brackets: \texttt{{[}c(2,3){]}}. All together it looks like this.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mylist[}\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)] }\CommentTok{\# note the double brackets}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## $wife
-## [1] "Mary"
+## [1] "Emma Darwin"
 ## 
 ## [[2]]
 ## [1]  8  6  9 10  5
 \end{verbatim}
 
-Elements of lists may also be named, and in this case the elements may be referred to by giving the list name, followed by ``\(”, followed by the element name. For example, mylist\)name is the same as mylist{[}{[}1{]}{]} and mylist\$wife is the same as mylist{[}{[}2{]}{]}:
+Elements of lists may also be named, resulting in a \textbf{named lists}. The elements may then be referred to by giving the list name, followed by ``\$'', followed by the element name. For example, mylist\$name is the same as mylist{[}{[}1{]}{]} and mylist\$wife is the same as mylist{[}{[}2{]}{]}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -597,10 +758,10 @@ Elements of lists may also be named, and in this case the elements may be referr
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Mary"
+## [1] "Emma Darwin"
 \end{verbatim}
 
-We can find out the names of the named elements in a list by using the attributes() function, for example:
+We can find out the names of the named elements in a list by using the \texttt{attributes()} function, for example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -613,13 +774,18 @@ We can find out the names of the named elements in a list by using the attribute
 ## [1] "name" "wife" ""
 \end{verbatim}
 
-When you use the attributes() function to find the named elements of a list variable, the named elements are always listed under a heading ``\(names”. Therefore, we see that the named elements of the list variable mylist are called “name” and “wife”, and we can retrieve their values by typing mylist\)name and mylist\$wife, respectively.
+When you use the \texttt{attributes()} function to find the named elements of a list variable, the named elements are always listed under a heading ``\$names''. Therefore, we see that the named elements of the list variable \texttt{mylist} are called ``name'' and ``wife'', and we can retrieve their values by typing mylist\$name and mylist\$wife, respectively.
 
-Another type of object that you will encounter in R is a \textbf{table}. For example, if we made a vector variable ``mynames'' containing the names of children in a class, we can use the table() function to produce a table variable that contains the number of children with each possible name:
+\hypertarget{tables}{%
+\subsection{Tables}\label{tables}}
+
+\textbf{NOTE}: Tables are a common
+
+Another type of object that you will encounter in R is a \textbf{table}. For example, if we made a vector variable ``nucleotides'' containing the of a DNA molecule, we can use the \texttt{table()} function to produce a \textbf{table variable} that contains the number of bases with each possible nucleotides:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mynames }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Mary"}\NormalTok{, }\StringTok{"John"}\NormalTok{, }\StringTok{"Ann"}\NormalTok{, }\StringTok{"Sinead"}\NormalTok{, }\StringTok{"Joe"}\NormalTok{, }\StringTok{"Mary"}\NormalTok{, }\StringTok{"Jim"}\NormalTok{, }\StringTok{"John"}\NormalTok{, }\StringTok{"Simon"}\NormalTok{)}
+\NormalTok{bases }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{, }\StringTok{"T"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"A"}\NormalTok{, }\StringTok{"T"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{, }\StringTok{"C"}\NormalTok{, }\StringTok{"G"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -627,31 +793,29 @@ Now make the table
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{table}\NormalTok{(mynames)}
+\FunctionTok{table}\NormalTok{(bases)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## mynames
-##    Ann    Jim    Joe   John   Mary  Simon Sinead 
-##      1      1      1      2      2      1      1
+## bases
+## A C G T 
+## 3 2 2 2
 \end{verbatim}
 
-Note that there are two Johns and two Marys.
-
-We can store the table variable produced by the function table(), and call the stored table ``mytable'', by typing:
+We can store the table variable produced by the function \texttt{table()}, and call the stored table ``bases.table'', by typing:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mytable }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(mynames)}
+\NormalTok{bases.table }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(bases)}
 \end{Highlighting}
 \end{Shaded}
 
-To access elements in a table variable, you need to use double square brackets, just like accessing elements in a list. For example, to access the fourth element in the table mytable (the number of children called ``John''), we type:
+To access elements in a table variable, you need to use double square brackets, just like accessing elements in a list. For example, to access the fourth element in the table bases.table (the number of Ts in the sequence), we type:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mytable[[}\DecValTok{4}\NormalTok{]]}
+\NormalTok{bases.table[[}\DecValTok{4}\NormalTok{]]  }\CommentTok{\# double backets!}
 \end{Highlighting}
 \end{Shaded}
 
@@ -663,7 +827,7 @@ Alternatively, you can use the name of the fourth element in the table (``John''
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{mytable[[}\StringTok{"John"}\NormalTok{]]}
+\NormalTok{bases.table[[}\StringTok{"T"}\NormalTok{]]}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1082,7 +1246,7 @@ Once you have table you can make a basic plot
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-58-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-64-1.pdf}
 
 We can sort by the number of words using the sort() command
 
@@ -1112,7 +1276,7 @@ Let's save over the original object
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-61-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-67-1.pdf}
 
 R will automatically try to optimize the appearance of the labels on the graph so you may not see all of them; no worries.
 
@@ -1132,7 +1296,7 @@ Make a piechart with pie()
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-63-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-69-1.pdf}
 
 \hypertarget{summary}{%
 \subsection{Summary}\label{summary}}
@@ -2056,7 +2220,7 @@ You can view the code that makes up a function by typing its name (without any p
 ##   output <- (20 + (x*x)) 
 ##   return(output)
 ##   }
-## <bytecode: 0x7f9d4a448c00>
+## <bytecode: 0x7fb5e8429cb8>
 \end{verbatim}
 
 When you are typing R, if you want to, you can write comments by writing the comment text after the ``\#'' sign. This can be useful if you want to write some R commands that other people need to read and understand. R will ignore the comments when it is executing the commands. For example, you may want to write a comment to explain what the function log10() does:
@@ -2417,7 +2581,7 @@ Not plot with the base R plot() function:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-152-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-158-1.pdf}
 
 If you want to label the axes on the plot, you can do this by giving the plot() function values for its optional arguments xlab and ylab:
 
@@ -2430,7 +2594,7 @@ If you want to label the axes on the plot, you can do this by giving the plot() 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-153-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-159-1.pdf}
 
 We can store character data in vectors so if we want we could do this to set up our labels:
 
@@ -2451,7 +2615,7 @@ Then use bracket notation to call the labels from nthe vector
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-155-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-161-1.pdf}
 
 The above plot has an error: I intentionlly made it so that ``vector1'' is printed on both axes. In the chunk below make it so that ``vector2'' is printed on the y axis.
 
@@ -2464,7 +2628,7 @@ The above plot has an error: I intentionlly made it so that ``vector1'' is print
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-156-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-162-1.pdf}
 
 Base R has lots of plotting functions; additionally, people have written packages to implement new plotting capabilities. ggplot2 is currently the most popular plotting package, and ggpubr is a package which makes ggplot2 easier to use. For quick plots we'll use base R functions, and when we get to more important things we'll use ggplot2 and ggpubr.
 
@@ -3254,7 +3418,7 @@ It is common to use the data generated from a sliding window analysis to create 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-201-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-207-1.pdf}
 
 In the code above, the line ``chunkGCs \textless- numeric(n)'' makes a new vector chunkGCs which has the same number of elements as the vector starts (5 elements here). This vector chunkGCs is then used within the for loop for storing the GC content of each chunk of DNA.
 
@@ -3294,7 +3458,7 @@ This function will make a sliding window plot of GC content for a particular inp
 ## [1] 0.4653333
 \end{verbatim}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-203-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-209-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3340,7 +3504,7 @@ This function will make a sliding window plot of GC content for a particular inp
 ## [1] 0.4833333
 \end{verbatim}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-204-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-210-1.pdf}
 
 \hypertarget{over-represented-and-under-represented-dna-words}{%
 \subsection{Over-represented and under-represented DNA words}\label{over-represented-and-under-represented-dna-words}}
@@ -3598,7 +3762,7 @@ For example, if we want to create a dotplot of the sequences for the chorismate 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-217-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-223-1.pdf}
 
 In the dotplot above, the \emph{M. leprae} sequence is plotted along the x-axis (horizontal axis), and the \emph{M. ulcerans} sequence is plotted along the y-axis (vertical axis). The dotplot displays a dot at points where there is an identical amino acid in the two sequences.
 
@@ -4789,8 +4953,8 @@ We can use this function to generate 1000 7-letter amino acid sequences using a 
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "PWWPHEE" "WWAHWPP" "AAEHHPA" "WPAPAEP" "AEWHHAW" "AAEWEAH" "HEEEEEP"
-##  [8] "AAAAAEE" "PEAHWEE" "PPHWEAP"
+##  [1] "AEPHEAA" "WPEHWPH" "HWEEEEP" "WHEWEPH" "PHEWHAA" "EPPPAAH" "HEPEWHW"
+##  [8] "AAWHAWH" "PHEAAEA" "HEPAHAE"
 \end{verbatim}
 
 The 1000 random sequences are stored in a vector randomseqs that has 1000 elements, each of which contains one of the random sequences.
@@ -4817,9 +4981,9 @@ For example, to align `HEAGAWGHEE' to the first of the 1000 random sequences (`E
 
 \begin{verbatim}
 ## Global PairwiseAlignmentsSingleSubject (1 of 1)
-## pattern: HEAGAWGHEE
-## subject: PW---WPHEE
-## score: 4
+## pattern: HEAGAWGHEE-
+## subject: AEP----HEAA
+## score: -26
 \end{verbatim}
 
 If we use the pairwiseAlignment() function with the argument `scoreOnly=TRUE', it will just give us the score for the alignment:
@@ -4832,7 +4996,7 @@ If we use the pairwiseAlignment() function with the argument `scoreOnly=TRUE', i
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 4
+## [1] -26
 \end{verbatim}
 
 If we repeat this 1000 times, that is, for each of the 1000 random sequences in vector randomseqs, we can get a distribution of alignment scores expected for aligning `HEAGAWGHEE' to random sequences of the same length and (approximately the same) amino acid composition as `PAWHEAE'.
@@ -4863,7 +5027,7 @@ Once we have run the `for loop', we can make a histogram plot of the 1000 scores
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-286-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-292-1.pdf}
 
 We can see from the histogram that quite a lot of the random sequences seem to have higher alignment scores than -5 when aligned to `HEAGAWGHEE' (where -5 is the alignment score for `PAWHEAE' and `HEAGAWGHEE').
 
@@ -4876,7 +5040,7 @@ We can use the vector randomscores of scores for 1000 alignments of random seque
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 276
+## [1] 283
 \end{verbatim}
 
 We see that 266 of the 1000 alignments of random sequences to `HEAGAWGHEE' had alignment scores that were equal to or greater than -5. Thus, we can estimate that the probability of getting a score as large as the real alignment score by chance is (266/1000 =) 0.266. In other words, we can calculate a P-value of 0.266. This probability or P-value is quite high (almost 30\%, or 1 in 3), so we can conclude that it is quite probable that we could get an alignment score as high as -5 by chance alone. This indicates that the sequences `HEAGAWGHEE' and `PAWHEAE' are not more similar than any two random sequences, and so they are probably not related sequences.
@@ -4981,7 +5145,7 @@ In R, you can view the standard genetic code, the correspondence between codons 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-289-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-295-1.pdf}
 
 You can see from this table that ``ATG'' is translated to Met (the amino acid methionine), and that ``TAA'', ``TGA'' and ``TAG'' correspond to Stp (stop codons, which are not translated to any amino acid, but signal the end of translation).
 
@@ -5425,7 +5589,7 @@ Generate one random sequence using the multinomial model
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "ATAAACCAAATAATAAAGAAA"
+## [1] "CAGAAACAACAAAAGTACTTC"
 \end{verbatim}
 
 We can then use the findORFsinSeq() function to find ORFs in this random sequence. If we repeat this 10 times, we can find the lengths of the ORFs found in the 10 random sequences. We can then compare the lengths of the ORFs found in the original sequence, to the lengths of the ORFs found in the random sequences.
@@ -6341,8 +6505,8 @@ We can use R to generate a DNA sequence using a particular multinomial model. Fi
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "A" "A" "G" "G" "C" "T" "T" "C" "T" "C" "T" "C" "G" "A" "A" "C" "C" "T" "G"
-## [20] "C" "T" "A" "C" "G" "C" "T" "T" "T" "G" "G"
+##  [1] "C" "T" "C" "C" "C" "G" "C" "G" "C" "G" "A" "C" "C" "C" "A" "A" "G" "C" "G"
+## [20] "T" "G" "T" "C" "G" "C" "G" "A" "A" "T" "A"
 \end{verbatim}
 
 If you look at the help page for the function(), you will find that its inputs are the vector to sample from (nucleotides here), the size of the sample (seqlength here), and a vector of probabilities for obtaining the elements of the vector being sampled (probabilities1 here). If we use the sample() function to generate a sequence again, it will create a different sequence using the same multinomial model:
@@ -6354,8 +6518,8 @@ If you look at the help page for the function(), you will find that its inputs a
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "T" "C" "G" "T" "T" "G" "G" "A" "G" "C" "A" "C" "A" "C" "T" "G" "T" "C" "A"
-## [20] "A" "C" "A" "G" "T" "T" "G" "A" "T" "T" "C"
+##  [1] "A" "A" "G" "C" "C" "C" "C" "C" "C" "G" "G" "G" "C" "G" "G" "G" "G" "C" "G"
+## [20] "T" "C" "G" "C" "T" "A" "A" "G" "G" "A" "T"
 \end{verbatim}
 
 In the same way, we can generate a sequence using a different multinomial model, where pA=0.1, pC=0.41, pG=0.39, and pT=0.1:
@@ -6368,8 +6532,8 @@ In the same way, we can generate a sequence using a different multinomial model,
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "A" "C" "C" "C" "C" "A" "A" "T" "G" "G" "C" "T" "C" "C" "C" "A" "C" "T" "C"
-## [20] "C" "C" "C" "G" "G" "G" "C" "G" "G" "G" "C"
+##  [1] "C" "T" "C" "G" "C" "C" "G" "C" "G" "G" "C" "G" "C" "G" "C" "T" "G" "A" "G"
+## [20] "C" "C" "T" "A" "C" "C" "A" "C" "A" "C" "C"
 \end{verbatim}
 
 As you would expect, the sequences generated using this second multinomial model have a higher fraction of Cs and Gs compared to the sequences generated using the first multinomial model above. This is because pC and GT are higher for this second model than for the first model (pC=0.41 and GT=0.39 in the second model, versus pC=0.3 and GT=0.3 in the first model). That is, in the second multinomial model we are using a roulette wheel that has large slices labelled ``C'' and ``G'', while in the first multinomial model we were using a roulette wheel with relatively smaller slices labelled ``C'' and ``G'' (SEE THE PICTURE BELOW).
@@ -6460,8 +6624,8 @@ We can use the generatemarkovseq() function to generate a sequence using a parti
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "A" "C" "C" "A" "A" "G" "A" "G" "T" "A" "G" "C" "A" "C" "T" "C" "C" "T" "A"
-## [20] "T" "T" "T" "A" "G" "A" "T" "A" "C" "C" "G"
+##  [1] "A" "G" "C" "C" "C" "G" "A" "C" "A" "A" "C" "G" "C" "T" "A" "A" "A" "A" "G"
+## [20] "T" "T" "A" "C" "G" "T" "G" "T" "A" "C" "C"
 \end{verbatim}
 
 As you can see, there are many ``A''s after ``T''s in the sequence. This is because pTA has a high value (0.5) in the Markov transition matrix mytransitionmatrix. Similarly, there are few ``A''s or ``T''s after ``C''s, which is because pCA and pCT have low values (0.1) in this transition matrix.
@@ -6583,34 +6747,34 @@ We can use the generatehmmseq() function to generate a sequence using a particul
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Position 1 , State GC-rich , Nucleotide =  C"
-## [1] "Position 2 , State AT-rich , Nucleotide =  T"
-## [1] "Position 3 , State AT-rich , Nucleotide =  G"
+## [1] "Position 1 , State GC-rich , Nucleotide =  G"
+## [1] "Position 2 , State GC-rich , Nucleotide =  G"
+## [1] "Position 3 , State GC-rich , Nucleotide =  G"
 ## [1] "Position 4 , State GC-rich , Nucleotide =  G"
-## [1] "Position 5 , State AT-rich , Nucleotide =  T"
-## [1] "Position 6 , State AT-rich , Nucleotide =  G"
-## [1] "Position 7 , State GC-rich , Nucleotide =  C"
-## [1] "Position 8 , State GC-rich , Nucleotide =  C"
+## [1] "Position 5 , State GC-rich , Nucleotide =  C"
+## [1] "Position 6 , State GC-rich , Nucleotide =  G"
+## [1] "Position 7 , State GC-rich , Nucleotide =  T"
+## [1] "Position 8 , State GC-rich , Nucleotide =  G"
 ## [1] "Position 9 , State GC-rich , Nucleotide =  G"
-## [1] "Position 10 , State GC-rich , Nucleotide =  T"
-## [1] "Position 11 , State GC-rich , Nucleotide =  C"
-## [1] "Position 12 , State GC-rich , Nucleotide =  T"
-## [1] "Position 13 , State GC-rich , Nucleotide =  G"
-## [1] "Position 14 , State GC-rich , Nucleotide =  G"
+## [1] "Position 10 , State GC-rich , Nucleotide =  C"
+## [1] "Position 11 , State GC-rich , Nucleotide =  G"
+## [1] "Position 12 , State GC-rich , Nucleotide =  C"
+## [1] "Position 13 , State GC-rich , Nucleotide =  C"
+## [1] "Position 14 , State GC-rich , Nucleotide =  C"
 ## [1] "Position 15 , State GC-rich , Nucleotide =  C"
-## [1] "Position 16 , State GC-rich , Nucleotide =  G"
+## [1] "Position 16 , State GC-rich , Nucleotide =  C"
 ## [1] "Position 17 , State GC-rich , Nucleotide =  C"
-## [1] "Position 18 , State GC-rich , Nucleotide =  A"
-## [1] "Position 19 , State GC-rich , Nucleotide =  C"
-## [1] "Position 20 , State GC-rich , Nucleotide =  A"
-## [1] "Position 21 , State GC-rich , Nucleotide =  T"
+## [1] "Position 18 , State GC-rich , Nucleotide =  C"
+## [1] "Position 19 , State GC-rich , Nucleotide =  G"
+## [1] "Position 20 , State GC-rich , Nucleotide =  T"
+## [1] "Position 21 , State GC-rich , Nucleotide =  G"
 ## [1] "Position 22 , State GC-rich , Nucleotide =  G"
-## [1] "Position 23 , State AT-rich , Nucleotide =  T"
-## [1] "Position 24 , State AT-rich , Nucleotide =  A"
-## [1] "Position 25 , State AT-rich , Nucleotide =  A"
-## [1] "Position 26 , State AT-rich , Nucleotide =  A"
-## [1] "Position 27 , State GC-rich , Nucleotide =  C"
-## [1] "Position 28 , State GC-rich , Nucleotide =  C"
+## [1] "Position 23 , State GC-rich , Nucleotide =  T"
+## [1] "Position 24 , State GC-rich , Nucleotide =  T"
+## [1] "Position 25 , State GC-rich , Nucleotide =  G"
+## [1] "Position 26 , State GC-rich , Nucleotide =  A"
+## [1] "Position 27 , State GC-rich , Nucleotide =  G"
+## [1] "Position 28 , State AT-rich , Nucleotide =  T"
 ## [1] "Position 29 , State GC-rich , Nucleotide =  C"
 ## [1] "Position 30 , State GC-rich , Nucleotide =  C"
 \end{verbatim}
@@ -7192,7 +7356,7 @@ Some functions in R can be executed within nothing in the parentheses.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Thu Jul  8 10:15:44 2021"
+## [1] "Thu Jul  8 12:31:54 2021"
 \end{verbatim}
 
 \textbf{Exponents}
