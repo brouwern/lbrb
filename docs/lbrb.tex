@@ -1565,8 +1565,8 @@ Challenge: How can we use a for loop to print out the square of every second num
 
 In the first cycle of this loop, the value of i is 1, and so i * i = 1 is printed out. In the second cycle through the loop, the value of i is 3, and so i * i = 9 is printed out. The loop continues until the value of i is 9. In the fifth cycle through the loop, the value of i is 9, and so i * i = 81 is printed out.
 
-\hypertarget{programming-in-r-for-functions}{%
-\chapter{Programming in R: for functions}\label{programming-in-r-for-functions}}
+\hypertarget{mini-tutorial-vectors-in-r}{%
+\chapter{Mini tutorial: Vectors in R}\label{mini-tutorial-vectors-in-r}}
 
 \textbf{By}: Avril Coghlan
 
@@ -1575,110 +1575,10 @@ In the first cycle of this loop, the value of i is 1, and so i * i = 1 is printe
 \hypertarget{preface-3}{%
 \section{Preface}\label{preface-3}}
 
-This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics (1)''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. The text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
+This is a modification of part of\href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter2.html}{``DNA Sequence Statistics (2)''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. Most of text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
 
 \hypertarget{vocab-1}{%
 \section{Vocab}\label{vocab-1}}
-
-\begin{itemize}
-\tightlist
-\item
-  function
-\item
-  curly brackets
-\end{itemize}
-
-\hypertarget{functions-2}{%
-\section{Functions}\label{functions-2}}
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{function()}
-\end{itemize}
-
-\hypertarget{functions-in-r}{%
-\section{Functions in R}\label{functions-in-r}}
-
-We have been using \textbf{built-in functions} such as mean(), length(), print(), plot(), etc. We can also create our own functions in R to do calculations that you want to carry out very often on different input data sets. For example, we can create a function to calculate the value of 20 plus the square of some input number:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{myfunction }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{ }
-\NormalTok{  output }\OtherTok{\textless{}{-}}\NormalTok{ (}\DecValTok{20} \SpecialCharTok{+}\NormalTok{ (x}\SpecialCharTok{*}\NormalTok{x)) }
-  \FunctionTok{return}\NormalTok{(output)}
-\NormalTok{  \}}
-\end{Highlighting}
-\end{Shaded}
-
-This function will calculate the square of a number (x), and then add 20 to that value. It stores this in a temporary object called output. The return() statement returns the calculated value. Once you have typed in this function, the function is then available for use. For example, we can use the function for different input numbers (e.g.. 10, 25):
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{myfunction}\NormalTok{(}\DecValTok{10}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 120
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{myfunction}\NormalTok{(}\DecValTok{25}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 645
-\end{verbatim}
-
-You can view the code that makes up a function by typing its name (without any parentheses). For example, we can try this by typing ``myfunction'':
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{myfunction}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## function(x) { 
-##   output <- (20 + (x*x)) 
-##   return(output)
-##   }
-## <bytecode: 0x7fd8337a2060>
-\end{verbatim}
-
-\hypertarget{comments-in-r}{%
-\section{Comments in R}\label{comments-in-r}}
-
-When you are typing R, if you want to, you can write comments by writing the comment text after the ``\#'' sign. This can be useful if you want to write some R commands that other people need to read and understand. R will ignore the comments when it is executing the commands. For example, you may want to write a comment to explain what the function log10() does:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{100}
-\FunctionTok{log10}\NormalTok{(x) }\CommentTok{\# Finds the log to the base 10 of variable x.}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 2
-\end{verbatim}
-
-\hypertarget{mini-tutorial-vectors-in-r}{%
-\chapter{Mini tutorial: Vectors in R}\label{mini-tutorial-vectors-in-r}}
-
-\textbf{By}: Avril Coghlan
-
-\textbf{Adapted, edited and expanded}: Nathan Brouwer (\href{mailto:brouwern@gmail.com}{\nolinkurl{brouwern@gmail.com}}) under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
-
-\hypertarget{preface-4}{%
-\section{Preface}\label{preface-4}}
-
-This is a modification of part of\href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter2.html}{``DNA Sequence Statistics (2)''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. Most of text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
-
-\hypertarget{vocab-2}{%
-\section{Vocab}\label{vocab-2}}
 
 \begin{itemize}
 \tightlist
@@ -1690,8 +1590,8 @@ This is a modification of part of\href{https://a-little-book-of-r-for-bioinforma
   regular expressions
 \end{itemize}
 
-\hypertarget{functions-3}{%
-\chapter{Functions}\label{functions-3}}
+\hypertarget{functions-2}{%
+\chapter{Functions}\label{functions-2}}
 
 \begin{itemize}
 \tightlist
@@ -2171,8 +2071,8 @@ Regular expressions are a deep subject in computing. You can find some more info
 
 \textbf{Adapted, edited and expanded}: Nathan Brouwer (\href{mailto:brouwern@gmail.com}{\nolinkurl{brouwern@gmail.com}}) under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
 
-\hypertarget{preface-5}{%
-\section{Preface}\label{preface-5}}
+\hypertarget{preface-4}{%
+\section{Preface}\label{preface-4}}
 
 This is a modification of part of\href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter2.html}{``DNA Sequence Statistics (2)''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. Most of text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
 
@@ -2200,7 +2100,7 @@ Not plot with the base R \texttt{plot()} function:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-116-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-112-1.pdf}
 Note that there is a comma between the two vector names. When building plots from dataframes you usually see a tilde (\textasciitilde), but when you have two vectors you can use just a comma.
 
 Also note the order of the vectors within the \texttt{plot()} command and which axes they appear on. The first vector is \texttt{numeric.vect1} and it appears on the horizontal x-axis.
@@ -2216,7 +2116,7 @@ If you want to label the axes on the plot, you can do this by giving the \texttt
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-117-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-113-1.pdf}
 
 We can store character data in vectors so if we want we could do this to set up our labels:
 
@@ -2237,7 +2137,7 @@ Then use bracket notation to call the labels from the vector
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-119-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-115-1.pdf}
 
 If we want we can use a tilde to make our plot like this:
 
@@ -2247,7 +2147,7 @@ If we want we can use a tilde to make our plot like this:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-120-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-116-1.pdf}
 
 Note that now, \texttt{numeric.vect2} is on the left and \texttt{numeric.vect1} is on the right. This flexibility can be tricky to keep track of.
 
@@ -2267,12 +2167,112 @@ Then we plot it like this, referencing the dataframe \texttt{df} via the \texttt
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-122-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-118-1.pdf}
 
 \hypertarget{other-plotting-packages}{%
 \section{Other plotting packages}\label{other-plotting-packages}}
 
 Base R has lots of plotting functions; additionally, people have written packages to implement new plotting capabilities. The package \texttt{ggplot2} is currently the most popular plotting package, and \texttt{ggpubr} is a package which makes \texttt{ggplot2} easier to use. For quick plots we'll use base R functions, and when we get to more important things we'll use ggplot2 and ggpubr.
+
+\hypertarget{programming-in-r-for-functions}{%
+\chapter{Programming in R: for functions}\label{programming-in-r-for-functions}}
+
+\textbf{By}: Avril Coghlan
+
+\textbf{Adapted, edited and expanded}: Nathan Brouwer (\href{mailto:brouwern@gmail.com}{\nolinkurl{brouwern@gmail.com}}) under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+
+\hypertarget{preface-5}{%
+\section{Preface}\label{preface-5}}
+
+This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics (1)''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. The text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
+
+\hypertarget{vocab-2}{%
+\section{Vocab}\label{vocab-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  function
+\item
+  curly brackets
+\end{itemize}
+
+\hypertarget{functions-3}{%
+\section{Functions}\label{functions-3}}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{function()}
+\end{itemize}
+
+\hypertarget{functions-in-r}{%
+\section{Functions in R}\label{functions-in-r}}
+
+We have been using \textbf{built-in functions} such as mean(), length(), print(), plot(), etc. We can also create our own functions in R to do calculations that you want to carry out very often on different input data sets. For example, we can create a function to calculate the value of 20 plus the square of some input number:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myfunction }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{ }
+\NormalTok{  output }\OtherTok{\textless{}{-}}\NormalTok{ (}\DecValTok{20} \SpecialCharTok{+}\NormalTok{ (x}\SpecialCharTok{*}\NormalTok{x)) }
+  \FunctionTok{return}\NormalTok{(output)}
+\NormalTok{  \}}
+\end{Highlighting}
+\end{Shaded}
+
+This function will calculate the square of a number (x), and then add 20 to that value. It stores this in a temporary object called output. The return() statement returns the calculated value. Once you have typed in this function, the function is then available for use. For example, we can use the function for different input numbers (e.g.. 10, 25):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{myfunction}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 120
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{myfunction}\NormalTok{(}\DecValTok{25}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 645
+\end{verbatim}
+
+You can view the code that makes up a function by typing its name (without any parentheses). For example, we can try this by typing ``myfunction'':
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{myfunction}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## function(x) { 
+##   output <- (20 + (x*x)) 
+##   return(output)
+##   }
+## <bytecode: 0x7fb09e7af308>
+\end{verbatim}
+
+\hypertarget{comments-in-r}{%
+\section{Comments in R}\label{comments-in-r}}
+
+When you are typing R, if you want to, you can write comments by writing the comment text after the ``\#'' sign. This can be useful if you want to write some R commands that other people need to read and understand. R will ignore the comments when it is executing the commands. For example, you may want to write a comment to explain what the function log10() does:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{100}
+\FunctionTok{log10}\NormalTok{(x) }\CommentTok{\# Finds the log to the base 10 of variable x.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
 
 \hypertarget{part-appendices}{%
 \part{Appendices}\label{part-appendices}}
@@ -2679,7 +2679,7 @@ Some functions in R can be executed within nothing in the parentheses.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Sun Jul 11 12:01:10 2021"
+## [1] "Sun Jul 11 14:39:10 2021"
 \end{verbatim}
 
 \textbf{Exponents}

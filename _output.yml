@@ -7,6 +7,8 @@ bookdown::gitbook:
       after: |
         <li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
     download: ["pdf", "epub"]
+    includes:
+      after_body: disqus.html
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
@@ -14,3 +16,4 @@ bookdown::pdf_book:
   citation_package: natbib
   keep_tex: yes
 bookdown::epub_book: default
+

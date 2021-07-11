@@ -122,7 +122,7 @@ You can also start *R* from the Start menu in Windows.  Click on the “Start”
 
 Say "Hi" to *R* and take a quick look at how it looks.  Now say "Goodbye", because we will never actually do any work in this version of *R*; instead, we'll use the **RStudio IDE (integrated development environment)**.
 
-<!--chapter:end:5000-ac-b-downloading_R_AC01-1.Rmd-->
+<!--chapter:end:02-downloading_R_AC01-1.Rmd-->
 
 # Installing the RStudio IDE
 
@@ -147,7 +147,7 @@ A good overview of what the different parts of RStudio can be seen in the image 
 
 RStudio and RStudio cloud work almost identically, so anything you read about RStudio will apply to RStudio Cloud.  RStudio is easy to download an use, but RStudio Cloud eliminates even the minor hiccups that occur.  Free accounts with RStudio Cloud allow up to 15 hours per month, which is enough for you to get a taste for using R. 
 
-<!--chapter:end:5000-ac-c-installing_RStudio_AC01-2.Rmd-->
+<!--chapter:end:03-installing_RStudio_AC01-2.Rmd-->
 
 # Installing *R* packages
 
@@ -198,7 +198,7 @@ library(ggplot2) # note: NO " "
 
 
 
-<!--chapter:end:5000-ac-d-installing_packages_in_RStudio_AC01-3.Rmd-->
+<!--chapter:end:04-installing_packages_in_RStudio_AC01-3.Rmd-->
 
 ---
 output: html_document
@@ -324,7 +324,7 @@ knitr::include_graphics("images/R_cursor.png")
 
 
 
-<!--chapter:end:5000-ac-e-installing_bioconductor_AC01-4.Rmd-->
+<!--chapter:end:05-installing_bioconductor_AC01-4.Rmd-->
 
 ---
 output: html_document
@@ -677,7 +677,7 @@ There is another nice (slightly more in-depth) tutorial to R available on the �
 ```
 
 
-<!--chapter:end:5000-ac-f-brief_intro_to_R_AC01-5.Rmd-->
+<!--chapter:end:06-brief_intro_to_R_AC01-5.Rmd-->
 
 ---
 output: html_document
@@ -963,7 +963,7 @@ Hint: look at the help page for the GC() function to find out how it deals with 
 ```
 
 
-<!--chapter:end:5000-ac-h-DNA_sequence_descriptive_stats-AC03-02-.Rmd-->
+<!--chapter:end:07-DNA_sequence_descriptive_stats-AC03-02-.Rmd-->
 
 # Programming in R: for loops
 
@@ -1042,67 +1042,7 @@ for (i in seq(1, 10, by = 2)) {
 In the first cycle of this loop, the value of i is 1, and so i * i = 1 is printed out. In the second cycle through the loop, the value of i is 3, and so i * i = 9 is printed out. The loop continues until the value of i is 9. In the fifth cycle through the loop, the value of i is 9, and so i * i = 81 is printed out.
 
 
-<!--chapter:end:5000-ac-h-programming_in_R-forloops_AC04-02.Rmd-->
-
-# Programming in R: for functions
-
-**By**: Avril Coghlan  
-
-**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
-
-## Preface
-
-This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  The text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
-
-
-## Vocab
-
-* function
-* curly brackets
-
-## Functions
-
-* `function()`
-
-## Functions in R
-
-We have been using **built-in functions** such as mean(), length(), print(), plot(), etc. We can also create our own functions in R to do calculations that you want to carry out very often on different input data sets. For example, we can create a function to calculate the value of 20 plus the square of some input number:
-
-```{r}
-myfunction <- function(x) { 
-  output <- (20 + (x*x)) 
-  return(output)
-  }
-```
-
-This function will calculate the square of a number (x), and then add 20 to that value.  It stores this in a temporary object called output. The return() statement returns the calculated value. Once you have typed in this function, the function is then available for use. For example, we can use the function for different input numbers (e.g.. 10, 25):
-
-
-```{r}
-myfunction(10)
-myfunction(25)
-```
-
- 
- 
-You can view the code that makes up a function by typing its name (without any parentheses). For example, we can try this by typing “myfunction”:
-
-```{r}
-myfunction
-```
- 
-
-## Comments in R
-
-When you are typing R, if you want to, you can write comments by writing the comment text after the “#” sign. This can be useful if you want to write some R commands that other people need to read and understand. R will ignore the comments when it is executing the commands. For example, you may want to write a comment to explain what the function log10() does:
-
-```{r}
-x <- 100
-log10(x) # Finds the log to the base 10 of variable x.
-```
-
-
-<!--chapter:end:5000-ac-h-programming_in_R-functions-AC04-02.Rmd-->
+<!--chapter:end:08-programming_in_R-forloops_AC04-02.Rmd-->
 
 ---
 output: html_document
@@ -1413,7 +1353,7 @@ Regular expressions are a deep subject in computing.  You can find some more inf
 
 
 
-<!--chapter:end:5000-ac-h-vectors-AC04-01.Rmd-->
+<!--chapter:end:09a-vectors-AC04-01.Rmd-->
 
 ---
 output: html_document
@@ -1503,7 +1443,67 @@ plot(numeric.vect2 ~ numeric.vect1, data = df)
 Base R has lots of plotting functions; additionally, people have written packages to implement new plotting capabilities. The package `ggplot2` is currently the most popular plotting package, and `ggpubr` is a package which makes `ggplot2` easier to use.  For quick plots we'll use base R functions, and when we get to more important things we'll use ggplot2 and ggpubr.
 
 
-<!--chapter:end:5000-ac-h-vectors-plotting-AC04-01.Rmd-->
+<!--chapter:end:09b-vectors-plotting-AC04-01.Rmd-->
+
+# Programming in R: for functions
+
+**By**: Avril Coghlan  
+
+**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+## Preface
+
+This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  The text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
+
+
+## Vocab
+
+* function
+* curly brackets
+
+## Functions
+
+* `function()`
+
+## Functions in R
+
+We have been using **built-in functions** such as mean(), length(), print(), plot(), etc. We can also create our own functions in R to do calculations that you want to carry out very often on different input data sets. For example, we can create a function to calculate the value of 20 plus the square of some input number:
+
+```{r}
+myfunction <- function(x) { 
+  output <- (20 + (x*x)) 
+  return(output)
+  }
+```
+
+This function will calculate the square of a number (x), and then add 20 to that value.  It stores this in a temporary object called output. The return() statement returns the calculated value. Once you have typed in this function, the function is then available for use. For example, we can use the function for different input numbers (e.g.. 10, 25):
+
+
+```{r}
+myfunction(10)
+myfunction(25)
+```
+
+ 
+ 
+You can view the code that makes up a function by typing its name (without any parentheses). For example, we can try this by typing “myfunction”:
+
+```{r}
+myfunction
+```
+ 
+
+## Comments in R
+
+When you are typing R, if you want to, you can write comments by writing the comment text after the “#” sign. This can be useful if you want to write some R commands that other people need to read and understand. R will ignore the comments when it is executing the commands. For example, you may want to write a comment to explain what the function log10() does:
+
+```{r}
+x <- 100
+log10(x) # Finds the log to the base 10 of variable x.
+```
+
+
+<!--chapter:end:09c-programming_in_R-functions-AC04-02.Rmd-->
 
 ---
 output: html_document
@@ -1559,7 +1559,7 @@ Run the installer after it downloads and accept the default.  RStudio will autom
 Both R and RStudio undergo regular updates and you will occasionally have to re-download and install one or both of them.  In practice I probably do this about every 6 months.
 
 
-<!--chapter:end:9010-A01_getting_access_to_R.Rmd-->
+<!--chapter:end:99-A01_getting_access_to_R.Rmd-->
 
 # Getting started with R itself (or not) {-}
 
@@ -1832,5 +1832,5 @@ exp(log(sqrt(42)^2))
 
 
 
-<!--chapter:end:9010-A02_getting_started_with_R.Rmd-->
+<!--chapter:end:99-A02_getting_started_with_R.Rmd-->
 
