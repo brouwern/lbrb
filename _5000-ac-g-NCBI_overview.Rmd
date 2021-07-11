@@ -1,0 +1,33 @@
+# NCBI: The National Center for Biotechnology Information
+
+**NOTE:** The following material was partially adapted by N. Brouwer from [Wikipedia](https://en.wikipedia.org/wiki/National_Center_for_Biotechnology_Information).  See the underlying .Rmd file for information on specific paragraphs from Wikipedia.
+
+<!-- This paragraph is from Wikipedia -->
+The **National Center for Biotechnology Information (NCBI)** is part of the United States National Library of Medicine (NLM), a branch of the National Institutes of Health (NIH). It was founded in 1988 and is approved and funded by the government of the United States.  The NCBI houses a series of **databases** relevant to the basic and applied life sciences and is an important resource for **bioinformatics** tools and services. Major databases include **GenBank** for DNA sequences and **PubMed**, a **bibliographic** database for biomedical literature.  All these databases are available online through the **Entrez** search engine. 
+<!-- end paragraph  from Wikipedia -->
+
+In this chapter we'll briefly discuss the major databases, following up with specific details in subsequent chapters.  One thing to note is that in practice people do no always adhere to the specific names of databases and other tools.  For example, someone may say "I searched NCBI for sequences."  It would be more accurate to say "I used Entrez to search GenBank for sequences."  For in-depth details on all the features see [Database resources of the National Center for Biotechnology Information](https://academic.oup.com/nar/article/41/D1/D8/1067646)
+
+## GenBank sequence database
+
+The GenBank sequence database is an open access collection of  publicly available DNA and protein sequences.  If you've work with sequence data, you'll work with GenBank.  GenBank is the actual database, and it  can be searched several ways.  For example, you can search for a sequence by its ID number (**accession number**) if you know it, or do a **BLAST search** using an actual sequence to look for similar sequences.
+
+A key component of GenBank are the **GeneBank Records**, which are annotated summaries of sequences in the databases.  For example, below is shown record for a gene [pallysin](https://www.ncbi.nlm.nih.gov/protein/AAC65720) from syphilis  In addition to the actual A, T, C, and Gs of the sequences, the record provides **metadata**, such as the scientific name of the organism (*Treponema pallidum*), who did the sequencing, the name of the paper where the sequence was published, and important features of the gene.  
+<!-- Accession number for Tp0751 is AAC65720.1 -->
+
+A key feature of PubMed records is that they are **hyperlinked** to other NCBI databases.  For example, you can click link under the name of the paper which reported the sequence of the gene and it will take you to the PubMed record for that paper (see below).  You can also click the "Run BLAST" link and you can search the database for similar sequences.  This protein coded for by this particular gene has had its structured solved using x-ray crystalography, and you can see these results under "Protein 3D Structure."  In a later chapter we'll get to know these records in further detail.
+
+```{r, echo = F}
+genbank_record
+knitr::include_graphics("images/genbank_record.png")
+```
+
+
+## PubMed and PubMed Central article database
+
+PubMed and **PubMed Central (PMC)** are databases of articles related to data contained in NCBI databases.  PubMed contains basic biolographic information, the abstract,  relevant links to sequences, and to the websites of the actual publishers of the papers.  If the text of an article is open-access, PMC should have a copy of it.  Articles in PMC contain relevant hyperlinks, such as to any sequences that are mentioned.  For example, the image below show where the sequence of Tp0751 is mentioned in a paper and linked to the GenBank record we looked at above.
+
+
+
+
+

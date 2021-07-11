@@ -1,6 +1,13 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Downloading DNA sequences with R
 
 This is a modification of ["DNA Sequence Statistics"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  Almost all of text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license.  
+
+<!-- how much is sequinr actually useD? -->
 
 
 ### Functions
@@ -16,7 +23,7 @@ This is a modification of ["DNA Sequence Statistics"](https://a-little-book-of-r
 ### Software/websites
 
 * www.ncbi.nlm.nih.gov
-* Text editor (eg Notepad++, TextWrangler)
+* Text editors (e.g. Notepad++, TextWrangler)
 
 ### R vocabulary
 
@@ -33,7 +40,7 @@ This is a modification of ["DNA Sequence Statistics"](https://a-little-book-of-r
 
 ### Bioinformatics vocabulary
 
-* accession
+* accession, accession number
 * NCBI
 * NCBI Sequence Database
 * EMBL Sequence Database
@@ -41,45 +48,51 @@ This is a modification of ["DNA Sequence Statistics"](https://a-little-book-of-r
 
 ### Organisms and Sequence accessions
 
-Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. 
+* Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. 
 
 The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are NC_001477, NC_001474, NC_001475 and NC_002640, respectively.
 
 According to Wikipedia
 
-> "Dengue virus (DENV) is the cause of dengue fever. It is a mosquito-borne, single positive-stranded RNA virus .... Five serotypes of the virus have been found, all of which can cause the full spectrum of disease. Nevertheless, scientists' understanding of dengue virus may be simplistic, as rather than distinct ... groups, a continuum appears to exist. ... [A] study identified 47 strains of dengue virus." https://en.wikipedia.org/wiki/Dengue_virus
+> "Dengue virus (DENV) is the cause of dengue fever. It is a mosquito-borne, single positive-stranded RNA virus ... Five serotypes of the virus have been found, all of which can cause the full spectrum of disease. Nevertheless, scientists' understanding of dengue virus may be simplistic, as rather than distinct ... groups, a continuum appears to exist." https://en.wikipedia.org/wiki/Dengue_virus
 
 ### Preliminaries
 
 ```{r}
 library(rentrez)
-library(compbio4all)
+library(compbio4all)  
 ```
 
+<!-- is compbio4all called? -->
 
 ## DNA Sequence Statistics: Part 1
 
 ### Using R for Bioinformatics
 
-These tutorials tell you how to use  R  to carry out  simple analyses that are common in bioinformatics and computational biology.  In particular, the focus is on computational analysis of biological sequence data such as genome sequences and protein sequences. The programming approaches, however, are broadly generalizable to statistics and data science.
+These tutorials tell you how to use R to carry out simple analyses that are common in bioinformatics and computational biology.  In particular, the focus is on computational analysis of biological sequence data such as genome sequences and protein sequences. The programming approaches, however, are broadly generalizable to statistics and data science.
 
 The tutorials assume that the reader has some basic knowledge of biology, but not necessarily of bioinformatics. The focus is to explain simple bioinformatics analysis, and to explain how to carry out these analyses using *R*.
 
 
 ### R packages for bioinformatics: Bioconductor and SeqinR
 
-Many authors have written *R* packages for performing a wide variety of analyses. These do not come with the standard *R* installation, but must be installed and loaded as “add-ons”.  Loading the dayoff package will automatically load most of the packages we need.
+Many authors have written *R* packages for performing a wide variety of analyses. These do not come with the standard *R* installation, but must be installed and loaded as “add-ons”.  
 
-Bioinformaticians have written numerous specialized packages for R. In this tutorial, you will learn to use some of the function in the [*SeqinR*](https://cran.r-project.org/web/packages/seqinr/index.html) package to to carry out simple analyses of DNA sequences.  (SeqinR can retrieve sequences from a DNA sequence database, but this has largely been replaced by the functions in the package *rentrez*)
+<!-- old Loading the dayoff package will automatically load most of the packages we need. -->
+<!-- have these as dependencies of combio4all? -->
 
-Many well-known bioinformatics packages for *R* are in the Bioconductor set of R packages (www.bioconductor.org), which contains  packages with many *R* functions for analyzing biological data sets such as microarray data; and the [*SeqinR*](https://cran.r-project.org/web/packages/seqinr/index.html) package from CRAN, which contains R functions for obtaining sequences from DNA and protein sequence databases, and for analyzing DNA and protein sequences.  
+Bioinformaticians have written numerous specialized packages for *R*. In this tutorial, you will learn to use some of the function in the [`SeqinR`](https://cran.r-project.org/web/packages/seqinr/index.html) package to to carry out simple analyses of DNA sequences.  (`SeqinR` can retrieve sequences from a DNA sequence database, but this has largely been replaced by the functions in the package `rentrez`)
 
-SequinR will automatically load when you load dayoff.   For instructions on how to install an R package on your own see [How to install an R package](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html).
+Many well-known bioinformatics packages for *R* are in the Bioconductor set of *R* packages (www.bioconductor.org), which contains  packages with many *R* functions for analyzing biological data sets such as microarray data.  The [`SeqinR`](https://cran.r-project.org/web/packages/seqinr/index.html) package is from CRAN, which contains R functions for obtaining sequences from DNA and protein sequence databases, and for analyzing DNA and protein sequences.  
 
-We will also use functions from the *rentrez* and *ape* packages. Both of these also are loaded automatically by the dayoff package.
+<!-- SequinR will automatically load when you load dayoff.   For instructions on how to install an R package on your own see [How to install an R package](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html). -->
+
+We will also use functions from the `rentrez` and `ape` packages. 
+
+<!-- Both of these also are loaded automatically by the dayoff package. -->
 
 
-Remember that you can ask for more information about a particular R command by using the `help() eval = F` function. For example, to ask for more information about the `library() eval = F function`, you can type:
+Remember that you can ask for more information about a particular *R* command by using the `help()` function. For example, to ask for more information about the `library()`, you can type:
 
 ```{r, eval = F}
 help("library")
@@ -93,55 +106,61 @@ You can also do this
 
 ### FASTA file format
 
-The FASTA format is a simple and widely used format for storing biological (eg DNA or protein) sequences. It was first used by the [FASTA program](https://en.wikipedia.org/wiki/FASTA) for sequence alignment in the 1980s and has been adopted as standard by many other programs. 
+The FASTA format is a simple and widely used format for storing biological (e.g. DNA or protein) sequences. It was first used by the [FASTA program](https://en.wikipedia.org/wiki/FASTA) for sequence alignment in the 1980s and has been adopted as standard by many other programs. 
 
-FASTA files begin with a single-line description starting with a greater-than sign “>” character, followed on the next line with the sequences. Here is an example of a FASTA file.  (The cat() command is just a text display function used format the text when you run the code).
+FASTA files begin with a single-line description starting with a greater-than sign `>` character, followed on the next line with the sequences. Here is an example of a FASTA file.  (If you're looking at the source script for this lesson you'll see the `cat()` command, which is just a text display function used format the text when you run the code).
 ```{r, eval = T, echo = F}
-cat("A06852 183 residues MPRLFSYLLGVWLLLSQLPREIPGQSTNDFIKACGRELVRLWVEICGSVSWGRTALSLEEPQLETGPPAETMPSSITKDAEILKMMLEFVPNLPQELKATLSERQPSLRELQQSASKDSNLNFEEFKKIILNRQNEAEDKSLLELKNLGLDKHSRKKRLFRMTLSEKCCQVGCIRKDIARLC")
+cat(">A06852 183 residues MPRLFSYLLGVWLLLSQLPREIPGQSTNDFIKACGRELVRLWVEICGSVSWGRTALSLEEPQLETGPPAETMPSSITKDAEILKMMLEFVPNLPQELKATLSERQPSLRELQQSASKDSNLNFEEFKKIILNRQNEAEDKSLLELKNLGLDKHSRKKRLFRMTLSEKCCQVGCIRKDIARLC")
 ```
 
 
 ### The NCBI sequence database
 
-The [National Centre for Biotechnology Information (NCBI)](www.ncbi.nlm.nih.gov) in the US maintains a huge database of all the DNA and protein sequence data that has been collected, the NCBI Sequence Database. This also a similar database in Europe, the [European Molecular Biology Laboratory (EMBL) Sequence Database](www.ebi.ac.uk/embl), and also a similar database in Japan, the [DNA Data Bank of Japan (DDBJ)](www.ddbj.nig.ac.jp). These three databases exchange data every night, so at any one point in time, they contain almost identical data.
+The [National Centre for Biotechnology Information (NCBI)](www.ncbi.nlm.nih.gov) in the US maintains a huge database of all the DNA and protein sequence data that has been collected, the NCBI Sequence Database. These also a similar database in Europe, the [European Molecular Biology Laboratory (EMBL) Sequence Database](www.ebi.ac.uk/embl), and also a similar database in Japan, the [DNA Data Bank of Japan (DDBJ)](www.ddbj.nig.ac.jp). These three databases exchange data every night, so at any one point in time, they contain almost identical data.
 
-Each sequence in the NCBI Sequence Database is stored in a separate **record**, and is assigned a unique identifier that can be used to refer to that sequence record. The identifier is known as an **accession**, and consists of a mixture of numbers and letters. For example, Dengue virus causes Dengue fever, which is classified as a neglected tropical disease by the World Health Organization (WHO), is classified by any one of four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are NC_001477, NC_001474, NC_001475 and NC_002640, respectively.
+Each sequence in the NCBI Sequence Database is stored in a separate **record**, and is assigned a unique identifier that can be used to refer to that sequence record. The identifier is known as an **accession**, and consists of a mixture of numbers and letters. For example, Dengue virus causes Dengue fever, which is classified as a **neglected tropical disease** by the World Health Organization (WHO), is classified by any one of four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are 
+
+* NC_001477
+* NC_001474
+* NC_001475  
+* NC_002640
 
 Note that because the NCBI Sequence Database, the EMBL Sequence Database, and DDBJ exchange data every night, the DEN-1 (and DEN-2, DEN-3, DEN-4) Dengue virus sequence will be present in all three databases, but it will have different accessions in each database, as they each use their own numbering systems for referring to their own sequence records.
 
 
 ### Retrieving genome sequence data using rentrez
 
-You can retrieve sequence data from NCBI directly from *R* using the *rentrez* package.  The DEN-1 Dengue virus genome sequence has NCBI accession NC_001477. To retrieve a sequence with a particular NCBI accession, you can use an R function entrez_fetch() from the rentrez package.
+You can retrieve sequence data from NCBI directly from *R* using the `rentrez` package.  The DEN-1 Dengue virus genome sequence has NCBI accession NC_001477. To retrieve a sequence with a particular NCBI accession, you can use an R function `entrez_fetch()` from the `rentrez` package.
 
 ```{r}
-dengueseq_fasta <- entrez_fetch(db = "nucleotide", 
+dengueseq_fasta <- rentrez::entrez_fetch(db = "nucleotide", 
                           id = "NC_001477", 
                           rettype = "fasta")
 ```
 
 
-Note that the "_" in the name is just an arbitrary way to separate two words.  Another common format would be dengueseq.fasta. Some people like dengueseqFasta, called "camel case" because the capital letter makes a hump in the middle of the word.  Underscores are becoming most common and are favored by developers associated with RStudio and the "tidyverse" of packages that many data scientists user.  I switch between "." and "_" as separators, usually favoring "_" for function names and "." for objects; I personally find camel case hard to read and harder to type.
+Note that the "_" in the name is just an arbitrary way to separate two words.  Another common format would be dengueseq.fasta. Some people like dengueseqFasta, called **camel case** because the capital letter makes a hump in the middle of the word.  Underscores are becoming most common and are favored by developers associated with RStudio and the **tidyverse** of packages that many data scientists user.  I switch between "." and "_" as separators, usually favoring "_" for function names and "." for objects; I personally find camel case harder to read and to type.
 
 
-Ok, so what exactly have we done when we made dengueseq_fasta?  We have an R object "dengueseq_fasta" which has the sequence linked to the accession number "NC_001477."  So where is the sequence, and what is it?
+Ok, so what exactly have we done when we made `dengueseq_fasta`?  We have an R object "dengueseq_fasta" which has the sequence linked to the accession number "NC_001477."  So where is the sequence, and what is it?
 
 First, what is it?
 ```{r}
-
-
+is(dengueseq_fasta)
+class(dengueseq_fasta)
 ```
 
 How big is it?  Try the dim() and length() commands and see which one works.  Do you know why?
 ```{r}
-
+dim(dengueseq_fasta)
+length(dengueseq_fasta)
 ```
 
-The size of the object is 1.  Why is this?  We'll use another function to explore that.  Thing about this: how many pieces of unique information are in the dengueseq object?  In what sense is there only 1 piece of information?
+The size of the object is 1.  Why is this?  We'll use another function to explore that.  Think about this: how many pieces of unique information are in the `dengueseq object`?  In what sense is there only _one) piece of information?
 
 
-If we want to actually we can type just type "dengueseq_fasta" and press enter.  This will print the WHOLE genomic sequence out but it will probably run of your screen.
-```{r}
+If we want to actually we can type just type `dengueseq_fasta` and press enter.  This will print the WHOLE genomic sequence out but it will probably run of your screen.
+```{r eval = F}
 dengueseq_fasta
 ```
 
@@ -163,7 +182,7 @@ strtrim(dengueseq_fasta, 100)
 
 
 
-Note that at the end of the  name is a slah follwed by an n, which indicates to the computer that this is a newline; this is read by text editor, but is ignored by R in this context.
+Note that at the end of the  name is a slash followed by an n, which indicates to the computer that this is a newline; this is read by text editor, but is ignored by R in this context.
 ```{r, echo = F}
 
 strtrim(dengueseq_fasta, 45)

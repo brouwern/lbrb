@@ -35,9 +35,13 @@ Nathan Brouwer, June 2021
 1. Moved most functions and datasets to my teaching package [compbio4all](https://github.com/brouwern/compbio4all).
 1. Changed some plotting to ggplot2 or ggpubr.
 1. Added additional subheadings
-1. Added vocab and function lists
+1. Added vocab and function lists to the beginning of many chapters
 1. At times replaced non-biological examples with biological ones.
-1. Change from British to American English (Sorry!  Couldn't help myself.)
+1. Change from British to American English (Sorry!Couldn't help myself.)
+1. Provided additional links to external resources.
+1. Added use or `rentrez` for querying NCBI databases
+
+<!-- rentrez replaces what? Seqinr?-->
 
 
 ```{r include=FALSE}

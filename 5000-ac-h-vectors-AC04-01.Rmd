@@ -1,55 +1,67 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Mini tutorial: Vectors in R
+
+**By**: Avril Coghlan  
+
+**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+## Preface 
+
+<!-- rename this attribution?  put at end? -->
 
 This is a modification of part of["DNA Sequence Statistics (2)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter2.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  Most of text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
 
-## Vocab and functions
+## Vocab 
 
 * base R
 * scalar, vector, matrix
 * regular expressions
-* seq()
-* is(), is.vector(), is.matrix()
-* gsub()
+
+# Functions
+* `seq()`
+* `is()`, `is.vector()`, `is.matrix()`
+* `gsub()`
 
 
 
 
 ## Vectors in R
 
-**Variables** in R include **scalars**, **vectors**, and **lists**.  **Functions** in R carry out operations on variables, for example, using the log10() function to calculate the log to the base 10 of a scalar variable x, or using the mean() function to calculate the average of the values in a vector variable myvector.  For example, we can use log10() on a scalar like this:
+**Variables** in R include **scalars**, **vectors**, and **lists**.  **Functions** in R carry out operations on variables, for example, using the `log10()` function to calculate the log to the base 10 of a scalar variable `x`, or using the `mean()` function to calculate the average of the values in a vector variable `myvector`.  For example, we can use `log10()` on a scalar object like this:
 
 ```{r}
-
+# store value in object
 x <- 100
-log10(x)
 
+# take log base 10 of object
+log10(x)
 ```
 
 Note that while mathematically x is a single number, or a scalar, R considers it to be a vector:
 
 ```{r}
-
 is.vector(x)
-
 ```
 
-
-There are many "is" commands.  What is returned when you run is.matrix() on a vector?
+There are many "is" commands.  What is returned when you run `is.matrix()` on a vector?
 ```{r}
-
-
-
+is.matrix(x)
 ```
 
 
-Mathematically this is a bit odd, since often a vector is defined as a one dimenionsal matrix, eg, a single column or single row  of a matrix.  But in R land, a vector is a vector, and matrix is a matrix, and there are no explicit scalars.
+Mathematically this is a bit odd, since often a vector is defined as a one-dimensional matrix, e.g., a single column or single row  of a matrix.  But in *R* land, a vector is a vector, and matrix is a matrix, and there are no explicit scalars.
 
 
 ## Math on vectors
 
-Vectors can serve as the input for mathematical operations. When this is done R does the mathematical operation seperately on each element of the vector. 
+Vectors can serve as the input for mathematical operations. When this is done *R* does the mathematical operation separately on each element of the vector.  This is a unique feature of *R* that can be hard to get used to even for people with previous programming experience.
 
-Let's make a vector of numbers
+Let's make a vector of numbers:
 
 ```{r}
 
@@ -57,53 +69,70 @@ myvector <- c(30,16,303,99,11,111)
 
 ```
 
-What happens when we multiply myvector by 10?
+What happens when we multiply `myvector` by 10?
 
 ```{r}
-
 myvector*10
+```
 
+R has taken each of the 6 values, 30 through 111, of `myvector` and multiplied each one by 10, giving us 6 results.  That is, what R did was
 
+```{r, eval =-F}
+30*10    # first value of myvector
+16*10    # second value of myvector
+303*10   # ....
+99*10
+111*10   # last value of myvector
 ```
 
 
-The normal order of operations rules apply to vectors as they do to operations were more used to.   So multplying myvector by 10 is the same whether you put he 10 before or after vector.  Write the code below to check this:
+The normal order of operations rules apply to vectors as they do to operations we're more used to.   So multiplying `myvector` by 10 is the same whether you put he 10 before or after vector.  That is `myvector\*10` is the same as `10\*myvector`.
 
 ```{r}
-
-
-
+myvector*10
+10*myvector
 ```
 
 
-What happen when you sutract 30 from myvector?  Write the code below.
+What happen when you subtract 30 from myvector?  Write the code below.
 
 ```{r}
+myvector-30
+```
 
-
-
+So, what R did was
+```{r, eval =-F}
+30-30    # first value of myvector
+16-30    # second value of myvector
+303-30   # ....
+99-30
+111-30   # last value of myvector
 ```
 
 
 You can also square a vector
 
 ```{r}
-
 myvector^2
-
 ```
 
+Which is the same as
+```{r, eval =-F}
+30^2    # first value of myvector
+16^2    # second value of myvector
+303^2   # ....
+99^2
+111^2   # last value of myvector
+```
 
-Take the square root of a vector
+Also you can take the square root of a vector...
 
 ```{r}
-
 sqrt(myvector)
-
 ```
 
 
-and take the log of a vector
+...and take the log of a vector...
 
 ```{r}
 
@@ -111,55 +140,44 @@ log(myvector)
 
 ```
 
-
-Here we are working on a seperate vector object; all of these rules apply to a column in a matrix or a dataframe.
+...and just about any other mathematical operation.  Here we are working on a separate vector object; all of these rules apply to a column in a matrix or a dataframe.  This attribution of R is called **vectorization**.
 
 
 ## Functions on vectors
 
-
-We can use functions on vectors. Typically these use the vectors as an input and all the numbers are procssed into an output.  Call the mean() function  on the vector we made called myvector
+We can use functions on vectors. Typically these use the vectors as an input and all the numbers are processed into an output.  Call the `mean()` function  on the vector we made called `myvector`.
 ```{r}
-
-
-
+mean(myvector)
 ```
  
+Note how we get a single value back - the mean of all the values in the vector.  R saw that we had a vector of multiple and knew that the mean is a function that doesn't get applied to single number, but sets of numbers.
  
-The function sd() calcualtes the standard deviation. Apply the sd() to myvector:
+The function `sd()` calculates the standard deviation. Apply the `sd()` to myvector:
 
 ```{r}
-
-
-
+sd(myvector)
 ```
 
 
 ## Operations with two vectors
 
-You can also subtract one vector from another vector.  Make another vector with the numbers 5, 10, 15, 20, 25, 30.  Call this myvector2:
+You can also subtract one vector from another vector.  This can be a little weird when you first see it.  Make another vector with the numbers 5, 10, 15, 20, 25, 30.  Call this myvector2:
 
 ```{r}
-
-
-
-
+myvector2 <- c(5, 10, 15, 20, 25, 30)
 ```
 
 
 Now subtract myvector2 from myvector.  What happens?
 
 ```{r}
-
-
-
+myvector-myvector2
 ```
-
 
  
 ## Subsetting vectors
  
-You can extract an **element** of a vector by typing the vector name with the index of that element given in **square brackets**. For example, to get the value of the 3rd element in the vector myvector, we type:
+You can extract an **element** of a vector by typing the vector name with the index of that element given in **square brackets**. For example, to get the value of the 3rd element in the vector `myvector`, we type:
 
 
 ```{r}
@@ -167,135 +185,109 @@ myvector[3]
 ```
 
 
-Extract the 4th element of the vector
+Extract the 4th element of the vector:
 
 ```{r}
-
-
+myvector[4]
 ```
 
 
-You extract more than one element by using a vector in the brackets:
+You can extract more than one element by using a vector in the brackets:
 
 First, say I want to extract the 3rd and the 4th element.  I can make a vector with 3 and 4 in it:
 ```{r}
-
 nums <- c(3,4)
-
 ```
 
 
 Then put that vector in the brackets:
 ```{r}
-
 myvector[nums]
-
 ```
 
 
-We can also do it directly like this:
+We can also do it directly like this, skipping the vector-creation step:
 
 ```{r}
-
 myvector[c(3,4)]
-
-
 ```
 
 
-When numbers are consecutive you can do this:
-```{r}
-
-myvector[3:4]
-
-```
-
-
-In the chunk below extract tghe 1st and 2nd elements
+In the chunk below extract the 1st and 2nd elements:
 
 ```{r}
-
-
-
+myvector[c(1,2)]
 ```
-
-
-
 
 ## Sequences of numbers
 
-Often we want a vectors of numbers in sequential order.  The easiest way to do this is using a colo
+Often we want a vector of numbers in **sequential order**. That is, a vector with the numbers 1, 2, 3, 4, ... or 5, 10, 15, 20, ...  The easiest way to do this is using a colon
 ```{r}
-
-1:20
-
+1:10
 ```
 
-Note that in R 1:20 is equivalent to c(1:20)
+Note that in R 1:10 is equivalent to c(1:10)
 ```{r}
-
-c(1:20)
-
+c(1:10)
 ```
 
-Usually to empaphasize that a vector is being created I will use c(1:20)
+Usually to emphasize that a vector is being created I will use c(1:10)
 
 We can do any number to any numbers
 ```{r}
-
-c(20:40)
-
+c(20:30)
 ```
 
 
-We can also do it in reverse.  In the code below put 40 before 20:
+We can also do it in *reverse*.  In the code below put 30 before 20:
 
 ```{r}
-
-
-
+c(30:20)
 ```
 
 
-A useful function in R is the seq() function, which is an explicit function that can be used to create a vector containing a sequence of numbers that run from a particular number to another particular number.
+A useful function in *R* is the `seq()` function, which is an explicit function that can be used to create a vector containing a sequence of numbers that run from a particular number to another particular number.
 
 ```{r}
-
 seq(1, 10)
-
 ```
 
-Using seq() instead of a : can be useful for readability to make is explicity what is going on.  More importantly, seq has an arguement by =   For example, if we want to create the sequence of numbers from 1-10 in steps of 1 (ie. 1, 2, 3, 4, ... 10), we can type:
+Using `seq()` instead of a `:` can be useful for readability to make it explicit what is going on.  More importantly, `seq` has an argument `by = ...` so you can make a sequence of number with any interval between  For example, if we want to create the sequence of numbers from 1 to 10 in steps of 1 (i.e.. 1, 2, 3, 4, ... 10), we can type:
 
 ```{r}
-seq(1, 10, by = 1)
+seq(1, 10,
+    by = 1)
 ```
 
 
-We can change the **step size** by altering the value of the “by” argument given to the function seq(). For example, if we want to create a sequence of numbers from 1-100 in steps of 20 (ie. 1, 21, 41, ... 101), we can type:
+We can change the **step size** by altering the value of the `by` argument given to the function `seq()`. For example, if we want to create a sequence of numbers from 1-100 in steps of 20 (i.e.. 1, 21, 41, ... 101), we can type:
 
 ```{r}
-seq(1, 101, by = 20)
+seq(1, 101,
+    by = 20)
 ```
 
 
 
 ## Vectors can hold numeric or character data
 
-The vector we created above holds numeric data, as indicated by is()
+The vector we created above holds numeric data, as indicated by `class()`
 
 ```{r}
-
-
-
+class(myvector)
 ```
 
-As we've seen, vectors can holder character data, like the genetic code
+Vectors can also holder character data, like the genetic code:
 
 ```{r}
+# vector of character data
 myvector <- c("A","T","G")
 
+# how it looks
 myvector
+
+# what is "is"
+class(myvector)
 ```
 
 ## Regular expressions can modify character data
@@ -311,73 +303,6 @@ Now check it out
 myvector
 ```
 
+Regular expressions are a deep subject in computing.  You can find some more information about them [here](https://rstudio-pubs-static.s3.amazonaws.com/74603_76cd14d5983f47408fdf0b323550b846.html).
 
-
-## Plotting vectors in base R
-
-R allows the production of a variety of plots, including scatterplots, histograms, piecharts, and boxplots. For example, if you have two vectors of numbers myvector1 and myvector2, you can plot a scatterplot of the values in myvector1 against the values in myvector2 using the **base R** plot() function. 
-
-First, let's make up some data in put it in vectors:
-
-```{r}
-
-myvector1 <- c(10, 15, 22, 35, 43)
-myvector2 <- c(3, 3.2, 3.9, 4.1, 5.2)
-
-
-```
-
-Not plot with the base R plot() function:
-```{r}
-plot(myvector1, myvector2)
-```
-
-If you want to label the axes on the plot, you can do this by giving the plot() function values for its optional arguments xlab and ylab:
-```{r}
-
-plot(myvector1, 
-     myvector2, 
-     xlab="vector1", 
-     ylab="vector2")
-
-```
-
-We can store character data in vectors so if we want we could do this to set up our labels:
-```{r}
-mylabels <-  c("vector1","vector2")
-```
-
-Then use bracket notation to call the labels from nthe vector
-```{r}
-
-plot(myvector1, 
-     myvector2, 
-     xlab=mylabels[1],
-     ylab=mylabels[1])
-
-```
-
-
-The above plot has an error: I intentionlly made it so that "vector1" is printed on both axes.  In the chunk below make it so that "vector2" is printed on the y axis.
-
-```{r}
-
-plot(myvector1, 
-     myvector2, 
-     xlab=mylabels[1],
-     ylab=mylabels[1])
-
-```
-
-
-Base R has lots of plotting functions; additionally, people have written packages to implement new plotting capabilities. ggplot2 is currently the most popular plotting package, and ggpubr is a package which makes ggplot2 easier to use.  For quick plots we'll use base R functions, and when we get to more important things we'll use ggplot2 and ggpubr.
-
-
-# NOTE: please save this file with a new file name to your documents folder or desktop
-
-
-```{r}
-
-
-```
 

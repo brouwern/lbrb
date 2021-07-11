@@ -1,54 +1,70 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # DNA descriptive statics - Part 1
 
-```{r  eval = T}
-library(compbio4all)
-```
+**By**: Avril Coghlan  
+
+**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+## Preface
+
+This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  The text and code were originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
+
+## Writing TODO:
+
+* Add biology introduction
+* Work on flow
+* organize intial sections (intro, vocab, preliminaries)
 
 
 ## Introduction
 
-### Note on the biology in this section
+<!-- Check the current status of the biology of this section -->
+<!-- ### Note on the biology in this section -->
 
-Some of the biology in this tutorial appears to be out of date.  Specifically, research on the biological basis of unusual frequencies of DNA "words" does not appear to be much current interest in bioinformatics and genomics.  (In contrast, methylation of bases within certain DNA words is being worked on.)  The examples are still good for practicing R skills.
-
-
-### Vocabulary
-
-GC content
-DNA words
-
-scatterplots, histograms, piecharts, and boxplots
+<!-- Some of the biology in this tutorial appears to be out of date.  Specifically, research on the biological basis of unusual frequencies of DNA "words" does not appear to be much current interest in bioinformatics and genomics.  (In contrast, methylation of bases within certain DNA words is being worked on.)  The examples are still good for practicing R skills. -->
 
 
-seqinr::GC()
-seqinr::count()
+## Vocabulary
+
+* GC content
+* DNA words
+* scatterplots, histograms, piecharts, and boxplots
+
+
+## Functions
+* `seqinr::GC()`
+* `seqinr::count()`
 
 
 ## Preliminaries
 
 ```{r}
+library(compbio4all)
 library(seqinr)
 ```
 
 
 
+
 ## Converting DNA from FASTA format
 
-In a previous exercise we downloaded and examined DNA sequence in the FASTA format. The sequence we worked with is actually stored as a data file within this package and can be brought into memory using the data() command
+In a previous exercise we downloaded and examined DNA sequence in the FASTA format. The sequence we worked with is also stored as a data file within the `compbio4all` pa package and can be brought into memory using the `data()` command.
 
 ```{r}
 data("dengueseq_fasta")
 ```
 
-We can look at this with the str() command
+We can look at this data object with the `str()` command
 
 ```{r}
-
-
-
+str(dengueseq_fasta)
 ```
 
-This isn't in a format we can actually work with so we'll use the function fasta_cleaner()
+This isn't in a format we can work with directly so we'll use the function fasta_cleaner() to set it up.
 
 ```{r}
 header. <- ">NC_001477.1 Dengue virus 1, complete genome"

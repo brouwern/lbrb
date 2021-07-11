@@ -1,15 +1,12 @@
 # Downloading NCBI sequence data by hand
 
-```{r , eval = F}
-library(compbio4all)
-```
-
-
 **By**: Avril Coghlan.  
 
 **Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
-The following chapter was originally written by Avril Coghlan.  It provides brief, basic information for how to access sequences via the internet.  A subsequent vignette provides more details.
+## Preface
+
+The following chapter was originally written by Avril Coghlan.  It provides brief, basic information for how to access sequences via the internet.  Subsequent chapters provide more details and R code.
 
 ## Retrieving genome sequence data via the NCBI website
 

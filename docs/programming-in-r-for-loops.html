@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Appendix 01: Getting access to R | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Chapter 7 Programming in R: for loops | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Appendix 01: Getting access to R | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Chapter 7 Programming in R: for loops | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Appendix 01: Getting access to R | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Chapter 7 Programming in R: for loops | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="plotting-vectors-in-base-r.html"/>
-<link rel="next" href="getting-started-with-r-itself-or-not.html"/>
+<link rel="prev" href="dna-descriptive-statics-part-1.html"/>
+<link rel="next" href="programming-in-r-for-functions.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -307,44 +307,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="appendix-01-getting-access-to-r" class="section level1 unnumbered">
-<h1>Appendix 01: Getting access to R</h1>
-<div id="getting-started-with-r-and-rstudio" class="section level2" number="11.4">
-<h2><span class="header-section-number">11.4</span> Getting Started With R and RStudio</h2>
+<div id="programming-in-r-for-loops" class="section level1" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Programming in R: for loops</h1>
+<p><strong>By</strong>: Avril Coghlan</p>
+<p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer (<a href="mailto:brouwern@gmail.com" class="email">brouwern@gmail.com</a>) under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
+<div id="preface-2" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Preface</h2>
+<p>This is a modification of <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html">“DNA Sequence Statistics (1)”</a> from Avril Coghlan’s <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html"><em>A little book of R for bioinformatics.</em></a>. The text and code was originally written by Dr. Coghlan and distributed under the <a href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons 3.0</a> license.</p>
+</div>
+<div id="vocab" class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> Vocab</h2>
 <ul>
-<li>R is a piece of software that does calculations and makes graphs.</li>
-<li>RStudio is a GUI (graphical user interface) that acts as a front-end to R</li>
-<li>Your can use R directly, but most people use a GUI of some kind</li>
-<li>RStudio has become the most popular GUI</li>
+<li>for loop</li>
+<li>curly brackets</li>
 </ul>
-<p>The following instructions will lead you click by click through downloading R and RStudio and starting an initial session. If you have trouble with downloading either program go to YouTube and search for something like “Downloading R” or “Installing RStudio” and you should be able to find something helpful, such as <a href="https://www.youtube.com/watch?v=GYdmkLgV9n8">“How to Download R for Windows”</a>.</p>
-<div id="rstudio-cloud" class="section level3" number="11.4.1">
-<h3><span class="header-section-number">11.4.1</span> RStudio Cloud</h3>
-<p>TODO: Add RStudio cloud</p>
 </div>
-<div id="getting-r-onto-your-own-computer" class="section level3" number="11.4.2">
-<h3><span class="header-section-number">11.4.2</span> Getting R onto your own computer</h3>
-<p>To get R on to your computer first go to the <a href="https://cran.r-project.org/">CRAN website</a> at <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a> (CRAN stands for “comprehensive R Archive Network”). At the top of the screen are three bullet points; select the appropriate one (or click the link below)</p>
+<div id="functions-1" class="section level2" number="7.3">
+<h2><span class="header-section-number">7.3</span> Functions</h2>
 <ul>
-<li><a href="https://cran.r-project.org/bin/linux/">Download R for Linux</a></li>
-<li><a href="https://cran.r-project.org/bin/macosx/">Download R for (Mac) OS X</a></li>
-<li><a href="https://cran.r-project.org/bin/windows/">Download R for Windows</a></li>
+<li><code>for()</code></li>
+<li><code>print()</code></li>
 </ul>
-<p>Each page is formatted slightly differently. For a current Mac, click on the top link, which as of 8/16/2018 was “<a href="https://cran.r-project.org/bin/macosx/R-3.5.1.pkg">R-3.5.1.pkg</a>” or click this link. If you have an older Mac you might have to scroll down to find your operating system under “Binaries for legacy OS X systems.”</p>
-<p>For PC select “<a href="https://cran.r-project.org/bin/windows/base/">base</a>” or click this link.</p>
-<p>When its downloaded, run the installer and accept the defaults.</p>
 </div>
-<div id="getting-rstudio-onto-your-computer" class="section level3" number="11.4.3">
-<h3><span class="header-section-number">11.4.3</span> Getting RStudio onto your computer</h3>
-<p><a href="www.rstudio.com/">RStudio</a> is an R interface developed by a company of the same name. RStudio has a number of commercial products, but much of their portfolio is freeware. You can download RStudio from their website www.rstudio.com/ . The <a href="https://www.rstudio.com/products/rstudio/download/">download page</a> (www.rstudio.com/products/rstudio/download/) is a bit busy because it shows all of their commercial products; the free version is on the far left side of the table of products. Click on the big green DOWNLOAD button under the column on the left that says “RStudio Desktop Open Source License” (or click on this <a href="https://www.rstudio.com/products/rstudio/download/#download">link</a> ).</p>
-<p>This will scroll you down to a list of downloads titled “Installers for Supported Platforms.” Windows users can select the top option <a href="https://download1.rstudio.org/RStudio-1.1.456.exe">RStudio 1.1.456 - Windows Vista/7/8/10</a> and Mac the second option <a href="https://download1.rstudio.org/RStudio-1.1.456.dmg">RStudio 1.1.456 - Mac OS X 10.6+ (64-bit)</a>. (Versions names are current of 8/16/2018).</p>
-<p>Run the installer after it downloads and accept the default. RStudio will automatically link up with the most current version of R you have on your computer. Find the RStudio icon on your desktop or search for “RStudio” from your task bar and you’ll be read to go.</p>
+<div id="basic-for-loops-in-in-r" class="section level2" number="7.4">
+<h2><span class="header-section-number">7.4</span> Basic for loops in in R</h2>
+<p>In <em>R</em>, just as in programming languages such as <strong>Python</strong>, it is possible to write a <strong>for loop</strong> to carry out the same command several times. For example, say we have a pressing need to calculate the square the square of each number between 1 and 4. We could write for lines of code like this to do it:</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="programming-in-r-for-loops.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="programming-in-r-for-loops.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="programming-in-r-for-loops.html#cb105-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 9</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="programming-in-r-for-loops.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 16</code></pre>
+<p>If we know how to write a for loop, we could do the same think like this:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="programming-in-r-for-loops.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) { </span>
+<span id="cb109-2"><a href="programming-in-r-for-loops.html#cb109-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span> (i<span class="sc">*</span>i) </span>
+<span id="cb109-3"><a href="programming-in-r-for-loops.html#cb109-3" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 4
+## [1] 9
+## [1] 16</code></pre>
+<p>In the for loop above, the variable <code>i</code> is a counter or <strong>index</strong> for the number of cycles through the loop. In the first cycle through the loop, the value of <code>i</code> is 1, and so <code>i * i</code> = 1 is printed out. In the second cycle through the loop, the value of <code>i</code> is 2, and so <code>i * i</code> = 4 is printed out. In the third cycle through the loop, the value of <code>i</code> is 3, and so <code>i * i</code> = 9 is printed out. The loop continues until the value of <code>i</code> is 4.</p>
+<p>Note that the commands that are to be carried out at each cycle of the for loop must be enclosed within <strong>curly brackets</strong> (“{” and “}”).</p>
+<p>You may be thinking “<em>ok, so it took four lines of code to do 1<sup>2</sup> through 4<sup>2</sup> each on their own, and three lines to do it wit the loop; what’s the big deal?</em>” What if you need to do 1 through 100 squared for some reason? Now the for loop is a lot less work.</p>
+<p>You can also give a for loop a vector of numbers containing the values that you want the counter <code>i</code> to take in subsequent cycles. For example, you can make a vector containing the numbers 1, 2, 3, and 4, and write a for loop to print out the square of each number in vector avector:</p>
+<pre><code>## [1] 1
+## [1] 4
+## [1] 9
+## [1] 16</code></pre>
+<p>The results should be the same as before.</p>
 </div>
-<div id="keep-r-and-rstudio-current" class="section level3" number="11.4.4">
-<h3><span class="header-section-number">11.4.4</span> Keep R and RStudio current</h3>
-<p>Both R and RStudio undergo regular updates and you will occasionally have to re-download and install one or both of them. In practice I probably do this about every 6 months.</p>
+<div id="challenge-complicated-vectors-of-values" class="section level2" number="7.5">
+<h2><span class="header-section-number">7.5</span> Challenge: complicated vectors of values</h2>
+<p>Here’s a more complex example. If you don’t understand it don’t worry, its not something you’d probably do in practice.</p>
+<p>Challenge: How can we use a for loop to print out the square of every second number between, say, 1 and 10? The answer is to use the seq() function with “by = 2” to tell the for loop to take every second number between 1 and 10:</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="programming-in-r-for-loops.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">2</span>)) { </span>
+<span id="cb112-2"><a href="programming-in-r-for-loops.html#cb112-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span> (i<span class="sc">*</span>i) </span>
+<span id="cb112-3"><a href="programming-in-r-for-loops.html#cb112-3" aria-hidden="true" tabindex="-1"></a>  }</span></code></pre></div>
+<pre><code>## [1] 1
+## [1] 9
+## [1] 25
+## [1] 49
+## [1] 81</code></pre>
+<p>In the first cycle of this loop, the value of i is 1, and so i * i = 1 is printed out. In the second cycle through the loop, the value of i is 3, and so i * i = 9 is printed out. The loop continues until the value of i is 9. In the fifth cycle through the loop, the value of i is 9, and so i * i = 81 is printed out.</p>
 
-</div>
 </div>
 </div>
             </section>
@@ -352,8 +379,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="plotting-vectors-in-base-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="getting-started-with-r-itself-or-not.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="dna-descriptive-statics-part-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="programming-in-r-for-functions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

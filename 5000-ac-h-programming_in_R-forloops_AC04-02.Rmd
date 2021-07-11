@@ -1,0 +1,76 @@
+# Programming in R: for loops
+
+**By**: Avril Coghlan  
+
+**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+## Preface
+
+This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  The text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
+
+
+## Vocab
+
+* for loop
+* curly brackets
+
+## Functions
+
+* `for()`
+* `print()`
+
+
+## Basic for loops in in R
+
+In *R*, just as in programming languages such as **Python**, it is possible to write a **for loop** to carry out the same command several times. For example, say we have a pressing need to calculate the square the square of each number between 1 and 4.  We could write for lines of code like this to do it:
+
+```{r}
+1^2
+2^2
+3^2
+4^2
+```
+
+If we know how to write a for loop, we could do the same think like this: 
+
+```{r}
+for (i in 1:4) { 
+  print (i*i) 
+  }
+```
+
+In the for loop above, the variable `i` is a counter or **index** for the number of cycles through the loop. In the first cycle through the loop, the value of `i` is 1, and so `i * i` = 1 is printed out. In the second cycle through the loop, the value of `i` is 2, and so `i * i` = 4 is printed out. In the third cycle through the loop, the value of `i` is 3, and so `i * i` = 9 is printed out. The loop continues until the value of `i` is 4. 
+
+Note that the commands that are to be carried out at each cycle of the for loop must be enclosed within **curly brackets** (“{” and “}”).
+
+You may be thinking "*ok, so it took four lines of code to do 1^2^ through 4^2^ each on their own, and three lines to do it wit the loop; what's the big deal?*".  What if you need to do 1 through 100 squared for some reason?  Now the for loop is a lot less work.
+
+You can also give a for loop a vector of numbers containing the values that you want the counter `i` to take in subsequent cycles. For example, you can make a vector  containing the numbers 1, 2, 3, and 4, and write a for loop to print out the square of each number in vector avector:
+
+```{r, echo = F}
+# vector with valuea to square
+avector <- c(1, 2, 3, 4)
+
+# for() loop to do the squaring
+ for (i in avector) { 
+   print (i*i) 
+   }
+```
+
+The results should be the same as before.
+
+
+## Challenge: complicated vectors of values
+
+Here's a more complex example.  If you don't understand it don't worry, its not something you'd probably do in practice.
+
+Challenge: How can we use a for loop to print out the square of every second number between, say, 1 and 10? The answer is to use the seq() function with "by = 2" to tell the for loop to take every second number between 1 and 10:
+
+```{r}
+for (i in seq(1, 10, by = 2)) { 
+  print (i*i) 
+  }
+```
+
+In the first cycle of this loop, the value of i is 1, and so i * i = 1 is printed out. In the second cycle through the loop, the value of i is 3, and so i * i = 9 is printed out. The loop continues until the value of i is 9. In the fifth cycle through the loop, the value of i is 9, and so i * i = 81 is printed out.
+
