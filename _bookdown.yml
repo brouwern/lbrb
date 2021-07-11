@@ -5,3 +5,5 @@ output_dir: "docs"
 language:
   ui:
     chapter_name: "Chapter "
+edit: https://github.com/brouwern/lbrb/edit/master/%s
+view: https://github.com/brouwern/lbrb/blob/master/%s

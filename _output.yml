@@ -7,8 +7,6 @@ bookdown::gitbook:
       after: |
         <li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
     download: ["pdf", "epub"]
-    includes:
-      after_body: disqus.html
 bookdown::pdf_book:
   includes:
     in_header: preamble.tex
