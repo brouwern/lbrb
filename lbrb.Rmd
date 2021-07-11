@@ -1445,7 +1445,7 @@ Base R has lots of plotting functions; additionally, people have written package
 
 <!--chapter:end:09b-vectors-plotting-AC04-01.Rmd-->
 
-# Programming in R: for functions
+# Programming in R: functions
 
 **By**: Avril Coghlan  
 

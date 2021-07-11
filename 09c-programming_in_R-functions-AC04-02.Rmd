@@ -1,4 +1,4 @@
-# Programming in R: for functions
+# Programming in R: functions
 
 **By**: Avril Coghlan  
 

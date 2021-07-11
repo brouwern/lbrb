@@ -77,7 +77,7 @@ plotting-vectors-in-base-r
 preface-4
 plotting-numeric-data
 other-plotting-packages
-programming-in-r-for-functions
+programming-in-r-functions
 preface-5
 vocab-2
 functions-3
