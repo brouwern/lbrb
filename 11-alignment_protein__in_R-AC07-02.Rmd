@@ -1,0 +1,88 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Local protein aligments in *R*
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+## Preliminaries
+
+<!-- is compbio4all needed? -->
+<!-- have on gone over biodoncdutor and biostrings? -->
+
+```{r}
+library(compbio4all)
+library(Biostrings)
+```
+
+
+### Download sequences
+
+As we did in the previous lesson on dotplots, we'll look at two sequences.
+
+
+```{r}
+# Download
+## sequence 1: Q9CD83
+leprae_fasta <- rentrez::entrez_fetch(db = "protein",
+                        id = "Q9CD83",
+                         rettype = "fasta")
+## sequence 2: OIN17619.1
+ulcerans_fasta <- rentrez::entrez_fetch(db = "protein",
+                         id = "OIN17619.1",
+                         rettype = "fasta")
+
+# clean
+leprae_vector   <- fasta_cleaner(leprae_fasta)
+ulcerans_vector <- fasta_cleaner(ulcerans_fasta)
+
+# convert leprae_vector to an object lepraeseq_string
+lepraeseq_string <-paste(leprae_vector,collapse = "")    
+
+# convert ulcerans_vector to an object ulceransseq_string
+ulceransseq_string <-paste(ulcerans_vector,collapse = "") 
+```
+
+
+
+## Pairwise local alignment of protein sequences using the Smith-Waterman algorithm
+
+You can use the `pairwiseAlignment()` function to find the optimal **local alignment** of two sequences, that is the best alignment of parts (**subsequences**) of those sequences, by using the `type=local` argument in `pairwiseAlignment()`. This uses the **[Smith-Waterman algorithm](https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm)** for local alignment.  This is the classic bioinformatics algorithm for finding optimal local alignments.  (We'll discuss updated approaches when we get into **database searches** with **BLAST**, the **Basic, Local Alignment Search Tool* that is the workhorse of many day-to-day bioinformatics tasks).
+
+For example, to find the best local alignment between the *M. leprae* and *M. ulcerans* chorismate lyase proteins, we can run:
+
+```{r}
+# load scoring matrix
+data(BLOSUM50)
+
+# run alignment
+localAlignLepraeUlcerans <- pairwiseAlignment(lepraeseq_string, 
+                                              ulceransseq_string,
+                                              substitutionMatrix = BLOSUM50, 
+                                              gapOpening = -2, 
+                                              gapExtension = -8, 
+                                              scoreOnly = FALSE, 
+                                              type="local")  # <= type = "local !
+
+```
+
+ Print out the optimal local alignment and its score
+```{r}
+localAlignLepraeUlcerans 
+```
+
+
+As before, we can print out the full alignment with `printPairwiseAlignment()`:
+```{r}
+printPairwiseAlignment(localAlignLepraeUlcerans, 60)
+```
+
+
+We see that the optimal local alignment is quite similar to the optimal global alignment in this case, except that it excludes a short region of poorly aligned sequence at the start and at the ends of the two proteins.
+
+

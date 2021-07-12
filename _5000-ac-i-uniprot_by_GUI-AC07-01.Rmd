@@ -1,17 +1,12 @@
 # Downloading sequences from UniProt by hand
 
-```{r, eval = F}
-library(compbio4all)
-```
-
-
 **By**: Avril Coghlan.  
 
 **Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
-TODO / NOTES:
 
-* The original online version has images, though they are somewhat outdated.
+<!-- TODO / NOTES: -->
+<!-- The original online version has images, though they are somewhat outdated. -->
 
 
 ## Vocab
@@ -21,7 +16,7 @@ TODO / NOTES:
 * UniProt
 * accession
 
-## UniProt
+## Downloading Protein data from UniProt
 
 In a previous vignette you learnt how to retrieve sequences from the NCBI database. The NCBI database is a key database in bioinformatics because it contains essentially all DNA sequences ever sequenced.
 

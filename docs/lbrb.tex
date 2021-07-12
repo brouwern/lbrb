@@ -2255,7 +2255,7 @@ You can view the code that makes up a function by typing its name (without any p
 ##   output <- (20 + (x*x)) 
 ##   return(output)
 ##   }
-## <bytecode: 0x7fed4295e4e0>
+## <bytecode: 0x7f8a97df64f0>
 \end{verbatim}
 
 \hypertarget{comments-in-r}{%
@@ -2643,6 +2643,30 @@ We know it contains character data - how many characters? \texttt{nchar()} for `
 ## [1] 10935
 \end{verbatim}
 
+\hypertarget{optional-saving-fasta-files}{%
+\section{OPTIONAL: Saving FASTA files}\label{optional-saving-fasta-files}}
+
+We can save our data as .fasta file for safe keeping. The \texttt{write()} function will save the data we downloaded as a plain text file.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write}\NormalTok{(dengueseq\_fasta, }
+      \AttributeTok{file=}\StringTok{"dengueseq.fasta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If you do this, you'll need to figure out where \emph{R} is saving things, which requires and understanding \emph{R's} \textbf{file system}, which can take some getting used to, especially if you're new to programming. As a start, you can see where \emph{R} saves things by using the \texttt{getwd()} command, which tells you where on your harddrive R currently is using as its home base for files.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{getwd}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "/Users/nlb24/google_backup_sync_nlb24/lbrb"
+\end{verbatim}
+
 \hypertarget{next-steps}{%
 \section{Next steps}\label{next-steps}}
 
@@ -2653,11 +2677,19 @@ On their own, FASTA files in R are not directly useful. In the next lesson we'll
 
 This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. Most of the text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
 
+\hypertarget{preliminaries-2}{%
+\section{Preliminaries}\label{preliminaries-2}}
+
+We'll need the \texttt{dengueseq\_fasta} FASTA data object, which is in the \texttt{compbio4all} package. We'll also use the \texttt{stringr} package for cleaning up the FASTA data, which can be downloaded with \texttt{install.packages("stringr")}
+
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{\# compbio4all, which has dengueseq\_fasta}
 \FunctionTok{library}\NormalTok{(compbio4all)}
-\FunctionTok{library}\NormalTok{(stringr)}
 \FunctionTok{data}\NormalTok{(dengueseq\_fasta)}
+
+\CommentTok{\# stringr, for data cleaning}
+\FunctionTok{library}\NormalTok{(stringr)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2674,7 +2706,7 @@ There are several things we need to remove:
 \item
   The \textbf{meta data} line \texttt{\textgreater{}NC\_001477.1\ Dengue\ virus\ 1,\ complete\ genome} (metadata is ``data'' about data, such as where it came from, what it is, who made it, etc.).
 \item
-  All the ``\textbackslash n'' that show up in the file (these are the \textbf{line breaks}).
+  All the \texttt{\textbackslash{}n} that show up in the file (these are the \textbf{line breaks}).
 \item
   Put each nucleotide of the sequence into its own spot in a vector.
 \end{enumerate}
@@ -2690,20 +2722,23 @@ There are functions that can do this automatically, but
   walking through this will help you understand the types of operations you can do on text data.
 \end{enumerate}
 
-The first two steps involve removing things from the existing \textbf{character string} that contains the sequence. The third step will split the single continuous character string like ``AGTTGTTAGTCTACGT\ldots{}'' into a \textbf{character vector} like \texttt{c("A","G","T","T","G","T","T","A","G","T","C","T","A","C","G","T"...)}, where each element of the vector is a single character a stored in a separate slot in the vevtor.
+The first two steps involve removing things from the existing \textbf{character string} that contains the sequence. The third step will split the single continuous character string like ``AGTTGTTAGTCTACGT\ldots{}'' into a \textbf{character vector} like \texttt{c("A","G","T","T","G","T","T","A","G","T","C","T","A","C","G","T"...)}, where each element of the vector is a single character a stored in a separate slot in the vector.
 
-The second item is the easiest to take care of. \emph{R} and many programming languages have tools called \textbf{regular expressions} that allow you to manipulate text. R has a function called \texttt{gsub()} which allows you to substitute or delete character data from a string. First I'll remove all those \texttt{\textbackslash{}\textbackslash{}n} values.
+\hypertarget{removing-unwanted-characters}{%
+\subsection{Removing unwanted characters}\label{removing-unwanted-characters}}
+
+The second item is the easiest to take care of. \emph{R} and many programming languages have tools called \textbf{regular expressions} that allow you to manipulate text. R has a function called \texttt{gsub()} which allows you to substitute or delete character data from a string. First I'll remove all those \texttt{\textbackslash{}n} values.
 
 The regular expression function \texttt{gsub()} takes three arguments:
 1. \texttt{pattern\ =\ ...}. This is what we need it to find so we can replace it.
 1. \texttt{replacement\ =\ ...}. The replacement.
-1. \texttt{x\ =\ ...}. A character string or vector.
+1. \texttt{x\ =\ ...}. A character string or vector where \texttt{gsub()} will do its work.
 
-We need to get rid of the \texttt{\textbackslash{}\textbackslash{}n} so that we are left with only A, T and G, which are the actually information of the sequence. We want \texttt{\textbackslash{}\textbackslash{}n} removed, so the replacement will be \texttt{""}, which is as set of quotation marks with nothing in the middle, which means ``delete the target pattern and put nothing in its place.''
+We need to get rid of the \texttt{\textbackslash{}n} so that we are left with only A, T and G, which are the actually information of the sequence. We want \texttt{\textbackslash{}n} completely removed, so the replacement will be \texttt{""}, which is as set of quotation marks with nothing in the middle, which means ``delete the target pattern and put nothing in its place.''
 
-One thing that is tricky about regular expressions is that many characters have special meaning to the functions, such as slashes, dollar signs, and brackets. So, if you want to find and replace one of these specially designated characters you need to put a slash in front of them. So when we set the pattern, instead of setting the pattern to a slash before an n, we have to give it two slashes.
+One thing that is tricky about regular expressions is that many characters have special meaning to the functions, such as slashes, dollar signs, and brackets. So, if you want to find and replace one of these specially designated characters you need to put a slash in front of them. So when we set the pattern, instead of setting the pattern to a slash before an n \texttt{\textbackslash{}n}, we have to give it two slashes \texttt{\textbackslash{}\textbackslash{}n}.
 
-Here is the regular expression to delete the newline characer \textbackslash n.
+Here is the regular expression to delete the newline character \textbackslash n.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2714,7 +2749,7 @@ Here is the regular expression to delete the newline characer \textbackslash n.
 \end{Highlighting}
 \end{Shaded}
 
-We can use strtrim() to see if it worked
+We can use \texttt{strtrim()} to see if it worked
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2728,7 +2763,7 @@ We can use strtrim() to see if it worked
 
 Now for the metadata header. This is a bit complex, but the following code is going to take all the that occurs before the beginning of the sequence (``AGTTGTTAGTC'') and delete it.
 
-First, I'll define what I want to get rid of in an \emph{R} object
+First, I'll define what I want to get rid of in an \emph{R} object. This will make the \textbf{call} to \texttt{gsub()} a little cleaner to read
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2736,11 +2771,13 @@ First, I'll define what I want to get rid of in an \emph{R} object
 \end{Highlighting}
 \end{Shaded}
 
-Now I'll get rid of it with \texttt{gsub()}.
+Now I'll get rid of the header with with \texttt{gsub()}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dengueseq\_vector }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(seq.header,}\StringTok{""}\NormalTok{, dengueseq\_vector)}
+\NormalTok{dengueseq\_vector }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\AttributeTok{pattern =}\NormalTok{ seq.header, }\CommentTok{\# object defined above}
+                         \AttributeTok{replacement =} \StringTok{""}\NormalTok{, }
+                         \AttributeTok{x =}\NormalTok{ dengueseq\_vector)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2756,7 +2793,10 @@ See if it worked:
 ## [1] "AGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTAACAGTTTTTTATTAG"
 \end{verbatim}
 
-Now the more complex part. We need to split up a continuous, unborken string of letters into a vector wher each letter is on its own. This can be done with the \texttt{str\_split()} function (``string split'') from the \texttt{stringr} package. The notation \texttt{stringr::str\_split()} mean ``use the \texttt{str\_split} function from from the \texttt{stringr} package.'' More specifically, it temporarily loads the stringr package and gives R access to just the str\_split function. These allows you to call a single function without loading the whole library.
+\hypertarget{spliting-unbroken-strings-in-character-vectors}{%
+\subsection{Spliting unbroken strings in character vectors}\label{spliting-unbroken-strings-in-character-vectors}}
+
+Now the more complex part. We need to split up a continuous, unbroken string of letters into a vector where each letter is on its own. This can be done with the \texttt{str\_split()} function (``string split'') from the \texttt{stringr} package. The notation \texttt{stringr::str\_split()} mean ``use the \texttt{str\_split} function from from the \texttt{stringr} package.'' More specifically, it temporarily loads the \texttt{stringr} package and gives R access to just the \texttt{str\_split} function. These allows you to call a single function without loading the whole library.
 
 There are several arguments to \texttt{str\_split}, and I've tacked a \texttt{{[}{[}1{]}{]}} on to the end.
 
@@ -2782,11 +2822,11 @@ Look at the output with str()
 ##  chr [1:10735] "A" "G" "T" "T" "G" "T" "T" "A" "G" "T" "C" "T" "A" "C" "G" ...
 \end{verbatim}
 
-We can explore what the different arguments do by modifying them. Change pattern = "" to pattern = ``A''. Can you figure out what happened?
+We can explore what the different arguments do by modifying them. Change \texttt{pattern\ =\ ""\ to\ pattern\ =\ "A"}. Can you figure out what happened?
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# re{-}run the command without "pattern  = ""}
+\CommentTok{\# re{-}run the command with "pattern  = "A"}
 \NormalTok{dengueseq\_vector\_split2 }\OtherTok{\textless{}{-}}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_split}\NormalTok{(dengueseq\_vector,}
                                        \AttributeTok{pattern =} \StringTok{"A"}\NormalTok{,}
                                        \AttributeTok{simplify =} \ConstantTok{FALSE}\NormalTok{)[[}\DecValTok{1}\NormalTok{]]}
@@ -2798,23 +2838,41 @@ We can explore what the different arguments do by modifying them. Change pattern
 ##  chr [1:3427] "" "GTTGTT" "GTCT" "CGTGG" "CCG" "C" "" "G" "" "C" "GTTTCG" ...
 \end{verbatim}
 
-Run this code (don't worry what it does). Does this help you see what's up?
+And try it with \texttt{pattern\ =\ ""\ to\ pattern\ =\ "G"}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# re{-}run the command with "pattern  = "G"}
+\NormalTok{dengueseq\_vector\_split3 }\OtherTok{\textless{}{-}}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_split}\NormalTok{(dengueseq\_vector,}
+                                       \AttributeTok{pattern =} \StringTok{"G"}\NormalTok{,}
+                                       \AttributeTok{simplify =} \ConstantTok{FALSE}\NormalTok{)[[}\DecValTok{1}\NormalTok{]]}
+\FunctionTok{str}\NormalTok{(dengueseq\_vector\_split3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  chr [1:2771] "A" "TT" "TTA" "TCTAC" "T" "" "ACC" "ACAA" "AACA" "TTTC" ...
+\end{verbatim}
+
+Run this code to compare the two ways we just used \texttt{str\_split} (don't worry what it does). Does this help you see what's up?
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{options}\NormalTok{(}\AttributeTok{str =} \FunctionTok{strOptions}\NormalTok{(}\AttributeTok{vec.len =} \DecValTok{10}\NormalTok{))}
 \FunctionTok{str}\NormalTok{(}\FunctionTok{list}\NormalTok{(dengueseq\_vector\_split[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{],}
-\NormalTok{     dengueseq\_vector\_split2[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{]))}
+\NormalTok{     dengueseq\_vector\_split2[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{], }
+\NormalTok{     dengueseq\_vector\_split3[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{]))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## List of 2
+## List of 3
 ##  $ : chr [1:20] "A" "G" "T" "T" "G" "T" "T" "A" "G" "T" ...
 ##  $ : chr [1:10] "" "GTTGTT" "GTCT" "CGTGG" "CCG" "C" "" "G" "" "C"
+##  $ : chr [1:10] "A" "TT" "TTA" "TCTAC" "T" "" "ACC" "ACAA" "AACA" "TTTC"
 \end{verbatim}
 
-So, what does the \texttt{pattern\ =\ ...} argument do?
+So, what does the \texttt{pattern\ =\ ...} argument do? For more info open up the help file for \texttt{str\_split} by calling \texttt{?str\_split}.
 
 Something cool which we will explore in the next exercise is that we can do summaries on vectors of nucleotides, like this:
 
@@ -2830,70 +2888,857 @@ Something cool which we will explore in the next exercise is that we can do summ
 ## 3426 2240 2770 2299
 \end{verbatim}
 
-\hypertarget{saving-fasta-files}{%
-\section{Saving FASTA files}\label{saving-fasta-files}}
+\hypertarget{local-protein-aligments-in-r}{%
+\chapter{\texorpdfstring{Local protein aligments in \emph{R}}{Local protein aligments in R}}\label{local-protein-aligments-in-r}}
 
-We can save our data as .fasta file for safe keeping
+\textbf{By}: Avril Coghlan.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{write}\NormalTok{(dengueseq\_fasta, }\AttributeTok{file=}\StringTok{"dengueseq.fasta"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
 
-\hypertarget{reading-in-fasta-files}{%
-\section{Reading in FASTA files}\label{reading-in-fasta-files}}
-
-We can read in FASTA files
-
-NOTE: this code needs to be updated to have a call to the compbio package itself
+\hypertarget{preliminaries-3}{%
+\section{Preliminaries}\label{preliminaries-3}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dengueseq\_matrix }\OtherTok{\textless{}{-}}\NormalTok{ ape}\SpecialCharTok{::}\FunctionTok{read.dna}\NormalTok{(}\AttributeTok{file =} \FunctionTok{system.file}\NormalTok{(}\StringTok{"dengueseq.fasta"}\NormalTok{),}
-              \AttributeTok{format =} \StringTok{"fasta"}\NormalTok{,}
-              \AttributeTok{as.character =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{library}\NormalTok{(compbio4all)}
+\FunctionTok{library}\NormalTok{(Biostrings)}
 \end{Highlighting}
 \end{Shaded}
 
-Note that reading it back in like this results in a change from its original format
+\begin{verbatim}
+## Loading required package: BiocGenerics
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: parallel
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'BiocGenerics'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:parallel':
+## 
+##     clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+##     clusterExport, clusterMap, parApply, parCapply, parLapply,
+##     parLapplyLB, parRapply, parSapply, parSapplyLB
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     IQR, mad, sd, var, xtabs
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+##     dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+##     grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+##     order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+##     rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+##     union, unique, unsplit, which, which.max, which.min
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: S4Vectors
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: stats4
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'S4Vectors'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:base':
+## 
+##     expand.grid
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: IRanges
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: XVector
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'Biostrings'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:seqinr':
+## 
+##     translate
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:base':
+## 
+##     strsplit
+\end{verbatim}
+
+\hypertarget{download-sequences}{%
+\subsection{Download sequences}\label{download-sequences}}
+
+As we did in the previous lesson on dotplots, we'll look at two sequences.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{class}\NormalTok{(dengueseq\_matrix)}
+\CommentTok{\# Download}
+\DocumentationTok{\#\# sequence 1: Q9CD83}
+\NormalTok{leprae\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                        \AttributeTok{id =} \StringTok{"Q9CD83"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\DocumentationTok{\#\# sequence 2: OIN17619.1}
+\NormalTok{ulcerans\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                         \AttributeTok{id =} \StringTok{"OIN17619.1"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+
+\CommentTok{\# clean}
+\NormalTok{leprae\_vector   }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(leprae\_fasta)}
+\NormalTok{ulcerans\_vector }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(ulcerans\_fasta)}
+
+\CommentTok{\# convert leprae\_vector to an object lepraeseq\_string}
+\NormalTok{lepraeseq\_string }\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(leprae\_vector,}\AttributeTok{collapse =} \StringTok{""}\NormalTok{)    }
+
+\CommentTok{\# convert ulcerans\_vector to an object ulceransseq\_string}
+\NormalTok{ulceransseq\_string }\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(ulcerans\_vector,}\AttributeTok{collapse =} \StringTok{""}\NormalTok{) }
 \end{Highlighting}
 \end{Shaded}
 
-Now we have a matrix instead of a vector. str() will give us a peak at it
-\texttt{\{,\ eval\ =\ Fr\}\ str(dengueseq\_matrix)}
+\hypertarget{pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm}{%
+\section{Pairwise local alignment of protein sequences using the Smith-Waterman algorithm}\label{pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm}}
 
-Matrices are squares of data - how big is this square?
+You can use the \texttt{pairwiseAlignment()} function to find the optimal \textbf{local alignment} of two sequences, that is the best alignment of parts (\textbf{subsequences}) of those sequences, by using the \texttt{type=local} argument in \texttt{pairwiseAlignment()}. This uses the \textbf{\href{https://en.wikipedia.org/wiki/Smith\%E2\%80\%93Waterman_algorithm}{Smith-Waterman algorithm}} for local alignment. This is the classic bioinformatics algorithm for finding optimal local alignments. (We'll discuss updated approaches when we get into \textbf{database searches} with \textbf{BLAST}, the **Basic, Local Alignment Search Tool* that is the workhorse of many day-to-day bioinformatics tasks).
+
+For example, to find the best local alignment between the \emph{M. leprae} and \emph{M. ulcerans} chorismate lyase proteins, we can run:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{dim}\NormalTok{(dengueseq\_matrix)}
+\CommentTok{\# load scoring matrix}
+\FunctionTok{data}\NormalTok{(BLOSUM50)}
+
+\CommentTok{\# run alignment}
+\NormalTok{localAlignLepraeUlcerans }\OtherTok{\textless{}{-}} \FunctionTok{pairwiseAlignment}\NormalTok{(lepraeseq\_string, }
+\NormalTok{                                              ulceransseq\_string,}
+                                              \AttributeTok{substitutionMatrix =}\NormalTok{ BLOSUM50, }
+                                              \AttributeTok{gapOpening =} \SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }
+                                              \AttributeTok{gapExtension =} \SpecialCharTok{{-}}\DecValTok{8}\NormalTok{, }
+                                              \AttributeTok{scoreOnly =} \ConstantTok{FALSE}\NormalTok{, }
+                                              \AttributeTok{type=}\StringTok{"local"}\NormalTok{)  }\CommentTok{\# \textless{}= type = "local !}
 \end{Highlighting}
 \end{Shaded}
 
-We have a 1 x 10737 matrix.
-
-To print out a certain subsequence of the sequence, we just need to type the name of the vector dengueseq\_reload followed by the square brackets {[} {]} containing the \textbf{indices} for the nucleotides we want to see. For example, the following command prints out the first 50 nucleotides of the DEN-1 Dengue virus genome sequence:
+Print out the optimal local alignment and its score
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dengueseq\_matrix[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{50}\NormalTok{]}
+\NormalTok{localAlignLepraeUlcerans }
 \end{Highlighting}
 \end{Shaded}
 
-Note that dengueseq\_matrix{[}1:50{]} refers to the elements of the vector dengueseq\_matrix with indices from 1-50. These elements contain the first 50 nucleotides of the DEN-1 Dengue virus sequence.
+\begin{verbatim}
+## Local PairwiseAlignmentsSingleSubject (1 of 1)
+## pattern:  [1] MTNRTLSREEIRKLDRDLRILVATNGTLTRVL...TEYFLRSVFQDTPREELDRCQYSNDIDTRSG
+## subject: [11] MTECHLSDEEIRKLNRDLRILIATNGTLTRIL...TEYFLRSVFEDNSREEPIRHQRSVGTSARSG
+## score: 761
+\end{verbatim}
 
-We can run table() on this
+As before, we can print out the full alignment with \texttt{printPairwiseAlignment()}:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{table}\NormalTok{(dengueseq\_matrix)}
+\FunctionTok{printPairwiseAlignment}\NormalTok{(localAlignLepraeUlcerans, }\DecValTok{60}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## [1] "MTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLLDVAPKIPELE 60"
+## [1] "MTECHLSDEEIRKLNRDLRILIATNGTLTRILNVLANDEIVVEIVKQQIQDAAPEMDGCD 60"
+## [1] " "
+## [1] "NLKIGRILQRDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPIGEIMAASRIE 120"
+## [1] "HSSIGRVLRRDIVLKGRRSGIPFVAAESFIAIDLLPPEIVASLLETHRPIGEVMAASCIE 120"
+## [1] " "
+## [1] "TYKEDAQVWIGDLPCWLADYGYWDLPKRAVGRRYRIIAGGQPVIITTEYFLRSVFQDTPR 180"
+## [1] "TFKEEAKVWAGESPAWLELDRRRNLPPKVVGRQYRVIAEGRPVIIITEYFLRSVFEDNSR 180"
+## [1] " "
+## [1] "EELDRCQYSNDIDTRSG 240"
+## [1] "EEPIRHQRSVGTSARSG 240"
+## [1] " "
+\end{verbatim}
+
+We see that the optimal local alignment is quite similar to the optimal global alignment in this case, except that it excludes a short region of poorly aligned sequence at the start and at the ends of the two proteins.
+
+\hypertarget{downloading-protein-sequences-in-r}{%
+\chapter{\texorpdfstring{Downloading protein sequences in \emph{R}}{Downloading protein sequences in R}}\label{downloading-protein-sequences-in-r}}
+
+\textbf{By}: Avril Coghlan.
+
+\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+
+\hypertarget{preliminaries-4}{%
+\section{Preliminaries}\label{preliminaries-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(compbio4all)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{retrieving-a-uniprot-protein-sequence-using-rentrez}{%
+\section{Retrieving a UniProt protein sequence using rentrez}\label{retrieving-a-uniprot-protein-sequence-using-rentrez}}
+
+We can use \texttt{entrez\_fetch()} to download protein sequences.
+
+For example to retrieve the protein sequences for UniProt accessions Q9CD83 and A0PQ23, we type in R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# sequence 1: Q9CD83}
+\NormalTok{leprae\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                        \AttributeTok{id =} \StringTok{"Q9CD83"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\CommentTok{\# sequence 2: OIN17619.1}
+\NormalTok{ulcerans\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                         \AttributeTok{id =} \StringTok{"OIN17619.1"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Display the contents of the \texttt{lepraeseq} FASTA file.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{leprae\_fasta}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] ">sp|Q9CD83.1|PHBS_MYCLE RecName: Full=Chorismate pyruvate-lyase; AltName: Full=4-HB synthase; AltName: Full=p-hydroxybenzoic acid synthase\nMTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLLDVAPKIPELENLKIGRILQR\nDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPIGEIMAASRIETYKEDAQVWIGDLPCWLADY\nGYWDLPKRAVGRRYRIIAGGQPVIITTEYFLRSVFQDTPREELDRCQYSNDIDTRSGDRFVLHGRVFKNL\n\n"
+\end{verbatim}
+
+Let's clean these up to remove the header and new line characters usin the function \texttt{fasta\_cleaner()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{leprae\_vector   }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(leprae\_fasta)}
+\NormalTok{ulcerans\_vector }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(ulcerans\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+Examine the output using \texttt{length()}, \texttt{class()}, and \texttt{head()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(leprae\_vector)}
+\FunctionTok{class}\NormalTok{(leprae\_vector)}
+\FunctionTok{head}\NormalTok{(leprae\_vector, }\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sequence-dotplots-in-r}{%
+\chapter{\texorpdfstring{Sequence dotplots in \emph{R}}{Sequence dotplots in R}}\label{sequence-dotplots-in-r}}
+
+\textbf{By}: Avril Coghlan.
+
+\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+
+\textbf{NOTE: I've added some new material that is rather terse and lacks explication.}
+
+\hypertarget{preliminaries-5}{%
+\section{Preliminaries}\label{preliminaries-5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(compbio4all)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{download-sequences-1}{%
+\subsection{Download sequences}\label{download-sequences-1}}
+
+As we did in the previous lesson on dotplots, we'll look at two sequences.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# sequence 1: Q9CD83}
+\NormalTok{leprae\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                        \AttributeTok{id =} \StringTok{"Q9CD83"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\CommentTok{\# sequence 2: OIN17619.1}
+\NormalTok{ulcerans\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                         \AttributeTok{id =} \StringTok{"OIN17619.1"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+
+\NormalTok{leprae\_vector   }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(leprae\_fasta)}
+\NormalTok{ulcerans\_vector }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(ulcerans\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{visualzing-two-identical-sequences}{%
+\section{Visualzing two identical sequences}\label{visualzing-two-identical-sequences}}
+
+To help build our intuition about dotplots we'll first look at some artificial examples. First, we'll see what happens when we make a dotplot comparing the alphabet versus itself. The build-in \texttt{LETTERS} object in R contains the alphabet from A to Z. This is a sequence with no repeats.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS, }
+\NormalTok{                LETTERS)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-167-1.pdf}
+
+What we get is a perfect diagonal line.
+
+\hypertarget{visualizing-repeats}{%
+\section{Visualizing repeats}\label{visualizing-repeats}}
+
+Now lets' make a sequence where the alphabet gets repeats twice
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LETTERS.}\FloatTok{2.}\NormalTok{times }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(LETTERS,LETTERS)}
+
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS.}\FloatTok{2.}\NormalTok{times, }
+\NormalTok{                LETTERS.}\FloatTok{2.}\NormalTok{times)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-168-1.pdf}
+
+Note the diagonal lines.
+
+Now 3 repeats
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LETTERS.}\FloatTok{3.}\NormalTok{times }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(LETTERS,LETTERS,LETTERS)}
+
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS.}\FloatTok{3.}\NormalTok{times, }
+\NormalTok{                LETTERS.}\FloatTok{3.}\NormalTok{times)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-169-1.pdf}
+
+Here's another example of repeats.
+
+Create sequence with repeats:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq.repeat }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{,}\StringTok{"C"}\NormalTok{,}\StringTok{"D"}\NormalTok{,}\StringTok{"E"}\NormalTok{,}\StringTok{"F"}\NormalTok{,}\StringTok{"G"}\NormalTok{,}\StringTok{"H"}\NormalTok{,}\StringTok{"I"}\NormalTok{)}
+\NormalTok{seq1 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(seq.repeat,}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Make the dotplot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(seq1, }
+\NormalTok{                seq1)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-171-1.pdf}
+
+\hypertarget{inversions}{%
+\section{Inversions}\label{inversions}}
+
+See if you can figure out what's going on here.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LETTERS.}\FloatTok{3.}\NormalTok{times.with.invert }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(LETTERS,}\FunctionTok{rev}\NormalTok{(LETTERS),LETTERS)}
+
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS.}\FloatTok{3.}\NormalTok{times, }
+\NormalTok{                LETTERS.}\FloatTok{3.}\NormalTok{times.with.invert)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-172-1.pdf}
+
+\hypertarget{translocations}{%
+\section{Translocations}\label{translocations}}
+
+See if you can figure out what's going on here.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seg1 }\OtherTok{\textless{}{-}}\NormalTok{ LETTERS[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{8}\NormalTok{]}
+\NormalTok{seg2 }\OtherTok{\textless{}{-}}\NormalTok{ LETTERS[}\DecValTok{9}\SpecialCharTok{:}\DecValTok{18}\NormalTok{]}
+\NormalTok{seg3 }\OtherTok{\textless{}{-}}\NormalTok{ LETTERS[}\DecValTok{18}\SpecialCharTok{:}\DecValTok{26}\NormalTok{]}
+
+\NormalTok{LETTERS.with.transloc }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(seg1,seg3,seg2)}
+
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS, }
+\NormalTok{                LETTERS.with.transloc)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-173-1.pdf}
+
+\hypertarget{random-sequence}{%
+\section{Random sequence}\label{random-sequence}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{letters.rand1 }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\AttributeTok{x =}\NormalTok{ LETTERS, }\AttributeTok{size =} \DecValTok{26}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ F)}
+\NormalTok{letters.rand2 }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\AttributeTok{x =}\NormalTok{ LETTERS, }\AttributeTok{size =} \DecValTok{26}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ F)}
+
+
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(letters.rand1, }
+\NormalTok{                letters.rand2)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-174-1.pdf}
+
+\hypertarget{comparing-two-real-sequences-using-a-dotplot}{%
+\section{Comparing two real sequences using a dotplot}\label{comparing-two-real-sequences-using-a-dotplot}}
+
+As a first step in comparing two protein, RNA or DNA sequences, it is a good idea to make a \textbf{dotplot}. A \textbf{dotplot} is a graphical method that allows the comparison of two protein or DNA sequences and identify regions of close similarity between them. A dotplot is essentially a two-dimensional matrix (like a grid), which has the sequences of the proteins being compared along the vertical and horizontal axes.
+
+In order to make a simple dotplot to represent of the similarity between two sequences, individual cells in the matrix can be shaded black if residues are identical, so that matching sequence segments appear as runs of diagonal lines across the matrix. Identical proteins will have a line exactly on the main diagonal of the dotplot, that spans across the whole matrix.
+
+For proteins that are not identical, but share regions of similarity, the dotplot will have shorter lines that may be on the \textbf{main diagonal}, or off the main diagonal of the matrix. In essence, a dotplot will reveal if there are any regions that are clearly very similar in two protein (or DNA) sequences.
+
+We can create a dotplot for two sequences using the \texttt{dotPlot()} function in the \texttt{seqinr} package.
+
+First, let's look at a dotplot created using only a single sequence. You'd never do this in practice, but it will give you a sense of what dotplots are doing.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(leprae\_vector, }
+\NormalTok{                leprae\_vector)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-175-1.pdf}
+
+These two sequences are identical, so we have a very distinct diagonal line. But there's also other
+
+Now we'll make a real dotplot of the \href{https://en.wikipedia.org/wiki/Chorismate_lyase}{chorismate lyase} proteins from two closely related species, \emph{Mycobacterium leprae} and \emph{Mycobacterium ulcerans}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(leprae\_vector, }
+\NormalTok{                ulcerans\_vector)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-176-1.pdf}
+
+In the dotplot above, the \emph{M. leprae} sequence is plotted along the x-axis (horizontal axis), and the \emph{M. ulcerans} sequence is plotted along the y-axis (vertical axis). The dotplot displays a dot at points where there is an identical amino acid in the two sequences.
+
+For example, if amino acid 53 in the \emph{M. leprae} sequence is the same amino acid (eg. ``W'') as amino acid 70 in the M. ulcerans sequence, then the dotplot will show a dot the position in the plot where x =50 and y =53.
+
+In this case you can see a lot of dots along a diagonal line, which indicates that the two protein sequences contain many identical amino acids at the same (or very similar) positions along their lengths. This is what you would expect, because we know that these two proteins are \textbf{homologs} (related proteins) because they share a close evolutionary history.
+
+\hypertarget{global-proteins-aligments-in-r}{%
+\chapter{\texorpdfstring{Global proteins aligments in \emph{R}}{Global proteins aligments in R}}\label{global-proteins-aligments-in-r}}
+
+\textbf{By}: Avril Coghlan.
+
+\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+
+\hypertarget{preliminaries-6}{%
+\section{Preliminaries}\label{preliminaries-6}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(compbio4all)}
+
+\FunctionTok{library}\NormalTok{(Biostrings)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{download-sequences-2}{%
+\subsection{Download sequences}\label{download-sequences-2}}
+
+As we did in the previous lesson on dotplots, we'll look at two sequences.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Download}
+\DocumentationTok{\#\# sequence 1: Q9CD83}
+\NormalTok{leprae\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                        \AttributeTok{id =} \StringTok{"Q9CD83"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\DocumentationTok{\#\# sequence 2: OIN17619.1}
+\NormalTok{ulcerans\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                         \AttributeTok{id =} \StringTok{"OIN17619.1"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+
+\CommentTok{\# clean}
+\NormalTok{leprae\_vector   }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(leprae\_fasta)}
+\NormalTok{ulcerans\_vector }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(ulcerans\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{pairwise-global-alignment-of-dna-sequences-using-the-needleman-wunsch-algorithm}{%
+\section{Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm}\label{pairwise-global-alignment-of-dna-sequences-using-the-needleman-wunsch-algorithm}}
+
+If you are studying a particular pair of genes or proteins, an important question is to what extent the two sequences are similar.
+
+To quantify similarity, it is necessary to \textbf{align} the two sequences, and then you can calculate a similarity score based on the alignment.
+
+There are two types of alignment in general. A \textbf{global alignment} is an alignment of the \emph{full} length of two sequences from beginning to end, for example, of two protein sequences or of two DNA sequences. A \textbf{local alignment} is an alignment of part of one sequence to part of another sequence; the parts the end up getting aligned are the most similar, and determined by the alignment algorithm.
+
+The first step in computing a alignment (global or local) is to decide on a \textbf{scoring system}. For example, we may decide to give a score of +2 to a match and a penalty of -1 to a mismatch, and a penalty of -2 to a \textbf{gap} due to an \textbf{indexl}. Thus, for the alignment:
+
+\begin{verbatim}
+## [1] "G A A T T C"
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "G A T T - A"
+\end{verbatim}
+
+we would compute a score of
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  G vs G = matchb = 2
+\item
+  A vs A = match = 2
+\item
+  A vs T = mismatch = -1
+\item
+  T vs T = match = 2
+\item
+  T vs - = gap = -2
+\item
+  C vs A = mismatch = 2
+\end{enumerate}
+
+So, the scores is 2 + 2 -1 + 2 -2 - 1 = 2.
+
+Similarly, the score for the following alignment is 2 + 2 -2 + 2 + 2 -1 = 5:
+
+\begin{verbatim}
+## [1] "G A A T T C"
+\end{verbatim}
+
+\begin{verbatim}
+## [1] "G A - T T A"
+\end{verbatim}
+
+The \textbf{scoring system} above can be represented by a \textbf{scoring matrix} (also known as a \textbf{substitution matrix}). The scoring matrix has one row and one column for each possible letter in our alphabet of letters (e.g.~4 rows and 4 columns for DNA and RNA sequences, 20 x 20 for amino acids). The (i,j) element of the matrix has a value of +2 in case of a match and -1 in case of a mismatch.
+
+We can make a scoring matrix in R by using the \texttt{nucleotideSubstitutionMatrix()} function in the \texttt{Biostrings} package. \texttt{Biostrings} is part of a set of R packages for bioinformatics analysis known as \href{www.bioconductor.org/}{Bioconductor} (www.bioconductor.org/).
+
+The arguments (inputs) for the \texttt{nucleotideSubstitutionMatrix()} function are the score that we want to assign to a match and the score that we want to assign to a mismatch. We can also specify that we want to use only the four letters representing the four nucleotides (ie. A, C, G, T) by setting \texttt{baseOnly=TRUE}, or whether we also want to use the letters that represent \textbf{ambiguous cases} where we are not sure what the nucleotide is (e.g.~`N' = A/C/G/T; ambiguous cases occur in some sequences due to sequencing errors or ambiguities).
+
+To make a scoring matrix which assigns a score of +2 to a match and -1 to a mismatch, and store it in the variable \texttt{sigma}, we type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# make the matrix}
+\NormalTok{sigma }\OtherTok{\textless{}{-}} \FunctionTok{nucleotideSubstitutionMatrix}\NormalTok{(}\AttributeTok{match =} \DecValTok{2}\NormalTok{, }
+                                      \AttributeTok{mismatch =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }
+                                      \AttributeTok{baseOnly =} \ConstantTok{TRUE}\NormalTok{)}
+\CommentTok{\# Print out the matrix}
+\NormalTok{sigma }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    A  C  G  T
+## A  2 -1 -1 -1
+## C -1  2 -1 -1
+## G -1 -1  2 -1
+## T -1 -1 -1  2
+\end{verbatim}
+
+Instead of assigning the same penalty (e.g.~-8) to every gap position, it is common instead to assign a \textbf{gap opening penalty} to the first position in a gap (e.g.~-8), and a smaller \textbf{gap extension penalty} to every subsequent position in the same gap.
+
+The reason for doing this is that it is likely that adjacent gap positions were created by the same insertion or deletion event, rather than by several independent insertion or deletion events. Therefore, we don't want to penalize a 3-letter gap (AAA---AAA) as much as we would penalize three separate 1-letter gaps (AA-A-A-AA), as the 3-letter gap may have arisen due to just one insertion or deletion event, while the 3 separate 1-letter gaps probably arose due to three independent insertion or deletion events.
+
+For example, if we want to compute the score for a global alignment of two short DNA sequences `GAATTC' and `GATTA', we can use the \textbf{Needleman-Wunsch} algorithm to calculate the highest-scoring alignment using a particular scoring function.
+
+The \texttt{pairwiseAlignment()} function in the Biostrings package finds the score for the optimal global alignment between two sequences using the Needleman-Wunsch algorithm, given a particular scoring system.
+
+As arguments (inputs), \texttt{pairwiseAlignment()} takes
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  the two sequences that you want to align,
+\item
+  the scoring matrix,
+\item
+  the gap opening penalty, and
+\item
+  the gap extension penalty.
+\end{enumerate}
+
+You can also tell the function that you want to just have the optimal global alignment's score by setting \texttt{scoreOnly\ =\ TRUE}, or that you want to have both the optimal global alignment and its score by setting \texttt{scoreOnly\ =\ FALSE}.
+
+For example, let's find the score for the optimal global alignment between the sequences `GAATTC' and `GATTA'.
+
+First, we'll store the sequences as \textbf{character vectors}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{s1 }\OtherTok{\textless{}{-}} \StringTok{"GAATTC"}
+\NormalTok{s2 }\OtherTok{\textless{}{-}} \StringTok{"GATTA"}
+\end{Highlighting}
+\end{Shaded}
+
+Now we'll align them:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{globalAligns1s2 }\OtherTok{\textless{}{-}}\NormalTok{ Biostrings}\SpecialCharTok{::}\FunctionTok{pairwiseAlignment}\NormalTok{(s1, s2, }
+                                                 \AttributeTok{substitutionMatrix =}\NormalTok{ sigma, }
+                                                 \AttributeTok{gapOpening =} \SpecialCharTok{{-}}\DecValTok{2}\NormalTok{,}
+                                                 \AttributeTok{gapExtension =} \SpecialCharTok{{-}}\DecValTok{8}\NormalTok{, }
+                                                 \AttributeTok{scoreOnly =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{globalAligns1s2 }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Global PairwiseAlignmentsSingleSubject (1 of 1)
+## pattern: GAATTC
+## subject: GA-TTA
+## score: -3
+\end{verbatim}
+
+The above commands print out the optimal global alignment for the two sequences and its score.
+
+\textbf{Note} we set \texttt{gapOpening} to be -2 and \texttt{gapExtension} to be -8, which means that the first position of a gap is assigned a score of -8 - 2= -10, and every subsequent position in a gap is given a score of -8. Here the alignment contains four matches, one mismatch, and one gap of length 1, so its score is (4\emph{2)+(1}-1)+(1*-10) = -3.
+
+\hypertarget{pairwise-global-alignment-of-protein-sequences-using-the-needleman-wunsch-algorithm}{%
+\section{Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm}\label{pairwise-global-alignment-of-protein-sequences-using-the-needleman-wunsch-algorithm}}
+
+As well as DNA alignments, it is also possible to make alignments of protein sequences. In this case it is necessary to use a scoring matrix for amino acids rather than for nucleotides.
+
+\hypertarget{protein-score-matrices}{%
+\subsection{Protein score matrices}\label{protein-score-matrices}}
+
+There are several well known scoring matrices that come with \emph{R}, such as the \textbf{BLOSUM} series of matrices. Different BLOSUM matrices exist, named with different numbers. BLOSUM with high numbers are designed for comparing closely related sequences, while BLOSUM with low numbers are designed for comparing evolutionarily distantly related sequences. For example, \textbf{BLOSUM62} is used for \textbf{less divergent alignments} (alignments of sequences that differ little), and \textbf{BLOSUM30} is used for more divergent alignments (alignments of sequences that differ a lot).
+
+Many \emph{R} packages come with example data sets or data files and you use the \texttt{data()} function is used to load these data files. You can use the \texttt{data()} function to load a data set of BLOSUM matrices that comes with \texttt{Biostrings}
+
+To load the BLOSUM50 matrix, we type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(BLOSUM50)}
+\NormalTok{BLOSUM50 }\CommentTok{\# Print out the data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    A  R  N  D  C  Q  E  G  H  I  L  K  M  F  P  S  T  W  Y  V  B  Z  X  *
+## A  5 -2 -1 -2 -1 -1 -1  0 -2 -1 -2 -1 -1 -3 -1  1  0 -3 -2  0 -2 -1 -1 -5
+## R -2  7 -1 -2 -4  1  0 -3  0 -4 -3  3 -2 -3 -3 -1 -1 -3 -1 -3 -1  0 -1 -5
+## N -1 -1  7  2 -2  0  0  0  1 -3 -4  0 -2 -4 -2  1  0 -4 -2 -3  4  0 -1 -5
+## D -2 -2  2  8 -4  0  2 -1 -1 -4 -4 -1 -4 -5 -1  0 -1 -5 -3 -4  5  1 -1 -5
+## C -1 -4 -2 -4 13 -3 -3 -3 -3 -2 -2 -3 -2 -2 -4 -1 -1 -5 -3 -1 -3 -3 -2 -5
+## Q -1  1  0  0 -3  7  2 -2  1 -3 -2  2  0 -4 -1  0 -1 -1 -1 -3  0  4 -1 -5
+## E -1  0  0  2 -3  2  6 -3  0 -4 -3  1 -2 -3 -1 -1 -1 -3 -2 -3  1  5 -1 -5
+## G  0 -3  0 -1 -3 -2 -3  8 -2 -4 -4 -2 -3 -4 -2  0 -2 -3 -3 -4 -1 -2 -2 -5
+## H -2  0  1 -1 -3  1  0 -2 10 -4 -3  0 -1 -1 -2 -1 -2 -3  2 -4  0  0 -1 -5
+## I -1 -4 -3 -4 -2 -3 -4 -4 -4  5  2 -3  2  0 -3 -3 -1 -3 -1  4 -4 -3 -1 -5
+## L -2 -3 -4 -4 -2 -2 -3 -4 -3  2  5 -3  3  1 -4 -3 -1 -2 -1  1 -4 -3 -1 -5
+## K -1  3  0 -1 -3  2  1 -2  0 -3 -3  6 -2 -4 -1  0 -1 -3 -2 -3  0  1 -1 -5
+## M -1 -2 -2 -4 -2  0 -2 -3 -1  2  3 -2  7  0 -3 -2 -1 -1  0  1 -3 -1 -1 -5
+## F -3 -3 -4 -5 -2 -4 -3 -4 -1  0  1 -4  0  8 -4 -3 -2  1  4 -1 -4 -4 -2 -5
+## P -1 -3 -2 -1 -4 -1 -1 -2 -2 -3 -4 -1 -3 -4 10 -1 -1 -4 -3 -3 -2 -1 -2 -5
+## S  1 -1  1  0 -1  0 -1  0 -1 -3 -3  0 -2 -3 -1  5  2 -4 -2 -2  0  0 -1 -5
+## T  0 -1  0 -1 -1 -1 -1 -2 -2 -1 -1 -1 -1 -2 -1  2  5 -3 -2  0  0 -1  0 -5
+## W -3 -3 -4 -5 -5 -1 -3 -3 -3 -3 -2 -3 -1  1 -4 -4 -3 15  2 -3 -5 -2 -3 -5
+## Y -2 -1 -2 -3 -3 -1 -2 -3  2 -1 -1 -2  0  4 -3 -2 -2  2  8 -1 -3 -2 -1 -5
+## V  0 -3 -3 -4 -1 -3 -3 -4 -4  4  1 -3  1 -1 -3 -2  0 -3 -1  5 -4 -3 -1 -5
+## B -2 -1  4  5 -3  0  1 -1  0 -4 -4  0 -3 -4 -2  0  0 -5 -3 -4  5  2 -1 -5
+## Z -1  0  0  1 -3  4  5 -2  0 -3 -3  1 -1 -4 -1  0 -1 -2 -2 -3  2  5 -1 -5
+## X -1 -1 -1 -1 -2 -1 -1 -2 -1 -1 -1 -1 -1 -2 -2 -1  0 -3 -1 -1 -1 -1 -1 -5
+## * -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5  1
+\end{verbatim}
+
+You can get a list of the available scoring matrices that come with the Biostrings package by using the data() function, which takes as an argument the name of the package for which you want to know the data sets that come with it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{data}\NormalTok{(}\AttributeTok{package=}\StringTok{"Biostrings"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Another well-known series of scoring matrices are the \textbf{PAM} matrices developed by \href{https://en.wikipedia.org/wiki/Margaret_Oakley_Dayhoff}{Margaret Dayhoff} and her team. These have largely been replaced by BLOSUM but are important for historical reasons because they represent one of the first major bioinformatics, computational biology, and phyolgenetics projects ever.
+
+\hypertarget{example-protein-alignment}{%
+\subsection{Example protein alignment}\label{example-protein-alignment}}
+
+Let's find the optimal global alignment between the protein sequences ``PAWHEAE'' and ``HEAGAWGHEE'' using the Needleman-Wunsch algorithm using the BLOSUM50 matrix.
+
+First, load the scoring matrix \texttt{BLOSUM50} and make vectors for the sequence
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# matrix}
+\FunctionTok{data}\NormalTok{(BLOSUM50)}
+
+\CommentTok{\# sequences}
+\NormalTok{s3 }\OtherTok{\textless{}{-}} \StringTok{"PAWHEAE"}
+\NormalTok{s4 }\OtherTok{\textless{}{-}} \StringTok{"HEAGAWGHEE"}
+\end{Highlighting}
+\end{Shaded}
+
+Now do the alignments.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{globalAligns3s4 }\OtherTok{\textless{}{-}} \FunctionTok{pairwiseAlignment}\NormalTok{(s3, s4,}
+                                     \AttributeTok{substitutionMatrix =} \StringTok{"BLOSUM50"}\NormalTok{, }
+                                     \AttributeTok{gapOpening =} \SpecialCharTok{{-}}\DecValTok{2}\NormalTok{,}
+                                     \AttributeTok{gapExtension =} \SpecialCharTok{{-}}\DecValTok{8}\NormalTok{, }
+                                     \AttributeTok{scoreOnly =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Look at the results:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{globalAligns3s4 }\CommentTok{\# Print out the optimal global alignment and its score}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Global PairwiseAlignmentsSingleSubject (1 of 1)
+## pattern: P---AWHEAE
+## subject: HEAGAWGHEE
+## score: -5
+\end{verbatim}
+
+We set \texttt{gapOpening} to be -2 and \texttt{gapExtension} to be -8, which means that the first position of a gap is assigned a score of -8-2=-10, and every subsequent position in a gap is given a score of -8. This means that the gap will be given a score of -10-8-8 = -26.
+
+\hypertarget{aligning-uniprot-sequences}{%
+\section{Aligning UniProt sequences}\label{aligning-uniprot-sequences}}
+
+We discussed previously how you can search for UniProt accessions and retrieve the corresponding protein sequences, either via the UniProt website or using the \texttt{rentrez} package.
+
+In the examples given above, we learned how to retrieve the sequences for the chorismate lyase proteins from \emph{Mycobacterium leprae} (UniProt Q9CD83) and \emph{Mycobacterium ulcerans} (UniProt A0PQ23), and read them into R, and store them as vectors lepraeseq and ulceransseq.
+
+You can align these sequences using \texttt{pairwiseAlignment()} from the Biostrings package.
+
+As its input, the \texttt{pairwiseAlignment()}function requires that the sequences be in the form of a single string (e.g.~``ACGTA''), rather than as a vector of characters (e.g.~a vector with the first element as ``A'', the second element as ``C'', etc.). Therefore, to align the \emph{M. leprae} and \emph{M. ulcerans} chorismate lyase proteins, we first need to convert the vectors lepraeeq and ulceransseq into strings. We can do this using the \texttt{paste()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# convert leprae\_vector to an object lepraeseq\_string}
+\NormalTok{lepraeseq\_string }\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(leprae\_vector,}\AttributeTok{collapse =} \StringTok{""}\NormalTok{)    }
+
+\CommentTok{\# convert ulcerans\_vector to an object ulceransseq\_string}
+\NormalTok{ulceransseq\_string }\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(ulcerans\_vector,}\AttributeTok{collapse =} \StringTok{""}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+Furthermore, pairwiseAlignment() requires that the sequences be stored as uppercase characters. Therefore, if they are not already in uppercase, we need to use the \texttt{toupper()} function to convert \texttt{lepraeseq\_string} and \texttt{ulceransseq\_string} to uppercase:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lepraeseq\_string   }\OtherTok{\textless{}{-}} \FunctionTok{toupper}\NormalTok{(lepraeseq\_string)}
+\NormalTok{ulceransseq\_string }\OtherTok{\textless{}{-}} \FunctionTok{toupper}\NormalTok{(ulceransseq\_string)}
+\end{Highlighting}
+\end{Shaded}
+
+Check the output
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lepraeseq\_string }\CommentTok{\# Print out the content of "lepraeseq\_string"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "MTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLLDVAPKIPELENLKIGRILQRDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPIGEIMAASRIETYKEDAQVWIGDLPCWLADYGYWDLPKRAVGRRYRIIAGGQPVIITTEYFLRSVFQDTPREELDRCQYSNDIDTRSGDRFVLHGRVFKNL"
+\end{verbatim}
+
+We can now align the the \emph{M. leprae} and \emph{M. ulcerans} chorismate lyase protein sequences using the \texttt{pairwiseAlignment()} function:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{globalAlignLepraeUlcerans }\OtherTok{\textless{}{-}}\NormalTok{ Biostrings}\SpecialCharTok{::}\FunctionTok{pairwiseAlignment}\NormalTok{(lepraeseq\_string, }
+\NormalTok{                                               ulceransseq\_string,}
+                                               \AttributeTok{substitutionMatrix =}\NormalTok{ BLOSUM50, }
+                                               \AttributeTok{gapOpening =} \SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }
+                                               \AttributeTok{gapExtension =} \SpecialCharTok{{-}}\DecValTok{8}\NormalTok{, }
+                                               \AttributeTok{scoreOnly =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{globalAlignLepraeUlcerans }\CommentTok{\# Print out the optimal global alignment and its score}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Global PairwiseAlignmentsSingleSubject (1 of 1)
+## pattern: MT-----NR--T---LSREEIRKLDRDLRILVAT...DTPREELDRCQYSNDIDTRSGDRFVLHGRVFKNL
+## subject: MLAVLPEKREMTECHLSDEEIRKLNRDLRILIAT...DNSREEPIRHQRS--VGT-SA-R---SGRSICT-
+## score: 627
+\end{verbatim}
+
+As the alignment is very long, when you type \texttt{globalAlignLepraeUlcerans}, you only see the start and the end of the alignment. Therefore, we need to have a function to print out the whole alignment (see below).
+
+\hypertarget{viewing-a-long-pairwise-alignment}{%
+\section{Viewing a long pairwise alignment}\label{viewing-a-long-pairwise-alignment}}
+
+If you want to view a long pairwise alignment such as that between the \emph{M. leprae} and \emph{M. ulerans} chorismate lyase proteins, it is convenient to print out the alignment in blocks.
+
+The R function \texttt{printPairwiseAlignment()} below will do this for you:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{printPairwiseAlignment}\NormalTok{(globalAlignLepraeUlcerans, }\DecValTok{60}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "MT-----NR--T---LSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLL 50"
+## [1] "MLAVLPEKREMTECHLSDEEIRKLNRDLRILIATNGTLTRILNVLANDEIVVEIVKQQIQ 60"
+## [1] " "
+## [1] "DVAPKIPELENLKIGRILQRDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPI 110"
+## [1] "DAAPEMDGCDHSSIGRVLRRDIVLKGRRSGIPFVAAESFIAIDLLPPEIVASLLETHRPI 120"
+## [1] " "
+## [1] "GEIMAASRIETYKEDAQVWIGDLPCWLADYGYWDLPKRAVGRRYRIIAGGQPVIITTEYF 170"
+## [1] "GEVMAASCIETFKEEAKVWAGESPAWLELDRRRNLPPKVVGRQYRVIAEGRPVIIITEYF 180"
+## [1] " "
+## [1] "LRSVFQDTPREELDRCQYSNDIDTRSGDRFVLHGRVFKN 230"
+## [1] "LRSVFEDNSREEPIRHQRS--VGT-SA-R---SGRSICT 233"
+## [1] " "
+\end{verbatim}
+
+The position in the protein of the amino acid that is at the end of each line of the printed alignment is shown after the end of the line. For example, the first line of the alignment above finishes at amino acid position 50 in the \emph{M. leprae} protein and also at amino acid position 60 in the \emph{M. ulcerans} protein. Becaues there as a difference of 60-50 = 10 bases, there must be 10 insertions in the \emph{M. leprae} to get it to line up. Count the number of dashes in the sequence to see how many there are.
 
 \hypertarget{part-appendices}{%
 \part{Appendices}\label{part-appendices}}
@@ -3300,7 +4145,7 @@ Some functions in R can be executed within nothing in the parentheses.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Mon Jul 12 09:58:44 2021"
+## [1] "Mon Jul 12 12:13:32 2021"
 \end{verbatim}
 
 \textbf{Exponents}

@@ -1746,12 +1746,27 @@ We know it contains character data - how many characters?  `nchar()` for "number
 nchar(dengueseq_fasta)
 ```
 
+## OPTIONAL: Saving FASTA files
+
+We can save our data as .fasta file for safe keeping.  The `write()` function will save the data we downloaded as a plain text file.  
+
+```{r, eval = F}
+write(dengueseq_fasta, 
+      file="dengueseq.fasta")
+```
+
+If you do this, you'll need to figure out where *R* is saving things, which requires and understanding *R's* **file system**, which can take some getting used to, especially if you're new to programming.  As a start, you can see where *R* saves things by using the `getwd()` command, which tells you where on your harddrive R currently is using as its home base for files.
+
+```{r}
+getwd()
+```
+
 
 ## Next steps
 
 On their own, FASTA files in R are not directly useful.  In the next lesson we'll process our `dengueseq_fasta` file so that we can use it in analyses.
 
-<!--chapter:end:10-download_FASTA_in_R.Rmd-->
+<!--chapter:end:10a-download_FASTA_in_R.Rmd-->
 
 # Downloading DNA sequences as FASTA files in R
 
@@ -1761,10 +1776,17 @@ This is a modification of ["DNA Sequence Statistics"](https://a-little-book-of-r
 
 <!-- download stringr -->
 
+## Preliminaries
+
+We'll need the `dengueseq_fasta` FASTA data object, which is in the `compbio4all` package.  We'll also use the `stringr` package for cleaning up the FASTA data, which can be downloaded with `install.packages("stringr")`
+
 ```{r}
+# compbio4all, which has dengueseq_fasta
 library(compbio4all)
-library(stringr)
 data(dengueseq_fasta)
+
+# stringr, for data cleaning
+library(stringr)
 ```
 
 
@@ -1775,7 +1797,7 @@ We can't actually do much with the contents of the `dengueseq_fasta` we download
 There are several things we need to remove: 
 
 1. The **meta data** line `>NC_001477.1 Dengue virus 1, complete genome` (metadata is "data" about data, such as where it came from, what it is, who made it, etc.).
-1. All the "\\n" that show up in the file (these are the **line breaks**).
+1. All the `\n` that show up in the file (these are the **line breaks**).
 1. Put each nucleotide of the sequence into its own spot in a vector.
 
 There are functions that can do this automatically, but 
@@ -1783,23 +1805,25 @@ There are functions that can do this automatically, but
 1. I haven't found one I like, and 
 1. walking through this will help you understand the types of operations you can do on text data.
 
-The first two steps involve removing things from the existing **character string** that contains the sequence.  The third step will split the single continuous character string like "AGTTGTTAGTCTACGT..." into a **character vector** like `c("A","G","T","T","G","T","T","A","G","T","C","T","A","C","G","T"...)`, where each element of the vector is a single character a stored in a separate slot in the vevtor.
+The first two steps involve removing things from the existing **character string** that contains the sequence.  The third step will split the single continuous character string like "AGTTGTTAGTCTACGT..." into a **character vector** like `c("A","G","T","T","G","T","T","A","G","T","C","T","A","C","G","T"...)`, where each element of the vector is a single character a stored in a separate slot in the vector.
 
 
-The second item is the easiest to take care of.   *R* and many programming languages have tools called **regular expressions** that allow you to manipulate text.  R has a function called `gsub()` which allows you to substitute or delete character data from a string.  First I'll remove all those `\\n` values.
+### Removing unwanted characters
+
+The second item is the easiest to take care of.   *R* and many programming languages have tools called **regular expressions** that allow you to manipulate text.  R has a function called `gsub()` which allows you to substitute or delete character data from a string.  First I'll remove all those `\n` values.
 
 The regular expression function `gsub()` takes three arguments:
 1. `pattern = ...`.  This is what we need it to find so we can replace it.
 1. `replacement = ...`.  The replacement.
-1. `x = ...`.  A character string or vector.
+1. `x = ...`.  A character string or vector where `gsub()` will do its work.
 
 <!-- TODO: check that this is rendering correcting with the number of slashes -->
 
-We need to get rid of the `\\n` so that we are left with only A, T and G, which are the actually information of the sequence.  We want `\\n` removed, so the replacement will be `""`, which is as set of quotation marks with nothing in the middle, which means "delete the target pattern and put nothing in its place."
+We need to get rid of the `\n` so that we are left with only A, T and G, which are the actually information of the sequence.  We want `\n` completely removed, so the replacement will be `""`, which is as set of quotation marks with nothing in the middle, which means "delete the target pattern and put nothing in its place."
 
-One thing that is tricky about regular expressions is that many characters have special meaning to the functions, such as slashes, dollar signs, and brackets.  So, if you want to find and replace one of these specially designated characters you need to put a slash in front of them.  So when we set the pattern, instead of setting the pattern to a slash before an n, we have to give it two slashes.  
+One thing that is tricky about regular expressions is that many characters have special meaning to the functions, such as slashes, dollar signs, and brackets.  So, if you want to find and replace one of these specially designated characters you need to put a slash in front of them.  So when we set the pattern, instead of setting the pattern to a slash before an n `\n`, we have to give it two slashes `\\n`.  
 
-Here is the regular expression to delete the newline characer \\n.
+Here is the regular expression to delete the newline character \\n.
 ```{r}
  # note: we want to find all the \n, but need to set the pattern as \\n
 dengueseq_vector <- gsub(pattern = "\\n",  
@@ -1823,7 +1847,7 @@ seq.header <- ">NC_001477.1 Dengue virus 1, complete genome"
 
 Now I'll get rid of the header with  with `gsub()`.
 ```{r}
-dengueseq_vector <- gsub(pattern = seq.header, # defined above
+dengueseq_vector <- gsub(pattern = seq.header, # object defined above
                          replacement = "", 
                          x = dengueseq_vector)
 ```
@@ -1834,7 +1858,9 @@ See if it worked:
 strtrim(dengueseq_vector, 80)
 ```
 
-Now the more complex part.  We need to split up a continuous, unborken string of letters into a vector wher each letter is on its own. This can be done with the `str_split()` function ("string split") from the `stringr` package.  The notation `stringr::str_split()` mean "use the `str_split` function from from the `stringr` package."  More specifically, it temporarily loads the stringr package and gives R access to just the str_split function.  These allows you to call a single function without loading the whole library.
+### Spliting unbroken strings in character vectors
+
+Now the more complex part.  We need to split up a continuous, unbroken string of letters into a vector where each letter is on its own. This can be done with the `str_split()` function ("string split") from the `stringr` package.  The notation `stringr::str_split()` mean "use the `str_split` function from from the `stringr` package."  More specifically, it temporarily loads the `stringr` package and gives R access to just the `str_split` function.  These allows you to call a single function without loading the whole library.
 
 There are several arguments to `str_split`, and I've tacked a `[[1]]` on to the end.  
 
@@ -1849,29 +1875,38 @@ dengueseq_vector_split <- stringr::str_split(dengueseq_vector,
 Look at the output with str()
 ```{r}
 str(dengueseq_vector_split)
-
 ```
 
 
-We can explore what the different arguments do by modifying them.  Change pattern = "" to pattern = "A".  Can you figure out what happened?
+We can explore what the different arguments do by modifying them.  Change `pattern = "" to pattern = "A"`.  Can you figure out what happened?
 ```{r}
-# re-run the command without "pattern  = ""
+# re-run the command with "pattern  = "A"
 dengueseq_vector_split2 <- stringr::str_split(dengueseq_vector,
                                        pattern = "A",
                                        simplify = FALSE)[[1]]
 str(dengueseq_vector_split2)
 ```
 
-
-Run this code (don't worry what it does).  Does this help you see what's up?
+And try it with `pattern = "" to pattern = "G"`.
 ```{r}
-options(str = strOptions(vec.len = 10))
-str(list(dengueseq_vector_split[1:20],
-     dengueseq_vector_split2[1:10]))
+# re-run the command with "pattern  = "G"
+dengueseq_vector_split3 <- stringr::str_split(dengueseq_vector,
+                                       pattern = "G",
+                                       simplify = FALSE)[[1]]
+str(dengueseq_vector_split3)
 ```
 
 
-So, what does the `pattern = ... ` argument do?
+Run this code to compare the two ways we just used `str_split` (don't worry what it does). Does this help you see what's up?
+```{r}
+options(str = strOptions(vec.len = 10))
+str(list(dengueseq_vector_split[1:20],
+     dengueseq_vector_split2[1:10], 
+     dengueseq_vector_split3[1:10]))
+```
+
+
+So, what does the `pattern = ... ` argument do?  For more info open up the help file for `str_split` by calling `?str_split`.
 
 Something cool which we will explore in the next exercise is that we can do summaries on vectors of nucleotides, like this:
 ```{r}
@@ -1879,80 +1914,613 @@ table(dengueseq_vector_split)
 ```
 
 
-## Saving FASTA files
-
-We can save our data as .fasta file for safe keeping
-
-```{r, eval = F}
-write(dengueseq_fasta, file="dengueseq.fasta")
-```
-
-## Reading in FASTA files
-
-We can read in FASTA files
-
-NOTE: this code needs to be updated to have a call to the compbio package itself
-
-```{r, echo = F, eval = F}
-fi. <- here::here("inst/extdata/dengueseq.fasta")
-# dengueseq <- seqinr::read.fasta(file = fi.,
-#                              seqtype  = "DNA",
-#                              as.string = FALSE)
-
-dengueseq_matrix <- ape::read.dna(file = here::here("inst/extdata/dengueseq.fasta"),
-              format = "fasta",
-              as.character = TRUE)
-```
 
 
-```{r, eval = F}
-dengueseq_matrix <- ape::read.dna(file = system.file("dengueseq.fasta"),
-              format = "fasta",
-              as.character = TRUE)
+
+
+<!--chapter:end:10b-clean_FASTA_in_R-AC03-01.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Local protein aligments in *R*
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+## Preliminaries
+
+<!-- is compbio4all needed? -->
+<!-- have on gone over biodoncdutor and biostrings? -->
+
+```{r}
+library(compbio4all)
+library(Biostrings)
 ```
 
 
-Note that reading it back in like this results in a change from its original format
+### Download sequences
 
-```{r, eval = F}
-class(dengueseq_matrix)
-```
-
-Now we have a matrix instead of a vector.  str() will give us a peak at it
-```{, eval = Fr}
-str(dengueseq_matrix)
-```
-
-Matrices are squares of data - how big is this square?
-
-```{r, eval = F}
-dim(dengueseq_matrix)
-```
-
-We have a 1 x 10737 matrix.
-
-To print out a certain subsequence of the sequence, we just need to type the name of the vector dengueseq_reload followed by the square brackets [ ] containing the **indices** for the nucleotides we want to see. For example, the following command prints out the first 50 nucleotides of the DEN-1 Dengue virus genome sequence:
-
-```{r, eval = F}
-dengueseq_matrix[1:50]
-```
-
-Note that dengueseq_matrix[1:50] refers to the elements of the vector dengueseq_matrix with indices from 1-50. These elements contain the first 50 nucleotides of the DEN-1 Dengue virus sequence.
-
-
-We can run table() on this 
-```{r, eval = F}
-table(dengueseq_matrix)
-```
+As we did in the previous lesson on dotplots, we'll look at two sequences.
 
 
 ```{r}
+# Download
+## sequence 1: Q9CD83
+leprae_fasta <- rentrez::entrez_fetch(db = "protein",
+                        id = "Q9CD83",
+                         rettype = "fasta")
+## sequence 2: OIN17619.1
+ulcerans_fasta <- rentrez::entrez_fetch(db = "protein",
+                         id = "OIN17619.1",
+                         rettype = "fasta")
 
+# clean
+leprae_vector   <- fasta_cleaner(leprae_fasta)
+ulcerans_vector <- fasta_cleaner(ulcerans_fasta)
+
+# convert leprae_vector to an object lepraeseq_string
+lepraeseq_string <-paste(leprae_vector,collapse = "")    
+
+# convert ulcerans_vector to an object ulceransseq_string
+ulceransseq_string <-paste(ulcerans_vector,collapse = "") 
 ```
 
 
 
-<!--chapter:end:10-downloading_DNA_seq_in_R-AC03-01.Rmd-->
+## Pairwise local alignment of protein sequences using the Smith-Waterman algorithm
+
+You can use the `pairwiseAlignment()` function to find the optimal **local alignment** of two sequences, that is the best alignment of parts (**subsequences**) of those sequences, by using the `type=local` argument in `pairwiseAlignment()`. This uses the **[Smith-Waterman algorithm](https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm)** for local alignment.  This is the classic bioinformatics algorithm for finding optimal local alignments.  (We'll discuss updated approaches when we get into **database searches** with **BLAST**, the **Basic, Local Alignment Search Tool* that is the workhorse of many day-to-day bioinformatics tasks).
+
+For example, to find the best local alignment between the *M. leprae* and *M. ulcerans* chorismate lyase proteins, we can run:
+
+```{r}
+# load scoring matrix
+data(BLOSUM50)
+
+# run alignment
+localAlignLepraeUlcerans <- pairwiseAlignment(lepraeseq_string, 
+                                              ulceransseq_string,
+                                              substitutionMatrix = BLOSUM50, 
+                                              gapOpening = -2, 
+                                              gapExtension = -8, 
+                                              scoreOnly = FALSE, 
+                                              type="local")  # <= type = "local !
+
+```
+
+ Print out the optimal local alignment and its score
+```{r}
+localAlignLepraeUlcerans 
+```
+
+
+As before, we can print out the full alignment with `printPairwiseAlignment()`:
+```{r}
+printPairwiseAlignment(localAlignLepraeUlcerans, 60)
+```
+
+
+We see that the optimal local alignment is quite similar to the optimal global alignment in this case, except that it excludes a short region of poorly aligned sequence at the start and at the ends of the two proteins.
+
+
+
+<!--chapter:end:11-alignment_protein__in_R-AC07-02.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Downloading protein sequences in *R*
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+<!-- Add gsub walk through -->
+
+## Preliminaries
+
+```{r}
+library(compbio4all)
+```
+
+
+## Retrieving a UniProt protein sequence using rentrez
+
+We can use `entrez_fetch()` to download protein sequences.
+
+For example to retrieve the protein sequences for UniProt accessions Q9CD83 and A0PQ23, we type in R:
+
+
+```{r}
+# sequence 1: Q9CD83
+leprae_fasta <- rentrez::entrez_fetch(db = "protein",
+                        id = "Q9CD83",
+                         rettype = "fasta")
+# sequence 2: OIN17619.1
+ulcerans_fasta <- rentrez::entrez_fetch(db = "protein",
+                         id = "OIN17619.1",
+                         rettype = "fasta")
+```
+
+
+Display the contents of the `lepraeseq` FASTA file.
+```{r}
+leprae_fasta
+```
+
+<!-- When did I introduce FASTA cleaner? -->
+<!-- Are these data files in compbio4all? -->
+
+Let's clean these up to remove the header and new line characters usin the function `fasta_cleaner()`.
+```{r}
+leprae_vector   <- fasta_cleaner(leprae_fasta)
+ulcerans_vector <- fasta_cleaner(ulcerans_fasta)
+```
+
+Examine the output using `length()`, `class()`, and `head()`:
+
+```{r, eval = F}
+length(leprae_vector)
+class(leprae_vector)
+head(leprae_vector, 20)
+```
+
+<!--chapter:end:11a-download_protein_sequences.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Sequence dotplots in *R*
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+**NOTE: I've added some new material that is rather terse and lacks explication.**
+
+<!-- stronger motivation / explanation -->
+<!-- good sources -->
+<!-- https://omicstutorials.com/interpreting-dot-plot-bioinformatics-with-an-example/ -->
+<!-- http://resources.qiagenbioinformatics.com/manuals/clcgenomicsworkbench/650/Examples_interpretations_dot_plots.html -->
+
+## Preliminaries
+
+```{r}
+library(compbio4all)
+```
+
+
+### Download sequences
+
+As we did in the previous lesson on dotplots, we'll look at two sequences.
+
+
+```{r}
+# sequence 1: Q9CD83
+leprae_fasta <- rentrez::entrez_fetch(db = "protein",
+                        id = "Q9CD83",
+                         rettype = "fasta")
+# sequence 2: OIN17619.1
+ulcerans_fasta <- rentrez::entrez_fetch(db = "protein",
+                         id = "OIN17619.1",
+                         rettype = "fasta")
+
+leprae_vector   <- fasta_cleaner(leprae_fasta)
+ulcerans_vector <- fasta_cleaner(ulcerans_fasta)
+```
+
+
+## Visualzing two identical sequences
+
+To help build our intuition about dotplots we'll first look at some artificial examples.  First, we'll see what happens when we make a dotplot comparing the alphabet versus itself.  The build-in `LETTERS` object in R contains the alphabet from A to Z.  This is a sequence with no repeats.
+
+```{r}
+seqinr::dotPlot(LETTERS, 
+                LETTERS)
+```
+
+What we get is a perfect diagonal line.
+
+
+## Visualizing repeats
+
+Now lets' make a sequence where the alphabet gets repeats twice
+
+```{r}
+LETTERS.2.times <- c(LETTERS,LETTERS)
+
+seqinr::dotPlot(LETTERS.2.times, 
+                LETTERS.2.times)
+```
+
+Note the diagonal lines.
+
+Now 3 repeats
+```{r}
+LETTERS.3.times <- c(LETTERS,LETTERS,LETTERS)
+
+seqinr::dotPlot(LETTERS.3.times, 
+                LETTERS.3.times)
+```
+
+
+Here's another example of repeats.
+
+Create sequence with repeats:
+```{r}
+seq.repeat <- c("A","C","D","E","F","G","H","I")
+seq1 <- rep(seq.repeat,3)
+```
+
+Make the dotplot:
+```{r}
+seqinr::dotPlot(seq1, 
+                seq1)
+```
+
+
+## Inversions
+
+See if you can figure out what's going on here.
+
+```{r}
+LETTERS.3.times.with.invert <- c(LETTERS,rev(LETTERS),LETTERS)
+
+seqinr::dotPlot(LETTERS.3.times, 
+                LETTERS.3.times.with.invert)
+```
+
+## Translocations
+
+See if you can figure out what's going on here.
+
+```{r}
+seg1 <- LETTERS[1:8]
+seg2 <- LETTERS[9:18]
+seg3 <- LETTERS[18:26]
+
+LETTERS.with.transloc <- c(seg1,seg3,seg2)
+
+seqinr::dotPlot(LETTERS, 
+                LETTERS.with.transloc)
+```
+
+
+## Random sequence
+
+
+```{r}
+letters.rand1 <- sample(x = LETTERS, size = 26, replace = F)
+letters.rand2 <- sample(x = LETTERS, size = 26, replace = F)
+
+
+seqinr::dotPlot(letters.rand1, 
+                letters.rand2)
+```
+
+
+
+
+## Comparing two real sequences using a dotplot
+
+As a first step in comparing two protein, RNA or DNA sequences, it is a good idea to make a **dotplot**. A **dotplot** is a graphical method that allows the comparison of two protein or DNA sequences and identify regions of close similarity between them. A dotplot is essentially a two-dimensional matrix (like a grid), which has the sequences of the proteins being compared along the vertical and horizontal axes.
+
+In order to make a simple dotplot to represent of the similarity between two sequences, individual cells in the matrix can be shaded black if residues are identical, so that matching sequence segments appear as runs of diagonal lines across the matrix. Identical proteins will have a line exactly on the main diagonal of the dotplot, that spans across the whole matrix.
+
+For proteins that are not identical, but share regions of similarity, the dotplot will have shorter lines that may be on the **main diagonal**, or off the main diagonal of the matrix. In essence, a dotplot will reveal if there are any regions that are clearly very similar in two protein (or DNA) sequences.
+
+We can create a dotplot for two sequences using the `dotPlot()` function in the `seqinr`  package.
+
+First, let's look at a dotplot created using only a single sequence.  You'd never do this in practice, but it will give you a sense of what dotplots are doing.
+
+```{r}
+seqinr::dotPlot(leprae_vector, 
+                leprae_vector)
+```
+
+These two sequences are identical, so we have a very distinct diagonal line.  But there's also other 
+
+
+
+
+Now we'll make a real dotplot of the [chorismate lyase](https://en.wikipedia.org/wiki/Chorismate_lyase) proteins from two closely related species, *Mycobacterium leprae* and *Mycobacterium ulcerans*.
+
+
+```{r}
+seqinr::dotPlot(leprae_vector, 
+                ulcerans_vector)
+```
+
+
+
+In the dotplot above, the *M. leprae* sequence is plotted along the x-axis (horizontal axis), and the *M. ulcerans* sequence is plotted along the y-axis (vertical axis). The dotplot displays a dot at points where there is an identical amino acid in the two sequences.
+
+For example, if amino acid 53 in the *M. leprae* sequence is the same amino acid (eg. “W”) as amino acid 70 in the M. ulcerans sequence, then the dotplot will show a dot the position in the plot where x =50 and y =53.
+
+In this case you can see a lot of dots along a diagonal line, which indicates that the two protein sequences contain many identical amino acids at the same (or very similar) positions along their lengths. This is what you would expect, because we know that these two proteins are **homologs** (related proteins) because they share a close evolutionary history.
+
+
+<!-- TO DO:  Add the same gene from more distance relatives -->
+
+<!--chapter:end:11b-dotplots.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Global proteins aligments in *R*
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+## Preliminaries
+
+<!-- is compbio4all needed? -->
+<!-- have on gone over biodoncdutor and biostrings? -->
+
+```{r}
+library(compbio4all)
+
+library(Biostrings)
+```
+
+
+### Download sequences
+
+As we did in the previous lesson on dotplots, we'll look at two sequences.
+
+
+```{r}
+# Download
+## sequence 1: Q9CD83
+leprae_fasta <- rentrez::entrez_fetch(db = "protein",
+                        id = "Q9CD83",
+                         rettype = "fasta")
+## sequence 2: OIN17619.1
+ulcerans_fasta <- rentrez::entrez_fetch(db = "protein",
+                         id = "OIN17619.1",
+                         rettype = "fasta")
+
+# clean
+leprae_vector   <- fasta_cleaner(leprae_fasta)
+ulcerans_vector <- fasta_cleaner(ulcerans_fasta)
+```
+
+
+
+## Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm
+
+If you are studying a particular pair of genes or proteins, an important question is to what extent the two sequences are similar.
+
+<!-- Could precede this by an R exercise to calculate compositional similarity -->
+
+To quantify similarity, it is necessary to **align** the two sequences, and then you can calculate a similarity score based on the alignment.
+
+There are two types of alignment in general. A **global alignment** is an alignment of the *full* length of two sequences from beginning to end, for example, of two protein sequences or of two DNA sequences. A **local alignment** is an alignment of part of one sequence to part of another sequence; the parts the end up getting aligned are the most similar, and determined by the alignment algorithm.
+
+<!-- review mutations? -->
+<!-- Introduction PID -->
+
+The first step in computing a alignment (global or local) is to decide on a **scoring system**. For example, we may decide to give a score of +2 to a match and a penalty of -1 to a mismatch, and a penalty of -2 to a **gap** due to an **indexl**. Thus, for the alignment:
+
+```{r echo = F}
+"G A A T T C"
+"G A T T - A"
+```
+we would compute a score of 
+
+1. G vs G = matchb   = 2
+1. A vs A = match    = 2
+1. A vs T = mismatch = -1
+1. T vs T = match    = 2
+1. T vs - = gap      = -2
+1. C vs A = mismatch = 2
+
+So, the scores is 2 + 2 -1 + 2 -2 - 1 = 2. 
+
+Similarly, the score for the following alignment is 2 + 2 -2 + 2 + 2 -1 = 5:
+
+```{r echo = F}
+"G A A T T C"
+"G A - T T A"
+```
+
+The **scoring system** above can be represented by a **scoring matrix** (also known as a **substitution matrix**). The scoring matrix has one row and one column for each possible letter in our alphabet of letters (e.g. 4 rows and 4 columns for DNA and RNA sequences, 20 x 20 for amino acids). The (i,j) element of the matrix has a value of +2 in case of a match and -1 in case of a mismatch.
+
+We can make a scoring matrix in R by using the `nucleotideSubstitutionMatrix()` function in the `Biostrings` package.  `Biostrings` is part of a set of R packages for bioinformatics analysis known as [Bioconductor](www.bioconductor.org/) (www.bioconductor.org/).
+
+The arguments (inputs) for the `nucleotideSubstitutionMatrix()` function are the score that we want to assign to a match and the score that we want to assign to a mismatch. We can also specify that we want to use only the four letters representing the four nucleotides (ie. A, C, G, T) by setting `baseOnly=TRUE`, or whether we also want to use the letters that represent **ambiguous cases** where we are not sure what the nucleotide is (e.g. ‘N’ = A/C/G/T; ambiguous cases occur in some sequences due to sequencing errors or ambiguities).
+
+To make a scoring matrix which assigns a score of +2 to a match and -1 to a mismatch, and store it in the variable `sigma`, we type:
+
+```{r}
+# make the matrix
+sigma <- nucleotideSubstitutionMatrix(match = 2, 
+                                      mismatch = -1, 
+                                      baseOnly = TRUE)
+# Print out the matrix
+sigma 
+```
+
+
+Instead of assigning the same penalty (e.g. -8) to every gap position, it is common instead to assign a **gap opening penalty** to the first position in a gap (e.g. -8), and a smaller **gap extension penalty** to every subsequent position in the same gap.
+
+The reason for doing this is that it is likely that adjacent gap positions were created by the same insertion or deletion event, rather than by several independent insertion or deletion events. Therefore, we don’t want to penalize a 3-letter gap (AAA---AAA) as much as we would penalize three separate 1-letter gaps (AA-A-A-AA), as the 3-letter gap may have arisen due to just one insertion or deletion event, while the 3 separate 1-letter gaps probably arose due to three independent insertion or deletion events.
+
+For example, if we want to compute the score for a global alignment of two short DNA sequences ‘GAATTC’ and ‘GATTA’, we can use the **Needleman-Wunsch** algorithm to calculate the highest-scoring alignment using a particular scoring function.
+
+The `pairwiseAlignment()` function in the Biostrings package finds the score for the optimal global alignment between two sequences using the Needleman-Wunsch algorithm, given a particular scoring system.
+
+As arguments (inputs), `pairwiseAlignment()` takes 
+
+1. the two sequences that you want to align, 
+1. the scoring matrix, 
+1. the gap opening penalty, and 
+1. the gap extension penalty. 
+
+You can also tell the function that you want to just have the optimal global alignment’s score by setting `scoreOnly = TRUE`, or that you want to have both the optimal global alignment and its score by setting `scoreOnly = FALSE`.
+
+For example, let's find the score for the optimal global alignment between the sequences ‘GAATTC’ and ‘GATTA’.
+
+First, we'll store the sequences as **character vectors**:
+```{r}
+s1 <- "GAATTC"
+s2 <- "GATTA"
+```
+
+Now we'll align them:
+```{r}
+globalAligns1s2 <- Biostrings::pairwiseAlignment(s1, s2, 
+                                                 substitutionMatrix = sigma, 
+                                                 gapOpening = -2,
+                                                 gapExtension = -8, 
+                                                 scoreOnly = FALSE)
+```
+
+
+The output:
+```{r}
+globalAligns1s2 
+```
+
+The above commands print out the optimal global alignment for the two sequences and its score.
+
+**Note**  we set `gapOpening` to be -2 and `gapExtension` to be -8, which means that the first position of a gap is assigned a score of -8 - 2= -10, and every subsequent position in a gap is given a score of -8. Here the alignment contains four matches, one mismatch, and one gap of length 1, so its score is (4*2)+(1*-1)+(1*-10) = -3.
+
+## Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm
+
+As well as DNA alignments, it is also possible to make alignments of protein sequences. In this case it is necessary to use a scoring matrix for amino acids rather than for nucleotides.
+
+### Protein score matrices
+
+There are several well known scoring matrices that come with *R*, such as the **BLOSUM** series of matrices. Different BLOSUM matrices exist, named with different numbers. BLOSUM with high numbers are designed for comparing closely related sequences, while BLOSUM with low numbers are designed for comparing evolutionarily distantly related sequences. For example, **BLOSUM62** is used for **less divergent alignments** (alignments of sequences that differ little), and **BLOSUM30** is used for more divergent alignments (alignments of sequences that differ a lot).
+
+Many *R* packages come with example data sets or data files and you use the `data()` function is used to load these data files. You can use the `data()` function to load a data set of BLOSUM matrices that comes with `Biostrings` 
+
+To load the BLOSUM50 matrix, we type:
+
+```{r}
+data(BLOSUM50)
+BLOSUM50 # Print out the data
+```
+
+You can get a list of the available scoring matrices that come with the Biostrings package by using the data() function, which takes as an argument the name of the package for which you want to know the data sets that come with it:
+
+```{r, eval = F}
+data(package="Biostrings")
+```
+
+Another well-known series of scoring matrices are the **PAM** matrices developed by [Margaret Dayhoff](https://en.wikipedia.org/wiki/Margaret_Oakley_Dayhoff) and her team.  These have largely been replaced by BLOSUM but are important for historical reasons because they represent one of the first major bioinformatics, computational biology, and phyolgenetics projects ever.
+
+### Example protein alignment
+
+Let's find the optimal global alignment between the protein sequences “PAWHEAE” and “HEAGAWGHEE” using the Needleman-Wunsch algorithm using the BLOSUM50 matrix.
+
+First, load the scoring matrix `BLOSUM50` and make vectors for the sequence
+```{r}
+# matrix
+data(BLOSUM50)
+
+# sequences
+s3 <- "PAWHEAE"
+s4 <- "HEAGAWGHEE"
+```
+
+
+Now do the alignments.
+```{r}
+globalAligns3s4 <- pairwiseAlignment(s3, s4,
+                                     substitutionMatrix = "BLOSUM50", 
+                                     gapOpening = -2,
+                                     gapExtension = -8, 
+                                     scoreOnly = FALSE)
+```
+
+Look at the results:
+```{r}
+globalAligns3s4 # Print out the optimal global alignment and its score
+```
+
+We set `gapOpening` to be -2 and `gapExtension` to be -8, which means that the first position of a gap is assigned a score of -8-2=-10, and every subsequent position in a gap is given a score of -8. This means that the gap will be given a score of -10-8-8 = -26.
+
+## Aligning UniProt sequences
+
+We discussed previously how you can search for UniProt accessions and retrieve the corresponding protein sequences, either via the UniProt website or using the `rentrez` package.
+
+In the examples given above, we learned how to retrieve the sequences for the chorismate lyase proteins from *Mycobacterium leprae* (UniProt Q9CD83) and *Mycobacterium ulcerans* (UniProt A0PQ23), and read them into R, and store them as vectors lepraeseq and ulceransseq.
+
+You can align these sequences using `pairwiseAlignment()` from the Biostrings package.
+
+As its input, the `pairwiseAlignment() `function requires that the sequences be in the form of a single string (e.g. “ACGTA”), rather than as a vector of characters (e.g. a vector with the first element as “A”, the second element as “C”, etc.). Therefore, to align the *M. leprae* and *M. ulcerans* chorismate lyase proteins, we first need to convert the vectors lepraeeq and ulceransseq into strings. We can do this using the `paste()` function:
+
+```{r}
+# convert leprae_vector to an object lepraeseq_string
+lepraeseq_string <-paste(leprae_vector,collapse = "")    
+
+# convert ulcerans_vector to an object ulceransseq_string
+ulceransseq_string <-paste(ulcerans_vector,collapse = "") 
+```
+
+Furthermore, pairwiseAlignment() requires that the sequences be stored as uppercase characters. Therefore, if they are not already in uppercase, we need to use the `toupper()` function to convert `lepraeseq_string` and `ulceransseq_string` to uppercase:
+
+```{r}
+lepraeseq_string   <- toupper(lepraeseq_string)
+ulceransseq_string <- toupper(ulceransseq_string)
+```
+
+
+Check the output
+```{r}
+lepraeseq_string # Print out the content of "lepraeseq_string"
+```
+
+
+We can now align the the *M. leprae* and *M. ulcerans* chorismate lyase protein sequences using the `pairwiseAlignment()` function:
+
+```{r}
+globalAlignLepraeUlcerans <- Biostrings::pairwiseAlignment(lepraeseq_string, 
+                                               ulceransseq_string,
+                                               substitutionMatrix = BLOSUM50, 
+                                               gapOpening = -2, 
+                                               gapExtension = -8, 
+                                               scoreOnly = FALSE)
+
+```
+
+The output:
+```{r}
+globalAlignLepraeUlcerans # Print out the optimal global alignment and its score
+```
+
+As the alignment is very long, when you type `globalAlignLepraeUlcerans`, you only see the start and the end of the alignment. Therefore, we need to have a function to print out the whole alignment (see below).
+
+## Viewing a long pairwise alignment
+
+If you want to view a long pairwise alignment such as that between the *M. leprae* and *M. ulerans* chorismate lyase proteins, it is convenient to print out the alignment in blocks.
+
+The R function `printPairwiseAlignment()` below will do this for you:
+
+```{r}
+printPairwiseAlignment(globalAlignLepraeUlcerans, 60)
+```
+
+The position in the protein of the amino acid that is at the end of each line of the printed alignment is shown after the end of the line. For example, the first line of the alignment above finishes at amino acid position 50 in the *M. leprae* protein and also at amino acid position 60 in the *M. ulcerans* protein.  Becaues there as a difference of 60-50 = 10 bases, there must be 10 insertions in the *M. leprae* to get it to line up.  Count the number of dashes in the sequence to see how many there are.
+
+<!--chapter:end:11c_alignment_global_protein.Rmd-->
 
 ---
 output: html_document
