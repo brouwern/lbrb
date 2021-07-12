@@ -1,0 +1,64 @@
+
+
+## Reading in a saved FASTA file
+
+We can read in FASTA files
+
+NOTE: this code needs to be updated to have a call to the compbio package itself
+
+```{r, echo = F, eval = F}
+fi. <- here::here("inst/extdata/dengueseq.fasta")
+# dengueseq <- seqinr::read.fasta(file = fi.,
+#                              seqtype  = "DNA",
+#                              as.string = FALSE)
+
+dengueseq_matrix <- ape::read.dna(file = here::here("inst/extdata/dengueseq.fasta"),
+              format = "fasta",
+              as.character = TRUE)
+```
+
+
+```{r, eval = F}
+dengueseq_matrix <- ape::read.dna(file = system.file("dengueseq.fasta"),
+              format = "fasta",
+              as.character = TRUE)
+```
+
+
+Note that reading it back in like this results in a change from its original format
+
+```{r, eval = F}
+class(dengueseq_matrix)
+```
+
+Now we have a matrix instead of a vector.  str() will give us a peak at it
+```{, eval = Fr}
+str(dengueseq_matrix)
+```
+
+Matrices are squares of data - how big is this square?
+
+```{r, eval = F}
+dim(dengueseq_matrix)
+```
+
+We have a 1 x 10737 matrix.
+
+To print out a certain subsequence of the sequence, we just need to type the name of the vector dengueseq_reload followed by the square brackets [ ] containing the **indices** for the nucleotides we want to see. For example, the following command prints out the first 50 nucleotides of the DEN-1 Dengue virus genome sequence:
+
+```{r, eval = F}
+dengueseq_matrix[1:50]
+```
+
+Note that dengueseq_matrix[1:50] refers to the elements of the vector dengueseq_matrix with indices from 1-50. These elements contain the first 50 nucleotides of the DEN-1 Dengue virus sequence.
+
+
+We can run table() on this 
+```{r, eval = F}
+table(dengueseq_matrix)
+```
+
+
+```{r}
+
+```

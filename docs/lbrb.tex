@@ -117,7 +117,7 @@
 
 \title{A Little Book of R for Bioinformatics 2.0}
 \author{Avirl Coghlan, with contributions by Nathan L. Brouwer}
-\date{2021-07-11}
+\date{2021-07-12}
 
 \begin{document}
 \maketitle
@@ -2255,7 +2255,7 @@ You can view the code that makes up a function by typing its name (without any p
 ##   output <- (20 + (x*x)) 
 ##   return(output)
 ##   }
-## <bytecode: 0x7fa839bffbd8>
+## <bytecode: 0x7fed4295e4e0>
 \end{verbatim}
 
 \hypertarget{comments-in-r}{%
@@ -2273,6 +2273,627 @@ When you are typing R, if you want to, you can write comments by writing the com
 \begin{verbatim}
 ## [1] 2
 \end{verbatim}
+
+\hypertarget{downloading-dna-sequences-as-fasta-files-in-r}{%
+\chapter{Downloading DNA sequences as FASTA files in R}\label{downloading-dna-sequences-as-fasta-files-in-r}}
+
+This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. Most of the text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
+
+\textbf{NOTE}: There is some reduncnacy in this current draft that needs to be eliminated.
+
+\hypertarget{functions-4}{%
+\subsection{Functions}\label{functions-4}}
+
+\begin{itemize}
+\tightlist
+\item
+  library()
+\item
+  help()
+\item
+  length
+\item
+  table
+\item
+  seqinr::GC()
+\item
+  seqinr::count()
+\item
+  seqinr::write.fasta()
+\end{itemize}
+
+\hypertarget{softwarewebsites}{%
+\subsection{Software/websites}\label{softwarewebsites}}
+
+\begin{itemize}
+\tightlist
+\item
+  www.ncbi.nlm.nih.gov
+\item
+  Text editors (e.g.~Notepad++, TextWrangler)
+\end{itemize}
+
+\hypertarget{r-vocabulary}{%
+\subsection{R vocabulary}\label{r-vocabulary}}
+
+\begin{itemize}
+\tightlist
+\item
+  list
+\item
+  library
+\item
+  package
+\item
+  CRAN
+\item
+  wrapper
+\end{itemize}
+
+\hypertarget{file-types}{%
+\subsection{File types}\label{file-types}}
+
+\begin{itemize}
+\tightlist
+\item
+  FASTA
+\end{itemize}
+
+\hypertarget{bioinformatics-vocabulary}{%
+\subsection{Bioinformatics vocabulary}\label{bioinformatics-vocabulary}}
+
+\begin{itemize}
+\tightlist
+\item
+  accession, accession number
+\item
+  NCBI
+\item
+  NCBI Sequence Database
+\item
+  EMBL Sequence Database
+\item
+  FASTA file
+\end{itemize}
+
+\hypertarget{organisms-and-sequence-accessions}{%
+\subsection{Organisms and Sequence accessions}\label{organisms-and-sequence-accessions}}
+
+\begin{itemize}
+\tightlist
+\item
+  Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4.
+\end{itemize}
+
+The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are NC\_001477, NC\_001474, NC\_001475 and NC\_002640, respectively.
+
+According to Wikipedia
+
+\begin{quote}
+``Dengue virus (DENV) is the cause of dengue fever. It is a mosquito-borne, single positive-stranded RNA virus \ldots{} Five serotypes of the virus have been found, all of which can cause the full spectrum of disease. Nevertheless, scientists' understanding of dengue virus may be simplistic, as rather than distinct \ldots{} groups, a continuum appears to exist.'' \url{https://en.wikipedia.org/wiki/Dengue_virus}
+\end{quote}
+
+\hypertarget{preliminaries-1}{%
+\subsection{Preliminaries}\label{preliminaries-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(rentrez)}
+\FunctionTok{library}\NormalTok{(compbio4all)  }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{dna-sequence-statistics-part-1}{%
+\section{DNA Sequence Statistics: Part 1}\label{dna-sequence-statistics-part-1}}
+
+\hypertarget{using-r-for-bioinformatics}{%
+\subsection{Using R for Bioinformatics}\label{using-r-for-bioinformatics}}
+
+The chapter will guide you through the process of using R to carry out simple analyses that are common in bioinformatics and computational biology. In particular, the focus is on computational analysis of biological sequence data such as genome sequences and protein sequences. The programming approaches, however, are broadly generalizable to statistics and data science.
+
+The tutorials assume that the reader has some basic knowledge of biology, but not necessarily of bioinformatics. The focus is to explain simple bioinformatics analysis, and to explain how to carry out these analyses using \emph{R}.
+
+\hypertarget{r-packages-for-bioinformatics-bioconductor-and-seqinr}{%
+\subsection{R packages for bioinformatics: Bioconductor and SeqinR}\label{r-packages-for-bioinformatics-bioconductor-and-seqinr}}
+
+Many authors have written \emph{R} packages for performing a wide variety of analyses. These do not come with the standard \emph{R} installation, but must be installed and loaded as ``add-ons''.
+
+Bioinformaticians have written numerous specialized packages for \emph{R}. In this tutorial, you will learn to use some of the function in the \href{https://cran.r-project.org/web/packages/seqinr/index.html}{\texttt{SeqinR}} package to to carry out simple analyses of DNA sequences. (\texttt{SeqinR} can retrieve sequences from a DNA sequence database, but this has largely been replaced by the functions in the package \texttt{rentrez})
+
+Many well-known bioinformatics packages for \emph{R} are in the Bioconductor set of \emph{R} packages (www.bioconductor.org), which contains packages with many \emph{R} functions for analyzing biological data sets such as microarray data. The \href{https://cran.r-project.org/web/packages/seqinr/index.html}{\texttt{SeqinR}} package is from CRAN, which contains R functions for obtaining sequences from DNA and protein sequence databases, and for analyzing DNA and protein sequences.
+
+We will also use functions from the \texttt{rentrez} and \texttt{ape} packages.
+
+Remember that you can ask for more information about a particular \emph{R} command by using the \texttt{help()} function. For example, to ask for more information about the \texttt{library()}, you can type:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{help}\NormalTok{(}\StringTok{"library"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+You can also do this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{?library}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{fasta-file-format}{%
+\subsection{FASTA file format}\label{fasta-file-format}}
+
+The FASTA format is a simple and widely used format for storing biological (e.g.~DNA or protein) sequences. It was first used by the \href{https://en.wikipedia.org/wiki/FASTA}{FASTA program} for sequence alignment in the 1980s and has been adopted as standard by many other programs.
+
+FASTA files begin with a single-line description starting with a greater-than sign \texttt{\textgreater{}} character, followed on the next line by the sequences. Here is an example of a FASTA file. (If you're looking at the source script for this lesson you'll see the \texttt{cat()} command, which is just a text display function used format the text when you run the code).
+
+\begin{verbatim}
+## >A06852 183 residues MPRLFSYLLGVWLLLSQLPREIPGQSTNDFIKACGRELVRLWVEICGSVSWGRTALSLEEPQLETGPPAETMPSSITKDAEILKMMLEFVPNLPQELKATLSERQPSLRELQQSASKDSNLNFEEFKKIILNRQNEAEDKSLLELKNLGLDKHSRKKRLFRMTLSEKCCQVGCIRKDIARLC
+\end{verbatim}
+
+\hypertarget{the-ncbi-sequence-database}{%
+\subsection{The NCBI sequence database}\label{the-ncbi-sequence-database}}
+
+The US \href{www.ncbi.nlm.nih.gov}{National Centre for Biotechnology Information (NCBI)} maintains the \textbf{NCBI Sequence Database}, a huge database of all the DNA and protein sequence data that has been collected. There are also similar databases in Europe, the \href{www.ebi.ac.uk/embl}{European Molecular Biology Laboratory (EMBL) Sequence Database}, and Japan, the \href{www.ddbj.nig.ac.jp}{DNA Data Bank of Japan (DDBJ)}. These three databases exchange data every night, so at any one point in time, they contain almost identical data.
+
+Each sequence in the NCBI Sequence Database is stored in a separate \textbf{record}, and is assigned a unique identifier that can be used to refer to that record. The identifier is known as an \textbf{accession}, and consists of a mixture of numbers and letters.
+
+For example, Dengue virus causes Dengue fever, which is classified as a \textbf{neglected tropical disease} by the World Health Organization (WHO), is classified by any one of four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are
+
+\begin{itemize}
+\tightlist
+\item
+  NC\_001477
+\item
+  NC\_001474
+\item
+  NC\_001475\\
+\item
+  NC\_002640
+\end{itemize}
+
+Note that because the NCBI Sequence Database, the EMBL Sequence Database, and DDBJ exchange data every night, the DEN-1 (and DEN-2, DEN-3, DEN-4) Dengue virus sequence are present in all three databases, but they have different accessions in each database, as they each use their own numbering systems for referring to their own sequence records.
+
+\hypertarget{retrieving-genome-sequence-data-using-rentrez}{%
+\subsection{Retrieving genome sequence data using rentrez}\label{retrieving-genome-sequence-data-using-rentrez}}
+
+You can retrieve sequence data from NCBI directly from \emph{R} using the \texttt{rentrez} package. The DEN-1 Dengue virus genome sequence has NCBI accession NC\_001477. To retrieve a sequence with a particular NCBI accession, you can use the function \texttt{entrez\_fetch()} from the \texttt{rentrez} package. Note that to be specific where the function comes from I write it as \texttt{package::function()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dengueseq\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"nucleotide"}\NormalTok{, }
+                          \AttributeTok{id =} \StringTok{"NC\_001477"}\NormalTok{, }
+                          \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Note that the ``\emph{" in the name is just an arbitrary way to separate two words. Another common format would be \texttt{dengueseq.fasta}. Some people like \texttt{dengueseqFasta}, called \textbf{camel case} because the capital letter makes a hump in the middle of the word. Underscores are becoming most common and are favored by developers associated with RStudio and the \textbf{tidyverse} of packages that many data scientists use. I switch between "." and "}'' as separators, usually favoring "\_" for function names and ``.'' for objects; I personally find camel case harder to read and to type.
+
+Ok, so what exactly have we done when we made \texttt{dengueseq\_fasta}? We have an R object \texttt{dengueseq\_fasta} which has the sequence linked to the accession number ``NC\_001477.'' So where is the sequence, and what is it?
+
+First, what is it?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is}\NormalTok{(dengueseq\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"           "vector"              "data.frameRowLabels"
+## [4] "SuperClassMethod"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(dengueseq\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+How big is it? Try the \texttt{dim()} and \texttt{length()} commands and see which one works. Do you know why one works and the other doesn't?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(dengueseq\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## NULL
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(dengueseq\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+
+The size of the object is 1. Why is this? This is the genomics sequence of a virus, so you'd expect it to be fairly large. We'll use another function below to explore that issue. Think about this first: how many pieces of unique information are in the \texttt{dengueseq} object? In what sense is there only \emph{one} piece of information?
+
+If we want to actually see the sequence we can type just type \texttt{dengueseq\_fasta} and press enter. This will print the WHOLE genomic sequence out but it will probably run of your screen.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dengueseq\_fasta}
+\end{Highlighting}
+\end{Shaded}
+
+This is a whole genome sequence, but its stored as single entry in a vector, so the \texttt{length()} command just tells us how many entries there are in the vector, which is just one! What this means is that the entire genomic sequence is stored in a single entry of the vector \texttt{dengueseq\_fasta}. (If you're not following along with this, no worries - its not essential to actually working with the data)
+
+If we want to actually know how long the sequence is, we need to use the function \texttt{nchar()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nchar}\NormalTok{(dengueseq\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10935
+\end{verbatim}
+
+The sequence is 10935 bases long. All of these bases are stored as a single \textbf{character string} with no spaces in a single entry of our \texttt{dengueseq\_fasta} vector. This isn't actually a useful format for us, so below were' going to convert it to something more useful.
+
+If we want to see just part of the sequence we can use the \texttt{strtrim()} function. Before you run the code below, predict what the 100 means.
+
+\begin{verbatim}
+## [1] ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAA"
+\end{verbatim}
+
+Note that at the end of the name is a slash followed by an n, which indicates to the computer that this is a \textbf{newline}; this is read by text editor, but is ignored by R in this context.
+
+\begin{verbatim}
+## [1] ">NC_001477.1 Dengue virus 1, complete genome\n"
+\end{verbatim}
+
+After the \texttt{\textbackslash{}\textbackslash{}n} begins the sequence, which will continue on for a LOOOOOONG way. Let's just print a little bit.
+
+\begin{verbatim}
+## [1] ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTT"
+\end{verbatim}
+
+Let's print some more. Do you notice anything beside A, T, C and G in the sequence?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{strtrim}\NormalTok{(dengueseq\_fasta, }\DecValTok{200}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTAACAGT\nTTTTTATTAGAGAGCAGATCTCTGATGAACAACCAACGGAAAAAGACGGGTCGACCGTCTTTCAATATGC\nTGAAACGCGCGAG"
+\end{verbatim}
+
+Again, there are the \texttt{\textbackslash{}\textbackslash{}n} newline characters, which tell text editors and wordprocessors how to display the file.
+
+Now that we a sense of what we're looking at let's explore the \texttt{dengueseq\_fasta} a bit more.
+
+We can find out more information about what it is using the \texttt{class()}command.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(dengueseq\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"
+\end{verbatim}
+
+As noted before, this is character data.
+
+Many things in R are vectors so we can ask \emph{R }\texttt{is.vector()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.vector}\NormalTok{(dengueseq\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+Yup, that's true.
+
+Ok, let's see what else. A handy though often verbose command is \texttt{is()}, which tells us what an object, well, what it is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is}\NormalTok{(dengueseq\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "character"           "vector"              "data.frameRowLabels"
+## [4] "SuperClassMethod"
+\end{verbatim}
+
+There is a lot here but if you scan for some key words you will see ``character'' and ``vector'' at the top. The other stuff you can ignore. The first two things, though, tell us the dengueseq\_fasta is a \textbf{vector} of the class \textbf{character}: that is, a \textbf{character vector}.
+
+Another handy function is \texttt{str()}, which gives us a peak at the context and structure of an \emph{R} object. This is most useful when you are working in the R console or with dataframes, but is a useful function to run on all \emph{R} objects. How does this output differ from other ways we've displayed dengueseq\_fasta?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(dengueseq\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  chr ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTA"| __truncated__
+\end{verbatim}
+
+We know it contains character data - how many characters? \texttt{nchar()} for ``number of characters'' answers that:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nchar}\NormalTok{(dengueseq\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10935
+\end{verbatim}
+
+\hypertarget{next-steps}{%
+\section{Next steps}\label{next-steps}}
+
+On their own, FASTA files in R are not directly useful. In the next lesson we'll process our \texttt{dengueseq\_fasta} file so that we can use it in analyses.
+
+\hypertarget{downloading-dna-sequences-as-fasta-files-in-r-1}{%
+\chapter{Downloading DNA sequences as FASTA files in R}\label{downloading-dna-sequences-as-fasta-files-in-r-1}}
+
+This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. Most of the text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(compbio4all)}
+\FunctionTok{library}\NormalTok{(stringr)}
+\FunctionTok{data}\NormalTok{(dengueseq\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{convert-fasta-sequence-to-an-r-variable}{%
+\section{Convert FASTA sequence to an R variable}\label{convert-fasta-sequence-to-an-r-variable}}
+
+We can't actually do much with the contents of the \texttt{dengueseq\_fasta} we downloaded with the \texttt{rentrez} package except read them. If we want do address some biological questions with the data we need is to convert it into a data structure \emph{R} can work with.
+
+There are several things we need to remove:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The \textbf{meta data} line \texttt{\textgreater{}NC\_001477.1\ Dengue\ virus\ 1,\ complete\ genome} (metadata is ``data'' about data, such as where it came from, what it is, who made it, etc.).
+\item
+  All the ``\textbackslash n'' that show up in the file (these are the \textbf{line breaks}).
+\item
+  Put each nucleotide of the sequence into its own spot in a vector.
+\end{enumerate}
+
+There are functions that can do this automatically, but
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  I haven't found one I like, and
+\item
+  walking through this will help you understand the types of operations you can do on text data.
+\end{enumerate}
+
+The first two steps involve removing things from the existing \textbf{character string} that contains the sequence. The third step will split the single continuous character string like ``AGTTGTTAGTCTACGT\ldots{}'' into a \textbf{character vector} like \texttt{c("A","G","T","T","G","T","T","A","G","T","C","T","A","C","G","T"...)}, where each element of the vector is a single character a stored in a separate slot in the vevtor.
+
+The second item is the easiest to take care of. \emph{R} and many programming languages have tools called \textbf{regular expressions} that allow you to manipulate text. R has a function called \texttt{gsub()} which allows you to substitute or delete character data from a string. First I'll remove all those \texttt{\textbackslash{}\textbackslash{}n} values.
+
+The regular expression function \texttt{gsub()} takes three arguments:
+1. \texttt{pattern\ =\ ...}. This is what we need it to find so we can replace it.
+1. \texttt{replacement\ =\ ...}. The replacement.
+1. \texttt{x\ =\ ...}. A character string or vector.
+
+We need to get rid of the \texttt{\textbackslash{}\textbackslash{}n} so that we are left with only A, T and G, which are the actually information of the sequence. We want \texttt{\textbackslash{}\textbackslash{}n} removed, so the replacement will be \texttt{""}, which is as set of quotation marks with nothing in the middle, which means ``delete the target pattern and put nothing in its place.''
+
+One thing that is tricky about regular expressions is that many characters have special meaning to the functions, such as slashes, dollar signs, and brackets. So, if you want to find and replace one of these specially designated characters you need to put a slash in front of them. So when we set the pattern, instead of setting the pattern to a slash before an n, we have to give it two slashes.
+
+Here is the regular expression to delete the newline characer \textbackslash n.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{\# note: we want to find all the \textbackslash{}n, but need to set the pattern as \textbackslash{}\textbackslash{}n}
+\NormalTok{dengueseq\_vector }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{n"}\NormalTok{,  }
+                         \AttributeTok{replacement =} \StringTok{""}\NormalTok{, }
+                         \AttributeTok{x =}\NormalTok{ dengueseq\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+We can use strtrim() to see if it worked
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{strtrim}\NormalTok{(dengueseq\_vector, }\DecValTok{80}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] ">NC_001477.1 Dengue virus 1, complete genomeAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTC"
+\end{verbatim}
+
+Now for the metadata header. This is a bit complex, but the following code is going to take all the that occurs before the beginning of the sequence (``AGTTGTTAGTC'') and delete it.
+
+First, I'll define what I want to get rid of in an \emph{R} object
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq.header }\OtherTok{\textless{}{-}} \StringTok{"\textgreater{}NC\_001477.1 Dengue virus 1, complete genome"}
+\end{Highlighting}
+\end{Shaded}
+
+Now I'll get rid of it with \texttt{gsub()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dengueseq\_vector }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(seq.header,}\StringTok{""}\NormalTok{, dengueseq\_vector)}
+\end{Highlighting}
+\end{Shaded}
+
+See if it worked:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{strtrim}\NormalTok{(dengueseq\_vector, }\DecValTok{80}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "AGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTAACAGTTTTTTATTAG"
+\end{verbatim}
+
+Now the more complex part. We need to split up a continuous, unborken string of letters into a vector wher each letter is on its own. This can be done with the \texttt{str\_split()} function (``string split'') from the \texttt{stringr} package. The notation \texttt{stringr::str\_split()} mean ``use the \texttt{str\_split} function from from the \texttt{stringr} package.'' More specifically, it temporarily loads the stringr package and gives R access to just the str\_split function. These allows you to call a single function without loading the whole library.
+
+There are several arguments to \texttt{str\_split}, and I've tacked a \texttt{{[}{[}1{]}{]}} on to the end.
+
+First, run the command
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dengueseq\_vector\_split }\OtherTok{\textless{}{-}}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_split}\NormalTok{(dengueseq\_vector,}
+                                       \AttributeTok{pattern =} \StringTok{""}\NormalTok{,}
+                                       \AttributeTok{simplify =} \ConstantTok{FALSE}\NormalTok{)[[}\DecValTok{1}\NormalTok{]]}
+\end{Highlighting}
+\end{Shaded}
+
+Look at the output with str()
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(dengueseq\_vector\_split)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  chr [1:10735] "A" "G" "T" "T" "G" "T" "T" "A" "G" "T" "C" "T" "A" "C" "G" ...
+\end{verbatim}
+
+We can explore what the different arguments do by modifying them. Change pattern = "" to pattern = ``A''. Can you figure out what happened?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# re{-}run the command without "pattern  = ""}
+\NormalTok{dengueseq\_vector\_split2 }\OtherTok{\textless{}{-}}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_split}\NormalTok{(dengueseq\_vector,}
+                                       \AttributeTok{pattern =} \StringTok{"A"}\NormalTok{,}
+                                       \AttributeTok{simplify =} \ConstantTok{FALSE}\NormalTok{)[[}\DecValTok{1}\NormalTok{]]}
+\FunctionTok{str}\NormalTok{(dengueseq\_vector\_split2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  chr [1:3427] "" "GTTGTT" "GTCT" "CGTGG" "CCG" "C" "" "G" "" "C" "GTTTCG" ...
+\end{verbatim}
+
+Run this code (don't worry what it does). Does this help you see what's up?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{options}\NormalTok{(}\AttributeTok{str =} \FunctionTok{strOptions}\NormalTok{(}\AttributeTok{vec.len =} \DecValTok{10}\NormalTok{))}
+\FunctionTok{str}\NormalTok{(}\FunctionTok{list}\NormalTok{(dengueseq\_vector\_split[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{],}
+\NormalTok{     dengueseq\_vector\_split2[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{]))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## List of 2
+##  $ : chr [1:20] "A" "G" "T" "T" "G" "T" "T" "A" "G" "T" ...
+##  $ : chr [1:10] "" "GTTGTT" "GTCT" "CGTGG" "CCG" "C" "" "G" "" "C"
+\end{verbatim}
+
+So, what does the \texttt{pattern\ =\ ...} argument do?
+
+Something cool which we will explore in the next exercise is that we can do summaries on vectors of nucleotides, like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(dengueseq\_vector\_split)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## dengueseq_vector_split
+##    A    C    G    T 
+## 3426 2240 2770 2299
+\end{verbatim}
+
+\hypertarget{saving-fasta-files}{%
+\section{Saving FASTA files}\label{saving-fasta-files}}
+
+We can save our data as .fasta file for safe keeping
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{write}\NormalTok{(dengueseq\_fasta, }\AttributeTok{file=}\StringTok{"dengueseq.fasta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{reading-in-fasta-files}{%
+\section{Reading in FASTA files}\label{reading-in-fasta-files}}
+
+We can read in FASTA files
+
+NOTE: this code needs to be updated to have a call to the compbio package itself
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dengueseq\_matrix }\OtherTok{\textless{}{-}}\NormalTok{ ape}\SpecialCharTok{::}\FunctionTok{read.dna}\NormalTok{(}\AttributeTok{file =} \FunctionTok{system.file}\NormalTok{(}\StringTok{"dengueseq.fasta"}\NormalTok{),}
+              \AttributeTok{format =} \StringTok{"fasta"}\NormalTok{,}
+              \AttributeTok{as.character =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Note that reading it back in like this results in a change from its original format
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(dengueseq\_matrix)}
+\end{Highlighting}
+\end{Shaded}
+
+Now we have a matrix instead of a vector. str() will give us a peak at it
+\texttt{\{,\ eval\ =\ Fr\}\ str(dengueseq\_matrix)}
+
+Matrices are squares of data - how big is this square?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(dengueseq\_matrix)}
+\end{Highlighting}
+\end{Shaded}
+
+We have a 1 x 10737 matrix.
+
+To print out a certain subsequence of the sequence, we just need to type the name of the vector dengueseq\_reload followed by the square brackets {[} {]} containing the \textbf{indices} for the nucleotides we want to see. For example, the following command prints out the first 50 nucleotides of the DEN-1 Dengue virus genome sequence:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dengueseq\_matrix[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{50}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+Note that dengueseq\_matrix{[}1:50{]} refers to the elements of the vector dengueseq\_matrix with indices from 1-50. These elements contain the first 50 nucleotides of the DEN-1 Dengue virus sequence.
+
+We can run table() on this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(dengueseq\_matrix)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{part-appendices}{%
 \part{Appendices}\label{part-appendices}}
@@ -2679,7 +3300,7 @@ Some functions in R can be executed within nothing in the parentheses.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Sun Jul 11 15:08:56 2021"
+## [1] "Mon Jul 12 09:58:44 2021"
 \end{verbatim}
 
 \textbf{Exponents}

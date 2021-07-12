@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Downloading R | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Chapter 13 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Downloading R | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Chapter 13 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Downloading R | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Chapter 13 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="installing-the-rstudio-ide.html"/>
+<link rel="prev" href="downloading-dna-sequences-as-fasta-files-in-r.html"/>
+<link rel="next" href="appendix-01-getting-access-to-r.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -332,65 +332,116 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="downloading-r" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Downloading R</h1>
-<p><strong>By</strong>: Avril Coghlan</p>
-<p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer (<a href="mailto:brouwern@gmail.com" class="email">brouwern@gmail.com</a>) under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
-<div id="preface" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Preface</h2>
-<p>The following introduction to <em>R</em> is based on the first part of <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html">“How to install <em>R</em> and a Brief Introduction to R”</a> by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>. For additional information see the Appendices and <a href="https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html">“Getting <em>R</em> onto your computer”</a>.</p>
-<!-- TODO: Update links to send to Comp Bio 4 All -->
-</div>
-<div id="introduction-to-r" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Introduction to R</h2>
-<p><em>R</em> (www.r-project.org) is a commonly used free statistics software. <em>R</em> allows you to carry out statistical analyses in an interactive mode, as well as allowing programming.</p>
-</div>
-<div id="installing-r" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Installing R</h2>
-<p>To use R, you first need to install the <em>R</em> program on your computer.</p>
-<div id="installing-r-on-a-windows-pc" class="section level3" number="1.3.1">
-<h3><span class="header-section-number">1.3.1</span> Installing <em>R</em> on a Windows PC</h3>
-<p>These instructions will focus on installing <em>R</em> on a Windows PC. However, I will also briefly mention how to install <em>R</em> on a Macintosh or Linux computer (see below).</p>
-<p><strong>These steps have not been checked as of 8/13/2019 so there may be small variations in what the prompts are. Installing R, however, is basically that same as any other program. Clicking “Yes” etc on everything should work.</strong></p>
-<blockquote>
-<p><strong>PROTIP:</strong> Even if you have used <em>R</em> before its good to regularly update it to avoid conflicts with recently produced software.</p>
-</blockquote>
-<p>Minor updates of <em>R</em> are made very regularly (approximately every 6 months), as <em>R</em> is actively being improved all the time. It is worthwhile installing new versions of <em>R</em> a couple times a year, to make sure that you have a recent version of <em>R</em> (to ensure compatibility with all the latest versions of the <em>R</em> packages that you have downloaded).</p>
-<p>To install <em>R</em> on your <strong>Windows</strong> computer, follow these steps:</p>
+<div id="downloading-dna-sequences-as-fasta-files-in-r-1" class="section level1" number="13">
+<h1><span class="header-section-number">Chapter 13</span> Downloading DNA sequences as FASTA files in R</h1>
+<p>This is a modification of <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html">“DNA Sequence Statistics”</a> from Avril Coghlan’s <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html"><em>A little book of R for bioinformatics.</em></a>. Most of the text and code was originally written by Dr. Coghlan and distributed under the <a href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons 3.0</a> license.</p>
+<!-- how much is sequinr actually useD? -->
+<!-- download stringr -->
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span>
+<span id="cb227-2"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb227-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb227-3"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb227-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(dengueseq_fasta)</span></code></pre></div>
+<div id="convert-fasta-sequence-to-an-r-variable" class="section level2" number="13.1">
+<h2><span class="header-section-number">13.1</span> Convert FASTA sequence to an R variable</h2>
+<p>We can’t actually do much with the contents of the <code>dengueseq_fasta</code> we downloaded with the <code>rentrez</code> package except read them. If we want do address some biological questions with the data we need is to convert it into a data structure <em>R</em> can work with.</p>
+<p>There are several things we need to remove:</p>
 <ol style="list-style-type: decimal">
-<li>Go to <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></li>
-<li>Under “Download and Install R,” click on the “Windows” link.</li>
-<li>Under “Subdirectories,” click on the <strong>“base”</strong> link.</li>
-<li>On the next page, you should see a link saying something like “Download <em>R</em> 4.1.0 for Windows” (or <em>R</em> X.X.X, where X.X.X gives the version of the program). Click on this link.</li>
-<li>You may be asked if you want to save or run a file “R-x.x.x-win32.exe.” Choose “Save” and save the file. Then double-click on the icon for the file to run it.</li>
-<li>You will be asked what language to install it in.</li>
-<li>The <em>R</em> Setup Wizard will appear in a window. Click “Next” at the bottom of the <em>R</em> Setup wizard window.</li>
-<li>The next page says “Information” at the top. Click “Next” again.</li>
-<li>The next page says “Select Destination Location” at the top. By default, it will suggest to install <em>R</em> on the C drive in the “Program Files” directory on your computer.</li>
-<li>Click “Next” at the bottom of the <em>R</em> Setup wizard window.</li>
-<li>The next page says “Select components” at the top. Click “Next” again.</li>
-<li>The next page says “Startup options” at the top. Click “Next” again.</li>
-<li>The next page says “Select start menu folder” at the top. Click “Next” again.</li>
-<li>The next page says “Select additional tasks” at the top. Click “Next” again.</li>
-<li><em>R</em> should now be installing. This will take about a minute. When <em>R</em> has finished, you will see “Completing the <em>R</em> for Windows Setup Wizard” appear. Click “Finish.”</li>
-<li>To start R, you can do one of the following steps:</li>
-<li>Check if there is an “R” icon on the desktop of the computer that you are using. If so, double-click on the “R” icon to start R. If you cannot find an “R” icon, try the next step instead.</li>
-<li>Click on the “Start” button at the bottom left of your computer screen, and then choose “All programs,” and start <em>R</em> by selecting “R” (or <em>R</em> X.X.X, where X.X.X gives the version of R) from the menu of programs.</li>
-<li>The <em>R</em> console (a rectangle) should pop up:</li>
+<li>The <strong>meta data</strong> line <code>&gt;NC_001477.1 Dengue virus 1, complete genome</code> (metadata is “data” about data, such as where it came from, what it is, who made it, etc.).</li>
+<li>All the “\n” that show up in the file (these are the <strong>line breaks</strong>).</li>
+<li>Put each nucleotide of the sequence into its own spot in a vector.</li>
 </ol>
+<p>There are functions that can do this automatically, but</p>
+<ol style="list-style-type: decimal">
+<li>I haven’t found one I like, and</li>
+<li>walking through this will help you understand the types of operations you can do on text data.</li>
+</ol>
+<p>The first two steps involve removing things from the existing <strong>character string</strong> that contains the sequence. The third step will split the single continuous character string like “AGTTGTTAGTCTACGT…” into a <strong>character vector</strong> like <code>c("A","G","T","T","G","T","T","A","G","T","C","T","A","C","G","T"...)</code>, where each element of the vector is a single character a stored in a separate slot in the vevtor.</p>
+<p>The second item is the easiest to take care of. <em>R</em> and many programming languages have tools called <strong>regular expressions</strong> that allow you to manipulate text. R has a function called <code>gsub()</code> which allows you to substitute or delete character data from a string. First I’ll remove all those <code>\\n</code> values.</p>
+<p>The regular expression function <code>gsub()</code> takes three arguments:
+1. <code>pattern = ...</code>. This is what we need it to find so we can replace it.
+1. <code>replacement = ...</code>. The replacement.
+1. <code>x = ...</code>. A character string or vector.</p>
+<!-- TODO: check that this is rendering correcting with the number of slashes -->
+<p>We need to get rid of the <code>\\n</code> so that we are left with only A, T and G, which are the actually information of the sequence. We want <code>\\n</code> removed, so the replacement will be <code>""</code>, which is as set of quotation marks with nothing in the middle, which means “delete the target pattern and put nothing in its place.”</p>
+<p>One thing that is tricky about regular expressions is that many characters have special meaning to the functions, such as slashes, dollar signs, and brackets. So, if you want to find and replace one of these specially designated characters you need to put a slash in front of them. So when we set the pattern, instead of setting the pattern to a slash before an n, we have to give it two slashes.</p>
+<p>Here is the regular expression to delete the newline characer \n.</p>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb228-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># note: we want to find all the \n, but need to set the pattern as \\n</span></span>
+<span id="cb228-2"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb228-2" aria-hidden="true" tabindex="-1"></a>dengueseq_vector <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">n&quot;</span>,  </span>
+<span id="cb228-3"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb228-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">replacement =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb228-4"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb228-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">x =</span> dengueseq_fasta)</span></code></pre></div>
+<p>We can use <code>strtrim()</code> to see if it worked</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strtrim</span>(dengueseq_vector, <span class="dv">80</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;&gt;NC_001477.1 Dengue virus 1, complete genomeAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTC&quot;</code></pre>
+<p>Now for the metadata header. This is a bit complex, but the following code is going to take all the that occurs before the beginning of the sequence (“AGTTGTTAGTC”) and delete it.</p>
+<p>First, I’ll define what I want to get rid of in an <em>R</em> object. This will make the <strong>call</strong> to <code>gsub()</code> a little cleaner to read</p>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb231-1" aria-hidden="true" tabindex="-1"></a>seq.header <span class="ot">&lt;-</span> <span class="st">&quot;&gt;NC_001477.1 Dengue virus 1, complete genome&quot;</span></span></code></pre></div>
+<p>Now I’ll get rid of the header with with <code>gsub()</code>.</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb232-1" aria-hidden="true" tabindex="-1"></a>dengueseq_vector <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="at">pattern =</span> seq.header, <span class="co"># defined above</span></span>
+<span id="cb232-2"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb232-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">replacement =</span> <span class="st">&quot;&quot;</span>, </span>
+<span id="cb232-3"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb232-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">x =</span> dengueseq_vector)</span></code></pre></div>
+<p>See if it worked:</p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strtrim</span>(dengueseq_vector, <span class="dv">80</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;AGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTAACAGTTTTTTATTAG&quot;</code></pre>
+<p>Now the more complex part. We need to split up a continuous, unborken string of letters into a vector wher each letter is on its own. This can be done with the <code>str_split()</code> function (“string split”) from the <code>stringr</code> package. The notation <code>stringr::str_split()</code> mean “use the <code>str_split</code> function from from the <code>stringr</code> package.” More specifically, it temporarily loads the stringr package and gives R access to just the str_split function. These allows you to call a single function without loading the whole library.</p>
+<p>There are several arguments to <code>str_split</code>, and I’ve tacked a <code>[[1]]</code> on to the end.</p>
+<p>First, run the command</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb235-1" aria-hidden="true" tabindex="-1"></a>dengueseq_vector_split <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_split</span>(dengueseq_vector,</span>
+<span id="cb235-2"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb235-2" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">pattern =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb235-3"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb235-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">simplify =</span> <span class="cn">FALSE</span>)[[<span class="dv">1</span>]]</span></code></pre></div>
+<p>Look at the output with str()</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dengueseq_vector_split)</span></code></pre></div>
+<pre><code>##  chr [1:10735] &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;C&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot; ...</code></pre>
+<p>We can explore what the different arguments do by modifying them. Change pattern = "" to pattern = “A.” Can you figure out what happened?</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="co"># re-run the command without &quot;pattern  = &quot;&quot;</span></span>
+<span id="cb238-2"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb238-2" aria-hidden="true" tabindex="-1"></a>dengueseq_vector_split2 <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_split</span>(dengueseq_vector,</span>
+<span id="cb238-3"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb238-3" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">pattern =</span> <span class="st">&quot;A&quot;</span>,</span>
+<span id="cb238-4"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb238-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">simplify =</span> <span class="cn">FALSE</span>)[[<span class="dv">1</span>]]</span>
+<span id="cb238-5"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb238-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dengueseq_vector_split2)</span></code></pre></div>
+<pre><code>##  chr [1:3427] &quot;&quot; &quot;GTTGTT&quot; &quot;GTCT&quot; &quot;CGTGG&quot; &quot;CCG&quot; &quot;C&quot; &quot;&quot; &quot;G&quot; &quot;&quot; &quot;C&quot; &quot;GTTTCG&quot; &quot;&quot; &quot;TCGG&quot; &quot;&quot; ...</code></pre>
+<p>Run this code (don’t worry what it does). Does this help you see what’s up?</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">str =</span> <span class="fu">strOptions</span>(<span class="at">vec.len =</span> <span class="dv">10</span>))</span>
+<span id="cb240-2"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb240-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">list</span>(dengueseq_vector_split[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>],</span>
+<span id="cb240-3"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb240-3" aria-hidden="true" tabindex="-1"></a>     dengueseq_vector_split2[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]))</span></code></pre></div>
+<pre><code>## List of 2
+##  $ : chr [1:20] &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; ...
+##  $ : chr [1:10] &quot;&quot; &quot;GTTGTT&quot; &quot;GTCT&quot; &quot;CGTGG&quot; &quot;CCG&quot; &quot;C&quot; &quot;&quot; &quot;G&quot; &quot;&quot; &quot;C&quot;</code></pre>
+<p>So, what does the <code>pattern = ...</code> argument do?</p>
+<p>Something cool which we will explore in the next exercise is that we can do summaries on vectors of nucleotides, like this:</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dengueseq_vector_split)</span></code></pre></div>
+<pre><code>## dengueseq_vector_split
+##    A    C    G    T 
+## 3426 2240 2770 2299</code></pre>
 </div>
-<div id="how-to-install-r-on-non-windows-computers-eg.-macintosh-or-linux-computers" class="section level3" number="1.3.2">
-<h3><span class="header-section-number">1.3.2</span> How to install <em>R</em> on non-Windows computers (eg. Macintosh or Linux computers)</h3>
-<p><strong>These steps have not been checked as of 8/13/2019 so there may be small variations in what the prompts are. Installing R, however, is basically that same as any other program. Clicking “Yes” etc on everything should work.</strong></p>
-<p>The instructions above are for installing <em>R</em> on a Windows PC. If you want to install <em>R</em> on a computer that has a non-Windows operating system (for example, a Macintosh or computer running Linux, you should download the appropriate <em>R</em> installer for that operating system at <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a> and follow the <em>R</em> installation instructions for the appropriate operating system at <a href="https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-can-R-be-installed_003f" class="uri">https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-can-R-be-installed_003f</a> .</p>
+<div id="saving-fasta-files" class="section level2" number="13.2">
+<h2><span class="header-section-number">13.2</span> Saving FASTA files</h2>
+<p>We can save our data as .fasta file for safe keeping</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write</span>(dengueseq_fasta, <span class="at">file=</span><span class="st">&quot;dengueseq.fasta&quot;</span>)</span></code></pre></div>
 </div>
-</div>
-<div id="starting-r" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Starting <em>R</em></h2>
-<p>To start R, Check if there is an <em>R</em> icon on the desktop of the computer that you are using. If so, double-click on the <em>R</em> icon to start <em>R</em>. If you cannot find an <em>R</em> icon, try the next step instead.</p>
-<p>You can also start <em>R</em> from the Start menu in Windows. Click on the “Start” button at the bottom left of your computer screen, and then choose “All programs,” and start <em>R</em> by selecting “R” (or <em>R</em> X.X.X, where X.X.X gives the version of R, e.g.. <em>R</em> 2.10.0) from the menu of programs.</p>
-<p>Say “Hi” to <em>R</em> and take a quick look at how it looks. Now say “Goodbye,” because we will never actually do any work in this version of <em>R</em>; instead, we’ll use the <strong>RStudio IDE (integrated development environment)</strong>.</p>
+<div id="reading-in-fasta-files" class="section level2" number="13.3">
+<h2><span class="header-section-number">13.3</span> Reading in FASTA files</h2>
+<p>We can read in FASTA files</p>
+<p>NOTE: this code needs to be updated to have a call to the compbio package itself</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb245-1" aria-hidden="true" tabindex="-1"></a>dengueseq_matrix <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">read.dna</span>(<span class="at">file =</span> <span class="fu">system.file</span>(<span class="st">&quot;dengueseq.fasta&quot;</span>),</span>
+<span id="cb245-2"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb245-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">format =</span> <span class="st">&quot;fasta&quot;</span>,</span>
+<span id="cb245-3"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb245-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">as.character =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Note that reading it back in like this results in a change from its original format</p>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dengueseq_matrix)</span></code></pre></div>
+<p>Now we have a matrix instead of a vector. str() will give us a peak at it
+<code>{, eval = Fr} str(dengueseq_matrix)</code></p>
+<p>Matrices are squares of data - how big is this square?</p>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(dengueseq_matrix)</span></code></pre></div>
+<p>We have a 1 x 10737 matrix.</p>
+<p>To print out a certain subsequence of the sequence, we just need to type the name of the vector dengueseq_reload followed by the square brackets [ ] containing the <strong>indices</strong> for the nucleotides we want to see. For example, the following command prints out the first 50 nucleotides of the DEN-1 Dengue virus genome sequence:</p>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb248-1" aria-hidden="true" tabindex="-1"></a>dengueseq_matrix[<span class="dv">1</span><span class="sc">:</span><span class="dv">50</span>]</span></code></pre></div>
+<p>Note that dengueseq_matrix[1:50] refers to the elements of the vector dengueseq_matrix with indices from 1-50. These elements contain the first 50 nucleotides of the DEN-1 Dengue virus sequence.</p>
+<p>We can run table() on this</p>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dengueseq_matrix)</span></code></pre></div>
 
+</div>
+</div>
+
+
+
+<h3 class="unnumbered"></h3>
 </div>
 </div>
             </section>
@@ -398,8 +449,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="installing-the-rstudio-ide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="downloading-dna-sequences-as-fasta-files-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix-01-getting-access-to-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -431,7 +482,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/brouwern/lbrb/edit/master/02-downloading_R_AC01-1.Rmd",
+"link": "https://github.com/brouwern/lbrb/edit/master/10-downloading_DNA_seq_in_R-AC03-01.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -439,7 +490,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/brouwern/lbrb/blob/master/02-downloading_R_AC01-1.Rmd",
+"link": "https://github.com/brouwern/lbrb/blob/master/10-downloading_DNA_seq_in_R-AC03-01.Rmd",
 "text": null
 },
 "download": ["lbrb.pdf", "lbrb.epub"],

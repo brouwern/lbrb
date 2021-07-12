@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Downloading R | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Chapter 12 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Downloading R | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Chapter 12 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Downloading R | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Chapter 12 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
-<link rel="next" href="installing-the-rstudio-ide.html"/>
+<link rel="prev" href="programming-in-r-functions.html"/>
+<link rel="next" href="downloading-dna-sequences-as-fasta-files-in-r-1.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -332,64 +332,178 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="downloading-r" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Downloading R</h1>
-<p><strong>By</strong>: Avril Coghlan</p>
-<p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer (<a href="mailto:brouwern@gmail.com" class="email">brouwern@gmail.com</a>) under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
-<div id="preface" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Preface</h2>
-<p>The following introduction to <em>R</em> is based on the first part of <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html">“How to install <em>R</em> and a Brief Introduction to R”</a> by Avril Coghlan, which was released under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>. For additional information see the Appendices and <a href="https://brouwern.github.io/BOOK_R_Ecological_Data_Science/getting-r-onto-your-computer.html">“Getting <em>R</em> onto your computer”</a>.</p>
-<!-- TODO: Update links to send to Comp Bio 4 All -->
+<div id="downloading-dna-sequences-as-fasta-files-in-r" class="section level1" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Downloading DNA sequences as FASTA files in R</h1>
+<p>This is a modification of <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html">“DNA Sequence Statistics”</a> from Avril Coghlan’s <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html"><em>A little book of R for bioinformatics.</em></a>. Most of the text and code was originally written by Dr. Coghlan and distributed under the <a href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons 3.0</a> license.</p>
+<!-- how much is sequinr actually useD? -->
+<p><strong>NOTE</strong>: There is some reduncnacy in this current draft that needs to be eliminated.</p>
+<div id="functions-4" class="section level3" number="12.0.1">
+<h3><span class="header-section-number">12.0.1</span> Functions</h3>
+<ul>
+<li>library()</li>
+<li>help()</li>
+<li>length</li>
+<li>table</li>
+<li>seqinr::GC()</li>
+<li>seqinr::count()</li>
+<li>seqinr::write.fasta()</li>
+</ul>
 </div>
-<div id="introduction-to-r" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Introduction to R</h2>
-<p><em>R</em> (www.r-project.org) is a commonly used free statistics software. <em>R</em> allows you to carry out statistical analyses in an interactive mode, as well as allowing programming.</p>
+<div id="softwarewebsites" class="section level3" number="12.0.2">
+<h3><span class="header-section-number">12.0.2</span> Software/websites</h3>
+<ul>
+<li>www.ncbi.nlm.nih.gov</li>
+<li>Text editors (e.g. Notepad++, TextWrangler)</li>
+</ul>
 </div>
-<div id="installing-r" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Installing R</h2>
-<p>To use R, you first need to install the <em>R</em> program on your computer.</p>
-<div id="installing-r-on-a-windows-pc" class="section level3" number="1.3.1">
-<h3><span class="header-section-number">1.3.1</span> Installing <em>R</em> on a Windows PC</h3>
-<p>These instructions will focus on installing <em>R</em> on a Windows PC. However, I will also briefly mention how to install <em>R</em> on a Macintosh or Linux computer (see below).</p>
-<p><strong>These steps have not been checked as of 8/13/2019 so there may be small variations in what the prompts are. Installing R, however, is basically that same as any other program. Clicking “Yes” etc on everything should work.</strong></p>
+<div id="r-vocabulary" class="section level3" number="12.0.3">
+<h3><span class="header-section-number">12.0.3</span> R vocabulary</h3>
+<ul>
+<li>list</li>
+<li>library</li>
+<li>package</li>
+<li>CRAN</li>
+<li>wrapper</li>
+</ul>
+</div>
+<div id="file-types" class="section level3" number="12.0.4">
+<h3><span class="header-section-number">12.0.4</span> File types</h3>
+<ul>
+<li>FASTA</li>
+</ul>
+</div>
+<div id="bioinformatics-vocabulary" class="section level3" number="12.0.5">
+<h3><span class="header-section-number">12.0.5</span> Bioinformatics vocabulary</h3>
+<ul>
+<li>accession, accession number</li>
+<li>NCBI</li>
+<li>NCBI Sequence Database</li>
+<li>EMBL Sequence Database</li>
+<li>FASTA file</li>
+</ul>
+</div>
+<div id="organisms-and-sequence-accessions" class="section level3" number="12.0.6">
+<h3><span class="header-section-number">12.0.6</span> Organisms and Sequence accessions</h3>
+<ul>
+<li>Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4.</li>
+</ul>
+<p>The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are NC_001477, NC_001474, NC_001475 and NC_002640, respectively.</p>
+<p>According to Wikipedia</p>
 <blockquote>
-<p><strong>PROTIP:</strong> Even if you have used <em>R</em> before its good to regularly update it to avoid conflicts with recently produced software.</p>
+<p>“Dengue virus (DENV) is the cause of dengue fever. It is a mosquito-borne, single positive-stranded RNA virus … Five serotypes of the virus have been found, all of which can cause the full spectrum of disease. Nevertheless, scientists’ understanding of dengue virus may be simplistic, as rather than distinct … groups, a continuum appears to exist.” <a href="https://en.wikipedia.org/wiki/Dengue_virus" class="uri">https://en.wikipedia.org/wiki/Dengue_virus</a></p>
 </blockquote>
-<p>Minor updates of <em>R</em> are made very regularly (approximately every 6 months), as <em>R</em> is actively being improved all the time. It is worthwhile installing new versions of <em>R</em> a couple times a year, to make sure that you have a recent version of <em>R</em> (to ensure compatibility with all the latest versions of the <em>R</em> packages that you have downloaded).</p>
-<p>To install <em>R</em> on your <strong>Windows</strong> computer, follow these steps:</p>
-<ol style="list-style-type: decimal">
-<li>Go to <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a></li>
-<li>Under “Download and Install R,” click on the “Windows” link.</li>
-<li>Under “Subdirectories,” click on the <strong>“base”</strong> link.</li>
-<li>On the next page, you should see a link saying something like “Download <em>R</em> 4.1.0 for Windows” (or <em>R</em> X.X.X, where X.X.X gives the version of the program). Click on this link.</li>
-<li>You may be asked if you want to save or run a file “R-x.x.x-win32.exe.” Choose “Save” and save the file. Then double-click on the icon for the file to run it.</li>
-<li>You will be asked what language to install it in.</li>
-<li>The <em>R</em> Setup Wizard will appear in a window. Click “Next” at the bottom of the <em>R</em> Setup wizard window.</li>
-<li>The next page says “Information” at the top. Click “Next” again.</li>
-<li>The next page says “Select Destination Location” at the top. By default, it will suggest to install <em>R</em> on the C drive in the “Program Files” directory on your computer.</li>
-<li>Click “Next” at the bottom of the <em>R</em> Setup wizard window.</li>
-<li>The next page says “Select components” at the top. Click “Next” again.</li>
-<li>The next page says “Startup options” at the top. Click “Next” again.</li>
-<li>The next page says “Select start menu folder” at the top. Click “Next” again.</li>
-<li>The next page says “Select additional tasks” at the top. Click “Next” again.</li>
-<li><em>R</em> should now be installing. This will take about a minute. When <em>R</em> has finished, you will see “Completing the <em>R</em> for Windows Setup Wizard” appear. Click “Finish.”</li>
-<li>To start R, you can do one of the following steps:</li>
-<li>Check if there is an “R” icon on the desktop of the computer that you are using. If so, double-click on the “R” icon to start R. If you cannot find an “R” icon, try the next step instead.</li>
-<li>Click on the “Start” button at the bottom left of your computer screen, and then choose “All programs,” and start <em>R</em> by selecting “R” (or <em>R</em> X.X.X, where X.X.X gives the version of R) from the menu of programs.</li>
-<li>The <em>R</em> console (a rectangle) should pop up:</li>
-</ol>
 </div>
-<div id="how-to-install-r-on-non-windows-computers-eg.-macintosh-or-linux-computers" class="section level3" number="1.3.2">
-<h3><span class="header-section-number">1.3.2</span> How to install <em>R</em> on non-Windows computers (eg. Macintosh or Linux computers)</h3>
-<p><strong>These steps have not been checked as of 8/13/2019 so there may be small variations in what the prompts are. Installing R, however, is basically that same as any other program. Clicking “Yes” etc on everything should work.</strong></p>
-<p>The instructions above are for installing <em>R</em> on a Windows PC. If you want to install <em>R</em> on a computer that has a non-Windows operating system (for example, a Macintosh or computer running Linux, you should download the appropriate <em>R</em> installer for that operating system at <a href="https://cran.r-project.org/" class="uri">https://cran.r-project.org/</a> and follow the <em>R</em> installation instructions for the appropriate operating system at <a href="https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-can-R-be-installed_003f" class="uri">https://cran.r-project.org/doc/FAQ/R-FAQ.html#How-can-R-be-installed_003f</a> .</p>
+<div id="preliminaries-1" class="section level3" number="12.0.7">
+<h3><span class="header-section-number">12.0.7</span> Preliminaries</h3>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rentrez)</span>
+<span id="cb196-2"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)  </span></code></pre></div>
+<!-- is compbio4all called? -->
+</div>
+<div id="dna-sequence-statistics-part-1" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> DNA Sequence Statistics: Part 1</h2>
+<div id="using-r-for-bioinformatics" class="section level3" number="12.1.1">
+<h3><span class="header-section-number">12.1.1</span> Using R for Bioinformatics</h3>
+<p>The chapter will guide you through the process of using R to carry out simple analyses that are common in bioinformatics and computational biology. In particular, the focus is on computational analysis of biological sequence data such as genome sequences and protein sequences. The programming approaches, however, are broadly generalizable to statistics and data science.</p>
+<p>The tutorials assume that the reader has some basic knowledge of biology, but not necessarily of bioinformatics. The focus is to explain simple bioinformatics analysis, and to explain how to carry out these analyses using <em>R</em>.</p>
+</div>
+<div id="r-packages-for-bioinformatics-bioconductor-and-seqinr" class="section level3" number="12.1.2">
+<h3><span class="header-section-number">12.1.2</span> R packages for bioinformatics: Bioconductor and SeqinR</h3>
+<p>Many authors have written <em>R</em> packages for performing a wide variety of analyses. These do not come with the standard <em>R</em> installation, but must be installed and loaded as “add-ons.”</p>
+<!-- old Loading the dayoff package will automatically load most of the packages we need. -->
+<!-- have these as dependencies of combio4all? -->
+<p>Bioinformaticians have written numerous specialized packages for <em>R</em>. In this tutorial, you will learn to use some of the function in the <a href="https://cran.r-project.org/web/packages/seqinr/index.html"><code>SeqinR</code></a> package to to carry out simple analyses of DNA sequences. (<code>SeqinR</code> can retrieve sequences from a DNA sequence database, but this has largely been replaced by the functions in the package <code>rentrez</code>)</p>
+<p>Many well-known bioinformatics packages for <em>R</em> are in the Bioconductor set of <em>R</em> packages (www.bioconductor.org), which contains packages with many <em>R</em> functions for analyzing biological data sets such as microarray data. The <a href="https://cran.r-project.org/web/packages/seqinr/index.html"><code>SeqinR</code></a> package is from CRAN, which contains R functions for obtaining sequences from DNA and protein sequence databases, and for analyzing DNA and protein sequences.</p>
+<!-- SequinR will automatically load when you load dayoff.   For instructions on how to install an R package on your own see [How to install an R package](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html). -->
+<p>We will also use functions from the <code>rentrez</code> and <code>ape</code> packages.</p>
+<!-- Both of these also are loaded automatically by the dayoff package. -->
+<!-- ape still used?. -->
+<p>Remember that you can ask for more information about a particular <em>R</em> command by using the <code>help()</code> function. For example, to ask for more information about the <code>library()</code>, you can type:</p>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">&quot;library&quot;</span>)</span></code></pre></div>
+<p>You can also do this</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb198-1" aria-hidden="true" tabindex="-1"></a>?library</span></code></pre></div>
+</div>
+<div id="fasta-file-format" class="section level3" number="12.1.3">
+<h3><span class="header-section-number">12.1.3</span> FASTA file format</h3>
+<p>The FASTA format is a simple and widely used format for storing biological (e.g. DNA or protein) sequences. It was first used by the <a href="https://en.wikipedia.org/wiki/FASTA">FASTA program</a> for sequence alignment in the 1980s and has been adopted as standard by many other programs.</p>
+<p>FASTA files begin with a single-line description starting with a greater-than sign <code>&gt;</code> character, followed on the next line by the sequences. Here is an example of a FASTA file. (If you’re looking at the source script for this lesson you’ll see the <code>cat()</code> command, which is just a text display function used format the text when you run the code).</p>
+<pre><code>## &gt;A06852 183 residues MPRLFSYLLGVWLLLSQLPREIPGQSTNDFIKACGRELVRLWVEICGSVSWGRTALSLEEPQLETGPPAETMPSSITKDAEILKMMLEFVPNLPQELKATLSERQPSLRELQQSASKDSNLNFEEFKKIILNRQNEAEDKSLLELKNLGLDKHSRKKRLFRMTLSEKCCQVGCIRKDIARLC</code></pre>
+</div>
+<div id="the-ncbi-sequence-database" class="section level3" number="12.1.4">
+<h3><span class="header-section-number">12.1.4</span> The NCBI sequence database</h3>
+<p>The US <a href="www.ncbi.nlm.nih.gov">National Centre for Biotechnology Information (NCBI)</a> maintains the <strong>NCBI Sequence Database</strong>, a huge database of all the DNA and protein sequence data that has been collected. There are also similar databases in Europe, the <a href="www.ebi.ac.uk/embl">European Molecular Biology Laboratory (EMBL) Sequence Database</a>, and Japan, the <a href="www.ddbj.nig.ac.jp">DNA Data Bank of Japan (DDBJ)</a>. These three databases exchange data every night, so at any one point in time, they contain almost identical data.</p>
+<p>Each sequence in the NCBI Sequence Database is stored in a separate <strong>record</strong>, and is assigned a unique identifier that can be used to refer to that record. The identifier is known as an <strong>accession</strong>, and consists of a mixture of numbers and letters.</p>
+<p>For example, Dengue virus causes Dengue fever, which is classified as a <strong>neglected tropical disease</strong> by the World Health Organization (WHO), is classified by any one of four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are</p>
+<ul>
+<li>NC_001477</li>
+<li>NC_001474</li>
+<li>NC_001475<br />
+</li>
+<li>NC_002640</li>
+</ul>
+<p>Note that because the NCBI Sequence Database, the EMBL Sequence Database, and DDBJ exchange data every night, the DEN-1 (and DEN-2, DEN-3, DEN-4) Dengue virus sequence are present in all three databases, but they have different accessions in each database, as they each use their own numbering systems for referring to their own sequence records.</p>
+</div>
+<div id="retrieving-genome-sequence-data-using-rentrez" class="section level3" number="12.1.5">
+<h3><span class="header-section-number">12.1.5</span> Retrieving genome sequence data using rentrez</h3>
+<p>You can retrieve sequence data from NCBI directly from <em>R</em> using the <code>rentrez</code> package. The DEN-1 Dengue virus genome sequence has NCBI accession NC_001477. To retrieve a sequence with a particular NCBI accession, you can use the function <code>entrez_fetch()</code> from the <code>rentrez</code> package. Note that to be specific where the function comes from I write it as <code>package::function()</code>.</p>
+<!-- QUESTION: How many arguments does entrez_fetch take in this call? -->
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb200-1" aria-hidden="true" tabindex="-1"></a>dengueseq_fasta <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;nucleotide&quot;</span>, </span>
+<span id="cb200-2"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb200-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> <span class="st">&quot;NC_001477&quot;</span>, </span>
+<span id="cb200-3"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb200-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
+<p>Note that the “<em>" in the name is just an arbitrary way to separate two words. Another common format would be <code>dengueseq.fasta</code>. Some people like <code>dengueseqFasta</code>, called <strong>camel case</strong> because the capital letter makes a hump in the middle of the word. Underscores are becoming most common and are favored by developers associated with RStudio and the <strong>tidyverse</strong> of packages that many data scientists use. I switch between "." and "</em>” as separators, usually favoring "_" for function names and “.” for objects; I personally find camel case harder to read and to type.</p>
+<p>Ok, so what exactly have we done when we made <code>dengueseq_fasta</code>? We have an R object <code>dengueseq_fasta</code> which has the sequence linked to the accession number “NC_001477.” So where is the sequence, and what is it?</p>
+<p>First, what is it?</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is</span>(dengueseq_fasta)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;</code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dengueseq_fasta)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>How big is it? Try the <code>dim()</code> and <code>length()</code> commands and see which one works. Do you know why one works and the other doesn’t?
+<!-- question:l which one works --></p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(dengueseq_fasta)</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(dengueseq_fasta)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>The size of the object is 1. Why is this? This is the genomics sequence of a virus, so you’d expect it to be fairly large. We’ll use another function below to explore that issue. Think about this first: how many pieces of unique information are in the <code>dengueseq</code> object? In what sense is there only <em>one</em> piece of information?</p>
+<p>If we want to actually see the sequence we can type just type <code>dengueseq_fasta</code> and press enter. This will print the WHOLE genomic sequence out but it will probably run of your screen.</p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb209-1" aria-hidden="true" tabindex="-1"></a>dengueseq_fasta</span></code></pre></div>
+<p>This is a whole genome sequence, but its stored as single entry in a vector, so the <code>length()</code> command just tells us how many entries there are in the vector, which is just one! What this means is that the entire genomic sequence is stored in a single entry of the vector <code>dengueseq_fasta</code>. (If you’re not following along with this, no worries - its not essential to actually working with the data)</p>
+<p>If we want to actually know how long the sequence is, we need to use the function <code>nchar()</code>.</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(dengueseq_fasta)</span></code></pre></div>
+<pre><code>## [1] 10935</code></pre>
+<p>The sequence is 10935 bases long. All of these bases are stored as a single <strong>character string</strong> with no spaces in a single entry of our <code>dengueseq_fasta</code> vector. This isn’t actually a useful format for us, so below were’ going to convert it to something more useful.</p>
+<p>If we want to see just part of the sequence we can use the <code>strtrim()</code> function. Before you run the code below, predict what the 100 means.</p>
+<pre><code>## [1] &quot;&gt;NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAA&quot;</code></pre>
+<p>Note that at the end of the name is a slash followed by an n, which indicates to the computer that this is a <strong>newline</strong>; this is read by text editor, but is ignored by R in this context.</p>
+<pre><code>## [1] &quot;&gt;NC_001477.1 Dengue virus 1, complete genome\n&quot;</code></pre>
+<p>After the <code>\\n</code> begins the sequence, which will continue on for a LOOOOOONG way. Let’s just print a little bit.</p>
+<pre><code>## [1] &quot;&gt;NC_001477.1 Dengue virus 1, complete genome\nAGTTGTT&quot;</code></pre>
+<p>Let’s print some more. Do you notice anything beside A, T, C and G in the sequence?</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strtrim</span>(dengueseq_fasta, <span class="dv">200</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;&gt;NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTAACAGT\nTTTTTATTAGAGAGCAGATCTCTGATGAACAACCAACGGAAAAAGACGGGTCGACCGTCTTTCAATATGC\nTGAAACGCGCGAG&quot;</code></pre>
+<p>Again, there are the <code>\\n</code> newline characters, which tell text editors and wordprocessors how to display the file.</p>
+<p>Now that we a sense of what we’re looking at let’s explore the <code>dengueseq_fasta</code> a bit more.</p>
+<p>We can find out more information about what it is using the <code>class()</code>command.</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dengueseq_fasta)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>As noted before, this is character data.</p>
+<p>Many things in R are vectors so we can ask <em>R </em><code>is.vector()</code></p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(dengueseq_fasta)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Yup, that’s true.</p>
+<p>Ok, let’s see what else. A handy though often verbose command is <code>is()</code>, which tells us what an object, well, what it is:</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb221-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is</span>(dengueseq_fasta)</span></code></pre></div>
+<pre><code>## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot; &quot;SuperClassMethod&quot;</code></pre>
+<p>There is a lot here but if you scan for some key words you will see “character” and “vector” at the top. The other stuff you can ignore. The first two things, though, tell us the dengueseq_fasta is a <strong>vector</strong> of the class <strong>character</strong>: that is, a <strong>character vector</strong>.</p>
+<p>Another handy function is <code>str()</code>, which gives us a peak at the context and structure of an <em>R</em> object. This is most useful when you are working in the R console or with dataframes, but is a useful function to run on all <em>R</em> objects. How does this output differ from other ways we’ve displayed dengueseq_fasta?</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb223-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dengueseq_fasta)</span></code></pre></div>
+<pre><code>##  chr &quot;&gt;NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTA&quot;| __truncated__</code></pre>
+<p>We know it contains character data - how many characters? <code>nchar()</code> for “number of characters” answers that:</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(dengueseq_fasta)</span></code></pre></div>
+<pre><code>## [1] 10935</code></pre>
 </div>
 </div>
-<div id="starting-r" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Starting <em>R</em></h2>
-<p>To start R, Check if there is an <em>R</em> icon on the desktop of the computer that you are using. If so, double-click on the <em>R</em> icon to start <em>R</em>. If you cannot find an <em>R</em> icon, try the next step instead.</p>
-<p>You can also start <em>R</em> from the Start menu in Windows. Click on the “Start” button at the bottom left of your computer screen, and then choose “All programs,” and start <em>R</em> by selecting “R” (or <em>R</em> X.X.X, where X.X.X gives the version of R, e.g.. <em>R</em> 2.10.0) from the menu of programs.</p>
-<p>Say “Hi” to <em>R</em> and take a quick look at how it looks. Now say “Goodbye,” because we will never actually do any work in this version of <em>R</em>; instead, we’ll use the <strong>RStudio IDE (integrated development environment)</strong>.</p>
+<div id="next-steps" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> Next steps</h2>
+<p>On their own, FASTA files in R are not directly useful. In the next lesson we’ll process our <code>dengueseq_fasta</code> file so that we can use it in analyses.</p>
 
 </div>
 </div>
@@ -398,8 +512,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="installing-the-rstudio-ide.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="programming-in-r-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="downloading-dna-sequences-as-fasta-files-in-r-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -431,7 +545,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/brouwern/lbrb/edit/master/02-downloading_R_AC01-1.Rmd",
+"link": "https://github.com/brouwern/lbrb/edit/master/10-download_FASTA_in_R.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -439,7 +553,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/brouwern/lbrb/blob/master/02-downloading_R_AC01-1.Rmd",
+"link": "https://github.com/brouwern/lbrb/blob/master/10-download_FASTA_in_R.Rmd",
 "text": null
 },
 "download": ["lbrb.pdf", "lbrb.epub"],
