@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 15 Downloading protein sequences in R | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Chapter 14 Downloading protein sequences in R | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 15 Downloading protein sequences in R | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Chapter 14 Downloading protein sequences in R | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 15 Downloading protein sequences in R | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Chapter 14 Downloading protein sequences in R | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="local-protein-aligments-in-r.html"/>
+<link rel="prev" href="downloading-dna-sequences-as-fasta-files-in-r-1.html"/>
 <link rel="next" href="sequence-dotplots-in-r.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -284,46 +284,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.2.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#spliting-unbroken-strings-in-character-vectors"><i class="fa fa-check"></i><b>13.2.2</b> Spliting unbroken strings in character vectors</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html"><i class="fa fa-check"></i><b>14</b> Local protein aligments in <em>R</em></a>
+<li class="chapter" data-level="14" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html"><i class="fa fa-check"></i><b>14</b> Downloading protein sequences in <em>R</em></a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#preliminaries-3"><i class="fa fa-check"></i><b>14.1</b> Preliminaries</a>
-<ul>
-<li class="chapter" data-level="14.1.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#download-sequences"><i class="fa fa-check"></i><b>14.1.1</b> Download sequences</a></li>
+<li class="chapter" data-level="14.1" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#preliminaries-3"><i class="fa fa-check"></i><b>14.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="14.2" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#retrieving-a-uniprot-protein-sequence-using-rentrez"><i class="fa fa-check"></i><b>14.2</b> Retrieving a UniProt protein sequence using rentrez</a></li>
 </ul></li>
-<li class="chapter" data-level="14.2" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm"><i class="fa fa-check"></i><b>14.2</b> Pairwise local alignment of protein sequences using the Smith-Waterman algorithm</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html"><i class="fa fa-check"></i><b>15</b> Downloading protein sequences in <em>R</em></a>
+<li class="chapter" data-level="15" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html"><i class="fa fa-check"></i><b>15</b> Sequence dotplots in <em>R</em></a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#preliminaries-4"><i class="fa fa-check"></i><b>15.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="15.2" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#retrieving-a-uniprot-protein-sequence-using-rentrez"><i class="fa fa-check"></i><b>15.2</b> Retrieving a UniProt protein sequence using rentrez</a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html"><i class="fa fa-check"></i><b>16</b> Sequence dotplots in <em>R</em></a>
+<li class="chapter" data-level="15.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#preliminaries-4"><i class="fa fa-check"></i><b>15.1</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#preliminaries-5"><i class="fa fa-check"></i><b>16.1</b> Preliminaries</a>
-<ul>
-<li class="chapter" data-level="16.1.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#download-sequences-1"><i class="fa fa-check"></i><b>16.1.1</b> Download sequences</a></li>
+<li class="chapter" data-level="15.1.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#download-sequences"><i class="fa fa-check"></i><b>15.1.1</b> Download sequences</a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualzing-two-identical-sequences"><i class="fa fa-check"></i><b>16.2</b> Visualzing two identical sequences</a></li>
-<li class="chapter" data-level="16.3" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualizing-repeats"><i class="fa fa-check"></i><b>16.3</b> Visualizing repeats</a></li>
-<li class="chapter" data-level="16.4" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#inversions"><i class="fa fa-check"></i><b>16.4</b> Inversions</a></li>
-<li class="chapter" data-level="16.5" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#translocations"><i class="fa fa-check"></i><b>16.5</b> Translocations</a></li>
-<li class="chapter" data-level="16.6" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#random-sequence"><i class="fa fa-check"></i><b>16.6</b> Random sequence</a></li>
-<li class="chapter" data-level="16.7" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#comparing-two-real-sequences-using-a-dotplot"><i class="fa fa-check"></i><b>16.7</b> Comparing two real sequences using a dotplot</a></li>
+<li class="chapter" data-level="15.2" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualzing-two-identical-sequences"><i class="fa fa-check"></i><b>15.2</b> Visualzing two identical sequences</a></li>
+<li class="chapter" data-level="15.3" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualizing-repeats"><i class="fa fa-check"></i><b>15.3</b> Visualizing repeats</a></li>
+<li class="chapter" data-level="15.4" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#inversions"><i class="fa fa-check"></i><b>15.4</b> Inversions</a></li>
+<li class="chapter" data-level="15.5" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#translocations"><i class="fa fa-check"></i><b>15.5</b> Translocations</a></li>
+<li class="chapter" data-level="15.6" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#random-sequence"><i class="fa fa-check"></i><b>15.6</b> Random sequence</a></li>
+<li class="chapter" data-level="15.7" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#comparing-two-real-sequences-using-a-dotplot"><i class="fa fa-check"></i><b>15.7</b> Comparing two real sequences using a dotplot</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html"><i class="fa fa-check"></i><b>17</b> Global proteins aligments in <em>R</em></a>
+<li class="chapter" data-level="16" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html"><i class="fa fa-check"></i><b>16</b> Global proteins aligments in <em>R</em></a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#preliminaries-6"><i class="fa fa-check"></i><b>17.1</b> Preliminaries</a>
+<li class="chapter" data-level="16.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#preliminaries-5"><i class="fa fa-check"></i><b>16.1</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="17.1.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#download-sequences-2"><i class="fa fa-check"></i><b>17.1.1</b> Download sequences</a></li>
+<li class="chapter" data-level="16.1.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#download-sequences-1"><i class="fa fa-check"></i><b>16.1.1</b> Download sequences</a></li>
 </ul></li>
-<li class="chapter" data-level="17.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-dna-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>17.2</b> Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm</a></li>
-<li class="chapter" data-level="17.3" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-protein-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>17.3</b> Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm</a>
+<li class="chapter" data-level="16.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-dna-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>16.2</b> Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm</a></li>
+<li class="chapter" data-level="16.3" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-protein-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>16.3</b> Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm</a>
 <ul>
-<li class="chapter" data-level="17.3.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#protein-score-matrices"><i class="fa fa-check"></i><b>17.3.1</b> Protein score matrices</a></li>
-<li class="chapter" data-level="17.3.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#example-protein-alignment"><i class="fa fa-check"></i><b>17.3.2</b> Example protein alignment</a></li>
+<li class="chapter" data-level="16.3.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#protein-score-matrices"><i class="fa fa-check"></i><b>16.3.1</b> Protein score matrices</a></li>
+<li class="chapter" data-level="16.3.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#example-protein-alignment"><i class="fa fa-check"></i><b>16.3.2</b> Example protein alignment</a></li>
 </ul></li>
-<li class="chapter" data-level="17.4" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#aligning-uniprot-sequences"><i class="fa fa-check"></i><b>17.4</b> Aligning UniProt sequences</a></li>
-<li class="chapter" data-level="17.5" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#viewing-a-long-pairwise-alignment"><i class="fa fa-check"></i><b>17.5</b> Viewing a long pairwise alignment</a></li>
+<li class="chapter" data-level="16.4" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#aligning-uniprot-sequences"><i class="fa fa-check"></i><b>16.4</b> Aligning UniProt sequences</a></li>
+<li class="chapter" data-level="16.5" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#viewing-a-long-pairwise-alignment"><i class="fa fa-check"></i><b>16.5</b> Viewing a long pairwise alignment</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html"><i class="fa fa-check"></i><b>17</b> Local protein aligments in <em>R</em></a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#preliminaries-6"><i class="fa fa-check"></i><b>17.1</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#download-sequences-2"><i class="fa fa-check"></i><b>17.1.1</b> Download sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm"><i class="fa fa-check"></i><b>17.2</b> Pairwise local alignment of protein sequences using the Smith-Waterman algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html"><i class="fa fa-check"></i><b>18</b> Retrieving multiple sequences in R</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#prelminaries"><i class="fa fa-check"></i><b>18.1</b> Prelminaries</a></li>
+<li class="chapter" data-level="18.2" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#retrieving-a-set-of-sequences-from-uniprot"><i class="fa fa-check"></i><b>18.2</b> Retrieving a set of sequences from UniProt</a></li>
+<li class="chapter" data-level="18.3" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#downloading-sequences-in-bulk"><i class="fa fa-check"></i><b>18.3</b> Downloading sequences in bulk</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path=""><a href="#part-appendices"><i class="fa fa-check"></i>(PART) Appendices</a>
 <ul>
@@ -331,31 +337,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html"><i class="fa fa-check"></i>Appendix 01: Getting access to R</a>
 <ul>
-<li class="chapter" data-level="17.6" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-started-with-r-and-rstudio"><i class="fa fa-check"></i><b>17.6</b> Getting Started With R and RStudio</a>
+<li class="chapter" data-level="18.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-started-with-r-and-rstudio"><i class="fa fa-check"></i><b>18.4</b> Getting Started With R and RStudio</a>
 <ul>
-<li class="chapter" data-level="17.6.1" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#rstudio-cloud"><i class="fa fa-check"></i><b>17.6.1</b> RStudio Cloud</a></li>
-<li class="chapter" data-level="17.6.2" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-r-onto-your-own-computer"><i class="fa fa-check"></i><b>17.6.2</b> Getting R onto your own computer</a></li>
-<li class="chapter" data-level="17.6.3" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-rstudio-onto-your-computer"><i class="fa fa-check"></i><b>17.6.3</b> Getting RStudio onto your computer</a></li>
-<li class="chapter" data-level="17.6.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#keep-r-and-rstudio-current"><i class="fa fa-check"></i><b>17.6.4</b> Keep R and RStudio current</a></li>
+<li class="chapter" data-level="18.4.1" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#rstudio-cloud"><i class="fa fa-check"></i><b>18.4.1</b> RStudio Cloud</a></li>
+<li class="chapter" data-level="18.4.2" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-r-onto-your-own-computer"><i class="fa fa-check"></i><b>18.4.2</b> Getting R onto your own computer</a></li>
+<li class="chapter" data-level="18.4.3" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-rstudio-onto-your-computer"><i class="fa fa-check"></i><b>18.4.3</b> Getting RStudio onto your computer</a></li>
+<li class="chapter" data-level="18.4.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#keep-r-and-rstudio-current"><i class="fa fa-check"></i><b>18.4.4</b> Keep R and RStudio current</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html"><i class="fa fa-check"></i>Getting started with R itself (or not)</a>
 <ul>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#vocabulary-2"><i class="fa fa-check"></i>Vocabulary</a></li>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#r-commands"><i class="fa fa-check"></i>R commands</a></li>
-<li class="chapter" data-level="17.7" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#help"><i class="fa fa-check"></i><b>17.7</b> Help!</a>
+<li class="chapter" data-level="18.5" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#help"><i class="fa fa-check"></i><b>18.5</b> Help!</a>
 <ul>
-<li class="chapter" data-level="17.7.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-r"><i class="fa fa-check"></i><b>17.7.1</b> Getting “help” from R</a></li>
-<li class="chapter" data-level="17.7.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-the-internet"><i class="fa fa-check"></i><b>17.7.2</b> Getting help from the internet</a></li>
-<li class="chapter" data-level="17.7.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-online-forums"><i class="fa fa-check"></i><b>17.7.3</b> Getting help from online forums</a></li>
-<li class="chapter" data-level="17.7.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-twitter"><i class="fa fa-check"></i><b>17.7.4</b> Getting help from twitter</a></li>
+<li class="chapter" data-level="18.5.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-r"><i class="fa fa-check"></i><b>18.5.1</b> Getting “help” from R</a></li>
+<li class="chapter" data-level="18.5.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-the-internet"><i class="fa fa-check"></i><b>18.5.2</b> Getting help from the internet</a></li>
+<li class="chapter" data-level="18.5.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-online-forums"><i class="fa fa-check"></i><b>18.5.3</b> Getting help from online forums</a></li>
+<li class="chapter" data-level="18.5.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-twitter"><i class="fa fa-check"></i><b>18.5.4</b> Getting help from twitter</a></li>
 </ul></li>
-<li class="chapter" data-level="17.8" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#other-features-of-rstudio"><i class="fa fa-check"></i><b>17.8</b> Other features of RStudio</a>
+<li class="chapter" data-level="18.6" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#other-features-of-rstudio"><i class="fa fa-check"></i><b>18.6</b> Other features of RStudio</a>
 <ul>
-<li class="chapter" data-level="17.8.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#ajusting-pane-the-layout"><i class="fa fa-check"></i><b>17.8.1</b> Ajusting pane the layout</a></li>
-<li class="chapter" data-level="17.8.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#adjusting-size-of-windows"><i class="fa fa-check"></i><b>17.8.2</b> Adjusting size of windows</a></li>
+<li class="chapter" data-level="18.6.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#ajusting-pane-the-layout"><i class="fa fa-check"></i><b>18.6.1</b> Ajusting pane the layout</a></li>
+<li class="chapter" data-level="18.6.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#adjusting-size-of-windows"><i class="fa fa-check"></i><b>18.6.2</b> Adjusting size of windows</a></li>
 </ul></li>
-<li class="chapter" data-level="17.9" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>17.9</b> Practice (OPTIONAL)</a></li>
+<li class="chapter" data-level="18.7" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>18.7</b> Practice (OPTIONAL)</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
@@ -377,39 +383,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="downloading-protein-sequences-in-r" class="section level1" number="15">
-<h1><span class="header-section-number">Chapter 15</span> Downloading protein sequences in <em>R</em></h1>
+<div id="downloading-protein-sequences-in-r" class="section level1" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Downloading protein sequences in <em>R</em></h1>
 <p><strong>By</strong>: Avril Coghlan.</p>
 <p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
 <!-- Add gsub walk through -->
-<div id="preliminaries-4" class="section level2" number="15.1">
-<h2><span class="header-section-number">15.1</span> Preliminaries</h2>
-<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="downloading-protein-sequences-in-r.html#cb271-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
+<div id="preliminaries-3" class="section level2" number="14.1">
+<h2><span class="header-section-number">14.1</span> Preliminaries</h2>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="downloading-protein-sequences-in-r.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
 </div>
-<div id="retrieving-a-uniprot-protein-sequence-using-rentrez" class="section level2" number="15.2">
-<h2><span class="header-section-number">15.2</span> Retrieving a UniProt protein sequence using rentrez</h2>
+<div id="retrieving-a-uniprot-protein-sequence-using-rentrez" class="section level2" number="14.2">
+<h2><span class="header-section-number">14.2</span> Retrieving a UniProt protein sequence using rentrez</h2>
 <p>We can use <code>entrez_fetch()</code> to download protein sequences.</p>
 <p>For example to retrieve the protein sequences for UniProt accessions Q9CD83 and A0PQ23, we type in R:</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="downloading-protein-sequences-in-r.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sequence 1: Q9CD83</span></span>
-<span id="cb272-2"><a href="downloading-protein-sequences-in-r.html#cb272-2" aria-hidden="true" tabindex="-1"></a>leprae_fasta <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>,</span>
-<span id="cb272-3"><a href="downloading-protein-sequences-in-r.html#cb272-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">id =</span> <span class="st">&quot;Q9CD83&quot;</span>,</span>
-<span id="cb272-4"><a href="downloading-protein-sequences-in-r.html#cb272-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span>
-<span id="cb272-5"><a href="downloading-protein-sequences-in-r.html#cb272-5" aria-hidden="true" tabindex="-1"></a><span class="co"># sequence 2: OIN17619.1</span></span>
-<span id="cb272-6"><a href="downloading-protein-sequences-in-r.html#cb272-6" aria-hidden="true" tabindex="-1"></a>ulcerans_fasta <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>,</span>
-<span id="cb272-7"><a href="downloading-protein-sequences-in-r.html#cb272-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">id =</span> <span class="st">&quot;OIN17619.1&quot;</span>,</span>
-<span id="cb272-8"><a href="downloading-protein-sequences-in-r.html#cb272-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="downloading-protein-sequences-in-r.html#cb250-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sequence 1: Q9CD83</span></span>
+<span id="cb250-2"><a href="downloading-protein-sequences-in-r.html#cb250-2" aria-hidden="true" tabindex="-1"></a>leprae_fasta <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>,</span>
+<span id="cb250-3"><a href="downloading-protein-sequences-in-r.html#cb250-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">id =</span> <span class="st">&quot;Q9CD83&quot;</span>,</span>
+<span id="cb250-4"><a href="downloading-protein-sequences-in-r.html#cb250-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span>
+<span id="cb250-5"><a href="downloading-protein-sequences-in-r.html#cb250-5" aria-hidden="true" tabindex="-1"></a><span class="co"># sequence 2: OIN17619.1</span></span>
+<span id="cb250-6"><a href="downloading-protein-sequences-in-r.html#cb250-6" aria-hidden="true" tabindex="-1"></a>ulcerans_fasta <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>,</span>
+<span id="cb250-7"><a href="downloading-protein-sequences-in-r.html#cb250-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">id =</span> <span class="st">&quot;OIN17619.1&quot;</span>,</span>
+<span id="cb250-8"><a href="downloading-protein-sequences-in-r.html#cb250-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
 <p>Display the contents of the <code>lepraeseq</code> FASTA file.</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="downloading-protein-sequences-in-r.html#cb273-1" aria-hidden="true" tabindex="-1"></a>leprae_fasta</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="downloading-protein-sequences-in-r.html#cb251-1" aria-hidden="true" tabindex="-1"></a>leprae_fasta</span></code></pre></div>
 <pre><code>## [1] &quot;&gt;sp|Q9CD83.1|PHBS_MYCLE RecName: Full=Chorismate pyruvate-lyase; AltName: Full=4-HB synthase; AltName: Full=p-hydroxybenzoic acid synthase\nMTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLLDVAPKIPELENLKIGRILQR\nDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPIGEIMAASRIETYKEDAQVWIGDLPCWLADY\nGYWDLPKRAVGRRYRIIAGGQPVIITTEYFLRSVFQDTPREELDRCQYSNDIDTRSGDRFVLHGRVFKNL\n\n&quot;</code></pre>
 <!-- When did I introduce FASTA cleaner? -->
 <!-- Are these data files in compbio4all? -->
 <p>Let’s clean these up to remove the header and new line characters usin the function <code>fasta_cleaner()</code>.</p>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="downloading-protein-sequences-in-r.html#cb275-1" aria-hidden="true" tabindex="-1"></a>leprae_vector   <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(leprae_fasta)</span>
-<span id="cb275-2"><a href="downloading-protein-sequences-in-r.html#cb275-2" aria-hidden="true" tabindex="-1"></a>ulcerans_vector <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(ulcerans_fasta)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="downloading-protein-sequences-in-r.html#cb253-1" aria-hidden="true" tabindex="-1"></a>leprae_vector   <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(leprae_fasta)</span>
+<span id="cb253-2"><a href="downloading-protein-sequences-in-r.html#cb253-2" aria-hidden="true" tabindex="-1"></a>ulcerans_vector <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(ulcerans_fasta)</span></code></pre></div>
 <p>Examine the output using <code>length()</code>, <code>class()</code>, and <code>head()</code>:</p>
-<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="downloading-protein-sequences-in-r.html#cb276-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(leprae_vector)</span>
-<span id="cb276-2"><a href="downloading-protein-sequences-in-r.html#cb276-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(leprae_vector)</span>
-<span id="cb276-3"><a href="downloading-protein-sequences-in-r.html#cb276-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(leprae_vector, <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="downloading-protein-sequences-in-r.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(leprae_vector)</span>
+<span id="cb254-2"><a href="downloading-protein-sequences-in-r.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(leprae_vector)</span>
+<span id="cb254-3"><a href="downloading-protein-sequences-in-r.html#cb254-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(leprae_vector, <span class="dv">20</span>)</span></code></pre></div>
 
 </div>
 </div>
@@ -418,7 +424,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="local-protein-aligments-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="downloading-dna-sequences-as-fasta-files-in-r-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="sequence-dotplots-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -451,7 +457,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/brouwern/lbrb/edit/master/11a-download_protein_sequences.Rmd",
+"link": "https://github.com/brouwern/lbrb/edit/master/14-download_protein_sequences.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -459,7 +465,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/brouwern/lbrb/blob/master/11a-download_protein_sequences.Rmd",
+"link": "https://github.com/brouwern/lbrb/blob/master/14-download_protein_sequences.Rmd",
 "text": null
 },
 "download": ["lbrb.pdf", "lbrb.epub"],

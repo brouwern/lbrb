@@ -122,7 +122,7 @@ You can also start *R* from the Start menu in Windows.  Click on the “Start”
 
 Say "Hi" to *R* and take a quick look at how it looks.  Now say "Goodbye", because we will never actually do any work in this version of *R*; instead, we'll use the **RStudio IDE (integrated development environment)**.
 
-<!--chapter:end:02-downloading_R_AC01-1.Rmd-->
+<!--chapter:end:01-downloading_R_AC01-1.Rmd-->
 
 # Installing the RStudio IDE
 
@@ -147,7 +147,7 @@ A good overview of what the different parts of RStudio can be seen in the image 
 
 RStudio and RStudio cloud work almost identically, so anything you read about RStudio will apply to RStudio Cloud.  RStudio is easy to download an use, but RStudio Cloud eliminates even the minor hiccups that occur.  Free accounts with RStudio Cloud allow up to 15 hours per month, which is enough for you to get a taste for using R. 
 
-<!--chapter:end:03-installing_RStudio_AC01-2.Rmd-->
+<!--chapter:end:02-installing_RStudio_AC01-2.Rmd-->
 
 # Installing *R* packages
 
@@ -198,7 +198,7 @@ library(ggplot2) # note: NO " "
 
 
 
-<!--chapter:end:04-installing_packages_in_RStudio_AC01-3.Rmd-->
+<!--chapter:end:03-installing_packages_in_RStudio_AC01-3.Rmd-->
 
 ---
 output: html_document
@@ -324,7 +324,7 @@ knitr::include_graphics("images/R_cursor.png")
 
 
 
-<!--chapter:end:05-installing_bioconductor_AC01-4.Rmd-->
+<!--chapter:end:04-installing_bioconductor_AC01-4.Rmd-->
 
 ---
 output: html_document
@@ -677,7 +677,7 @@ There is another nice (slightly more in-depth) tutorial to R available on the �
 ```
 
 
-<!--chapter:end:06-brief_intro_to_R_AC01-5.Rmd-->
+<!--chapter:end:05-brief_intro_to_R_AC01-5.Rmd-->
 
 ---
 output: html_document
@@ -963,7 +963,7 @@ Hint: look at the help page for the GC() function to find out how it deals with 
 ```
 
 
-<!--chapter:end:07-DNA_sequence_descriptive_stats-AC03-02-.Rmd-->
+<!--chapter:end:06-DNA_sequence_descriptive_stats-AC03-02-.Rmd-->
 
 # Programming in R: for loops
 
@@ -1042,7 +1042,7 @@ for (i in seq(1, 10, by = 2)) {
 In the first cycle of this loop, the value of i is 1, and so i * i = 1 is printed out. In the second cycle through the loop, the value of i is 3, and so i * i = 9 is printed out. The loop continues until the value of i is 9. In the fifth cycle through the loop, the value of i is 9, and so i * i = 81 is printed out.
 
 
-<!--chapter:end:08-programming_in_R-forloops_AC04-02.Rmd-->
+<!--chapter:end:07-programming_in_R-forloops_AC04-02.Rmd-->
 
 ---
 output: html_document
@@ -1353,7 +1353,7 @@ Regular expressions are a deep subject in computing.  You can find some more inf
 
 
 
-<!--chapter:end:09a-vectors-AC04-01.Rmd-->
+<!--chapter:end:08-vectors-AC04-01.Rmd-->
 
 ---
 output: html_document
@@ -1443,7 +1443,7 @@ plot(numeric.vect2 ~ numeric.vect1, data = df)
 Base R has lots of plotting functions; additionally, people have written packages to implement new plotting capabilities. The package `ggplot2` is currently the most popular plotting package, and `ggpubr` is a package which makes `ggplot2` easier to use.  For quick plots we'll use base R functions, and when we get to more important things we'll use ggplot2 and ggpubr.
 
 
-<!--chapter:end:09b-vectors-plotting-AC04-01.Rmd-->
+<!--chapter:end:09-vectors-plotting-AC04-01.Rmd-->
 
 # Programming in R: functions
 
@@ -1503,7 +1503,7 @@ log10(x) # Finds the log to the base 10 of variable x.
 ```
 
 
-<!--chapter:end:09c-programming_in_R-functions-AC04-02.Rmd-->
+<!--chapter:end:10-programming_in_R-functions-AC04-02.Rmd-->
 
 ---
 output: html_document
@@ -1766,7 +1766,7 @@ getwd()
 
 On their own, FASTA files in R are not directly useful.  In the next lesson we'll process our `dengueseq_fasta` file so that we can use it in analyses.
 
-<!--chapter:end:10a-download_FASTA_in_R.Rmd-->
+<!--chapter:end:11-download_FASTA_in_R.Rmd-->
 
 # Downloading DNA sequences as FASTA files in R
 
@@ -1918,98 +1918,7 @@ table(dengueseq_vector_split)
 
 
 
-<!--chapter:end:10b-clean_FASTA_in_R-AC03-01.Rmd-->
-
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-# Local protein aligments in *R*
-
-**By**: Avril Coghlan.  
-
-**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
-
-
-## Preliminaries
-
-<!-- is compbio4all needed? -->
-<!-- have on gone over biodoncdutor and biostrings? -->
-
-```{r}
-library(compbio4all)
-library(Biostrings)
-```
-
-
-### Download sequences
-
-As we did in the previous lesson on dotplots, we'll look at two sequences.
-
-
-```{r}
-# Download
-## sequence 1: Q9CD83
-leprae_fasta <- rentrez::entrez_fetch(db = "protein",
-                        id = "Q9CD83",
-                         rettype = "fasta")
-## sequence 2: OIN17619.1
-ulcerans_fasta <- rentrez::entrez_fetch(db = "protein",
-                         id = "OIN17619.1",
-                         rettype = "fasta")
-
-# clean
-leprae_vector   <- fasta_cleaner(leprae_fasta)
-ulcerans_vector <- fasta_cleaner(ulcerans_fasta)
-
-# convert leprae_vector to an object lepraeseq_string
-lepraeseq_string <-paste(leprae_vector,collapse = "")    
-
-# convert ulcerans_vector to an object ulceransseq_string
-ulceransseq_string <-paste(ulcerans_vector,collapse = "") 
-```
-
-
-
-## Pairwise local alignment of protein sequences using the Smith-Waterman algorithm
-
-You can use the `pairwiseAlignment()` function to find the optimal **local alignment** of two sequences, that is the best alignment of parts (**subsequences**) of those sequences, by using the `type=local` argument in `pairwiseAlignment()`. This uses the **[Smith-Waterman algorithm](https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm)** for local alignment.  This is the classic bioinformatics algorithm for finding optimal local alignments.  (We'll discuss updated approaches when we get into **database searches** with **BLAST**, the **Basic, Local Alignment Search Tool* that is the workhorse of many day-to-day bioinformatics tasks).
-
-For example, to find the best local alignment between the *M. leprae* and *M. ulcerans* chorismate lyase proteins, we can run:
-
-```{r}
-# load scoring matrix
-data(BLOSUM50)
-
-# run alignment
-localAlignLepraeUlcerans <- pairwiseAlignment(lepraeseq_string, 
-                                              ulceransseq_string,
-                                              substitutionMatrix = BLOSUM50, 
-                                              gapOpening = -2, 
-                                              gapExtension = -8, 
-                                              scoreOnly = FALSE, 
-                                              type="local")  # <= type = "local !
-
-```
-
- Print out the optimal local alignment and its score
-```{r}
-localAlignLepraeUlcerans 
-```
-
-
-As before, we can print out the full alignment with `printPairwiseAlignment()`:
-```{r}
-printPairwiseAlignment(localAlignLepraeUlcerans, 60)
-```
-
-
-We see that the optimal local alignment is quite similar to the optimal global alignment in this case, except that it excludes a short region of poorly aligned sequence at the start and at the ends of the two proteins.
-
-
-
-<!--chapter:end:11-alignment_protein__in_R-AC07-02.Rmd-->
+<!--chapter:end:12-clean_FASTA_in_R-AC03-01.Rmd-->
 
 ---
 output: html_document
@@ -2073,7 +1982,7 @@ class(leprae_vector)
 head(leprae_vector, 20)
 ```
 
-<!--chapter:end:11a-download_protein_sequences.Rmd-->
+<!--chapter:end:14-download_protein_sequences.Rmd-->
 
 ---
 output: html_document
@@ -2253,7 +2162,7 @@ In this case you can see a lot of dots along a diagonal line, which indicates th
 
 <!-- TO DO:  Add the same gene from more distance relatives -->
 
-<!--chapter:end:11b-dotplots.Rmd-->
+<!--chapter:end:15-dotplots.Rmd-->
 
 ---
 output: html_document
@@ -2520,7 +2429,343 @@ printPairwiseAlignment(globalAlignLepraeUlcerans, 60)
 
 The position in the protein of the amino acid that is at the end of each line of the printed alignment is shown after the end of the line. For example, the first line of the alignment above finishes at amino acid position 50 in the *M. leprae* protein and also at amino acid position 60 in the *M. ulcerans* protein.  Becaues there as a difference of 60-50 = 10 bases, there must be 10 insertions in the *M. leprae* to get it to line up.  Count the number of dashes in the sequence to see how many there are.
 
-<!--chapter:end:11c_alignment_global_protein.Rmd-->
+<!--chapter:end:16_alignment_global_protein.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Local protein aligments in *R*
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+## Preliminaries
+
+<!-- is compbio4all needed? -->
+<!-- have on gone over biodoncdutor and biostrings? -->
+
+```{r}
+library(compbio4all)
+library(Biostrings)
+```
+
+
+### Download sequences
+
+As we did in the previous lesson on dotplots, we'll look at two sequences.
+
+
+```{r}
+# Download
+## sequence 1: Q9CD83
+leprae_fasta <- rentrez::entrez_fetch(db = "protein",
+                        id = "Q9CD83",
+                         rettype = "fasta")
+## sequence 2: OIN17619.1
+ulcerans_fasta <- rentrez::entrez_fetch(db = "protein",
+                         id = "OIN17619.1",
+                         rettype = "fasta")
+
+# clean
+leprae_vector   <- fasta_cleaner(leprae_fasta)
+ulcerans_vector <- fasta_cleaner(ulcerans_fasta)
+
+# convert leprae_vector to an object lepraeseq_string
+lepraeseq_string <-paste(leprae_vector,collapse = "")    
+
+# convert ulcerans_vector to an object ulceransseq_string
+ulceransseq_string <-paste(ulcerans_vector,collapse = "") 
+```
+
+
+
+## Pairwise local alignment of protein sequences using the Smith-Waterman algorithm
+
+You can use the `pairwiseAlignment()` function to find the optimal **local alignment** of two sequences, that is the best alignment of parts (**subsequences**) of those sequences, by using the `type=local` argument in `pairwiseAlignment()`. This uses the **[Smith-Waterman algorithm](https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm)** for local alignment.  This is the classic bioinformatics algorithm for finding optimal local alignments.  (We'll discuss updated approaches when we get into **database searches** with **BLAST**, the **Basic, Local Alignment Search Tool* that is the workhorse of many day-to-day bioinformatics tasks).
+
+For example, to find the best local alignment between the *M. leprae* and *M. ulcerans* chorismate lyase proteins, we can run:
+
+```{r}
+# load scoring matrix
+data(BLOSUM50)
+
+# run alignment
+localAlignLepraeUlcerans <- pairwiseAlignment(lepraeseq_string, 
+                                              ulceransseq_string,
+                                              substitutionMatrix = BLOSUM50, 
+                                              gapOpening = -2, 
+                                              gapExtension = -8, 
+                                              scoreOnly = FALSE, 
+                                              type="local")  # <= type = "local !
+
+```
+
+ Print out the optimal local alignment and its score
+```{r}
+localAlignLepraeUlcerans 
+```
+
+
+As before, we can print out the full alignment with `printPairwiseAlignment()`:
+```{r}
+printPairwiseAlignment(localAlignLepraeUlcerans, 60)
+```
+
+
+We see that the optimal local alignment is quite similar to the optimal global alignment in this case, except that it excludes a short region of poorly aligned sequence at the start and at the ends of the two proteins.
+
+
+
+<!--chapter:end:17-alignment_local-protein_in_R-AC07-02.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Retrieving multiple sequences in R
+
+```{r eval = T}
+library(compbio4all)
+```
+
+
+**By**: Avril Coghlan.  
+Multiple Alignment and Phylogenetic trees
+https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+## Prelminaries
+
+<!-- TODO:  add entrez_fetch_list to combio4all -->
+<!-- Add output to combio4all -->
+
+```{r}
+## package
+library(compbio4all)
+library(rentrez)
+
+# function
+
+## this function is called in this lesson
+## it will be added to the combio4all package
+### and called from it
+entrez_fetch_list <- function(db, id, rettype, ...){
+  
+  #setup list for storing output
+  n.seq <- length(id)
+  list.output <- as.list(rep(NA, n.seq))
+  names(list.output) <- id
+  
+  # get output
+  for(i in 1:length(id)){
+  list.output[[i]] <- rentrez::entrez_fetch(db = db, 
+                          id = id[i], 
+                          rettype = rettype)
+  }
+  
+  
+  return(list.output)
+}
+```
+
+
+## Retrieving a set of sequences from UniProt
+
+Using websites or *R* you can search fort DNA or protein sequences in sequence databases such as the **NCBI** database and **UniProt**.  Oftentimes, it is useful to retrieve several sequences at once. The *R* function `entrez_fetch()` from the *rentrez* package is useful for this purpose.  Other packages can also, such as `sequinr` this but *rentrez* has the cleanest interface.
+
+<!-- have I ever mention ACNUC before -->
+
+<!-- IS this necessary?: -->
+<!-- As its input, you need to give `entrez_fetch()` a vector containing the **accessions** for the sequences you wish to retrieve, as well as the name of the **ACNUC sub-database** that the sequences should be retrieved from. In this case, we want to retrieve sequences from **UniProt**, so the sequences should be in the **swissprot** ACNUC sub-database.  (It can be tricky to know exactly where to get sequences from sometimes so I will usually give you the code to do this). -->
+
+<!-- This isn't actually how it works -->
+<!-- The `entrez_fetch()` function returns a **list** variable, in which each element is a separate **vector** containing one of the sequences of interest.  **Lists* are a common data structure in *R* and can take some getting used to, but by working with them we will become familiar with how they work.  Unfortunately there are some quirks in how *R* likes you to write code referring to lists, so I will frequently provide the necessary code for this. -->
+
+We'll retrieve the protein sequences for these UniProt accessions 
+
+1. P06747: rabies virus phosphoprotein
+1. P0C569: Mokola virus phosphoprotein
+1. O56773: Lagos bat virus phosphoprotein
+1. Q5VKP1: Western Caucasian bat virus phosphoprotein
+
+Rabies virus is the virus responsible for rabies, which is classified by the WHO as a **neglected tropical disease**. Rabies is not a major human pathogen in the USA and Europe, but is problem in Africa.   [Mokola virus](https://en.wikipedia.org/wiki/Mokola_lyssavirus() and rabies virus are closely related viruses that both belong to a group of viruses called the [Lyssaviruses](https://en.wikipedia.org/wiki/Lyssavirus). Mokola virus causes a rabies-like infection in mammals including humans.
+
+You can type make a vector containing the names of the sequences.   Note that the accessions aren't numbers but are **quoted character strings**: 
+
+```{r}
+seqnames <- c("P06747", 
+              "P0C569", 
+              "O56773", 
+              "Q5VKP1")  
+```
+
+
+Confirm that we are working with character data using `is.character()`
+```{r}
+is.character(seqnames)
+```
+
+
+We can access the first element of the vector, P06747, using **bracket notation** like this:
+```{r}
+seqnames[1]
+```
+
+
+The code to access the second and third elements of the vector of accessions is:
+```{r}
+# 2nd accession
+seqnames[2]
+
+# 3rd accession
+seqnames[3]
+
+```
+
+Now let's use this vector of accessions to download sequence data.  To make sure we understand what we're doing, first we'll download just the sequences one by one.  This code retrieves the first sequence and store them in vector variable `seqs`.
+```{r}
+seq1 <- rentrez::entrez_fetch(db = "protein", 
+                          id = seqnames[1], 
+                          rettype = "fasta")      
+
+```
+
+We can do the next two sequences by change `id = ...` to ` seqnames[2]` and ` seqnames[3]`.
+```{r}
+# sequence two using seqnames[2]
+seq2 <- rentrez::entrez_fetch(db = "protein", 
+                          id = seqnames[2], 
+                          rettype = "fasta") 
+
+# sequence two using seqnames[3]
+seq3 <- rentrez::entrez_fetch(db = "protein", 
+                          id = seqnames[3], 
+                          rettype = "fasta")
+
+# sequence two using seqnames[4]
+seq4 <- rentrez::entrez_fetch(db = "protein", 
+                          id = seqnames[4], 
+                          rettype = "fasta")
+```
+
+
+Each of these is in raw FASTA format
+```{r}
+seq1
+```
+
+To do an analysis of these we need to clean each of these vectors using `fasta_cleaner()`.
+```{r}
+seq1 <- fasta_cleaner(seq1, parse = T)  
+seq2 <- fasta_cleaner(seq2, parse = T)  
+seq3 <- fasta_cleaner(seq3, parse = T)  
+seq4 <- fasta_cleaner(seq4, parse = T)  
+```
+
+Print out the first 20 letters of the first sequence
+```{r}
+seq1[1:20]                                   
+```
+
+Print out the first 20 letters of the second sequence
+```{r}
+seq2[1:20]                                   
+```
+
+We have these four sequences, each cleaned and in its own vector.  We can therefore do dotplots, alignments, and other analyses.  Creating all these seprate vectors is a bit laborious.  Luckily `entrez_fetch()` can download multiple sequences for us.
+
+## Downloading sequences in bulk
+
+Previously we were giving `entrez_fetch` the name of just one sequence at a time by using square brackets on our `seqnames` vector, e.g. `seqnames[1]`, `seqnames[2]` etc.  If don't include square brackets, `entrez_fetch()` will download *all* of the sequences in succession and package them up into a single long, formatted string.  This may take a second or two, depending on your internet connection and how busy the NCBI serverse are.
+
+```{r}
+seq_1_2_3_4 <- rentrez::entrez_fetch(db = "protein", 
+                          id = seqnames, 
+                          rettype = "fasta")
+```
+
+We can view what we have in a nice format using the `cat()` function.
+```{r}
+cat(seq_1_2_3_4)
+```
+
+This is a good way to store FASTA files, but we can't work with them in this format - they need to be in vectors.  To give us FASTA data in a usable form the `compbio4all` package has a function called `entrez_fetch_list()`, which is a **wrapper** for `entrez_fetch()` which returns each sequence in its own separate slot in a list.
+
+```{r}
+seq_1_2_3_4 <- entrez_fetch_list(db = "protein", 
+                          id = seqnames, 
+                          rettype = "fasta")
+```
+
+Let's look at the output
+```{r}
+seq_1_2_3_4
+```
+
+Note that before each sequence is its name, preceded by a dollar sign, e.g. `$P06747`.
+
+This is the name of each element of our list.  We can confirm that we have a list using `is.list()`.
+
+```{r}
+is.list(seq_1_2_3_4)
+```
+
+
+The size of the list is the number of elements it contains, not the amount of data in each element.  There are 4 sequences, so 4 elements, so length = 4.
+```{r}
+length(seq_1_2_3_4)
+```
+
+We can access each element of the list by name, like this:
+
+```{r}
+seq_1_2_3_4$P06747
+```
+
+We can also access it by its index number, like this, using **double-bracket notation.**
+
+```{r}
+seq_1_2_3_4[[1]] #NOTE: double brackets
+```
+
+
+Each element of the list is a vector.  We can check this using `is.vector()` like this 
+```{r}
+is.vector(seq_1_2_3_4$P06747)
+```
+
+or using double brackets like this
+
+```{r, eval = F}
+is.vector(seq_1_2_3_4[[1]])
+```
+
+Its character data, which we can confirm with `class()`
+```{r, eval = F}
+class(seq_1_2_3_4$P06747) # dollar sign notation
+class(seq_1_2_3_4[[1]])   # double-bracket notation
+```
+
+
+<!-- Once you have retrieved the sequences using `entrez_fetch()`, you can then use the function write.fasta() from the SeqinR package to write the sequences to a FASTA-format file. As its arguments (inputs), the write.fasta() function takes the list variable containing the sequences, and a vector containing the names of the sequences, and the name that you want to give to the FASTA-format file. For example: -->
+
+<!-- TODO: make this a data object in package -->
+<!-- TODO: where should students write this to? -->
+<!-- ```{r. eval = F} -->
+<!-- seqinr::write.fasta(seq_1_2_3_4, seqnames,file="data-raw/phosphoproteins.fasta") -->
+<!-- ``` -->
+
+<!-- The command above will write the sequences in list variable seqs to a FASTA-format file called “phosphoproteins.fasta” in the “My Documents” folder on your computer. -->
+
+
+<!--chapter:end:18-ac-m1-retrieving_mult_seqs-AC08-01.Rmd-->
 
 ---
 output: html_document

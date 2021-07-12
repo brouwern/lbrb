@@ -2255,7 +2255,7 @@ You can view the code that makes up a function by typing its name (without any p
 ##   output <- (20 + (x*x)) 
 ##   return(output)
 ##   }
-## <bytecode: 0x7f8a97df64f0>
+## <bytecode: 0x7fa0fc9b8240>
 \end{verbatim}
 
 \hypertarget{comments-in-r}{%
@@ -2888,8 +2888,8 @@ Something cool which we will explore in the next exercise is that we can do summ
 ## 3426 2240 2770 2299
 \end{verbatim}
 
-\hypertarget{local-protein-aligments-in-r}{%
-\chapter{\texorpdfstring{Local protein aligments in \emph{R}}{Local protein aligments in R}}\label{local-protein-aligments-in-r}}
+\hypertarget{downloading-protein-sequences-in-r}{%
+\chapter{\texorpdfstring{Downloading protein sequences in \emph{R}}{Downloading protein sequences in R}}\label{downloading-protein-sequences-in-r}}
 
 \textbf{By}: Avril Coghlan.
 
@@ -2901,6 +2901,275 @@ Something cool which we will explore in the next exercise is that we can do summ
 \begin{Shaded}
 \begin{Highlighting}[]
 \FunctionTok{library}\NormalTok{(compbio4all)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{retrieving-a-uniprot-protein-sequence-using-rentrez}{%
+\section{Retrieving a UniProt protein sequence using rentrez}\label{retrieving-a-uniprot-protein-sequence-using-rentrez}}
+
+We can use \texttt{entrez\_fetch()} to download protein sequences.
+
+For example to retrieve the protein sequences for UniProt accessions Q9CD83 and A0PQ23, we type in R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# sequence 1: Q9CD83}
+\NormalTok{leprae\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                        \AttributeTok{id =} \StringTok{"Q9CD83"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\CommentTok{\# sequence 2: OIN17619.1}
+\NormalTok{ulcerans\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                         \AttributeTok{id =} \StringTok{"OIN17619.1"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Display the contents of the \texttt{lepraeseq} FASTA file.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{leprae\_fasta}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] ">sp|Q9CD83.1|PHBS_MYCLE RecName: Full=Chorismate pyruvate-lyase; AltName: Full=4-HB synthase; AltName: Full=p-hydroxybenzoic acid synthase\nMTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLLDVAPKIPELENLKIGRILQR\nDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPIGEIMAASRIETYKEDAQVWIGDLPCWLADY\nGYWDLPKRAVGRRYRIIAGGQPVIITTEYFLRSVFQDTPREELDRCQYSNDIDTRSGDRFVLHGRVFKNL\n\n"
+\end{verbatim}
+
+Let's clean these up to remove the header and new line characters usin the function \texttt{fasta\_cleaner()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{leprae\_vector   }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(leprae\_fasta)}
+\NormalTok{ulcerans\_vector }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(ulcerans\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+Examine the output using \texttt{length()}, \texttt{class()}, and \texttt{head()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(leprae\_vector)}
+\FunctionTok{class}\NormalTok{(leprae\_vector)}
+\FunctionTok{head}\NormalTok{(leprae\_vector, }\DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{sequence-dotplots-in-r}{%
+\chapter{\texorpdfstring{Sequence dotplots in \emph{R}}{Sequence dotplots in R}}\label{sequence-dotplots-in-r}}
+
+\textbf{By}: Avril Coghlan.
+
+\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+
+\textbf{NOTE: I've added some new material that is rather terse and lacks explication.}
+
+\hypertarget{preliminaries-4}{%
+\section{Preliminaries}\label{preliminaries-4}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(compbio4all)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{download-sequences}{%
+\subsection{Download sequences}\label{download-sequences}}
+
+As we did in the previous lesson on dotplots, we'll look at two sequences.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# sequence 1: Q9CD83}
+\NormalTok{leprae\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                        \AttributeTok{id =} \StringTok{"Q9CD83"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\CommentTok{\# sequence 2: OIN17619.1}
+\NormalTok{ulcerans\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                         \AttributeTok{id =} \StringTok{"OIN17619.1"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+
+\NormalTok{leprae\_vector   }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(leprae\_fasta)}
+\NormalTok{ulcerans\_vector }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(ulcerans\_fasta)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{visualzing-two-identical-sequences}{%
+\section{Visualzing two identical sequences}\label{visualzing-two-identical-sequences}}
+
+To help build our intuition about dotplots we'll first look at some artificial examples. First, we'll see what happens when we make a dotplot comparing the alphabet versus itself. The build-in \texttt{LETTERS} object in R contains the alphabet from A to Z. This is a sequence with no repeats.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS, }
+\NormalTok{                LETTERS)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-162-1.pdf}
+
+What we get is a perfect diagonal line.
+
+\hypertarget{visualizing-repeats}{%
+\section{Visualizing repeats}\label{visualizing-repeats}}
+
+Now lets' make a sequence where the alphabet gets repeats twice
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LETTERS.}\FloatTok{2.}\NormalTok{times }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(LETTERS,LETTERS)}
+
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS.}\FloatTok{2.}\NormalTok{times, }
+\NormalTok{                LETTERS.}\FloatTok{2.}\NormalTok{times)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-163-1.pdf}
+
+Note the diagonal lines.
+
+Now 3 repeats
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LETTERS.}\FloatTok{3.}\NormalTok{times }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(LETTERS,LETTERS,LETTERS)}
+
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS.}\FloatTok{3.}\NormalTok{times, }
+\NormalTok{                LETTERS.}\FloatTok{3.}\NormalTok{times)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-164-1.pdf}
+
+Here's another example of repeats.
+
+Create sequence with repeats:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq.repeat }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{,}\StringTok{"C"}\NormalTok{,}\StringTok{"D"}\NormalTok{,}\StringTok{"E"}\NormalTok{,}\StringTok{"F"}\NormalTok{,}\StringTok{"G"}\NormalTok{,}\StringTok{"H"}\NormalTok{,}\StringTok{"I"}\NormalTok{)}
+\NormalTok{seq1 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(seq.repeat,}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Make the dotplot:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(seq1, }
+\NormalTok{                seq1)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-166-1.pdf}
+
+\hypertarget{inversions}{%
+\section{Inversions}\label{inversions}}
+
+See if you can figure out what's going on here.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{LETTERS.}\FloatTok{3.}\NormalTok{times.with.invert }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(LETTERS,}\FunctionTok{rev}\NormalTok{(LETTERS),LETTERS)}
+
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS.}\FloatTok{3.}\NormalTok{times, }
+\NormalTok{                LETTERS.}\FloatTok{3.}\NormalTok{times.with.invert)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-167-1.pdf}
+
+\hypertarget{translocations}{%
+\section{Translocations}\label{translocations}}
+
+See if you can figure out what's going on here.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seg1 }\OtherTok{\textless{}{-}}\NormalTok{ LETTERS[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{8}\NormalTok{]}
+\NormalTok{seg2 }\OtherTok{\textless{}{-}}\NormalTok{ LETTERS[}\DecValTok{9}\SpecialCharTok{:}\DecValTok{18}\NormalTok{]}
+\NormalTok{seg3 }\OtherTok{\textless{}{-}}\NormalTok{ LETTERS[}\DecValTok{18}\SpecialCharTok{:}\DecValTok{26}\NormalTok{]}
+
+\NormalTok{LETTERS.with.transloc }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(seg1,seg3,seg2)}
+
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS, }
+\NormalTok{                LETTERS.with.transloc)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-168-1.pdf}
+
+\hypertarget{random-sequence}{%
+\section{Random sequence}\label{random-sequence}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{letters.rand1 }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\AttributeTok{x =}\NormalTok{ LETTERS, }\AttributeTok{size =} \DecValTok{26}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ F)}
+\NormalTok{letters.rand2 }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\AttributeTok{x =}\NormalTok{ LETTERS, }\AttributeTok{size =} \DecValTok{26}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ F)}
+
+
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(letters.rand1, }
+\NormalTok{                letters.rand2)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-169-1.pdf}
+
+\hypertarget{comparing-two-real-sequences-using-a-dotplot}{%
+\section{Comparing two real sequences using a dotplot}\label{comparing-two-real-sequences-using-a-dotplot}}
+
+As a first step in comparing two protein, RNA or DNA sequences, it is a good idea to make a \textbf{dotplot}. A \textbf{dotplot} is a graphical method that allows the comparison of two protein or DNA sequences and identify regions of close similarity between them. A dotplot is essentially a two-dimensional matrix (like a grid), which has the sequences of the proteins being compared along the vertical and horizontal axes.
+
+In order to make a simple dotplot to represent of the similarity between two sequences, individual cells in the matrix can be shaded black if residues are identical, so that matching sequence segments appear as runs of diagonal lines across the matrix. Identical proteins will have a line exactly on the main diagonal of the dotplot, that spans across the whole matrix.
+
+For proteins that are not identical, but share regions of similarity, the dotplot will have shorter lines that may be on the \textbf{main diagonal}, or off the main diagonal of the matrix. In essence, a dotplot will reveal if there are any regions that are clearly very similar in two protein (or DNA) sequences.
+
+We can create a dotplot for two sequences using the \texttt{dotPlot()} function in the \texttt{seqinr} package.
+
+First, let's look at a dotplot created using only a single sequence. You'd never do this in practice, but it will give you a sense of what dotplots are doing.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(leprae\_vector, }
+\NormalTok{                leprae\_vector)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-170-1.pdf}
+
+These two sequences are identical, so we have a very distinct diagonal line. But there's also other
+
+Now we'll make a real dotplot of the \href{https://en.wikipedia.org/wiki/Chorismate_lyase}{chorismate lyase} proteins from two closely related species, \emph{Mycobacterium leprae} and \emph{Mycobacterium ulcerans}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(leprae\_vector, }
+\NormalTok{                ulcerans\_vector)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-171-1.pdf}
+
+In the dotplot above, the \emph{M. leprae} sequence is plotted along the x-axis (horizontal axis), and the \emph{M. ulcerans} sequence is plotted along the y-axis (vertical axis). The dotplot displays a dot at points where there is an identical amino acid in the two sequences.
+
+For example, if amino acid 53 in the \emph{M. leprae} sequence is the same amino acid (eg. ``W'') as amino acid 70 in the M. ulcerans sequence, then the dotplot will show a dot the position in the plot where x =50 and y =53.
+
+In this case you can see a lot of dots along a diagonal line, which indicates that the two protein sequences contain many identical amino acids at the same (or very similar) positions along their lengths. This is what you would expect, because we know that these two proteins are \textbf{homologs} (related proteins) because they share a close evolutionary history.
+
+\hypertarget{global-proteins-aligments-in-r}{%
+\chapter{\texorpdfstring{Global proteins aligments in \emph{R}}{Global proteins aligments in R}}\label{global-proteins-aligments-in-r}}
+
+\textbf{By}: Avril Coghlan.
+
+\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+
+\hypertarget{preliminaries-5}{%
+\section{Preliminaries}\label{preliminaries-5}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(compbio4all)}
+
 \FunctionTok{library}\NormalTok{(Biostrings)}
 \end{Highlighting}
 \end{Shaded}
@@ -2987,386 +3256,8 @@ Something cool which we will explore in the next exercise is that we can do summ
 ##     strsplit
 \end{verbatim}
 
-\hypertarget{download-sequences}{%
-\subsection{Download sequences}\label{download-sequences}}
-
-As we did in the previous lesson on dotplots, we'll look at two sequences.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Download}
-\DocumentationTok{\#\# sequence 1: Q9CD83}
-\NormalTok{leprae\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
-                        \AttributeTok{id =} \StringTok{"Q9CD83"}\NormalTok{,}
-                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
-\DocumentationTok{\#\# sequence 2: OIN17619.1}
-\NormalTok{ulcerans\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
-                         \AttributeTok{id =} \StringTok{"OIN17619.1"}\NormalTok{,}
-                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
-
-\CommentTok{\# clean}
-\NormalTok{leprae\_vector   }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(leprae\_fasta)}
-\NormalTok{ulcerans\_vector }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(ulcerans\_fasta)}
-
-\CommentTok{\# convert leprae\_vector to an object lepraeseq\_string}
-\NormalTok{lepraeseq\_string }\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(leprae\_vector,}\AttributeTok{collapse =} \StringTok{""}\NormalTok{)    }
-
-\CommentTok{\# convert ulcerans\_vector to an object ulceransseq\_string}
-\NormalTok{ulceransseq\_string }\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(ulcerans\_vector,}\AttributeTok{collapse =} \StringTok{""}\NormalTok{) }
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm}{%
-\section{Pairwise local alignment of protein sequences using the Smith-Waterman algorithm}\label{pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm}}
-
-You can use the \texttt{pairwiseAlignment()} function to find the optimal \textbf{local alignment} of two sequences, that is the best alignment of parts (\textbf{subsequences}) of those sequences, by using the \texttt{type=local} argument in \texttt{pairwiseAlignment()}. This uses the \textbf{\href{https://en.wikipedia.org/wiki/Smith\%E2\%80\%93Waterman_algorithm}{Smith-Waterman algorithm}} for local alignment. This is the classic bioinformatics algorithm for finding optimal local alignments. (We'll discuss updated approaches when we get into \textbf{database searches} with \textbf{BLAST}, the **Basic, Local Alignment Search Tool* that is the workhorse of many day-to-day bioinformatics tasks).
-
-For example, to find the best local alignment between the \emph{M. leprae} and \emph{M. ulcerans} chorismate lyase proteins, we can run:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# load scoring matrix}
-\FunctionTok{data}\NormalTok{(BLOSUM50)}
-
-\CommentTok{\# run alignment}
-\NormalTok{localAlignLepraeUlcerans }\OtherTok{\textless{}{-}} \FunctionTok{pairwiseAlignment}\NormalTok{(lepraeseq\_string, }
-\NormalTok{                                              ulceransseq\_string,}
-                                              \AttributeTok{substitutionMatrix =}\NormalTok{ BLOSUM50, }
-                                              \AttributeTok{gapOpening =} \SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }
-                                              \AttributeTok{gapExtension =} \SpecialCharTok{{-}}\DecValTok{8}\NormalTok{, }
-                                              \AttributeTok{scoreOnly =} \ConstantTok{FALSE}\NormalTok{, }
-                                              \AttributeTok{type=}\StringTok{"local"}\NormalTok{)  }\CommentTok{\# \textless{}= type = "local !}
-\end{Highlighting}
-\end{Shaded}
-
-Print out the optimal local alignment and its score
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{localAlignLepraeUlcerans }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Local PairwiseAlignmentsSingleSubject (1 of 1)
-## pattern:  [1] MTNRTLSREEIRKLDRDLRILVATNGTLTRVL...TEYFLRSVFQDTPREELDRCQYSNDIDTRSG
-## subject: [11] MTECHLSDEEIRKLNRDLRILIATNGTLTRIL...TEYFLRSVFEDNSREEPIRHQRSVGTSARSG
-## score: 761
-\end{verbatim}
-
-As before, we can print out the full alignment with \texttt{printPairwiseAlignment()}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{printPairwiseAlignment}\NormalTok{(localAlignLepraeUlcerans, }\DecValTok{60}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "MTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLLDVAPKIPELE 60"
-## [1] "MTECHLSDEEIRKLNRDLRILIATNGTLTRILNVLANDEIVVEIVKQQIQDAAPEMDGCD 60"
-## [1] " "
-## [1] "NLKIGRILQRDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPIGEIMAASRIE 120"
-## [1] "HSSIGRVLRRDIVLKGRRSGIPFVAAESFIAIDLLPPEIVASLLETHRPIGEVMAASCIE 120"
-## [1] " "
-## [1] "TYKEDAQVWIGDLPCWLADYGYWDLPKRAVGRRYRIIAGGQPVIITTEYFLRSVFQDTPR 180"
-## [1] "TFKEEAKVWAGESPAWLELDRRRNLPPKVVGRQYRVIAEGRPVIIITEYFLRSVFEDNSR 180"
-## [1] " "
-## [1] "EELDRCQYSNDIDTRSG 240"
-## [1] "EEPIRHQRSVGTSARSG 240"
-## [1] " "
-\end{verbatim}
-
-We see that the optimal local alignment is quite similar to the optimal global alignment in this case, except that it excludes a short region of poorly aligned sequence at the start and at the ends of the two proteins.
-
-\hypertarget{downloading-protein-sequences-in-r}{%
-\chapter{\texorpdfstring{Downloading protein sequences in \emph{R}}{Downloading protein sequences in R}}\label{downloading-protein-sequences-in-r}}
-
-\textbf{By}: Avril Coghlan.
-
-\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
-
-\hypertarget{preliminaries-4}{%
-\section{Preliminaries}\label{preliminaries-4}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(compbio4all)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{retrieving-a-uniprot-protein-sequence-using-rentrez}{%
-\section{Retrieving a UniProt protein sequence using rentrez}\label{retrieving-a-uniprot-protein-sequence-using-rentrez}}
-
-We can use \texttt{entrez\_fetch()} to download protein sequences.
-
-For example to retrieve the protein sequences for UniProt accessions Q9CD83 and A0PQ23, we type in R:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# sequence 1: Q9CD83}
-\NormalTok{leprae\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
-                        \AttributeTok{id =} \StringTok{"Q9CD83"}\NormalTok{,}
-                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
-\CommentTok{\# sequence 2: OIN17619.1}
-\NormalTok{ulcerans\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
-                         \AttributeTok{id =} \StringTok{"OIN17619.1"}\NormalTok{,}
-                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Display the contents of the \texttt{lepraeseq} FASTA file.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{leprae\_fasta}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] ">sp|Q9CD83.1|PHBS_MYCLE RecName: Full=Chorismate pyruvate-lyase; AltName: Full=4-HB synthase; AltName: Full=p-hydroxybenzoic acid synthase\nMTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLLDVAPKIPELENLKIGRILQR\nDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPIGEIMAASRIETYKEDAQVWIGDLPCWLADY\nGYWDLPKRAVGRRYRIIAGGQPVIITTEYFLRSVFQDTPREELDRCQYSNDIDTRSGDRFVLHGRVFKNL\n\n"
-\end{verbatim}
-
-Let's clean these up to remove the header and new line characters usin the function \texttt{fasta\_cleaner()}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{leprae\_vector   }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(leprae\_fasta)}
-\NormalTok{ulcerans\_vector }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(ulcerans\_fasta)}
-\end{Highlighting}
-\end{Shaded}
-
-Examine the output using \texttt{length()}, \texttt{class()}, and \texttt{head()}:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{length}\NormalTok{(leprae\_vector)}
-\FunctionTok{class}\NormalTok{(leprae\_vector)}
-\FunctionTok{head}\NormalTok{(leprae\_vector, }\DecValTok{20}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{sequence-dotplots-in-r}{%
-\chapter{\texorpdfstring{Sequence dotplots in \emph{R}}{Sequence dotplots in R}}\label{sequence-dotplots-in-r}}
-
-\textbf{By}: Avril Coghlan.
-
-\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
-
-\textbf{NOTE: I've added some new material that is rather terse and lacks explication.}
-
-\hypertarget{preliminaries-5}{%
-\section{Preliminaries}\label{preliminaries-5}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(compbio4all)}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{download-sequences-1}{%
 \subsection{Download sequences}\label{download-sequences-1}}
-
-As we did in the previous lesson on dotplots, we'll look at two sequences.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# sequence 1: Q9CD83}
-\NormalTok{leprae\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
-                        \AttributeTok{id =} \StringTok{"Q9CD83"}\NormalTok{,}
-                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
-\CommentTok{\# sequence 2: OIN17619.1}
-\NormalTok{ulcerans\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
-                         \AttributeTok{id =} \StringTok{"OIN17619.1"}\NormalTok{,}
-                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
-
-\NormalTok{leprae\_vector   }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(leprae\_fasta)}
-\NormalTok{ulcerans\_vector }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(ulcerans\_fasta)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{visualzing-two-identical-sequences}{%
-\section{Visualzing two identical sequences}\label{visualzing-two-identical-sequences}}
-
-To help build our intuition about dotplots we'll first look at some artificial examples. First, we'll see what happens when we make a dotplot comparing the alphabet versus itself. The build-in \texttt{LETTERS} object in R contains the alphabet from A to Z. This is a sequence with no repeats.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS, }
-\NormalTok{                LETTERS)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-167-1.pdf}
-
-What we get is a perfect diagonal line.
-
-\hypertarget{visualizing-repeats}{%
-\section{Visualizing repeats}\label{visualizing-repeats}}
-
-Now lets' make a sequence where the alphabet gets repeats twice
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{LETTERS.}\FloatTok{2.}\NormalTok{times }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(LETTERS,LETTERS)}
-
-\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS.}\FloatTok{2.}\NormalTok{times, }
-\NormalTok{                LETTERS.}\FloatTok{2.}\NormalTok{times)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-168-1.pdf}
-
-Note the diagonal lines.
-
-Now 3 repeats
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{LETTERS.}\FloatTok{3.}\NormalTok{times }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(LETTERS,LETTERS,LETTERS)}
-
-\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS.}\FloatTok{3.}\NormalTok{times, }
-\NormalTok{                LETTERS.}\FloatTok{3.}\NormalTok{times)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-169-1.pdf}
-
-Here's another example of repeats.
-
-Create sequence with repeats:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{seq.repeat }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{,}\StringTok{"C"}\NormalTok{,}\StringTok{"D"}\NormalTok{,}\StringTok{"E"}\NormalTok{,}\StringTok{"F"}\NormalTok{,}\StringTok{"G"}\NormalTok{,}\StringTok{"H"}\NormalTok{,}\StringTok{"I"}\NormalTok{)}
-\NormalTok{seq1 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(seq.repeat,}\DecValTok{3}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Make the dotplot:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(seq1, }
-\NormalTok{                seq1)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-171-1.pdf}
-
-\hypertarget{inversions}{%
-\section{Inversions}\label{inversions}}
-
-See if you can figure out what's going on here.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{LETTERS.}\FloatTok{3.}\NormalTok{times.with.invert }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(LETTERS,}\FunctionTok{rev}\NormalTok{(LETTERS),LETTERS)}
-
-\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS.}\FloatTok{3.}\NormalTok{times, }
-\NormalTok{                LETTERS.}\FloatTok{3.}\NormalTok{times.with.invert)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-172-1.pdf}
-
-\hypertarget{translocations}{%
-\section{Translocations}\label{translocations}}
-
-See if you can figure out what's going on here.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{seg1 }\OtherTok{\textless{}{-}}\NormalTok{ LETTERS[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{8}\NormalTok{]}
-\NormalTok{seg2 }\OtherTok{\textless{}{-}}\NormalTok{ LETTERS[}\DecValTok{9}\SpecialCharTok{:}\DecValTok{18}\NormalTok{]}
-\NormalTok{seg3 }\OtherTok{\textless{}{-}}\NormalTok{ LETTERS[}\DecValTok{18}\SpecialCharTok{:}\DecValTok{26}\NormalTok{]}
-
-\NormalTok{LETTERS.with.transloc }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(seg1,seg3,seg2)}
-
-\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(LETTERS, }
-\NormalTok{                LETTERS.with.transloc)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-173-1.pdf}
-
-\hypertarget{random-sequence}{%
-\section{Random sequence}\label{random-sequence}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{letters.rand1 }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\AttributeTok{x =}\NormalTok{ LETTERS, }\AttributeTok{size =} \DecValTok{26}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ F)}
-\NormalTok{letters.rand2 }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\AttributeTok{x =}\NormalTok{ LETTERS, }\AttributeTok{size =} \DecValTok{26}\NormalTok{, }\AttributeTok{replace =}\NormalTok{ F)}
-
-
-\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(letters.rand1, }
-\NormalTok{                letters.rand2)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-174-1.pdf}
-
-\hypertarget{comparing-two-real-sequences-using-a-dotplot}{%
-\section{Comparing two real sequences using a dotplot}\label{comparing-two-real-sequences-using-a-dotplot}}
-
-As a first step in comparing two protein, RNA or DNA sequences, it is a good idea to make a \textbf{dotplot}. A \textbf{dotplot} is a graphical method that allows the comparison of two protein or DNA sequences and identify regions of close similarity between them. A dotplot is essentially a two-dimensional matrix (like a grid), which has the sequences of the proteins being compared along the vertical and horizontal axes.
-
-In order to make a simple dotplot to represent of the similarity between two sequences, individual cells in the matrix can be shaded black if residues are identical, so that matching sequence segments appear as runs of diagonal lines across the matrix. Identical proteins will have a line exactly on the main diagonal of the dotplot, that spans across the whole matrix.
-
-For proteins that are not identical, but share regions of similarity, the dotplot will have shorter lines that may be on the \textbf{main diagonal}, or off the main diagonal of the matrix. In essence, a dotplot will reveal if there are any regions that are clearly very similar in two protein (or DNA) sequences.
-
-We can create a dotplot for two sequences using the \texttt{dotPlot()} function in the \texttt{seqinr} package.
-
-First, let's look at a dotplot created using only a single sequence. You'd never do this in practice, but it will give you a sense of what dotplots are doing.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(leprae\_vector, }
-\NormalTok{                leprae\_vector)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-175-1.pdf}
-
-These two sequences are identical, so we have a very distinct diagonal line. But there's also other
-
-Now we'll make a real dotplot of the \href{https://en.wikipedia.org/wiki/Chorismate_lyase}{chorismate lyase} proteins from two closely related species, \emph{Mycobacterium leprae} and \emph{Mycobacterium ulcerans}.
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{seqinr}\SpecialCharTok{::}\FunctionTok{dotPlot}\NormalTok{(leprae\_vector, }
-\NormalTok{                ulcerans\_vector)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-176-1.pdf}
-
-In the dotplot above, the \emph{M. leprae} sequence is plotted along the x-axis (horizontal axis), and the \emph{M. ulcerans} sequence is plotted along the y-axis (vertical axis). The dotplot displays a dot at points where there is an identical amino acid in the two sequences.
-
-For example, if amino acid 53 in the \emph{M. leprae} sequence is the same amino acid (eg. ``W'') as amino acid 70 in the M. ulcerans sequence, then the dotplot will show a dot the position in the plot where x =50 and y =53.
-
-In this case you can see a lot of dots along a diagonal line, which indicates that the two protein sequences contain many identical amino acids at the same (or very similar) positions along their lengths. This is what you would expect, because we know that these two proteins are \textbf{homologs} (related proteins) because they share a close evolutionary history.
-
-\hypertarget{global-proteins-aligments-in-r}{%
-\chapter{\texorpdfstring{Global proteins aligments in \emph{R}}{Global proteins aligments in R}}\label{global-proteins-aligments-in-r}}
-
-\textbf{By}: Avril Coghlan.
-
-\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
-
-\hypertarget{preliminaries-6}{%
-\section{Preliminaries}\label{preliminaries-6}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(compbio4all)}
-
-\FunctionTok{library}\NormalTok{(Biostrings)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{download-sequences-2}{%
-\subsection{Download sequences}\label{download-sequences-2}}
 
 As we did in the previous lesson on dotplots, we'll look at two sequences.
 
@@ -3739,6 +3630,489 @@ The R function \texttt{printPairwiseAlignment()} below will do this for you:
 \end{verbatim}
 
 The position in the protein of the amino acid that is at the end of each line of the printed alignment is shown after the end of the line. For example, the first line of the alignment above finishes at amino acid position 50 in the \emph{M. leprae} protein and also at amino acid position 60 in the \emph{M. ulcerans} protein. Becaues there as a difference of 60-50 = 10 bases, there must be 10 insertions in the \emph{M. leprae} to get it to line up. Count the number of dashes in the sequence to see how many there are.
+
+\hypertarget{local-protein-aligments-in-r}{%
+\chapter{\texorpdfstring{Local protein aligments in \emph{R}}{Local protein aligments in R}}\label{local-protein-aligments-in-r}}
+
+\textbf{By}: Avril Coghlan.
+
+\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+
+\hypertarget{preliminaries-6}{%
+\section{Preliminaries}\label{preliminaries-6}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(compbio4all)}
+\FunctionTok{library}\NormalTok{(Biostrings)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{download-sequences-2}{%
+\subsection{Download sequences}\label{download-sequences-2}}
+
+As we did in the previous lesson on dotplots, we'll look at two sequences.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Download}
+\DocumentationTok{\#\# sequence 1: Q9CD83}
+\NormalTok{leprae\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                        \AttributeTok{id =} \StringTok{"Q9CD83"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\DocumentationTok{\#\# sequence 2: OIN17619.1}
+\NormalTok{ulcerans\_fasta }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{,}
+                         \AttributeTok{id =} \StringTok{"OIN17619.1"}\NormalTok{,}
+                         \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+
+\CommentTok{\# clean}
+\NormalTok{leprae\_vector   }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(leprae\_fasta)}
+\NormalTok{ulcerans\_vector }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(ulcerans\_fasta)}
+
+\CommentTok{\# convert leprae\_vector to an object lepraeseq\_string}
+\NormalTok{lepraeseq\_string }\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(leprae\_vector,}\AttributeTok{collapse =} \StringTok{""}\NormalTok{)    }
+
+\CommentTok{\# convert ulcerans\_vector to an object ulceransseq\_string}
+\NormalTok{ulceransseq\_string }\OtherTok{\textless{}{-}}\FunctionTok{paste}\NormalTok{(ulcerans\_vector,}\AttributeTok{collapse =} \StringTok{""}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm}{%
+\section{Pairwise local alignment of protein sequences using the Smith-Waterman algorithm}\label{pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm}}
+
+You can use the \texttt{pairwiseAlignment()} function to find the optimal \textbf{local alignment} of two sequences, that is the best alignment of parts (\textbf{subsequences}) of those sequences, by using the \texttt{type=local} argument in \texttt{pairwiseAlignment()}. This uses the \textbf{\href{https://en.wikipedia.org/wiki/Smith\%E2\%80\%93Waterman_algorithm}{Smith-Waterman algorithm}} for local alignment. This is the classic bioinformatics algorithm for finding optimal local alignments. (We'll discuss updated approaches when we get into \textbf{database searches} with \textbf{BLAST}, the **Basic, Local Alignment Search Tool* that is the workhorse of many day-to-day bioinformatics tasks).
+
+For example, to find the best local alignment between the \emph{M. leprae} and \emph{M. ulcerans} chorismate lyase proteins, we can run:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# load scoring matrix}
+\FunctionTok{data}\NormalTok{(BLOSUM50)}
+
+\CommentTok{\# run alignment}
+\NormalTok{localAlignLepraeUlcerans }\OtherTok{\textless{}{-}} \FunctionTok{pairwiseAlignment}\NormalTok{(lepraeseq\_string, }
+\NormalTok{                                              ulceransseq\_string,}
+                                              \AttributeTok{substitutionMatrix =}\NormalTok{ BLOSUM50, }
+                                              \AttributeTok{gapOpening =} \SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }
+                                              \AttributeTok{gapExtension =} \SpecialCharTok{{-}}\DecValTok{8}\NormalTok{, }
+                                              \AttributeTok{scoreOnly =} \ConstantTok{FALSE}\NormalTok{, }
+                                              \AttributeTok{type=}\StringTok{"local"}\NormalTok{)  }\CommentTok{\# \textless{}= type = "local !}
+\end{Highlighting}
+\end{Shaded}
+
+Print out the optimal local alignment and its score
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{localAlignLepraeUlcerans }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Local PairwiseAlignmentsSingleSubject (1 of 1)
+## pattern:  [1] MTNRTLSREEIRKLDRDLRILVATNGTLTRVL...TEYFLRSVFQDTPREELDRCQYSNDIDTRSG
+## subject: [11] MTECHLSDEEIRKLNRDLRILIATNGTLTRIL...TEYFLRSVFEDNSREEPIRHQRSVGTSARSG
+## score: 761
+\end{verbatim}
+
+As before, we can print out the full alignment with \texttt{printPairwiseAlignment()}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{printPairwiseAlignment}\NormalTok{(localAlignLepraeUlcerans, }\DecValTok{60}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "MTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLLDVAPKIPELE 60"
+## [1] "MTECHLSDEEIRKLNRDLRILIATNGTLTRILNVLANDEIVVEIVKQQIQDAAPEMDGCD 60"
+## [1] " "
+## [1] "NLKIGRILQRDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPIGEIMAASRIE 120"
+## [1] "HSSIGRVLRRDIVLKGRRSGIPFVAAESFIAIDLLPPEIVASLLETHRPIGEVMAASCIE 120"
+## [1] " "
+## [1] "TYKEDAQVWIGDLPCWLADYGYWDLPKRAVGRRYRIIAGGQPVIITTEYFLRSVFQDTPR 180"
+## [1] "TFKEEAKVWAGESPAWLELDRRRNLPPKVVGRQYRVIAEGRPVIIITEYFLRSVFEDNSR 180"
+## [1] " "
+## [1] "EELDRCQYSNDIDTRSG 240"
+## [1] "EEPIRHQRSVGTSARSG 240"
+## [1] " "
+\end{verbatim}
+
+We see that the optimal local alignment is quite similar to the optimal global alignment in this case, except that it excludes a short region of poorly aligned sequence at the start and at the ends of the two proteins.
+
+\hypertarget{retrieving-multiple-sequences-in-r}{%
+\chapter{Retrieving multiple sequences in R}\label{retrieving-multiple-sequences-in-r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(compbio4all)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{By}: Avril Coghlan.\\
+Multiple Alignment and Phylogenetic trees
+\url{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html}
+
+\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+
+\hypertarget{prelminaries}{%
+\section{Prelminaries}\label{prelminaries}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# package}
+\FunctionTok{library}\NormalTok{(compbio4all)}
+\FunctionTok{library}\NormalTok{(rentrez)}
+
+\CommentTok{\# function}
+
+\DocumentationTok{\#\# this function is called in this lesson}
+\DocumentationTok{\#\# it will be added to the combio4all package}
+\DocumentationTok{\#\#\# and called from it}
+\NormalTok{entrez\_fetch\_list }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(db, id, rettype, ...)\{}
+  
+  \CommentTok{\#setup list for storing output}
+\NormalTok{  n.seq }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(id)}
+\NormalTok{  list.output }\OtherTok{\textless{}{-}} \FunctionTok{as.list}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, n.seq))}
+  \FunctionTok{names}\NormalTok{(list.output) }\OtherTok{\textless{}{-}}\NormalTok{ id}
+  
+  \CommentTok{\# get output}
+  \ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(id))\{}
+\NormalTok{  list.output[[i]] }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =}\NormalTok{ db, }
+                          \AttributeTok{id =}\NormalTok{ id[i], }
+                          \AttributeTok{rettype =}\NormalTok{ rettype)}
+\NormalTok{  \}}
+  
+  
+  \FunctionTok{return}\NormalTok{(list.output)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{retrieving-a-set-of-sequences-from-uniprot}{%
+\section{Retrieving a set of sequences from UniProt}\label{retrieving-a-set-of-sequences-from-uniprot}}
+
+Using websites or \emph{R} you can search fort DNA or protein sequences in sequence databases such as the \textbf{NCBI} database and \textbf{UniProt}. Oftentimes, it is useful to retrieve several sequences at once. The \emph{R} function \texttt{entrez\_fetch()} from the \emph{rentrez} package is useful for this purpose. Other packages can also, such as \texttt{sequinr} this but \emph{rentrez} has the cleanest interface.
+
+We'll retrieve the protein sequences for these UniProt accessions
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  P06747: rabies virus phosphoprotein
+\item
+  P0C569: Mokola virus phosphoprotein
+\item
+  O56773: Lagos bat virus phosphoprotein
+\item
+  Q5VKP1: Western Caucasian bat virus phosphoprotein
+\end{enumerate}
+
+Rabies virus is the virus responsible for rabies, which is classified by the WHO as a \textbf{neglected tropical disease}. Rabies is not a major human pathogen in the USA and Europe, but is problem in Africa. {[}Mokola virus{]}(\url{https://en.wikipedia.org/wiki/Mokola_lyssavirus}() and rabies virus are closely related viruses that both belong to a group of viruses called the \href{https://en.wikipedia.org/wiki/Lyssavirus}{Lyssaviruses}. Mokola virus causes a rabies-like infection in mammals including humans.
+
+You can type make a vector containing the names of the sequences. Note that the accessions aren't numbers but are \textbf{quoted character strings}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seqnames }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"P06747"}\NormalTok{, }
+              \StringTok{"P0C569"}\NormalTok{, }
+              \StringTok{"O56773"}\NormalTok{, }
+              \StringTok{"Q5VKP1"}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+Confirm that we are working with character data using \texttt{is.character()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.character}\NormalTok{(seqnames)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+We can access the first element of the vector, P06747, using \textbf{bracket notation} like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seqnames[}\DecValTok{1}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "P06747"
+\end{verbatim}
+
+The code to access the second and third elements of the vector of accessions is:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 2nd accession}
+\NormalTok{seqnames[}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "P0C569"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 3rd accession}
+\NormalTok{seqnames[}\DecValTok{3}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "O56773"
+\end{verbatim}
+
+Now let's use this vector of accessions to download sequence data. To make sure we understand what we're doing, first we'll download just the sequences one by one. This code retrieves the first sequence and store them in vector variable \texttt{seqs}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq1 }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{, }
+                          \AttributeTok{id =}\NormalTok{ seqnames[}\DecValTok{1}\NormalTok{], }
+                          \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)      }
+\end{Highlighting}
+\end{Shaded}
+
+We can do the next two sequences by change \texttt{id\ =\ ...} to \texttt{seqnames{[}2{]}} and \texttt{seqnames{[}3{]}}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# sequence two using seqnames[2]}
+\NormalTok{seq2 }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{, }
+                          \AttributeTok{id =}\NormalTok{ seqnames[}\DecValTok{2}\NormalTok{], }
+                          \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{) }
+
+\CommentTok{\# sequence two using seqnames[3]}
+\NormalTok{seq3 }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{, }
+                          \AttributeTok{id =}\NormalTok{ seqnames[}\DecValTok{3}\NormalTok{], }
+                          \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+
+\CommentTok{\# sequence two using seqnames[4]}
+\NormalTok{seq4 }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{, }
+                          \AttributeTok{id =}\NormalTok{ seqnames[}\DecValTok{4}\NormalTok{], }
+                          \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Each of these is in raw FASTA format
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] ">sp|P06747.1|PHOSP_RABVP RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1\nMSKIFVNPSAIRAGLADLEMAEETVDLINRNIEDNQAHLQGEPIEVDNLPEDMGRLHLDDGKSPNPGEMA\nKVGEGKYREDFQMDEGEDPSLLFQSYLDNVGVQIVRQIRSGERFLKIWSQTVEEIISYVAVNFPNPPGKS\nSEDKSTQTTGRELKKETTPTPSQRESQSSKARMAAQTASGPPALEWSATNEEDDLSVEAEIAHQIAESFS\nKKYKFPSRSSGILLYNFEQLKMNLDDIVKEAKNVPGVTRLARDGSKLPLRCVLGWVALANSKKFQLLVES\nNKLSKIMQDDLNRYTSC\n\n"
+\end{verbatim}
+
+To do an analysis of these we need to clean each of these vectors using \texttt{fasta\_cleaner()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq1 }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(seq1, }\AttributeTok{parse =}\NormalTok{ T)  }
+\NormalTok{seq2 }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(seq2, }\AttributeTok{parse =}\NormalTok{ T)  }
+\NormalTok{seq3 }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(seq3, }\AttributeTok{parse =}\NormalTok{ T)  }
+\NormalTok{seq4 }\OtherTok{\textless{}{-}} \FunctionTok{fasta\_cleaner}\NormalTok{(seq4, }\AttributeTok{parse =}\NormalTok{ T)  }
+\end{Highlighting}
+\end{Shaded}
+
+Print out the first 20 letters of the first sequence
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq1[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{]                                   }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "M" "S" "K" "I" "F" "V" "N" "P" "S" "A" "I" "R" "A" "G" "L" "A" "D" "L" "E"
+## [20] "M"
+\end{verbatim}
+
+Print out the first 20 letters of the second sequence
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq2[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{20}\NormalTok{]                                   }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "M" "S" "K" "D" "L" "V" "H" "P" "S" "L" "I" "R" "A" "G" "I" "V" "E" "L" "E"
+## [20] "M"
+\end{verbatim}
+
+We have these four sequences, each cleaned and in its own vector. We can therefore do dotplots, alignments, and other analyses. Creating all these seprate vectors is a bit laborious. Luckily \texttt{entrez\_fetch()} can download multiple sequences for us.
+
+\hypertarget{downloading-sequences-in-bulk}{%
+\section{Downloading sequences in bulk}\label{downloading-sequences-in-bulk}}
+
+Previously we were giving \texttt{entrez\_fetch} the name of just one sequence at a time by using square brackets on our \texttt{seqnames} vector, e.g.~\texttt{seqnames{[}1{]}}, \texttt{seqnames{[}2{]}} etc. If don't include square brackets, \texttt{entrez\_fetch()} will download \emph{all} of the sequences in succession and package them up into a single long, formatted string. This may take a second or two, depending on your internet connection and how busy the NCBI serverse are.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq\_1\_2\_3\_4 }\OtherTok{\textless{}{-}}\NormalTok{ rentrez}\SpecialCharTok{::}\FunctionTok{entrez\_fetch}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{, }
+                          \AttributeTok{id =}\NormalTok{ seqnames, }
+                          \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+We can view what we have in a nice format using the \texttt{cat()} function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(seq\_1\_2\_3\_4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## >sp|P06747.1|PHOSP_RABVP RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1
+## MSKIFVNPSAIRAGLADLEMAEETVDLINRNIEDNQAHLQGEPIEVDNLPEDMGRLHLDDGKSPNPGEMA
+## KVGEGKYREDFQMDEGEDPSLLFQSYLDNVGVQIVRQIRSGERFLKIWSQTVEEIISYVAVNFPNPPGKS
+## SEDKSTQTTGRELKKETTPTPSQRESQSSKARMAAQTASGPPALEWSATNEEDDLSVEAEIAHQIAESFS
+## KKYKFPSRSSGILLYNFEQLKMNLDDIVKEAKNVPGVTRLARDGSKLPLRCVLGWVALANSKKFQLLVES
+## NKLSKIMQDDLNRYTSC
+## 
+## >sp|P0C569.1|PHOSP_MOKV RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1
+## MSKDLVHPSLIRAGIVELEMAEETTDLINRTIESNQAHLQGEPLYVDSLPEDMSRLRIEDKSRRTKTEEE
+## ERDEGSSEEDNYLSEGQDPLIPFQNFLDEIGARAVKRLKTGEGFFRVWSALSDDIKGYVSTNIMTSGERD
+## TKSIQIQTEPTASVSSGNESRHDSESMHDPNDKKDHTPDHDVVPDIESSTDKGEIRDIEGEVAHQVAESF
+## SKKYKFPSRSSGIFLWNFEQLKMNLDDIVKAAMNVPGVERIAEKGGKLPLRCILGFVALDSSKRFRLLAD
+## NDKVARLIQEDINSYMARLEEAE
+## 
+## >sp|O56773.1|PHOSP_LBV RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1
+## MSKGLIHPSAIRSGLVDLEMAEETVDLVHKNLADSQAHLQGEPLNVDSLPEDMRKMRLTNAPSEREIIEE
+## DEEEYSSEDEYYLSQGQDPMVPFQNFLDELGTQIVRRMKSGDGFFKIWSAASEDIKGYVLSTFMKPETQA
+## TVSKPTQTDSLSVPRPSQGYTSVPRDKPSNSESQGGGVKPKKVQKSEWTRDTDEISDIEGEVAHQVAESF
+## SKKYKFPSRSSGIFLWNFEQLKMNLDDIVKTSMNVPGVDKIAEKGGKLPLRCILGFVSLDSSKRFRLLAD
+## TDKVARLMQDDIHNYMTRIEEIDHN
+## 
+## >sp|Q5VKP1.1|PHOSP_WCBV RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1
+## MSKSLIHPSDLRAGLADIEMADETVDLVYKNLSEGQAHLQGEPFDIKDLPEGVSKLQISDNVRSDTSPNE
+## YSDEDDEEGEDEYEEVYDPVSAFQDFLDETGSYLISKLKKGEKIKKTWSEVSRVIYSYVMSNFPPRPPKP
+## TTKDIAVQADLKKPNEIQKISEHKSKSEPSPREPVVEMHKHATLENPEDDEGALESEIAHQVAESYSKKY
+## KFPSKSSGIFLWNFEQLKMNLDDIVQVARGVPGISQIVERGGKLPLRCMLGYVGLETSKRFRSLVNQDKL
+## CKLMQEDLNAYSVSSNN
+\end{verbatim}
+
+This is a good way to store FASTA files, but we can't work with them in this format - they need to be in vectors. To give us FASTA data in a usable form the \texttt{compbio4all} package has a function called \texttt{entrez\_fetch\_list()}, which is a \textbf{wrapper} for \texttt{entrez\_fetch()} which returns each sequence in its own separate slot in a list.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq\_1\_2\_3\_4 }\OtherTok{\textless{}{-}} \FunctionTok{entrez\_fetch\_list}\NormalTok{(}\AttributeTok{db =} \StringTok{"protein"}\NormalTok{, }
+                          \AttributeTok{id =}\NormalTok{ seqnames, }
+                          \AttributeTok{rettype =} \StringTok{"fasta"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Let's look at the output
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq\_1\_2\_3\_4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $P06747
+## [1] ">sp|P06747.1|PHOSP_RABVP RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1\nMSKIFVNPSAIRAGLADLEMAEETVDLINRNIEDNQAHLQGEPIEVDNLPEDMGRLHLDDGKSPNPGEMA\nKVGEGKYREDFQMDEGEDPSLLFQSYLDNVGVQIVRQIRSGERFLKIWSQTVEEIISYVAVNFPNPPGKS\nSEDKSTQTTGRELKKETTPTPSQRESQSSKARMAAQTASGPPALEWSATNEEDDLSVEAEIAHQIAESFS\nKKYKFPSRSSGILLYNFEQLKMNLDDIVKEAKNVPGVTRLARDGSKLPLRCVLGWVALANSKKFQLLVES\nNKLSKIMQDDLNRYTSC\n\n"
+## 
+## $P0C569
+## [1] ">sp|P0C569.1|PHOSP_MOKV RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1\nMSKDLVHPSLIRAGIVELEMAEETTDLINRTIESNQAHLQGEPLYVDSLPEDMSRLRIEDKSRRTKTEEE\nERDEGSSEEDNYLSEGQDPLIPFQNFLDEIGARAVKRLKTGEGFFRVWSALSDDIKGYVSTNIMTSGERD\nTKSIQIQTEPTASVSSGNESRHDSESMHDPNDKKDHTPDHDVVPDIESSTDKGEIRDIEGEVAHQVAESF\nSKKYKFPSRSSGIFLWNFEQLKMNLDDIVKAAMNVPGVERIAEKGGKLPLRCILGFVALDSSKRFRLLAD\nNDKVARLIQEDINSYMARLEEAE\n\n"
+## 
+## $O56773
+## [1] ">sp|O56773.1|PHOSP_LBV RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1\nMSKGLIHPSAIRSGLVDLEMAEETVDLVHKNLADSQAHLQGEPLNVDSLPEDMRKMRLTNAPSEREIIEE\nDEEEYSSEDEYYLSQGQDPMVPFQNFLDELGTQIVRRMKSGDGFFKIWSAASEDIKGYVLSTFMKPETQA\nTVSKPTQTDSLSVPRPSQGYTSVPRDKPSNSESQGGGVKPKKVQKSEWTRDTDEISDIEGEVAHQVAESF\nSKKYKFPSRSSGIFLWNFEQLKMNLDDIVKTSMNVPGVDKIAEKGGKLPLRCILGFVSLDSSKRFRLLAD\nTDKVARLMQDDIHNYMTRIEEIDHN\n\n"
+## 
+## $Q5VKP1
+## [1] ">sp|Q5VKP1.1|PHOSP_WCBV RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1\nMSKSLIHPSDLRAGLADIEMADETVDLVYKNLSEGQAHLQGEPFDIKDLPEGVSKLQISDNVRSDTSPNE\nYSDEDDEEGEDEYEEVYDPVSAFQDFLDETGSYLISKLKKGEKIKKTWSEVSRVIYSYVMSNFPPRPPKP\nTTKDIAVQADLKKPNEIQKISEHKSKSEPSPREPVVEMHKHATLENPEDDEGALESEIAHQVAESYSKKY\nKFPSKSSGIFLWNFEQLKMNLDDIVQVARGVPGISQIVERGGKLPLRCMLGYVGLETSKRFRSLVNQDKL\nCKLMQEDLNAYSVSSNN\n\n"
+\end{verbatim}
+
+Note that before each sequence is its name, preceded by a dollar sign, e.g.~\texttt{\$P06747}.
+
+This is the name of each element of our list. We can confirm that we have a list using \texttt{is.list()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.list}\NormalTok{(seq\_1\_2\_3\_4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+The size of the list is the number of elements it contains, not the amount of data in each element. There are 4 sequences, so 4 elements, so length = 4.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(seq\_1\_2\_3\_4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+We can access each element of the list by name, like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq\_1\_2\_3\_4}\SpecialCharTok{$}\NormalTok{P06747}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] ">sp|P06747.1|PHOSP_RABVP RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1\nMSKIFVNPSAIRAGLADLEMAEETVDLINRNIEDNQAHLQGEPIEVDNLPEDMGRLHLDDGKSPNPGEMA\nKVGEGKYREDFQMDEGEDPSLLFQSYLDNVGVQIVRQIRSGERFLKIWSQTVEEIISYVAVNFPNPPGKS\nSEDKSTQTTGRELKKETTPTPSQRESQSSKARMAAQTASGPPALEWSATNEEDDLSVEAEIAHQIAESFS\nKKYKFPSRSSGILLYNFEQLKMNLDDIVKEAKNVPGVTRLARDGSKLPLRCVLGWVALANSKKFQLLVES\nNKLSKIMQDDLNRYTSC\n\n"
+\end{verbatim}
+
+We can also access it by its index number, like this, using \textbf{double-bracket notation.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{seq\_1\_2\_3\_4[[}\DecValTok{1}\NormalTok{]] }\CommentTok{\#NOTE: double brackets}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] ">sp|P06747.1|PHOSP_RABVP RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1\nMSKIFVNPSAIRAGLADLEMAEETVDLINRNIEDNQAHLQGEPIEVDNLPEDMGRLHLDDGKSPNPGEMA\nKVGEGKYREDFQMDEGEDPSLLFQSYLDNVGVQIVRQIRSGERFLKIWSQTVEEIISYVAVNFPNPPGKS\nSEDKSTQTTGRELKKETTPTPSQRESQSSKARMAAQTASGPPALEWSATNEEDDLSVEAEIAHQIAESFS\nKKYKFPSRSSGILLYNFEQLKMNLDDIVKEAKNVPGVTRLARDGSKLPLRCVLGWVALANSKKFQLLVES\nNKLSKIMQDDLNRYTSC\n\n"
+\end{verbatim}
+
+Each element of the list is a vector. We can check this using \texttt{is.vector()} like this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.vector}\NormalTok{(seq\_1\_2\_3\_4}\SpecialCharTok{$}\NormalTok{P06747)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+or using double brackets like this
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{is.vector}\NormalTok{(seq\_1\_2\_3\_4[[}\DecValTok{1}\NormalTok{]])}
+\end{Highlighting}
+\end{Shaded}
+
+Its character data, which we can confirm with \texttt{class()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{class}\NormalTok{(seq\_1\_2\_3\_4}\SpecialCharTok{$}\NormalTok{P06747) }\CommentTok{\# dollar sign notation}
+\FunctionTok{class}\NormalTok{(seq\_1\_2\_3\_4[[}\DecValTok{1}\NormalTok{]])   }\CommentTok{\# double{-}bracket notation}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{part-appendices}{%
 \part{Appendices}\label{part-appendices}}
@@ -4145,7 +4519,7 @@ Some functions in R can be executed within nothing in the parentheses.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Mon Jul 12 12:13:32 2021"
+## [1] "Mon Jul 12 13:17:08 2021"
 \end{verbatim}
 
 \textbf{Exponents}
