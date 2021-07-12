@@ -1,4 +1,4 @@
-# Rooted Neighbor-joining Phylogenetic trees
+# Rooted neighbor-joining phylogenetic trees
 
 ```{r eval = T}
 library(compbio4all)
@@ -6,8 +6,8 @@ library(compbio4all)
 
 
 **By**: Avril Coghlan.  
-Multiple Alignment and Phylogenetic trees
-https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html
+[Multiple Alignment and Phylogenetic trees](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html)
+
 
 
 **Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).

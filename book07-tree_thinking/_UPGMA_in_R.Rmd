@@ -1,0 +1,346 @@
+---
+title: "UPGMA in R"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{UPGMA in R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+## Introduction
+
+UPGMA is a method for constructing phylogenetic trees using **genetic distances**.  It is an old, outmoded method that is rarely ever used any more building final versions of trees.  Its relative simplicity makes it a useful starting point for thinking about how to construct phylogenetic trees and code up algorithms to build them.
+
+A good, no-math overview of the general ideas of UPGMA is at
+https://medium.com/@sharma.ravit/upgma-method-designing-a-phylogenetic-tree-9a708de18419
+
+Wikipedia provides a good overview with math that isn't too daunting (though it could be improved)
+https://en.wikipedia.org/wiki/UPGMA
+
+An excellent worked example is at
+http://www.slimsuite.unsw.edu.au/teaching/upgma/
+This example breaks down the math into basic steps, but there's a lot of taxa so its still complicated.
+
+Some useful but terse notes are here:
+https://www.sequentix.de/gelquest/help/upgma_method.htm
+
+If you want to understand what the **ultrametricity** assumption is, check this out (I don't get hung up on this)
+https://www.sequentix.de/gelquest/help/explanation_of_the_term_ultrametric.htm
+
+A worked example showing the limits of UPGMA is at
+https://www.icp.ucl.ac.be/~opperd/private/upgma.html
+
+Another, dense-looking example is here
+http://www.nmsr.org/upgma.htm
+
+Anothere worked example is
+https://www.mun.ca/biology/scarr/2900_UPGMA.htm
+
+Explantion of the convoluted meaning of "Un-weighted" is here
+https://www.mun.ca/biology/scarr/UPGMA_vs_WPGMA.html
+
+## Preliminaries
+
+
+```{r}
+#install.packages("phangorn")
+#install.packages("ape")
+library(phangorn)
+library(ape)
+
+```
+
+## Sequence data
+
+Let's consider three hypothetical DNA sequences.
+```{r}
+human   <- c("a","t","c","g","a","t","c","g")
+chimp   <- c("a","t","c","a","a","t","c","a")
+gorilla <- c("a","a","a","a","a","a","a","a")
+```
+
+
+We can examine each pair of sequences and count up the number of differences between each one.  This gives us a preliminary estimate of how diverged the sequences are.  
+
+Humans and chimps have 2 differences
+```{r}
+rbind(human, chimp)
+```
+
+Chimps and gorillas have 4 differences
+```{r}
+rbind(chimp, gorilla)
+```
+
+
+Humans and gorillas have 6 differences
+```{r}
+rbind(human, gorilla)
+```
+
+We could represent this data as a genetic distance matrix like this
+
+```{r}
+my.dist <- matrix(data = c(NA, NA, NA,
+                            2, NA,NA,
+                            6, 4, NA),
+                  nrow = 3, 
+                  byrow = T)
+colnames(my.dist) <- c("H","C","G")
+rownames(my.dist) <- c("H","C","G")
+my.dist
+```
+
+Alternatively, we could make each row of the matrix into a vector and then stack them with rbind
+```{r}
+human.row <- c(NA,NA,NA)
+chimp.row <- c( 2,NA,NA)
+gorilla.row <- c(6,4,NA)
+
+my.dist <- rbind(human.row, chimp.row, gorilla.row)
+
+spp.names <- c("human","chimp","gorilla")
+colnames(my.dist) <- spp.names
+rownames(my.dist) <- spp.names
+my.dist
+
+```
+
+
+Note that we leave the values on the diagonal as NA because the genetic distance between humans and humans, or chimps and chimps, is 0 and isn't helpful.  A matrix like this is also symmetrical, where the lower triangle portion is the same as the upper portion  We could build the matrix like the one below if we wanted, but the convention is to use the lower.
+
+```{r}
+human.row <- c(NA,2,6)
+chimp.row <- c( NA,NA,4)
+gorilla.row <- c(NA,NA,NA)
+
+my.dist.upper <- rbind(human.row, chimp.row, gorilla.row)
+colnames(my.dist.upper) <- spp.names
+rownames(my.dist.upper) <- spp.names
+```
+
+Compare them
+```{r}
+my.dist
+my.dist.upper
+```
+In both matrixes the distance from humans to gorillas is 6, humans to chimps is 2, and chimps to gorillas is 4.  Make sure you understand why this is true.
+
+Again, the lower triangular for is the form usually used.  Because "NA" occurs in the entire top row and last column, people often omit it
+
+```{r}
+my.dist[-1, -3]
+```
+
+These calculations imply that humans and chimps are more closely related.  Phylogenetic algorithms would therefore cluster them into a clade.  In Newick Format this would be (H,C).
+
+Since we have just three taxa, we add G outside the first clade ((H,C),G)
+
+```{r}
+str1<- "(G,(C, H) );"
+tree1<-read.tree(text=str1)
+plot(tree1,edge.width=2, main = "")
+```
+
+Newick format does not represent genetic distance/branch lengths, only the clade and structure.  We can calculate branch lengths using the UPGMA algorithm.
+
+
+## Distance matrix in R from raw sequences
+
+To make a distance matrix in Rfrom the original sequences we first need to put our original sequences into a matrix
+
+```{r}
+my.seqs <- rbind(human, 
+                 chimp, 
+                 gorilla)
+```
+
+We then need to do some fancy processing (this has to do with how the packages we're going to use works, which is picky about formats because its optimized to accommodate real sequences which can be very very long).  We'll use the as.DNAbin() function.
+
+```{r}
+my.seqs.pro <- as.DNAbin(my.seqs)
+```
+
+We then can calculate the **distance** between each sequence in terms of the number (N) of mutations.  This uses the dist.dna() function.  We set the arguement model = "N".  This is the most basic and naive model of mutation and ignores the possibility of back mutations.
+
+```{r}
+seq.dist0 <- dist.dna(my.seqs.pro, model = "N")
+
+seq.dist0
+```
+
+## Distance matrix in R from normal matrix
+
+Sometimes we already have a distance matrix computed.  In this case we can convert our normal matrix into a properly formatted distance matrix.  This requires the as.dist() function.  I'll call this object "seq.dist.from.mat" to indicate that it came "from a matrix".  Note that I'm going to give it the full 3 x x matrix, but
+```{r}
+seq.dist.from.mat <- as.dist(my.dist)
+
+```
+
+I'll now compare the two ways of making the matrix: seq.dist0, which was build from the original sequences, and seq.dist.from.mat, which was built from the hand-entered matrix.
+
+Firt, i'll just look at them
+
+```{r}
+seq.dist0
+seq.dist.from.mat
+```
+
+Then check them out with is() and class()
+
+```{r}
+is(seq.dist0) == is(seq.dist.from.mat)
+class(seq.dist0) == class(seq.dist.from.mat)
+```
+
+Now I'll confirm that that have the same content (Note that distance matrices are not indexed internall by rows and columns, but by the order that the values appear.  The following code therefores returns only 3 responses, not 4.)
+```{r}
+seq.dist0 == seq.dist.from.mat
+```
+
+Cool, so we can make a matrix either from the raw sequences or from a hand-entered matrix.
+
+## UPGMA in R
+
+Once you have a distance matrix, UPGMA is easy in R with the upgam() function
+
+```{r}
+par(mar = c(2,2,2,2))
+seq.upgma0 <- upgma(seq.dist0)
+
+plot(seq.upgma0, main = "orig")
+
+```
+
+This doesn't look too different than the phylogeny produced from Newick.  Let's play with the distance matrix to see what happens.
+
+First, make some more copies of the distance matrix
+```{r}
+seq.dist1 <- seq.dist0
+seq.dist2 <- seq.dist0
+seq.dist3 <- seq.dist0
+```
+
+```{r}
+seq.dist1
+```
+
+The relationship between humans and chimps in in the upper left hand cell of the matrix.  Internally, R is calling this the first cell of the matrix
+
+```{r}
+seq.dist1[1]
+```
+
+
+Let's increase and decrease this value
+```{r}
+seq.dist1[1] <- 20 #change from 2 to 3.75
+seq.dist2[1] <- 0.5 #change from 2 to 0.5
+seq.dist3[1] <- 0.05 #change from 2 to 0.05
+```
+
+
+Now we'll plot the original and the other ones
+```{r}
+par(mfrow = c(2,2), mar = c(2,2,2,2))
+seq.upgma0 <- upgma(seq.dist0)
+plot(seq.upgma0, main = "orig")
+
+
+seq.upgma1 <- upgma(seq.dist1)
+plot(seq.upgma1, main = "longer")
+
+seq.upgma2 <- upgma(seq.dist2)
+plot(seq.upgma2, main = "shorter")
+
+
+seq.upgma3 <- upgma(seq.dist3)
+plot(seq.upgma3, main = "much shorter")
+
+
+```
+
+
+## UPGMA by hand
+
+The following is a brief overview of how branch lenths are calculated.
+
+Human and chimps are closest
+```{r}
+seq.dist0
+
+d.min <- min(seq.dist0)
+```
+
+When two individual taxa are grouped into a clade the branch lengths are set at 1/2 the distance between them.
+
+
+
+```{r}
+d.min/2
+```
+
+We can confirm that this is correct by checking what R calculated via the upgma() function.  We can access R's calculations by looking at the object we saved the upgma output too
+```{r}
+seq.upgma0
+```
+
+On its own this isn't helpful.  But what we can do is use the str() command to look under the hood of the object
+```{r}
+str(seq.upgma0)
+```
+
+The output "edge.length" tells us the shortest branch lengths are 1.  This looks right ("edge" is the math term for branches in a tree).
+
+
+Next we combine Humans and chimps into a clade, then  Re-calculate the distance matrix with a new combined human-chimp grouping.
+The distance from this human-chimp group to gorillas is the average distance from humans to gorillas and chimps to gorillas.
+
+```{r}
+#distance humans to gorillas
+Dh_g <- 6
+
+#distance chimps to gorillas
+Dc_g <- 4
+
+#mean of the two distances
+Dhc_g <- (Dh_g*1 + Dc_g*1)/(1+1)
+
+```
+
+The result is distance between our human-chimp clade and gorillas.
+
+
+This new distance allows us to calculate the branch lengths for the rest of the tree
+
+The branch length from the h-c clade to the gorillas g is 1/2 half the distance we just calculated:
+
+Dhc_g/2 = 5/2 = 2.5.
+
+The remaining branch length is 2.5 - 1 = 1.5. 
+(Next week we'll draw this out to show exactly how this works; see if you can figure out why this is done by sketching out the tree.)
+
+These values match what is in the upgma object
+
+```{r}
+str(seq.upgma0)
+```
+
+
+
+
+```{r}
+
+```
+

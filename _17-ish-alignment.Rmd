@@ -1,0 +1,1273 @@
+---
+title: "Aligments and matrices"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Aligments and matrices}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+
+
+
+
+## Introduction 
+
+In this exercise we will practice manipulating matrices and vector by exploring the structure of **scoring matrices** and **alignments**.
+
+## Preliminaries
+
+Load basic packages
+```{r}
+
+library(flextable)
+library(webshot)
+
+```
+
+Install the Biostrings package from Bioconductor; you don't have to run this if you already happen to have downloaded Biostrings before
+```{r, echo = F, eval = F}
+library(BiocManager)
+
+BiocManager::install("Biostrings") #Manipulate biological string data
+
+```
+
+
+```{r}
+library(Biostrings)
+```
+
+## The BLOSUM matrix
+
+
+When data is contained within an R package we can load it using the data() function.  We'll work with a version of the BLOSUM62 matrix in the Biostrings package
+
+Load BLOSUM62 amino acid substitution matrix using data()
+```{r}
+data(BLOSUM62)
+```
+
+
+Bioinformatics uses a lot of difference data structures, including dataframes, matrices, vectors, etc.
+
+What is the **data structure** of BLOSUM62?  Use is()
+```{r}
+
+
+```
+
+Take a look at the whole matrix by just callin gup the object on its own:
+```{r}
+
+
+```
+
+
+
+Whenever you start working with data its important to get a sense of what's there, how much of its there, and if there is anything goofy.  Since it can be hard to see a dataframe or matrix on a screen its important to explore it with various commands, including nrow(), ncol(), dim(), colnames(), rownames(), head(), and tail()
+
+Use nrow() and ncol() to determine the number of rows and columns.
+```{r}
+
+
+
+```
+
+This is a **square matrix** since the number of rows equals the number of columns.  It is also a symmetrical matrix since the **lower triangle** of the matrix is the same as the **upper triangle**.  The dayoff package has functions for displaying these.
+
+
+The function tri_print() will print just the lower triangle, with all the other values changed to 0. (This might be a bit slow)
+```{r}
+
+tri_print(BLOSUM62, as.image = T)
+
+```
+
+`
+
+R shows us the full **symmetric matrix**, though in books usually they just show the **lower triangle**.  A symmetric matrix is one where the upper and lower triangles are identical.
+
+
+BLOSUM62 is a matrix for scoring differences between sequences of amino acids.  Is the size of this R object therefore a bit odd?  We should check out what these rows and columns actually are.
+
+What are the row names of the matrix?  Use rownames() to determine this.
+```{r}
+
+
+
+```
+
+
+What are the column names?  Run the appropriate command below to determine this.
+```{r}
+
+
+
+```
+
+
+
+Look at the top of the matrix using head().
+```{r}
+
+
+```
+
+
+Look at the bottom of the matrix using tail()
+```{r}
+
+
+```
+
+
+
+What have we learned?  There's more than 20 rows and columns (why is 20 the reference point?).  The B, J, Z, X and * represent more generalized transitions between amino acids.  
+
+According to Baxevanis and Oulette 2005 Bioinformatics: A practical guide to the analysis of genes and proteins, "B" and "Z" are "ambiguity codes".  I believe these usually show up due to sequencing errors or lack of full resolution of an amino acid in the sequence because they are so close chemically (Eg Asparagine versus aspartic acid)  .
+
+* **B** means its ambiguous whether the amino acid is asparagine or aspartic acid (D or N)
+* **J** is used when its ambiguous whether its  I or L.
+* **Z** means its ambiguous whether the amino acid is Glutamine or glutamic acid (E or Q).
+* **X** is a stand in for any or an unknown code.  This might occur if there is a sequencing error; I 
+* The **asterisk** "*" is used to represent stop codons.  I am not sure when this is used.
+
+For more information see https://www.dnabaser.com/articles/IUPAC%20ambiguity%20codes.html and http://www.matrixscience.com/blog/non-standard-amino-acid-residues.html
+
+
+The fact that these are here is a bit annoying.  In the following sections of code we'll remove them.
+
+
+
+## Diagonal of a matrix
+
+The **diagonal of a matrix** is the set of numbers that falls directly in a diagonal line from the upper left corner to the lower right.
+
+
+The diagonal of a scoring matrix represents an amino acid that hasn't changed or diverged between two sequences (in theory it could change and then change back).
+
+
+
+What does diag(BLOSUM62) tell you?
+
+
+```{r}
+
+
+
+```
+
+This is showing you the entries that fall along the diagonal of the matrix.  But the output is just a string of numbers. We can look at the diagonal in context using the diag_show() function from the dayoff package.
+
+```{r}
+diag_show(BLOSUM62)
+```
+
+
+We often want to access just subsets of data from a matrix or a dataframe.  This can take some getting used to.  We can use square brackets to get certain subsets or ranges of cells. If we want just the upper left-hand cell we can do this:
+
+```{r}
+BLOSUM62[1,1]
+```
+
+If we want the first four cells in the upper left hand corner we can do this
+
+```{r}
+BLOSUM62[c(1:4),c(1:4)]
+```
+
+
+If we want to get rid of the **ambiguity code** cells on the bottom which are "B, J, Z, X and *" we can specify that we want elements 1 through 20.  Let me step through ti.
+
+First, run the code below; what happens?
+```{r}
+
+1:4
+
+```
+
+Now do the same thing for 1 to 20
+```{r}
+
+
+
+```
+
+Note that this next line should provide the same result as what you just did.
+```{r}
+
+c(1:20)
+
+```
+
+
+If we really wanted to type all of this out, we would have to do this
+```{r}
+
+c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)
+
+```
+
+
+
+We can get just the first row of the BLOSUM matrix by telling R we want row 1 and columns 1 to 20.
+
+We get row 1 like this
+
+```{r}
+
+BLOSUM62[1, ]
+
+```
+
+We get columns 1:20 like this
+```{r}
+
+BLOSUM62[ , c(1:20)]
+
+```
+
+Note that leaving the first part blank gives us ALL the rows.
+
+If we want just the first row AND the first 20 columns, we do this:
+```{r}
+
+BLOSUM62[1 , c(1:20)]
+
+```
+
+Assign the output of the code c(1:20) to an object called "i" using the assignment operator <-.  The code should like like this i <- c(1:20)
+
+```{r, echo = F}
+i <- c(1:20)
+```
+
+
+```{r}
+
+
+
+```
+
+This thing "i" we just  made is a **vector** of numbers.  Vectors are a 1 dimensional sequence of numbers.  You can thing of a matrix as a bunch of vectors stacked on top of each other.
+
+Unfortunately, if you call is() in the i object you don't get a totally clear picture of what it is.  Where does the word "vector" show up?
+```{r}
+
+
+
+```
+
+I'm not sure why "vector" isn't the first thing to be printed.  We can check whether i is a vector more directly by asking it "hey i, are you a vector" using the is.vector() command
+
+```{r}
+is.vector(i)
+```
+
+Its a vector, so it shouldn't be a matrix, but we can check
+```{r}
+is.matrix(i)
+```
+
+Math books may tell you that a vector is a 1-dimensional matrix, but in R land vectors are distinct from matrices.
+
+Vectors show up everyone in R.  In this case I've defined a vector, i, which is holding the row and column numbers I want to isolated from the BLOSUM62 matrix.
+
+I can call up just these rows and columns like this
+
+
+```{r}
+BLOSUM62[i ,i ]
+```
+
+If I hadn't defined the vector i, I could write
+
+```{r}
+BLOSUM62[c(1:20) ,c(1:20)  ]
+```
+
+Let's isolate just the first 20 rows and columns and put them into a new object called BLOSUM62.subset.
+
+```{r}
+BLOSUM62.subset <-  BLOSUM62[i ,i ]
+```
+
+
+We can get the scores for when there is no change in an amino acid from the diagonal
+```{r}
+diag(BLOSUM62.subset)
+```
+
+
+If you're scoring an alignment by hand you can pull up the diagonal of the matrix this way so  you don't have to squint at the whole matrix.  We can make it even easier if we alphabetize thing, though this requires some extra code which you don't need to worry about.  (I'm making a new vector, i2, which will do the alphabetizing)
+```{r}
+n <- colnames(BLOSUM62.subset)
+i2 <- sort(n)
+```
+
+
+Now things are in alphabetical order
+```{r}
+diag(BLOSUM62.subset)[i2]
+```
+
+Save this alphabetized diagonal to an R object called BLOSUM62.diag using the assignment operator <-
+
+```{r, echo = F}
+BLOSUM62.diag <- diag(BLOSUM62.subset)[i2]
+```
+
+```{r}
+
+
+
+```
+
+What are the names attached to this BLOSUM62.diag object? Unfortunately R is picky about how you do this so you need to figure out whether the functions names(), rownames(), or colname() gets you want you want
+```{r}
+rownames(BLOSUM62.diag)
+colnames(BLOSUM62.diag)
+names(BLOSUM62.diag)
+```
+
+
+When an R object has "names" assigned to it we can use the name to call up elements of the object.
+We can call up just the score for an E to E transition like this, which is a way of saying "Hey R, give me the value in this object that is in the "E" column".
+```{r}
+
+BLOSUM62.diag["E"]
+
+```
+
+
+E is the 4th column so we can also get this value like this
+```{r}
+
+BLOSUM62.diag[4]
+
+```
+
+
+We could get the first four values using c(1:4).  Try it
+```{r}
+
+
+
+```
+
+
+What type of object is this diagonal thingy anyway?  The command starts with "i".
+```{r}
+
+
+
+```
+
+
+
+If we want to get something from the main matrix (the full BLOSUM matrix, not the diagonal) we can also specify things using the row and column names.  This will give us the value for an E to E transition:
+```{r}
+
+BLOSUM62.subset["E","E"]
+
+```
+
+
+How could you get the whole "E" column?
+```{r}
+
+
+```
+
+
+How could you get the whole "E" row?
+```{r}
+
+
+```
+
+We can use numbers too if we want.  "E" is in the 7th column, so we can get the E to E value like this:
+```{r}
+
+BLOSUM62.subset[7,7]
+
+```
+
+How would you get the whole "E" column?
+```{r}
+
+
+
+```
+
+How would you get the whole "E" row?
+```{r}
+BLOSUM62.subset[7, ]
+```
+
+We can actually specify any score we want.  For a P to A transition we could do this:
+```{r}
+BLOSUM62.subset["P","A"]
+
+```
+
+
+Or specify the row and column numbers
+```{r}
+BLOSUM62.subset[15,1]
+```
+
+What happens when you do ["A","P"] instead (reverse of what was above?
+
+```{r}
+
+
+
+```
+
+So, if you are doing an alignment by hand, you can quickly query the matrix and pull up the scores.  If you have a sequence "EPEERPEWRDRPGSP" and "EAEREASWSEDRPGT" you can get the score for the E to E matching again like this
+
+```{r}
+BLOSUM62.subset["E","E"]
+```
+
+
+and P to A like this
+
+```{r}
+BLOSUM62.subset["P","A"]
+```
+
+and so on.  
+
+
+
+
+## Alignment by eye in R
+
+
+
+
+Let's do an alignment between two parts of a shroom protein.  We'll look at part of the ASD2 domain of Shroom 3.  We'll look at human shroom (hShrm3) and call this the "Query" sequence.  We'll use mouse shroom (mShrm3) as the "subject" or "target".  (The accession number for human shroom 3 is NP_065910.3)
+
+```{r}
+hShrm3  <- "EPEREPEWRDRPGSP"
+
+mShrm3     <- "EAEREASWSEDRPGT"
+```
+
+
+Use nchar() to see how many characters are in them
+
+```{r}
+
+
+
+```
+
+
+We can make a little matrix and look at how they align using the rbind() function, which stands for "row bind"
+
+```{r}
+rbind(hShrm3,
+      mShrm3)
+```
+
+Assign this to an object called shrms
+
+```{r}
+
+
+```
+
+
+What type of object is shrms?
+
+```{r}
+
+
+
+```
+
+How big is it?  See if you can guess first before using R to check
+
+```{r}
+
+
+```
+
+
+If we want to do an alignment by eye it would help if instead of having all the letters stuck together they were separated.  We would do this by hand but it would require a lot of typing:
+
+```{r}
+hShrm3_alt  <- c("E","P","E","R","E","P","E","W","R","D","R","P","G","S","P")
+
+mShrm3_alt     <- c("E","A","E","R","E","A","S","W","S","E","D","R","P","G","T")
+```
+
+
+
+One thing that is annoying about R is that vectors have "length" but no dimension.  Compare the output of the length() command and dim() command when called on hShrm3_alt
+```{r}
+# run length()
+
+
+# run dim()
+
+
+
+```
+
+
+Use is,  is.vector, length, is.character, and n.char on hShrm3 and hShrm3_alt.  How is hShrm3 ("EPEREPEWRDRPGSP") different from hShrm3_alt?  Can you figure out why nchar() is doing what its doing?
+```{r}
+# run is() on hShrm3 AND hShrm3_alt
+
+
+# run is.vector on hShrm3 AND hShrm3_alt
+
+
+# do this for the rest of the commands
+
+
+
+```
+
+
+Typing all this stuff out is a pain.  Instead of typing all those commas to make hShrm3_alt we could take hShrm3 and have R do the work for us.  Lots of people work with **character data** (data make up of alphabetic and other characters that can NOT be interpreted as numbers) so there are lots of functions for manipulating characters. We'll use the strsplit() function.
+
+If we just all strsplit() on the hShrm3 object we get something a little annoying.  
+```{r}
+strsplit(hShrm3, split = "")
+```
+
+Note that the output above is on too lines, and the first line is "[[1]]".
+
+Ok, what's up?
+
+Assign the thing we just made to an object called hShrm3_vec for "hShrm3 vector".
+
+```{r}
+
+
+```
+
+Now figure out what the heck it "is":
+```{r}
+
+
+```
+
+If you used the right command to figure out what it **is** (hint) the first thing you see is "list."  Lists are rather complex **data structures** in R because they aren't the kind of thing you run in to if you just have experience working in a spreadsheet.  Lists allow you to make collections of different R objects.  For now you just need to know that they exist; we'll run into them again later.  For now, we want to get rid of this listy-ness of our R object.  We can do this with the function unlist().  Call unlist() on your hShrm3_vec object and re-assign it to the same object hShrm3_vec, eg, run 
+hShrm3_vec <- unlist(hShrm3_vec)
+
+
+```{r}
+
+```
+
+
+Now we need to repeat these steps for the mouse shroom sequence.  
+```{r}
+# split up mShrm3 with strsplit()
+
+
+# unlist it with unlist()
+
+
+```
+
+
+Something that is useful once you get good at reading R code is that you can wrap functions within functions.  So instead of doing this in seperate steps I could just do this:
+
+```{r}
+hShrm3_vec <- unlist(strsplit(hShrm3, split = ""))
+mShrm3_vec <- unlist(strsplit(mShrm3, split = ""))
+```
+
+Before moving on confirm that these two factors are the same length.  If they aren't R will get angry
+```{r}
+# length of hShrm3_vec
+
+# length of mShrm3_vec
+
+```
+
+
+Now let's make a little matrix so we can think about aligning these sequences.  The rbind() function binds two rows together into a matrix.
+
+```{r}
+rbind(hShrm3_vec, mShrm3_vec)
+```
+
+
+For what we want to do next aligning them vertically will actually work better.  We can align them as columns using cbind(), which stands for "column bind"
+
+```{r}
+cbind(hShrm3_vec, mShrm3_vec)
+```
+
+
+Save that to an object called shrm
+
+```{r, echo = F}
+cbind(hShrm3_vec, mShrm3_vec)
+```
+
+
+```{r, echo = F}
+shrm <- cbind(hShrm3_vec, mShrm3_vec)
+```
+
+```{r}
+
+
+```
+
+
+The most basic way to do an alignment is to determine the which bases are identical and to score those as 1, and anything that is mismatched score as 0.  From this you can determine **percent identity**. 
+
+A handy way to do this quickly in R is to use the ifelse() command.  What you can do is tell it to do this: "IF a base in the first sequence the same as the aligned base in the seconde sequence, return a value of 1, ELSE return a value of 0."
+
+I'll do a really transparent example. First, let me make some very simple objects with just a single letter in them.
+
+```{r}
+aa1 <- "A"
+aa2 <- "A"
+aa3 <- "W"
+```
+
+
+What kind of object have I just made? Use is, is.vector, length, dim, and is.matrix.  Can you understand why you get the results that you do?
+```{r}
+
+
+```
+
+Now let me use ifelse().  First, let me check if aa1 is the same as aa2, an if they R, return a value of 1, else return a value of 0
+```{r}
+ifelse(aa1 == aa2, yes =  1, no = 0)
+```
+
+The first part of the function asks a true/false question: is aa1 the same as aa2?  Note that it is TWO equals signs
+
+This is a **logical comparison** or **logical test** in R. It would work on its own outside of ifelse, like this:
+
+```{r}
+aa1 == aa2
+```
+
+Now compare aa1 and aa2.  First try the logical test
+```{r}
+
+
+```
+
+
+Now try the ifelse() command
+
+```{r}
+
+
+
+```
+
+
+Something that is very hand in R is that it can process things in a series. First, let's turn our single amino acids into some sequences.
+
+```{r}
+
+seq1 <- c(aa1, aa2, aa3)
+seq2 <- c(aa3, aa2, aa1)
+
+```
+
+Do you know what kind of R object we just made?  Run an appropriate check
+
+```{r}
+
+
+```
+
+
+Now let's compare these two sequences. First a logical comparison. Can you tell what this code is doing?
+```{r}
+
+seq1 == seq2
+
+```
+
+What is going on here?  It might help to line everything up using rbind() to make a little matrix. First, save the output of the logical comparison to an R object
+
+```{r}
+
+identical <- seq1==seq2
+
+```
+
+
+Now stack the two sequences and the logical comparison into a matrix
+```{r}
+
+rbind(seq1, seq2, identical)
+
+```
+
+
+We can also run ifelse() on the two sequences
+```{r}
+ifelse(seq1 == seq2, yes = 1, no = 0)
+```
+
+Save this output to an object called align.score for "alignment score"
+
+```{r, echo = F}
+align.score <- ifelse(seq1 == seq2, yes = 1, no = 0)
+```
+
+
+```{r}
+
+
+
+```
+
+
+Now stack everything up into a matrix using rbind
+
+```{r}
+
+rbind(seq1, seq2, identical, align.score )
+
+
+```
+
+
+Now let's try this on our shroom vectors.  First, do a logical comparison of the hShrm3_vec vector and the mShrm3_vec vector.  Remember there are two equals signs (==)
+
+```{r}
+
+
+```
+
+
+Now use ifelse() to assign a 1 to a match and a 0 to a mismatch.
+
+```{r}
+
+
+
+```
+
+
+Again, can you describe what's going on here?
+
+Again we can make a little matrix with rbind(). I'm going to embed the ifelse() function within rbind(); this might be a little dense but see if you can figure out what each seperate command is.
+
+```{r}
+rbind(hShrm3_vec, 
+      mShrm3_vec,
+      identical = hShrm3_vec == mShrm3_vec,
+      score= ifelse(hShrm3_vec == mShrm3_vec,yes = 1, no = 0 ))
+```
+
+If we want the total score we can assign the results of ifelse() to an object
+```{r}
+scores <-ifelse(hShrm3_vec == mShrm3_vec,yes = 1, no = 0 )
+```
+
+I can then total up the score with sum()
+
+```{r}
+sum(scores)
+```
+
+
+I can easily call up the number of amino acids with length().  Do that below
+
+```{r}
+
+
+```
+
+
+Percent identity is a common statistic when comparing sequences.  If my score is 5 and my total number of residues is 15 my percent identity is:
+```{r}
+
+5/15
+
+```
+
+
+I can do this directly on the objects like this
+
+```{r}
+
+sum(scores)/length(scores)
+
+```
+
+
+
+We can do this sort of scoring on sequences in a matrix or data frame.  Remember that we made a matrix called shrm with our two sequences in it. Matrices and dataframes are very similar, but its usually easier to work with dataframes.  We can convert the matrix to a dataframe like this
+
+```{r}
+shrm <- data.frame(shrm, stringsAsFactors = F)
+```
+
+
+There's a lot relate to the "stringsAsFactors = F"; basically it makes sure we are working with raw character data.
+
+
+Calling summary() on the shrm dataframe can confirm that its character data:
+
+```{r}
+summary(shrm)
+```
+
+
+You can call up the human shroom 3 columns with this code: shrm[, "hShrm3_vec"]. try it below
+
+```{r}
+
+
+```
+
+How would you call up the other column with mouse shroom?
+
+```{r}
+
+
+
+```
+
+
+One tricky thin about R is that you can access the column of dataframes in more than one way.  You can get the first column also using the dollar sign
+
+```{r}
+shrm$hShrm3_vec
+```
+
+Note that even though we're calling a column, R prints it out left to right like a row.
+
+We can do a logical comparisons of the two columns like this:
+```{r}
+
+shrm[, "hShrm3_vec"] == shrm[,"mShrm3_vec"]
+
+```
+
+
+Can you re-write this using the dollar sign notation?  Try it below
+
+```{r}
+
+
+
+```
+
+
+Now let's use ifelse() on these two columns
+```{r}
+
+ifelse(shrm[, "hShrm3_vec"] == shrm[,"mShrm3_vec"], yes = 1, no = 0)
+
+```
+
+
+Rewrite the code above using dollar sign notation
+
+```{r}
+
+
+
+```
+
+
+We can add this information to the dataframe like this
+
+
+```{r}
+shrm$identical <- ifelse(shrm[, "hShrm3_vec"] == shrm[,"mShrm3_vec"], yes = 1, no = 0)
+```
+
+
+Now what do we have?  Call up the dataframe shrm we just made:
+
+```{r}
+
+
+
+```
+
+
+
+Now call summary on it.  What types of data are each variable?
+
+```{r}
+ 
+
+```
+
+
+
+Comparing an alignment to a scoring matrix by hand is a lot of work, so there's a function called score_alignment() in the dayoff package which can do basic comparisons.  The function has the following arguments
+
+* seq.df = A dataframe with aligned sequences in columns
+* seq1 = the name of the column with a sequence in it; name must be in quotes
+* seq2 = the other, aligned sequence
+* gap.penalty = -10
+
+Running the function returns a dataframe with a new column called "score".
+
+```{r}
+shrm <-score_alignment(seq.df = shrm, 
+                seq1=  "hShrm3_vec",  #note the quotation marks
+                seq2 = "mShrm3_vec",
+                sub.mat = BLOSUM62,
+                gap.penalty =  -10)
+```
+
+
+
+We can call the sum() function on the score column of the shrm dataframe to calculate the overall score for the alignment.  This is a metric that tells use how good the alignment is based on the number of identical residues in the sequence, how different any mutations are from the original residue, and how many gaps there are.
+```{r}
+sum(shrm$score)
+```
+
+
+
+I happen to know that we can make this alignment better if we add a gap.  I'll do it by hand because I don't have a function yet to do it automatically.  I'll put a gap into the human shroom 3 sequence (hShrm3_alt) after the "W" that's about in the middle of the sequence.
+
+
+```{r}
+
+hShrm3_alt  <- c("E","P","E","R","E","P","E","W","-","R","D","R","P","G","S","P")
+
+```
+
+
+Using an appropriate function, confirm that the insertion has made the sequence longer (hint: its not nchar)
+```{r}
+
+
+```
+
+Now we'll do the other sequence.  To make this work we need to add an insertion to the end of the mouse sequence (mShrm3_alt) so that the two sequences are the same length.
+```{r}
+
+mShrm3_alt  <- c("E","A","E","R","E","A","S","W","S","E","D","R","P","G","T","-")
+
+```
+
+
+Again, check that this sequence is longer than it was before
+
+```{r}
+
+
+```
+
+
+A handy trick is to do a **logical comparison** to check that the two vectors are the same.  Run the following code and see if you can interpret what is going on.  Remember that the double equals sign == carries out a logical comparison that returns TRUE if two values are the same.
+
+```{r}
+
+length(hShrm3_alt) == length(mShrm3_alt)
+
+```
+
+
+
+Now, for a challenge, see if you can figure out what's going on here
+```{r}
+
+hShrm3_alt == mShrm3_alt
+
+```
+
+
+
+It might be easier if we stack thing in to a little matrix with rbind().  I've put a lot of stuff in the rbind() function but see if you can figure it out.
+
+```{r}
+
+rbind(hShrm3_alt = hShrm3_alt,
+      mShrm3_alt = mShrm3_alt,
+      identical = hShrm3_alt == mShrm3_alt)
+
+```
+
+
+Now let's compare these two sequences by scoring them.  First, we'll put them into a dataframe using data.frame(). We'll call the object shrm.gap.
+
+```{r}
+
+shrm.gap <-data.frame(hShrm3_alt,
+                      mShrm3_alt, 
+                      stringsAsFactors = F)
+
+```
+
+
+Run an appropriate function to confirm that this is a dataframe
+```{r}
+
+
+```
+
+
+Check what the size of the dataframe is:
+```{r}
+
+
+
+```
+
+
+Now look at the full dataframe
+```{r}
+
+
+
+```
+
+Now run a function to just look at the top of the dataframe:
+```{r}
+
+
+
+```
+
+
+
+Run a function to just look at the bottom of the dataframe
+```{r}
+
+
+
+```
+
+
+
+Ok, we have a sense of what we're working with.  Let's calculate the score
+```{r}
+
+shrm.gap <- score_alignment(shrm.gap, 
+                     seq1=  "hShrm3_alt",
+                     seq2 = "mShrm3_alt",
+                     sub.mat= BLOSUM62,
+                     gap.penalty =-10)
+
+```
+
+
+Look at the dataframe and make sure it looks right.  Note that each gap ("-") has a score of 10 as defined by the gap.penalty.
+```{r}
+
+
+
+```
+
+
+Now calculate the total score
+
+```{r}
+  
+sum(shrm.gap$score)
+
+```
+
+
+There is one issue here which I haven't yet resolved.  When alignment are scored we take into account two things: the creation of a gap (yes there is a gap there) and its length (how long it it).
+
+Each gap that get's created gets scores -10 for occurring and -4 for each insertion in the gap.  So a gap of 1 insertion ("-") gets score -10 + -4
+
+```{r}
+
+-10 + -4
+
+```
+
+
+A gap of 2 insertions ("--") gets a score of
+
+```{r}
+
+(-10 + -4) + -4
+
+```
+
+A gap of 3 insertions ("---") gets a score of
+
+```{r}
+
+(-10 + -4) + -4 + -4
+
+```
+
+
+Our alignment has two separate insertions, one in the middle and one on the end.  In the logic of alignment this is two seperate insertions each of length one, so each one gets scored -10 + -4 = -14
+
+
+I haven't written a function yet to implement counting up the length of the insertions, so the score returned by score_alignment() is not correct.  Based on the description above, what is the correct score?  Write out R code using sum() to calculate the correct score.
+
+
+
+```{r}
+
+
+
+```
+
+
+## Alignment in R
+
+We can do a pairwise alignment directly in R using pairwiseAlignment() from Biostrings, a package from Bioconductor.  We'll use this function to check the math on our alignment calculations.
+
+Normally this pairwiseAlignment() will insert gaps.  Alignment algorithms allow you to set a penalty for first creating a gap, and for how large it is.  As noted above, usually the penalty is largest for first allowing a gap initially, but less for each additional space.  So a gap of 1 might have a penalty of -14 (-10 + -4), but a gap of 2 might have total penalty of -18 (-10 + -4 + -4).
+
+
+In pairwiseAlignment the arguments related to gaps are  gapOpening and gapExtension, where gapOpening is the for starting the gap and gapExtension is the penalty for the size of the gap (including the first insertion).
+ 
+In R you can get information about a function using the ? function.  If we cant to know about the pairwiseAlignment function we run ?pairwiseAlignment.  
+
+Call up the help file for pairwiseAlignment and see if you can see what the **defaults** are for gap opening (aka gap creation) and gap extension.  Hint: Its int the first 50 lines of the help file - don't scroll too far down).
+
+R help files are pretty dense so this might be hard.  Note that the penalties are set as positive numbers in the help file but get  converted to negative values.
+
+```{r}
+# Call up the help file for pairwiseAlignment
+
+# What is the gap opening penalty? Replace the "NA" with the penalty
+
+gapOpen <- NA
+
+
+# What is the gap extension ? Replace the "NA" with the penalty
+
+gapExtend <- NA
+
+```
+
+
+
+We can force the alignment to NOT allow gaps by setting the penalties for gaps to be REALLY large. 
+
+```{r}
+
+nogap <- pairwiseAlignment(hShrm3,
+                  mShrm3,
+                  gapOpening = -100,
+                  gapExtension = -100,
+                  substitutionMatrix = "BLOSUM62")
+
+
+```
+
+We can check the alignment by calling up the object
+```{r}
+
+
+```
+
+
+We can get the score directly using the score() function
+
+```{r}
+
+
+
+```
+
+
+We can get the percent identity using the pid() function
+
+```{r}
+
+
+
+```
+
+
+
+Note that In the code above I've set the penalties to be negative, which is more intuitive.  Confirm that positive numbers for these penalties result in the same score by chaning the 100 values to -100.  Copy the code from above and make the appropriate changes.
+
+```{r}
+
+
+
+```
+
+
+
+
+Why does setting the gap penalties high make the algorithm *not* insert gaps?  We haven't covered this directly yet, but the goal of an alignment algorithm is to maximize the score by lining up the two sequences and adding gaps and deletions as necessary.  Recalling what's along the diagonal of the BLOSUM matrix, direct matches (identity) between the residues on two sequences result in the highest scores, and differences have lower scores based on how different the residues are.  Look at the BLOSUM matrix and see if there are any entries that are as low as -10, the gap penalty.
+
+
+
+We can allow gaps by removing the gapOpening and gapExtension arguments (deleting them).  Copy the code from above, remove those arguments, and assign the output to an object called gap.  
+```{r}
+
+
+
+```
+
+When we don't assign anything to  gapOpening and gapExtension arguments in the code above, the function uses the defaults. We can also specify the gap penalties directly.  COpy the code again, leave the arguements in but change the penaliteis to -10 for gap creation and -4 for gap extension.
+
+
+```{r}
+
+
+
+```
+
+
+
+Look at the alignment; How many indels were addedon the "pattern" strand?
+```{r}
+
+
+```
+
+
+What is the score of this alignment?  Use the appropriate fucntion to access it directly and save itto an object called score.gap
+```{r}
+
+
+# remove the NA and add the appropriate code 
+score.gap <- NA
+
+
+
+```
+
+
+
+What is the percent identity? Use the appropriate fucntion to access it directly and save it to and object called pid.gap
+
+```{r}
+# remove the NA and add the appropriate code 
+pid.gap <- NA
+
+
+```
+
+
+
+
+

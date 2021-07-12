@@ -1,3 +1,11 @@
+how-to-review-this-book
+file-format
+what-can-you-do
+adding-comments
+html-tagged-comments
+code-chunk-comments
+keys-to-exercise
+problem---fix-this-code
 downloading-r
 preface
 introduction-to-r

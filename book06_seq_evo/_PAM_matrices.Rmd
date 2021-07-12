@@ -1,0 +1,1101 @@
+---
+title: "The Dayhoff PAM matrices"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The Dayhoff PAM matrices}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+
+```{r  include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Introduction
+
+Alignments are ubiquitous in molecular biology, phylogenetics, and genomics.  For any two sequences, there are many ways you could align them by adding insertions or deletions.  The essential steps in alignment are therfore
+
+* locate sections in the two sequences that are identical
+* hypothesize the occurence of insertions and deletions that allow you to line up more of the sequence
+* decide when there the amino acids or bases in the position are different due to mutation
+
+Because there are so many ways to align two sequences there is a need to be able to judge how "good" a given alignment is a rank the quality of many alignments.  Key to this are alignment scoring matrices such as **BLOSUM** and **PAM** matrices.  The matrices are based on empirical data about how frequently differnt mutations have occurred between sequences.  
+
+There are a number of steps required to calcualte these matrices.  The following tutorial will step you through key aspects of constructing Margaret Dayhoff's PAM matrices.  The focus here will be on the R operations need to reconstruct the matrices.  However, seeing how Dayhoff moved from raw data to a probablity matrix, and finally her scoring matrix should help you better understand how they work.
+
+
+## Key steps
+
+* Examine and finalize the set up of Dayhoff's data matrix (we'll call is pams)
+* Set up Dayhoff's data on the relative frequeny of amino acids and the "**mutability**" of each of the 20 amino acids
+* combine this information to make a **mutation probability matrix**
+
+
+## Biology and data analysis Learning objectives
+
+By the end of this exericse and after reviewing relevant readings you should be able to 
+
+* define mutability
+* define what a mutation probability matrix
+* define what an alignment scoring matrix is
+* better interpret histograms and scatterpots
+* better interpret correlations
+
+## Coding learning objectives
+
+* practice building data frames by hand
+* practice doing math with matrices and vectors
+* introduction to for() loops
+
+
+## Preliminaries
+
+```{r}
+library(compbio4all)
+library(ggpubr)
+```
+
+
+## Dayhoff's PAM matrix
+
+
+The data in Figure 80 of Dayhoff et al (1978) is stored in the dataframe pams in the dayoff package.  Load this with the data() command. 
+```{r}
+# Make sure you've done libary(dayoff) !
+
+data(pams)
+
+```
+
+How large is the data set?
+```{r}
+
+
+
+```
+
+
+What kind of object is pams?
+```{r}
+
+
+
+
+```
+
+
+Since its not a matrix we can't access the diagonal directly.  We can subset the dataframe and turn it into a matrix.  Take a look at the top of the dataframe using head()
+
+```{r}
+
+
+```
+
+Check out what the different columns are using summary()
+```{r}
+
+
+```
+
+
+The first column is different than all of the others.  You can check this using the is() function on just the column., eg is(pams$code) 
+
+
+```{r}
+   
+
+
+
+```
+
+
+
+
+We can remove this first column using R's square bracket notation.  Let's do this and save it to a new object called A. 
+
+```{r}
+
+A <- pams[ , -1]
+
+
+```
+
+
+Confirm the size of the dataframe using an appropriate command
+```{r}
+
+
+```
+
+
+For some annoying reasons data.frames and matrices don't behave the same in R.  So if we want to work with these data as a matrix we need to convert it explicilty to a matrix.
+
+```{r}
+
+A <- as.matrix(A)
+rownames(A) <- colnames(A)
+
+```
+
+We can use the dayoff function tri_print() to look at the matrix
+```{r, eval = FALSE}
+
+tri_print(A)
+
+```
+
+
+
+Use the diag() function.  Why do you get this response?
+```{r}
+
+
+
+```
+
+
+The matrix is currently in a **lower triangular** form.  The matrix will acctually be easier to work with when doing math if its in a **symmetric triangular** form.  You don't need to understand the following code, just run it. (For the curious: what it's doing is fidning all the "NA" values with is.na(), re-assigning, them to 0, then adding the original matrix and its mirror image (transpose)  to get a symetric matrix.
+
+```{r}
+# just run this code - no need to understand it
+A[is.na(A)] <-0
+
+A <- A + t(A)
+```
+
+Check out the new matrix.  Can you tell why I am calling it "symmetric" ?
+```{r, eval = F}
+tri_print(A, triangle = F)
+```
+
+
+If its not clear why this is symmetric, run this coe, which will just show the first 4 rows and columns
+```{r}
+
+tri_print(A[1:4,1:4], triangle = F)
+
+```
+
+
+
+## Frequencies of amino acids in Dayhoff data
+
+Dayhoff et al tallied up all of the amino acids in the data set they used and calculated the relative frequency of each one.  They shows the data in Table 22 (Table 3.1 in Pevsner).
+
+We can recreate this datatable in. First, the frequencies.  
+```{r}
+frequencies <- c(0.089, 0.087, 0.085, 0.081, 0.070, 
+                 0.065, 0.058, 0.051, 0.050, 0.047, 
+                 0.041, 0.040, 0.040, 0.038, 0.037, 
+                 0.034, 0.033, 0.030, 0.015, 0.010)
+
+```
+
+You should be able to determine what type of object this is, how long it is, etc.
+
+
+Now the amino acids.
+
+```{r}
+aa <- c("Gly", "Ala", "Leu", "Lys", "Ser", 
+        "Val", "Thr", "Pro", "Glu", "Asp",
+        "Arg", "Asn", "Phe", "Gln", "Ile",
+        "His", "Cys", "Tyr", "Met", "Trp")
+```
+
+
+Now use data.frame to turn this into a dataframe
+
+```{r}
+
+freqs <- data.frame(aa, frequencies) 
+
+
+```
+
+
+The code below will re-create the table as it is published.  This table is a little goofy from a data analysis perspective because there are two columns of amino acid names and two columns of frequencies.  First, I'm going to grab each side of the table.
+
+```{r}
+# first aa column and first frequency column
+left  <- freqs[1:10, ]
+
+# 2nd aa column and 2nd frequency column
+right <- freqs[11:20, ]
+
+```
+
+Now I can put them together with a function called cbind(), which stands for "column bind"
+
+```{r}
+
+table22 <- cbind(left, right)
+
+```
+
+
+
+
+PUll up the table and compare it to the original.  Let me know if I made a mistake : )
+```{r}
+
+```
+
+
+
+The table isn't handy for doing much but looking at.  For other stuff we need the original data in the freq object.  We can make a histogram of these frequencies using gghistogram().  Make sure ggpubr is loaded before you run this code (Note: you'll get an warnings; ignore this)
+
+
+```{r}
+#ignore the warning
+gghistogram(data = freqs,  #use freqs, not table2
+            x = "frequencies",
+            bins = 15)
+```
+
+This is a histogram of **freuqncies**.  What does it mean that the tallest bar, is located between 0.04 and 0.04, goes up to 5?  Use the data table which amino acids are represented by this bar?  A function that can help us figure this out is which().  We can ask R, "which values are less than 0.04" like this.
+
+```{r}
+rows.less.04 <- which(freqs$frequencies < 0.04)
+```
+
+This gives us the row number of the values less than 0.04. 
+
+```{r}
+rows.less.04
+```
+
+
+We can look at the actual data like this
+```{r}
+freqs[rows.less.04, ]
+```
+
+
+## Table 21
+
+The pams matrix above tells us about observed mutations.  Key to Dayhoff et al's calcualtions their PAM scoring matrices is the calculation of the realtive mutability of each amino acid.  Dayhoff et al explain it this way
+
+> "A complete picture of the mutational process must include a consideration of the amino acids that did not change, as well as those that did.  For this we nee to know the probability that each amino acid will change in a given small evolutionary time interval.  We call this number the 'relative mutability'" (pag 346-347).
+
+(See the Dayhoff chapter and pages 80-82 in Pevsner for more information).
+
+
+
+Dayhoff doesn't provide all the data, just the final mutabilities.  The calculation is basically  (# of times the aa change)/(# of time the aa occurred).  
+
+We can determine the number of times an amino acid occured like this
+
+```{r}
+sum(A[,"Ala"])
+```
+
+Or, equivalently
+```{r}
+sum(A[,1])
+```
+Or, because we made the matrix symmetric
+
+```{r}
+sum(A[1,])
+```
+
+If it seems weird that the last code wored, examine the results of this code, and look at the original matrix
+```{r}
+A[1,] == A[,1]
+```
+
+
+So, they observed Ala mutating to another amino acid 14576 times.  They then determined how many tiems Ala occured overall, did a little math to make everything work they way they wanted, and produced table 21.  Note that they've standardized things so that Ala is set as a reference point.
+
+
+We can build table 21 like this
+
+```{r}
+mutability <- c(134, 120, 106, 102, 100,
+                97,   96,  94,  93, 74,
+                66,   65,  56,  56, 49,
+                41,   41,  20,  20, 18)
+```
+
+
+Confirm that the size of this object is correct
+```{r}
+
+
+```
+
+
+
+Now the names of the amino acids (which is different than the previous table we made)
+```{r}
+
+aa <- c("Asn", "Ser", "Asp", "Glu", "Ala", 
+        "Thr", "Ile", "Met", "Gln", "Val",
+        "His", "Arg", "Lys", "Pro", "Gly", 
+        "Tyr", "Phe", "Leu", "Cys", "Trp")
+
+```
+
+As before, make this into a data frame; call it mut 
+    `
+
+
+```{r}
+ mut <- data.frame(aa, mutability) 
+```
+
+
+
+Using the code from above, can you re-make table 21?  This requires square brackets, sepcifying rows, and using the cbind() function.
+
+
+```{r}
+
+
+
+```
+
+
+
+Compare your result to Table 21.  Let me know if there are any errors.
+
+
+
+We can merge table 21 (mut) and 22 (freqs) into a single data frame using the merge() command.  We tell the function to merge "by" the comman column, aa.
+
+```{r}
+tab.merge <- merge(freqs, mut, by = "aa")
+```
+
+
+We can plot the relationship between an amino acids frequency and its mutability with a scatter plot  using ggscatter
+```{r}
+ggscatter(data = tab.merge,
+          y = "frequencies",
+          x = "mutability")
+```
+
+
+We can add a regression line using add = "reg.line"
+```{r}
+ggscatter(data = tab.merge,
+          y = "frequencies",
+          x = "mutability",
+          add = "reg.line")
+```
+
+
+We can calculate the correlation coefficient and a p-value suign cor.coef = TRUE.
+```{r}
+ggscatter(data = tab.merge,
+          y = "frequencies",
+          x = "mutability",
+          add = "reg.line",
+          cor.coef = TRUE)
+```
+
+
+
+## From observed mutations to mutation probabilities
+
+So far we have worked up 3 things
+
+* observed numbers of transitions between amino acids ("pams"; how frequently an aa changes to each other aa,  We revised this matrix and saved is as "A")
+* observed frequencies of amino acids
+* relative mutabilities (mugs; how frequently an aa changes to any other)
+
+A useful quantity is the **probability** that a given amino acid in a sequence (say, the first aa after the start codon) is to mutate into each other amino acid, or to remain the same.  For a number of reasons, Dayhoff doesn't use a real amount of time but measure realtive to each sequence, called a "PAM."  We won't get too hung up on what this means.
+
+The math for this mutation probability is shown on page 348 in Dayhoff et al 1978 (see 83-84 in Pevsner).  The actuall derivation is not yet totally clear to me; we'll step through the math, focusing on how to do it in R and not get bogged down in the biology.  Our main focus here will be to understand the equation and to implement the equation in R.
+
+Dayhoff wants to calcualte a matrix (A; Figure 82) that shows the probability of an amino acid transitioning to all other aa, or staying the same.  This is the probablity of transitioning over the relative time scale of 1 PAM, so this is called a PAM1 mutation probability matrix.  Eventually we will want to use this PAM1 matrix to calculate the PAM250 matrix, which was once a popular scoring matrix for BLAST
+
+Note that in figure 82 they multipled everything by 10000 to avoid writing decimels.  So 9867 is 98.67% or 0.9867.  This is kind of a pain; note that Pevsner doesn't do this.  Check this math below.
+
+```{r}
+
+
+```
+
+
+In their notation, Dayhoff et al calls the matrix of pams "A", and a single entry in the matrix Aij.  A11 is the 1st row of the 1st column.  A21 is the 2nd row, 1st column.  So, Ala's Aij value for transitioning to Arg would be the 2nd row, 1st column (A21):
+
+```{r}
+A[2,1]
+```
+
+Because the matrix is symmetrics A21 is the same as A12
+```{r}
+A[1,2]
+```
+
+
+If this isn't clear look at the upper left part of the matrix
+
+```{r, eval = F}
+
+tri_print(A[1:4,1:4],triangle = F)
+
+```
+
+We can add up all the obsereved transitions for a single amino acid, which Dayhoff calls sum(Aij) for a given i, though she uses the fancy sigma symbol, like this
+```{r}
+sum(A[1,])
+```
+So, Ala was observed transitiona to another amino acid 3644 times.  
+
+
+Again, because the matrix is symmetric, sum(Aij) for a given i is the same as sum(Aij) for i = j.  So if i = 1, the first row, then j = 1, the first column.
+```{r}
+sum(A[,1])
+```
+
+
+For Arg, the second row, we'd do this to get the total number of observed changes:
+
+```{r}
+sum(A[2,])
+```
+
+or, equivalently
+
+
+```{r}
+sum(A[,2])
+```
+
+
+How many times did Dayhoff observe Asp transition to another amino acid?
+
+```{r}
+# Remove the NA and add the appropriate code
+# Use this result to answer the corresponding question on TopHat
+
+pams.asp <- NA
+
+```
+
+
+
+
+Dayhoff calls the table of mutabilities (mut) "m", and each row of m is "mi".  So the mutability for Ala is m5, because Ala is in the 5th row.
+
+```{r}
+mut[5, ]
+```
+
+What code calls up Trp from the mutability matrix?
+
+```{r}
+
+
+```
+
+
+
+Dayhoff has one other element in the equation on page 348, lambda (backwards h-like thing), but she doesn't give us its value.  Its a **proportionality constant** to scale things properly.  We're going to have to try to figure it out ourselves.
+
+Aside: A key part of what Dayhoff did was use scaling factors and other tweaks to make the math easy to do and to end up with values with easy to interpret biological meaning.  For example, she sets the mutabiltiy of Alanine arbitrarily to 100 (arbitrary because she picked 100 and because she picked alanine; she could've used valine or something else as the standard).  Also, the values in most of the Figures are multipled by 10, 100, or 10,000 in order to make them easier to read.
+
+Ok, back to Dayhoff's equation for getting mutation frequencies, Mij.
+
+The equation is a bit complex, and it has this thing lambda which she didn't actually tell us what the value is.  First let's do the easy math to try to make progress on this.  The main part of the equation on page 348 is just:
+
+(mj*Aij)/sum(Aij).
+
+In words, this is "multiple a mutability of an amino acid by the number of transitions it made to another amino acid, then divide by the total number of times the focal amino acid transitioned to anything.
+
+In reference to the Ala transitioning to Arg, the equation would be: 
+"multiple the mutability of Ala (mj) by the number of times Ala transitions to Arg (A21) and divide that by the total number of times Ala transition into anything (sum(Aij) for i = 2).
+
+These quantities are
+```{r}
+# m: mutability
+m.ala <- mut[5, 2]
+
+# A.ala.arg number of transtions from ala to art
+A.ala.arg <- A[2,1]
+
+# A.ala.sum: total transitions for ala
+A.ala.sum <- sum(A[,1])
+```
+
+I can the multiple this out, ignoring lambda
+```{r}
+
+m.ala*A.ala.arg/A.ala.sum
+
+```
+
+Let's save this to a variable x 
+
+```{r}
+
+x <- m.ala*A.ala.arg/A.ala.sum
+
+```
+
+
+This value does not match what is shown for the Arg to Ala transtion in Dayhoff's figure 82 because
+
+* we need to multiple by 10000, her arbitrary scaling factor
+* we need to figure out lambda
+
+
+The 10000 thing is annoying and we'll try out best to do the conversions in our heads.
+
+So, doing the conversion, Dayhoff have the Arg to Ala transition as 1, so that's really 1/10000
+
+To get things to match we need to figure out a value for lambda to get an answer of 1/10000 when we use our focal equaion.  That is, what value of lambda will result in m.ala*A.ala.arg/A.ala.sum = 1/10000?
+
+
+Ignoring the finer details of the math, the answer is:
+```{r}
+lambda <- (1/10000)/(m.ala*A.ala.arg/A.ala.sum)
+```
+
+This makes lambda pretty small.
+```{r}
+lambda
+```
+
+
+So, the transition is of Ala to Arg is
+```{r}
+lambda*(m.ala*A.ala.arg)/A.ala.sum
+```
+
+We can check this against Dayhoff's matrx FIgure 82 by multiplying by 10000
+```{r}
+10000*lambda*(m.ala*A.ala.arg)/A.ala.sum
+```
+
+
+Ok, let's see if we can to this for the Ala to Cys transition, which is also 1 in Dayhoff's table, or 1/10000 for us.  All the values are the same as above except A.ij, which we'll call A.ala.asn
+
+```{r}
+A.ala.cys <- A[5,1]
+```
+
+Now swap A.ala.asn in our previous math
+```{r}
+lambda*(m.ala*A.ala.cys)/A.ala.sum
+```
+
+Now multiple by 10000
+```{r}
+10000*lambda*(m.ala*A.ala.cys)/A.ala.sum
+```
+
+This is 1.1, and on Figure 82 for the M matrix Dayhoff has 1.  What's the difference?  Rounding.  Saving the result to an object M.ala.asn, which stands for an element of the M matrix for the ala to asn transition.
+
+```{r}
+M.ala.cys <- 10000*lambda*(m.ala*A.ala.cys)/A.ala.sum
+```
+
+Then we round with round()
+
+```{r}
+round(M.ala.cys,0)
+```
+
+What happens if we use the Ala->Cys transition as our basis for back-calculationg lambda?
+
+```{r}
+lambda.ala.cys <- (1/10000)/(m.ala*A.ala.cys/A.ala.sum)
+```
+
+
+How would you test if my original lambda is the same as this new lambda.ala.cys?
+```{r}
+
+
+
+```
+
+
+How different are they?
+```{r}
+
+lambda - lambda.ala.cys
+
+```
+
+
+It turns out this small difference creates a problem for me down the road.  Let me check one more transition.  The transition from Ala to Tyr also has a value of 1 in Dayhoff matrix.  Let's calcualte lamda for that
+
+```{r}
+A.ala.tyr <- A[19,1]
+lambda.ala.tyr <- (1/10000)/(m.ala*A.ala.tyr/A.ala.sum)
+```
+
+
+How does this compare to the others?
+```{r}
+lambda         - lambda.ala.tyr
+lambda.ala.cys - lambda.ala.tyr 
+```
+
+
+Let's do some more: the Ala to Phe transition is 1 on Figure 82:
+```{r}
+A.ala.phe <- A[14,1]
+lambda.ala.phe <- (1/10000)/(m.ala*A.ala.phe/A.ala.sum)
+
+A.ala.met <- A[13,1]
+lambda.ala.met <- (1/10000)/(m.ala*A.ala.met/A.ala.sum)
+
+
+A.ala.his <- A[9,1]
+lambda.ala.his <- (1/10000)/(m.ala*A.ala.his/A.ala.sum)
+```
+
+
+
+
+
+What I'm going to do is take the mean of these three values to try to better approximate what Dayhoff used.
+
+I can do this by hand
+```{r}
+lambdas <- c(lambda,lambda.ala.cys,lambda.ala.tyr,
+             lambda.ala.phe,lambda.ala.met,lambda.ala.his)
+lambda.mean <-sum(lambdas)/length(lambdas)
+
+```
+
+or with the mean() function
+
+```{r}
+lambda.mean <- mean(lambdas)
+```
+
+
+
+
+
+
+
+
+
+Let's try another transition, and compare lambda to lambda.mean: Ala to Gly, which is 21 on Figure 82:
+```{r}
+A.ala.gly <- A[8,1]
+```
+
+Here we have a problem though: the following code gives us 19.3, not 21
+```{r}
+10000*lambda*(m.ala*A.ala.gly)/A.ala.sum
+```
+
+
+Now we try lambda.mean
+```{r}
+10000*lambda.mean*(m.ala*A.ala.gly)/A.ala.sum
+```
+
+lambda.mean is a little closer, but not perfect.
+
+What if I calcualted lambda from the 
+```{r}
+A.ala.gly <- A[13,1]
+lambda.ala.gly <- (21/10000)/(m.ala*A.ala.gly/A.ala.sum)
+lambda.ala.gly
+
+```
+
+Confirm we get 21:
+```{r}
+10000*lambda.ala.gly*m.ala*A.ala.gly/A.ala.sum
+```
+
+
+So, I'm having a hard time trying to pin lambda down, and its making me made. The lambda I get for Ala->Gly is much bigger than all they others.  I can check this with a logical statement using >
+```{r}
+lambda.ala.gly > lambdas
+```
+
+
+I'm going to calcualte lambda for each transition of Ala.  
+
+First, I need all of Dayhoff's Ala data.  This is the entire 1st column of the matrix in Figure 82
+```{r}
+dayhoff.Ala <- c(9867,1,4,6,1,3,10,21,1,2,3,2,1,1,13,28,22,0,1,13)
+```
+It shoudl sum to 10,000.  Check this.
+
+```{r}
+
+```
+
+
+Don't worry about this code, just run it.
+
+```{r}
+dayhoff.Ala.withNA <- dayhoff.Ala
+dayhoff.Ala.withNA[which(dayhoff.Ala.withNA==0)] <- NA
+lambs <- rep(NA,length(dayhoff.Ala))
+
+for(i in 1:length(lambs)){
+  
+  A.ala.i <- A[i,1]
+  
+  dayhoff.i <- dayhoff.Ala.withNA[i]
+  
+  lambda.ala.i <- (dayhoff.i/10000)/(m.ala*A.ala.i/A.ala.sum)
+  
+  lambs[i] <- lambda.ala.i
+}
+
+#drop the 1st value
+lambs.noInf <- lambs[-1]
+
+
+```
+
+
+Look at the distribution of lambda values; there's lots of variation!
+```{r}
+hist(lambs.noInf)
+```
+
+Does lambda vary by the value in the matrix? Not overall, but the most variation is for when lambda = 1!
+
+TODO: code fails, not sure what it does
+```{r, eval = F}
+plot(lambs ~ dayhoff.Ala[-1])
+abline(v = 1, col =2)
+```
+
+Now, I'm going to take the mean of all those lambdas
+```{r}
+lambda.mean <- mean(lambs.noInf, na.rm = T)
+```
+
+
+
+Now, repeat these steps for the Ala to Asp transition.  Make an object M.ala.Asp and round it.  Use lambda.mean and compare the value of M.ala.asp to Dayhoff's matrix in Figure 82.
+
+```{r}
+# make A.ala.Asp that contains the correct information from the A matrix
+# (A matrix is found in Figure 81)
+# swap out the NA with the final calculation
+A.ala.asp <- NA
+
+
+# Make M.ala.Asp, the mutation matrix
+# swap out the NA with the final calculation
+M.ala.asp <- NA
+```
+
+
+
+So, this would be tedious to do for all 400 elements in the 20 x 20 matrix of M shown in f FIgure 82.  Lucikly R let's us do math on matrices easily.
+
+
+First, I need to get my **mutability matrix** set up. Unfortunatley its not in the order I need it.  The order of the A matrix happens to be in alphabetic order by the three letter aa code, while the mutability data are in order by mutability.  The code below makes a new dataframe, mut2 that should be in the proper order; don't worry about how it works though.
+
+```{r}
+mut2 <- mut[order(mut$aa), ]
+```
+
+Now let's check to make sure that my new mut2 is the same as my matrix A.  All the response should be TRUE. (What this code is doing is comparing each pair of names and making sure they are they same)
+```{r}
+mut2$aa == colnames(A)
+```
+
+
+
+A key part of this equation on page 348 is the sum of all of the observed mutations, sum(Aij).  For Ala, this is the sum of the first column.  We don't want to have to do this individually for each aa, so we can use a special R function to repeat the math for us.  Don't worry how this works, but do check what the result sum.Aij looks like
+
+```{r}
+sum.Aij <- apply(A,2,sum)
+```
+
+
+Check out what we've done and make sure you see how it fits
+```{r}
+sum.Aij
+```
+
+Looking at this could help; the following code "binds" the vector sum.Aij to the matrix A (I added an extra row of dahes to make it easier to read.
+
+```{r, eval = F}
+tri_print(rbind(A,rep("-",length(sum.Aij)),sum.Aij),triangle = F)
+```
+
+
+So, a lot is going on be we actually have all our pieces.  First, we have our original matrix A, which is the raw data.  We have our mutabilities m, which we've re-ordered to be set up in the same order as the rows of the matrix A.  We also have a new quantity, sum.Aij, which is a vector of the total number of transitions for each aa.  We also figure out what lambda is, or at least what its value is.  Now we can move from a matrix (A) that is raw data on mutations to a probability matrix.  The following code is a bit dense and I'm not going to explain it.  It uses a **for loop** to cycle through all the sets of calculations we need to do.  If you've used Python or Matlab before you might be able to figure out what's going.  Don't worry about this though, just run the code.
+
+```{r}
+# make a matrix M for mutation probabilities, the same size as 
+# the original matrix A
+M <- A
+
+# make it all NAs
+M[ , ] <- NA
+
+# loop over each column of A and apply the equation 
+## on page 348 by column
+for(j in 1:ncol(A)){
+  
+  M[ , j] <- (lambda.mean*mut2$mutability[j] * A[,j]) / sum.Aij[j]
+  
+}
+
+```
+
+Multiple that by 10000 to compare to Dayhoff Figure 82.
+```{r}
+M.10k <- M*10000
+```
+
+
+Let's make a temporary rouded version for viewing
+```{r}
+M.round <- round(M.10k, 0)
+```
+
+
+
+As noted above, ifyou compare the matrix M.round to figure 82, yy values are a bit off and I'm nore sure why!  Doh!  I used an R program to scan the original data out of a PDF and I need to make sure that there were no errors (I  used the Pevsner version of the table and found 1 typo already, so perhaps there are more).  More probable is that there's an error I'm commiting or an assumption I'm making that is wrong.  
+
+Compare for yourself the M.round matrix and the one in Figure 82, page 348.
+
+```{r, eval = F}
+tri_print(M.round, triangle = F)
+```
+
+This is ok but still not perfect!  Doh!  
+
+## Adding diagonal to M matrix
+
+Currently we have 0 along the diagonal.  Check this:
+
+```{r}
+
+
+```
+
+
+
+According to Dayhoff the diagonal is Mjj = 1-lambda*mj
+
+m is the mutability matrix.
+
+```{r}
+
+Mjj <- 1-lambda*mut2$mutability
+
+```
+
+
+Whatever errors I have are amplified here.  
+
+
+A key aspect of the mutation matix in Figure 82 is that all the columns should sum to 1 (100%).  I'm going to check and instead of using the equation I just used (Mjj = 1-lambda*mj) I'm going to make sure the values all sum to 1.
+
+
+```{r}
+#Don't worry about the function, just run it
+Mjj <- 1 - apply(M,2,sum)
+```
+
+
+
+We can add the diagonal to our matrix M of mutation probablities like this:
+```{r}
+
+diag(M) <- Mjj
+
+```
+
+Let's use data.frame to compare what I've worked up to the original Dayhoff matix
+
+```{r}
+M.10k <- M*10000
+M.round <- round(M.10k, 0)
+
+brouwer.vs.dayhoff <- data.frame(dr.brouwer = M.round[,1],
+           dayhoff = dayhoff.Ala)
+```
+
+
+I can check the differnce like this
+```{r}
+brouwer.vs.dayhoff$dr.brouwer - brouwer.vs.dayhoff$dayhoff
+
+```
+
+The sum of each column *should* be approximatley 1, or 100%
+```{r}
+sum(M[,1])
+sum(M[,2])
+sum(M[,3])
+```
+
+ Let me use another R function which will allow me to check all the column sums.  Just run this.
+
+```{r}
+apply(M,2, sum)
+```
+
+
+I have no reason to doubt Dayhoff's data but I want to check what her columns sum to because I feel like I'm going nuts.  Here columns should sum to 10000.
+```{r}
+sum(dayhoff.Ala)
+```
+
+## So, after all of that, what do we have?
+
+So, what we have here is a PAM1 mutation probability matrix.  See Pevsner and Dayhoff for the precise intepretation of this.  Now we want to go from a mutation probability matrix to the scoring matrix.  First, we'll go from our starting point of PAM1 to PAM250.  
+
+
+
+## From PAM1 to PAM250
+
+As discussed by Dayhoff and Pevsner PAM1 is usually converted to PAM250.  PAM1 represents transition probabilities over a short period of time (1 PAM) while more practically a longer period of time is more useful, like 250 PAMS.  (Don't worry about what a PAM is; it is a relative measure of evolutionary time.)
+
+
+Converting from PAM1 to PAM250 is easy  We just multiple the matrix by itself.  We won't worry about the details of this here; its due to a special kind of math that can be done on matrices.
+
+PAM2 would look like this, where %*% is a special tool for multiplying matices by each other.
+
+```{r}
+PAM2 <- M%*%M
+```
+
+Below is the upper left hand corner of PAM2
+
+```{r}
+tri_print(round(PAM2[1:4,1:4],3),triangle = F)
+```
+
+PAM10 would be like this
+
+```{r}
+PAM10 <- M%*%M%*%M%*%M%*%M%*%M%*%M%*%M%*%M%*%M
+```
+
+What do you notice about the numbers?  What happens when you multiple fractional values by each other?
+```{r}
+tri_print(round(PAM10[1:4,1:4],3),triangle = F)
+```
+
+
+For the Ala->Ala transition in the upper left corner what this represents is Ala remaining Ala over the course of 10 time steps (10 PAMs).  As you increase the number of time steps, it becomes less and less likely that Ala won't change, so this number goes down.
+
+Getting to PAM250 would be a pain.  Luckily we use a package to do the matrix equivalent of raising the matrix to the 10th power.
+
+NOTE: Pevsner has a box showing how to do this and is totally wrong!
+
+```{r}
+library(matrixcalc)
+PAM10.2 <- matrix.power(M, 10)
+```
+
+
+
+We can confirm this like this.   All the values are TRUE because M*M*M*M*M*M*M*M*M*M and matrix.power(M, 10) produce the same result in every single cell.
+```{r}
+PAM10 == PAM10.2
+
+
+```
+
+
+Let's make PAM250.  We'll call it M250 because we're still working with a mutation probablity matrix and not a scoring matrix.
+
+```{r}
+
+M250 <- matrix.power(M, 250)
+
+```
+
+
+Let's look at the upper left part of the matrix.  I've multipled it by 100 so it looks more like Dayhoff.  Unfortunately, the small errors I've been trying to fix above get amplified when I multiple the error-fille matrix 250 times!
+```{r}
+tri_print(round(M250[1:4,1:4],2)*100, triangle = F)
+```
+
+There's  specific interpretation of this matrix.  See Pevsner and Dayhoff for how to interpret these values.
+
+
+```{r}
+apply(M250,2,sum)
+```
+
+
+## Making the final matrix
+
+So far we're still working in terms of probabilities, eg, what the probablity Ala stays Ala over a "distance" of 250 PAMS? (18% on my matrix, 13% on Dayhoff's)  What's the probablity that Ala transitions to Arg over 250 PAMs? (4% on mine, 3% on Dayhoff)
+
+We need a bit more math to get to the **scoring matrix** that's used for actual alignment..  We'll gloss over the why of the math in order to just pratice R.
+
+On page 351 Dayhoff has an equation 
+Rij = Mij/fi
+
+This is a "relatedness odds matrix", which is a fancier name for an alignment scoring matrix.  If you know gambling or statistics you might know about odds.  Don't worry about it for now.
+
+M is a probabilty matrix, eg M250.  f is the relative frequency of each amino acids (freqs).  Let's do the math.  Let's use Dayhoff's exact numbers first
+
+```{r}
+#from table 83
+Mij.ala.ala <- 13/100
+freq.ala <- 0.087
+
+round(10*log10(Mij.ala.ala/freq.ala),0)
+```
+
+
+
+
+
+
+Now for the whole matrix: Key step: putting the frequencies in the right order!
+
+```{r}
+#put freqs (Table 22) in the same order as matrix
+freqs2 <- freqs[order(freqs$aa), ]
+```
+
+
+We need a for loop again.  Just run this unless you want to root aroudn in teh details
+```{r}
+# make a matrix M for mutation probabilities, the same size as 
+# the original matrix A
+R250 <- M250
+
+# make it all NAs
+R250[ , ] <- NA
+
+# loop over each column of A and apply the equation 
+## on page 348 by column
+for(j in 1:ncol(M250)){
+  R250[ , j] <- M250[,j]/(freqs2$frequencies[j])
+}
+```
+
+R is a matrix of odds ratios.  Don't worry about how to interpret them; its still not a scoring matrix.  To get to the scoring matrix, we need to do one more mathy thing invovling log10, and multiplying by 10.  Dayhoff doesn't cover all of this but see equation 3.4 in Pevsner (pag 89)
+```{r}
+PAM250 <- 10*log10(R250)
+```
+
+
+Let's round that off
+
+```{r}
+PAM250.round <- round(R250, 0)
+```
+
+
+```{r}
+tri_print(PAM250.round, triangle = F)
+```
+

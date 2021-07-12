@@ -1,0 +1,223 @@
+---
+title: "Searching for things in R: An example for how BLAST could (but doesn't!) work"
+author: "Nathan Brouwer"
+date: "10/17/2019"
+output:
+  pdf_document: default
+  html_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+Once BLAST has compiled all the "words" its going to search for, it needs to locate those words, related to the query sequence, within its database.  In the real BLAST algorith this is done using a fancy computational tool called a **deterministic finite-state automata (DFSA)** (aka a **finite state machine (FSM)**).  
+
+For a more typical task, when we need to search through text, like a sequence of amino acid letters, we use regular expressions, such as grep() or grepl().
+
+For an assignment, I gave you another approach that could be done in R to search for a particular bit of text.  This is NOT how BLAST works, but is an example of a data processing workflow that could accomplish a similar task.
+
+
+## Search through processed text
+
+The code below presents a way to address a text search problem by first creating a database of all the "words" in the text.  In this case, the "text" is the sequence of the protein anillin.
+
+The code below is un-annotated code. As an assignment, annotate by hand each line of the code with some note about what the code is doing.   I will collect these at the beginning of class and then we will discuss the code, so you may want to photocopy your assignment or take a picture.  I will likely call on people randomly to ask if they know what the code does.  If a line of code spans more than 1 line, make a note on each and every line (see below for example). You will probably need to run all of the preceding code and investigate the inputs and output to figure out what it does
+
+Ideally you'll be able to figure out what the big picture of the R code is and how it does what was previously done with the regular expression grepl(), but its perfectly acceptable to make notes on basic things. I'll discuss a few of the initial lines here.
+
+The sequence is:
+```{r, echo  = F}
+anillin <-c("MDPFTQHMLEKAEQRSRALGISNASKFPLVECSVPSSSATSASGGDAGVLAPRSRSPGGQ
+SAASGGGKVVTLGKATLEASPAKPLRHYTAVNKENLDMGIEINITTDKPIGVQVEIQEQE
+VTDDEEQAEGGALNPLLEAEPVNQPLARLRDTSRSRLQRMGALYSNTDDLSSPIHRTEGQ
+FHVTTGEEEDCGNRSSRQPKQRLGKLAALADTINQWEDDTSHHEVHRLLEAPPPKPHLSS
+RRAEKGPAPLPPKKDEVDEASRTKQLKWDPKVLSSLEAQGFQRRESSTIKHTYDYAKQEE
+AAPASKVEDAVLTAKPPVPQKSTTVSQVAKNFASSAPAPKPAPAPAVSVKSGLVSGRAAL
+FENKGTGGQSQGLRNQKDPCELSLKERMKLFETGNNKAMLPMAPIGSAPSITQIRAEEVK
+QHLAAMHPVTAAAATTVVAATKPKQENKLRDKVAALVANAQSSAETRIKDIDRQRQEDMQ
+IISNRFNKQKELFDNQPSDSSVAAQARPPAPAPSRVVRPMPPPPPPPIAALSPGLASSKR
+RSPGDAPTTDEDSKRARKSHSDRLYPALSDLDSSGDNCCAAETASATDDSHQQDEEETES
+CMDESDDQSQTEDSSAGMCNGSLGREIMSAVQRNEVEMQQQQTGKKTVRYADQDMYYDDS
+SLNSSQVSAGIDDYLDEALVEDYGSTQDDQSDSGDEQNASRLSLGSKGTTASNSFSFRKN
+PASICTPIEEHHEMEMDLQTPLLSGAQPVKSELSVNQDNDNLVTLVHTVSFYRRQQSANS
+SNSTPVRKICREQQVMRSALAGDCHAKHRLEYDSPQQSDYVAAATDIADQTDEDDEEMQN
+AREVNDASQAQDKIKKLLSEVCKQQQVIGQASQALNLCAATVEFSGSTESVEGERYLLLA
+THRRQACLDEVQRLRVENSIRPVGAPKEKGLLTVKDITIPLRQEYVRKMASNNINGHHLV
+CLLKYNEHVLATKTVPTMPGLLSVKFPDVLQLNNVYADFRITLEIYGMLAQRDQLPHELK
+YHINLNKKGGIKTPKKKGGENRLVMPPVQSPAGPHVVRTPQLVQYGFAIFSLREIQRTTW
+TLTQVLGVSPLEGVVHMKVNCELSVSVEYKGFLTMFEDISGFGAWHRRWCYLNGSVINYW
+KYPDDEKRKTPMGSIDLNSCTSQKVTTAPRDICARLNTMLLECERPALETDQESLIIVPN
+GRTTTVRHLLSADTKEEREEWCAYLNKALTLLRAWGTTH")
+```
+
+
+For example, the first line of code I use in the assignment (below) is 
+
+```{r, eval = T}
+anillin <- gsub("\n","", anillin)
+```
+
+You could annotate this by writing "anillin is a character string with the anillin sequence" or "gsub is a regular expression" or "/n is the newline character".  This would all be full credit.  Ideally - or at least eventually - you'll be able to read this line of code and write something like "replace newline characters using regular expression"
+
+The second line of code is
+
+```{r, eval = T}
+anillin.split.list <- strsplit(anillin,"")
+```
+
+
+To figure this out you'll probably have to run the code and compare the anillin object to the  anillin.split.list object.  look at it visually or using is(), then put a note in about what the change is, what strsplit() does, etc
+
+The third line of code is
+```{r, eval = T}
+anillin.split.vect <- unlist(anillin.split.list)
+```
+
+This is trickier.  There are lists in R, and unlist() turns a list into a vector().
+
+
+
+For a line like this
+```{r, eval = F}
+anillin.length.total <- anillin.length.total-2
+```
+
+
+
+Ideally you'll know *why* I'm doing it (hint: word lengths = 3).  However, if you don't know biologically or computationally what a step is occurring, you can just write basically what's happening (this is just a mathematical operation).
+For a line of code that spans multiple lines, annotate each line.  For example:
+
+
+```{r, eval = F}
+anillin.word.matrix <- matrix(data = NA,
+                              nrow = anillin.length.total,
+                              ncol = 3)
+```
+
+
+
+make a note about "anillin.word.matrix <- matrix(data = NA, "
+and another note about "nrow = anillin.length.total, "
+and a third note about "ncol = 3)"
+
+
+## The code
+
+
+```{r}
+# remove \n from anillin
+anillin <- gsub("\n","", anillin) 
+
+# split anillin character string up
+anillin.split.list <- strsplit(anillin,"")
+
+# convert from list to vector
+## each amino acid is not in a separate slot of 
+## the vector
+anillin.split.vect <- unlist(anillin.split.list)
+
+# total length of vector; number of amino acids
+anillin.length.total <- length(anillin.split.vect)
+
+# total number of words in sequence
+## which is 2 less than number of amino acids
+anillin.length.total <- anillin.length.total-2
+
+
+# matrix store the data
+## fill with NAs
+## make the number of rows = the lenghth of anillin seq
+## make number of columns = 3
+anillin.word.matrix <- matrix(data = NA,  
+                      nrow = anillin.length.total, 
+                      ncol = 3)
+
+
+# loop over each aa in anillin seq
+for(i in 1:anillin.length.total){
+  
+  # grab letters from anillin is sets of 3s
+  word.i.vect <- anillin.split.vect[c(i, i+1, i+2)]# what does c(i, i+1, i+2) do?
+  
+  #store each word in a row of the matrix
+  anillin.word.matrix[i ,] <- word.i.vect
+  
+}
+
+
+# make a vector to store the words of anillin
+## (instead of being in columns they'll be in
+## actual 3-latter words, eg AAA)
+anillin.word.vector <- rep(NA, nrow(anillin.word.matrix))
+
+
+# Loop over each possible word
+## paste into a single word
+for(i in 1:length(anillin.word.vector)){
+  anillin.word.vector[i] <- paste(anillin.word.matrix[i,], sep = "", collapse = "")
+}
+
+
+# make a table of all the words to see
+# which ones are most common
+anillin.word.table <- table(anillin.word.vector)
+ 
+
+# put words in order; most common word will be first
+i.anillin.order <- order(anillin.word.table, decreasing = T)
+
+
+
+```
+
+
+```{r, eval = F}
+# Look at the output of the tabulation
+anillin.word.table[i.anillin.order]
+```
+
+
+
+```{r, eval = T}
+# histgram of talbe
+## one word occurs six times!
+hist(anillin.word.table)
+
+
+```
+
+
+```{r, eval = F}
+# similar output: a plot
+plot(anillin.word.table[i.anillin.order],ylab = "")
+
+
+# just tlook at the first 175 amino acids
+plot(anillin.word.table[i.anillin.order[1:175]],ylab = "")
+```
+
+
+
+## Compare HBB words > T with anillin word database
+
+Once I've worked up a set of words for anillin, I can use which() and %in% to see where the matches are.
+
+NOTE: this code will only word if the word.scores.above.t object has been generated already!
+
+```{r, eval = F}
+# use which() to compare the high-scoring words in 
+# from the query sequence
+# against all the words that occur in anillin
+# store that in i.match
+i.match <- which(word.scores.above.t$words.as.string %in% anillin.word.vector)
+
+# look at the match
+word.scores.above.t[i.match, ]
+
+```
+

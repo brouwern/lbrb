@@ -1,0 +1,452 @@
+---
+title: "Simulating sequences to get an EVD"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Simulating sequences to get an EVD}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+
+
+Figure 4.14 in Pevsner is an idealized curve based on equations that exactly describe the the normal distribution and the extreme value distribution (EVD).  The following code will run simulations to create an EVD based based on on amino acids.
+
+
+## Preliminaries
+
+
+```{r}
+library(Biostrings)
+```
+
+## The amino acid code
+
+We need a list of all the 1-letter codes for amino acids.  We can make this from the LETTERS object in are.  Below I use **negative** indexing to do this.  I make a vector of letters that are NOT amino acids, and then remove them.
+
+```{r}
+#1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6        
+#A,  C,D,E,F,G,H,I,  K,L,M,N,  P,Q,R,S,T,  V,W,  Y
+#A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z
+LETTERS[c(2,10,15,21,24,26)]
+not.an.aa <- c(2,10,15,21,24,26)
+aas <- LETTERS[-not.an.aa]
+```
+
+
+I need to create random sequences of polypeptides.  One way to do this is using the runif() function  (random-uniform) and set the range from 0.5 to 20.5, then round off the result
+
+First, make up some random numbers
+```{r}
+rand.num <- runif(n = 100,min = 0.5, max = 20.5)
+rand.num <- round(rand.num)
+
+rand.num
+```
+
+
+Note that all of the random numbers occur at least once.
+```{r}
+hist(rand.num)
+```
+
+Now use those random number as indices to pull out the amino acid codes.  If a letter occurs more than once, it gets pulled out each time.  
+```{r}
+aas[rand.num]
+```
+
+
+I slightly more direct way to do this is with the sample() function
+
+```{r}
+sample(x = aas, size = 100, replace = TRUE)
+```
+
+
+sample() allows you to vary the probabilities for each possibility.  As we know from studying PAM matrices amino acids vary in how often they occur in nature.
+
+This code sets up the frequencies from Dayhoff's original paper.  (The use of the function order()) puts it in alphabetical order
+```{r}
+frequencies <- c(0.089, 0.087, 0.085, 0.081, 0.070, 
+                 0.065, 0.058, 0.051, 0.050, 0.047, 
+                 0.041, 0.040, 0.040, 0.038, 0.037, 
+                 0.034, 0.033, 0.030, 0.015, 0.010)
+
+aa3 <- c("Gly","Ala","Leu","Lys","Ser", 
+         "Val","Thr","Pro","Glu","Asp",
+         "Arg","Asn","Phe","Gln","Ile",
+         "His","Cys","Tyr","Met","Trp")
+
+aa <- c("G", "A", "L", "K", "S", 
+        "V", "T", "P", "E", "D",
+        "R", "N", "F", "Q", "I",
+        "H", "C", "Y", "M", "W")
+
+freqs <- data.frame(aa3 = aa3[order(aa3)], 
+                    aa  = aa[order(aa3)],
+                    frequencies = frequencies[order(aa3)],
+                    stringsAsFactors = F)
+
+hist(freqs$frequencies, breaks  = 20)
+```
+
+
+I can set up my sampling based on the relative frequencies like this
+
+```{r}
+sample(x = freqs$aa, 
+       size = 100, 
+       replace = TRUE, 
+       prob = freqs$frequencies)
+```
+
+I can summarize the results using table().  
+
+```{r}
+x <- sample(x = freqs$aa, 
+       size = 100, 
+       replace = TRUE, 
+       prob = freqs$frequencies)
+
+table(x)
+```
+
+
+
+I can encapsulate this in a custom function I'll call rand_seq_aa()
+```{r}
+rand_seq_aa <- function(n = 100, aas, probs){
+   sample(x = aas, 
+          size = n, 
+          replace = TRUE, 
+          prob = probs)
+}
+
+```
+
+Every single time I run it, it gives me a random polypeptide.
+```{r}
+rand_seq_aa(n = 100, aas = freqs$aa, probs = freqs$frequencies)
+```
+
+
+
+
+Now I generate a database of random sequences
+```{r}
+#I want each polypeptide to be 1000 aa
+seq.length <- 120
+
+# I want 1000 fake sequences
+seq.n <- 1000
+
+# I'll store them here
+random.seqs <- matrix(data = NA, nrow = seq.n, ncol =seq.length)
+rownames(random.seqs) <- paste0("r.seq",1:seq.n)
+
+random.seqs[1:10,1:10]
+
+# Use a loop to run my rand_seq_aa() function 1000 times
+for(i in 1:nrow(random.seqs)){
+  random.seqs[i,] <- rand_seq_aa(aas = freqs$aa,
+                                   n = seq.length,
+                                   probs = freqs$frequencies)
+}
+
+# Each row represents a sequence
+## first 10 aa of first 10 sequences
+random.seqs[1:10,1:10]
+
+# first 10 aa of last 10 seqs
+random.seqs[990:1000,1:10]
+```
+
+
+I will compare a real Shroom sequence against my database of 1000 fake sequences. (This is from PDZ domain of mouse shroom; shroom 2 I think)
+```{r}
+shrm <- c("MKTPENLEEPSATPNPSRTPTERFVYLEALLEGGAPWGFTLKGGLERGEPLIISKIEEGGKADSVSSGLQAGDEVIHINEVALSSPRREAVSLVKGSYKTLRLVVRRDVCAAPGHADPGT")
+
+
+```
+
+Check that everything is the same size
+```{r}
+nchar(shrm)
+
+nchar(shrm) == seq.length
+```
+
+
+I am going to do a **local, pairwise** alignment between my shroom sequence and each random sequence.  I need a place to keep my alignment scores.
+
+```{r}
+random.seqs.score <- rep(NA,seq.length)
+```
+
+Now I will loop through each row of my random sequences, grab the sequence, format it into a character string using paste(), and align it with pairwiseAlignment().
+
+(If you don't want all the text print out you can comment out the cat() and print() commands with a hash tag).
+
+```{r}
+for(i in 1:nrow(random.seqs)){
+  
+  # turn row of matrix into a character vector 
+  rand.seq.i <- paste(random.seqs[i,], sep = "",collapse = "")
+  
+  # print some output
+  cat("\n")
+  cat("Iteration", i)
+  print(substr(rand.seq.i,1,20))
+  
+  # do alignment
+  score.i    <- pairwiseAlignment(shrm,
+                                  rand.seq.i,
+                                  type = "local",
+                                  gapOpening=1000, 
+                                  substitutionMatrix  = "BLOSUM62",
+                                  gapExtension=1,
+                                  scoreOnly  = T)
+  
+  #store score
+  random.seqs.score[i] <- score.i
+}
+```
+
+
+What we have is a set of scores between a real sequence and a random sequence.  We'd expect this all to be really lower scores, but due to random chance we might get a big one.  Let's look at the distribution
+
+
+Most scores are around 30, but there are a few that are pretty good.
+```{r}
+hist(random.seqs.score)
+```
+
+Let's characterize this distribution of scores and compare it to a normal distribution
+
+First, we want the mean, median, min, max and sd of the scores
+```{r}
+scores.mean <- mean(random.seqs.score)
+
+
+
+```
+
+To make the plotting easier I am going to **re-center** the distribution at zero.  I do this by subtracting the mean from the scores
+
+```{r}
+random.seqs.score.centered <- random.seqs.score-scores.mean
+```
+
+
+This doesn't change the shape of the histogram, just puts the mean at 0.  This is very common in stats.
+```{r}
+hist(random.seqs.score.centered)
+```
+
+Now I want the median, min, max and sd of the **centered data**.
+```{r}
+scores.med <- median(random.seqs.score.centered)
+score.min  <- min(random.seqs.score.centered)
+score.max  <- max(random.seqs.score.centered)
+scores.sd  <- sd(random.seqs.score.centered)
+```
+
+
+I'm going to do my blotting with a wider range of x values.  This is set with the xlim argument.  The abline() function puts reference lines for the mean and median
+```{r}
+x.axis.range <- c(-1*score.max,score.max)
+
+hist(random.seqs.score.centered,
+     breaks = 20, 
+     xlim = x.axis.range)
+abline(v = 0, col = 2)
+abline(v = scores.med, col = 3)
+```
+
+
+Now I'm going to overlay a normal distribution on the data.  This code is a bit dense.  See https://www.statmethods.net/graphs/density.html for another example, though its not well annotated.
+
+First, I need a sequence of numbers for my x-axis range
+```{r}
+scores.seq <- seq(-1*score.max, score.max)
+
+```
+
+I save my histogram as an object
+```{r}
+my.hist <- hist(random.seqs.score.centered,
+     breaks = 20, 
+     xlim = x.axis.range)
+```
+
+
+Now I calculate the data the represents the normal curve
+```{r}
+normal.curve.ht <-dnorm(scores.seq,
+            mean = 0,
+            sd=scores.sd)
+
+
+
+```
+
+I need to tweak the height
+```{r}
+normal.curve.ht <- normal.curve.ht*diff(my.hist$mids[1:2])*length(random.seqs.score.centered)
+```
+
+Now plot the histogram of the scores I simulated and a normal curve.  Note how on the left the curve is above the histogram bars, and on the right it below it.  Moreover, the tail on the left of the histogram stops short, while on the right large values occur even when the blue line of the normal distribution is basically flat.  What this means is that a normal distribution would have more small values than we see in our simulation, and fewer large values.
+
+```{r}
+hist(random.seqs.score.centered,
+     breaks = 20, 
+     xlim = x.axis.range)
+abline(v = 0, col = 2)
+abline(v = scores.med, col = 3)
+lines(scores.seq, normal.curve.ht, col="blue", lwd=2)
+
+```
+
+
+
+There are statistical functions that can test for normality.  They tell us that our data are most definitely not normal!
+```{r}
+shapiro.test(random.seqs.score)
+```
+
+Log transformations can make things more normal - not here!
+
+```{r}
+shapiro.test(log(random.seqs.score))
+```
+
+
+
+
+## Comparisons with a real sequence
+
+Our simulation indicates that random sequences will produce local alignments with scores between -10 and 30, and that those scores follow an **extreme value distribution.**  
+
+What if we compared a real sequence?  Below is the PDZ domain from  Kiwi (a bird) shroom (https://www.ncbi.nlm.nih.gov/protein/XP_025945925.1?report=graph)
+
+```{r}
+shrm.kiwi <- c("SESSITHKGRYIYLEALLQGGAPWGFTLKGGLEHGEPLIISKIEEGGKADSLPSKLQAGDEVVNINEVELSSSRREAISLVKGSYKKLKLVVRRDTYAAKGCTDLLSSNPLSPDCVTSDF")
+
+nchar(shrm.kiwi)
+nchar(shrm) == nchar(shrm.kiwi)
+```
+
+
+We can do a pairwise alignment between mouse shroom PDZ and Kiwi shroom PDZ.  The score is over 10x greater than anything from our random sequences!
+```{r}
+kiwi.align <- pairwiseAlignment(shrm,
+                  shrm.kiwi,
+                  type = "local",
+                  gapOpening=1000, 
+                  substitutionMatrix  = "BLOSUM62",
+                  gapExtension=1,
+                  scoreOnly  = T)
+
+kiwi.align
+```
+
+
+The code below plots the kiwi shroom pdz score against our distribution of random scores
+
+```{r}
+hist(random.seqs.score.centered,
+     breaks = 20, 
+     xlim = c(-20,390))
+abline(v = 0, col = 2)
+abline(v = scores.med, col = 3)
+abline(v = kiwi.align, col = 4, lwd = 4)
+lines(scores.seq, normal.curve.ht, col="blue", lwd=2)
+
+```
+
+
+
+What does this mean?  Practically, this means that if the sequence from the kiwi wasn't actually homologous and just due to random mutational events happened to end up with a the sequence that it did, we should be very very very surprised!  Stated another way: the alignment between mouse shroom and the kiwi sequence is outrageously good if the kiwi sequence wasn't related to the mouse shroom.  When ranked against the 1000 simulated data sets, the kiwi alignment is the top ranked, putting it in the 99.9th percentile.  
+
+We can convert this to a familiar **p-value** by converting 99.9% to a proportion and subtracting it from 1.
+```{r}
+1-0.999
+```
+
+We can therefore say that the alignment between mouse shroom and the kiwi sequence is high significant, with p < 0.001.  
+
+The interpretation of p-values is tricky.  What this means is that, when comparing random sequences, the probability of getting an alignment as good or better than the one between the mouse and kiwi sequence is less than 0.001.  The inference is that this is so unlikely that random events did not result in the similarity between the sequences but rather the sequences are evolutionarily linked.
+
+One thing to note: the p-value here is dependent on the number of simulations I ran.  If I rand 10,000 simulations - and if I still hadn't gotten a score greater than the observed one --  I could same my p value was p < 0.0001 (1e-04).
+
+
+```{r}
+1-0.9999
+```
+
+I'm using a kiwi sequence that I know is homologous to my mouse sequence.  Realistically I'd probably have to run trillions of simulations in order to end up with an alignment that is this good.
+
+
+
+
+## E values from p-values
+
+Its more common with alignments to use **E** values, or **Expect values**.  We can convert p-values to E values with the equation
+
+p = 1 - exp(-E).
+
+So,
+
+
+p - 1  = -exp(-E)
+-1 + p  = -exp(-E)
+1 - p  = exp(-E)
+ln(1-p) = -E
+-1*ln(1-p) = E
+
+-1*ln(1-0.001) =E
+-1*ln(0.999) =E
+
+ln is just log() in R
+```{r}
+log(0.999)
+```
+
+-1*-0.0010005 = E
+```{r}
+-1*-0.0010005
+```
+
+E equals 0.00100005.  
+
+
+Ok, doesn't look like much.  When p-values are small, E values are small.  An E value is the number of sequences you'd expect due to chance to have a given score.  This makes more sense when the E value is big.
+
+What if we'd gotten p = 0.86?
+
+```{r}
+1-0.86
+```
+
+```{r}
+log(0.14)
+```
+
+```{r}
+-1*-1.966113
+```
+So a p value of 0.96 converts to an E value of about 2.  When an alignment results in an E value of 2, what this means is that we'd expect to get the score associated with the alignment about 2 times just due to chance.  E values are often very very small, and usually a cut off of less than 0.001 is used.  This requires consideration of specific situations, though.
+
+

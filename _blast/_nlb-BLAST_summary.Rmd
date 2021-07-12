@@ -1,0 +1,221 @@
+---
+title: "BLAST Summary"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{BLAST Summary}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+
+I have discovered that there are many minor but annoying inconsistencies in how the BLAST algorithm is described in text books.  Additionally, most gloss over key computational steps, such as how BLAST actually searches through sequences.  While this doesn't have many - if any - consequences for a user of BLAST, it makes it very difficult to determine the computational steps involved and to appreciate exactly what is going on.  The following notes are my attempt to summarize all the key features and computational steps of BLAST.
+
+In a few cases I not provided every detail, which I usually note.  I also occasionally use my own analogy or terminology which I think provides a useful description.
+
+In the *dayoff* package I have written code that simulates some steps of the BLAST algorithm.  This code is meant to emulate or evoke the process of BLAST and is NOT written as the actual program is.  For example, as discussed below, BLAST's actual searching of databases involves computational tool called a **deterministic finite-state automata (DFSA)** (Zvelebil & Baum 2008).  This is a rather complicated sub-program, buts it general behavior can be evoked using a simple regular expression or for() loop.  (I'd like to write code for a DFSA but have yet to find R or Python examples).
+
+## BLAST Overview
+
+### Why do a BLAST search?
+
+BLASTing is a common activity by molecular biologists, bioinformaticians, computational biologists, and phylogenists.  Some general reasons to do a BLAST
+
+* Find conserved sequences (homologs)
+* Find conserved regions within a gene which may be important to protein function
+* Determine how similar a gene in a model species (mice, Drosophila) is to humans
+* Scan a new genome sequence for conserved genes
+* Ex: BLASTing sequence of newly discovered mouse gene (shroom) showed Hildebrand & Soriano (1999) that this gene wasn't just a mouse gene - it occurred in Humans AND mice
+* Subsequent BLASTing of shroom indicates that shroom occurs in almost all multicellular organisms!
+
+
+
+### What does BLAST let you do?
+
+* find homologous genes
+* search DNA, protein, mRNA, whole genomes, etc
+* search specific curated databases with high-quality data (eg **RefSeq**, **UniProt**)
+* determine specific regions of homology via **local alignment**
+* Search many many many sequences using efficient **heuristic** search technique
+* determine how likely your results are to have occurred by chance (E-value)
+
+
+## BLAST recipe
+
+* Input 1: The query: a sequence of interest (eg mouse shroom)
+* Input 2: a database (eg, all known and predicted protein sequences, all reference protein sequences)
+* Input 3: a scoring matrix (BLOSUM62, PAM250)
+* Output 1: high-scoring local alignments between query and entries in the database
+* Output 2: quality scores for each alignment
+
+The BLAST results interface can also run other programs which can build **multiple sequence alignments**, **create simple phylogenetic trees**, link to relevant literature, etc.
+
+## Modules in the BLAST Workflow and Algorithm
+
+The writers of BLAST divide it up into 3 modules (Camacho et al 2009).  This is also how Pevsner frames it (page 138).  The first two steps are by far the most important.  The third appears to be mostly about doing book keeping and minor revisions, in part to clean up things that were done in step 1 to maximize speed and reduce memory usage.
+
+1. **Setup**: Converting query sequence to **words**, scoring the words, determining words above neighbor hood threshold
+1. **Scanning**: Comparing query word list against database, create initial **ungapped alignment** and subsequent **gapped alignment** for **high-scoring sequence pairs**.
+1. **Traceback**: Produce, revise and report full **gapped alignment**
+
+
+### Module 1: Setup query sequence (Protein BLAST oriented)
+
+* Read **query sequence**
+* Filter **low complexity regions** with little information (eg, AAAAAAAAAAA, ATATATATAT, etc)
+* Determine all overlapping **words** occurring in the query.
+* The default is for 3-letter amino acid words; users can modify this.
+* A word may occur more than once; each instance gets processed
+* Score query words against **master word list** with **scoring matrix** (**PAM** or **BLOSUM**)
+* The master word list for 3-letter words contains 20 x 20 x 20 = 8000 possible words!
+* Use a cutoff **T** (default = 11) to determine which words in master words list are in an desirable evolutionary **neighborhood** of the words in the query sequence.
+* **T** is sometimes called the **Neighborhood word score threshold** (Mount 2007)
+* Typically for each word in a query sequence there are ~50 words with a score >11
+* A 100 protein with amino acid will have 98 overlapping words.  98*50 = 4900.  These the sequence database will then be scanned for each of the 4900 words!
+
+NOTE 1: *BLAST also does some special data organization and data structures to make this and downstream processing more efficient (for those with a CS background: this involves a look-up table/HASH table).  The code I've used to demonstrate parts of the BLAST process are evocative of what goes on, but are not accurate in the data structures and workflow.*  
+
+NOTE 2: *The term "master word list" isn't used by anyone, but I think describes what this element is*.
+
+### Module 2: Scanning database for high-scoring words
+
+The scanning process in BLAST involves two important steps: find the 1st "hit" between a word from the query (or a neighboring word), then find a 2nd hit.  The Baxevanis and Ouellette (2005) description does not indicate this.
+
+The scanning process is done with a **deterministic finite-state automata (DFSA)** (aka a **finite state machine (FSM)**).  The only textbook I've found which mentions this and discusses it is Zvelebil; and Baum (2008).  A DFSA produces a similar result as a regular expression, though its probably much faster!  Most peer review papers except the original BLAST paper (Alschul et al 1990) also don't mention this.  
+
+Note: you don't need to know what a DFSA or FSM are.  You do need to know that BLST searches sequences for matching words.
+
+#### Scanning for the 1st hit
+
+* Scan sequences in database for each word in the **neighborhood** of a word from the query
+* Scanning is done using a special computational tool called a **deterministic finite-state automata** (aka a **finite state machine**).
+* (**Regular expressions** can be converted to this format; BLAST does not, however, use regular expressions or simple loops to do this search!).
+* Each time a word from the neighborhood matches with a sequence in the database BLAST records its position as a **hit**.
+* Through the late 1990s, once scanning was done matched words served as the starting point for an ungapped alignment extending in both directions from the match (Some sources  such as Baxevanis and Ouellette 2005 still describe BLAST this way);
+
+#### Scanning for the 2nd hit
+
+* Since the late 1990s, BLAST has used the **two hit method**
+* Once scanning is done, BLAST locates pairs of hits that are within 40 amino acids of each other
+* If a hit is isolated with no other hits within 40 amino acids upstream or downstream, its is ignored
+* If 2 hits occur within 40 amino acids, BLAST builds and scores an un-gapped alignment starting at the second word; overlapping words aren't considered)
+* (Some Sources imply that BLAST builds an alignment that runs between these two hits, eg Mount 2007.  Pevsner phrasing is also not accurate: "BLAST extends hits to find alignments called ...Hasps" (pg 140, 2nd paragraph).  These are either misstatements or errors).
+
+Note: You don't need to memorize this value of 40; you should be able to reason through what might  happen if it is increased or decreased.
+
+#### Scoring initial ungapped alignment
+
+Once BLAST finds a second hit, it starts building an **ungapped alignment**.  If this alignment exceeds a certain threshold, a gapped alignment (see below).   Baxevanis and Ouellette (2005) gloss over this two-step process.
+
+* Starting from the 2nd hit of two adjacent hits, BLAST extends an un-gapped alignment in both directions. 
+* BLAST monitors the score of this un-gapped alignment as it grows.
+* Scoring is done with a BLOSUM, PAM or other matrix
+* If this ungapped alignment exceeds a certain threshold (**S**), a **gapped alignment** is initiated.
+* The value of S is (was?) determined by subjecting **random sequences** to the word matching, scanning, and ungapped alignment procedures just described.  S is set so that short alignments occurring due to chance are unlikely to be proceed in the algorithm.  (Mount 2007) 
+* If S is exceeded and a gapped alignment built, the resulting **gapped alignment** is called a **High scoring sequence pair (HSP)**
+
+
+
+#### Scoring gapped alignment
+
+* As the alignment of a HSP extends, its score is monitored.  
+* When an alignment has mostly identical or chemically similar matches, its score increases with its length.
+* Gaps and matches between dissimilar amino acids cause the alignment score to begin to drop
+* Small gaps and mis-matches might result in temporary declines in the alignment score, but the score may increase again after the gap or an area where sequences have diverged.
+* If the score drops more than a specified threshold (X.u; usually ~20) then the alignment is stopped 
+* Once the threshold is exceed BLAST essentially backtracks to where the highest score occurred; this alignment is then stored as a preliminary HSP 
+* (To save time and memory BLAST uses some shortcuts during the creation and reporting 
+
+Note: You don't need to memorize this value of 20; you should be able to reason through what might  happen if it is increased or decreased.
+
+### Module 3: Traceback
+
+* During the traceback phase the alignment is finalized, minor improvements made, and reported
+* The traceback procedures appears to be required mostly to deal with simplifications the algorithm used to save time and memory.  (For example, only the location and length of preliminary HSPs are stored during the scanning part of the alignment.  The full alignment is then built and reported during traceback.  I assume this means the full alignment is rebuilt, but I am not yet sure of all the steps)
+
+
+
+## BLAST alignment statistics
+
+BLAST reports the following things
+
+* The **raw score** from **gapped alignment** between the query and matching sequence
+* The proportion of the query sequence which was aligned
+* The **percent identity** of the alignment (this involves some rule for how gaps are counted; we won't worry about this)
+* The **E-value**
+* The **Bit Score** (where?)
+
+Note: BLAST reports both a Max Score and a Total Score, which are both **raw scores**.  They are often identical, and we won't worry about exactly what they are.
+
+
+Tp0751 is a syphilis (Treponema pallidum) outer membrane protein thought to be involved in parthenogenesis.  I googled "Tp0751 accession number" and it took me to the UniProt page.  I found the FASTA-formatted sequence and pasted it into a blastp search.  The default for blastp it so search the "nr" (non-redundant) database.  I changed this to RefSeq because this database has higher standard for inclusion.
+
+```{r, eval = F}
+">sp|O83732|Y751_TREPA Uncharacterized protein TP_0751 OS=Treponema pallidum (strain Nichols) OX=243276 GN=TP_0751 PE=1 SV=1
+MNRPLLSVAGSLFVAAWALYIFSCFQHGHVPPRRIPPHDTFGALPTAALPSNARDTAAHP
+SDTADNTSGSSTTTDPRSHGNAPPAPVGGAAQTHTQPPVQTAMRIALWNRATHGEQGALQ
+HLLAGLWIQTEISPNSGDIHPLLFFDREHAEITFSRASVQEIFLVDSAHTHRKTVSFLTR
+NTAISSIRRRLEVTFESHEVIHVRAVEDVARLKIGSTSMWDGQYTRYHAGPASAPSP"
+```
+BLAST returns 27 sequences when I query RefSeq.  All occur in *Treponema* species.  I also tried the default **non-redundant (nr)** database and got 38 hits, also all in *Treponema* species.  The **UniProt** database returns just 1, my original sequence, because no other related proteins have been studied well enough to deserve entry to UniProt.
+
+I also tried PSI-BLAST, which is a modified (and slower) BLAST which is better at finding more distantly related proteins.  PSI-BLAST returned 81 sequences.  Some of these are non-Treponema species, but they have E values > 0.05.
+
+The highest scoring **hit** from the RefSeq search is to the sequence I submitted: it as 100% coverage and 100% Identity.  This means the alignments between what I submitted and this database sequence are identical.  
+
+The second hit is to another species, *T. paraluisicuniculi*.  This has 100% query coverage, which means no gaps were introduced.  I can confirm this by clicking on the "Alignments" tab and looking at the reported pairwise alignment.  Gaps are indicated by dashes, and the top of the alignment has a gap percentage stat.
+
+The percent identity (PID) for this hit is 98.73%.  Looking at the actual alignment, I can see only a few "+" symbols which indicate conservative differences between the sequence, and one space, which indicates a non-conservative difference. 
+
+The **E-value** is tiny.  Its reported at 6e-170, which is 6*10^-170.  Below 0.05 E values and p-values are almost identical (Pevsner Table 4.3, page 144).
+
+
+The lowest-scoring hit was from T. maltophilum.  Only 55% of my query sequence matched with the T. maltophilum. sequence and the percent identity was 27.27%.  Despite this low level of identity, the E value for this hit is still 5e-07, or 5*10^-7.  
+
+An E value of 5e-07 is going to be very similar to the related p-value, but let's check.  Pevsner provides a conversion equation (page 143, equation 4.8): 
+p = 1-e^(-E)
+
+You should memorize this equation (or include it on a note sheet if allowed) and be able to implement it in R as shown below.
+
+In R I can code this as below.  Note that instead of e^-E I have to use exp(-E)
+```{r}
+E <- 5e-07 
+p <- 1 - exp(-E)
+
+p
+```
+
+You can it this way too
+
+```{r, eval = F}
+p <- 1 - exp(-5e-07 )
+p
+```
+
+Or skip the assignment step
+
+```{r, eval = F}
+1 - exp(-5e-07 )
+```
+
+Or write it out long-form
+
+```{r, eval = F}
+1 - exp(-5*10^-7 )
+```
+
+
+```{r}
+
+```
+

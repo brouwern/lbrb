@@ -1,0 +1,432 @@
+# Bioinformatics workflow
+
+This lesson walks you through and entire workflow for a bioinformatics, including
+
+<!-- check all of this -->
+
+1. obtaining FASTA sequences
+1. cleaning sequences
+1. creating alignments
+1. creating distance a distance matrix
+1. building a phylogenetic tree
+
+
+
+## Software Preliminaires
+
+A few things need to be done to get started with an R sessions.
+
+### Download necessary packages
+
+Many R sessions begin by downloading necessary software packages to augment R's functionality.  I've already set this up behind the scenes so we can get to work.  (For those familiar with other languages, these are usually called 'libraries').
+
+### Load packages into memory
+
+We *do* need to load up all our bioinformatics and phylogenetics software into R.  This is done with the library() command.  
+
+To run this code just clock on the sideways green triangel all the way to the right of the code.
+
+NOTE: You'll likely see some red code appear on your screen.  No worries, totally normal!
+
+```{r, message= F, warning=F}
+library(msa)
+library(rentrez)
+library(seqinr)
+library(ape)
+library(Biostrings)
+```
+
+
+## Downloading macro-molecular sequences
+
+We're going to explore some sequences.  First we need to download them.  To do this we'll use a function, entrez_fretch(), which acesses the Entrez system of database (ncbi.nlm.nih.gov/search/).  This function is from the rentrez package, which stands for "R-Entrez."
+
+We need to tell entrez_fetch() several things
+
+1. db = the type of entrez database.  
+1. id = the accession (ID) number of the sequence
+1. rettype = file type what we want the function to return.  
+
+(Formally, these things are called **arguements** by R.)
+
+
+We'll use these settings:
+
+1. db = "protein" to access the Entrez database of protein sequences  
+1. rettype = "fasta", which is a standard file format for nucleic acid and protein sequences
+
+We'll set id = ... to 2 sequences whose **accession numbers** are:
+
+1. NP_065910: Human shroom 3
+1. AAF13269:  Mouse shroom 3a
+1. CAA58534:  Human shroom2
+1. XP_783573:  Sea urchin shroom
+
+There are two highly conserved regions of shroom 3
+1. ASD 1: aa 884 to aa 1062 in  hShroom3
+1. ASD 2: aa 1671 to aa 1955 in hShroom3
+
+
+Normally we'd have to download these sequences by hand.  In R we can do it automatically; this might take a second.
+
+```{r}
+# Human shroom 3 (H. sapiens)
+hShroom3 <- entrez_fetch(db = "protein", 
+                          id = "NP_065910", 
+                          rettype = "fasta")
+
+# Mouse shroom 3a (M. musculus)
+mShroom3a <- entrez_fetch(db = "protein", 
+                          id = "AAF13269", 
+                          rettype = "fasta")
+
+# Human shroom 2 (H. sapiens)
+hShroom2 <- entrez_fetch(db = "protein", 
+                          id = "CAA58534", 
+                          rettype = "fasta")
+
+
+# Sea-urchin shroom
+sShroom <- entrez_fetch(db = "protein", 
+                          id = "XP_783573", 
+                          rettype = "fasta")
+```
+
+
+We can take a peek at what we just got
+
+```{r}
+cat(hShroom3)
+```
+
+
+There's lots of labels and ID nubmers and stuff here, so I'm going to check about how long each of these sequences is - each should have an at least slightly different length. If any are identical, I might have repeated an accession name or re-used an object name. The function nchar() counts of the number of characters in an R object.
+```{r}
+nchar(hShroom3)
+nchar(mShroom3a)
+nchar(sShroom)
+nchar(hShroom2)
+```
+
+
+
+## Prepping macromolecular sequences
+
+>"90% of data analysis is data cleaning" (-Just about every data analyst and data scientist on twitter)
+
+We have our sequences, but the current format isn't useable for us yet. We can set it up using a function I wrote called fasta_cleaner. 
+
+If we run the name of the command with out any quotation marks we can see the code:
+```{r}
+fasta_cleaner
+```
+
+
+Now use the function to clean our sequences
+```{r}
+hShroom3  <- fasta_cleaner(hShroom3,  parse = F)
+mShroom3a <- fasta_cleaner(mShroom3a, parse = F)
+hShroom2  <- fasta_cleaner(hShroom2,  parse = F)
+sShroom   <- fasta_cleaner(sShroom,   parse = F)
+```
+
+
+
+
+Now let's take a peek at what our sequences look like:
+```{r}
+hShroom3
+```
+
+
+## Aligning sequences
+
+We can do a [**global alignment**](https://tinyurl.com/y4du73zq) using the pairwiseAlignment() function.
+
+```{r}
+align.h3.vs.m3a <- Biostrings::pairwiseAlignment(
+                  hShroom3,
+                  mShroom3a)
+```
+
+We can peek at the alignment
+```{r}
+align.h3.vs.m3a
+```
+
+The score tells us how closely they are aligned; higher scores mean the sequences are more similar.  Its hard to interpret the number on its own so we can get the **percent sequence identity** using the pid() function.
+
+```{r}
+Biostrings::pid(align.h3.vs.m3a)
+```
+
+So, *shroom3* from humans and *shroom3* from mice are 71% similar (at least using this particular method of alignment, and there are many ways to do this.)
+
+What about human shroom 3 and sea urchin shroom
+
+```{r}
+align.h3.vs.h2 <- Biostrings::pairwiseAlignment(
+                  hShroom3,
+                  hShroom2)
+```
+
+
+First check out the score
+```{r}
+score(align.h3.vs.h2)
+```
+
+Now the percent sequence alignment.
+```{r}
+Biostrings::pid(align.h3.vs.h2)
+```
+
+
+How does it work out evolutionarily that Human shroom 3 and Mouse shroom 3 are more similar to each other than human shroom 3 and human shroom 2?  What are the evolutionary relationships among these genes within the shroom gene family?
+
+
+
+## Downloading multiple sequences
+
+I've copied a table from a published paper which has accession numbers for 15 different Shroom genes.
+
+```{r}
+shroom_table <- c("CAA78718" , "X. laevis Apx" ,         "xShroom1",
+            "NP_597713" , "H. sapiens APXL2" ,     "hShroom1",
+            "CAA58534" , "H. sapiens APXL",        "hShroom2",
+            "ABD19518" , "M. musculus Apxl" ,      "mShroom2",
+            "AAF13269" , "M. musculus ShroomL" ,   "mShroom3a",
+            "AAF13270" , "M. musculus ShroomS" ,   "mShroom3b",
+            "NP_065910", "H. sapiens Shroom" ,     "hShroom3",
+            "ABD59319" , "X. laevis Shroom-like",  "xShroom3",
+            "NP_065768", "H. sapiens KIAA1202" ,   "hShroom4a",
+            "AAK95579" , "H. sapiens SHAP-A" ,     "hShroom4b",
+            #"DQ435686" , "M. musculus KIAA1202" ,  "mShroom4",
+            "ABA81834" , "D. melanogaster Shroom", "dmShroom",
+            "EAA12598" , "A. gambiae Shroom",      "agShroom",
+            "XP_392427" , "A. mellifera Shroom" ,  "amShroom",
+            "XP_783573" , "S. purpuratus Shroom" , "spShroom") #sea urchin
+
+shroom_table <- data.frame(matrix(shroom_table,byrow = T, nrow = 14), 
+                     stringsAsFactors = F)
+names(shroom_table) <- c("accession", "name.orig","name.new")
+
+shroom_table$spp <- "Homo"
+shroom_table$spp[grep("laevis",shroom_table$name.orig)] <- "Xenopus"
+shroom_table$spp[grep("musculus",shroom_table$name.orig)] <- "Mus"
+shroom_table$spp[grep("melanogaster",shroom_table$name.orig)] <- "Drosophila"
+shroom_table$spp[grep("gambiae",shroom_table$name.orig)] <- "mosquito"
+shroom_table$spp[grep("mellifera",shroom_table$name.orig)] <- "bee"
+shroom_table$spp[grep("purpuratus",shroom_table$name.orig)] <- "sea urchin"
+
+
+```
+
+
+Take a look:
+```{r}
+shroom_table
+```
+
+
+Instead of getting one sequence at a time we can download several by accessing the "accession" column from the table
+
+```{r}
+shroom_table$accession
+```
+
+
+We can give this whole set of accessions to entrez_fetch()
+```{r}
+shrooms <- entrez_fetch(db = "protein", 
+                          id = shroom_table$accession, 
+                          rettype = "fasta")
+```
+
+We can look at what we got here
+```{r, eval = F}
+cat(shrooms)
+```
+
+
+## Building a phylogenetic tree 
+
+We can align all of the sequences we downloaded and use that alignment to build a phylogenetic tree.  Again, we first need to set things up properly.  In this case, we need to make a text file (.txt) that contain our data.  This code is kinda dense, such close your eyes and run it.
+
+TODO: where should students save this?
+
+```{r, eval = F}
+sink("shrooms.txt")
+cat(shrooms)
+sink()
+file.show("shrooms.txt")
+```
+
+A new tab might pop up in RStudio showing you the sequence; just close it.
+
+Now some more cleaning.  We need to read in the .txt file we just made and make a particular type of R object for our alginment program.  Luckily this is easy:
+
+```{r}
+shrooms_stringset <- readAAStringSet("shrooms.txt")
+```
+
+
+Let's take a look at the names of these proteins:
+```{r}
+names(shrooms_stringset)
+```
+
+At the bottom of the list are two entries that say either "PREDICTED: hypothetical protein" or "PREDICTED: protein".  What organisms are these from (google the species names)?  What does this mean?
+
+
+These names are really long - Let's overwrite them with the short versions of the names from the table, which are:
+
+```{r}
+#shroom_table$name.new
+```
+
+Now overwrite them:
+```{r}
+names(shrooms_stringset) <- shroom_table$name.new
+```
+
+
+### Multiple sequence alignment
+
+Now, we'll use the software msa, which implements the **ClustalW** multiple sequence alignment algorith.  Normally we'd have to download the ClustalW program and either point-and-click our way through it or use the **command line***, but these folks wrote up the algorithm in R so we can do this with a  line of R code.
+
+This will take a second or two (or minute if everyone runs this at the same time).
+```{r}
+shrooms_align <- msa(shrooms_stringset,
+                     method = "ClustalW")
+```
+
+
+Now we can take a look at the alignment in PDF format.  I this case I'm going to just show about 100 amino acids near the end of the alignment, where there is the most overlap accross all of the sequences:
+
+```{r}
+msaPrettyPrint(shrooms_align, 
+               #output="asis", 
+               y=c(2000, 2100),
+               showNames="left", 
+               #showLogo="top",
+               consensusColor="ColdHot", 
+               shadingMode = "functional",
+               shadingModeArg = "structure",
+               showLegend=TRUE,
+               showConsensus = "bottom",
+               askForOverwrite=FALSE)
+```
+
+
+
+### Gene tree
+
+First, we need to convert to a different data structure.  Sigh... 
+```{r}
+shrooms_align_seqinr <- msaConvert(shrooms_align, type="seqinr::alignment")
+```
+
+Next we need to get an estimate of how similar each sequences is.  THis will be the basis for our phylogenetic tree.
+```{r}
+shrooms_dist <- dist.alignment(shrooms_align_seqinr, "identity")
+
+
+```
+
+We've made a matrix using dist.alginment(); let's round it off so its easier to look at:
+```{r}
+shrooms_dist_rounded <- round(shrooms_dist,1)
+```
+
+Now let's look at it
+```{r}
+shrooms_dist_rounded
+```
+
+
+Now let's use these data to build a tree.  First, we let R figure out the structure of the tree.  We'll use the **neighbor joining** algorith via the functin nj():
+```{r}
+tree <- nj(shrooms_dist)
+```
+
+Now we'll make a quick plot of our tree.
+```{r}
+plot(tree, main="Phylogenetic Tree")
+mtext(text = "Shroom family gene tree")
+```
+
+
+Let's make a fancier plot:
+```{r}
+plot(tree, main="Phylogenetic Tree")
+mtext(text = "Shroom family gene tree")
+
+x <- 0.551
+x2 <- 0.6
+
+segments(x0 = x, y0 = 1, 
+         x1 = x, y1 = 4,
+         lwd=2)
+text(x = x*1.01, y = 2.5, "Shrm 3",adj = 0)
+
+segments(x0 = x, y0 = 5, 
+         x1 = x, y1 = 6,
+         lwd=2)
+text(x = x*1.01, y = 5.5, "Shrm 2",adj = 0)
+
+segments(x0 = x, y0 = 7, 
+         x1 = x, y1 = 9,
+         lwd=2)
+text(x = x*1.01, y = 8, "Shrm 1",adj = 0)
+
+segments(x0 = x, y0 = 10, 
+         x1 = x, y1 = 13,
+         lwd=2)
+text(x = x*1.01, y = 12, "Shrm ?",adj = 0)
+
+
+segments(x0 = x, y0 = 14, 
+         x1 = x, y1 = 15,
+         lwd=2)
+text(x = x*1.01, y = 14.5, "Shrm 4",adj = 0)
+
+
+segments(x0 = x2, y0 = 1, 
+         x1 = x2, y1 = 6,
+         lwd=2)
+
+segments(x0 = x2, y0 = 7, 
+         x1 = x2, y1 = 9,
+         lwd=2)
+
+segments(x0 = x2, y0 = 10, 
+         x1 = x2, y1 = 15,
+         lwd=2)
+
+```
+
+
+
+
+```{r}
+
+```
+
+
+## Functions used
+
+library()
+source()
+head()
+nchar()
+
+entrez_fretch()
+
+
+msa
+rentrez
+seqinr
+ape
+
+Entrez: ncbi.nlm.nih.gov/search/

@@ -1,0 +1,672 @@
+---
+title: "UPGMA in R - the hard way - deprecated?"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{UPGMA in R - the hard way - deprecated?}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r  eval = F}
+library(compbio4all)
+```
+
+
+
+## Libraries
+
+We'll need the ape package
+```{r}
+#install.packages("ape")
+library(ape)
+```
+
+## Function we'll use
+
+```{r}
+
+plot_dist_as_nmds <- function(mat){
+  matno0 <- mat
+  
+matno0[is.na(matno0)] <- 0
+
+
+d2  <- cmdscale(matno0, add =T)
+x <- d2$points[,1]
+y <- d2$points[,2]
+plot(x,y, main = "APPROXIMATE 2D distances",
+     xlim = c(-20,20), 
+     ylim = c(-20,20))
+text(x, y, labels = row.names(d2$points), cex=3)
+
+return(d2)
+
+}
+```
+
+## Data matrix
+
+Data matrix from https://en.wikipedia.org/wiki/UPGMA#First_step
+
+One way to make the data is to rbind() individual vectors as rows
+```{r}
+
+#      a   b   c   d   e
+a <- c(0,	 17, 21, 31, 23)
+b <- c(17, 0,	 30, 34, 21)
+c	<- c(21, 30, 0,  28, 39)
+d	<- c(31, 34, 28,	0, 43)
+e	<- c(23, 21, 39, 43,	0)
+dmat1 <- rbind(a,b,c,d,e)
+
+```
+
+Looks like this
+```{r}
+dmat1
+```
+
+Add names
+```{r}
+colnames(dmat1) <- c("a","b","c","d","e")
+```
+
+The matrix is symmetrical.  Its easier if you make redundant elements NA because we don't need them.
+```{r}
+diag(dmat1) <- NA
+dmat1[upper.tri(dmat1)] <- NA
+```
+
+Matrix now looks like this
+```{r}
+dmat1
+```
+
+
+
+## What does this matrix represent?
+
+### Genetic distances conceptualized as pairwise linear distances
+
+Each element of the matrix is a **distance.**  In this case, it is the number of nucleotides that are different between two sequences.  There are 5 sequences, and if each is compared against the other then there are 10 **distances.**  
+
+(Mathematically these are called **Hamming distances**.  You don't need to memorize that).
+
+Each distance is the distance between two species, and it can be conceptualized as a linear distance.
+
+You could visualize each pairwise distance like this
+
+```{r}
+par(mfrow = c(1,1))
+plot(0, 0, xlim = c(0,max(dmat1,na.rm = T)), 
+     ylim = c(0,12), 
+     type = "l",
+     xlab = c("Distance (number of mutations)"),
+     ylab = "Pairwise comparison")
+points(0, 1, pch = "a")
+points(dmat1[2,1], 1, pch = "b")
+segments(x0 = 0, y0 = 1, 
+         x1 = dmat1[2,1],y1 = 1)
+abline(h = 1.5, col = 2)
+```
+
+
+
+We can look at all of them.  Note that each line is independent and cannot be compared (the y axis has no meaning). This is NOT a 2D map!
+
+```{r}
+plot(0, 0, xlim = c(0,max(dmat1,na.rm = T)), 
+     ylim = c(0,12), 
+     type = "l",
+     xlab = c("Distance (number of mutations)"),
+     ylab = "Pairwise comparison")
+pair.k <-0
+for(i in 1:nrow(dmat1)){
+  for(j in 1:nrow(dmat1)){
+
+dist.ij <- dmat1[i,j] 
+if(is.na(dist.ij) == FALSE){
+  pair.k <- pair.k+1    
+
+       
+spp.i <- rownames(dmat1)[i]
+spp.j <- colnames(dmat1)[j]
+points(-0.5,               pair.k, pch = spp.j, col = which(LETTERS %in% toupper(spp.j)), cex = 1.75)
+points(dist.ij+0.75,       pair.k, pch =spp.i, col = which(LETTERS %in% toupper(spp.i)), cex = 1.75)
+segments(x0 = 0, y0 = pair.k, 
+         x1 = dist.ij, y1 = pair.k)
+abline(h = pair.k+0.5, col = 2)
+}
+
+  }
+}
+
+```
+
+We can see that the distance between a and b is the smallest, at 17 amino acid changes.  
+
+
+
+### Genetic distances conceptualized as 2D linear distances
+
+We can extend the analogy of linear distance to two dimensions.  With some fancy math we can make a 2D plot where the distances in 2D space are similar to the distances in the matrix.  
+
+
+```{r}
+par(mfrow = c(1,1), mar= c(2,2,2,2))
+dmat1no0 <- dmat1
+  
+dmat1no0[is.na(dmat1no0)] <- 0
+
+d2  <- cmdscale(dmat1no0, add =T)
+x <- d2$points[,1]
+y <- d2$points[,2]
+plot(x,y, main = "APPROXIMATE 2D distances",xlim = c(-20,20), ylim = c(-20,20))
+text(x, y, labels = row.names(d2$points), cex=3)
+
+```
+
+In this plot, things appear to have been distorted a bit, and b looks closer than e (to me).
+
+
+
+## From linear distances to "tree distances"
+
+Distances aren't actually linear - we are assuming a "tree shape" to represent the divergence of two species genetically (and possibly geographically.)
+
+The simplest methods of building trees assume that all branch lengths terminate at the same spot, and the total mutational distance traversed by each species is the same. (This is the assumption or constraint related to **ultrametricity**).  
+
+The distance between a and b is 17.  We assume that both species a and species b have undergone the same number of mutations since they split, so the branch lengths for each are 17/2 = 8.5.  (You obviously can't have 8.5 mutations, but this is how the math works).
+
+```{r}
+par(mfrow = c(1,1), mar= c(2,2,2,2))
+plot(0, 0, xlim = c(0,max(dmat1,na.rm = T)), 
+     ylim = c(0,12), 
+     type = "l",
+     xlab = c("Distance (number of mutations)"),
+     ylab = "Pairwise comparison")
+points(0, 1, pch = "a")
+points(dmat1[2,1], 1, pch = "b")
+segments(x0 = 0, y0 = 1, 
+         x1 = dmat1[2,1],y1 = 1)
+abline(h = 1.5, col = 2)
+
+
+branch.length <- dmat1[2,1]/2
+points(0, 4)
+points(branch.length+0.75, 4, pch = "a")
+points(0, 6)
+points(branch.length+0.75, 6, pch = "b")
+
+segments(x0 = 0, y0 = 4, 
+         x1 = branch.length,y1 = 4)
+segments(x0 = 0, y0 = 6, 
+         x1 = branch.length,y1 = 6)
+
+segments(x0 = 0, y0 = 4, 
+         x1 = 0, y1 = 6, col = 1, lty = 2)
+
+abline(h = 8, col = 2)
+```
+
+
+
+## The UPGMA algorithm
+
+The UPGMA algorithm is described by Swofford et al (1996?, page 486) as below.  The word "cluster" means "taxa" in some cases and "clade" in others.  This is a bit tricky at first but once you get a sense for the whole algorithm it will make more sense.
+
+1. "Given matrix of pairwise distances, find the clusters (taxa) i and j such the d.ij is the minmum value in the table." (d.ij is the distane between taxa i and taxa j)
+
+2. "Define the depth of the branching between i and j (l.ij) to be d.ij/2" ("depth of branching" = branch length; so i is attached to a branch of d.ij/2 and j is attached to a separate branch of d.ij/2)
+
+3. "If i and j were the last two clusters, the tree is complete.  Otherwise, create a new cluster called u".  This new cluster is a clade of i and j will represent the combined features of i and j.
+
+4. "Define the distance from [the new cluster] u to each other [remaining] cluster (k, with k=\=i or j) [here cluster = clade] to be an average of the distnace d.ki and d.jk".  That is, calculate the distance from the clade u to all the remaining taxa, which we'll generically call k.  The new distnace will be called d.ku, for "distance from taxa k to clade u."  The exact calculation of the average can take different forms.
+
+5.  "Go back to step 1 with one less cluster; cluster i and j have been elimated, and cluster u has been added."  The distance matrix is now shrunk with all distance related to i and j removed and replaced by information about u.
+
+For step 4, UPGMA uses the following equation to calculate distances:
+
+Ti = the number of taxa in cluster i. This is 1 if the "cluster" is a single species, or it can be >1 if a previous iteration has created a clade.
+
+Tj = the number of taxa in cluster j.
+
+d.ku = the distance from k to u.  k and u can be individual taxa or clades created by the algorithm.
+
+d.ku = (Ti x d.ki + Tj x d.kj)/(Ti + Tj)
+
+(You should lknow this equation, should be able to write R code to calcualte it, etc )
+
+You can think of this as a **weighted mean** where the **weights** are the number of taxa in each clade.  Its a bit annoying that the "U" in UPGMA means "un-weighted" even though there is weighting, but this is how the math people say we should think about it (the un-weighted part has to do with some other aspect of the math).
+
+In the above outline of the algorithm, if i and j are the first two taxa grouped then the equation would be
+
+d.ku = (Ti x d.ki + Tj x d.kj)/(Ti + Tj)
+d.ku = (1  x d.ki + 1  x d.kj)/(1  + 1)
+d.ku = (d.ki + d.kj)/2
+
+
+
+
+## Calculate 2D representation
+
+We can think about this using a 2D representation
+
+```{r}
+
+dmat1.out<- plot_dist_as_nmds(dmat1)
+
+
+```
+
+
+
+a and b are closest together, so we group them
+
+```{r}
+
+#install.packages(plotrix)
+library(plotrix)
+dmat1.out<- plot_dist_as_nmds(dmat1)
+
+#get x y coord of a and b
+
+a.<-dmat1.out$points["a",]
+b.<-dmat1.out$points["b",]
+draw.ellipse(x = mean(c(a.[1],b.[1])), 
+             y = mean(c(a.[2],b.[2])),
+             a =3, 
+             b = 10, 
+             angle = 30
+             )
+
+     
+
+#We then examine in turn the distance from a and b to each other point
+
+
+c.<-dmat1.out$points["c",]
+segments(x0 = a.[1],x1 = c.[1],
+         y0 = a.[2],y1 = c.[2])
+segments(x0 = b.[1],x1 = c.[1],
+         y0 = b.[2],y1 = c.[2])                                    
+                                
+```
+
+
+
+```{r}
+par(mfrow = c(2,2), mar = c(2,2,2,2))
+
+# ab to c
+plot_dist_as_nmds(dmat1)
+
+#get x y coord of a and b
+a.<-dmat1.out$points["a",]
+b.<-dmat1.out$points["b",]
+
+draw.ellipse(x = mean(c(a.[1],b.[1])), 
+             y = mean(c(a.[2],b.[2])),
+             a =3, 
+             b = 10, 
+             angle = 30)
+c.<-d2$points["c",]
+segments(x0 = a.[1],x1 = c.[1],
+         y0 = a.[2],y1 = c.[2])
+segments(x0 = b.[1],x1 = c.[1],
+         y0 = b.[2],y1 = c.[2])  
+
+# ab to d
+plot_dist_as_nmds(dmat1)
+draw.ellipse(x = mean(c(a.[1],b.[1])), 
+             y = mean(c(a.[2],b.[2])),
+             a =3, 
+             b = 10, 
+             angle = 30)
+d.<-d2$points["d",]
+segments(x0 = a.[1],x1 = d.[1],
+         y0 = a.[2],y1 = d.[2])
+segments(x0 = b.[1],x1 = d.[1],
+         y0 = b.[2],y1 = d.[2])  
+
+# ab to e
+plot_dist_as_nmds(dmat1)
+draw.ellipse(x = mean(c(a.[1],b.[1])), 
+             y = mean(c(a.[2],b.[2])),
+             a =3, 
+             b = 10, 
+             angle = 30)
+e.<-d2$points["e",]
+segments(x0 = a.[1],x1 = e.[1],
+         y0 = a.[2],y1 = e.[2])
+segments(x0 = b.[1],x1 = e.[1],
+         y0 = b.[2],y1 = e.[2]) 
+```
+
+
+
+
+## Algorithm - round 1
+
+### Determine minimum value in current matrix
+
+```{r}
+dist.min.i <- min(dmat1, na.rm = T)
+
+```
+
+### Combine species into clade
+
+```{r}
+clade.i <- "ab"
+clade.i <- paste("a","b",sep = "")
+```
+
+### Calcualte distance from clade to all other points
+
+Distance (ab) to all other points
+ab to c
+ab to d
+ab to e
+
+
+#### ab to c
+
+This is calculated at the average of the distance from a to c  and b to c
+
+D(ab to c) = [D(a to c) + D(b to c)] / 2
+D(ab to c) = [    21    +     30   ] / 2
+D(ab to c) = [    21    +     30   ] / 2
+D(ab to c) = 25.5
+
+Dab_c      = [Da_c + Db_c] / 2
+Dab_c      = 25.5
+
+```{r}
+Da_c <- 21
+Db_c <- 30
+Dab_c <- (Da_c+Db_c)/2
+```
+
+
+
+For reasons that will become clear below, the math is most accurately written out as 
+
+D(ab to c) = [D(a to c)*1 + D(b to c)*1] / (1+1)
+D(ab to c) = [    21*1    +     30*1   ] / (1+1)
+D(ab to c) = [    21*1    +     30*1   ] / (1+1)
+D(ab to c) = 25.5
+
+Dab_c      = [Da_c*1 + Db_c*1] / (1+1)
+Dab_c      = 25.5
+
+```{r}
+Da_c <- 21
+Db_c <- 30
+Dab_c <- (Da_c*1+Db_c*1)/(1+1)
+```
+
+
+#### ab to d
+
+D(ab to d) = [D(a to d) + D(b to d)] / 2
+D(ab to d) = [    31    +     34   ] / 2
+D(ab to d) = [    31    +     34   ] / 2
+D(ab to d) = 32.5
+
+Dab_d      = [Da_d + Db_d] / 2
+Dab_d      = 32.5
+
+```{r}
+Da_d <- 31
+Db_d <- 34
+Dab_d <- (Da_d+Db_d)/2
+```
+#### ab to e
+
+
+D(ab to d) = [D(a to d) + D(b to d)] / 2
+D(ab to d) = [    23    +     21   ] / 2
+D(ab to d) = [    23    +     21   ] / 2
+D(ab to d) = Dab_e
+
+Dab_d      = [Da_d + Db_d] / 2
+Dab_d      = Dab_e
+
+```{r}
+
+Da_e <- 23
+Db_e <- 21
+Dab_e <- (Da_e+Db_e)/2
+
+```
+
+
+### Update matrix with new distance
+
+Old matrix has distnaces from a and b to all other points: we want to replace these.  distances among c, d, and e are still the same values.
+
+```{r}
+dmat1
+```
+
+#### Illustration
+Values in parenthesese will be REPLACED
+```{r}
+a <- c(NA, NA, NA, NA, NA)
+b <- c("(17)", NA, NA, NA, NA)
+c	<- c("(21)", "(30)", NA, NA, NA)
+d	<- c("(31)", "(34)", "28", NA, NA)
+e	<- c("(23)", "(21)", "39", "43",	NA)
+dmat1.alt <- rbind(a,b,c,d,e)
+colnames(dmat1.alt) <- c("a","b","c","d","e")
+dmat1.alt
+```
+
+Create smaller matrix with clade ab
+```{r}
+#       ab      c   d   e
+ab  <- c(NA,    NA,  NA, NA)
+c	  <- c(Dab_c, NA,  NA, NA)
+d	  <- c(Dab_d, 28,	 NA, NA)
+e	  <- c(Dab_e, 39,  43, NA)
+
+dmat2 <- rbind(ab,c,d,e)
+colnames(dmat2) <- c("ab","c","d","e")
+
+```
+
+#### Estimate 2 D
+
+Estimate of 2D representation.
+
+```{r}
+
+plot_dist_as_nmds(dmat2)
+
+```
+
+
+
+## Algorithm - round 2
+
+We've combined a and b and calcualted the disnace of this clade (a,b) to the remaining taxa.  What is now the minimum distance?
+
+```{r}
+dist.min.i <- min(dmat2, na.rm = TRUE)
+
+```
+
+
+
+In the current matrix, the smallest distance is between ab and e
+
+We therefore want to form a clade between ab and e (abe) all the other remaining species.
+
+Visualize this as an approximate 2D situation
+
+```{r}
+
+par(mfrow = c(1,1))
+dmat2.out <- plot_dist_as_nmds(dmat2)
+
+#get x y coord of ab and e
+ab.<-dmat2.out$points["ab",]
+e.<-dmat2.out$points["e",]
+
+draw.ellipse(x = mean(c(ab.[1],e.[1])), 
+             y = mean(c(ab.[2],e.[2])),
+             a =7, 
+             b = 7, 
+             angle = 0)
+c.<-dmat2.out$points["c",]
+
+segments(x0 = ab.[1],x1 = c.[1],
+         y0 = ab.[2],y1 = c.[2])
+segments(x0 = e.[1],x1 = c.[1],
+         y0 = e.[2],y1 = c.[2]) 
+
+```
+
+
+
+
+#### abe to c
+
+NOTE: calculations are "weighted" in proportion number of species in clade.
+
+So D(ab to c) is multiplied by two because ab is 2 species
+
+The denominators is 3 because of the weights used in the numerator.
+
+D(abe to c) = [D(ab to c)*2  + D(e to c)*1] / (2+1)
+D(abe to c) = [    25.5*2    +     39*1   ] / (2+1)
+D(abe to c) = [    25.5*2    +     39*1   ] / (2+1)
+D(abe to c) = 32.5
+
+Dabe_c      = [Dab_c*2 + De_c*1] / (2+1)
+Dabe_c       = 32.5
+
+
+
+```{r}
+Dab_c <- 25.5
+De_c  <- 39
+Dabe_c <- (Dab_c*2 + De_c*1)/(2+1)
+```
+
+#### abe to c
+
+For abe to d
+
+```{r}
+Dab_d <- 32.5
+De_d  <- 43
+Dabe_d <- (Dab_d*2 + De_d*1)/(2+1)
+
+```
+
+### Update the matrix
+
+```{r}
+abe <- c(NA,     NA,  NA)
+c	   <- c(Dabe_c, NA,  NA)
+d	   <- c(Dabe_d, 28,	 NA)
+
+
+dmat3 <- rbind(abe,c,d)
+colnames(dmat3) <- c("abe","c","d")
+```
+
+
+#### Estimate 2 D
+
+a, b, e are now combined into a clade
+
+```{r}
+
+plot_dist_as_nmds(dmat3)
+
+```
+
+
+
+## Iteration 3
+
+```{r}
+
+dist.min.i <- min(dmat3, na.rm = T)
+
+```
+
+
+
+```{r}
+
+par(mfrow = c(1,1))
+dmat3.out <- plot_dist_as_nmds(dmat3)
+
+#get x y coord of ab and e
+c. <-dmat3.out$points["c",]
+d.<-dmat3.out$points["d",]
+
+draw.ellipse(x = mean(c(c.[1],d.[1])), 
+             y = mean(c(c.[2],d.[2])),
+             a =14, 
+             b = 4, 
+             angle = 105)
+abe.<-dmat3.out$points["abe",]
+
+segments(x0 = c.[1],x1 = abe.[1],
+         y0 = c.[2],y1 = abe.[2])
+segments(x0 = d.[1],x1 = abe.[1],
+         y0 = d.[2],y1 = abe.[2]) 
+
+```
+
+
+
+
+### Distance of c to abe and d to abe
+
+```{r}
+Dc_abe <- 30
+Dd_abe <- 36
+
+# abe is composted of 3 
+Ddc_abe <- (Dc_abe*3 + Dd_abe*3)/(3+3)
+
+# factor out 3
+Ddc_abe <- 3*(Dc_abe*1 + Dd_abe*1)/6
+
+# simplify
+Ddc_abe <- 1*(Dc_abe*1 + Dd_abe*1)/2
+Ddc_abe <- (Dc_abe*1 + Dd_abe)/2
+
+```
+
+Create matrix
+```{r}
+abe <- c(NA,     NA)
+cd	 <- c(Ddc_abe, NA)
+
+
+
+dmat4 <- rbind(abe,cd)
+colnames(dmat4) <- c("abe","cd")
+
+
+```
+
+
+```{r}
+
+```
+

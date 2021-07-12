@@ -1,0 +1,413 @@
+---
+title: "BLAST via R"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{BLAST via R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+
+The Drosophila shroom GenBank page is at https://www.ncbi.nlm.nih.gov/protein/ABA81834 (I think)
+
+Sequence can be obtained by licking on "FASTA.  I copy and past it from https://www.ncbi.nlm.nih.gov/protein/ABA81834.1?report=fasta .  Note the quotation marks around the string.
+```{r}
+dmshrm <- c("MKMRNHKENGNGSEMGESTKSLAKMEPENNNKISVVSVSKLLLKDSNGANSRSSNSNASFSSASVAGSVQ
+DDLPHHNSSSSQLGQQHGSSLDQCGLTQAGLEEYNNRSSSYYDQTAFHHQKQPSYAQSEGYHSYVSSSDS
+TSATPFLDKLRQESDLLSRQSHHWSENDLSSVCSNSVAPSPIPLLARQSHSHSHSHAHSHSNSHGHSHGH
+AHSASSSSSSNNNSNGSATNNNNNNSSESTSSTETLKWLGSMSDISEASHATGYSAISESVSSSQRIVHS
+SRVPTPKRHHSESVLYLHNNEEQGDSSPTASNSSQMMISEEANGEESPPSVQPLRIQHRHSPSYPPVHTS
+MVLHHFQQQQQQQQDYQHPSRHHTNQSTLSTQSSLLELASPTEKPRSLMGQSHSMGDLQQKNPHQNPMLG
+RSAGQQHKSSISVTISSSEAVVTIAPQPPAGKPSKLQLSLGKSEALSCSTPNMGEQSPTNSIDSYRSNHR
+LFPVSTYTEPVHSNTSQYVQHPKPQFSSGLHKSAKLPVITPAGATVQPTWHSVAERINDFERSQLGEPPK
+FAYLEPTKTHRLSNPALKALQKNAVQSYVERQQQQQKEEQQLLRPHSQSYQACHVERKSLPNNLSPIMVG
+LPTGSNSASTRDCSSPTPPPPPRRSGSLLPNLLRRSSSASDYAEFRELHQAQGQVKGPSIRNISNAEKIS
+FNDCGMPPPPPPPRGRLAVPTRRTSSATEYAPMRDKLLLQQAAALAHQQHHPQQHRHAQPPHVPPERPPK
+HPNLRVPSPELPPPPQSELDISYTFDEPLPPPPPPEVLQPRPPPSPNRRNCFAGASTRRTTYEAPPPTAI
+VAAKVPPLVPKKPTSLQHKHLANGGGGSRKRPHHATPQPILENVASPVAPPPPLLPRARSTAHDNVIASN
+LESNQQKRSNSKASYLPRQSLEKLNNTDPDHGIYKLTLTSNEDLVAHTKPSYGVTGKLPNNLPDVLPLGV
+KLHQQPKLQPGSPNGDANVTLRYGSNNNLTGNSPTVAPPPYYGGGQRYSTPVLGQGYGKSSKPVTPQQYT
+RSQSYDVKHTSAVTMPTMSQSHVDLKQAAHDLETTLEEVLPTATPTPTPTPTPTPPRLSPASSHSDCSLS
+TSSLECTINPIATPIPKPEAHIFRAEVISTTLNTNPLTTPPKPAMNRQESLRENIEKITQLQSVLMSAHL
+CDASLLGGYTTPLITSPTASFANEPLMTPPLPPSPPPPLEPEEEEEQEENDVHDKQPEIEELQLMQRSEL
+VLMVNPKPSTTDMACQTDELEDRDTDLEAAREEHQTRTTLQPRQRQPIELDYEQMSRELVKLLPPGDKIA
+DILTPKICKPTSQYVSNLYNPDVPLRLAKRDVGTSTLMRMKSITSSAEIRVVSVELQLAEPSEEPTNLIK
+QKMDELIKHLNQKIVSLKREQQTISEECSANDRLGQDLFAKLAEKVRPSEASKFRTHVDAVGNITSLLLS
+LSERLAQTESSLETRQQERGALESKRDLLYEQMEEAQRLKSDIERRGVSIAGLLAKNLSADMCADYDYFI
+NMKAKLIADARDLAVRIKGSEEQLSSLSDALVQSDC")
+
+
+```
+
+The object.  Note the "\n" in the sequence.
+```{r}
+dmshrm
+```
+
+
+
+Check out how long it is. Why is length 1?
+```{r}
+length(dmshrm)
+```
+
+How many characters?
+```{r}
+nchar(dmshrm)
+```
+
+Use the gsub() regular expression to get rid of the newline characters (regular expressions are tough and I will always write them for you)
+```{r}
+dmshrm <- gsub("\n", "", dmshrm)
+```
+
+Now how many character?
+```{r}
+nchar(dmshrm)
+```
+
+
+Another example of regular expression: Let's say I wanted to turn all the I to ¯\_(ツ)_/¯ for some weird reason (one example of why regular expressions are tough: I can't figure out how to get one of the arms to be correct)
+```{r}
+gsub("I", "¯\\_(ツ)_/¯", dmshrm)
+```
+
+
+
+Use just the actin binding part of shroom2
+```{r}
+dmshrm.actin <- substr(dmshrm, start = 445, stop =920)
+```
+
+Use nchar to confirm change
+```{r}
+nchar(dmshrm.actin)
+```
+
+
+Check the class of the new object (I did this in class b/c I got muddled about what nchar does to a vector versus another operation; see below)
+```{r}
+is(dmshrm.actin)
+```
+
+
+
+I didn't do this in class but had notes on it.  You can put each aa into a separate element of a vector like this
+```{r}
+dmshrm.actin2 <- strsplit(dmshrm.actin,"")
+```
+"strsplit" stands for "String split."
+
+for some reason strsplit gives us a list
+```{r}
+is(dmshrm.actin2)
+```
+
+if we do length() we get an odd result
+```{r}
+length(dmshrm.actin2)
+```
+
+
+Lists take some experience to work with.  I'll write code to work with them.  To move forward what we need to to access the vector of amino acids which is stored i this list.  The easiest way to do this is with bracket notation (can't use a dollar sign b/c there isn't a name assigned to the vector; these are some R quirks). Note the double brackets. [[1]] means "give me the first element of the list.  
+
+```{r}
+dmshrm.actin2 <- dmshrm.actin2[[1]]
+```
+
+Now the length makes sense
+```{r}
+length(dmshrm.actin2)
+```
+
+```{r}
+is(dmshrm.actin2)
+```
+
+
+I can summarize the aa composition of this subsequence with table()
+
+```{r}
+table(dmshrm.actin2)
+```
+
+
+Save table as an object
+
+```{r}
+my.table <- table(dmshrm.actin2)
+```
+
+A table is a table, not a dataframe or a matrix.  Its a special data structure for summarizing data
+
+```{r}
+is(my.table)
+```
+
+
+The plot function can work on tables
+```{r}
+plot(my.table)
+```
+
+
+Normally we give plot() and x and y axis to plot.  Due to R's object oriented abilities attributes of table objects communicate with plot() to tell it what to do.
+
+We can sort this using the order command
+```{r}
+i<- order(my.table)
+plot(my.table[i])
+
+```
+
+
+I can reverse the order with rev()
+```{r}
+#reverse the index
+i.rev <- rev(i)
+
+#reverse the vector
+## (this might be hard to understand; no worries)
+my.table.rev <- my.table[i.rev]
+
+#plot it
+plot(my.table.rev)
+```
+
+
+order and rev are functions I don't expect you to remember; I'll always give them to you if needed
+
+
+Ok, now back to our main event.
+
+The bio3d package lets you do blast searches from R.  Install it if needed
+```{r}
+# install.packages("bio3d")
+library(bio3d)
+
+```
+
+We run the blast like this
+```{r}
+dmshrm.blast.1 <- bio3d::blast.pdb(dmshrm.actin)
+```
+
+How many results are resumed?  I got 5.  Why is that?
+
+The protein data band (pdb) is a special database: "The Protein Data Bank (PDB) is a database for the three-dimensional structural data of large biological molecules, such as proteins and nucleic acids." (wikipedia).  We don't have good 3D data on most proteins, so there aren't that many entries in the pdb (https://en.wikipedia.org/wiki/Protein_Data_Bank).
+
+I tweaked the blast.pdb() to allow it to work with other databases; the default is now refseq_protein, the database of reference sequences (only one entry for each protein).  The new function is in dayoff and called blastr()
+
+This version of the code should return more than 5 results.
+
+TODO: add data to package
+```{r, eval = F}
+dmshrm.blast.2 <- blastr(dmshrm.actin)
+```
+
+
+What kind of object do we get?
+
+```{r eval = F}
+is(dmshrm.blast.2)
+```
+
+
+```{r eval = F}
+class(dmshrm.blast.2)
+```
+
+This is a special type of object created by these package authors. Its basically a list though
+
+```{r eval = F}
+is.list(dmshrm.blast.2)
+```
+
+
+Peak at the structure
+```{r eval = F}
+str(dmshrm.blast.2, max.level = 1)
+```
+
+
+The data is in the hist.tbl part of the list.
+```{r eval = F}
+head(dmshrm.blast$hit.tbl)
+```
+
+We can save hit.tbl to its own object if we want
+```{r eval = F}
+hit.tbl <-dmshrm.blast.2$hit.tbl
+```
+
+
+
+## Object Orient Programming
+
+I gave a very brief shout out to Object Oriented Programming today.  This is a huge topic, though in R it isn't always a big player in how we code.  As a typical R user, you'll never need to think about it, though you will benefit from it.  Wickham writes 
+
+>"The main reason to use OOP is polymorphism (literally: many shapes). Polymorphism means that a developer can consider a function’s interface separately from its implementation, making it possible to use the same function form [sic] for different types of input. This is closely related to the idea of encapsulation: the user doesn’t need to worry about details of an object because they are encapsulated behind a standard interface." https://adv-r.hadley.nz/oo.html
+
+The way I think about it (which may be overly simplistic) is that functions are often very flexible and can take on many kinds of input. The code below will evoke some of these ideas; follow the link above for more information.
+
+
+Let's make a new dataframe with a few numeric variables from our blast
+```{r, eval = F}
+my.hit.tbl <- data.frame(alignmentlength = hit.tbl$alignmentlength,
+                         evalue = hit.tbl$evalue,
+                         bitscore = hit.tbl$bitscore,
+                         identity = hit.tbl$identity)
+```
+
+
+```{r, eval = F}
+head(my.hit.tbl)
+```
+
+
+In class I made a plot
+```{r, eval = F}
+plot(my.hit.tbl$evalue, my.hit.tbl$identity)
+```
+
+Looks better logged
+
+```{r, eval = F}
+plot(log(my.hit.tbl$evalue), my.hit.tbl$identity)
+```
+
+I can also use a ~.  Note that the behavior of plot is different with ~ and I've switched the order of the objects within plot
+
+```{r, eval = F}
+plot(my.hit.tbl$identity ~ log(my.hit.tbl$evalue))
+```
+
+
+I can also do this, with a data argument; "my.hit.tbl" only has to be written once, and no $
+```{r, eval = F}
+plot(identity ~ log(evalue), data= my.hit.tbl)
+```
+
+
+Due to object oriented programming features, I can also just throw the whole dataframe into plot, and plot() knows that when that happen, make a scatter plot of all the numeric variables (This doesn't work unless all variables are numeric)
+```{r, eval = F}
+plot(my.hit.tbl)
+```
+
+
+## For loops 
+
+I played around with for loops. First I put all the identity values into a single object, x
+
+
+```{r, eval = F}
+
+x <- dmshrm.blast$hit.tbl$identity
+
+
+```
+
+This is just a vector of numbers
+```{r, eval = F}
+x
+```
+
+
+For a toy loop example, I will print out each value one by one using a loop, along with some other text
+
+First, how many elements are in the x?
+```{r, eval = F}
+length(x)
+```
+
+A simple, very explicit loop is
+```{r, eval = F}
+for(i in 1:108){
+  
+  cat("\n")
+  print("i")
+  print(x[i])
+  
+}
+```
+
+1:108 creates an index.  "i" will take on each value, 1 to 108
+
+A more flexible approach is
+
+```{r, eval = F}
+for(i in 1:length(x)){
+  
+  cat("\n")
+  print("i")
+  print(x[i])
+  
+}
+```
+
+As Rich pointed out, another approach is
+
+```{r, eval = F}
+for(i in x){
+  print(i)
+  cat("\n")
+}
+
+```
+
+Here, "i" takes on each value of x, and so I is the index, but the actual value we want.  In many ways this is cleaner code, and in more advanced scenarios this will prevent bugs
+
+
+One issues is that my approach will try to run the loop even if my vector "x" doesn't have anything in it
+```{r, eval = F}
+#set x to null
+x <-NULL
+
+#how long is it
+length(x)
+
+#run loop
+for(i in 1:length(x)){
+  
+  cat("\n")
+  print("i")
+  print(x[i])
+  
+}
+```
+
+
+Rich's method, however, does nothing, because there is nothing to do
+```{r, eval = F}
+
+for(i in x){
+  print(i)
+  cat("\n")
+}
+```
+
+
+Another alternative which I am still exploring is to use the seq_len function. This throws an error when there is nothing in x
+
+```{r, eval = F}
+for(i in seq_len(x)){
+  print(x[i])
+  cat("\n")
+}
+
+ 
+```
+

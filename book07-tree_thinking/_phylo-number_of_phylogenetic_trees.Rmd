@@ -1,0 +1,379 @@
+---
+title: "Tutorial: Writing functions to calculate the number of phylogenetic trees"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tutorial: Writing functions to calculate the number of phylogenetic trees}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+
+
+
+### Functions
+
+factorial()
+seq()
+print()
+c()
+if()
+function()
+args()
+
+### Concepts:
+
+Number of possible phylogenetics trees 
+vectorized inputs to functions
+conditional statements
+Role of arguements in writing function
+Role of { and } in writing functions
+function source code
+functions with defaults
+functions with 1 arguement
+functions with 2 arguements
+
+### Vocab:
+
+function
+function arguement
+function default
+conditional statement
+
+
+### Packages:
+
+None
+
+
+
+## Introduction
+
+Phylogenetics is one of the original fields of computational biology.  This is because as the number of taxa that need to be organized on a tree increases, the number of unique phylogenetic trees increases rapidly.
+
+In this tutorial, you'll learn how to write functions in R so that you can calculate how many trees are possible for any number of taxa.
+
+Prior to completing this assignment you should work through the function-writing tutorials in swirl and on RStudio Cloud.
+
+## Number of rooted trees
+
+The number of possible rooted phylogenetic trees is calculated using the equation below, where n is the number of taxa:
+
+In text:
+(2n-3)!/(2^(n-2))(n-2)!
+
+Rendered:
+
+$\frac{(2*n-3)!}{2^{n-2} * (n-2)!}$
+
+
+## Number of rooted trees in R
+
+In R we take factorials using the factorial() function
+```{r}
+factorial(3)
+3*2*1
+
+factorial(4)
+4*3*2*1
+```
+
+We can re-write our text equation above as
+factorial(2n-3)/(2^(n-2))*(factorial(n-2))
+
+In this would be
+
+```{r}
+n<-3
+
+factorial(2*n-3)/((2^(n-2))*factorial(n-2))
+```
+
+All of the parentheses make this a bit nutty.  Let me write this out as a separate numerator and denominator
+
+```{r}
+#numerator
+numerator   <- factorial(2*n-3)
+
+#denominator
+denominator <- 2^(n-2)*factorial(n-2)
+
+#division
+numerator/denominator
+```
+
+## Functions in R
+
+Functions in R have the general format
+
+function_name <- function(arguements = ...){
+ # math etc saved to object
+ print(output)
+}
+
+The function_name can be any valid R object name.
+The function function() creates the function.
+A function can have any number of arguments.
+Note that the arguments are enclosed in parentheses, and after the closing ")" there is a "}".
+After all the stuff inside the function its finished with a "}".
+
+## Function to calculate the number of trees
+
+We can set up a function to encapsulate this.  We'll call the function tree_count().  It has one **argument** -- n --  the number of taxa on the tree.  We'll set the **default value** of the arguement to be n = 3 taxa.
+
+I use the function print() at the end so that the function acutally returns output.  If this isn't included then nothing will be returned by the function.
+
+In the code below note the locations of the following things
+
+* function ame
+* function-making command
+* The opening parenthesis (
+* the arguement
+* the default
+* the closing parenthesis )
+* the opening curly bracket {
+* the math
+* the print() command
+* the closing curly bracket }
+
+```{r}
+
+#             [ ]function-making command
+#             |
+# [ ]Function |         [ ] argument
+# name        |          |
+# |           |          |    [ ]closing ")"
+# |           |          |     |
+# |           | [ ] "("  |     |  [ ]"{"
+# |           |      \   |     | /
+tree_count <- function(  n = 3 ){    # note the "}"
+  
+  # [ ] math
+  numerator   <- factorial(2*n-3)
+  denominator <- 2^(n-2)*factorial(n-2)
+  trees  <- numerator / denominator 
+  
+  # [ ] print output
+  print(trees)
+  
+}  # end with the "}"
+#\
+# [ ] "}"
+
+           
+```
+
+Does it work?
+```{r}
+tree_count()
+```
+
+We can view the **function source code** by just running the name of the function without any parantheses (or arugements)
+```{r}
+tree_count
+```
+
+
+We can see just the arguments, and any defaults, for a function using args()
+```{r}
+args(tree_count)
+```
+
+
+As an aside: the print() function is key.  Make and run this function and see what happens.
+```{r}
+
+                                 #/ don't forget this!
+tree_count_bad <- function(n = 3){
+  
+  # math
+  numerator   <- factorial(2*n-3)
+  denominator <- 2^(n-2)*factorial(n-2)
+  trees  <- numerator / denominator 
+  
+}
+#\ don't forget this!
+
+tree_count_bad()
+```
+
+
+
+
+
+
+How rapidly does the number of possible trees grow?
+```{r}
+tree_count(n = 3)
+tree_count(n = 4)
+tree_count(n = 5)
+tree_count(n = 6)
+```
+
+One of my favorite example data sets has 11 taxa.
+```{r}
+tree_count(n = 11)
+```
+
+
+
+This number grows very rapidly.  According to Bianconi et al (2012) https://www.tandfonline.com/doi/full/10.3109/03014460.2013.807878 there are 3.72*10^13 cells in the body (37,200,000,000,000, or 3.72e13)
+
+```{r}
+### with all the zeros
+37200000000000
+
+### "e" scientific notation
+3.72e13
+
+3.72e+13
+```
+
+If we put 14 taxa on a tree there are this many possible trees
+```{r}
+tree_count(n = 14)
+```
+If we put 15 taxa on the tree
+```{r}
+tree_count(n = 15)
+```
+
+
+## Vectorized inputs to functions
+
+One of R's most powerful features is that it works on vectors.  I want to make a plot of the the number of possible trees for 3 to 11 taxa.  I can make a vector any way I chose
+
+```{r}
+#typing out all numbers
+n.taxa <- c(3,4,5,6,7,8,9,11)
+
+# using seq with arguments spelled out
+n.taxa <- seq(from = 3,to = 11,by = 1)
+
+#using seq w/o arguments
+n.taxa <- seq(3, 11, 1)
+
+#shortcuts
+n.taxa <- c(3:11)
+n.taxa <- 3:11
+```
+
+I can then put the vector as an input into my function
+
+```{r}
+tree_count(n = n.taxa)
+```
+
+I can save this output to a vector
+```{r}
+n.trees <- tree_count(n = n.taxa)
+```
+
+And plot things.  type = "b" plots points and a line.
+
+```{r}
+plot(n.trees ~ n.taxa, type = "b")
+```
+
+## Adding conditional statements
+
+The equation above is only valid for 2 or more taxa.  If we put in a lower number the result doesn't make sense
+
+```{r}
+tree_count(n = 0)
+tree_count(n = 1)
+```
+
+We can add a **conditional statement** so that if 0 or 1 are input then an warning is given.  Conditional statements test a logical condition which, if false, can be used to throw a warning, error, etc.
+
+I'll use the conditional statement if(n < 3) to test if the number of taxa entered into my tree_count() function is going to be valid.  The warning() function allows me to remind the user of the function of what they should  enter.
+
+Note that the conditional statement has the logical operation in parentheses, eg (n <2), and then what to do if n < 2 is true in curly brackets
+
+```{r}
+tree_count <- function(n = 3){
+  
+  # conditional statement
+  ## is n a valid number for using in this equaiton?
+  ## if it is NOT, throw a warning
+  ## if it is a valid number, skip everything in the 
+  ## { } and go to the math
+  if(n < 3){
+    
+    # warning if test is TRUE
+    warning("This function is only valid for 2 or more taxa.")
+  }
+  
+  # If test is FALSE (n = 3 or n > 3)
+  ## continue with the math
+  numerator   <- factorial(2*n-3)
+  denominator <- 2^(n-2)*factorial(n-2)
+  trees  <- numerator / denominator 
+  
+  # print the results
+  print(trees)
+}
+```
+
+## Adding additional arguments
+
+Perhaps we want provide the option of always printing the results in scientific notation.  We can another argument to our tree_count() function called "format".  If the argument is set to "sci", "scientific" or "e", the function will change the options for how numbers are printed.
+
+```{r}
+tree_count <- function(n = 3,                # 1st arguement: number of taxa
+                       format = "standard"){ # 2nd arguement: format
+  
+  # conditional statement
+  if(n < 2){
+    warning("This function is only valid for 2 or more taxa.")
+  }
+  
+  # the math
+  numerator   <- factorial(2*n-3)
+  denominator <- 2^(n-2)*factorial(n-2)
+  trees  <- numerator / denominator 
+  
+  # another conditional statement:
+  ## set formatting
+  if(format %in% c("sci","scientific","e")){
+    options(scipen = -2,digits = 3)
+  }
+  
+  # print the output
+  print(trees)
+  
+  # re-set the formatting
+  options(scipen = 0,digits = 7)
+}
+```
+
+Check out the source code
+```{r}
+tree_count
+```
+
+Check out the arguements
+```{r}
+args(tree_count)
+```
+
+
+Check the output
+```{r}
+tree_count(n = 10)
+tree_count(n = 10, format = "sci")
+tree_count(n = 10, format = "scientific")
+tree_count(n = 10, format = "e")
+```
+
+

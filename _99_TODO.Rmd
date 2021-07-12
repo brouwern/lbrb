@@ -1,0 +1,21 @@
+
+# add to compbio4all
+
+## function to add 
+unrootedNJtree  
+
+## data to add 
+
+1. protein sequences form rabies etc
+1. virusaln
+
+# from canvas
+
+1. add existing wikipedia entries i've already curage
+
+# misc
+
+1. write study question
+1. where are original questions from original book?
+1. 
+ 

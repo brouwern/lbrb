@@ -1,0 +1,259 @@
+---
+title: "Pevsner Figure 4.14"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Pevsner Figure 4.14}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+
+
+
+
+The following code creates a figure similar to Figure 4.14 in Chapter 4 of Pevsner (page 141).
+
+
+## Packages
+
+```{r}
+#install.packages("HistData")
+library(HistData)
+library(ggpubr)
+
+#install.packages("evd")
+library(evd)
+```
+
+
+
+## Distributions of alignment scores
+
+Imagine we could keep track of all of the steps of a BLAST search.  At a certain point, BLAST will have made many **local alignmens** of a few dozen to a couple hundred bases between the **query sequence** you submitted and sequences in the database.  Each of these local, pairwise alignments met all the criteria for being worthy of consideration and so are recored as **hits**.  Now we want to judge objectively how good these hits are and which ones are most worthy of further consideration.  We can do this by working of an **E-value**.
+
+With our collection of hits, we could take their scores and plot them.  Many things in biology when plotted will take on a bell-curve or normal distribution.  Scores for alignments, however, take on an **extreme value distribution** (EVD).  That is, compared to a **symmetric** normal distribution an EVD has too few low numbers (lower alignment scores) and extra high scores.
+
+Now imagine that instead of BLASTing our sequence against a database of real sequence, we made up a bunch of **random sequences**.  We could invent a random sequene by writing all the letters representing amino acids, tossing them into a hat, and pulling out an letter and writiing it down.  We would then toss the letter back in, mix up the letters, and pull out another one.  Repeat this 100 times and we'd have a perfectly random sequence the would be about the length of a protein, but wouldn't code for anything (or be very very very very very unlikely to code for anything).  If we invent, say 1000 sequence we could make a database of random sequences and would could aline our focal query sequence against our made up database.  When could then score the local alignment between the query and each random sequence.  Because these sequences are made up, the alignments will be pretty bad and teh scores low.  However, occassionally there might be a fairly high score due to chance. So, just due to luck we could accidently invent a sequence that is a pretty good alignment with our query sequence.  The question the **E-values** are trying to get at is how often this could happen, and how much better are our the scoures of our BLAST hits than the scores we'd get from BLASTing again random sequences.
+
+The following code will illustrate these concepts.
+
+
+## Simulating data
+
+The easiest way to think about simulating data is to roll a dice. Six-sided die allows you to draw numbers from a **uniform distribution**.  With a uniform distribution, all values have the same likelihood of occuring.  On a die, you have a 1/6 change of getting a 1, a 1/6 change of a 2, etc.
+
+We can simulate a 6-sided die in R using the runif() function, which doesn't mean "run-if" but rather "r-unif", for random-uniform.
+
+We can simulate rolling a die once with this code. n is the number of rolls.  Min is the minimum possible value, max is the max possible value.  Note that the min is set to 0.5 and the max to 6.  This will be explained in a second.
+
+So, this code generates a number between 0.5 and 6.5
+```{r}
+runif(n = 1, min = 0.5, max = 6.5)
+```
+
+This code generates 10 numbers from 0.5 to 6.5.
+```{r}
+runif(n = 10, min = 0.5, max = 6.5)
+```
+
+
+runif() allows for non-integers, so we can make this like a real dice using round()
+```{r}
+round(runif(n = 1, min = 0.50000000, max = 6.50000000))
+```
+
+
+If we want to simulate what would happen if 50 people in class all rolled a dice we set n to 50
+
+```{r}
+round(runif(n = 50, min = 0.5, max = 6.5))
+```
+
+If we had 10000 people in our class:
+
+```{r}
+round(runif(n = 10000, min = 0.5, max = 6.5))
+```
+
+
+We can save this and plot it:
+
+```{r}
+# save it
+random.uniform <- round(runif(n = 10000, min = 0.5, max = 6.4999999))
+
+# plot it
+hist(random.uniform)
+```
+
+The height of the histogram is almost level, indicating that this is a uniform distribution.  
+
+
+```{r}
+# save it
+random.uniform <- round(runif(n = 1000, min = 0.5, max = 6.5))
+
+# plot it
+hist(random.uniform)
+```
+
+
+The code above works if the probability of each number (1, 2, 3...) is the same for all values, as for a fair dice.
+
+We can get a similar result more dirctly using the function sample(), which acts like a virtual "pulling numbers from a hat" or rolling a dice.
+
+
+First I make a vector to represent my die
+```{r}
+dice <- c(1,2,3,4,5,6)
+```
+
+I can roll it once like this
+```{r}
+sample(dice, size = 1)
+```
+
+I can roll it twice like this; replace = T means that the same value can occur (its like pulling numbers from a hat and putting each number back in to make it available again).
+```{r}
+sample(dice, size = 1, replace = T)
+```
+
+I can simulate 50 dice like this:
+```{r}
+sample(dice, size = 50, replace = T)
+```
+
+
+
+If I want to represent an unfair dice I can add a new arguement which allows me to define the probabilites.
+
+A fair dice would be this
+```{r}
+probs.fair <- c(1/6, 1/6,1/6,1/6,1/6,1/6)
+sample(dice, size = 1, replace = T,  prob = probs.fair)
+```
+
+A dice biased for 1could look like this 
+```{r}
+probs.biased <- c(2/6, 1/6, 1/6, 1/6, 1/6, 1/6)
+sample(dice, size = 1, replace = T,  prob = probs.biased)
+```
+
+Let me see if its biased.  I simulate 1000 dice
+
+```{r}
+x <- sample(dice, size = 1000, replace = T,  prob = probs.biased)
+hist(x)
+```
+
+
+## Lots of data in biology is normal
+
+Data from a dice are discrete: you can only have certain numbers (1, 2, 3...) and can't have values in between (0.6).  Also dice produce uniform striguation.
+
+In contrast, the normal distribution is common in the world.  Many things are normal or normal-ish. The follow code plots human heights (note: this doesn't distinquish XY from XX but is still fairly normal)
+
+```{r}
+data(Galton)
+library(ggpubr)
+gghistogram(data = Galton, x = "child")
+```
+
+
+
+The code below plots data on the size of flower petals by species.  The middle panel is fairly normal.  The left panel is normalish, but squished becuase the values are small and you can't have flower sizes <0.
+```{r}
+data(iris)
+gghistogram(data = iris, x = "Petal.Length", facet.by = "Species")
+```
+
+
+
+## Simulating the normal distribution
+
+We can simulate normal data in R using the rnorm function.  Normal data is described by a mean (set here to 0) and a standard deviation (set here to 1).  It has a typical bell-shaped curve.  It is symmetrical - left of the mean has the same general shape as the data right of the mean.  There is a mathematical formula that describes the shape of the curve, and you can generate random numbers from this.  When you look at a normal distribution, the higher a given part of a curve is, the more likely a value under that part is to be randomly select.  So values near the mean occur most commonly, while values far from the mean become increasinly less likely to occur.
+
+```{r}
+n <- 1000
+mean0 <- 0
+sd1 <- 1
+
+normal.data <- rnorm(n = n, 
+                     mean = mean0, 
+                     sd = sd1)
+```
+
+We can quickly plot it with hist()
+
+```{r}
+hist(normal.data)
+abline(v = mean0, col = 2)
+```
+
+
+## The extreme value distribution
+
+Extreme value distributions are **skewed** and have a **long tail**.  
+
+The evd package allows us to simulate extreme value data
+s
+BLAST theory uses a particular extreme value distribution, the Gumbel distribution.  We can simulate data from this distribution with rgumbel()
+```{r}
+
+extreme.data <- rgumbel(n = n, loc=mean0, scale=1)
+
+```
+
+We can plot the data like this
+```{r}
+
+hist(extreme.data)
+abline(v = mean0, col = 2)
+
+```
+
+
+If you've taken a stats class you may have taken the log of a data set to make it more normal-like.  If you do this with data that follows the extreme value distribution it doens't help - the data still don't look normal.  Instead of being skewed one way, the skew is just flipped the other.
+```{r}
+hist(log(extreme.data))
+abline(v = mean0, col = 2)
+```
+
+
+## Replicating Figure 4.14
+
+This code evokes figrure 4.14.  You don't need to know these functions.
+
+Note that the main differences correspond to values around -2 and 2.
+```{r}
+range.x.axis <- seq(from = -5,to = 5,length.out = 1000)
+norm.curve    <- dnorm(  x = range.x.axis, mean = mean0, sd = sd1)
+extreme.curve <- dgumbel(x = range.x.axis, loc = mean0, scale = 1)
+
+plot(norm.curve~range.x.axis,type = "l")
+points(extreme.curve~range.x.axis,type = "l", lty = 2, col = 2)
+```
+
+
+## Why do we care?
+
+THe starting point for most statistics is the normal distribution.  This is where we get z-scores, most p-values, standard errors, and most 95% confidence intervals.  When we don't use normal distributions, we use other common distributions (eg the binomial distribution for binary data, the poisson for count data).  None of these common distributions work if we want to do any statistics with DNA alginment; we need tow rok with the extreme value distribution.  (Indeed, in 10 years of spending lots of time doing statiscs, this is the only application I've run in to of the EVD)
+
+
+```{r}
+
+```
+

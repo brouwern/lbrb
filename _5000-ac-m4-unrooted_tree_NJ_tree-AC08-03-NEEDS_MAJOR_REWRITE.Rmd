@@ -1,4 +1,9 @@
-# Unrooted Neighbor-joining Phylogenetic trees
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Unrooted neighbor-joining phylogenetic trees
 
 ```{r  eval = T}
 library(compbio4all)
@@ -12,18 +17,72 @@ https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapt
 
 **Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
+<!-- should make a intro to phylogenetic trees to preced this -->
+
+## Preliminaries
+
+```{r}
+library(compbio4all)
+library(seqinr)
+```
+
+
+You will need to install the `ape` package if you do not have it already using `install.packages("ape")`.
+ 
+```{r}
+library(ape)
+```
+ 
+ 
+This function is used in this lesson  It should be added to the compbio4all package
+
+```{r}
+unrootedNJtree <- function(alignment,type)
+{
+  # this function requires the ape and seqinR packages:
+  require("ape")
+  require("seqinr")
+  # define a function for making a tree:
+  makemytree <- function(alignmentmat)
+  {
+    alignment <- ape::as.alignment(alignmentmat)
+    if      (type == "protein")
+    {
+      mydist <- dist.alignment(alignment)
+    }
+    else if (type == "DNA")
+    {
+      alignmentbin <- as.DNAbin(alignment)
+      mydist <- dist.dna(alignmentbin)
+    }
+    mytree <- nj(mydist)
+    mytree <- makeLabel(mytree, space="") # get rid of spaces in tip names.
+    return(mytree)
+  }
+  # infer a tree
+  mymat  <- as.matrix.alignment(alignment)
+  mytree <- makemytree(mymat)
+  # bootstrap the tree
+  myboot <- boot.phylo(mytree, mymat, makemytree)
+  # plot the tree:
+  plot.phylo(mytree,type="u")   # plot the unrooted phylogenetic tree
+  nodelabels(myboot,cex=0.7)    # plot the bootstrap values
+  mytree$node.label <- myboot   # make the bootstrap values be the node labels
+  return(mytree)
+}
+```
 
 
 
 ## Building an unrooted phylogenetic tree for protein sequences
 
-Once we have a distance matrix that gives the pairwise distances between all our protein sequences, we can build a phylogenetic tree based on that distance matrix. One method for using this is the neighbour-joining algorithm.
+<!-- when distance matrices discussed? -->
 
-You can build a phylogenetic tree using the neighbour-joining algorithm with the the Ape R package. First you will need to install the “ape” package (see instructions on how to install R packages).
+Once we have a **distance matrix** that gives the **pairwise distances** between all our protein sequences, we can build a **phylogenetic tree** based on that distance matrix. One method for using this is the **neighbour-joining algorithm**.
 
-The following R function “unrootedNJtree()” builds a phylogenetic tree based on an alignment of sequences, using the neighbour-joining algorithm, using functions from the “ape” package.
+You can build a phylogenetic tree using the neighbour-joining algorithm with the the `ape` package. The R function `unrootedNJtree()` is a **wrapper** forfunctions from the “ape” package which builds a phylogenetic tree based on an alignment of sequences, using the neighbour-joining algorithm.
 
-The “unrootedNJtree()” function takes an alignment of sequences its input, calculates pairwise distances between the sequences based on the alignment, and then builds a phylogenetic tree based on the pairwise distances. It returns the phylogenetic tree, and also makes a picture of that tree:
+The `unrootedNJtree()` function takes an alignment of sequences its input, calculates pairwise distances between the sequences based on the alignment, and then builds a phylogenetic tree based on the pairwise distances. It returns the phylogenetic tree, and also makes a picture of that tree.
 
 
 To use the function to make a phylogenetic tree, you must first copy and paste the function into R. You can then use it to make a tree, for example of the virus phosphoproteins, based on the sequence alignment:

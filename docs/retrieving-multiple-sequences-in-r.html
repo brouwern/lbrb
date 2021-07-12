@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 18 Retrieving multiple sequences in R | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Chapter 19 Retrieving multiple sequences in R | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 18 Retrieving multiple sequences in R | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Chapter 19 Retrieving multiple sequences in R | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 18 Retrieving multiple sequences in R | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Chapter 19 Retrieving multiple sequences in R | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -138,198 +138,210 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface to version 2.0</a></li>
-<li class="chapter" data-level="1" data-path="downloading-r.html"><a href="downloading-r.html"><i class="fa fa-check"></i><b>1</b> Downloading R</a>
+<li class="chapter" data-level="1" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html"><i class="fa fa-check"></i><b>1</b> How to review this book</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="downloading-r.html"><a href="downloading-r.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
-<li class="chapter" data-level="1.2" data-path="downloading-r.html"><a href="downloading-r.html#introduction-to-r"><i class="fa fa-check"></i><b>1.2</b> Introduction to R</a></li>
-<li class="chapter" data-level="1.3" data-path="downloading-r.html"><a href="downloading-r.html#installing-r"><i class="fa fa-check"></i><b>1.3</b> Installing R</a>
+<li class="chapter" data-level="1.1" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#file-format"><i class="fa fa-check"></i><b>1.1</b> File format</a></li>
+<li class="chapter" data-level="1.2" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#what-can-you-do"><i class="fa fa-check"></i><b>1.2</b> What can you do?</a></li>
+<li class="chapter" data-level="1.3" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#adding-comments"><i class="fa fa-check"></i><b>1.3</b> Adding comments</a>
 <ul>
-<li class="chapter" data-level="1.3.1" data-path="downloading-r.html"><a href="downloading-r.html#installing-r-on-a-windows-pc"><i class="fa fa-check"></i><b>1.3.1</b> Installing <em>R</em> on a Windows PC</a></li>
-<li class="chapter" data-level="1.3.2" data-path="downloading-r.html"><a href="downloading-r.html#how-to-install-r-on-non-windows-computers-eg.-macintosh-or-linux-computers"><i class="fa fa-check"></i><b>1.3.2</b> How to install <em>R</em> on non-Windows computers (eg. Macintosh or Linux computers)</a></li>
-</ul></li>
-<li class="chapter" data-level="1.4" data-path="downloading-r.html"><a href="downloading-r.html#starting-r"><i class="fa fa-check"></i><b>1.4</b> Starting <em>R</em></a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html"><i class="fa fa-check"></i><b>2</b> Installing the RStudio IDE</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>2.1</b> Getting to know RStudio</a></li>
-<li class="chapter" data-level="2.2" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html#rstudio-versus-rstudio-cloud"><i class="fa fa-check"></i><b>2.2</b> RStudio versus RStudio Cloud</a></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>3</b> Installing <em>R</em> packages</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>3.1</b> Downloading packages with the RStudio IDE</a></li>
-<li class="chapter" data-level="3.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function <code>install.packages()</code></a></li>
-<li class="chapter" data-level="3.3" data-path="installing-r-packages.html"><a href="installing-r-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>3.3</b> Using packages after they are downloaded</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>4</b> Installing Bioconductor</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>4.1</b> Bioconductor</a></li>
-<li class="chapter" data-level="4.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>4.2</b> Installing BiocManager</a></li>
-<li class="chapter" data-level="4.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#the-ins-and-outs-of-package-installation"><i class="fa fa-check"></i><b>4.3</b> The ins and outs of package installation</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#updating-other-packages-when-downloading-a-package"><i class="fa fa-check"></i><b>4.3.1</b> Updating other packages when downloading a package</a></li>
-<li class="chapter" data-level="4.3.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#packages-from-source"><i class="fa fa-check"></i><b>4.3.2</b> Packages “from source”</a></li>
-<li class="chapter" data-level="4.3.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#more-on-angry-red-text"><i class="fa fa-check"></i><b>4.3.3</b> More on angry red text</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#actually-loading-a-package"><i class="fa fa-check"></i><b>4.4</b> Actually loading a package</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html"><i class="fa fa-check"></i><b>5</b> A Brief introduction to R</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vocabulary"><i class="fa fa-check"></i><b>5.1</b> Vocabulary</a></li>
-<li class="chapter" data-level="5.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions"><i class="fa fa-check"></i><b>5.2</b> R functions</a></li>
-<li class="chapter" data-level="5.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#interacting-with-r"><i class="fa fa-check"></i><b>5.3</b> Interacting with R</a></li>
-<li class="chapter" data-level="5.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#variables-in-r"><i class="fa fa-check"></i><b>5.4</b> Variables in R</a>
-<ul>
-<li class="chapter" data-level="5.4.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>5.4.1</b> Vectors</a></li>
-<li class="chapter" data-level="5.4.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vector-indexing"><i class="fa fa-check"></i><b>5.4.2</b> Vector indexing</a></li>
-<li class="chapter" data-level="5.4.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#character-vectors"><i class="fa fa-check"></i><b>5.4.3</b> Character vectors</a></li>
-<li class="chapter" data-level="5.4.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#lists"><i class="fa fa-check"></i><b>5.4.4</b> Lists</a></li>
-<li class="chapter" data-level="5.4.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#tables"><i class="fa fa-check"></i><b>5.4.5</b> Tables</a></li>
-</ul></li>
-<li class="chapter" data-level="5.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#arguments"><i class="fa fa-check"></i><b>5.5</b> Arguments</a></li>
-<li class="chapter" data-level="5.6" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#help-files-with-help-and"><i class="fa fa-check"></i><b>5.6</b> Help files with <code>help()</code> and <code>?</code></a></li>
-<li class="chapter" data-level="5.7" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#searching-for-functions-with-help.search-and-rsitesearch"><i class="fa fa-check"></i><b>5.7</b> Searching for functions with <code>help.search()</code> and <code>RSiteSearch()</code></a></li>
-<li class="chapter" data-level="5.8" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#more-on-functions"><i class="fa fa-check"></i><b>5.8</b> More on functions</a>
-<ul>
-<li class="chapter" data-level="5.8.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#writing-your-own-functions"><i class="fa fa-check"></i><b>5.8.1</b> Writing your own functions</a></li>
-</ul></li>
-<li class="chapter" data-level="5.9" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#quiting-r"><i class="fa fa-check"></i><b>5.9</b> Quiting R</a></li>
-<li class="chapter" data-level="5.10" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.10</b> Links and Further Reading</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html"><i class="fa fa-check"></i><b>6</b> DNA descriptive statics - Part 1</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#preface-1"><i class="fa fa-check"></i><b>6.1</b> Preface</a></li>
-<li class="chapter" data-level="6.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#writing-todo"><i class="fa fa-check"></i><b>6.2</b> Writing TODO:</a></li>
-<li class="chapter" data-level="6.3" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#introduction"><i class="fa fa-check"></i><b>6.3</b> Introduction</a></li>
-<li class="chapter" data-level="6.4" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#vocabulary-1"><i class="fa fa-check"></i><b>6.4</b> Vocabulary</a></li>
-<li class="chapter" data-level="6.5" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#functions"><i class="fa fa-check"></i><b>6.5</b> Functions</a></li>
-<li class="chapter" data-level="6.6" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#preliminaries"><i class="fa fa-check"></i><b>6.6</b> Preliminaries</a></li>
-<li class="chapter" data-level="6.7" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#converting-dna-from-fasta-format"><i class="fa fa-check"></i><b>6.7</b> Converting DNA from FASTA format</a></li>
-<li class="chapter" data-level="6.8" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#length-of-a-dna-sequence"><i class="fa fa-check"></i><b>6.8</b> Length of a DNA sequence</a>
-<ul>
-<li class="chapter" data-level="6.8.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#base-composition-of-a-dna-sequence"><i class="fa fa-check"></i><b>6.8.1</b> Base composition of a DNA sequence</a></li>
-<li class="chapter" data-level="6.8.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#gc-content-of-dna"><i class="fa fa-check"></i><b>6.8.2</b> GC Content of DNA</a></li>
-<li class="chapter" data-level="6.8.3" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#dna-words"><i class="fa fa-check"></i><b>6.8.3</b> DNA words</a></li>
-<li class="chapter" data-level="6.8.4" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#summary"><i class="fa fa-check"></i><b>6.8.4</b> Summary</a></li>
-</ul></li>
-<li class="chapter" data-level="6.9" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#acknowledgements"><i class="fa fa-check"></i><b>6.9</b> Acknowledgements</a>
-<ul>
-<li class="chapter" data-level="6.9.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#license"><i class="fa fa-check"></i><b>6.9.1</b> License</a></li>
-<li class="chapter" data-level="6.9.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#exercises"><i class="fa fa-check"></i><b>6.9.2</b> Exercises</a></li>
+<li class="chapter" data-level="1.3.1" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#html-tagged-comments"><i class="fa fa-check"></i><b>1.3.1</b> HTML-tagged comments</a></li>
+<li class="chapter" data-level="1.3.2" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#code-chunk-comments"><i class="fa fa-check"></i><b>1.3.2</b> Code chunk comments</a></li>
+<li class="chapter" data-level="1.3.3" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#keys-to-exercise"><i class="fa fa-check"></i><b>1.3.3</b> Keys to exercise</a></li>
+<li class="chapter" data-level="1.3.4" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#problem---fix-this-code"><i class="fa fa-check"></i><b>1.3.4</b> Problem - fix this code</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html"><i class="fa fa-check"></i><b>7</b> Programming in R: for loops</a>
+<li class="chapter" data-level="2" data-path="downloading-r.html"><a href="downloading-r.html"><i class="fa fa-check"></i><b>2</b> Downloading R</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#preface-2"><i class="fa fa-check"></i><b>7.1</b> Preface</a></li>
-<li class="chapter" data-level="7.2" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#vocab"><i class="fa fa-check"></i><b>7.2</b> Vocab</a></li>
-<li class="chapter" data-level="7.3" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#functions-1"><i class="fa fa-check"></i><b>7.3</b> Functions</a></li>
-<li class="chapter" data-level="7.4" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#basic-for-loops-in-in-r"><i class="fa fa-check"></i><b>7.4</b> Basic for loops in in R</a></li>
-<li class="chapter" data-level="7.5" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#challenge-complicated-vectors-of-values"><i class="fa fa-check"></i><b>7.5</b> Challenge: complicated vectors of values</a></li>
+<li class="chapter" data-level="2.1" data-path="downloading-r.html"><a href="downloading-r.html#preface"><i class="fa fa-check"></i><b>2.1</b> Preface</a></li>
+<li class="chapter" data-level="2.2" data-path="downloading-r.html"><a href="downloading-r.html#introduction-to-r"><i class="fa fa-check"></i><b>2.2</b> Introduction to R</a></li>
+<li class="chapter" data-level="2.3" data-path="downloading-r.html"><a href="downloading-r.html#installing-r"><i class="fa fa-check"></i><b>2.3</b> Installing R</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="downloading-r.html"><a href="downloading-r.html#installing-r-on-a-windows-pc"><i class="fa fa-check"></i><b>2.3.1</b> Installing <em>R</em> on a Windows PC</a></li>
+<li class="chapter" data-level="2.3.2" data-path="downloading-r.html"><a href="downloading-r.html#how-to-install-r-on-non-windows-computers-eg.-macintosh-or-linux-computers"><i class="fa fa-check"></i><b>2.3.2</b> How to install <em>R</em> on non-Windows computers (eg. Macintosh or Linux computers)</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html"><i class="fa fa-check"></i><b>8</b> Mini tutorial: Vectors in R</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#preface-3"><i class="fa fa-check"></i><b>8.1</b> Preface</a></li>
-<li class="chapter" data-level="8.2" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#vocab-1"><i class="fa fa-check"></i><b>8.2</b> Vocab</a></li>
+<li class="chapter" data-level="2.4" data-path="downloading-r.html"><a href="downloading-r.html#starting-r"><i class="fa fa-check"></i><b>2.4</b> Starting <em>R</em></a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="functions-2.html"><a href="functions-2.html"><i class="fa fa-check"></i><b>9</b> Functions</a>
+<li class="chapter" data-level="3" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html"><i class="fa fa-check"></i><b>3</b> Installing the RStudio IDE</a>
 <ul>
-<li class="chapter" data-level="9.1" data-path="functions-2.html"><a href="functions-2.html#vectors-in-r"><i class="fa fa-check"></i><b>9.1</b> Vectors in R</a></li>
-<li class="chapter" data-level="9.2" data-path="functions-2.html"><a href="functions-2.html#math-on-vectors"><i class="fa fa-check"></i><b>9.2</b> Math on vectors</a></li>
-<li class="chapter" data-level="9.3" data-path="functions-2.html"><a href="functions-2.html#functions-on-vectors"><i class="fa fa-check"></i><b>9.3</b> Functions on vectors</a></li>
-<li class="chapter" data-level="9.4" data-path="functions-2.html"><a href="functions-2.html#operations-with-two-vectors"><i class="fa fa-check"></i><b>9.4</b> Operations with two vectors</a></li>
-<li class="chapter" data-level="9.5" data-path="functions-2.html"><a href="functions-2.html#subsetting-vectors"><i class="fa fa-check"></i><b>9.5</b> Subsetting vectors</a></li>
-<li class="chapter" data-level="9.6" data-path="functions-2.html"><a href="functions-2.html#sequences-of-numbers"><i class="fa fa-check"></i><b>9.6</b> Sequences of numbers</a></li>
-<li class="chapter" data-level="9.7" data-path="functions-2.html"><a href="functions-2.html#vectors-can-hold-numeric-or-character-data"><i class="fa fa-check"></i><b>9.7</b> Vectors can hold numeric or character data</a></li>
-<li class="chapter" data-level="9.8" data-path="functions-2.html"><a href="functions-2.html#regular-expressions-can-modify-character-data"><i class="fa fa-check"></i><b>9.8</b> Regular expressions can modify character data</a></li>
+<li class="chapter" data-level="3.1" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>3.1</b> Getting to know RStudio</a></li>
+<li class="chapter" data-level="3.2" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html#rstudio-versus-rstudio-cloud"><i class="fa fa-check"></i><b>3.2</b> RStudio versus RStudio Cloud</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html"><i class="fa fa-check"></i><b>10</b> Plotting vectors in base R</a>
+<li class="chapter" data-level="4" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>4</b> Installing <em>R</em> packages</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html#preface-4"><i class="fa fa-check"></i><b>10.1</b> Preface</a></li>
-<li class="chapter" data-level="10.2" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html#plotting-numeric-data"><i class="fa fa-check"></i><b>10.2</b> Plotting numeric data</a></li>
-<li class="chapter" data-level="10.3" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html#other-plotting-packages"><i class="fa fa-check"></i><b>10.3</b> Other plotting packages</a></li>
+<li class="chapter" data-level="4.1" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>4.1</b> Downloading packages with the RStudio IDE</a></li>
+<li class="chapter" data-level="4.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>4.2</b> Downloading packages with the function <code>install.packages()</code></a></li>
+<li class="chapter" data-level="4.3" data-path="installing-r-packages.html"><a href="installing-r-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>4.3</b> Using packages after they are downloaded</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html"><i class="fa fa-check"></i><b>11</b> Programming in R: functions</a>
+<li class="chapter" data-level="5" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>5</b> Installing Bioconductor</a>
 <ul>
-<li class="chapter" data-level="11.1" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#preface-5"><i class="fa fa-check"></i><b>11.1</b> Preface</a></li>
-<li class="chapter" data-level="11.2" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#vocab-2"><i class="fa fa-check"></i><b>11.2</b> Vocab</a></li>
-<li class="chapter" data-level="11.3" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#functions-3"><i class="fa fa-check"></i><b>11.3</b> Functions</a></li>
-<li class="chapter" data-level="11.4" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#functions-in-r"><i class="fa fa-check"></i><b>11.4</b> Functions in R</a></li>
-<li class="chapter" data-level="11.5" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#comments-in-r"><i class="fa fa-check"></i><b>11.5</b> Comments in R</a></li>
+<li class="chapter" data-level="5.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>5.1</b> Bioconductor</a></li>
+<li class="chapter" data-level="5.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>5.2</b> Installing BiocManager</a></li>
+<li class="chapter" data-level="5.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#the-ins-and-outs-of-package-installation"><i class="fa fa-check"></i><b>5.3</b> The ins and outs of package installation</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#updating-other-packages-when-downloading-a-package"><i class="fa fa-check"></i><b>5.3.1</b> Updating other packages when downloading a package</a></li>
+<li class="chapter" data-level="5.3.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#packages-from-source"><i class="fa fa-check"></i><b>5.3.2</b> Packages “from source”</a></li>
+<li class="chapter" data-level="5.3.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#more-on-angry-red-text"><i class="fa fa-check"></i><b>5.3.3</b> More on angry red text</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html"><i class="fa fa-check"></i><b>12</b> Downloading DNA sequences as FASTA files in R</a>
-<ul>
-<li class="chapter" data-level="12.0.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#functions-4"><i class="fa fa-check"></i><b>12.0.1</b> Functions</a></li>
-<li class="chapter" data-level="12.0.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#softwarewebsites"><i class="fa fa-check"></i><b>12.0.2</b> Software/websites</a></li>
-<li class="chapter" data-level="12.0.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#r-vocabulary"><i class="fa fa-check"></i><b>12.0.3</b> R vocabulary</a></li>
-<li class="chapter" data-level="12.0.4" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#file-types"><i class="fa fa-check"></i><b>12.0.4</b> File types</a></li>
-<li class="chapter" data-level="12.0.5" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#bioinformatics-vocabulary"><i class="fa fa-check"></i><b>12.0.5</b> Bioinformatics vocabulary</a></li>
-<li class="chapter" data-level="12.0.6" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#organisms-and-sequence-accessions"><i class="fa fa-check"></i><b>12.0.6</b> Organisms and Sequence accessions</a></li>
-<li class="chapter" data-level="12.0.7" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#preliminaries-1"><i class="fa fa-check"></i><b>12.0.7</b> Preliminaries</a></li>
-<li class="chapter" data-level="12.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#dna-sequence-statistics-part-1"><i class="fa fa-check"></i><b>12.1</b> DNA Sequence Statistics: Part 1</a>
-<ul>
-<li class="chapter" data-level="12.1.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#using-r-for-bioinformatics"><i class="fa fa-check"></i><b>12.1.1</b> Using R for Bioinformatics</a></li>
-<li class="chapter" data-level="12.1.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#r-packages-for-bioinformatics-bioconductor-and-seqinr"><i class="fa fa-check"></i><b>12.1.2</b> R packages for bioinformatics: Bioconductor and SeqinR</a></li>
-<li class="chapter" data-level="12.1.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#fasta-file-format"><i class="fa fa-check"></i><b>12.1.3</b> FASTA file format</a></li>
-<li class="chapter" data-level="12.1.4" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#the-ncbi-sequence-database"><i class="fa fa-check"></i><b>12.1.4</b> The NCBI sequence database</a></li>
-<li class="chapter" data-level="12.1.5" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#retrieving-genome-sequence-data-using-rentrez"><i class="fa fa-check"></i><b>12.1.5</b> Retrieving genome sequence data using rentrez</a></li>
+<li class="chapter" data-level="5.4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#actually-loading-a-package"><i class="fa fa-check"></i><b>5.4</b> Actually loading a package</a></li>
 </ul></li>
-<li class="chapter" data-level="12.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#optional-saving-fasta-files"><i class="fa fa-check"></i><b>12.2</b> OPTIONAL: Saving FASTA files</a></li>
-<li class="chapter" data-level="12.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#next-steps"><i class="fa fa-check"></i><b>12.3</b> Next steps</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html"><i class="fa fa-check"></i><b>13</b> Downloading DNA sequences as FASTA files in R</a>
+<li class="chapter" data-level="6" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html"><i class="fa fa-check"></i><b>6</b> A Brief introduction to R</a>
 <ul>
-<li class="chapter" data-level="13.1" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#preliminaries-2"><i class="fa fa-check"></i><b>13.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="13.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#convert-fasta-sequence-to-an-r-variable"><i class="fa fa-check"></i><b>13.2</b> Convert FASTA sequence to an R variable</a>
+<li class="chapter" data-level="6.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vocabulary"><i class="fa fa-check"></i><b>6.1</b> Vocabulary</a></li>
+<li class="chapter" data-level="6.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions"><i class="fa fa-check"></i><b>6.2</b> R functions</a></li>
+<li class="chapter" data-level="6.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#interacting-with-r"><i class="fa fa-check"></i><b>6.3</b> Interacting with R</a></li>
+<li class="chapter" data-level="6.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#variables-in-r"><i class="fa fa-check"></i><b>6.4</b> Variables in R</a>
 <ul>
-<li class="chapter" data-level="13.2.1" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#removing-unwanted-characters"><i class="fa fa-check"></i><b>13.2.1</b> Removing unwanted characters</a></li>
-<li class="chapter" data-level="13.2.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#spliting-unbroken-strings-in-character-vectors"><i class="fa fa-check"></i><b>13.2.2</b> Spliting unbroken strings in character vectors</a></li>
+<li class="chapter" data-level="6.4.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>6.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="6.4.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vector-indexing"><i class="fa fa-check"></i><b>6.4.2</b> Vector indexing</a></li>
+<li class="chapter" data-level="6.4.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#character-vectors"><i class="fa fa-check"></i><b>6.4.3</b> Character vectors</a></li>
+<li class="chapter" data-level="6.4.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#lists"><i class="fa fa-check"></i><b>6.4.4</b> Lists</a></li>
+<li class="chapter" data-level="6.4.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#tables"><i class="fa fa-check"></i><b>6.4.5</b> Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#arguments"><i class="fa fa-check"></i><b>6.5</b> Arguments</a></li>
+<li class="chapter" data-level="6.6" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#help-files-with-help-and"><i class="fa fa-check"></i><b>6.6</b> Help files with <code>help()</code> and <code>?</code></a></li>
+<li class="chapter" data-level="6.7" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#searching-for-functions-with-help.search-and-rsitesearch"><i class="fa fa-check"></i><b>6.7</b> Searching for functions with <code>help.search()</code> and <code>RSiteSearch()</code></a></li>
+<li class="chapter" data-level="6.8" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#more-on-functions"><i class="fa fa-check"></i><b>6.8</b> More on functions</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#writing-your-own-functions"><i class="fa fa-check"></i><b>6.8.1</b> Writing your own functions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#quiting-r"><i class="fa fa-check"></i><b>6.9</b> Quiting R</a></li>
+<li class="chapter" data-level="6.10" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>6.10</b> Links and Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html"><i class="fa fa-check"></i><b>7</b> DNA descriptive statics - Part 1</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#preface-1"><i class="fa fa-check"></i><b>7.1</b> Preface</a></li>
+<li class="chapter" data-level="7.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#writing-todo"><i class="fa fa-check"></i><b>7.2</b> Writing TODO:</a></li>
+<li class="chapter" data-level="7.3" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#introduction"><i class="fa fa-check"></i><b>7.3</b> Introduction</a></li>
+<li class="chapter" data-level="7.4" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#vocabulary-1"><i class="fa fa-check"></i><b>7.4</b> Vocabulary</a></li>
+<li class="chapter" data-level="7.5" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#functions"><i class="fa fa-check"></i><b>7.5</b> Functions</a></li>
+<li class="chapter" data-level="7.6" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#preliminaries"><i class="fa fa-check"></i><b>7.6</b> Preliminaries</a></li>
+<li class="chapter" data-level="7.7" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#converting-dna-from-fasta-format"><i class="fa fa-check"></i><b>7.7</b> Converting DNA from FASTA format</a></li>
+<li class="chapter" data-level="7.8" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#length-of-a-dna-sequence"><i class="fa fa-check"></i><b>7.8</b> Length of a DNA sequence</a>
+<ul>
+<li class="chapter" data-level="7.8.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#base-composition-of-a-dna-sequence"><i class="fa fa-check"></i><b>7.8.1</b> Base composition of a DNA sequence</a></li>
+<li class="chapter" data-level="7.8.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#gc-content-of-dna"><i class="fa fa-check"></i><b>7.8.2</b> GC Content of DNA</a></li>
+<li class="chapter" data-level="7.8.3" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#dna-words"><i class="fa fa-check"></i><b>7.8.3</b> DNA words</a></li>
+<li class="chapter" data-level="7.8.4" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#summary"><i class="fa fa-check"></i><b>7.8.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="7.9" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#acknowledgements"><i class="fa fa-check"></i><b>7.9</b> Acknowledgements</a>
+<ul>
+<li class="chapter" data-level="7.9.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#license"><i class="fa fa-check"></i><b>7.9.1</b> License</a></li>
+<li class="chapter" data-level="7.9.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#exercises"><i class="fa fa-check"></i><b>7.9.2</b> Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html"><i class="fa fa-check"></i><b>14</b> Downloading protein sequences in <em>R</em></a>
+<li class="chapter" data-level="8" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html"><i class="fa fa-check"></i><b>8</b> Programming in R: for loops</a>
 <ul>
-<li class="chapter" data-level="14.1" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#preliminaries-3"><i class="fa fa-check"></i><b>14.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="14.2" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#retrieving-a-uniprot-protein-sequence-using-rentrez"><i class="fa fa-check"></i><b>14.2</b> Retrieving a UniProt protein sequence using rentrez</a></li>
+<li class="chapter" data-level="8.1" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#preface-2"><i class="fa fa-check"></i><b>8.1</b> Preface</a></li>
+<li class="chapter" data-level="8.2" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#vocab"><i class="fa fa-check"></i><b>8.2</b> Vocab</a></li>
+<li class="chapter" data-level="8.3" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#functions-1"><i class="fa fa-check"></i><b>8.3</b> Functions</a></li>
+<li class="chapter" data-level="8.4" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#basic-for-loops-in-in-r"><i class="fa fa-check"></i><b>8.4</b> Basic for loops in in R</a></li>
+<li class="chapter" data-level="8.5" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#challenge-complicated-vectors-of-values"><i class="fa fa-check"></i><b>8.5</b> Challenge: complicated vectors of values</a></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html"><i class="fa fa-check"></i><b>15</b> Sequence dotplots in <em>R</em></a>
+<li class="chapter" data-level="9" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html"><i class="fa fa-check"></i><b>9</b> Mini tutorial: Vectors in R</a>
 <ul>
-<li class="chapter" data-level="15.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#preliminaries-4"><i class="fa fa-check"></i><b>15.1</b> Preliminaries</a>
-<ul>
-<li class="chapter" data-level="15.1.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#download-sequences"><i class="fa fa-check"></i><b>15.1.1</b> Download sequences</a></li>
+<li class="chapter" data-level="9.1" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#preface-3"><i class="fa fa-check"></i><b>9.1</b> Preface</a></li>
+<li class="chapter" data-level="9.2" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#vocab-1"><i class="fa fa-check"></i><b>9.2</b> Vocab</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualzing-two-identical-sequences"><i class="fa fa-check"></i><b>15.2</b> Visualzing two identical sequences</a></li>
-<li class="chapter" data-level="15.3" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualizing-repeats"><i class="fa fa-check"></i><b>15.3</b> Visualizing repeats</a></li>
-<li class="chapter" data-level="15.4" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#inversions"><i class="fa fa-check"></i><b>15.4</b> Inversions</a></li>
-<li class="chapter" data-level="15.5" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#translocations"><i class="fa fa-check"></i><b>15.5</b> Translocations</a></li>
-<li class="chapter" data-level="15.6" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#random-sequence"><i class="fa fa-check"></i><b>15.6</b> Random sequence</a></li>
-<li class="chapter" data-level="15.7" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#comparing-two-real-sequences-using-a-dotplot"><i class="fa fa-check"></i><b>15.7</b> Comparing two real sequences using a dotplot</a></li>
-</ul></li>
-<li class="chapter" data-level="16" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html"><i class="fa fa-check"></i><b>16</b> Global proteins aligments in <em>R</em></a>
+<li class="chapter" data-level="10" data-path="functions-2.html"><a href="functions-2.html"><i class="fa fa-check"></i><b>10</b> Functions</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#preliminaries-5"><i class="fa fa-check"></i><b>16.1</b> Preliminaries</a>
-<ul>
-<li class="chapter" data-level="16.1.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#download-sequences-1"><i class="fa fa-check"></i><b>16.1.1</b> Download sequences</a></li>
+<li class="chapter" data-level="10.1" data-path="functions-2.html"><a href="functions-2.html#vectors-in-r"><i class="fa fa-check"></i><b>10.1</b> Vectors in R</a></li>
+<li class="chapter" data-level="10.2" data-path="functions-2.html"><a href="functions-2.html#math-on-vectors"><i class="fa fa-check"></i><b>10.2</b> Math on vectors</a></li>
+<li class="chapter" data-level="10.3" data-path="functions-2.html"><a href="functions-2.html#functions-on-vectors"><i class="fa fa-check"></i><b>10.3</b> Functions on vectors</a></li>
+<li class="chapter" data-level="10.4" data-path="functions-2.html"><a href="functions-2.html#operations-with-two-vectors"><i class="fa fa-check"></i><b>10.4</b> Operations with two vectors</a></li>
+<li class="chapter" data-level="10.5" data-path="functions-2.html"><a href="functions-2.html#subsetting-vectors"><i class="fa fa-check"></i><b>10.5</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="10.6" data-path="functions-2.html"><a href="functions-2.html#sequences-of-numbers"><i class="fa fa-check"></i><b>10.6</b> Sequences of numbers</a></li>
+<li class="chapter" data-level="10.7" data-path="functions-2.html"><a href="functions-2.html#vectors-can-hold-numeric-or-character-data"><i class="fa fa-check"></i><b>10.7</b> Vectors can hold numeric or character data</a></li>
+<li class="chapter" data-level="10.8" data-path="functions-2.html"><a href="functions-2.html#regular-expressions-can-modify-character-data"><i class="fa fa-check"></i><b>10.8</b> Regular expressions can modify character data</a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-dna-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>16.2</b> Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm</a></li>
-<li class="chapter" data-level="16.3" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-protein-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>16.3</b> Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm</a>
+<li class="chapter" data-level="11" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html"><i class="fa fa-check"></i><b>11</b> Plotting vectors in base R</a>
 <ul>
-<li class="chapter" data-level="16.3.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#protein-score-matrices"><i class="fa fa-check"></i><b>16.3.1</b> Protein score matrices</a></li>
-<li class="chapter" data-level="16.3.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#example-protein-alignment"><i class="fa fa-check"></i><b>16.3.2</b> Example protein alignment</a></li>
+<li class="chapter" data-level="11.1" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html#preface-4"><i class="fa fa-check"></i><b>11.1</b> Preface</a></li>
+<li class="chapter" data-level="11.2" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html#plotting-numeric-data"><i class="fa fa-check"></i><b>11.2</b> Plotting numeric data</a></li>
+<li class="chapter" data-level="11.3" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html#other-plotting-packages"><i class="fa fa-check"></i><b>11.3</b> Other plotting packages</a></li>
 </ul></li>
-<li class="chapter" data-level="16.4" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#aligning-uniprot-sequences"><i class="fa fa-check"></i><b>16.4</b> Aligning UniProt sequences</a></li>
-<li class="chapter" data-level="16.5" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#viewing-a-long-pairwise-alignment"><i class="fa fa-check"></i><b>16.5</b> Viewing a long pairwise alignment</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html"><i class="fa fa-check"></i><b>17</b> Local protein aligments in <em>R</em></a>
+<li class="chapter" data-level="12" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html"><i class="fa fa-check"></i><b>12</b> Programming in R: functions</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#preliminaries-6"><i class="fa fa-check"></i><b>17.1</b> Preliminaries</a>
-<ul>
-<li class="chapter" data-level="17.1.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#download-sequences-2"><i class="fa fa-check"></i><b>17.1.1</b> Download sequences</a></li>
+<li class="chapter" data-level="12.1" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#preface-5"><i class="fa fa-check"></i><b>12.1</b> Preface</a></li>
+<li class="chapter" data-level="12.2" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#vocab-2"><i class="fa fa-check"></i><b>12.2</b> Vocab</a></li>
+<li class="chapter" data-level="12.3" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#functions-3"><i class="fa fa-check"></i><b>12.3</b> Functions</a></li>
+<li class="chapter" data-level="12.4" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#functions-in-r"><i class="fa fa-check"></i><b>12.4</b> Functions in R</a></li>
+<li class="chapter" data-level="12.5" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#comments-in-r"><i class="fa fa-check"></i><b>12.5</b> Comments in R</a></li>
 </ul></li>
-<li class="chapter" data-level="17.2" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm"><i class="fa fa-check"></i><b>17.2</b> Pairwise local alignment of protein sequences using the Smith-Waterman algorithm</a></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html"><i class="fa fa-check"></i><b>18</b> Retrieving multiple sequences in R</a>
+<li class="chapter" data-level="13" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html"><i class="fa fa-check"></i><b>13</b> Downloading DNA sequences as FASTA files in R</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#prelminaries"><i class="fa fa-check"></i><b>18.1</b> Prelminaries</a></li>
-<li class="chapter" data-level="18.2" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#retrieving-a-set-of-sequences-from-uniprot"><i class="fa fa-check"></i><b>18.2</b> Retrieving a set of sequences from UniProt</a></li>
-<li class="chapter" data-level="18.3" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#downloading-sequences-in-bulk"><i class="fa fa-check"></i><b>18.3</b> Downloading sequences in bulk</a></li>
+<li class="chapter" data-level="13.0.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#functions-4"><i class="fa fa-check"></i><b>13.0.1</b> Functions</a></li>
+<li class="chapter" data-level="13.0.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#softwarewebsites"><i class="fa fa-check"></i><b>13.0.2</b> Software/websites</a></li>
+<li class="chapter" data-level="13.0.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#r-vocabulary"><i class="fa fa-check"></i><b>13.0.3</b> R vocabulary</a></li>
+<li class="chapter" data-level="13.0.4" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#file-types"><i class="fa fa-check"></i><b>13.0.4</b> File types</a></li>
+<li class="chapter" data-level="13.0.5" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#bioinformatics-vocabulary"><i class="fa fa-check"></i><b>13.0.5</b> Bioinformatics vocabulary</a></li>
+<li class="chapter" data-level="13.0.6" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#organisms-and-sequence-accessions"><i class="fa fa-check"></i><b>13.0.6</b> Organisms and Sequence accessions</a></li>
+<li class="chapter" data-level="13.0.7" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#preliminaries-1"><i class="fa fa-check"></i><b>13.0.7</b> Preliminaries</a></li>
+<li class="chapter" data-level="13.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#dna-sequence-statistics-part-1"><i class="fa fa-check"></i><b>13.1</b> DNA Sequence Statistics: Part 1</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#using-r-for-bioinformatics"><i class="fa fa-check"></i><b>13.1.1</b> Using R for Bioinformatics</a></li>
+<li class="chapter" data-level="13.1.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#r-packages-for-bioinformatics-bioconductor-and-seqinr"><i class="fa fa-check"></i><b>13.1.2</b> R packages for bioinformatics: Bioconductor and SeqinR</a></li>
+<li class="chapter" data-level="13.1.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#fasta-file-format"><i class="fa fa-check"></i><b>13.1.3</b> FASTA file format</a></li>
+<li class="chapter" data-level="13.1.4" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#the-ncbi-sequence-database"><i class="fa fa-check"></i><b>13.1.4</b> The NCBI sequence database</a></li>
+<li class="chapter" data-level="13.1.5" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#retrieving-genome-sequence-data-using-rentrez"><i class="fa fa-check"></i><b>13.1.5</b> Retrieving genome sequence data using rentrez</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#optional-saving-fasta-files"><i class="fa fa-check"></i><b>13.2</b> OPTIONAL: Saving FASTA files</a></li>
+<li class="chapter" data-level="13.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#next-steps"><i class="fa fa-check"></i><b>13.3</b> Next steps</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html"><i class="fa fa-check"></i><b>14</b> Downloading DNA sequences as FASTA files in R</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#preliminaries-2"><i class="fa fa-check"></i><b>14.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="14.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#convert-fasta-sequence-to-an-r-variable"><i class="fa fa-check"></i><b>14.2</b> Convert FASTA sequence to an R variable</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#removing-unwanted-characters"><i class="fa fa-check"></i><b>14.2.1</b> Removing unwanted characters</a></li>
+<li class="chapter" data-level="14.2.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#spliting-unbroken-strings-in-character-vectors"><i class="fa fa-check"></i><b>14.2.2</b> Spliting unbroken strings in character vectors</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html"><i class="fa fa-check"></i><b>15</b> Downloading protein sequences in <em>R</em></a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#preliminaries-3"><i class="fa fa-check"></i><b>15.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="15.2" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#retrieving-a-uniprot-protein-sequence-using-rentrez"><i class="fa fa-check"></i><b>15.2</b> Retrieving a UniProt protein sequence using rentrez</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html"><i class="fa fa-check"></i><b>16</b> Sequence dotplots in <em>R</em></a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#preliminaries-4"><i class="fa fa-check"></i><b>16.1</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#download-sequences"><i class="fa fa-check"></i><b>16.1.1</b> Download sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualzing-two-identical-sequences"><i class="fa fa-check"></i><b>16.2</b> Visualzing two identical sequences</a></li>
+<li class="chapter" data-level="16.3" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualizing-repeats"><i class="fa fa-check"></i><b>16.3</b> Visualizing repeats</a></li>
+<li class="chapter" data-level="16.4" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#inversions"><i class="fa fa-check"></i><b>16.4</b> Inversions</a></li>
+<li class="chapter" data-level="16.5" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#translocations"><i class="fa fa-check"></i><b>16.5</b> Translocations</a></li>
+<li class="chapter" data-level="16.6" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#random-sequence"><i class="fa fa-check"></i><b>16.6</b> Random sequence</a></li>
+<li class="chapter" data-level="16.7" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#comparing-two-real-sequences-using-a-dotplot"><i class="fa fa-check"></i><b>16.7</b> Comparing two real sequences using a dotplot</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html"><i class="fa fa-check"></i><b>17</b> Global proteins aligments in <em>R</em></a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#preliminaries-5"><i class="fa fa-check"></i><b>17.1</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="17.1.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#download-sequences-1"><i class="fa fa-check"></i><b>17.1.1</b> Download sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-dna-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>17.2</b> Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm</a></li>
+<li class="chapter" data-level="17.3" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-protein-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>17.3</b> Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm</a>
+<ul>
+<li class="chapter" data-level="17.3.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#protein-score-matrices"><i class="fa fa-check"></i><b>17.3.1</b> Protein score matrices</a></li>
+<li class="chapter" data-level="17.3.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#example-protein-alignment"><i class="fa fa-check"></i><b>17.3.2</b> Example protein alignment</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#aligning-uniprot-sequences"><i class="fa fa-check"></i><b>17.4</b> Aligning UniProt sequences</a></li>
+<li class="chapter" data-level="17.5" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#viewing-a-long-pairwise-alignment"><i class="fa fa-check"></i><b>17.5</b> Viewing a long pairwise alignment</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html"><i class="fa fa-check"></i><b>18</b> Local protein aligments in <em>R</em></a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#preliminaries-6"><i class="fa fa-check"></i><b>18.1</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#download-sequences-2"><i class="fa fa-check"></i><b>18.1.1</b> Download sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm"><i class="fa fa-check"></i><b>18.2</b> Pairwise local alignment of protein sequences using the Smith-Waterman algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html"><i class="fa fa-check"></i><b>19</b> Retrieving multiple sequences in R</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#prelminaries"><i class="fa fa-check"></i><b>19.1</b> Prelminaries</a></li>
+<li class="chapter" data-level="19.2" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#retrieving-a-set-of-sequences-from-uniprot"><i class="fa fa-check"></i><b>19.2</b> Retrieving a set of sequences from UniProt</a></li>
+<li class="chapter" data-level="19.3" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#downloading-sequences-in-bulk"><i class="fa fa-check"></i><b>19.3</b> Downloading sequences in bulk</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path=""><a href="#part-appendices"><i class="fa fa-check"></i>(PART) Appendices</a>
 <ul>
@@ -337,31 +349,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html"><i class="fa fa-check"></i>Appendix 01: Getting access to R</a>
 <ul>
-<li class="chapter" data-level="18.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-started-with-r-and-rstudio"><i class="fa fa-check"></i><b>18.4</b> Getting Started With R and RStudio</a>
+<li class="chapter" data-level="19.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-started-with-r-and-rstudio"><i class="fa fa-check"></i><b>19.4</b> Getting Started With R and RStudio</a>
 <ul>
-<li class="chapter" data-level="18.4.1" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#rstudio-cloud"><i class="fa fa-check"></i><b>18.4.1</b> RStudio Cloud</a></li>
-<li class="chapter" data-level="18.4.2" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-r-onto-your-own-computer"><i class="fa fa-check"></i><b>18.4.2</b> Getting R onto your own computer</a></li>
-<li class="chapter" data-level="18.4.3" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-rstudio-onto-your-computer"><i class="fa fa-check"></i><b>18.4.3</b> Getting RStudio onto your computer</a></li>
-<li class="chapter" data-level="18.4.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#keep-r-and-rstudio-current"><i class="fa fa-check"></i><b>18.4.4</b> Keep R and RStudio current</a></li>
+<li class="chapter" data-level="19.4.1" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#rstudio-cloud"><i class="fa fa-check"></i><b>19.4.1</b> RStudio Cloud</a></li>
+<li class="chapter" data-level="19.4.2" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-r-onto-your-own-computer"><i class="fa fa-check"></i><b>19.4.2</b> Getting R onto your own computer</a></li>
+<li class="chapter" data-level="19.4.3" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-rstudio-onto-your-computer"><i class="fa fa-check"></i><b>19.4.3</b> Getting RStudio onto your computer</a></li>
+<li class="chapter" data-level="19.4.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#keep-r-and-rstudio-current"><i class="fa fa-check"></i><b>19.4.4</b> Keep R and RStudio current</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html"><i class="fa fa-check"></i>Getting started with R itself (or not)</a>
 <ul>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#vocabulary-2"><i class="fa fa-check"></i>Vocabulary</a></li>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#r-commands"><i class="fa fa-check"></i>R commands</a></li>
-<li class="chapter" data-level="18.5" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#help"><i class="fa fa-check"></i><b>18.5</b> Help!</a>
+<li class="chapter" data-level="19.5" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#help"><i class="fa fa-check"></i><b>19.5</b> Help!</a>
 <ul>
-<li class="chapter" data-level="18.5.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-r"><i class="fa fa-check"></i><b>18.5.1</b> Getting “help” from R</a></li>
-<li class="chapter" data-level="18.5.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-the-internet"><i class="fa fa-check"></i><b>18.5.2</b> Getting help from the internet</a></li>
-<li class="chapter" data-level="18.5.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-online-forums"><i class="fa fa-check"></i><b>18.5.3</b> Getting help from online forums</a></li>
-<li class="chapter" data-level="18.5.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-twitter"><i class="fa fa-check"></i><b>18.5.4</b> Getting help from twitter</a></li>
+<li class="chapter" data-level="19.5.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-r"><i class="fa fa-check"></i><b>19.5.1</b> Getting “help” from R</a></li>
+<li class="chapter" data-level="19.5.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-the-internet"><i class="fa fa-check"></i><b>19.5.2</b> Getting help from the internet</a></li>
+<li class="chapter" data-level="19.5.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-online-forums"><i class="fa fa-check"></i><b>19.5.3</b> Getting help from online forums</a></li>
+<li class="chapter" data-level="19.5.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-twitter"><i class="fa fa-check"></i><b>19.5.4</b> Getting help from twitter</a></li>
 </ul></li>
-<li class="chapter" data-level="18.6" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#other-features-of-rstudio"><i class="fa fa-check"></i><b>18.6</b> Other features of RStudio</a>
+<li class="chapter" data-level="19.6" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#other-features-of-rstudio"><i class="fa fa-check"></i><b>19.6</b> Other features of RStudio</a>
 <ul>
-<li class="chapter" data-level="18.6.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#ajusting-pane-the-layout"><i class="fa fa-check"></i><b>18.6.1</b> Ajusting pane the layout</a></li>
-<li class="chapter" data-level="18.6.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#adjusting-size-of-windows"><i class="fa fa-check"></i><b>18.6.2</b> Adjusting size of windows</a></li>
+<li class="chapter" data-level="19.6.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#ajusting-pane-the-layout"><i class="fa fa-check"></i><b>19.6.1</b> Ajusting pane the layout</a></li>
+<li class="chapter" data-level="19.6.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#adjusting-size-of-windows"><i class="fa fa-check"></i><b>19.6.2</b> Adjusting size of windows</a></li>
 </ul></li>
-<li class="chapter" data-level="18.7" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>18.7</b> Practice (OPTIONAL)</a></li>
+<li class="chapter" data-level="19.7" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>19.7</b> Practice (OPTIONAL)</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
@@ -383,46 +395,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="retrieving-multiple-sequences-in-r" class="section level1" number="18">
-<h1><span class="header-section-number">Chapter 18</span> Retrieving multiple sequences in R</h1>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="retrieving-multiple-sequences-in-r.html#cb317-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
+<div id="retrieving-multiple-sequences-in-r" class="section level1" number="19">
+<h1><span class="header-section-number">Chapter 19</span> Retrieving multiple sequences in R</h1>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="retrieving-multiple-sequences-in-r.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span></code></pre></div>
 <p><strong>By</strong>: Avril Coghlan.<br />
 Multiple Alignment and Phylogenetic trees
 <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html" class="uri">https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html</a></p>
 <p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
-<div id="prelminaries" class="section level2" number="18.1">
-<h2><span class="header-section-number">18.1</span> Prelminaries</h2>
+<div id="prelminaries" class="section level2" number="19.1">
+<h2><span class="header-section-number">19.1</span> Prelminaries</h2>
 <!-- TODO:  add entrez_fetch_list to combio4all -->
 <!-- Add output to combio4all -->
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="retrieving-multiple-sequences-in-r.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="do">## package</span></span>
-<span id="cb318-2"><a href="retrieving-multiple-sequences-in-r.html#cb318-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span>
-<span id="cb318-3"><a href="retrieving-multiple-sequences-in-r.html#cb318-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rentrez)</span>
-<span id="cb318-4"><a href="retrieving-multiple-sequences-in-r.html#cb318-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb318-5"><a href="retrieving-multiple-sequences-in-r.html#cb318-5" aria-hidden="true" tabindex="-1"></a><span class="co"># function</span></span>
-<span id="cb318-6"><a href="retrieving-multiple-sequences-in-r.html#cb318-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb318-7"><a href="retrieving-multiple-sequences-in-r.html#cb318-7" aria-hidden="true" tabindex="-1"></a><span class="do">## this function is called in this lesson</span></span>
-<span id="cb318-8"><a href="retrieving-multiple-sequences-in-r.html#cb318-8" aria-hidden="true" tabindex="-1"></a><span class="do">## it will be added to the combio4all package</span></span>
-<span id="cb318-9"><a href="retrieving-multiple-sequences-in-r.html#cb318-9" aria-hidden="true" tabindex="-1"></a><span class="do">### and called from it</span></span>
-<span id="cb318-10"><a href="retrieving-multiple-sequences-in-r.html#cb318-10" aria-hidden="true" tabindex="-1"></a>entrez_fetch_list <span class="ot">&lt;-</span> <span class="cf">function</span>(db, id, rettype, ...){</span>
-<span id="cb318-11"><a href="retrieving-multiple-sequences-in-r.html#cb318-11" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb318-12"><a href="retrieving-multiple-sequences-in-r.html#cb318-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#setup list for storing output</span></span>
-<span id="cb318-13"><a href="retrieving-multiple-sequences-in-r.html#cb318-13" aria-hidden="true" tabindex="-1"></a>  n.seq <span class="ot">&lt;-</span> <span class="fu">length</span>(id)</span>
-<span id="cb318-14"><a href="retrieving-multiple-sequences-in-r.html#cb318-14" aria-hidden="true" tabindex="-1"></a>  list.output <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n.seq))</span>
-<span id="cb318-15"><a href="retrieving-multiple-sequences-in-r.html#cb318-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(list.output) <span class="ot">&lt;-</span> id</span>
-<span id="cb318-16"><a href="retrieving-multiple-sequences-in-r.html#cb318-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb318-17"><a href="retrieving-multiple-sequences-in-r.html#cb318-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get output</span></span>
-<span id="cb318-18"><a href="retrieving-multiple-sequences-in-r.html#cb318-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(id)){</span>
-<span id="cb318-19"><a href="retrieving-multiple-sequences-in-r.html#cb318-19" aria-hidden="true" tabindex="-1"></a>  list.output[[i]] <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> db, </span>
-<span id="cb318-20"><a href="retrieving-multiple-sequences-in-r.html#cb318-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> id[i], </span>
-<span id="cb318-21"><a href="retrieving-multiple-sequences-in-r.html#cb318-21" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> rettype)</span>
-<span id="cb318-22"><a href="retrieving-multiple-sequences-in-r.html#cb318-22" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb318-23"><a href="retrieving-multiple-sequences-in-r.html#cb318-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb318-24"><a href="retrieving-multiple-sequences-in-r.html#cb318-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb318-25"><a href="retrieving-multiple-sequences-in-r.html#cb318-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(list.output)</span>
-<span id="cb318-26"><a href="retrieving-multiple-sequences-in-r.html#cb318-26" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="retrieving-multiple-sequences-in-r.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="do">## package</span></span>
+<span id="cb319-2"><a href="retrieving-multiple-sequences-in-r.html#cb319-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span>
+<span id="cb319-3"><a href="retrieving-multiple-sequences-in-r.html#cb319-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rentrez)</span>
+<span id="cb319-4"><a href="retrieving-multiple-sequences-in-r.html#cb319-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb319-5"><a href="retrieving-multiple-sequences-in-r.html#cb319-5" aria-hidden="true" tabindex="-1"></a><span class="co"># function</span></span>
+<span id="cb319-6"><a href="retrieving-multiple-sequences-in-r.html#cb319-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb319-7"><a href="retrieving-multiple-sequences-in-r.html#cb319-7" aria-hidden="true" tabindex="-1"></a><span class="do">## this function is called in this lesson</span></span>
+<span id="cb319-8"><a href="retrieving-multiple-sequences-in-r.html#cb319-8" aria-hidden="true" tabindex="-1"></a><span class="do">## it will be added to the combio4all package</span></span>
+<span id="cb319-9"><a href="retrieving-multiple-sequences-in-r.html#cb319-9" aria-hidden="true" tabindex="-1"></a><span class="do">### and called from it</span></span>
+<span id="cb319-10"><a href="retrieving-multiple-sequences-in-r.html#cb319-10" aria-hidden="true" tabindex="-1"></a>entrez_fetch_list <span class="ot">&lt;-</span> <span class="cf">function</span>(db, id, rettype, ...){</span>
+<span id="cb319-11"><a href="retrieving-multiple-sequences-in-r.html#cb319-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb319-12"><a href="retrieving-multiple-sequences-in-r.html#cb319-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">#setup list for storing output</span></span>
+<span id="cb319-13"><a href="retrieving-multiple-sequences-in-r.html#cb319-13" aria-hidden="true" tabindex="-1"></a>  n.seq <span class="ot">&lt;-</span> <span class="fu">length</span>(id)</span>
+<span id="cb319-14"><a href="retrieving-multiple-sequences-in-r.html#cb319-14" aria-hidden="true" tabindex="-1"></a>  list.output <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n.seq))</span>
+<span id="cb319-15"><a href="retrieving-multiple-sequences-in-r.html#cb319-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(list.output) <span class="ot">&lt;-</span> id</span>
+<span id="cb319-16"><a href="retrieving-multiple-sequences-in-r.html#cb319-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb319-17"><a href="retrieving-multiple-sequences-in-r.html#cb319-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get output</span></span>
+<span id="cb319-18"><a href="retrieving-multiple-sequences-in-r.html#cb319-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(id)){</span>
+<span id="cb319-19"><a href="retrieving-multiple-sequences-in-r.html#cb319-19" aria-hidden="true" tabindex="-1"></a>  list.output[[i]] <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> db, </span>
+<span id="cb319-20"><a href="retrieving-multiple-sequences-in-r.html#cb319-20" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> id[i], </span>
+<span id="cb319-21"><a href="retrieving-multiple-sequences-in-r.html#cb319-21" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> rettype)</span>
+<span id="cb319-22"><a href="retrieving-multiple-sequences-in-r.html#cb319-22" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb319-23"><a href="retrieving-multiple-sequences-in-r.html#cb319-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb319-24"><a href="retrieving-multiple-sequences-in-r.html#cb319-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb319-25"><a href="retrieving-multiple-sequences-in-r.html#cb319-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(list.output)</span>
+<span id="cb319-26"><a href="retrieving-multiple-sequences-in-r.html#cb319-26" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="retrieving-a-set-of-sequences-from-uniprot" class="section level2" number="18.2">
-<h2><span class="header-section-number">18.2</span> Retrieving a set of sequences from UniProt</h2>
+<div id="retrieving-a-set-of-sequences-from-uniprot" class="section level2" number="19.2">
+<h2><span class="header-section-number">19.2</span> Retrieving a set of sequences from UniProt</h2>
 <p>Using websites or <em>R</em> you can search fort DNA or protein sequences in sequence databases such as the <strong>NCBI</strong> database and <strong>UniProt</strong>. Oftentimes, it is useful to retrieve several sequences at once. The <em>R</em> function <code>entrez_fetch()</code> from the <em>rentrez</em> package is useful for this purpose. Other packages can also, such as <code>sequinr</code> this but <em>rentrez</em> has the cleanest interface.</p>
 <!-- have I ever mention ACNUC before -->
 <!-- IS this necessary?: -->
@@ -438,68 +450,68 @@ Multiple Alignment and Phylogenetic trees
 </ol>
 <p>Rabies virus is the virus responsible for rabies, which is classified by the WHO as a <strong>neglected tropical disease</strong>. Rabies is not a major human pathogen in the USA and Europe, but is problem in Africa. [Mokola virus](<a href="https://en.wikipedia.org/wiki/Mokola_lyssavirus" class="uri">https://en.wikipedia.org/wiki/Mokola_lyssavirus</a>() and rabies virus are closely related viruses that both belong to a group of viruses called the <a href="https://en.wikipedia.org/wiki/Lyssavirus">Lyssaviruses</a>. Mokola virus causes a rabies-like infection in mammals including humans.</p>
 <p>You can type make a vector containing the names of the sequences. Note that the accessions aren’t numbers but are <strong>quoted character strings</strong>:</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="retrieving-multiple-sequences-in-r.html#cb319-1" aria-hidden="true" tabindex="-1"></a>seqnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P06747&quot;</span>, </span>
-<span id="cb319-2"><a href="retrieving-multiple-sequences-in-r.html#cb319-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;P0C569&quot;</span>, </span>
-<span id="cb319-3"><a href="retrieving-multiple-sequences-in-r.html#cb319-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;O56773&quot;</span>, </span>
-<span id="cb319-4"><a href="retrieving-multiple-sequences-in-r.html#cb319-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;Q5VKP1&quot;</span>)  </span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="retrieving-multiple-sequences-in-r.html#cb320-1" aria-hidden="true" tabindex="-1"></a>seqnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;P06747&quot;</span>, </span>
+<span id="cb320-2"><a href="retrieving-multiple-sequences-in-r.html#cb320-2" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;P0C569&quot;</span>, </span>
+<span id="cb320-3"><a href="retrieving-multiple-sequences-in-r.html#cb320-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;O56773&quot;</span>, </span>
+<span id="cb320-4"><a href="retrieving-multiple-sequences-in-r.html#cb320-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">&quot;Q5VKP1&quot;</span>)  </span></code></pre></div>
 <p>Confirm that we are working with character data using <code>is.character()</code></p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="retrieving-multiple-sequences-in-r.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(seqnames)</span></code></pre></div>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="retrieving-multiple-sequences-in-r.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.character</span>(seqnames)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>We can access the first element of the vector, P06747, using <strong>bracket notation</strong> like this:</p>
-<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="retrieving-multiple-sequences-in-r.html#cb322-1" aria-hidden="true" tabindex="-1"></a>seqnames[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="retrieving-multiple-sequences-in-r.html#cb323-1" aria-hidden="true" tabindex="-1"></a>seqnames[<span class="dv">1</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;P06747&quot;</code></pre>
 <p>The code to access the second and third elements of the vector of accessions is:</p>
-<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="retrieving-multiple-sequences-in-r.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2nd accession</span></span>
-<span id="cb324-2"><a href="retrieving-multiple-sequences-in-r.html#cb324-2" aria-hidden="true" tabindex="-1"></a>seqnames[<span class="dv">2</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="retrieving-multiple-sequences-in-r.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2nd accession</span></span>
+<span id="cb325-2"><a href="retrieving-multiple-sequences-in-r.html#cb325-2" aria-hidden="true" tabindex="-1"></a>seqnames[<span class="dv">2</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;P0C569&quot;</code></pre>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="retrieving-multiple-sequences-in-r.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3rd accession</span></span>
-<span id="cb326-2"><a href="retrieving-multiple-sequences-in-r.html#cb326-2" aria-hidden="true" tabindex="-1"></a>seqnames[<span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="retrieving-multiple-sequences-in-r.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 3rd accession</span></span>
+<span id="cb327-2"><a href="retrieving-multiple-sequences-in-r.html#cb327-2" aria-hidden="true" tabindex="-1"></a>seqnames[<span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] &quot;O56773&quot;</code></pre>
 <p>Now let’s use this vector of accessions to download sequence data. To make sure we understand what we’re doing, first we’ll download just the sequences one by one. This code retrieves the first sequence and store them in vector variable <code>seqs</code>.</p>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="retrieving-multiple-sequences-in-r.html#cb328-1" aria-hidden="true" tabindex="-1"></a>seq1 <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>, </span>
-<span id="cb328-2"><a href="retrieving-multiple-sequences-in-r.html#cb328-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> seqnames[<span class="dv">1</span>], </span>
-<span id="cb328-3"><a href="retrieving-multiple-sequences-in-r.html#cb328-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)      </span></code></pre></div>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="retrieving-multiple-sequences-in-r.html#cb329-1" aria-hidden="true" tabindex="-1"></a>seq1 <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>, </span>
+<span id="cb329-2"><a href="retrieving-multiple-sequences-in-r.html#cb329-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> seqnames[<span class="dv">1</span>], </span>
+<span id="cb329-3"><a href="retrieving-multiple-sequences-in-r.html#cb329-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)      </span></code></pre></div>
 <p>We can do the next two sequences by change <code>id = ...</code> to <code>seqnames[2]</code> and <code>seqnames[3]</code>.</p>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="retrieving-multiple-sequences-in-r.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sequence two using seqnames[2]</span></span>
-<span id="cb329-2"><a href="retrieving-multiple-sequences-in-r.html#cb329-2" aria-hidden="true" tabindex="-1"></a>seq2 <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>, </span>
-<span id="cb329-3"><a href="retrieving-multiple-sequences-in-r.html#cb329-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> seqnames[<span class="dv">2</span>], </span>
-<span id="cb329-4"><a href="retrieving-multiple-sequences-in-r.html#cb329-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>) </span>
-<span id="cb329-5"><a href="retrieving-multiple-sequences-in-r.html#cb329-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb329-6"><a href="retrieving-multiple-sequences-in-r.html#cb329-6" aria-hidden="true" tabindex="-1"></a><span class="co"># sequence two using seqnames[3]</span></span>
-<span id="cb329-7"><a href="retrieving-multiple-sequences-in-r.html#cb329-7" aria-hidden="true" tabindex="-1"></a>seq3 <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>, </span>
-<span id="cb329-8"><a href="retrieving-multiple-sequences-in-r.html#cb329-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> seqnames[<span class="dv">3</span>], </span>
-<span id="cb329-9"><a href="retrieving-multiple-sequences-in-r.html#cb329-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span>
-<span id="cb329-10"><a href="retrieving-multiple-sequences-in-r.html#cb329-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb329-11"><a href="retrieving-multiple-sequences-in-r.html#cb329-11" aria-hidden="true" tabindex="-1"></a><span class="co"># sequence two using seqnames[4]</span></span>
-<span id="cb329-12"><a href="retrieving-multiple-sequences-in-r.html#cb329-12" aria-hidden="true" tabindex="-1"></a>seq4 <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>, </span>
-<span id="cb329-13"><a href="retrieving-multiple-sequences-in-r.html#cb329-13" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> seqnames[<span class="dv">4</span>], </span>
-<span id="cb329-14"><a href="retrieving-multiple-sequences-in-r.html#cb329-14" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="retrieving-multiple-sequences-in-r.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sequence two using seqnames[2]</span></span>
+<span id="cb330-2"><a href="retrieving-multiple-sequences-in-r.html#cb330-2" aria-hidden="true" tabindex="-1"></a>seq2 <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>, </span>
+<span id="cb330-3"><a href="retrieving-multiple-sequences-in-r.html#cb330-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> seqnames[<span class="dv">2</span>], </span>
+<span id="cb330-4"><a href="retrieving-multiple-sequences-in-r.html#cb330-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>) </span>
+<span id="cb330-5"><a href="retrieving-multiple-sequences-in-r.html#cb330-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb330-6"><a href="retrieving-multiple-sequences-in-r.html#cb330-6" aria-hidden="true" tabindex="-1"></a><span class="co"># sequence two using seqnames[3]</span></span>
+<span id="cb330-7"><a href="retrieving-multiple-sequences-in-r.html#cb330-7" aria-hidden="true" tabindex="-1"></a>seq3 <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>, </span>
+<span id="cb330-8"><a href="retrieving-multiple-sequences-in-r.html#cb330-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> seqnames[<span class="dv">3</span>], </span>
+<span id="cb330-9"><a href="retrieving-multiple-sequences-in-r.html#cb330-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span>
+<span id="cb330-10"><a href="retrieving-multiple-sequences-in-r.html#cb330-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb330-11"><a href="retrieving-multiple-sequences-in-r.html#cb330-11" aria-hidden="true" tabindex="-1"></a><span class="co"># sequence two using seqnames[4]</span></span>
+<span id="cb330-12"><a href="retrieving-multiple-sequences-in-r.html#cb330-12" aria-hidden="true" tabindex="-1"></a>seq4 <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>, </span>
+<span id="cb330-13"><a href="retrieving-multiple-sequences-in-r.html#cb330-13" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> seqnames[<span class="dv">4</span>], </span>
+<span id="cb330-14"><a href="retrieving-multiple-sequences-in-r.html#cb330-14" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
 <p>Each of these is in raw FASTA format</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="retrieving-multiple-sequences-in-r.html#cb330-1" aria-hidden="true" tabindex="-1"></a>seq1</span></code></pre></div>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="retrieving-multiple-sequences-in-r.html#cb331-1" aria-hidden="true" tabindex="-1"></a>seq1</span></code></pre></div>
 <pre><code>## [1] &quot;&gt;sp|P06747.1|PHOSP_RABVP RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1\nMSKIFVNPSAIRAGLADLEMAEETVDLINRNIEDNQAHLQGEPIEVDNLPEDMGRLHLDDGKSPNPGEMA\nKVGEGKYREDFQMDEGEDPSLLFQSYLDNVGVQIVRQIRSGERFLKIWSQTVEEIISYVAVNFPNPPGKS\nSEDKSTQTTGRELKKETTPTPSQRESQSSKARMAAQTASGPPALEWSATNEEDDLSVEAEIAHQIAESFS\nKKYKFPSRSSGILLYNFEQLKMNLDDIVKEAKNVPGVTRLARDGSKLPLRCVLGWVALANSKKFQLLVES\nNKLSKIMQDDLNRYTSC\n\n&quot;</code></pre>
 <p>To do an analysis of these we need to clean each of these vectors using <code>fasta_cleaner()</code>.</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="retrieving-multiple-sequences-in-r.html#cb332-1" aria-hidden="true" tabindex="-1"></a>seq1 <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(seq1, <span class="at">parse =</span> T)  </span>
-<span id="cb332-2"><a href="retrieving-multiple-sequences-in-r.html#cb332-2" aria-hidden="true" tabindex="-1"></a>seq2 <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(seq2, <span class="at">parse =</span> T)  </span>
-<span id="cb332-3"><a href="retrieving-multiple-sequences-in-r.html#cb332-3" aria-hidden="true" tabindex="-1"></a>seq3 <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(seq3, <span class="at">parse =</span> T)  </span>
-<span id="cb332-4"><a href="retrieving-multiple-sequences-in-r.html#cb332-4" aria-hidden="true" tabindex="-1"></a>seq4 <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(seq4, <span class="at">parse =</span> T)  </span></code></pre></div>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="retrieving-multiple-sequences-in-r.html#cb333-1" aria-hidden="true" tabindex="-1"></a>seq1 <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(seq1, <span class="at">parse =</span> T)  </span>
+<span id="cb333-2"><a href="retrieving-multiple-sequences-in-r.html#cb333-2" aria-hidden="true" tabindex="-1"></a>seq2 <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(seq2, <span class="at">parse =</span> T)  </span>
+<span id="cb333-3"><a href="retrieving-multiple-sequences-in-r.html#cb333-3" aria-hidden="true" tabindex="-1"></a>seq3 <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(seq3, <span class="at">parse =</span> T)  </span>
+<span id="cb333-4"><a href="retrieving-multiple-sequences-in-r.html#cb333-4" aria-hidden="true" tabindex="-1"></a>seq4 <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(seq4, <span class="at">parse =</span> T)  </span></code></pre></div>
 <p>Print out the first 20 letters of the first sequence</p>
-<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="retrieving-multiple-sequences-in-r.html#cb333-1" aria-hidden="true" tabindex="-1"></a>seq1[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]                                   </span></code></pre></div>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="retrieving-multiple-sequences-in-r.html#cb334-1" aria-hidden="true" tabindex="-1"></a>seq1[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]                                   </span></code></pre></div>
 <pre><code>##  [1] &quot;M&quot; &quot;S&quot; &quot;K&quot; &quot;I&quot; &quot;F&quot; &quot;V&quot; &quot;N&quot; &quot;P&quot; &quot;S&quot; &quot;A&quot; &quot;I&quot; &quot;R&quot; &quot;A&quot; &quot;G&quot; &quot;L&quot; &quot;A&quot; &quot;D&quot; &quot;L&quot; &quot;E&quot;
 ## [20] &quot;M&quot;</code></pre>
 <p>Print out the first 20 letters of the second sequence</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="retrieving-multiple-sequences-in-r.html#cb335-1" aria-hidden="true" tabindex="-1"></a>seq2[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]                                   </span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="retrieving-multiple-sequences-in-r.html#cb336-1" aria-hidden="true" tabindex="-1"></a>seq2[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>]                                   </span></code></pre></div>
 <pre><code>##  [1] &quot;M&quot; &quot;S&quot; &quot;K&quot; &quot;D&quot; &quot;L&quot; &quot;V&quot; &quot;H&quot; &quot;P&quot; &quot;S&quot; &quot;L&quot; &quot;I&quot; &quot;R&quot; &quot;A&quot; &quot;G&quot; &quot;I&quot; &quot;V&quot; &quot;E&quot; &quot;L&quot; &quot;E&quot;
 ## [20] &quot;M&quot;</code></pre>
 <p>We have these four sequences, each cleaned and in its own vector. We can therefore do dotplots, alignments, and other analyses. Creating all these seprate vectors is a bit laborious. Luckily <code>entrez_fetch()</code> can download multiple sequences for us.</p>
 </div>
-<div id="downloading-sequences-in-bulk" class="section level2" number="18.3">
-<h2><span class="header-section-number">18.3</span> Downloading sequences in bulk</h2>
+<div id="downloading-sequences-in-bulk" class="section level2" number="19.3">
+<h2><span class="header-section-number">19.3</span> Downloading sequences in bulk</h2>
 <p>Previously we were giving <code>entrez_fetch</code> the name of just one sequence at a time by using square brackets on our <code>seqnames</code> vector, e.g. <code>seqnames[1]</code>, <code>seqnames[2]</code> etc. If don’t include square brackets, <code>entrez_fetch()</code> will download <em>all</em> of the sequences in succession and package them up into a single long, formatted string. This may take a second or two, depending on your internet connection and how busy the NCBI serverse are.</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="retrieving-multiple-sequences-in-r.html#cb337-1" aria-hidden="true" tabindex="-1"></a>seq_1_2_3_4 <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>, </span>
-<span id="cb337-2"><a href="retrieving-multiple-sequences-in-r.html#cb337-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> seqnames, </span>
-<span id="cb337-3"><a href="retrieving-multiple-sequences-in-r.html#cb337-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="retrieving-multiple-sequences-in-r.html#cb338-1" aria-hidden="true" tabindex="-1"></a>seq_1_2_3_4 <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>, </span>
+<span id="cb338-2"><a href="retrieving-multiple-sequences-in-r.html#cb338-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> seqnames, </span>
+<span id="cb338-3"><a href="retrieving-multiple-sequences-in-r.html#cb338-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
 <p>We can view what we have in a nice format using the <code>cat()</code> function.</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="retrieving-multiple-sequences-in-r.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(seq_1_2_3_4)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="retrieving-multiple-sequences-in-r.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(seq_1_2_3_4)</span></code></pre></div>
 <pre><code>## &gt;sp|P06747.1|PHOSP_RABVP RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1
 ## MSKIFVNPSAIRAGLADLEMAEETVDLINRNIEDNQAHLQGEPIEVDNLPEDMGRLHLDDGKSPNPGEMA
 ## KVGEGKYREDFQMDEGEDPSLLFQSYLDNVGVQIVRQIRSGERFLKIWSQTVEEIISYVAVNFPNPPGKS
@@ -528,11 +540,11 @@ Multiple Alignment and Phylogenetic trees
 ## KFPSKSSGIFLWNFEQLKMNLDDIVQVARGVPGISQIVERGGKLPLRCMLGYVGLETSKRFRSLVNQDKL
 ## CKLMQEDLNAYSVSSNN</code></pre>
 <p>This is a good way to store FASTA files, but we can’t work with them in this format - they need to be in vectors. To give us FASTA data in a usable form the <code>compbio4all</code> package has a function called <code>entrez_fetch_list()</code>, which is a <strong>wrapper</strong> for <code>entrez_fetch()</code> which returns each sequence in its own separate slot in a list.</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="retrieving-multiple-sequences-in-r.html#cb340-1" aria-hidden="true" tabindex="-1"></a>seq_1_2_3_4 <span class="ot">&lt;-</span> <span class="fu">entrez_fetch_list</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>, </span>
-<span id="cb340-2"><a href="retrieving-multiple-sequences-in-r.html#cb340-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> seqnames, </span>
-<span id="cb340-3"><a href="retrieving-multiple-sequences-in-r.html#cb340-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="retrieving-multiple-sequences-in-r.html#cb341-1" aria-hidden="true" tabindex="-1"></a>seq_1_2_3_4 <span class="ot">&lt;-</span> <span class="fu">entrez_fetch_list</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>, </span>
+<span id="cb341-2"><a href="retrieving-multiple-sequences-in-r.html#cb341-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> seqnames, </span>
+<span id="cb341-3"><a href="retrieving-multiple-sequences-in-r.html#cb341-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
 <p>Let’s look at the output</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="retrieving-multiple-sequences-in-r.html#cb341-1" aria-hidden="true" tabindex="-1"></a>seq_1_2_3_4</span></code></pre></div>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="retrieving-multiple-sequences-in-r.html#cb342-1" aria-hidden="true" tabindex="-1"></a>seq_1_2_3_4</span></code></pre></div>
 <pre><code>## $P06747
 ## [1] &quot;&gt;sp|P06747.1|PHOSP_RABVP RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1\nMSKIFVNPSAIRAGLADLEMAEETVDLINRNIEDNQAHLQGEPIEVDNLPEDMGRLHLDDGKSPNPGEMA\nKVGEGKYREDFQMDEGEDPSLLFQSYLDNVGVQIVRQIRSGERFLKIWSQTVEEIISYVAVNFPNPPGKS\nSEDKSTQTTGRELKKETTPTPSQRESQSSKARMAAQTASGPPALEWSATNEEDDLSVEAEIAHQIAESFS\nKKYKFPSRSSGILLYNFEQLKMNLDDIVKEAKNVPGVTRLARDGSKLPLRCVLGWVALANSKKFQLLVES\nNKLSKIMQDDLNRYTSC\n\n&quot;
 ## 
@@ -546,25 +558,25 @@ Multiple Alignment and Phylogenetic trees
 ## [1] &quot;&gt;sp|Q5VKP1.1|PHOSP_WCBV RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1\nMSKSLIHPSDLRAGLADIEMADETVDLVYKNLSEGQAHLQGEPFDIKDLPEGVSKLQISDNVRSDTSPNE\nYSDEDDEEGEDEYEEVYDPVSAFQDFLDETGSYLISKLKKGEKIKKTWSEVSRVIYSYVMSNFPPRPPKP\nTTKDIAVQADLKKPNEIQKISEHKSKSEPSPREPVVEMHKHATLENPEDDEGALESEIAHQVAESYSKKY\nKFPSKSSGIFLWNFEQLKMNLDDIVQVARGVPGISQIVERGGKLPLRCMLGYVGLETSKRFRSLVNQDKL\nCKLMQEDLNAYSVSSNN\n\n&quot;</code></pre>
 <p>Note that before each sequence is its name, preceded by a dollar sign, e.g. <code>$P06747</code>.</p>
 <p>This is the name of each element of our list. We can confirm that we have a list using <code>is.list()</code>.</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="retrieving-multiple-sequences-in-r.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.list</span>(seq_1_2_3_4)</span></code></pre></div>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="retrieving-multiple-sequences-in-r.html#cb344-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.list</span>(seq_1_2_3_4)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>The size of the list is the number of elements it contains, not the amount of data in each element. There are 4 sequences, so 4 elements, so length = 4.</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="retrieving-multiple-sequences-in-r.html#cb345-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(seq_1_2_3_4)</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="retrieving-multiple-sequences-in-r.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(seq_1_2_3_4)</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>We can access each element of the list by name, like this:</p>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="retrieving-multiple-sequences-in-r.html#cb347-1" aria-hidden="true" tabindex="-1"></a>seq_1_2_3_4<span class="sc">$</span>P06747</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="retrieving-multiple-sequences-in-r.html#cb348-1" aria-hidden="true" tabindex="-1"></a>seq_1_2_3_4<span class="sc">$</span>P06747</span></code></pre></div>
 <pre><code>## [1] &quot;&gt;sp|P06747.1|PHOSP_RABVP RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1\nMSKIFVNPSAIRAGLADLEMAEETVDLINRNIEDNQAHLQGEPIEVDNLPEDMGRLHLDDGKSPNPGEMA\nKVGEGKYREDFQMDEGEDPSLLFQSYLDNVGVQIVRQIRSGERFLKIWSQTVEEIISYVAVNFPNPPGKS\nSEDKSTQTTGRELKKETTPTPSQRESQSSKARMAAQTASGPPALEWSATNEEDDLSVEAEIAHQIAESFS\nKKYKFPSRSSGILLYNFEQLKMNLDDIVKEAKNVPGVTRLARDGSKLPLRCVLGWVALANSKKFQLLVES\nNKLSKIMQDDLNRYTSC\n\n&quot;</code></pre>
 <p>We can also access it by its index number, like this, using <strong>double-bracket notation.</strong></p>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="retrieving-multiple-sequences-in-r.html#cb349-1" aria-hidden="true" tabindex="-1"></a>seq_1_2_3_4[[<span class="dv">1</span>]] <span class="co">#NOTE: double brackets</span></span></code></pre></div>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="retrieving-multiple-sequences-in-r.html#cb350-1" aria-hidden="true" tabindex="-1"></a>seq_1_2_3_4[[<span class="dv">1</span>]] <span class="co">#NOTE: double brackets</span></span></code></pre></div>
 <pre><code>## [1] &quot;&gt;sp|P06747.1|PHOSP_RABVP RecName: Full=Phosphoprotein; Short=Protein P; AltName: Full=Protein M1\nMSKIFVNPSAIRAGLADLEMAEETVDLINRNIEDNQAHLQGEPIEVDNLPEDMGRLHLDDGKSPNPGEMA\nKVGEGKYREDFQMDEGEDPSLLFQSYLDNVGVQIVRQIRSGERFLKIWSQTVEEIISYVAVNFPNPPGKS\nSEDKSTQTTGRELKKETTPTPSQRESQSSKARMAAQTASGPPALEWSATNEEDDLSVEAEIAHQIAESFS\nKKYKFPSRSSGILLYNFEQLKMNLDDIVKEAKNVPGVTRLARDGSKLPLRCVLGWVALANSKKFQLLVES\nNKLSKIMQDDLNRYTSC\n\n&quot;</code></pre>
 <p>Each element of the list is a vector. We can check this using <code>is.vector()</code> like this</p>
-<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="retrieving-multiple-sequences-in-r.html#cb351-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(seq_1_2_3_4<span class="sc">$</span>P06747)</span></code></pre></div>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="retrieving-multiple-sequences-in-r.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(seq_1_2_3_4<span class="sc">$</span>P06747)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>or using double brackets like this</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="retrieving-multiple-sequences-in-r.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(seq_1_2_3_4[[<span class="dv">1</span>]])</span></code></pre></div>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="retrieving-multiple-sequences-in-r.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(seq_1_2_3_4[[<span class="dv">1</span>]])</span></code></pre></div>
 <p>Its character data, which we can confirm with <code>class()</code></p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="retrieving-multiple-sequences-in-r.html#cb354-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(seq_1_2_3_4<span class="sc">$</span>P06747) <span class="co"># dollar sign notation</span></span>
-<span id="cb354-2"><a href="retrieving-multiple-sequences-in-r.html#cb354-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(seq_1_2_3_4[[<span class="dv">1</span>]])   <span class="co"># double-bracket notation</span></span></code></pre></div>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="retrieving-multiple-sequences-in-r.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(seq_1_2_3_4<span class="sc">$</span>P06747) <span class="co"># dollar sign notation</span></span>
+<span id="cb355-2"><a href="retrieving-multiple-sequences-in-r.html#cb355-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(seq_1_2_3_4[[<span class="dv">1</span>]])   <span class="co"># double-bracket notation</span></span></code></pre></div>
 <!-- Once you have retrieved the sequences using `entrez_fetch()`, you can then use the function write.fasta() from the SeqinR package to write the sequences to a FASTA-format file. As its arguments (inputs), the write.fasta() function takes the list variable containing the sequences, and a vector containing the names of the sequences, and the name that you want to give to the FASTA-format file. For example: -->
 <!-- TODO: make this a data object in package -->
 <!-- TODO: where should students write this to? -->
