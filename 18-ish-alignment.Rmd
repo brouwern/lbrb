@@ -1,20 +1,4 @@
----
-title: "Aligments and matrices"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Aligments and matrices}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+# Aligments and matrices
 
 ```{r  eval = T}
 library(compbio4all)

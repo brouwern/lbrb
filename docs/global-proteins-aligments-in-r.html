@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 18 Global proteins aligments in R | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Chapter 19 Global proteins aligments in R | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 18 Global proteins aligments in R | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Chapter 19 Global proteins aligments in R | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 18 Global proteins aligments in R | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Chapter 19 Global proteins aligments in R | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -53,6 +53,7 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/tabwid-1.0.0/tabwid.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -139,210 +140,220 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface to version 2.0</a></li>
 <li class="chapter" data-level="1" data-path="test-shiny-app.html"><a href="test-shiny-app.html"><i class="fa fa-check"></i><b>1</b> Test shiny app</a></li>
-<li class="chapter" data-level="2" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html"><i class="fa fa-check"></i><b>2</b> How to review this book</a>
+<li class="chapter" data-level="2" data-path="test-shiny-app-1.html"><a href="test-shiny-app-1.html"><i class="fa fa-check"></i><b>2</b> Test shiny app</a></li>
+<li class="chapter" data-level="3" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html"><i class="fa fa-check"></i><b>3</b> How to review this book</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#file-format"><i class="fa fa-check"></i><b>2.1</b> File format</a></li>
-<li class="chapter" data-level="2.2" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#what-can-you-do"><i class="fa fa-check"></i><b>2.2</b> What can you do?</a></li>
-<li class="chapter" data-level="2.3" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#adding-comments"><i class="fa fa-check"></i><b>2.3</b> Adding comments</a>
+<li class="chapter" data-level="3.1" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#file-format"><i class="fa fa-check"></i><b>3.1</b> File format</a></li>
+<li class="chapter" data-level="3.2" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#what-can-you-do"><i class="fa fa-check"></i><b>3.2</b> What can you do?</a></li>
+<li class="chapter" data-level="3.3" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#adding-comments"><i class="fa fa-check"></i><b>3.3</b> Adding comments</a>
 <ul>
-<li class="chapter" data-level="2.3.1" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#html-tagged-comments"><i class="fa fa-check"></i><b>2.3.1</b> HTML-tagged comments</a></li>
-<li class="chapter" data-level="2.3.2" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#code-chunk-comments"><i class="fa fa-check"></i><b>2.3.2</b> Code chunk comments</a></li>
-<li class="chapter" data-level="2.3.3" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#keys-to-exercise"><i class="fa fa-check"></i><b>2.3.3</b> Keys to exercise</a></li>
-<li class="chapter" data-level="2.3.4" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#problem---fix-this-code"><i class="fa fa-check"></i><b>2.3.4</b> Problem - fix this code</a></li>
+<li class="chapter" data-level="3.3.1" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#html-tagged-comments"><i class="fa fa-check"></i><b>3.3.1</b> HTML-tagged comments</a></li>
+<li class="chapter" data-level="3.3.2" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#code-chunk-comments"><i class="fa fa-check"></i><b>3.3.2</b> Code chunk comments</a></li>
+<li class="chapter" data-level="3.3.3" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#keys-to-exercise"><i class="fa fa-check"></i><b>3.3.3</b> Keys to exercise</a></li>
+<li class="chapter" data-level="3.3.4" data-path="how-to-review-this-book.html"><a href="how-to-review-this-book.html#problem---fix-this-code"><i class="fa fa-check"></i><b>3.3.4</b> Problem - fix this code</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="downloading-r.html"><a href="downloading-r.html"><i class="fa fa-check"></i><b>3</b> Downloading R</a>
+<li class="chapter" data-level="4" data-path="downloading-r.html"><a href="downloading-r.html"><i class="fa fa-check"></i><b>4</b> Downloading R</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="downloading-r.html"><a href="downloading-r.html#preface"><i class="fa fa-check"></i><b>3.1</b> Preface</a></li>
-<li class="chapter" data-level="3.2" data-path="downloading-r.html"><a href="downloading-r.html#introduction-to-r"><i class="fa fa-check"></i><b>3.2</b> Introduction to R</a></li>
-<li class="chapter" data-level="3.3" data-path="downloading-r.html"><a href="downloading-r.html#installing-r"><i class="fa fa-check"></i><b>3.3</b> Installing R</a>
+<li class="chapter" data-level="4.1" data-path="downloading-r.html"><a href="downloading-r.html#preface"><i class="fa fa-check"></i><b>4.1</b> Preface</a></li>
+<li class="chapter" data-level="4.2" data-path="downloading-r.html"><a href="downloading-r.html#introduction-to-r"><i class="fa fa-check"></i><b>4.2</b> Introduction to R</a></li>
+<li class="chapter" data-level="4.3" data-path="downloading-r.html"><a href="downloading-r.html#installing-r"><i class="fa fa-check"></i><b>4.3</b> Installing R</a>
 <ul>
-<li class="chapter" data-level="3.3.1" data-path="downloading-r.html"><a href="downloading-r.html#installing-r-on-a-windows-pc"><i class="fa fa-check"></i><b>3.3.1</b> Installing <em>R</em> on a Windows PC</a></li>
-<li class="chapter" data-level="3.3.2" data-path="downloading-r.html"><a href="downloading-r.html#how-to-install-r-on-non-windows-computers-eg.-macintosh-or-linux-computers"><i class="fa fa-check"></i><b>3.3.2</b> How to install <em>R</em> on non-Windows computers (eg. Macintosh or Linux computers)</a></li>
+<li class="chapter" data-level="4.3.1" data-path="downloading-r.html"><a href="downloading-r.html#installing-r-on-a-windows-pc"><i class="fa fa-check"></i><b>4.3.1</b> Installing <em>R</em> on a Windows PC</a></li>
+<li class="chapter" data-level="4.3.2" data-path="downloading-r.html"><a href="downloading-r.html#how-to-install-r-on-non-windows-computers-eg.-macintosh-or-linux-computers"><i class="fa fa-check"></i><b>4.3.2</b> How to install <em>R</em> on non-Windows computers (eg. Macintosh or Linux computers)</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="downloading-r.html"><a href="downloading-r.html#starting-r"><i class="fa fa-check"></i><b>3.4</b> Starting <em>R</em></a></li>
+<li class="chapter" data-level="4.4" data-path="downloading-r.html"><a href="downloading-r.html#starting-r"><i class="fa fa-check"></i><b>4.4</b> Starting <em>R</em></a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html"><i class="fa fa-check"></i><b>4</b> Installing the RStudio IDE</a>
+<li class="chapter" data-level="5" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html"><i class="fa fa-check"></i><b>5</b> Installing the RStudio IDE</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>4.1</b> Getting to know RStudio</a></li>
-<li class="chapter" data-level="4.2" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html#rstudio-versus-rstudio-cloud"><i class="fa fa-check"></i><b>4.2</b> RStudio versus RStudio Cloud</a></li>
+<li class="chapter" data-level="5.1" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>5.1</b> Getting to know RStudio</a></li>
+<li class="chapter" data-level="5.2" data-path="installing-the-rstudio-ide.html"><a href="installing-the-rstudio-ide.html#rstudio-versus-rstudio-cloud"><i class="fa fa-check"></i><b>5.2</b> RStudio versus RStudio Cloud</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>5</b> Installing <em>R</em> packages</a>
+<li class="chapter" data-level="6" data-path="installing-r-packages.html"><a href="installing-r-packages.html"><i class="fa fa-check"></i><b>6</b> Installing <em>R</em> packages</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>5.1</b> Downloading packages with the RStudio IDE</a></li>
-<li class="chapter" data-level="5.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>5.2</b> Downloading packages with the function <code>install.packages()</code></a></li>
-<li class="chapter" data-level="5.3" data-path="installing-r-packages.html"><a href="installing-r-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>5.3</b> Using packages after they are downloaded</a></li>
+<li class="chapter" data-level="6.1" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>6.1</b> Downloading packages with the RStudio IDE</a></li>
+<li class="chapter" data-level="6.2" data-path="installing-r-packages.html"><a href="installing-r-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>6.2</b> Downloading packages with the function <code>install.packages()</code></a></li>
+<li class="chapter" data-level="6.3" data-path="installing-r-packages.html"><a href="installing-r-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>6.3</b> Using packages after they are downloaded</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>6</b> Installing Bioconductor</a>
+<li class="chapter" data-level="7" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>7</b> Installing Bioconductor</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>6.1</b> Bioconductor</a></li>
-<li class="chapter" data-level="6.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>6.2</b> Installing BiocManager</a></li>
-<li class="chapter" data-level="6.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#the-ins-and-outs-of-package-installation"><i class="fa fa-check"></i><b>6.3</b> The ins and outs of package installation</a>
+<li class="chapter" data-level="7.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>7.1</b> Bioconductor</a></li>
+<li class="chapter" data-level="7.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>7.2</b> Installing BiocManager</a></li>
+<li class="chapter" data-level="7.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#the-ins-and-outs-of-package-installation"><i class="fa fa-check"></i><b>7.3</b> The ins and outs of package installation</a>
 <ul>
-<li class="chapter" data-level="6.3.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#updating-other-packages-when-downloading-a-package"><i class="fa fa-check"></i><b>6.3.1</b> Updating other packages when downloading a package</a></li>
-<li class="chapter" data-level="6.3.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#packages-from-source"><i class="fa fa-check"></i><b>6.3.2</b> Packages “from source”</a></li>
-<li class="chapter" data-level="6.3.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#more-on-angry-red-text"><i class="fa fa-check"></i><b>6.3.3</b> More on angry red text</a></li>
+<li class="chapter" data-level="7.3.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#updating-other-packages-when-downloading-a-package"><i class="fa fa-check"></i><b>7.3.1</b> Updating other packages when downloading a package</a></li>
+<li class="chapter" data-level="7.3.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#packages-from-source"><i class="fa fa-check"></i><b>7.3.2</b> Packages “from source”</a></li>
+<li class="chapter" data-level="7.3.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#more-on-angry-red-text"><i class="fa fa-check"></i><b>7.3.3</b> More on angry red text</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#actually-loading-a-package"><i class="fa fa-check"></i><b>6.4</b> Actually loading a package</a></li>
+<li class="chapter" data-level="7.4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#actually-loading-a-package"><i class="fa fa-check"></i><b>7.4</b> Actually loading a package</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html"><i class="fa fa-check"></i><b>7</b> A Brief introduction to R</a>
+<li class="chapter" data-level="8" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html"><i class="fa fa-check"></i><b>8</b> A Brief introduction to R</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vocabulary"><i class="fa fa-check"></i><b>7.1</b> Vocabulary</a></li>
-<li class="chapter" data-level="7.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions"><i class="fa fa-check"></i><b>7.2</b> R functions</a></li>
-<li class="chapter" data-level="7.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#interacting-with-r"><i class="fa fa-check"></i><b>7.3</b> Interacting with R</a></li>
-<li class="chapter" data-level="7.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#variables-in-r"><i class="fa fa-check"></i><b>7.4</b> Variables in R</a>
+<li class="chapter" data-level="8.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vocabulary"><i class="fa fa-check"></i><b>8.1</b> Vocabulary</a></li>
+<li class="chapter" data-level="8.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#r-functions"><i class="fa fa-check"></i><b>8.2</b> R functions</a></li>
+<li class="chapter" data-level="8.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#interacting-with-r"><i class="fa fa-check"></i><b>8.3</b> Interacting with R</a></li>
+<li class="chapter" data-level="8.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#variables-in-r"><i class="fa fa-check"></i><b>8.4</b> Variables in R</a>
 <ul>
-<li class="chapter" data-level="7.4.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>7.4.1</b> Vectors</a></li>
-<li class="chapter" data-level="7.4.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vector-indexing"><i class="fa fa-check"></i><b>7.4.2</b> Vector indexing</a></li>
-<li class="chapter" data-level="7.4.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#character-vectors"><i class="fa fa-check"></i><b>7.4.3</b> Character vectors</a></li>
-<li class="chapter" data-level="7.4.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#lists"><i class="fa fa-check"></i><b>7.4.4</b> Lists</a></li>
-<li class="chapter" data-level="7.4.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#tables"><i class="fa fa-check"></i><b>7.4.5</b> Tables</a></li>
+<li class="chapter" data-level="8.4.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vectors"><i class="fa fa-check"></i><b>8.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="8.4.2" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#vector-indexing"><i class="fa fa-check"></i><b>8.4.2</b> Vector indexing</a></li>
+<li class="chapter" data-level="8.4.3" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#character-vectors"><i class="fa fa-check"></i><b>8.4.3</b> Character vectors</a></li>
+<li class="chapter" data-level="8.4.4" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#lists"><i class="fa fa-check"></i><b>8.4.4</b> Lists</a></li>
+<li class="chapter" data-level="8.4.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#tables"><i class="fa fa-check"></i><b>8.4.5</b> Tables</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#arguments"><i class="fa fa-check"></i><b>7.5</b> Arguments</a></li>
-<li class="chapter" data-level="7.6" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#help-files-with-help-and"><i class="fa fa-check"></i><b>7.6</b> Help files with <code>help()</code> and <code>?</code></a></li>
-<li class="chapter" data-level="7.7" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#searching-for-functions-with-help.search-and-rsitesearch"><i class="fa fa-check"></i><b>7.7</b> Searching for functions with <code>help.search()</code> and <code>RSiteSearch()</code></a></li>
-<li class="chapter" data-level="7.8" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#more-on-functions"><i class="fa fa-check"></i><b>7.8</b> More on functions</a>
+<li class="chapter" data-level="8.5" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#arguments"><i class="fa fa-check"></i><b>8.5</b> Arguments</a></li>
+<li class="chapter" data-level="8.6" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#help-files-with-help-and"><i class="fa fa-check"></i><b>8.6</b> Help files with <code>help()</code> and <code>?</code></a></li>
+<li class="chapter" data-level="8.7" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#searching-for-functions-with-help.search-and-rsitesearch"><i class="fa fa-check"></i><b>8.7</b> Searching for functions with <code>help.search()</code> and <code>RSiteSearch()</code></a></li>
+<li class="chapter" data-level="8.8" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#more-on-functions"><i class="fa fa-check"></i><b>8.8</b> More on functions</a>
 <ul>
-<li class="chapter" data-level="7.8.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#writing-your-own-functions"><i class="fa fa-check"></i><b>7.8.1</b> Writing your own functions</a></li>
+<li class="chapter" data-level="8.8.1" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#writing-your-own-functions"><i class="fa fa-check"></i><b>8.8.1</b> Writing your own functions</a></li>
 </ul></li>
-<li class="chapter" data-level="7.9" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#quiting-r"><i class="fa fa-check"></i><b>7.9</b> Quiting R</a></li>
-<li class="chapter" data-level="7.10" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>7.10</b> Links and Further Reading</a></li>
+<li class="chapter" data-level="8.9" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#quiting-r"><i class="fa fa-check"></i><b>8.9</b> Quiting R</a></li>
+<li class="chapter" data-level="8.10" data-path="a-brief-introduction-to-r.html"><a href="a-brief-introduction-to-r.html#links-and-further-reading"><i class="fa fa-check"></i><b>8.10</b> Links and Further Reading</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html"><i class="fa fa-check"></i><b>8</b> DNA descriptive statics - Part 1</a>
+<li class="chapter" data-level="9" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html"><i class="fa fa-check"></i><b>9</b> DNA descriptive statics - Part 1</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#preface-1"><i class="fa fa-check"></i><b>8.1</b> Preface</a></li>
-<li class="chapter" data-level="8.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#writing-todo"><i class="fa fa-check"></i><b>8.2</b> Writing TODO:</a></li>
-<li class="chapter" data-level="8.3" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#introduction"><i class="fa fa-check"></i><b>8.3</b> Introduction</a></li>
-<li class="chapter" data-level="8.4" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#vocabulary-1"><i class="fa fa-check"></i><b>8.4</b> Vocabulary</a></li>
-<li class="chapter" data-level="8.5" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#functions"><i class="fa fa-check"></i><b>8.5</b> Functions</a></li>
-<li class="chapter" data-level="8.6" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#preliminaries"><i class="fa fa-check"></i><b>8.6</b> Preliminaries</a></li>
-<li class="chapter" data-level="8.7" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#converting-dna-from-fasta-format"><i class="fa fa-check"></i><b>8.7</b> Converting DNA from FASTA format</a></li>
-<li class="chapter" data-level="8.8" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#length-of-a-dna-sequence"><i class="fa fa-check"></i><b>8.8</b> Length of a DNA sequence</a>
+<li class="chapter" data-level="9.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#preface-1"><i class="fa fa-check"></i><b>9.1</b> Preface</a></li>
+<li class="chapter" data-level="9.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#writing-todo"><i class="fa fa-check"></i><b>9.2</b> Writing TODO:</a></li>
+<li class="chapter" data-level="9.3" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#introduction"><i class="fa fa-check"></i><b>9.3</b> Introduction</a></li>
+<li class="chapter" data-level="9.4" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#vocabulary-1"><i class="fa fa-check"></i><b>9.4</b> Vocabulary</a></li>
+<li class="chapter" data-level="9.5" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#functions"><i class="fa fa-check"></i><b>9.5</b> Functions</a></li>
+<li class="chapter" data-level="9.6" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#preliminaries"><i class="fa fa-check"></i><b>9.6</b> Preliminaries</a></li>
+<li class="chapter" data-level="9.7" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#converting-dna-from-fasta-format"><i class="fa fa-check"></i><b>9.7</b> Converting DNA from FASTA format</a></li>
+<li class="chapter" data-level="9.8" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#length-of-a-dna-sequence"><i class="fa fa-check"></i><b>9.8</b> Length of a DNA sequence</a>
 <ul>
-<li class="chapter" data-level="8.8.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#base-composition-of-a-dna-sequence"><i class="fa fa-check"></i><b>8.8.1</b> Base composition of a DNA sequence</a></li>
-<li class="chapter" data-level="8.8.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#gc-content-of-dna"><i class="fa fa-check"></i><b>8.8.2</b> GC Content of DNA</a></li>
-<li class="chapter" data-level="8.8.3" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#dna-words"><i class="fa fa-check"></i><b>8.8.3</b> DNA words</a></li>
-<li class="chapter" data-level="8.8.4" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#summary"><i class="fa fa-check"></i><b>8.8.4</b> Summary</a></li>
+<li class="chapter" data-level="9.8.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#base-composition-of-a-dna-sequence"><i class="fa fa-check"></i><b>9.8.1</b> Base composition of a DNA sequence</a></li>
+<li class="chapter" data-level="9.8.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#gc-content-of-dna"><i class="fa fa-check"></i><b>9.8.2</b> GC Content of DNA</a></li>
+<li class="chapter" data-level="9.8.3" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#dna-words"><i class="fa fa-check"></i><b>9.8.3</b> DNA words</a></li>
+<li class="chapter" data-level="9.8.4" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#summary"><i class="fa fa-check"></i><b>9.8.4</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="8.9" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#acknowledgements"><i class="fa fa-check"></i><b>8.9</b> Acknowledgements</a>
+<li class="chapter" data-level="9.9" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#acknowledgements"><i class="fa fa-check"></i><b>9.9</b> Acknowledgements</a>
 <ul>
-<li class="chapter" data-level="8.9.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#license"><i class="fa fa-check"></i><b>8.9.1</b> License</a></li>
-<li class="chapter" data-level="8.9.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#exercises"><i class="fa fa-check"></i><b>8.9.2</b> Exercises</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html"><i class="fa fa-check"></i><b>9</b> Programming in R: for loops</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#preface-2"><i class="fa fa-check"></i><b>9.1</b> Preface</a></li>
-<li class="chapter" data-level="9.2" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#vocab"><i class="fa fa-check"></i><b>9.2</b> Vocab</a></li>
-<li class="chapter" data-level="9.3" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#functions-1"><i class="fa fa-check"></i><b>9.3</b> Functions</a></li>
-<li class="chapter" data-level="9.4" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#basic-for-loops-in-in-r"><i class="fa fa-check"></i><b>9.4</b> Basic for loops in in R</a></li>
-<li class="chapter" data-level="9.5" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#challenge-complicated-vectors-of-values"><i class="fa fa-check"></i><b>9.5</b> Challenge: complicated vectors of values</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html"><i class="fa fa-check"></i><b>10</b> Mini tutorial: Vectors in R</a>
-<ul>
-<li class="chapter" data-level="10.1" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#preface-3"><i class="fa fa-check"></i><b>10.1</b> Preface</a></li>
-<li class="chapter" data-level="10.2" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#vocab-1"><i class="fa fa-check"></i><b>10.2</b> Vocab</a></li>
-</ul></li>
-<li class="chapter" data-level="11" data-path="functions-2.html"><a href="functions-2.html"><i class="fa fa-check"></i><b>11</b> Functions</a>
-<ul>
-<li class="chapter" data-level="11.1" data-path="functions-2.html"><a href="functions-2.html#vectors-in-r"><i class="fa fa-check"></i><b>11.1</b> Vectors in R</a></li>
-<li class="chapter" data-level="11.2" data-path="functions-2.html"><a href="functions-2.html#math-on-vectors"><i class="fa fa-check"></i><b>11.2</b> Math on vectors</a></li>
-<li class="chapter" data-level="11.3" data-path="functions-2.html"><a href="functions-2.html#functions-on-vectors"><i class="fa fa-check"></i><b>11.3</b> Functions on vectors</a></li>
-<li class="chapter" data-level="11.4" data-path="functions-2.html"><a href="functions-2.html#operations-with-two-vectors"><i class="fa fa-check"></i><b>11.4</b> Operations with two vectors</a></li>
-<li class="chapter" data-level="11.5" data-path="functions-2.html"><a href="functions-2.html#subsetting-vectors"><i class="fa fa-check"></i><b>11.5</b> Subsetting vectors</a></li>
-<li class="chapter" data-level="11.6" data-path="functions-2.html"><a href="functions-2.html#sequences-of-numbers"><i class="fa fa-check"></i><b>11.6</b> Sequences of numbers</a></li>
-<li class="chapter" data-level="11.7" data-path="functions-2.html"><a href="functions-2.html#vectors-can-hold-numeric-or-character-data"><i class="fa fa-check"></i><b>11.7</b> Vectors can hold numeric or character data</a></li>
-<li class="chapter" data-level="11.8" data-path="functions-2.html"><a href="functions-2.html#regular-expressions-can-modify-character-data"><i class="fa fa-check"></i><b>11.8</b> Regular expressions can modify character data</a></li>
-</ul></li>
-<li class="chapter" data-level="12" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html"><i class="fa fa-check"></i><b>12</b> Plotting vectors in base R</a>
-<ul>
-<li class="chapter" data-level="12.1" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html#preface-4"><i class="fa fa-check"></i><b>12.1</b> Preface</a></li>
-<li class="chapter" data-level="12.2" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html#plotting-numeric-data"><i class="fa fa-check"></i><b>12.2</b> Plotting numeric data</a></li>
-<li class="chapter" data-level="12.3" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html#other-plotting-packages"><i class="fa fa-check"></i><b>12.3</b> Other plotting packages</a></li>
-</ul></li>
-<li class="chapter" data-level="13" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html"><i class="fa fa-check"></i><b>13</b> Programming in R: functions</a>
-<ul>
-<li class="chapter" data-level="13.1" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#preface-5"><i class="fa fa-check"></i><b>13.1</b> Preface</a></li>
-<li class="chapter" data-level="13.2" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#vocab-2"><i class="fa fa-check"></i><b>13.2</b> Vocab</a></li>
-<li class="chapter" data-level="13.3" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#functions-3"><i class="fa fa-check"></i><b>13.3</b> Functions</a></li>
-<li class="chapter" data-level="13.4" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#functions-in-r"><i class="fa fa-check"></i><b>13.4</b> Functions in R</a></li>
-<li class="chapter" data-level="13.5" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#comments-in-r"><i class="fa fa-check"></i><b>13.5</b> Comments in R</a></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html"><i class="fa fa-check"></i><b>14</b> Downloading DNA sequences as FASTA files in R</a>
-<ul>
-<li class="chapter" data-level="14.0.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#functions-4"><i class="fa fa-check"></i><b>14.0.1</b> Functions</a></li>
-<li class="chapter" data-level="14.0.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#softwarewebsites"><i class="fa fa-check"></i><b>14.0.2</b> Software/websites</a></li>
-<li class="chapter" data-level="14.0.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#r-vocabulary"><i class="fa fa-check"></i><b>14.0.3</b> R vocabulary</a></li>
-<li class="chapter" data-level="14.0.4" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#file-types"><i class="fa fa-check"></i><b>14.0.4</b> File types</a></li>
-<li class="chapter" data-level="14.0.5" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#bioinformatics-vocabulary"><i class="fa fa-check"></i><b>14.0.5</b> Bioinformatics vocabulary</a></li>
-<li class="chapter" data-level="14.0.6" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#organisms-and-sequence-accessions"><i class="fa fa-check"></i><b>14.0.6</b> Organisms and Sequence accessions</a></li>
-<li class="chapter" data-level="14.0.7" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#preliminaries-1"><i class="fa fa-check"></i><b>14.0.7</b> Preliminaries</a></li>
-<li class="chapter" data-level="14.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#dna-sequence-statistics-part-1"><i class="fa fa-check"></i><b>14.1</b> DNA Sequence Statistics: Part 1</a>
-<ul>
-<li class="chapter" data-level="14.1.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#using-r-for-bioinformatics"><i class="fa fa-check"></i><b>14.1.1</b> Using R for Bioinformatics</a></li>
-<li class="chapter" data-level="14.1.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#r-packages-for-bioinformatics-bioconductor-and-seqinr"><i class="fa fa-check"></i><b>14.1.2</b> R packages for bioinformatics: Bioconductor and SeqinR</a></li>
-<li class="chapter" data-level="14.1.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#fasta-file-format"><i class="fa fa-check"></i><b>14.1.3</b> FASTA file format</a></li>
-<li class="chapter" data-level="14.1.4" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#the-ncbi-sequence-database"><i class="fa fa-check"></i><b>14.1.4</b> The NCBI sequence database</a></li>
-<li class="chapter" data-level="14.1.5" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#retrieving-genome-sequence-data-using-rentrez"><i class="fa fa-check"></i><b>14.1.5</b> Retrieving genome sequence data using rentrez</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#optional-saving-fasta-files"><i class="fa fa-check"></i><b>14.2</b> OPTIONAL: Saving FASTA files</a></li>
-<li class="chapter" data-level="14.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#next-steps"><i class="fa fa-check"></i><b>14.3</b> Next steps</a></li>
-</ul></li>
-<li class="chapter" data-level="15" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html"><i class="fa fa-check"></i><b>15</b> Downloading DNA sequences as FASTA files in R</a>
-<ul>
-<li class="chapter" data-level="15.1" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#preliminaries-2"><i class="fa fa-check"></i><b>15.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="15.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#convert-fasta-sequence-to-an-r-variable"><i class="fa fa-check"></i><b>15.2</b> Convert FASTA sequence to an R variable</a>
-<ul>
-<li class="chapter" data-level="15.2.1" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#removing-unwanted-characters"><i class="fa fa-check"></i><b>15.2.1</b> Removing unwanted characters</a></li>
-<li class="chapter" data-level="15.2.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#spliting-unbroken-strings-in-character-vectors"><i class="fa fa-check"></i><b>15.2.2</b> Spliting unbroken strings in character vectors</a></li>
+<li class="chapter" data-level="9.9.1" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#license"><i class="fa fa-check"></i><b>9.9.1</b> License</a></li>
+<li class="chapter" data-level="9.9.2" data-path="dna-descriptive-statics-part-1.html"><a href="dna-descriptive-statics-part-1.html#exercises"><i class="fa fa-check"></i><b>9.9.2</b> Exercises</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html"><i class="fa fa-check"></i><b>16</b> Downloading protein sequences in <em>R</em></a>
+<li class="chapter" data-level="10" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html"><i class="fa fa-check"></i><b>10</b> Programming in R: for loops</a>
 <ul>
-<li class="chapter" data-level="16.1" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#preliminaries-3"><i class="fa fa-check"></i><b>16.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="16.2" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#retrieving-a-uniprot-protein-sequence-using-rentrez"><i class="fa fa-check"></i><b>16.2</b> Retrieving a UniProt protein sequence using rentrez</a></li>
+<li class="chapter" data-level="10.1" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#preface-2"><i class="fa fa-check"></i><b>10.1</b> Preface</a></li>
+<li class="chapter" data-level="10.2" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#vocab"><i class="fa fa-check"></i><b>10.2</b> Vocab</a></li>
+<li class="chapter" data-level="10.3" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#functions-1"><i class="fa fa-check"></i><b>10.3</b> Functions</a></li>
+<li class="chapter" data-level="10.4" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#basic-for-loops-in-in-r"><i class="fa fa-check"></i><b>10.4</b> Basic for loops in in R</a></li>
+<li class="chapter" data-level="10.5" data-path="programming-in-r-for-loops.html"><a href="programming-in-r-for-loops.html#challenge-complicated-vectors-of-values"><i class="fa fa-check"></i><b>10.5</b> Challenge: complicated vectors of values</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html"><i class="fa fa-check"></i><b>17</b> Sequence dotplots in <em>R</em></a>
+<li class="chapter" data-level="11" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html"><i class="fa fa-check"></i><b>11</b> Mini tutorial: Vectors in R</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#preliminaries-4"><i class="fa fa-check"></i><b>17.1</b> Preliminaries</a>
-<ul>
-<li class="chapter" data-level="17.1.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#download-sequences"><i class="fa fa-check"></i><b>17.1.1</b> Download sequences</a></li>
+<li class="chapter" data-level="11.1" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#preface-3"><i class="fa fa-check"></i><b>11.1</b> Preface</a></li>
+<li class="chapter" data-level="11.2" data-path="mini-tutorial-vectors-in-r.html"><a href="mini-tutorial-vectors-in-r.html#vocab-1"><i class="fa fa-check"></i><b>11.2</b> Vocab</a></li>
 </ul></li>
-<li class="chapter" data-level="17.2" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualzing-two-identical-sequences"><i class="fa fa-check"></i><b>17.2</b> Visualzing two identical sequences</a></li>
-<li class="chapter" data-level="17.3" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualizing-repeats"><i class="fa fa-check"></i><b>17.3</b> Visualizing repeats</a></li>
-<li class="chapter" data-level="17.4" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#inversions"><i class="fa fa-check"></i><b>17.4</b> Inversions</a></li>
-<li class="chapter" data-level="17.5" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#translocations"><i class="fa fa-check"></i><b>17.5</b> Translocations</a></li>
-<li class="chapter" data-level="17.6" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#random-sequence"><i class="fa fa-check"></i><b>17.6</b> Random sequence</a></li>
-<li class="chapter" data-level="17.7" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#comparing-two-real-sequences-using-a-dotplot"><i class="fa fa-check"></i><b>17.7</b> Comparing two real sequences using a dotplot</a></li>
-</ul></li>
-<li class="chapter" data-level="18" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html"><i class="fa fa-check"></i><b>18</b> Global proteins aligments in <em>R</em></a>
+<li class="chapter" data-level="12" data-path="functions-2.html"><a href="functions-2.html"><i class="fa fa-check"></i><b>12</b> Functions</a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#preliminaries-5"><i class="fa fa-check"></i><b>18.1</b> Preliminaries</a>
-<ul>
-<li class="chapter" data-level="18.1.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#download-sequences-1"><i class="fa fa-check"></i><b>18.1.1</b> Download sequences</a></li>
+<li class="chapter" data-level="12.1" data-path="functions-2.html"><a href="functions-2.html#vectors-in-r"><i class="fa fa-check"></i><b>12.1</b> Vectors in R</a></li>
+<li class="chapter" data-level="12.2" data-path="functions-2.html"><a href="functions-2.html#math-on-vectors"><i class="fa fa-check"></i><b>12.2</b> Math on vectors</a></li>
+<li class="chapter" data-level="12.3" data-path="functions-2.html"><a href="functions-2.html#functions-on-vectors"><i class="fa fa-check"></i><b>12.3</b> Functions on vectors</a></li>
+<li class="chapter" data-level="12.4" data-path="functions-2.html"><a href="functions-2.html#operations-with-two-vectors"><i class="fa fa-check"></i><b>12.4</b> Operations with two vectors</a></li>
+<li class="chapter" data-level="12.5" data-path="functions-2.html"><a href="functions-2.html#subsetting-vectors"><i class="fa fa-check"></i><b>12.5</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="12.6" data-path="functions-2.html"><a href="functions-2.html#sequences-of-numbers"><i class="fa fa-check"></i><b>12.6</b> Sequences of numbers</a></li>
+<li class="chapter" data-level="12.7" data-path="functions-2.html"><a href="functions-2.html#vectors-can-hold-numeric-or-character-data"><i class="fa fa-check"></i><b>12.7</b> Vectors can hold numeric or character data</a></li>
+<li class="chapter" data-level="12.8" data-path="functions-2.html"><a href="functions-2.html#regular-expressions-can-modify-character-data"><i class="fa fa-check"></i><b>12.8</b> Regular expressions can modify character data</a></li>
 </ul></li>
-<li class="chapter" data-level="18.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-dna-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>18.2</b> Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm</a></li>
-<li class="chapter" data-level="18.3" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-protein-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>18.3</b> Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm</a>
+<li class="chapter" data-level="13" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html"><i class="fa fa-check"></i><b>13</b> Plotting vectors in base R</a>
 <ul>
-<li class="chapter" data-level="18.3.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#protein-score-matrices"><i class="fa fa-check"></i><b>18.3.1</b> Protein score matrices</a></li>
-<li class="chapter" data-level="18.3.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#example-protein-alignment"><i class="fa fa-check"></i><b>18.3.2</b> Example protein alignment</a></li>
+<li class="chapter" data-level="13.1" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html#preface-4"><i class="fa fa-check"></i><b>13.1</b> Preface</a></li>
+<li class="chapter" data-level="13.2" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html#plotting-numeric-data"><i class="fa fa-check"></i><b>13.2</b> Plotting numeric data</a></li>
+<li class="chapter" data-level="13.3" data-path="plotting-vectors-in-base-r.html"><a href="plotting-vectors-in-base-r.html#other-plotting-packages"><i class="fa fa-check"></i><b>13.3</b> Other plotting packages</a></li>
 </ul></li>
-<li class="chapter" data-level="18.4" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#aligning-uniprot-sequences"><i class="fa fa-check"></i><b>18.4</b> Aligning UniProt sequences</a></li>
-<li class="chapter" data-level="18.5" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#viewing-a-long-pairwise-alignment"><i class="fa fa-check"></i><b>18.5</b> Viewing a long pairwise alignment</a></li>
-</ul></li>
-<li class="chapter" data-level="19" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html"><i class="fa fa-check"></i><b>19</b> Local protein aligments in <em>R</em></a>
+<li class="chapter" data-level="14" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html"><i class="fa fa-check"></i><b>14</b> Programming in R: functions</a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#preliminaries-6"><i class="fa fa-check"></i><b>19.1</b> Preliminaries</a>
-<ul>
-<li class="chapter" data-level="19.1.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#download-sequences-2"><i class="fa fa-check"></i><b>19.1.1</b> Download sequences</a></li>
+<li class="chapter" data-level="14.1" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#preface-5"><i class="fa fa-check"></i><b>14.1</b> Preface</a></li>
+<li class="chapter" data-level="14.2" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#vocab-2"><i class="fa fa-check"></i><b>14.2</b> Vocab</a></li>
+<li class="chapter" data-level="14.3" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#functions-3"><i class="fa fa-check"></i><b>14.3</b> Functions</a></li>
+<li class="chapter" data-level="14.4" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#functions-in-r"><i class="fa fa-check"></i><b>14.4</b> Functions in R</a></li>
+<li class="chapter" data-level="14.5" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#comments-in-r"><i class="fa fa-check"></i><b>14.5</b> Comments in R</a></li>
 </ul></li>
-<li class="chapter" data-level="19.2" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm"><i class="fa fa-check"></i><b>19.2</b> Pairwise local alignment of protein sequences using the Smith-Waterman algorithm</a></li>
-</ul></li>
-<li class="chapter" data-level="20" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html"><i class="fa fa-check"></i><b>20</b> Retrieving multiple sequences in R</a>
+<li class="chapter" data-level="15" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html"><i class="fa fa-check"></i><b>15</b> Downloading DNA sequences as FASTA files in R</a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#prelminaries"><i class="fa fa-check"></i><b>20.1</b> Prelminaries</a></li>
-<li class="chapter" data-level="20.2" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#retrieving-a-set-of-sequences-from-uniprot"><i class="fa fa-check"></i><b>20.2</b> Retrieving a set of sequences from UniProt</a></li>
-<li class="chapter" data-level="20.3" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#downloading-sequences-in-bulk"><i class="fa fa-check"></i><b>20.3</b> Downloading sequences in bulk</a></li>
+<li class="chapter" data-level="15.0.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#functions-4"><i class="fa fa-check"></i><b>15.0.1</b> Functions</a></li>
+<li class="chapter" data-level="15.0.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#softwarewebsites"><i class="fa fa-check"></i><b>15.0.2</b> Software/websites</a></li>
+<li class="chapter" data-level="15.0.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#r-vocabulary"><i class="fa fa-check"></i><b>15.0.3</b> R vocabulary</a></li>
+<li class="chapter" data-level="15.0.4" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#file-types"><i class="fa fa-check"></i><b>15.0.4</b> File types</a></li>
+<li class="chapter" data-level="15.0.5" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#bioinformatics-vocabulary"><i class="fa fa-check"></i><b>15.0.5</b> Bioinformatics vocabulary</a></li>
+<li class="chapter" data-level="15.0.6" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#organisms-and-sequence-accessions"><i class="fa fa-check"></i><b>15.0.6</b> Organisms and Sequence accessions</a></li>
+<li class="chapter" data-level="15.0.7" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#preliminaries-1"><i class="fa fa-check"></i><b>15.0.7</b> Preliminaries</a></li>
+<li class="chapter" data-level="15.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#dna-sequence-statistics-part-1"><i class="fa fa-check"></i><b>15.1</b> DNA Sequence Statistics: Part 1</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#using-r-for-bioinformatics"><i class="fa fa-check"></i><b>15.1.1</b> Using R for Bioinformatics</a></li>
+<li class="chapter" data-level="15.1.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#r-packages-for-bioinformatics-bioconductor-and-seqinr"><i class="fa fa-check"></i><b>15.1.2</b> R packages for bioinformatics: Bioconductor and SeqinR</a></li>
+<li class="chapter" data-level="15.1.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#fasta-file-format"><i class="fa fa-check"></i><b>15.1.3</b> FASTA file format</a></li>
+<li class="chapter" data-level="15.1.4" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#the-ncbi-sequence-database"><i class="fa fa-check"></i><b>15.1.4</b> The NCBI sequence database</a></li>
+<li class="chapter" data-level="15.1.5" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#retrieving-genome-sequence-data-using-rentrez"><i class="fa fa-check"></i><b>15.1.5</b> Retrieving genome sequence data using rentrez</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#optional-saving-fasta-files"><i class="fa fa-check"></i><b>15.2</b> OPTIONAL: Saving FASTA files</a></li>
+<li class="chapter" data-level="15.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#next-steps"><i class="fa fa-check"></i><b>15.3</b> Next steps</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html"><i class="fa fa-check"></i><b>16</b> Downloading DNA sequences as FASTA files in R</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#preliminaries-2"><i class="fa fa-check"></i><b>16.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="16.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#convert-fasta-sequence-to-an-r-variable"><i class="fa fa-check"></i><b>16.2</b> Convert FASTA sequence to an R variable</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#removing-unwanted-characters"><i class="fa fa-check"></i><b>16.2.1</b> Removing unwanted characters</a></li>
+<li class="chapter" data-level="16.2.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#spliting-unbroken-strings-in-character-vectors"><i class="fa fa-check"></i><b>16.2.2</b> Spliting unbroken strings in character vectors</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html"><i class="fa fa-check"></i><b>17</b> Downloading protein sequences in <em>R</em></a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#preliminaries-3"><i class="fa fa-check"></i><b>17.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="17.2" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#retrieving-a-uniprot-protein-sequence-using-rentrez"><i class="fa fa-check"></i><b>17.2</b> Retrieving a UniProt protein sequence using rentrez</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html"><i class="fa fa-check"></i><b>18</b> Sequence dotplots in <em>R</em></a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#preliminaries-4"><i class="fa fa-check"></i><b>18.1</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#download-sequences"><i class="fa fa-check"></i><b>18.1.1</b> Download sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualzing-two-identical-sequences"><i class="fa fa-check"></i><b>18.2</b> Visualzing two identical sequences</a></li>
+<li class="chapter" data-level="18.3" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualizing-repeats"><i class="fa fa-check"></i><b>18.3</b> Visualizing repeats</a></li>
+<li class="chapter" data-level="18.4" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#inversions"><i class="fa fa-check"></i><b>18.4</b> Inversions</a></li>
+<li class="chapter" data-level="18.5" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#translocations"><i class="fa fa-check"></i><b>18.5</b> Translocations</a></li>
+<li class="chapter" data-level="18.6" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#random-sequence"><i class="fa fa-check"></i><b>18.6</b> Random sequence</a></li>
+<li class="chapter" data-level="18.7" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#comparing-two-real-sequences-using-a-dotplot"><i class="fa fa-check"></i><b>18.7</b> Comparing two real sequences using a dotplot</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html"><i class="fa fa-check"></i><b>19</b> Global proteins aligments in <em>R</em></a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#preliminaries-5"><i class="fa fa-check"></i><b>19.1</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="19.1.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#download-sequences-1"><i class="fa fa-check"></i><b>19.1.1</b> Download sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-dna-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>19.2</b> Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm</a></li>
+<li class="chapter" data-level="19.3" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-protein-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>19.3</b> Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm</a>
+<ul>
+<li class="chapter" data-level="19.3.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#protein-score-matrices"><i class="fa fa-check"></i><b>19.3.1</b> Protein score matrices</a></li>
+<li class="chapter" data-level="19.3.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#example-protein-alignment"><i class="fa fa-check"></i><b>19.3.2</b> Example protein alignment</a></li>
+</ul></li>
+<li class="chapter" data-level="19.4" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#aligning-uniprot-sequences"><i class="fa fa-check"></i><b>19.4</b> Aligning UniProt sequences</a></li>
+<li class="chapter" data-level="19.5" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#viewing-a-long-pairwise-alignment"><i class="fa fa-check"></i><b>19.5</b> Viewing a long pairwise alignment</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html"><i class="fa fa-check"></i><b>20</b> Local protein aligments in <em>R</em></a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#preliminaries-6"><i class="fa fa-check"></i><b>20.1</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="20.1.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#download-sequences-2"><i class="fa fa-check"></i><b>20.1.1</b> Download sequences</a></li>
+</ul></li>
+<li class="chapter" data-level="20.2" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm"><i class="fa fa-check"></i><b>20.2</b> Pairwise local alignment of protein sequences using the Smith-Waterman algorithm</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html"><i class="fa fa-check"></i><b>21</b> Retrieving multiple sequences in R</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#prelminaries"><i class="fa fa-check"></i><b>21.1</b> Prelminaries</a></li>
+<li class="chapter" data-level="21.2" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#retrieving-a-set-of-sequences-from-uniprot"><i class="fa fa-check"></i><b>21.2</b> Retrieving a set of sequences from UniProt</a></li>
+<li class="chapter" data-level="21.3" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#downloading-sequences-in-bulk"><i class="fa fa-check"></i><b>21.3</b> Downloading sequences in bulk</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="aligments-and-matrices.html"><a href="aligments-and-matrices.html"><i class="fa fa-check"></i><b>22</b> Aligments and matrices</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="aligments-and-matrices.html"><a href="aligments-and-matrices.html#introduction-1"><i class="fa fa-check"></i><b>22.1</b> Introduction</a></li>
+<li class="chapter" data-level="22.2" data-path="aligments-and-matrices.html"><a href="aligments-and-matrices.html#preliminaries-7"><i class="fa fa-check"></i><b>22.2</b> Preliminaries</a></li>
+<li class="chapter" data-level="22.3" data-path="aligments-and-matrices.html"><a href="aligments-and-matrices.html#the-blosum-matrix"><i class="fa fa-check"></i><b>22.3</b> The BLOSUM matrix</a></li>
+<li class="chapter" data-level="22.4" data-path="aligments-and-matrices.html"><a href="aligments-and-matrices.html#diagonal-of-a-matrix"><i class="fa fa-check"></i><b>22.4</b> Diagonal of a matrix</a></li>
+<li class="chapter" data-level="22.5" data-path="aligments-and-matrices.html"><a href="aligments-and-matrices.html#alignment-by-eye-in-r"><i class="fa fa-check"></i><b>22.5</b> Alignment by eye in R</a></li>
+<li class="chapter" data-level="22.6" data-path="aligments-and-matrices.html"><a href="aligments-and-matrices.html#alignment-in-r"><i class="fa fa-check"></i><b>22.6</b> Alignment in R</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path=""><a href="#part-appendices"><i class="fa fa-check"></i>(PART) Appendices</a>
 <ul>
@@ -350,31 +361,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html"><i class="fa fa-check"></i>Appendix 01: Getting access to R</a>
 <ul>
-<li class="chapter" data-level="20.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-started-with-r-and-rstudio"><i class="fa fa-check"></i><b>20.4</b> Getting Started With R and RStudio</a>
+<li class="chapter" data-level="22.7" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-started-with-r-and-rstudio"><i class="fa fa-check"></i><b>22.7</b> Getting Started With R and RStudio</a>
 <ul>
-<li class="chapter" data-level="20.4.1" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#rstudio-cloud"><i class="fa fa-check"></i><b>20.4.1</b> RStudio Cloud</a></li>
-<li class="chapter" data-level="20.4.2" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-r-onto-your-own-computer"><i class="fa fa-check"></i><b>20.4.2</b> Getting R onto your own computer</a></li>
-<li class="chapter" data-level="20.4.3" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-rstudio-onto-your-computer"><i class="fa fa-check"></i><b>20.4.3</b> Getting RStudio onto your computer</a></li>
-<li class="chapter" data-level="20.4.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#keep-r-and-rstudio-current"><i class="fa fa-check"></i><b>20.4.4</b> Keep R and RStudio current</a></li>
+<li class="chapter" data-level="22.7.1" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#rstudio-cloud"><i class="fa fa-check"></i><b>22.7.1</b> RStudio Cloud</a></li>
+<li class="chapter" data-level="22.7.2" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-r-onto-your-own-computer"><i class="fa fa-check"></i><b>22.7.2</b> Getting R onto your own computer</a></li>
+<li class="chapter" data-level="22.7.3" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-rstudio-onto-your-computer"><i class="fa fa-check"></i><b>22.7.3</b> Getting RStudio onto your computer</a></li>
+<li class="chapter" data-level="22.7.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#keep-r-and-rstudio-current"><i class="fa fa-check"></i><b>22.7.4</b> Keep R and RStudio current</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html"><i class="fa fa-check"></i>Getting started with R itself (or not)</a>
 <ul>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#vocabulary-2"><i class="fa fa-check"></i>Vocabulary</a></li>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#r-commands"><i class="fa fa-check"></i>R commands</a></li>
-<li class="chapter" data-level="20.5" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#help"><i class="fa fa-check"></i><b>20.5</b> Help!</a>
+<li class="chapter" data-level="22.8" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#help"><i class="fa fa-check"></i><b>22.8</b> Help!</a>
 <ul>
-<li class="chapter" data-level="20.5.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-r"><i class="fa fa-check"></i><b>20.5.1</b> Getting “help” from R</a></li>
-<li class="chapter" data-level="20.5.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-the-internet"><i class="fa fa-check"></i><b>20.5.2</b> Getting help from the internet</a></li>
-<li class="chapter" data-level="20.5.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-online-forums"><i class="fa fa-check"></i><b>20.5.3</b> Getting help from online forums</a></li>
-<li class="chapter" data-level="20.5.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-twitter"><i class="fa fa-check"></i><b>20.5.4</b> Getting help from twitter</a></li>
+<li class="chapter" data-level="22.8.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-r"><i class="fa fa-check"></i><b>22.8.1</b> Getting “help” from R</a></li>
+<li class="chapter" data-level="22.8.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-the-internet"><i class="fa fa-check"></i><b>22.8.2</b> Getting help from the internet</a></li>
+<li class="chapter" data-level="22.8.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-online-forums"><i class="fa fa-check"></i><b>22.8.3</b> Getting help from online forums</a></li>
+<li class="chapter" data-level="22.8.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-twitter"><i class="fa fa-check"></i><b>22.8.4</b> Getting help from twitter</a></li>
 </ul></li>
-<li class="chapter" data-level="20.6" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#other-features-of-rstudio"><i class="fa fa-check"></i><b>20.6</b> Other features of RStudio</a>
+<li class="chapter" data-level="22.9" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#other-features-of-rstudio"><i class="fa fa-check"></i><b>22.9</b> Other features of RStudio</a>
 <ul>
-<li class="chapter" data-level="20.6.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#ajusting-pane-the-layout"><i class="fa fa-check"></i><b>20.6.1</b> Ajusting pane the layout</a></li>
-<li class="chapter" data-level="20.6.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#adjusting-size-of-windows"><i class="fa fa-check"></i><b>20.6.2</b> Adjusting size of windows</a></li>
+<li class="chapter" data-level="22.9.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#ajusting-pane-the-layout"><i class="fa fa-check"></i><b>22.9.1</b> Ajusting pane the layout</a></li>
+<li class="chapter" data-level="22.9.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#adjusting-size-of-windows"><i class="fa fa-check"></i><b>22.9.2</b> Adjusting size of windows</a></li>
 </ul></li>
-<li class="chapter" data-level="20.7" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>20.7</b> Practice (OPTIONAL)</a></li>
+<li class="chapter" data-level="22.10" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>22.10</b> Practice (OPTIONAL)</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
@@ -396,17 +407,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="global-proteins-aligments-in-r" class="section level1" number="18">
-<h1><span class="header-section-number">Chapter 18</span> Global proteins aligments in <em>R</em></h1>
+<div id="global-proteins-aligments-in-r" class="section level1" number="19">
+<h1><span class="header-section-number">Chapter 19</span> Global proteins aligments in <em>R</em></h1>
 <p><strong>By</strong>: Avril Coghlan.</p>
 <p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
-<div id="preliminaries-5" class="section level2" number="18.1">
-<h2><span class="header-section-number">18.1</span> Preliminaries</h2>
+<div id="preliminaries-5" class="section level2" number="19.1">
+<h2><span class="header-section-number">19.1</span> Preliminaries</h2>
 <!-- is compbio4all needed? -->
 <!-- have on gone over biodoncdutor and biostrings? -->
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="global-proteins-aligments-in-r.html#cb269-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span>
-<span id="cb269-2"><a href="global-proteins-aligments-in-r.html#cb269-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb269-3"><a href="global-proteins-aligments-in-r.html#cb269-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biostrings)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="global-proteins-aligments-in-r.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span>
+<span id="cb270-2"><a href="global-proteins-aligments-in-r.html#cb270-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb270-3"><a href="global-proteins-aligments-in-r.html#cb270-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biostrings)</span></code></pre></div>
 <pre><code>## Loading required package: BiocGenerics</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
 <pre><code>## 
@@ -444,26 +455,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## The following object is masked from &#39;package:base&#39;:
 ## 
 ##     strsplit</code></pre>
-<div id="download-sequences-1" class="section level3" number="18.1.1">
-<h3><span class="header-section-number">18.1.1</span> Download sequences</h3>
+<div id="download-sequences-1" class="section level3" number="19.1.1">
+<h3><span class="header-section-number">19.1.1</span> Download sequences</h3>
 <p>As we did in the previous lesson on dotplots, we’ll look at two sequences.</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="global-proteins-aligments-in-r.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download</span></span>
-<span id="cb285-2"><a href="global-proteins-aligments-in-r.html#cb285-2" aria-hidden="true" tabindex="-1"></a><span class="do">## sequence 1: Q9CD83</span></span>
-<span id="cb285-3"><a href="global-proteins-aligments-in-r.html#cb285-3" aria-hidden="true" tabindex="-1"></a>leprae_fasta <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>,</span>
-<span id="cb285-4"><a href="global-proteins-aligments-in-r.html#cb285-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">id =</span> <span class="st">&quot;Q9CD83&quot;</span>,</span>
-<span id="cb285-5"><a href="global-proteins-aligments-in-r.html#cb285-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span>
-<span id="cb285-6"><a href="global-proteins-aligments-in-r.html#cb285-6" aria-hidden="true" tabindex="-1"></a><span class="do">## sequence 2: OIN17619.1</span></span>
-<span id="cb285-7"><a href="global-proteins-aligments-in-r.html#cb285-7" aria-hidden="true" tabindex="-1"></a>ulcerans_fasta <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>,</span>
-<span id="cb285-8"><a href="global-proteins-aligments-in-r.html#cb285-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">id =</span> <span class="st">&quot;OIN17619.1&quot;</span>,</span>
-<span id="cb285-9"><a href="global-proteins-aligments-in-r.html#cb285-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span>
-<span id="cb285-10"><a href="global-proteins-aligments-in-r.html#cb285-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb285-11"><a href="global-proteins-aligments-in-r.html#cb285-11" aria-hidden="true" tabindex="-1"></a><span class="co"># clean</span></span>
-<span id="cb285-12"><a href="global-proteins-aligments-in-r.html#cb285-12" aria-hidden="true" tabindex="-1"></a>leprae_vector   <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(leprae_fasta)</span>
-<span id="cb285-13"><a href="global-proteins-aligments-in-r.html#cb285-13" aria-hidden="true" tabindex="-1"></a>ulcerans_vector <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(ulcerans_fasta)</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="global-proteins-aligments-in-r.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download</span></span>
+<span id="cb286-2"><a href="global-proteins-aligments-in-r.html#cb286-2" aria-hidden="true" tabindex="-1"></a><span class="do">## sequence 1: Q9CD83</span></span>
+<span id="cb286-3"><a href="global-proteins-aligments-in-r.html#cb286-3" aria-hidden="true" tabindex="-1"></a>leprae_fasta <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>,</span>
+<span id="cb286-4"><a href="global-proteins-aligments-in-r.html#cb286-4" aria-hidden="true" tabindex="-1"></a>                        <span class="at">id =</span> <span class="st">&quot;Q9CD83&quot;</span>,</span>
+<span id="cb286-5"><a href="global-proteins-aligments-in-r.html#cb286-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span>
+<span id="cb286-6"><a href="global-proteins-aligments-in-r.html#cb286-6" aria-hidden="true" tabindex="-1"></a><span class="do">## sequence 2: OIN17619.1</span></span>
+<span id="cb286-7"><a href="global-proteins-aligments-in-r.html#cb286-7" aria-hidden="true" tabindex="-1"></a>ulcerans_fasta <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;protein&quot;</span>,</span>
+<span id="cb286-8"><a href="global-proteins-aligments-in-r.html#cb286-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">id =</span> <span class="st">&quot;OIN17619.1&quot;</span>,</span>
+<span id="cb286-9"><a href="global-proteins-aligments-in-r.html#cb286-9" aria-hidden="true" tabindex="-1"></a>                         <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span>
+<span id="cb286-10"><a href="global-proteins-aligments-in-r.html#cb286-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb286-11"><a href="global-proteins-aligments-in-r.html#cb286-11" aria-hidden="true" tabindex="-1"></a><span class="co"># clean</span></span>
+<span id="cb286-12"><a href="global-proteins-aligments-in-r.html#cb286-12" aria-hidden="true" tabindex="-1"></a>leprae_vector   <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(leprae_fasta)</span>
+<span id="cb286-13"><a href="global-proteins-aligments-in-r.html#cb286-13" aria-hidden="true" tabindex="-1"></a>ulcerans_vector <span class="ot">&lt;-</span> <span class="fu">fasta_cleaner</span>(ulcerans_fasta)</span></code></pre></div>
 </div>
 </div>
-<div id="pairwise-global-alignment-of-dna-sequences-using-the-needleman-wunsch-algorithm" class="section level2" number="18.2">
-<h2><span class="header-section-number">18.2</span> Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm</h2>
+<div id="pairwise-global-alignment-of-dna-sequences-using-the-needleman-wunsch-algorithm" class="section level2" number="19.2">
+<h2><span class="header-section-number">19.2</span> Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm</h2>
 <p>If you are studying a particular pair of genes or proteins, an important question is to what extent the two sequences are similar.</p>
 <!-- Could precede this by an R exercise to calculate compositional similarity -->
 <p>To quantify similarity, it is necessary to <strong>align</strong> the two sequences, and then you can calculate a similarity score based on the alignment.</p>
@@ -490,12 +501,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can make a scoring matrix in R by using the <code>nucleotideSubstitutionMatrix()</code> function in the <code>Biostrings</code> package. <code>Biostrings</code> is part of a set of R packages for bioinformatics analysis known as <a href="www.bioconductor.org/">Bioconductor</a> (www.bioconductor.org/).</p>
 <p>The arguments (inputs) for the <code>nucleotideSubstitutionMatrix()</code> function are the score that we want to assign to a match and the score that we want to assign to a mismatch. We can also specify that we want to use only the four letters representing the four nucleotides (ie. A, C, G, T) by setting <code>baseOnly=TRUE</code>, or whether we also want to use the letters that represent <strong>ambiguous cases</strong> where we are not sure what the nucleotide is (e.g. ‘N’ = A/C/G/T; ambiguous cases occur in some sequences due to sequencing errors or ambiguities).</p>
 <p>To make a scoring matrix which assigns a score of +2 to a match and -1 to a mismatch, and store it in the variable <code>sigma</code>, we type:</p>
-<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="global-proteins-aligments-in-r.html#cb290-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make the matrix</span></span>
-<span id="cb290-2"><a href="global-proteins-aligments-in-r.html#cb290-2" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">nucleotideSubstitutionMatrix</span>(<span class="at">match =</span> <span class="dv">2</span>, </span>
-<span id="cb290-3"><a href="global-proteins-aligments-in-r.html#cb290-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">mismatch =</span> <span class="sc">-</span><span class="dv">1</span>, </span>
-<span id="cb290-4"><a href="global-proteins-aligments-in-r.html#cb290-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">baseOnly =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb290-5"><a href="global-proteins-aligments-in-r.html#cb290-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the matrix</span></span>
-<span id="cb290-6"><a href="global-proteins-aligments-in-r.html#cb290-6" aria-hidden="true" tabindex="-1"></a>sigma </span></code></pre></div>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="global-proteins-aligments-in-r.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make the matrix</span></span>
+<span id="cb291-2"><a href="global-proteins-aligments-in-r.html#cb291-2" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">nucleotideSubstitutionMatrix</span>(<span class="at">match =</span> <span class="dv">2</span>, </span>
+<span id="cb291-3"><a href="global-proteins-aligments-in-r.html#cb291-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">mismatch =</span> <span class="sc">-</span><span class="dv">1</span>, </span>
+<span id="cb291-4"><a href="global-proteins-aligments-in-r.html#cb291-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">baseOnly =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb291-5"><a href="global-proteins-aligments-in-r.html#cb291-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the matrix</span></span>
+<span id="cb291-6"><a href="global-proteins-aligments-in-r.html#cb291-6" aria-hidden="true" tabindex="-1"></a>sigma </span></code></pre></div>
 <pre><code>##    A  C  G  T
 ## A  2 -1 -1 -1
 ## C -1  2 -1 -1
@@ -515,16 +526,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You can also tell the function that you want to just have the optimal global alignment’s score by setting <code>scoreOnly = TRUE</code>, or that you want to have both the optimal global alignment and its score by setting <code>scoreOnly = FALSE</code>.</p>
 <p>For example, let’s find the score for the optimal global alignment between the sequences ‘GAATTC’ and ‘GATTA.’</p>
 <p>First, we’ll store the sequences as <strong>character vectors</strong>:</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="global-proteins-aligments-in-r.html#cb292-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="st">&quot;GAATTC&quot;</span></span>
-<span id="cb292-2"><a href="global-proteins-aligments-in-r.html#cb292-2" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="st">&quot;GATTA&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="global-proteins-aligments-in-r.html#cb293-1" aria-hidden="true" tabindex="-1"></a>s1 <span class="ot">&lt;-</span> <span class="st">&quot;GAATTC&quot;</span></span>
+<span id="cb293-2"><a href="global-proteins-aligments-in-r.html#cb293-2" aria-hidden="true" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> <span class="st">&quot;GATTA&quot;</span></span></code></pre></div>
 <p>Now we’ll align them:</p>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="global-proteins-aligments-in-r.html#cb293-1" aria-hidden="true" tabindex="-1"></a>globalAligns1s2 <span class="ot">&lt;-</span> Biostrings<span class="sc">::</span><span class="fu">pairwiseAlignment</span>(s1, s2, </span>
-<span id="cb293-2"><a href="global-proteins-aligments-in-r.html#cb293-2" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">substitutionMatrix =</span> sigma, </span>
-<span id="cb293-3"><a href="global-proteins-aligments-in-r.html#cb293-3" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">gapOpening =</span> <span class="sc">-</span><span class="dv">2</span>,</span>
-<span id="cb293-4"><a href="global-proteins-aligments-in-r.html#cb293-4" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">gapExtension =</span> <span class="sc">-</span><span class="dv">8</span>, </span>
-<span id="cb293-5"><a href="global-proteins-aligments-in-r.html#cb293-5" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">scoreOnly =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="global-proteins-aligments-in-r.html#cb294-1" aria-hidden="true" tabindex="-1"></a>globalAligns1s2 <span class="ot">&lt;-</span> Biostrings<span class="sc">::</span><span class="fu">pairwiseAlignment</span>(s1, s2, </span>
+<span id="cb294-2"><a href="global-proteins-aligments-in-r.html#cb294-2" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">substitutionMatrix =</span> sigma, </span>
+<span id="cb294-3"><a href="global-proteins-aligments-in-r.html#cb294-3" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">gapOpening =</span> <span class="sc">-</span><span class="dv">2</span>,</span>
+<span id="cb294-4"><a href="global-proteins-aligments-in-r.html#cb294-4" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">gapExtension =</span> <span class="sc">-</span><span class="dv">8</span>, </span>
+<span id="cb294-5"><a href="global-proteins-aligments-in-r.html#cb294-5" aria-hidden="true" tabindex="-1"></a>                                                 <span class="at">scoreOnly =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>The output:</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="global-proteins-aligments-in-r.html#cb294-1" aria-hidden="true" tabindex="-1"></a>globalAligns1s2 </span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="global-proteins-aligments-in-r.html#cb295-1" aria-hidden="true" tabindex="-1"></a>globalAligns1s2 </span></code></pre></div>
 <pre><code>## Global PairwiseAlignmentsSingleSubject (1 of 1)
 ## pattern: GAATTC
 ## subject: GA-TTA
@@ -532,16 +543,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The above commands print out the optimal global alignment for the two sequences and its score.</p>
 <p><strong>Note</strong> we set <code>gapOpening</code> to be -2 and <code>gapExtension</code> to be -8, which means that the first position of a gap is assigned a score of -8 - 2= -10, and every subsequent position in a gap is given a score of -8. Here the alignment contains four matches, one mismatch, and one gap of length 1, so its score is (4<em>2)+(1</em>-1)+(1*-10) = -3.</p>
 </div>
-<div id="pairwise-global-alignment-of-protein-sequences-using-the-needleman-wunsch-algorithm" class="section level2" number="18.3">
-<h2><span class="header-section-number">18.3</span> Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm</h2>
+<div id="pairwise-global-alignment-of-protein-sequences-using-the-needleman-wunsch-algorithm" class="section level2" number="19.3">
+<h2><span class="header-section-number">19.3</span> Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm</h2>
 <p>As well as DNA alignments, it is also possible to make alignments of protein sequences. In this case it is necessary to use a scoring matrix for amino acids rather than for nucleotides.</p>
-<div id="protein-score-matrices" class="section level3" number="18.3.1">
-<h3><span class="header-section-number">18.3.1</span> Protein score matrices</h3>
+<div id="protein-score-matrices" class="section level3" number="19.3.1">
+<h3><span class="header-section-number">19.3.1</span> Protein score matrices</h3>
 <p>There are several well known scoring matrices that come with <em>R</em>, such as the <strong>BLOSUM</strong> series of matrices. Different BLOSUM matrices exist, named with different numbers. BLOSUM with high numbers are designed for comparing closely related sequences, while BLOSUM with low numbers are designed for comparing evolutionarily distantly related sequences. For example, <strong>BLOSUM62</strong> is used for <strong>less divergent alignments</strong> (alignments of sequences that differ little), and <strong>BLOSUM30</strong> is used for more divergent alignments (alignments of sequences that differ a lot).</p>
 <p>Many <em>R</em> packages come with example data sets or data files and you use the <code>data()</code> function is used to load these data files. You can use the <code>data()</code> function to load a data set of BLOSUM matrices that comes with <code>Biostrings</code></p>
 <p>To load the BLOSUM50 matrix, we type:</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="global-proteins-aligments-in-r.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BLOSUM50)</span>
-<span id="cb296-2"><a href="global-proteins-aligments-in-r.html#cb296-2" aria-hidden="true" tabindex="-1"></a>BLOSUM50 <span class="co"># Print out the data</span></span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="global-proteins-aligments-in-r.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BLOSUM50)</span>
+<span id="cb297-2"><a href="global-proteins-aligments-in-r.html#cb297-2" aria-hidden="true" tabindex="-1"></a>BLOSUM50 <span class="co"># Print out the data</span></span></code></pre></div>
 <pre><code>##    A  R  N  D  C  Q  E  G  H  I  L  K  M  F  P  S  T  W  Y  V  B  Z  X  *
 ## A  5 -2 -1 -2 -1 -1 -1  0 -2 -1 -2 -1 -1 -3 -1  1  0 -3 -2  0 -2 -1 -1 -5
 ## R -2  7 -1 -2 -4  1  0 -3  0 -4 -3  3 -2 -3 -3 -1 -1 -3 -1 -3 -1  0 -1 -5
@@ -568,27 +579,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## X -1 -1 -1 -1 -2 -1 -1 -2 -1 -1 -1 -1 -1 -2 -2 -1  0 -3 -1 -1 -1 -1 -1 -5
 ## * -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5 -5  1</code></pre>
 <p>You can get a list of the available scoring matrices that come with the Biostrings package by using the data() function, which takes as an argument the name of the package for which you want to know the data sets that come with it:</p>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="global-proteins-aligments-in-r.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package=</span><span class="st">&quot;Biostrings&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="global-proteins-aligments-in-r.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package=</span><span class="st">&quot;Biostrings&quot;</span>)</span></code></pre></div>
 <p>Another well-known series of scoring matrices are the <strong>PAM</strong> matrices developed by <a href="https://en.wikipedia.org/wiki/Margaret_Oakley_Dayhoff">Margaret Dayhoff</a> and her team. These have largely been replaced by BLOSUM but are important for historical reasons because they represent one of the first major bioinformatics, computational biology, and phyolgenetics projects ever.</p>
 </div>
-<div id="example-protein-alignment" class="section level3" number="18.3.2">
-<h3><span class="header-section-number">18.3.2</span> Example protein alignment</h3>
+<div id="example-protein-alignment" class="section level3" number="19.3.2">
+<h3><span class="header-section-number">19.3.2</span> Example protein alignment</h3>
 <p>Let’s find the optimal global alignment between the protein sequences “PAWHEAE” and “HEAGAWGHEE” using the Needleman-Wunsch algorithm using the BLOSUM50 matrix.</p>
 <p>First, load the scoring matrix <code>BLOSUM50</code> and make vectors for the sequence</p>
-<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="global-proteins-aligments-in-r.html#cb299-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matrix</span></span>
-<span id="cb299-2"><a href="global-proteins-aligments-in-r.html#cb299-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BLOSUM50)</span>
-<span id="cb299-3"><a href="global-proteins-aligments-in-r.html#cb299-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb299-4"><a href="global-proteins-aligments-in-r.html#cb299-4" aria-hidden="true" tabindex="-1"></a><span class="co"># sequences</span></span>
-<span id="cb299-5"><a href="global-proteins-aligments-in-r.html#cb299-5" aria-hidden="true" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> <span class="st">&quot;PAWHEAE&quot;</span></span>
-<span id="cb299-6"><a href="global-proteins-aligments-in-r.html#cb299-6" aria-hidden="true" tabindex="-1"></a>s4 <span class="ot">&lt;-</span> <span class="st">&quot;HEAGAWGHEE&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="global-proteins-aligments-in-r.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="co"># matrix</span></span>
+<span id="cb300-2"><a href="global-proteins-aligments-in-r.html#cb300-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(BLOSUM50)</span>
+<span id="cb300-3"><a href="global-proteins-aligments-in-r.html#cb300-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb300-4"><a href="global-proteins-aligments-in-r.html#cb300-4" aria-hidden="true" tabindex="-1"></a><span class="co"># sequences</span></span>
+<span id="cb300-5"><a href="global-proteins-aligments-in-r.html#cb300-5" aria-hidden="true" tabindex="-1"></a>s3 <span class="ot">&lt;-</span> <span class="st">&quot;PAWHEAE&quot;</span></span>
+<span id="cb300-6"><a href="global-proteins-aligments-in-r.html#cb300-6" aria-hidden="true" tabindex="-1"></a>s4 <span class="ot">&lt;-</span> <span class="st">&quot;HEAGAWGHEE&quot;</span></span></code></pre></div>
 <p>Now do the alignments.</p>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="global-proteins-aligments-in-r.html#cb300-1" aria-hidden="true" tabindex="-1"></a>globalAligns3s4 <span class="ot">&lt;-</span> <span class="fu">pairwiseAlignment</span>(s3, s4,</span>
-<span id="cb300-2"><a href="global-proteins-aligments-in-r.html#cb300-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">substitutionMatrix =</span> <span class="st">&quot;BLOSUM50&quot;</span>, </span>
-<span id="cb300-3"><a href="global-proteins-aligments-in-r.html#cb300-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">gapOpening =</span> <span class="sc">-</span><span class="dv">2</span>,</span>
-<span id="cb300-4"><a href="global-proteins-aligments-in-r.html#cb300-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">gapExtension =</span> <span class="sc">-</span><span class="dv">8</span>, </span>
-<span id="cb300-5"><a href="global-proteins-aligments-in-r.html#cb300-5" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">scoreOnly =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="global-proteins-aligments-in-r.html#cb301-1" aria-hidden="true" tabindex="-1"></a>globalAligns3s4 <span class="ot">&lt;-</span> <span class="fu">pairwiseAlignment</span>(s3, s4,</span>
+<span id="cb301-2"><a href="global-proteins-aligments-in-r.html#cb301-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">substitutionMatrix =</span> <span class="st">&quot;BLOSUM50&quot;</span>, </span>
+<span id="cb301-3"><a href="global-proteins-aligments-in-r.html#cb301-3" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">gapOpening =</span> <span class="sc">-</span><span class="dv">2</span>,</span>
+<span id="cb301-4"><a href="global-proteins-aligments-in-r.html#cb301-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">gapExtension =</span> <span class="sc">-</span><span class="dv">8</span>, </span>
+<span id="cb301-5"><a href="global-proteins-aligments-in-r.html#cb301-5" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">scoreOnly =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>Look at the results:</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="global-proteins-aligments-in-r.html#cb301-1" aria-hidden="true" tabindex="-1"></a>globalAligns3s4 <span class="co"># Print out the optimal global alignment and its score</span></span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="global-proteins-aligments-in-r.html#cb302-1" aria-hidden="true" tabindex="-1"></a>globalAligns3s4 <span class="co"># Print out the optimal global alignment and its score</span></span></code></pre></div>
 <pre><code>## Global PairwiseAlignmentsSingleSubject (1 of 1)
 ## pattern: P---AWHEAE
 ## subject: HEAGAWGHEE
@@ -596,43 +607,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We set <code>gapOpening</code> to be -2 and <code>gapExtension</code> to be -8, which means that the first position of a gap is assigned a score of -8-2=-10, and every subsequent position in a gap is given a score of -8. This means that the gap will be given a score of -10-8-8 = -26.</p>
 </div>
 </div>
-<div id="aligning-uniprot-sequences" class="section level2" number="18.4">
-<h2><span class="header-section-number">18.4</span> Aligning UniProt sequences</h2>
+<div id="aligning-uniprot-sequences" class="section level2" number="19.4">
+<h2><span class="header-section-number">19.4</span> Aligning UniProt sequences</h2>
 <p>We discussed previously how you can search for UniProt accessions and retrieve the corresponding protein sequences, either via the UniProt website or using the <code>rentrez</code> package.</p>
 <p>In the examples given above, we learned how to retrieve the sequences for the chorismate lyase proteins from <em>Mycobacterium leprae</em> (UniProt Q9CD83) and <em>Mycobacterium ulcerans</em> (UniProt A0PQ23), and read them into R, and store them as vectors lepraeseq and ulceransseq.</p>
 <p>You can align these sequences using <code>pairwiseAlignment()</code> from the Biostrings package.</p>
 <p>As its input, the <code>pairwiseAlignment()</code>function requires that the sequences be in the form of a single string (e.g. “ACGTA”), rather than as a vector of characters (e.g. a vector with the first element as “A,” the second element as “C,” etc.). Therefore, to align the <em>M. leprae</em> and <em>M. ulcerans</em> chorismate lyase proteins, we first need to convert the vectors lepraeeq and ulceransseq into strings. We can do this using the <code>paste()</code> function:</p>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="global-proteins-aligments-in-r.html#cb303-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert leprae_vector to an object lepraeseq_string</span></span>
-<span id="cb303-2"><a href="global-proteins-aligments-in-r.html#cb303-2" aria-hidden="true" tabindex="-1"></a>lepraeseq_string <span class="ot">&lt;-</span><span class="fu">paste</span>(leprae_vector,<span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)    </span>
-<span id="cb303-3"><a href="global-proteins-aligments-in-r.html#cb303-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb303-4"><a href="global-proteins-aligments-in-r.html#cb303-4" aria-hidden="true" tabindex="-1"></a><span class="co"># convert ulcerans_vector to an object ulceransseq_string</span></span>
-<span id="cb303-5"><a href="global-proteins-aligments-in-r.html#cb303-5" aria-hidden="true" tabindex="-1"></a>ulceransseq_string <span class="ot">&lt;-</span><span class="fu">paste</span>(ulcerans_vector,<span class="at">collapse =</span> <span class="st">&quot;&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="global-proteins-aligments-in-r.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert leprae_vector to an object lepraeseq_string</span></span>
+<span id="cb304-2"><a href="global-proteins-aligments-in-r.html#cb304-2" aria-hidden="true" tabindex="-1"></a>lepraeseq_string <span class="ot">&lt;-</span><span class="fu">paste</span>(leprae_vector,<span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)    </span>
+<span id="cb304-3"><a href="global-proteins-aligments-in-r.html#cb304-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb304-4"><a href="global-proteins-aligments-in-r.html#cb304-4" aria-hidden="true" tabindex="-1"></a><span class="co"># convert ulcerans_vector to an object ulceransseq_string</span></span>
+<span id="cb304-5"><a href="global-proteins-aligments-in-r.html#cb304-5" aria-hidden="true" tabindex="-1"></a>ulceransseq_string <span class="ot">&lt;-</span><span class="fu">paste</span>(ulcerans_vector,<span class="at">collapse =</span> <span class="st">&quot;&quot;</span>) </span></code></pre></div>
 <p>Furthermore, pairwiseAlignment() requires that the sequences be stored as uppercase characters. Therefore, if they are not already in uppercase, we need to use the <code>toupper()</code> function to convert <code>lepraeseq_string</code> and <code>ulceransseq_string</code> to uppercase:</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="global-proteins-aligments-in-r.html#cb304-1" aria-hidden="true" tabindex="-1"></a>lepraeseq_string   <span class="ot">&lt;-</span> <span class="fu">toupper</span>(lepraeseq_string)</span>
-<span id="cb304-2"><a href="global-proteins-aligments-in-r.html#cb304-2" aria-hidden="true" tabindex="-1"></a>ulceransseq_string <span class="ot">&lt;-</span> <span class="fu">toupper</span>(ulceransseq_string)</span></code></pre></div>
+<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="global-proteins-aligments-in-r.html#cb305-1" aria-hidden="true" tabindex="-1"></a>lepraeseq_string   <span class="ot">&lt;-</span> <span class="fu">toupper</span>(lepraeseq_string)</span>
+<span id="cb305-2"><a href="global-proteins-aligments-in-r.html#cb305-2" aria-hidden="true" tabindex="-1"></a>ulceransseq_string <span class="ot">&lt;-</span> <span class="fu">toupper</span>(ulceransseq_string)</span></code></pre></div>
 <p>Check the output</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="global-proteins-aligments-in-r.html#cb305-1" aria-hidden="true" tabindex="-1"></a>lepraeseq_string <span class="co"># Print out the content of &quot;lepraeseq_string&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="global-proteins-aligments-in-r.html#cb306-1" aria-hidden="true" tabindex="-1"></a>lepraeseq_string <span class="co"># Print out the content of &quot;lepraeseq_string&quot;</span></span></code></pre></div>
 <pre><code>## [1] &quot;MTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLLDVAPKIPELENLKIGRILQRDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPIGEIMAASRIETYKEDAQVWIGDLPCWLADYGYWDLPKRAVGRRYRIIAGGQPVIITTEYFLRSVFQDTPREELDRCQYSNDIDTRSGDRFVLHGRVFKNL&quot;</code></pre>
 <p>We can now align the the <em>M. leprae</em> and <em>M. ulcerans</em> chorismate lyase protein sequences using the <code>pairwiseAlignment()</code> function:</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="global-proteins-aligments-in-r.html#cb307-1" aria-hidden="true" tabindex="-1"></a>globalAlignLepraeUlcerans <span class="ot">&lt;-</span> Biostrings<span class="sc">::</span><span class="fu">pairwiseAlignment</span>(lepraeseq_string, </span>
-<span id="cb307-2"><a href="global-proteins-aligments-in-r.html#cb307-2" aria-hidden="true" tabindex="-1"></a>                                               ulceransseq_string,</span>
-<span id="cb307-3"><a href="global-proteins-aligments-in-r.html#cb307-3" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">substitutionMatrix =</span> BLOSUM50, </span>
-<span id="cb307-4"><a href="global-proteins-aligments-in-r.html#cb307-4" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">gapOpening =</span> <span class="sc">-</span><span class="dv">2</span>, </span>
-<span id="cb307-5"><a href="global-proteins-aligments-in-r.html#cb307-5" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">gapExtension =</span> <span class="sc">-</span><span class="dv">8</span>, </span>
-<span id="cb307-6"><a href="global-proteins-aligments-in-r.html#cb307-6" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">scoreOnly =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="global-proteins-aligments-in-r.html#cb308-1" aria-hidden="true" tabindex="-1"></a>globalAlignLepraeUlcerans <span class="ot">&lt;-</span> Biostrings<span class="sc">::</span><span class="fu">pairwiseAlignment</span>(lepraeseq_string, </span>
+<span id="cb308-2"><a href="global-proteins-aligments-in-r.html#cb308-2" aria-hidden="true" tabindex="-1"></a>                                               ulceransseq_string,</span>
+<span id="cb308-3"><a href="global-proteins-aligments-in-r.html#cb308-3" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">substitutionMatrix =</span> BLOSUM50, </span>
+<span id="cb308-4"><a href="global-proteins-aligments-in-r.html#cb308-4" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">gapOpening =</span> <span class="sc">-</span><span class="dv">2</span>, </span>
+<span id="cb308-5"><a href="global-proteins-aligments-in-r.html#cb308-5" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">gapExtension =</span> <span class="sc">-</span><span class="dv">8</span>, </span>
+<span id="cb308-6"><a href="global-proteins-aligments-in-r.html#cb308-6" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">scoreOnly =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <p>The output:</p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="global-proteins-aligments-in-r.html#cb308-1" aria-hidden="true" tabindex="-1"></a>globalAlignLepraeUlcerans <span class="co"># Print out the optimal global alignment and its score</span></span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="global-proteins-aligments-in-r.html#cb309-1" aria-hidden="true" tabindex="-1"></a>globalAlignLepraeUlcerans <span class="co"># Print out the optimal global alignment and its score</span></span></code></pre></div>
 <pre><code>## Global PairwiseAlignmentsSingleSubject (1 of 1)
 ## pattern: MT-----NR--T---LSREEIRKLDRDLRILVAT...DTPREELDRCQYSNDIDTRSGDRFVLHGRVFKNL
 ## subject: MLAVLPEKREMTECHLSDEEIRKLNRDLRILIAT...DNSREEPIRHQRS--VGT-SA-R---SGRSICT-
 ## score: 627</code></pre>
 <p>As the alignment is very long, when you type <code>globalAlignLepraeUlcerans</code>, you only see the start and the end of the alignment. Therefore, we need to have a function to print out the whole alignment (see below).</p>
 </div>
-<div id="viewing-a-long-pairwise-alignment" class="section level2" number="18.5">
-<h2><span class="header-section-number">18.5</span> Viewing a long pairwise alignment</h2>
+<div id="viewing-a-long-pairwise-alignment" class="section level2" number="19.5">
+<h2><span class="header-section-number">19.5</span> Viewing a long pairwise alignment</h2>
 <p>If you want to view a long pairwise alignment such as that between the <em>M. leprae</em> and <em>M. ulerans</em> chorismate lyase proteins, it is convenient to print out the alignment in blocks.</p>
 <p>The R function <code>printPairwiseAlignment()</code> below will do this for you:</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="global-proteins-aligments-in-r.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printPairwiseAlignment</span>(globalAlignLepraeUlcerans, <span class="dv">60</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="global-proteins-aligments-in-r.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="fu">printPairwiseAlignment</span>(globalAlignLepraeUlcerans, <span class="dv">60</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;MT-----NR--T---LSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLL 50&quot;
 ## [1] &quot;MLAVLPEKREMTECHLSDEEIRKLNRDLRILIATNGTLTRILNVLANDEIVVEIVKQQIQ 60&quot;
 ## [1] &quot; &quot;

@@ -304,7 +304,7 @@ virusaln_seqinr <- msaConvert(virusaln, type = "seqinr::alignment")
 
 Then we can print it out like this, making the alignment 60 bases wide:
 ```{r}
-print_msa(alignment = virusaln2, 
+print_msa(alignment = virusaln_seqinr, 
           chunksize = 60)
 ```
 
@@ -318,14 +318,14 @@ A powerful tool for visualizing focal parts of an alignment is `ggmsa`.  If you 
 
 `ggmsa` prints a sequence alignment out within RStudio.  Alignments can be large, so its important to select a subset of the alignment for visualzation.
 
-First, let's look at the first 20 bases of our alignment.
+First, let's look at the first 20 bases of our alignment. Note that we are using `virusaln`, NOT `virusaln_seqinr` (sorry for the back and forth between objects.)
 ```{r}
-ggmsa(virusaln, 
+ggmsa(virusaln,   # virusaln, NOT virusaln_seqinr
       start = 1, 
       end = 20) 
 ```
 
-#### OPTIONAL: file types used by `ggmsa`
+#### OPTIONAL: File types used by `ggmsa`
 
 The `ggmsa` packages currently only works with certain types of alignment output.  We can see what these are with `available_msa()`.
 
@@ -342,10 +342,10 @@ The `msa` packages has a function `msaConvert()` which can change formats betwee
 
 ### OPTIONAL: Print MSA to PDF
 
-The `msa` package has a fabulous function, `msaPrettyPrint()` for rendering an MSA to PDF.  It can take a little bit to run, and in order to vioew the PDF you need to locate the output.  
+The `msa` package has a fabulous function, `msaPrettyPrint()` for rendering an MSA to PDF.  It can take a little bit to run, and in order to vioew the PDF you need to locate the output.  (Again, we'll use `virusaln`, not `virusaln_seqinr`).
 
 ```{r, eval = F}
-msaPrettyPrint(virusaln, 
+msaPrettyPrint(virusaln,     # virusaln, NOT virusaln_seqinr
                file = "my_msa.pdf",
                askForOverwrite = F)
 ```
@@ -359,12 +359,12 @@ getwd()
 You can change where R is saving things using the RStudio menu by clicking on Session -> Set Working Directory -> Choose directory...
 
 
-
 ## Discarding very poorly conserved regions from an alignment
 
 
 <!-- By Coglan -->
-It is often a good idea to discard very poorly conserved regions from a mulitple alignment before building a phylogenetic tree, as the very poorly conserved regions are likely to be regions that are either not homologous between the sequences being considered (and so do not add any phylogenetic signal), or are homologous but are so diverged that they are very difficult to align accurately (and so may add noise to the phylogenetic analysis, and decrease the accuracy of the inferred tree).
+
+It is often a good idea to discard very **poorly conserved** regions from a multiple sequence alignment before visualizing it or building a phylogenetic tree, as the very poorly conserved regions are likely to be regions that are either **non-homologous** between the sequences being considered (and so do not have any phylogenetic signal), or are homologous but are so **diverged** that they are very difficult to align accurately (and so may add noise to the phylogenetic analysis, and decrease the accuracy of the inferred tree).
 <!-- By Coglan -->
 
 <!-- By Coglan -->
@@ -372,27 +372,34 @@ To discard very poorly conserved regions from a multiple alignment, you can use 
 <!-- By Coglan -->
 
 <!-- By Coglan -->
-The function `clean_alignment()` takes three arguments (inputs): the input alignment; the minimum percent of letters in an alignment column that must be non-gap characters for the column to be kept; and the minimum percent of pairs of letters in an alignment column that must be identical for the column to be kept.
+The function `clean_alignment()` takes three arguments (inputs): 
+
+1. the input alignment; 
+1. minpcnongap: the minimum percent of letters in an alignment column that must be non-gap characters for the column to be kept; and 
+1. minpcid: the minimum percent of pairs of letters in an alignment column that must be identical for the column to be kept.
+<!-- By Coglan -->
+
+<!-- By Coglan, with some formatting by me -->
+For example, if we have a single column (**locus**) with letters “T”, “A”, “T”, “-” (in four sequences), then 75% of the letters are non-gap characters; and the pairs of letters between the three non-gap sequences are
+
+* 1 versus 2: “T,A”, 
+* 1 versus 3: “T,T”, 
+* 2 versus 3: “A,T”, 
+
+Therefore 33% of the pairs of letters are identical (**PID**) for that position in the alignment.
 <!-- By Coglan -->
 
 <!-- By Coglan -->
-For example, if we have a column with letters “T”, “A”, “T”, “-” (in four sequences), then 75% of the letters are non-gap characters; and the pairs of letters are “T,A”, “T,T”, and “A,T”, and 33% of the pairs of letters are identical.
+If you look at the multiple alignment for the virus phosphoprotein sequences (which we printed out using function `print_msa()`, see above), we can see that the last few columns are poorly aligned (contain many gaps and mismatches), and probably add noise to the phylogenetic analysis.
 <!-- By Coglan -->
 
-<!-- By Coglan -->
-We can use `clean_alignment()` to discard the very poorly aligned columns from a multiple alignment.
-<!-- By Coglan -->
-
-<!-- By Coglan -->
-For example, if you look at the multiple alignment for the virus phosphoprotein sequences (which we printed out using function print_msa(), see above), we can see that the last few columns are poorly aligned (contain many gaps and mismatches), and probably add noise to the phylogenetic analysis.
-<!-- By Coglan -->
-
-<!-- By Coglan -->
-Therefore, to filter out the well conserved columns of the alignment, and discard the very poorly conserved columns, we can type:
-<!-- By Coglan -->
+Let's cleave off anything with less than 30% non-gap and less than 30% PID.
+NOTE: we're bac to using `virusaln_seqinr`, not `virusaln`.
 
 ```{r, eval = F}
-cleanedvirusaln <- clean_alignment(x, 30, 30)
+virusaln_seqinr_clean <- clean_alignment(alignment = virusaln_seqinr,  # virusaln_seqinr
+                                   minpcnongap = 30, 
+                                   minpcid = 30)
 ```
 
 <!-- By Coglan -->
@@ -402,7 +409,8 @@ In this case, we required that at least 30% of letters in a column are not gap c
 We can print out the filtered alignment by typing:
 
 ```{r, eval = F}
-print_msa(x)
+print_msa(virusaln_seqinr)
+print_msa(virusaln_seqinr_clean)
 ```
 
 <!-- By Coglan -->

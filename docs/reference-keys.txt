@@ -1,4 +1,5 @@
 test-shiny-app
+test-shiny-app-1
 how-to-review-this-book
 file-format
 what-can-you-do
@@ -142,6 +143,13 @@ retrieving-multiple-sequences-in-r
 prelminaries
 retrieving-a-set-of-sequences-from-uniprot
 downloading-sequences-in-bulk
+aligments-and-matrices
+introduction-1
+preliminaries-7
+the-blosum-matrix
+diagonal-of-a-matrix
+alignment-by-eye-in-r
+alignment-in-r
 getting-started-with-r-and-rstudio
 rstudio-cloud
 getting-r-onto-your-own-computer
