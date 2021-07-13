@@ -117,7 +117,7 @@
 
 \title{A Little Book of R for Bioinformatics 2.0}
 \author{Avirl Coghlan, with contributions by Nathan L. Brouwer}
-\date{2021-07-12}
+\date{2021-07-13}
 
 \begin{document}
 \maketitle
@@ -174,6 +174,17 @@ Nathan Brouwer, June 2021
 \item
   Added use or \texttt{rentrez} for querying NCBI databases
 \end{enumerate}
+
+\hypertarget{test-shiny-app}{%
+\chapter{Test shiny app}\label{test-shiny-app}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_app}\NormalTok{(}\AttributeTok{url =} \StringTok{"https://wrightaprilm.shinyapps.io/treesiftr\_app/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\href{https://wrightaprilm.shinyapps.io/treesiftr_app/}{\includegraphics{lbrb_files/figure-latex/unnamed-chunk-2-1.pdf}}
 
 \hypertarget{how-to-review-this-book}{%
 \chapter{How to review this book}\label{how-to-review-this-book}}
@@ -1373,7 +1384,7 @@ Once you have table you can make a basic plot
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-70-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-71-1.pdf}
 
 We can sort by the number of words using the sort() command
 
@@ -1403,7 +1414,7 @@ Let's save over the original object
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-73-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-74-1.pdf}
 
 R will automatically try to optimize the appearance of the labels on the graph so you may not see all of them; no worries.
 
@@ -1423,7 +1434,7 @@ Make a piechart with pie()
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-75-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-76-1.pdf}
 
 \hypertarget{summary}{%
 \subsection{Summary}\label{summary}}
@@ -2156,7 +2167,7 @@ Not plot with the base R \texttt{plot()} function:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-116-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-117-1.pdf}
 Note that there is a comma between the two vector names. When building plots from dataframes you usually see a tilde (\textasciitilde), but when you have two vectors you can use just a comma.
 
 Also note the order of the vectors within the \texttt{plot()} command and which axes they appear on. The first vector is \texttt{numeric.vect1} and it appears on the horizontal x-axis.
@@ -2172,7 +2183,7 @@ If you want to label the axes on the plot, you can do this by giving the \texttt
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-117-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-118-1.pdf}
 
 We can store character data in vectors so if we want we could do this to set up our labels:
 
@@ -2193,7 +2204,7 @@ Then use bracket notation to call the labels from the vector
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-119-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-120-1.pdf}
 
 If we want we can use a tilde to make our plot like this:
 
@@ -2203,7 +2214,7 @@ If we want we can use a tilde to make our plot like this:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-120-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-121-1.pdf}
 
 Note that now, \texttt{numeric.vect2} is on the left and \texttt{numeric.vect1} is on the right. This flexibility can be tricky to keep track of.
 
@@ -2223,7 +2234,7 @@ Then we plot it like this, referencing the dataframe \texttt{df} via the \texttt
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-122-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-123-1.pdf}
 
 \hypertarget{other-plotting-packages}{%
 \section{Other plotting packages}\label{other-plotting-packages}}
@@ -2311,7 +2322,7 @@ You can view the code that makes up a function by typing its name (without any p
 ##   output <- (20 + (x*x)) 
 ##   return(output)
 ##   }
-## <bytecode: 0x7f86e215a240>
+## <bytecode: 0x7f8f4237e5c0>
 \end{verbatim}
 
 \hypertarget{comments-in-r}{%
@@ -3062,7 +3073,7 @@ To help build our intuition about dotplots we'll first look at some artificial e
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-166-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-167-1.pdf}
 
 What we get is a perfect diagonal line.
 
@@ -3080,7 +3091,7 @@ Now lets' make a sequence where the alphabet gets repeats twice
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-167-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-168-1.pdf}
 
 Note the diagonal lines.
 
@@ -3095,7 +3106,7 @@ Now 3 repeats
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-168-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-169-1.pdf}
 
 Here's another example of repeats.
 
@@ -3117,7 +3128,7 @@ Make the dotplot:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-170-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-171-1.pdf}
 
 \hypertarget{inversions}{%
 \section{Inversions}\label{inversions}}
@@ -3133,7 +3144,7 @@ See if you can figure out what's going on here.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-171-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-172-1.pdf}
 
 \hypertarget{translocations}{%
 \section{Translocations}\label{translocations}}
@@ -3153,7 +3164,7 @@ See if you can figure out what's going on here.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-172-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-173-1.pdf}
 
 \hypertarget{random-sequence}{%
 \section{Random sequence}\label{random-sequence}}
@@ -3169,7 +3180,7 @@ See if you can figure out what's going on here.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-173-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-174-1.pdf}
 
 \hypertarget{comparing-two-real-sequences-using-a-dotplot}{%
 \section{Comparing two real sequences using a dotplot}\label{comparing-two-real-sequences-using-a-dotplot}}
@@ -3191,7 +3202,7 @@ First, let's look at a dotplot created using only a single sequence. You'd never
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-174-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-175-1.pdf}
 
 These two sequences are identical, so we have a very distinct diagonal line. But there's also other
 
@@ -3204,7 +3215,7 @@ Now we'll make a real dotplot of the \href{https://en.wikipedia.org/wiki/Chorism
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-175-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-176-1.pdf}
 
 In the dotplot above, the \emph{M. leprae} sequence is plotted along the x-axis (horizontal axis), and the \emph{M. ulcerans} sequence is plotted along the y-axis (vertical axis). The dotplot displays a dot at points where there is an identical amino acid in the two sequences.
 
@@ -4575,7 +4586,7 @@ Some functions in R can be executed within nothing in the parentheses.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Mon Jul 12 16:04:56 2021"
+## [1] "Tue Jul 13 11:58:31 2021"
 \end{verbatim}
 
 \textbf{Exponents}

@@ -264,7 +264,7 @@ file.show("shrooms.txt")
 
 A new tab might pop up in RStudio showing you the sequence; just close it.
 
-Now some more cleaning.  We need to read in the .txt file we just made and make a particular type of R object for our alginment program.  Luckily this is easy:
+Now some more cleaning.  We need to read in the .txt file we just made and make a particular type of R object for our alignment program.  Luckily this is easy:
 
 ```{r}
 shrooms_stringset <- readAAStringSet("shrooms.txt")

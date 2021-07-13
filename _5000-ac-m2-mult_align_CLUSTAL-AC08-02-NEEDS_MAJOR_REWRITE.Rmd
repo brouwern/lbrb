@@ -3,44 +3,56 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Multiple alignment with Clustal
+# Multiple alignment in R
 
 <!-- use ggplotmsa? -->
 <!-- https://cran.r-project.org/web/packages/ggmsa/vignettes/ggmsa.html -->
 
 
-**By**: Avril Coghlan.  
-Multiple Alignment and Phylogenetic trees
-https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html
-
-
-**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+**By**: Nathan Brouwer, with some content adapted Coghlan (2011) [Multiple Alignment and Phylogenetic trees](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html) and under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  Functions print_msa() and clean_alignment() adapted from ([Coglan 2011](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/#)).
 
 
 ## Preliminaries 
 
 <!-- all needed? -->
 
-```{r }
-library(compbio4all)
+### Packages 
 
-library(msa)
-library(rentrez)
-library(seqinr)
-library(ape)
-library(Biostrings)
+We'll be using the package `ggmsa` for the first time and you will have to install it using `install.packages("ggmsa")`.  You may be asked to re-restart R more then once during the installation process.
+
+```{r , warning = F, message = F}
+# new packages
+## Only install once
+# install.packages("ggmsa")
+
+# other packages
+library(compbio4all)
+library(Biostrings)  # convert FASTA to AAStringSet
+library(msa)         # multiple sequence alignment
+
+library(ggmsa)       # visualize MSA
+
+
+# library(rentrez)
+# library(seqinr)
+# library(ape)
+
+
+
+
 ```
 
-### Data
+### Functions
 
+The following key functions are used in this lesson
 
-<!-- TODO:  add entrez_fetch_list to combio4all -->
-<!-- Add output to combio4all -->
+* fasta_cleaner()
+* entrez_fetch_list()
+* print_msa()
+* clean_alignment()
+
 
 ```{r}
-## package
-
-
 # function
 
 ## this function is called in this lesson
@@ -66,185 +78,337 @@ entrez_fetch_list <- function(db, id, rettype, ...){
 ```
 
 
+([Coglan 2011](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/#))
 ```{r}
+print_msa <- function(alignment, chunksize=60)
+{
+  # this function requires the Biostrings package
+  require("Biostrings")
+  # find the number of sequences in the alignment
+  numseqs <- alignment$nb
+  # find the length of the alignment
+  alignmentlen <- nchar(alignment$seq[[1]])
+  starts <- seq(1, alignmentlen, by=chunksize)
+  n <- length(starts)
+  # get the alignment for each of the sequences:
+  aln <- vector()
+  lettersprinted <- vector()
+  for (j in 1:numseqs)
+  {
+    alignmentj <- alignment$seq[[j]]
+    aln[j] <- alignmentj
+    lettersprinted[j] <- 0
+  }
+  # print out the alignment in blocks of 'chunksize' columns:
+  for (i in 1:n) { # for each of n chunks
+    for (j in 1:numseqs)
+    {
+      alnj <- aln[j]
+      chunkseqjaln <- substring(alnj, starts[i], starts[i]+chunksize-1)
+      chunkseqjaln <- toupper(chunkseqjaln)
+      # Find out how many gaps there are in chunkseqjaln:
+      gapsj <- countPattern("-",chunkseqjaln) # countPattern() is from Biostrings package
+      # Calculate how many residues of the first sequence we have printed so far in the alignment:
+      lettersprinted[j] <- lettersprinted[j] + chunksize - gapsj
+      print(paste(chunkseqjaln,lettersprinted[j]))
+    }
+    print(paste(' '))
+  }
+}
+
+```
+
+([Coglan 2011](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/#))
+```{r}
+clean_alignment <- function(alignment, minpcnongap, minpcid)
+{
+  # make a copy of the alignment to store the new alignment in:
+  newalignment <- alignment
+  # find the number of sequences in the alignment
+  numseqs <- alignment$nb
+  # empty the alignment in "newalignment")
+  for (j in 1:numseqs) { newalignment$seq[[j]] <- "" }
+  # find the length of the alignment
+  alignmentlen <- nchar(alignment$seq[[1]])
+  # look at each column of the alignment in turn:
+  for (i in 1:alignmentlen)
+  {
+    # see what percent of the letters in this column are non-gaps:
+    nongap <- 0
+    for (j in 1:numseqs)
+    {
+      seqj <- alignment$seq[[j]]
+      letterij <- substr(seqj,i,i)
+      if (letterij != "-") { nongap <- nongap + 1}
+    }
+    pcnongap <- (nongap*100)/numseqs
+    # Only consider this column if at least minpcnongap % of the letters are not gaps:
+    if (pcnongap >= minpcnongap)
+    {
+      # see what percent of the pairs of letters in this column are identical:
+      numpairs <- 0; numid <- 0
+      # find the letters in all of the sequences in this column:
+      for (j in 1:(numseqs-1))
+      {
+        seqj <- alignment$seq[[j]]
+        letterij <- substr(seqj,i,i)
+        for (k in (j+1):numseqs)
+        {
+          seqk <- alignment$seq[[k]]
+          letterkj <- substr(seqk,i,i)
+          if (letterij != "-" && letterkj != "-")
+          {
+            numpairs <- numpairs + 1
+            if (letterij == letterkj) { numid <- numid + 1}
+          }
+        }
+      }
+      pcid <- (numid*100)/(numpairs)
+      # Only consider this column if at least %minpcid of the pairs of letters are identical:
+      if (pcid >= minpcid)
+      {
+        for (j in 1:numseqs)
+        {
+          seqj <- alignment$seq[[j]]
+          letterij <- substr(seqj,i,i)
+          newalignmentj <- newalignment$seq[[j]]
+          newalignmentj <- paste(newalignmentj,letterij,sep="")
+          newalignment$seq[[j]] <- newalignmentj
+        }
+      }
+    }
+  }
+  return(newalignment)
+}
+
+```
+
+
+### Data
+
+This data will be added to the compbio4all package and called from there
+
+```{r}
+# sequence accessions
 seqnames <- c("P06747", 
               "P0C569", 
               "O56773", 
               "Q5VKP1") 
 
+# get sequences
 seq_1_2_3_4 <- entrez_fetch_list(db = "protein", 
                           id = seqnames, 
                           rettype = "fasta")
+
+# clean sequences
+seq_1_2_3_4[[1]] <- fasta_cleaner(seq_1_2_3_4[[1]])
+seq_1_2_3_4[[2]] <- fasta_cleaner(seq_1_2_3_4[[2]])
+seq_1_2_3_4[[3]] <- fasta_cleaner(seq_1_2_3_4[[3]])
+seq_1_2_3_4[[4]] <- fasta_cleaner(seq_1_2_3_4[[4]])
+
+# name the sequences
+## NOTE: MUST be named in order for ggmsa to work!!!
+seq_1_2_3_4 <- c(P06747 = paste(seq_1_2_3_4[[1]], collapse = ""),
+                 P0C569 = paste(seq_1_2_3_4[[2]], collapse = ""),
+                 O56773 = paste(seq_1_2_3_4[[3]], collapse = ""),
+                 Q5VKP1 = paste(seq_1_2_3_4[[3]], collapse = ""))
+
+# convert to AAStringSet
+seq_1_2_3_4_stringset <- Biostrings::AAStringSet(seq_1_2_3_4)
+
+
 ```
 
 
 ## Multiple sequence alignment (MSA)
 
-A common task in bioinformatics is to download a set of related sequences from a database, and then to align those sequences using multiple alignment software. This is the first step in most phylogenetic analyses.
+<!-- This paragraph adapated from Coghlan -->
+A common task in bioinformatics is to download a set of related sequences from a database, and then to align those sequences using multiple alignment software. This is the first step in almost all phylogenetic analyses using sequence data.
+<!-- This paragraph adapated from Coghlan -->
 
 
+## Make MSA with msa()
 
-### Make MSA
+WE'll use a package called `msa` ([Bodenhofer et al. 2015](https://academic.oup.com/bioinformatics/article/31/24/3997/197486)).  There are several packages that can do multiple sequence alignment in R, but they all require loading an external piece of alignment software that is just accessed via R.  The  `msa` package actually runs the alignment algorithms entirely in R, making workflows simpler.
 
+### Data preparation 
 
+First, we need to convert our set of sequences to a particular format in preparation for alignment.  This is done with the `AAStringSet()` function from `Biostrings`.
 
 ```{r}
-shrooms_align <- msa(inputSeqs = shrooms_stringset,
+seq_1_2_3_4_stringset <- Biostrings::AAStringSet(seq_1_2_3_4)
+```
+
+This just puts things in a format that makes the software happy.  Doing this is a theme of bioinformatics work!
+
+```{r}
+seq_1_2_3_4_stringset
+```
+
+Next, we can run the alignment algorithm with the `msa()` function.  There are many algorithms and pieces software for building alignments. The `msa` packages implements three major ones: 
+
+1. ClustalW
+1. ClustalOmega
+1. Muscle
+
+We'll use ClustalW.  Depending on the size and number of sequences this may take a little bit of time.  
+```{r}
+virusaln <- msa(inputSeqs = seq_1_2_3_4_stringset,
                      method = "ClustalW")
 ```
 
-
-
-
-
-### 
-
-Reading a multiple alignment file into R
-To read a sequence alignment into R from a file, you can use the read.alignment() function in the SeqinR package. For example, to read in the multiple sequence alignment of the virus phosphoproteins into R, we type:
-
-```{r, eval = F}
-virusaln  <- read.alignment(file = "phosphoproteins.phy", format = "phylip")
+We can view a snapshot of the alignment.
+```{r}
+virusaln
 ```
 
-The virusaln variable is a list variable that stores the alignment.
 
-An R list variable can have named elements, and you can access the named elements of a list variable by typing the variable name, followed by “$”, followed by the name of the named element.
+Each sequence is on a line.  The **consensus sequence** indicates something similar to the average of all the sequences and is on the bottom and labeled `Con`.  Question marks indicate that the software could not determine a consensus.  Dashes indicate either **indels** (**insertions** or **deletions**), or are added at the begining and end of sequences of unequal length so that they line up.
 
-The list variable virusaln has named elements “nb”, “nam”, “seq”, and “com”.
 
-In fact, the named element “seq” contains the alignment, which you can view by typing:
+The output from `msa()` is a particular class of R object, a `MsaAAMultipleAlignment`.
 
-```{r, eval = F}
-virusaln$seq
+```{r}
+is(virusaln)
+class(virusaln)
 ```
 
-Only the first part of the alignment stored in virusaln$seq is shown here, as it is very long.
+Next we'll want to visualize our alignment.   In order to do further work with the MSA we're going to - I bet you can guess what happens next - make a conversion to the object.  In this case we're going to make a subtle change by calling up the `class()` of the alignment and changing it from `MsaAAMultipleAlignment` (with "Msa" at the beginning) to `AAMultipleAlignment` (no "Msa").  (This is an annoying step and is needed because the folks who wrote the `msa` package have yet to collaobrate with the folks who wrote another package we'll use in a little bit).
 
-Viewing a long multiple alignment
-If you want to view a long multiple alignment, it is convenient to view the multiple alignment in blocks.
+Don't worry if you don't understand what's going on here - just run the code.
+```{r}
+class(virusaln) <- "AAMultipleAlignment"
+```
 
-The R function “printMultipleAlignment()” below will do this for you:N
-As its inputs, the function “printMultipleAlignment()” takes the input alignment, and the number of columns to print out in each block.
+## Viewing your MSA
 
-For example, to print out the multiple alignment of virus phosphoproteins (which we stored in variable virusaln, see above) in blocks of 60 columns, we type:
+There are several ways to view and explore your MSA
+
+1. Within the R console using `compbio4all::print_msa()`
+1. As an R plot using `ggmsa::ggmas()`
+1. OPTIONAL: As a PDF using `msa::msaPrettyPrint()`
+
+### Viewing a long multiple alignment in the R console.
+
+If you want to view a long multiple alignment within the R console, it is convenient to view the multiple alignment in blocks.
+
+The function `print_msa()` ([Coglan 2011](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/#))below will do this for you.  As its inputs, the function `print_msa()` takes the two things
+
+1. `alignment`: input alignment 
+1. `chunksize`: the number of columns to print out in each block.
+
+To use `print_msa()` we first need to do a little format conversion:
+```{r}
+virusaln_seqinr <- msaConvert(virusaln, type = "seqinr::alignment")
+```
+
+Then we can print it out like this, making the alignment 60 bases wide:
+```{r}
+print_msa(alignment = virusaln2, 
+          chunksize = 60)
+```
+
+
+<!-- TODO: do auto converion of format, print consensus -->
+
+### Visualizing alignments as an R plot
+
+A powerful tool for visualizing focal parts of an alignment is `ggmsa`.  If you haven't already, download it with `install.packages("ggmsa")` and load it with `library(ggmsa)`.
+
+
+`ggmsa` prints a sequence alignment out within RStudio.  Alignments can be large, so its important to select a subset of the alignment for visualzation.
+
+First, let's look at the first 20 bases of our alignment.
+```{r}
+ggmsa(virusaln, 
+      start = 1, 
+      end = 20) 
+```
+
+#### OPTIONAL: file types used by `ggmsa`
+
+The `ggmsa` packages currently only works with certain types of alignment output.  We can see what these are with `available_msa()`.
+
+```{r}
+available_msa()
+```
+
+As you can see there are a number of ways multiple sequence alignments can be represented in *R*.  This has to do with the facts that i) There are many pieces of software / algorithms for making MSAs, and many bioinformatics packages that work with them.,
+
+You can see that `AAMultipleAlignment` is listed, which the the format we set previously using the `class()` command.
+
+The `msa` packages has a function `msaConvert()` which can change formats between different ways of representing MSAs which may be useful.
+
+
+### OPTIONAL: Print MSA to PDF
+
+The `msa` package has a fabulous function, `msaPrettyPrint()` for rendering an MSA to PDF.  It can take a little bit to run, and in order to vioew the PDF you need to locate the output.  
 
 ```{r, eval = F}
-printMultipleAlignment(virusaln, 60)
+msaPrettyPrint(virusaln, 
+               file = "my_msa.pdf",
+               askForOverwrite = F)
 ```
+
+On a Mac usually searching in Finder will locate the file even after is just created.  You can ask R where it is saving thing using `getwd()`.
+
+```{r}
+getwd()
+```
+
+You can change where R is saving things using the RStudio menu by clicking on Session -> Set Working Directory -> Choose directory...
+
 
 
 ## Discarding very poorly conserved regions from an alignment
+
+
+<!-- By Coglan -->
 It is often a good idea to discard very poorly conserved regions from a mulitple alignment before building a phylogenetic tree, as the very poorly conserved regions are likely to be regions that are either not homologous between the sequences being considered (and so do not add any phylogenetic signal), or are homologous but are so diverged that they are very difficult to align accurately (and so may add noise to the phylogenetic analysis, and decrease the accuracy of the inferred tree).
+<!-- By Coglan -->
 
-To discard very poorly conserved regions from a multiple alignment, you can use the following R function, “cleanAlignment()”:
+<!-- By Coglan -->
+To discard very poorly conserved regions from a multiple alignment, you can use the following R function, `clean_alignment()` (([Coglan 2011](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/#)))
+<!-- By Coglan -->
 
+<!-- By Coglan -->
+The function `clean_alignment()` takes three arguments (inputs): the input alignment; the minimum percent of letters in an alignment column that must be non-gap characters for the column to be kept; and the minimum percent of pairs of letters in an alignment column that must be identical for the column to be kept.
+<!-- By Coglan -->
 
-The function cleanAlignment() takes three arguments (inputs): the input alignment; the minimum percent of letters in an alignment column that must be non-gap characters for the column to be kept; and the minimum percent of pairs of letters in an alignment column that must be identical for the column to be kept.
-
+<!-- By Coglan -->
 For example, if we have a column with letters “T”, “A”, “T”, “-” (in four sequences), then 75% of the letters are non-gap characters; and the pairs of letters are “T,A”, “T,T”, and “A,T”, and 33% of the pairs of letters are identical.
+<!-- By Coglan -->
 
-We can use the function cleanAlignment() to discard the very poorly aligned columns from a multiple alignment.
+<!-- By Coglan -->
+We can use `clean_alignment()` to discard the very poorly aligned columns from a multiple alignment.
+<!-- By Coglan -->
 
-For example, if you look at the multiple alignment for the virus phosphoprotein sequences (which we printed out using function printMultipleAlignment(), see above), we can see that the last few columns are poorly aligned (contain many gaps and mismatches), and probably add noise to the phylogenetic analysis.
+<!-- By Coglan -->
+For example, if you look at the multiple alignment for the virus phosphoprotein sequences (which we printed out using function print_msa(), see above), we can see that the last few columns are poorly aligned (contain many gaps and mismatches), and probably add noise to the phylogenetic analysis.
+<!-- By Coglan -->
 
+<!-- By Coglan -->
 Therefore, to filter out the well conserved columns of the alignment, and discard the very poorly conserved columns, we can type:
+<!-- By Coglan -->
 
 ```{r, eval = F}
-cleanedvirusaln <- cleanAlignment(virusaln, 30, 30)
+cleanedvirusaln <- clean_alignment(x, 30, 30)
 ```
 
+<!-- By Coglan -->
 In this case, we required that at least 30% of letters in a column are not gap characters for that column to be kept, and that at least 30% of pairs of letters in an alignment column must be identical for the column to be kept.
+<!-- By Coglan -->
 
 We can print out the filtered alignment by typing:
 
 ```{r, eval = F}
-printMultipleAlignment(cleanedvirusaln)
+print_msa(x)
 ```
 
-The filtered alignment is shorter, but is missing some of the poorly conserved regions of the original alignment.
+<!-- By Coglan -->
+The filtered alignment is shorter, and is missing some of the poorly conserved regions of the original alignment.
+<!-- By Coglan -->
 
+<!-- By Coglan -->
 Note that it is not a good idea to filter out too much of your alignment, as if you are left with few columns in your filtered alignment, you will be basing your phylogenetic tree upon a very short alignment (little data), and so the tree may be unreliable. Therefore, you need to achieve a balance between discarding the dodgy (poorly aligned) parts of your alignment, and retaining enough columns of the alignment that you will have enough data to based your tree upon.
-
-## Calculating genetic distances between protein sequences
-
-A common first step in performing a phylogenetic analysis is to calculate the pairwise genetic distances between sequences. The genetic distance is an estimate of the divergence between two sequences, and is usually measured in quantity of evolutionary change (an estimate of the number of mutations that have occurred since the two sequences shared a common ancestor).
-
-We can calculate the genetic distances between protein sequences using the “dist.alignment()” function in the SeqinR package. The dist.alignment() function takes a multiple alignment as input. Based on the multiple alignment that you give it, dist.alignment() calculates the genetic distance between each pair of proteins in the multiple alignment. For example, to calculate genetic distances between the virus phosphoproteins based on the multiple sequence alignment stored in virusaln, we type:
-
-```{r, eval = F}
-virusdist <- dist.alignment(virusaln)                 # Calculate the genetic distances
-```
-
-Print out the genetic distance
-```{r, eval = F}
-virusdist
-```
-
-
-The genetic distance matrix above shows the genetic distance between each pair of proteins.
-
-The sequences are referred to by their UniProt accessions. If you remember from above, P06747 is rabies virus phosphoprotein, P0C569 is Mokola virus phosphoprotein, O56773 is Lagos bat virus phosphoprotein and Q5VKP1 is Western Caucasian bat virus phosphoprotein.
-
-Based on the genetic distance matrix above, we can see that the genetic distance between Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein (P0C569) is smallest (about 0.414).
-
-Similarly, the genetic distance between Western Caucasian bat virus phosphoprotein (Q5VKP1) and Lagos bat virus phosphoprotein (O56773) is the biggest (about 0.507).
-
-The larger the genetic distance between two sequences, the more amino acid changes or indels that have occurred since they shared a common ancestor, and the longer ago their common ancestor probably lived.
-
-Calculating genetic distances between DNA/mRNA sequences
-Just like for protein sequences, you can calculate genetic distances between DNA (or mRNA) sequences based on an alignment of the sequences.
-
-For example, the NCBI accession AF049118 contains mRNA sequence for Mokola virus phosphoprotein, RefSeq AF049114 contains mRNA sequence for Mokola virus phosphoprotein, and AF049119 contains the mRNA sequence for Lagos bat virus phosphoprotein, while AF049115 contains the mRNA sequence for Duvenhage virus phosphoprotein.
-
-To retrieve these sequences from the NCBI database, we can search the ACNUC “genbank” sub-database (since these are nucleotide sequences), by typing:
-
-Make a vector containing the names of the sequences
-```{r, eval = F}
-seqnames <- c("AF049118", "AF049114", "AF049119", "AF049115")  # 
-```
-
-
- Retrieve the sequences and store them in list variable "seqs"
-```{r, eval = F}
-seqs <- retrieveseqs(seqnames,"genbank")                       #
-```
-
-We can then write out the sequences to a FASTA-format file by typing:
-
-```{r, eval = F}
-write.fasta(seqs, seqnames, file="virusmRNA.fasta")
-```
-
-We can then use CLUSTAL to create a PHYLIP-format alignment of the sequences, and store it in the alignment file “virusmRNA.phy”. This picture shows part of the alignment:
-
-
-We can then read the alignment into R:
-
-```{r, eval = F}
-virusmRNAaln  <- read.alignment(file = "virusmRNA.phy", format = "phylip")
-```
-
-We saw above that the function dist.alignment() can be used to calculate a genetic distance matrix based on a protein sequence alignment.
-
-You can calculate a genetic distance for DNA or mRNA sequences using the dist.dna() function in the Ape R package. dist.dna()</tt> takes a multiple alignment of DNA or mRNA sequences as its input, and calculates the genetic distance between each pair of DNA sequences in the multiple alignment.
-
-The dist.dna() function requires the input alignment to be in a special format known as “DNAbin” format, so we must use the as.DNAbin() function to convert our DNA alignment into this format before using the dist.dna() function.
-
-For example, to calculate the genetic distance between each pair of mRNA sequences for the virus phosphoproteins, we type:
-
-Convert the alignment to "DNAbin" format
-```{r, eval = F}
-virusmRNAalnbin <- as.DNAbin(virusmRNAaln) 
-```
-
-Calculate the genetic distance matrix
-```{r, eval = F}
-virusmRNAdist <- dist.dna(virusmRNAalnbin) 
-```
- 
-Print out the genetic distance matrix
-```{r, eval = F}
-virusmRNAdist                              
-```
-
-
+<!-- By Coglan -->

@@ -54,6 +54,15 @@ knitr::write_bib(c(
 
 <!--chapter:end:index.Rmd-->
 
+# Test shiny app
+
+```{r}
+knitr::include_app(url = "https://wrightaprilm.shinyapps.io/treesiftr_app/")
+```
+
+
+<!--chapter:end:0_test_shiny_app.Rmd-->
+
 ---
 output: html_document
 editor_options: 
@@ -2616,6 +2625,7 @@ https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapt
 
 <!-- TODO:  add entrez_fetch_list to combio4all -->
 <!-- Add output to combio4all -->
+<!-- add motivation -->
 
 ```{r}
 ## package
@@ -2823,6 +2833,8 @@ Its character data, which we can confirm with `class()`
 class(seq_1_2_3_4$P06747) # dollar sign notation
 class(seq_1_2_3_4[[1]])   # double-bracket notation
 ```
+
+
 
 
 <!-- Once you have retrieved the sequences using `entrez_fetch()`, you can then use the function write.fasta() from the SeqinR package to write the sequences to a FASTA-format file. As its arguments (inputs), the write.fasta() function takes the list variable containing the sequences, and a vector containing the names of the sequences, and the name that you want to give to the FASTA-format file. For example: -->
