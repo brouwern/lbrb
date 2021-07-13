@@ -151,6 +151,8 @@ editor_options:
 
 # Datacamp test
 
+<script src=https://cdn.datacamp.com/datacamp-light-latest.min.js></script>
+
 ```{r, include=FALSE}
 tutorial::go_interactive()
 ```
