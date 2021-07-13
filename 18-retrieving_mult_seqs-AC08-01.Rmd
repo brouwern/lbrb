@@ -26,30 +26,7 @@ https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapt
 ```{r}
 ## package
 library(compbio4all)
-library(rentrez)
-
-# function
-
-## this function is called in this lesson
-## it will be added to the combio4all package
-### and called from it
-entrez_fetch_list <- function(db, id, rettype, ...){
-  
-  #setup list for storing output
-  n.seq <- length(id)
-  list.output <- as.list(rep(NA, n.seq))
-  names(list.output) <- id
-  
-  # get output
-  for(i in 1:length(id)){
-  list.output[[i]] <- rentrez::entrez_fetch(db = db, 
-                          id = id[i], 
-                          rettype = rettype)
-  }
-  
-  
-  return(list.output)
-}
+library(rentrez)    # still needed?
 ```
 
 

@@ -3,10 +3,9 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Multiple alignment in R
 
-<!-- use ggplotmsa? -->
-<!-- https://cran.r-project.org/web/packages/ggmsa/vignettes/ggmsa.html -->
+# Multiple sequence alignment in R
+
 
 
 **By**: Nathan Brouwer, with some content adapted Coghlan (2011) [Multiple Alignment and Phylogenetic trees](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html) and under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  Functions print_msa() and clean_alignment() adapted from ([Coglan 2011](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/#)).
@@ -24,200 +23,22 @@ We'll be using the package `ggmsa` for the first time and you will have to insta
 # new packages
 ## Only install once
 # install.packages("ggmsa")
+library(ggmsa)       # visualize MSA
 
 # other packages
 library(compbio4all)
 library(Biostrings)  # convert FASTA to AAStringSet
 library(msa)         # multiple sequence alignment
-
-library(ggmsa)       # visualize MSA
-
-
-# library(rentrez)
-# library(seqinr)
-# library(ape)
-
-
-
-
 ```
 
 ### Functions
 
-The following key functions are used in this lesson
+The following key functions from compbio4all are used in this lesson
 
 * fasta_cleaner()
 * entrez_fetch_list()
 * print_msa()
 * clean_alignment()
-
-
-```{r}
-# function
-
-## this function is called in this lesson
-## it will be added to the combio4all package
-### and called from it
-entrez_fetch_list <- function(db, id, rettype, ...){
-  
-  #setup list for storing output
-  n.seq <- length(id)
-  list.output <- as.list(rep(NA, n.seq))
-  names(list.output) <- id
-  
-  # get output
-  for(i in 1:length(id)){
-  list.output[[i]] <- rentrez::entrez_fetch(db = db, 
-                          id = id[i], 
-                          rettype = rettype)
-  }
-  
-  
-  return(list.output)
-}
-```
-
-
-([Coglan 2011](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/#))
-```{r}
-print_msa <- function(alignment, chunksize=60)
-{
-  # this function requires the Biostrings package
-  require("Biostrings")
-  # find the number of sequences in the alignment
-  numseqs <- alignment$nb
-  # find the length of the alignment
-  alignmentlen <- nchar(alignment$seq[[1]])
-  starts <- seq(1, alignmentlen, by=chunksize)
-  n <- length(starts)
-  # get the alignment for each of the sequences:
-  aln <- vector()
-  lettersprinted <- vector()
-  for (j in 1:numseqs)
-  {
-    alignmentj <- alignment$seq[[j]]
-    aln[j] <- alignmentj
-    lettersprinted[j] <- 0
-  }
-  # print out the alignment in blocks of 'chunksize' columns:
-  for (i in 1:n) { # for each of n chunks
-    for (j in 1:numseqs)
-    {
-      alnj <- aln[j]
-      chunkseqjaln <- substring(alnj, starts[i], starts[i]+chunksize-1)
-      chunkseqjaln <- toupper(chunkseqjaln)
-      # Find out how many gaps there are in chunkseqjaln:
-      gapsj <- countPattern("-",chunkseqjaln) # countPattern() is from Biostrings package
-      # Calculate how many residues of the first sequence we have printed so far in the alignment:
-      lettersprinted[j] <- lettersprinted[j] + chunksize - gapsj
-      print(paste(chunkseqjaln,lettersprinted[j]))
-    }
-    print(paste(' '))
-  }
-}
-
-```
-
-([Coglan 2011](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/#))
-```{r}
-clean_alignment <- function(alignment, minpcnongap, minpcid)
-{
-  # make a copy of the alignment to store the new alignment in:
-  newalignment <- alignment
-  # find the number of sequences in the alignment
-  numseqs <- alignment$nb
-  # empty the alignment in "newalignment")
-  for (j in 1:numseqs) { newalignment$seq[[j]] <- "" }
-  # find the length of the alignment
-  alignmentlen <- nchar(alignment$seq[[1]])
-  # look at each column of the alignment in turn:
-  for (i in 1:alignmentlen)
-  {
-    # see what percent of the letters in this column are non-gaps:
-    nongap <- 0
-    for (j in 1:numseqs)
-    {
-      seqj <- alignment$seq[[j]]
-      letterij <- substr(seqj,i,i)
-      if (letterij != "-") { nongap <- nongap + 1}
-    }
-    pcnongap <- (nongap*100)/numseqs
-    # Only consider this column if at least minpcnongap % of the letters are not gaps:
-    if (pcnongap >= minpcnongap)
-    {
-      # see what percent of the pairs of letters in this column are identical:
-      numpairs <- 0; numid <- 0
-      # find the letters in all of the sequences in this column:
-      for (j in 1:(numseqs-1))
-      {
-        seqj <- alignment$seq[[j]]
-        letterij <- substr(seqj,i,i)
-        for (k in (j+1):numseqs)
-        {
-          seqk <- alignment$seq[[k]]
-          letterkj <- substr(seqk,i,i)
-          if (letterij != "-" && letterkj != "-")
-          {
-            numpairs <- numpairs + 1
-            if (letterij == letterkj) { numid <- numid + 1}
-          }
-        }
-      }
-      pcid <- (numid*100)/(numpairs)
-      # Only consider this column if at least %minpcid of the pairs of letters are identical:
-      if (pcid >= minpcid)
-      {
-        for (j in 1:numseqs)
-        {
-          seqj <- alignment$seq[[j]]
-          letterij <- substr(seqj,i,i)
-          newalignmentj <- newalignment$seq[[j]]
-          newalignmentj <- paste(newalignmentj,letterij,sep="")
-          newalignment$seq[[j]] <- newalignmentj
-        }
-      }
-    }
-  }
-  return(newalignment)
-}
-
-```
-
-
-### Data
-
-This data will be added to the compbio4all package and called from there
-
-```{r}
-# sequence accessions
-seqnames <- c("P06747", 
-              "P0C569", 
-              "O56773", 
-              "Q5VKP1") 
-
-# get sequences
-seq_1_2_3_4 <- entrez_fetch_list(db = "protein", 
-                          id = seqnames, 
-                          rettype = "fasta")
-
-# clean sequences
-seq_1_2_3_4[[1]] <- fasta_cleaner(seq_1_2_3_4[[1]])
-seq_1_2_3_4[[2]] <- fasta_cleaner(seq_1_2_3_4[[2]])
-seq_1_2_3_4[[3]] <- fasta_cleaner(seq_1_2_3_4[[3]])
-seq_1_2_3_4[[4]] <- fasta_cleaner(seq_1_2_3_4[[4]])
-
-# name the sequences
-## NOTE: MUST be named in order for ggmsa to work!!!
-seq_1_2_3_4 <- c(P06747 = paste(seq_1_2_3_4[[1]], collapse = ""),
-                 P0C569 = paste(seq_1_2_3_4[[2]], collapse = ""),
-                 O56773 = paste(seq_1_2_3_4[[3]], collapse = ""),
-                 Q5VKP1 = paste(seq_1_2_3_4[[3]], collapse = ""))
-
-# convert to AAStringSet
-seq_1_2_3_4_stringset <- Biostrings::AAStringSet(seq_1_2_3_4)
-
-
-```
 
 
 ## Multiple sequence alignment (MSA)
@@ -233,7 +54,13 @@ WE'll use a package called `msa` ([Bodenhofer et al. 2015](https://academic.oup.
 
 ### Data preparation 
 
-First, we need to convert our set of sequences to a particular format in preparation for alignment.  This is done with the `AAStringSet()` function from `Biostrings`.
+The data is stored in object in combio4all
+```{r}
+data(seq_1_2_3_4)
+```
+
+
+We'll need need to convert our set of sequences to a particular format in preparation for alignment.  This is done with the `AAStringSet()` function from `Biostrings`.
 
 ```{r}
 seq_1_2_3_4_stringset <- Biostrings::AAStringSet(seq_1_2_3_4)
@@ -396,7 +223,7 @@ If you look at the multiple alignment for the virus phosphoprotein sequences (wh
 Let's cleave off anything with less than 30% non-gap and less than 30% PID.
 NOTE: we're bac to using `virusaln_seqinr`, not `virusaln`.
 
-```{r, eval = F}
+```{r, eval = T}
 virusaln_seqinr_clean <- clean_alignment(alignment = virusaln_seqinr,  # virusaln_seqinr
                                    minpcnongap = 30, 
                                    minpcid = 30)
@@ -409,7 +236,6 @@ In this case, we required that at least 30% of letters in a column are not gap c
 We can print out the filtered alignment by typing:
 
 ```{r, eval = F}
-print_msa(virusaln_seqinr)
 print_msa(virusaln_seqinr_clean)
 ```
 
@@ -420,3 +246,6 @@ The filtered alignment is shorter, and is missing some of the poorly conserved r
 <!-- By Coglan -->
 Note that it is not a good idea to filter out too much of your alignment, as if you are left with few columns in your filtered alignment, you will be basing your phylogenetic tree upon a very short alignment (little data), and so the tree may be unreliable. Therefore, you need to achieve a balance between discarding the dodgy (poorly aligned) parts of your alignment, and retaining enough columns of the alignment that you will have enough data to based your tree upon.
 <!-- By Coglan -->
+
+
+

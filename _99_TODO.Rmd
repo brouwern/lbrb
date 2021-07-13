@@ -33,6 +33,28 @@ https://uclouvain-cbio.github.io/WSBIM1322/
 Omics data analysis
 https://uclouvain-cbio.github.io/WSBIM2122/
 
+UniprotR: Retrieving and visualizing protein sequence and functional information from Universal Protein Resource (UniProt knowledgebase)
+Journal of Proteomics
+https://www.sciencedirect.com/science/article/pii/S1874391919303859?casa_token=mOl5FCsRf5cAAAAA:zxlkQyVIt2MobNplBpH2_oUxvTedT724oLnCYGDmvdn1YPV9har4HK_wCu5ixG9_iCqlVSi-Zw
+
+The Bio3D packages for structural bioinformatics
+https://onlinelibrary.wiley.com/doi/epdf/10.1002/pro.3923
+http://thegrantlab.org/bio3d/index.html
+
+KeBABS - An R Package for Kernel-Based Analysis of Biological Sequences
+http://www.bioinf.jku.at/software/kebabs/
+
+A workflow with R: Phylogenetic analyses and visualizations using mitochondrial cytochrome b gene sequences
+https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243927
+
+Rchemcpp: An R package for computing the similarity of molecules
+http://www.bioinf.jku.at/software/Rchemcpp/index.html
+
+
+
+Orchestrating high-throughput genomic analysis with Bioconductor
+https://www.nature.com/articles/nmeth.3252
+
 # datacamp-light.js. 
 
 https://community.rstudio.com/t/bookdown-contest-submission-introduction-to-econometrics-with-r/15372

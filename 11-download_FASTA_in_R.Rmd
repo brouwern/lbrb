@@ -63,10 +63,10 @@ According to Wikipedia
 
 ```{r}
 library(rentrez)
-library(compbio4all)  
+library(compbio4all) 
 ```
 
-<!-- is compbio4all called? -->
+
 
 ## DNA Sequence Statistics: Part 1
 
@@ -139,10 +139,14 @@ Note that because the NCBI Sequence Database, the EMBL Sequence Database, and DD
 You can retrieve sequence data from NCBI directly from *R* using the `rentrez` package.  The DEN-1 Dengue virus genome sequence has NCBI accession NC_001477. To retrieve a sequence with a particular NCBI accession, you can use the function `entrez_fetch()` from the `rentrez` package.  Note that to be specific where the function comes from I write it as `package::function()`.  
 
 <!-- QUESTION: How many arguments does entrez_fetch take in this call? -->
-```{r}
+```{r, eval = T}
 dengueseq_fasta <- rentrez::entrez_fetch(db = "nucleotide", 
                           id = "NC_001477", 
                           rettype = "fasta")
+```
+
+```{r, echo = F}
+#data(dengueseq_fasta)
 ```
 
 
@@ -178,23 +182,23 @@ If we want to actually know how long the sequence is, we need to use the functio
 nchar(dengueseq_fasta)
 ```
 
-The sequence is `r nchar(dengueseq_fasta)` bases long.  All of these bases are stored as a single **character string** with no spaces in a single entry of our `dengueseq_fasta` vector.  This isn't actually a useful format for us, so below were' going to convert it to something more useful.
+The sequence is 10935 bases long.  All of these bases are stored as a single **character string** with no spaces in a single entry of our `dengueseq_fasta` vector.  This isn't actually a useful format for us, so below were' going to convert it to something more useful.
 
 If we want to see just part of the sequence we can use the `strtrim()` function.  Before you run the code below, predict what the 100 means.
 
-```{r, echo = F}
+```{r, echo = T}
 strtrim(dengueseq_fasta, 100)
 ```
 
 
 
 Note that at the end of the  name is a slash followed by an n, which indicates to the computer that this is a **newline**; this is read by text editor, but is ignored by R in this context.
-```{r, echo = F}
+```{r, echo = T}
 strtrim(dengueseq_fasta, 45)
 ```
 
 After the `\\n` begins the sequence, which will continue on for a LOOOOOONG way.  Let's just print a little bit.
-```{r, echo = F}
+```{r, echo = T}
 strtrim(dengueseq_fasta, 52)
 ```
 
