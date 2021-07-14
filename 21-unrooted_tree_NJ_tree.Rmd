@@ -52,11 +52,31 @@ library(ape)
 
 Once we have a **distance matrix** that gives the **pairwise distances** between all our protein sequences, we can build a **phylogenetic tree** based on that distance matrix. One method for using this is the **neighbor-joining algorithm**.
 
-You can build a phylogenetic tree using the neighbor-joining (NJ) algorithm with the the `ape` package. The R function `unrooted_NJ_tree()` is a **wrapper** for functions from the `ape` package which builds a phylogenetic tree based on an alignment of sequences, using the NJ algorithm.
 
-The `unrooted_NJ_tree()` function takes an alignment of sequences its input, calculates **pairwise distances** between the sequences based on the alignment, and then builds a phylogenetic tree based on the pairwise distances. It returns the phylogenetic tree, and also makes a plot of that tree.
 
-The alignment is save in `compbio4all` as `virusaln` and can be loaded with the `data()` command.
+If we have the distance matrix already made we can make the tree like this using `ape::nj()`.  The distance matrix is saved in `compbio4all` as `virus_mrna_dist`.  Load this with `data()`.
+```{r}
+# load the distance matrix
+data(virus_mrna_dist)
+
+# build the tree
+tree_from_distmat <- nj(virus_mrna_dist)
+
+
+plot.phylo(tree_from_distmat, type = "unrooted")
+```
+
+
+<!-- add bootstrapping? -->
+
+
+### Build tree with `unrooted_NJ_tree()`
+
+Coghlan (2011) wrote a function to simply the steps of making an NJ tree.  The R function `unrooted_NJ_tree()` is a **wrapper** for functions from the `ape` package which builds a phylogenetic tree based on an alignment of sequences, using the NJ algorithm.
+
+The `unrooted_NJ_tree()` function takes an alignment of sequences its input, calculates **pairwise distances** between the sequences based on the alignment behind the scenes, and then builds a phylogenetic tree based on the pairwise distances. It returns the phylogenetic tree, and also makes a plot of that tree.  It also gives us information about to what extent the data in the original MSA support the evolutionary relationships shown in the tree.
+
+The alignment is saved in `compbio4all` as `virusaln` and can be loaded with the `data()` command.
 
 ```{r}
 data(virusaln_seqinr)
@@ -68,13 +88,12 @@ str(virusaln_seqinr)
 ```
 
 
-Build the tree with `unrooted_NJ_tree()`
 ```{r, eval = F}
 virusalntree <- unrooted_NJ_tree(virusaln_seqinr_clean,
                                type="protein")
 ```
 
-Note that you need to specify that the type of sequences that you are using are protein sequences when you use `unrooted_NJ_tree()`, by setting `type=protein`.
+Note that you need to specify that the type of sequences that you are using are protein sequences when you use `unrooted_NJ_tree()`, by setting `type=protein`.  
 
 We can see that `Q5VKP1` (Western Caucasian bat virus phosphoprotein) and `P06747` (rabies virus phosphoprotein) have been grouped together into a **clade** on the tree, and that `O56773` (Lagos bat virus phosphoprotein) and `P0C569` (Mokola virus phosphoprotein) are grouped together.
 

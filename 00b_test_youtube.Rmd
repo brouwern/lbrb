@@ -1,0 +1,14 @@
+# Test YouTube vidoe
+
+Here is an example of a YouTube video  embedded in a bookdown book.
+
+
+As tag
+![](https://youtu.be/zNzZ1PfUDNk)
+
+
+
+via knitr chunk
+```{r}
+knitr::include_url("https://youtu.be/zNzZ1PfUDNk")
+```

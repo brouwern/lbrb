@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 15 Functions | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Chapter 29 A complete bioinformatics workflow in R | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 15 Functions | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Chapter 29 A complete bioinformatics workflow in R | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 15 Functions | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Chapter 29 A complete bioinformatics workflow in R | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="mini-tutorial-vectors-in-r.html"/>
-<link rel="next" href="plotting-vectors-in-base-r.html"/>
+<link rel="prev" href="unrooted-neighbor-joining-phylogenetic-trees.html"/>
+<link rel="next" href="appendix-01-getting-access-to-r.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -474,180 +474,346 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="functions-2" class="section level1" number="15">
-<h1><span class="header-section-number">Chapter 15</span> Functions</h1>
+<div id="a-complete-bioinformatics-workflow-in-r" class="section level1" number="29">
+<h1><span class="header-section-number">Chapter 29</span> A complete bioinformatics workflow in R</h1>
+<!-- TODO: create function to simplify the prepwork -->
+<p><strong>By</strong>: Nathan L. Brouwer</p>
+<p>This lesson walks you through and entire workflow for a bioinformatics, including</p>
+<!-- check all of this -->
+<ol style="list-style-type: decimal">
+<li>obtaining FASTA sequences</li>
+<li>cleaning sequences</li>
+<li>creating alignments</li>
+<li>creating distance a distance matrix</li>
+<li>building a phylogenetic tree</li>
+</ol>
+<p>We’ll examine the Shroom family of genes, which produces Shroom proteins essential for tissue formation in many multicellular eukaryotes, including neural tube formation in vertebrates. We’ll examine shroom in severall very different organism, including humans, mice and sea urchins. There is more than one type of shroom in vertebrates, and we’ll also look at two different Shroom genes: shroom 1 and shroom 2.</p>
+<p>This lesson draws on skills from previous sections of the book, but is written to act as a independent summary of these activities. There is therefore review of key aspects of R and bioinformatics throughout it.</p>
+<div id="software-preliminaires" class="section level2" number="29.1">
+<h2><span class="header-section-number">29.1</span> Software Preliminaires</h2>
+<div id="vocab-3" class="section level3" number="29.1.1">
+<h3><span class="header-section-number">29.1.1</span> Vocab</h3>
 <ul>
-<li><code>seq()</code></li>
-<li><code>is()</code>, <code>is.vector()</code>, <code>is.matrix()</code></li>
-<li><code>gsub()</code></li>
+<li>arguement</li>
+<li>function</li>
+<li>list</li>
+<li>named list</li>
+<li>vector</li>
+<li>named vector</li>
+<li>for() loop</li>
+<li>R console</li>
 </ul>
-<div id="vectors-in-r" class="section level2" number="15.1">
-<h2><span class="header-section-number">15.1</span> Vectors in R</h2>
-<p><strong>Variables</strong> in R include <strong>scalars</strong>, <strong>vectors</strong>, and <strong>lists</strong>. <strong>Functions</strong> in R carry out operations on variables, for example, using the <code>log10()</code> function to calculate the log to the base 10 of a scalar variable <code>x</code>, or using the <code>mean()</code> function to calculate the average of the values in a vector variable <code>myvector</code>. For example, we can use <code>log10()</code> on a scalar object like this:</p>
+</div>
+<div id="r-functions-1" class="section level3" number="29.1.2">
+<h3><span class="header-section-number">29.1.2</span> R functions</h3>
+<ul>
+<li>library()</li>
+<li>round()</li>
+<li>plot()</li>
+<li>mtext()</li>
+<li>nchar()</li>
+<li>rentrez::entrez_fetch()</li>
+<li>combio4all::entrez_fetch_list()</li>
+<li>combio4aal::print_msa() (Coghlan 2011)</li>
+<li>Biostrings::AAStringSet()</li>
+<li>msa::msa()</li>
+<li>msa::msaConvert()</li>
+<li>msa::msaPrettyPrint()</li>
+<li>seqinr::dist.alignment()</li>
+<li>ape::nj()</li>
+</ul>
+<p>A few things need to be done to get started with our R session.</p>
+</div>
+<div id="download-necessary-packages" class="section level3" number="29.1.3">
+<h3><span class="header-section-number">29.1.3</span> Download necessary packages</h3>
+<p>Many <em>R</em> sessions begin by downloading necessary software packages to augment <em>R’s</em> functionality.</p>
+<p>If you don’t have them already, you’ll need the following packages from CRAN:</p>
+<ol style="list-style-type: decimal">
+<li><code>ape</code></li>
+<li><code>seqinr</code></li>
+<li><code>rentrez</code></li>
+<li><code>devtools</code></li>
+</ol>
+<p>The CRAN packages can be loaded with <code>install.packages()</code>.</p>
+<p>You’ll also need these packages from Bioconductor:</p>
+<ol style="list-style-type: decimal">
+<li><code>msa</code></li>
+<li><code>Biostrings</code></li>
+</ol>
+<p>For install packages from Bioconductor, see the chapter at the beginning of this book on this process.</p>
+<p>Finally, you’ll need this package from GitHub</p>
+<ol style="list-style-type: decimal">
+<li><code>compbio4all</code></li>
+</ol>
+<p>To install packages from GitHub you can use the code <code>devtools::install_github("brouwern/combio4all")</code></p>
+</div>
+<div id="load-packages-into-memory" class="section level3" number="29.1.4">
+<h3><span class="header-section-number">29.1.4</span> Load packages into memory</h3>
+<p>We noew need to load up all our bioinformatics and phylogenetics software into R. This is done with the <code>library()</code> command.</p>
+<p>To run this code just clock on the sideways green triangel all the way to the right of the code.</p>
+<p>NOTE: You’ll likely see some red code appear on your screen. No worries, totally normal!</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHN0b3JlIHZhbHVlIGluIG9iamVjdFxueCA8LSAxMDBcblxuIyB0YWtlIGxvZyBiYXNlIDEwIG9mIG9iamVjdFxubG9nMTAoeCkifQ==
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGdpdGh1YiBwYWNrYWdlc1xubGlicmFyeShjb21wYmlvNGFsbClcblxuIyBDUkFOIHBhY2thZ2VzXG5saWJyYXJ5KHJlbnRyZXopXG5saWJyYXJ5KHNlcWlucilcbmxpYnJhcnkoYXBlKVxuXG4jIEJpb2NvbmR1Y3RvciBwYWNrYWdlc1xubGlicmFyeShtc2EpXG5saWJyYXJ5KEJpb3N0cmluZ3MpIn0=
 </div>
-<p>Note that while mathematically x is a single number, or a scalar, R considers it to be a vector:</p>
+</div>
+</div>
+<div id="downloading-macro-molecular-sequences" class="section level2" number="29.2">
+<h2><span class="header-section-number">29.2</span> Downloading macro-molecular sequences</h2>
+<p>We’re going to explore some sequences. First we need to download them. To do this we’ll use a function, <code>entrez_fretch()</code>, which accesses the <a href="ncbi.nlm.nih.gov/search/"><strong>Entrez</strong></a> system of database (ncbi.nlm.nih.gov/search/). This function is from the <code>rentrez</code> package, which stands for “R-Entrez.”</p>
+<p>We need to tell <code>entrez_fetch()</code> several things</p>
+<ol style="list-style-type: decimal">
+<li><code>db = ...</code> the type of entrez database.<br />
+</li>
+<li><code>id = ...</code> the <strong>accession</strong> (ID) number of the sequence</li>
+<li><code>rettype = ...</code> file type what we want the function to return.</li>
+</ol>
+<p>Formally, these things are called <strong>arguements</strong> by <em>R</em>.</p>
+<p>We’ll use these settings:</p>
+<ol style="list-style-type: decimal">
+<li><code>db = "protein"</code> to access the Entrez database of protein sequences<br />
+</li>
+<li><code>rettype = "fasta"</code>, which is a standard file format for nucleic acid and protein sequences</li>
+</ol>
+<p>We’ll set <code>id = ...</code> to sequences whose <strong>accession numbers</strong> are:</p>
+<ol style="list-style-type: decimal">
+<li>NP_065910: Human shroom 3</li>
+<li>AAF13269: Mouse shroom 3a</li>
+<li>CAA58534: Human shroom 2</li>
+<li>XP_783573: Sea urchin shroom</li>
+</ol>
+<p>There are two highly conserved regions of shroom 3
+1. ASD 1: aa 884 to aa 1062 in hShroom3
+1. ASD 2: aa 1671 to aa 1955 in hShroom3</p>
+<p>Normally we’d have to download these sequences by hand through pointing and clicking on GeneBank records on the NCBI website. In <em>R</em> we can do it automatically; this might take a second.</p>
+All the code needed is this:
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJpcy52ZWN0b3IoeCkifQ==
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIEh1bWFuIHNocm9vbSAzIChILiBzYXBpZW5zKVxuaFNocm9vbTMgPC0gZW50cmV6X2ZldGNoKGRiID0gXCJwcm90ZWluXCIsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICBpZCA9IFwiTlBfMDY1OTEwXCIsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICByZXR0eXBlID0gXCJmYXN0YVwiKSJ9
 </div>
-There are many “is” commands. What is returned when you run <code>is.matrix()</code> on a vector?
+The output is in FASTA format; we’ll use the <code>cat()</code> to do a little formating for us:
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJpcy5tYXRyaXgoeCkifQ==
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjYXQoaFNocm9vbTMpIn0=
 </div>
-<p>Mathematically this is a bit odd, since often a vector is defined as a one-dimensional matrix, e.g., a single column or single row of a matrix. But in <em>R</em> land, a vector is a vector, and matrix is a matrix, and there are no explicit scalars.</p>
-</div>
-<div id="math-on-vectors" class="section level2" number="15.2">
-<h2><span class="header-section-number">15.2</span> Math on vectors</h2>
-<p>Vectors can serve as the input for mathematical operations. When this is done <em>R</em> does the mathematical operation separately on each element of the vector. This is a unique feature of <em>R</em> that can be hard to get used to even for people with previous programming experience.</p>
-<p>Let’s make a vector of numbers:</p>
+<p>Note the initial <code>&gt;</code>, then the header line of <code>NP_065910.3 protein Shroom3 [Homo sapiens]</code>. After that is the amino acid sequence. The underlying data also includes the <strong>newline character</strong> <code>\n</code> to designate where each line of amino acids stops.</p>
+We can get the rest of the data by just chaing the <code>id = ...</code> argument:
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvciA8LSBjKDMwLDE2LDMwMyw5OSwxMSwxMTEpIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIE1vdXNlIHNocm9vbSAzYSAoTS4gbXVzY3VsdXMpXG5tU2hyb29tM2EgPC0gZW50cmV6X2ZldGNoKGRiID0gXCJwcm90ZWluXCIsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICBpZCA9IFwiQUFGMTMyNjlcIiwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHJldHR5cGUgPSBcImZhc3RhXCIpXG5cbiMgSHVtYW4gc2hyb29tIDIgKEguIHNhcGllbnMpXG5oU2hyb29tMiA8LSBlbnRyZXpfZmV0Y2goZGIgPSBcInByb3RlaW5cIiwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgIGlkID0gXCJDQUE1ODUzNFwiLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dHlwZSA9IFwiZmFzdGFcIilcblxuXG4jIFNlYS11cmNoaW4gc2hyb29tXG5zU2hyb29tIDwtIGVudHJlel9mZXRjaChkYiA9IFwicHJvdGVpblwiLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgaWQgPSBcIlhQXzc4MzU3M1wiLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dHlwZSA9IFwiZmFzdGFcIikifQ==
 </div>
-<p>What happens when we multiply <code>myvector</code> by 10?</p>
+I’m going to check about how long each of these sequences is - each should have an at least slightly different length. If any are identical, I might have repeated an accession name or re-used an object name. The function <code>nchar()</code> counts of the number of characters in an <em>R</em> object.
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvcioxMCJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJuY2hhcihoU2hyb29tMylcbm5jaGFyKG1TaHJvb20zYSlcbm5jaGFyKHNTaHJvb20pXG5uY2hhcihoU2hyb29tMikifQ==
 </div>
-<p>R has taken each of the 6 values, 30 through 111, of <code>myvector</code> and multiplied each one by 10, giving us 6 results. That is, what R did was</p>
+</div>
+<div id="prepping-macromolecular-sequences" class="section level2" number="29.3">
+<h2><span class="header-section-number">29.3</span> Prepping macromolecular sequences</h2>
+<blockquote>
+<p>“90% of data analysis is data cleaning” (-Just about every data analyst and data scientist on twitter)</p>
+</blockquote>
+<p>We have our sequences, but the current format isn’t directly usable for us yet because there are several thigns that aren’t sequence information</p>
+<ol style="list-style-type: decimal">
+<li>metadata (the header)</li>
+<li>page formatting information (the newline character)</li>
+</ol>
+<p>We can remove this non-sequence information using a function I wrote called <code>fasta_cleaner()</code>, which is in the <code>compbio4all</code> package. The function uses <strong>regular expressions</strong> to remove the info we don’t need.</p>
+<strong>ASIDE</strong>: If we run the name of the command with out any quotation marks we can see the code:
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIzMCoxMCAgICAjIGZpcnN0IHZhbHVlIG9mIG15dmVjdG9yXG4xNioxMCAgICAjIHNlY29uZCB2YWx1ZSBvZiBteXZlY3RvclxuMzAzKjEwICAgIyAuLi4uXG45OSoxMFxuMTExKjEwICAgIyBsYXN0IHZhbHVlIG9mIG15dmVjdG9yIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJmYXN0YV9jbGVhbmVyIn0=
 </div>
-<p>The normal order of operations rules apply to vectors as they do to operations we’re more used to. So multiplying <code>myvector</code> by 10 is the same whether you put he 10 before or after vector. That is <code>myvector\*10</code> is the same as <code>10\*myvector</code>.</p>
+<p><strong>End ASIDE</strong></p>
+Now use the function to clean our sequences; we won’t worry about what <code>pare = ...</code> is for.
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvcioxMFxuMTAqbXl2ZWN0b3IifQ==
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJoU2hyb29tMyAgPC0gZmFzdGFfY2xlYW5lcihoU2hyb29tMywgIHBhcnNlID0gRilcbm1TaHJvb20zYSA8LSBmYXN0YV9jbGVhbmVyKG1TaHJvb20zYSwgcGFyc2UgPSBGKVxuaFNocm9vbTIgIDwtIGZhc3RhX2NsZWFuZXIoaFNocm9vbTIsICBwYXJzZSA9IEYpXG5zU2hyb29tICAgPC0gZmFzdGFfY2xlYW5lcihzU2hyb29tLCAgIHBhcnNlID0gRikifQ==
 </div>
-<p>What happen when you subtract 30 from myvector? Write the code below.</p>
+Now let’s take a peek at what our sequences look like:
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3Rvci0zMCJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJoU2hyb29tMyJ9
 </div>
-So, what R did was
+</div>
+<div id="aligning-sequences" class="section level2" number="29.4">
+<h2><span class="header-section-number">29.4</span> Aligning sequences</h2>
+<p>We can do a <a href="https://tinyurl.com/y4du73zq"><strong>global alignment</strong></a> of one sequence against another using the <code>pairwiseAlignment()</code> function from the <strong>Bioconductor</strong> package <code>Biostrings</code> (note that capital “B” in <code>Biostrings</code>; most <em>R</em> package names are all lower case, but not this one).</p>
+Let’s align human versus mouse shroom:
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIzMC0zMCAgICAjIGZpcnN0IHZhbHVlIG9mIG15dmVjdG9yXG4xNi0zMCAgICAjIHNlY29uZCB2YWx1ZSBvZiBteXZlY3RvclxuMzAzLTMwICAgIyAuLi4uXG45OS0zMFxuMTExLTMwICAgIyBsYXN0IHZhbHVlIG9mIG15dmVjdG9yIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJhbGlnbi5oMy52cy5tM2EgPC0gQmlvc3RyaW5nczo6cGFpcndpc2VBbGlnbm1lbnQoXG4gICAgICAgICAgICAgICAgICBoU2hyb29tMyxcbiAgICAgICAgICAgICAgICAgIG1TaHJvb20zYSkifQ==
 </div>
-<p>You can also square a vector</p>
+We can peek at the alignment
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3Rvcl4yIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJhbGlnbi5oMy52cy5tM2EifQ==
 </div>
-Which is the same as
+<p>The <strong>score</strong> tells us how closely they are aligned; higher scores mean the sequences are more similar. Its hard to interpret the number on its own so we can get the <strong>percent sequence identity (PID)</strong> using the <code>pid()</code> function.</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIzMF4yICAgICMgZmlyc3QgdmFsdWUgb2YgbXl2ZWN0b3JcbjE2XjIgICAgIyBzZWNvbmQgdmFsdWUgb2YgbXl2ZWN0b3JcbjMwM14yICAgIyAuLi4uXG45OV4yXG4xMTFeMiAgICMgbGFzdCB2YWx1ZSBvZiBteXZlY3RvciJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJCaW9zdHJpbmdzOjpwaWQoYWxpZ24uaDMudnMubTNhKSJ9
 </div>
-<p>Also you can take the square root of a vector…</p>
+<p>So, <em>shroom3</em> from humans and <em>shroom3</em> from mice are ~71% similar (at least using this particular method of alignment, and there are many ways to do this!)</p>
+<p>What about human shroom 3 and sea-urchin shroom?</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzcXJ0KG15dmVjdG9yKSJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJhbGlnbi5oMy52cy5oMiA8LSBCaW9zdHJpbmdzOjpwYWlyd2lzZUFsaWdubWVudChcbiAgICAgICAgICAgICAgICAgIGhTaHJvb20zLFxuICAgICAgICAgICAgICAgICAgaFNocm9vbTIpIn0=
 </div>
-<p>…and take the log of a vector…</p>
+First check out the score using <code>score()</code>, which accesses it directly without all the other information.
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsb2cobXl2ZWN0b3IpIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzY29yZShhbGlnbi5oMy52cy5oMikifQ==
 </div>
-<p>…and just about any other mathematical operation. Here we are working on a separate vector object; all of these rules apply to a column in a matrix or a dataframe. This attribution of R is called <strong>vectorization</strong>.</p>
-</div>
-<div id="functions-on-vectors" class="section level2" number="15.3">
-<h2><span class="header-section-number">15.3</span> Functions on vectors</h2>
-We can use functions on vectors. Typically these use the vectors as an input and all the numbers are processed into an output. Call the <code>mean()</code> function on the vector we made called <code>myvector</code>.
+Now the percent sequence alignment with <code>pid()</code>:
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJtZWFuKG15dmVjdG9yKSJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJCaW9zdHJpbmdzOjpwaWQoYWxpZ24uaDMudnMuaDIpIn0=
 </div>
-<p>Note how we get a single value back - the mean of all the values in the vector. R saw that we had a vector of multiple and knew that the mean is a function that doesn’t get applied to single number, but sets of numbers.</p>
-<p>The function <code>sd()</code> calculates the standard deviation. Apply the <code>sd()</code> to myvector:</p>
+<p>So Human shroom 3 and Mouse shroom 3 are 71% identical, but Human shroom 3 and human shroom 2 are only 34% similar? How does it work out evolutionary that a human and mouse gene are more similar than a human and a human gene? What are the evolutionary relationships among these genes within the shroom gene family?</p>
+</div>
+<div id="the-shroom-family-of-genes" class="section level2" number="29.5">
+<h2><span class="header-section-number">29.5</span> The shroom family of genes</h2>
+<p>I’ve copied a table from a published paper which has accession numbers for 15 different Shroom genes.</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZChteXZlY3RvcikifQ==
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzaHJvb21fdGFibGUgPC0gYyhcIkNBQTc4NzE4XCIgLCBcIlguIGxhZXZpcyBBcHhcIiAsICAgICAgICAgXCJ4U2hyb29tMVwiLFxuICAgICAgICAgICAgXCJOUF81OTc3MTNcIiAsIFwiSC4gc2FwaWVucyBBUFhMMlwiICwgICAgIFwiaFNocm9vbTFcIixcbiAgICAgICAgICAgIFwiQ0FBNTg1MzRcIiAsIFwiSC4gc2FwaWVucyBBUFhMXCIsICAgICAgICBcImhTaHJvb20yXCIsXG4gICAgICAgICAgICBcIkFCRDE5NTE4XCIgLCBcIk0uIG11c2N1bHVzIEFweGxcIiAsICAgICAgXCJtU2hyb29tMlwiLFxuICAgICAgICAgICAgXCJBQUYxMzI2OVwiICwgXCJNLiBtdXNjdWx1cyBTaHJvb21MXCIgLCAgIFwibVNocm9vbTNhXCIsXG4gICAgICAgICAgICBcIkFBRjEzMjcwXCIgLCBcIk0uIG11c2N1bHVzIFNocm9vbVNcIiAsICAgXCJtU2hyb29tM2JcIixcbiAgICAgICAgICAgIFwiTlBfMDY1OTEwXCIsIFwiSC4gc2FwaWVucyBTaHJvb21cIiAsICAgICBcImhTaHJvb20zXCIsXG4gICAgICAgICAgICBcIkFCRDU5MzE5XCIgLCBcIlguIGxhZXZpcyBTaHJvb20tbGlrZVwiLCAgXCJ4U2hyb29tM1wiLFxuICAgICAgICAgICAgXCJOUF8wNjU3NjhcIiwgXCJILiBzYXBpZW5zIEtJQUExMjAyXCIgLCAgIFwiaFNocm9vbTRhXCIsXG4gICAgICAgICAgICBcIkFBSzk1NTc5XCIgLCBcIkguIHNhcGllbnMgU0hBUC1BXCIgLCAgICAgXCJoU2hyb29tNGJcIixcbiAgICAgICAgICAgICNcIkRRNDM1Njg2XCIgLCBcIk0uIG11c2N1bHVzIEtJQUExMjAyXCIgLCAgXCJtU2hyb29tNFwiLFxuICAgICAgICAgICAgXCJBQkE4MTgzNFwiICwgXCJELiBtZWxhbm9nYXN0ZXIgU2hyb29tXCIsIFwiZG1TaHJvb21cIixcbiAgICAgICAgICAgIFwiRUFBMTI1OThcIiAsIFwiQS4gZ2FtYmlhZSBTaHJvb21cIiwgICAgICBcImFnU2hyb29tXCIsXG4gICAgICAgICAgICBcIlhQXzM5MjQyN1wiICwgXCJBLiBtZWxsaWZlcmEgU2hyb29tXCIgLCAgXCJhbVNocm9vbVwiLFxuICAgICAgICAgICAgXCJYUF83ODM1NzNcIiAsIFwiUy4gcHVycHVyYXR1cyBTaHJvb21cIiAsIFwic3BTaHJvb21cIikgI3NlYSB1cmNoaW4ifQ==
 </div>
-</div>
-<div id="operations-with-two-vectors" class="section level2" number="15.4">
-<h2><span class="header-section-number">15.4</span> Operations with two vectors</h2>
-<p>You can also subtract one vector from another vector. This can be a little weird when you first see it. Make another vector with the numbers 5, 10, 15, 20, 25, 30. Call this myvector2:</p>
+I’ll do a bit of formatting; you can ignore these details if you want
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvcjIgPC0gYyg1LCAxMCwgMTUsIDIwLCAyNSwgMzApIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNvbnZlcnQgdG8gbWF0cml4XG5zaHJvb21fdGFibGVfbWF0cml4IDwtIG1hdHJpeChzaHJvb21fdGFibGUsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgYnlyb3cgPSBULFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG5yb3cgPSAxNClcbiMgY29udmVydCB0byBkYXRhZnJhbWVcbnNocm9vbV90YWJsZSA8LSBkYXRhLmZyYW1lKHNocm9vbV90YWJsZV9tYXRyaXgsIFxuICAgICAgICAgICAgICAgICAgICAgc3RyaW5nc0FzRmFjdG9ycyA9IEYpXG5cbiMgbmFtZSBjb2x1bW5zXG5uYW1lcyhzaHJvb21fdGFibGUpIDwtIGMoXCJhY2Nlc3Npb25cIiwgXCJuYW1lLm9yaWdcIixcIm5hbWUubmV3XCIpXG5cbiMgQ3JlYXRlIHNpbXBsaWZpZWQgc3BlY2llcyBuYW1lc1xuc2hyb29tX3RhYmxlJHNwcCA8LSBcIkhvbW9cIlxuc2hyb29tX3RhYmxlJHNwcFtncmVwKFwibGFldmlzXCIsc2hyb29tX3RhYmxlJG5hbWUub3JpZyldIDwtIFwiWGVub3B1c1wiXG5zaHJvb21fdGFibGUkc3BwW2dyZXAoXCJtdXNjdWx1c1wiLHNocm9vbV90YWJsZSRuYW1lLm9yaWcpXSA8LSBcIk11c1wiXG5zaHJvb21fdGFibGUkc3BwW2dyZXAoXCJtZWxhbm9nYXN0ZXJcIixzaHJvb21fdGFibGUkbmFtZS5vcmlnKV0gPC0gXCJEcm9zb3BoaWxhXCJcbnNocm9vbV90YWJsZSRzcHBbZ3JlcChcImdhbWJpYWVcIixzaHJvb21fdGFibGUkbmFtZS5vcmlnKV0gPC0gXCJtb3NxdWl0b1wiXG5zaHJvb21fdGFibGUkc3BwW2dyZXAoXCJtZWxsaWZlcmFcIixzaHJvb21fdGFibGUkbmFtZS5vcmlnKV0gPC0gXCJiZWVcIlxuc2hyb29tX3RhYmxlJHNwcFtncmVwKFwicHVycHVyYXR1c1wiLHNocm9vbV90YWJsZSRuYW1lLm9yaWcpXSA8LSBcInNlYSB1cmNoaW5cIiJ9
 </div>
-<p>Now subtract myvector2 from myvector. What happens?</p>
+Take a look:
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3Rvci1teXZlY3RvcjIifQ==
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzaHJvb21fdGFibGUifQ==
 </div>
 </div>
-<div id="subsetting-vectors" class="section level2" number="15.5">
-<h2><span class="header-section-number">15.5</span> Subsetting vectors</h2>
-<p>You can extract an <strong>element</strong> of a vector by typing the vector name with the index of that element given in <strong>square brackets</strong>. For example, to get the value of the 3rd element in the vector <code>myvector</code>, we type:</p>
+<div id="downloading-multiple-sequences" class="section level2" number="29.6">
+<h2><span class="header-section-number">29.6</span> Downloading multiple sequences</h2>
+<p>Instead of getting one sequence at a time we can download several by accessing the “accession” column from the table</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvclszXSJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzaHJvb21fdGFibGUkYWNjZXNzaW9uIn0=
 </div>
-<p>Extract the 4th element of the vector:</p>
+We can give this whole set of accessions to <code>entrez_fetch()</code>:
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3Rvcls0XSJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzaHJvb21zIDwtIGVudHJlel9mZXRjaChkYiA9IFwicHJvdGVpblwiLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgaWQgPSBzaHJvb21fdGFibGUkYWNjZXNzaW9uLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dHlwZSA9IFwiZmFzdGFcIikifQ==
 </div>
-<p>You can extract more than one element by using a vector in the brackets:</p>
-First, say I want to extract the 3rd and the 4th element. I can make a vector with 3 and 4 in it:
+We can look at what we got here with <code>cat()</code> (I won’t display this because it is very long!)
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJudW1zIDwtIGMoMyw0KSJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjYXQoc2hyb29tcykifQ==
 </div>
-Then put that vector in the brackets:
+<p>The current format of these data is a single, long set of data. This is a standard way to store, share and transmit FASTA files, but in <em>R</em> we’ll need a slightly different format.</p>
+<p>We’ll download all of the sequences again, this time using a function from <code>compbio4all</code> called <code>entrez_fetch_list()</code> which is a <strong>wrapper</strong> function I wrote to put the output of <code>entrez_fetch()</code> into an <em>R</em> data format called a <strong>list</strong>.</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvcltudW1zXSJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzaHJvb21zX2xpc3QgPC0gZW50cmV6X2ZldGNoX2xpc3QoZGIgPSBcInByb3RlaW5cIiwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgIGlkID0gc2hyb29tX3RhYmxlJGFjY2Vzc2lvbiwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgIHJldHR5cGUgPSBcImZhc3RhXCIpIn0=
 </div>
-<p>We can also do it directly like this, skipping the vector-creation step:</p>
+<p>Now we have a list which as 14 <strong>elements</strong>, one for each sequence in our table.</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvcltjKDMsNCldIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsZW5ndGgoc2hyb29tc19saXN0KSJ9
 </div>
-<p>In the chunk below extract the 1st and 2nd elements:</p>
+<p>We now need to clean up each one fo these sequences. We can do that using a simple <code>for()</code> loop:</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvcltjKDEsMildIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJmb3IoaSBpbiAxOmxlbmd0aChzaHJvb21zX2xpc3QpKXtcbiAgc2hyb29tc19saXN0W1tpXV0gPC0gZmFzdGFfY2xlYW5lcihzaHJvb21zX2xpc3RbW2ldXSwgcGFyc2UgPSBGKVxufSJ9
 </div>
-</div>
-<div id="sequences-of-numbers" class="section level2" number="15.6">
-<h2><span class="header-section-number">15.6</span> Sequences of numbers</h2>
-Often we want a vector of numbers in <strong>sequential order</strong>. That is, a vector with the numbers 1, 2, 3, 4, … or 5, 10, 15, 20, … The easiest way to do this is using a colon
+<p>Second to last step: we need to take each one of our sequences from our list and put it into a <strong>vector</strong>, in particular a <strong>named vector</strong></p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIxOjEwIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIG1ha2UgYSB2ZWN0b3IgdG8gc3RvcmUgb3V0cHV0XG5zaHJvb21zX3ZlY3RvciA8LSByZXAoTkEsIGxlbmd0aChzaHJvb21zX2xpc3QpKVxuXG4jIHJ1biB0aGUgbG9vcFxuZm9yKGkgaW4gMTpsZW5ndGgoc2hyb29tc192ZWN0b3IpKXtcbiAgc2hyb29tc192ZWN0b3JbaV0gPC0gc2hyb29tc19saXN0W1tpXV1cbn1cblxuIyBuYW1lIHRoZSB2ZWN0b3Jcbm5hbWVzKHNocm9vbXNfdmVjdG9yKSA8LSBuYW1lcyhzaHJvb21zX2xpc3QpIn0=
 </div>
-Note that in R 1:10 is equivalent to c(1:10)
+<p>Now the final step: we need to convert our named vector to a <strong>string set</strong> using <code>Biostrings::AAStringSet()</code>. Note the <code>_ss</code> tag at the end of the object we’re assigning the output to, which designates this as a string set.</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjKDE6MTApIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzaHJvb21zX3ZlY3Rvcl9zcyA8LSBCaW9zdHJpbmdzOjpBQVN0cmluZ1NldChzaHJvb21zX3ZlY3RvcikifQ==
 </div>
-<p>Usually to emphasize that a vector is being created I will use c(1:10)</p>
-We can do any number to any numbers
+</div>
+<div id="multiple-sequence-alignment" class="section level2" number="29.7">
+<h2><span class="header-section-number">29.7</span> Multiple sequence alignment</h2>
+<p>We must <strong>align</strong> all of the sequences we downloaded and use that <strong>alignment</strong> to build a <strong>phylogenetic tree</strong>. This will tell us how the different genes, both within and between species, are likely to be related.</p>
+<div id="building-an-multiple-sequence-alignment-msa" class="section level3" number="29.7.1">
+<h3><span class="header-section-number">29.7.1</span> Building an Multiple Sequence Alignment (MSA)</h3>
+We’ll use the software <code>msa,</code> which implements the <strong>ClustalW</strong> multiple sequence alignment algorithm. Normally we’d have to download the ClustalW program and either point-and-click our way through it or use the <strong>command line</strong>*, but these folks wrote up the algorithm in R so we can do this with a line of R code. This will take a second or two.
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjKDIwOjMwKSJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzaHJvb21zX2FsaWduIDwtIG1zYShzaHJvb21zX3ZlY3Rvcl9zcyxcbiAgICAgICAgICAgICAgICAgICAgIG1ldGhvZCA9IFwiQ2x1c3RhbFdcIikifQ==
 </div>
-<p>We can also do it in <em>reverse</em>. In the code below put 30 before 20:</p>
+</div>
+<div id="viewing-an-msa" class="section level3" number="29.7.2">
+<h3><span class="header-section-number">29.7.2</span> Viewing an MSA</h3>
+<p>Once we build an MSA we need to visualize it.</p>
+<div id="viewing-an-msa-in-r" class="section level4" number="29.7.2.1">
+<h4><span class="header-section-number">29.7.2.1</span> Viewing an MSA in R</h4>
+We can look at the output from <code>msa()</code>, but its not very helpful
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjKDMwOjIwKSJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzaHJvb21zX2FsaWduIn0=
 </div>
-<p>A useful function in <em>R</em> is the <code>seq()</code> function, which is an explicit function that can be used to create a vector containing a sequence of numbers that run from a particular number to another particular number.</p>
+<p>A function called <code>print_msa()</code> (Coghlan 2011) which I’ve put into<code>combio4all</code> can give us more informative output by printing out the actual alignment into the R console.</p>
+To use <code>print_msa()</code> We need to make a few minor tweaks though first. These are behind the scenes changes so don’t worry about the details right now. We’ll change the name to <code>shrooms_align_seqinr</code> to indcate that one of our changes is putting this into a format defined by the bioinformatics package <code>seqinr</code>.
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXEoMSwgMTApIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjbGFzcyhzaHJvb21zX2FsaWduKSA8LSBcIkFBTXVsdGlwbGVBbGlnbm1lbnRcIlxuc2hyb29tc19hbGlnbl9zZXFpbnIgPC0gbXNhQ29udmVydChzaHJvb21zX2FsaWduLCB0eXBlID0gXCJzZXFpbnI6OmFsaWdubWVudFwiKSJ9
 </div>
-<p>Using <code>seq()</code> instead of a <code>:</code> can be useful for readability to make it explicit what is going on. More importantly, <code>seq</code> has an argument <code>by = ...</code> so you can make a sequence of number with any interval between For example, if we want to create the sequence of numbers from 1 to 10 in steps of 1 (i.e.. 1, 2, 3, 4, … 10), we can type:</p>
+I won’t display the output from <code>shrooms_align_seqinr</code> because its very long; we have 14 shroom genes, and shroom happens to be a rather long gene.
+<!-- TODO: set up for displaying only part of the alignment, subsetting it etc. -->
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXEoMSwgMTAsXG4gICAgYnkgPSAxKSJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJwcmludF9tc2EoYWxpZ25tZW50ID0gc2hyb29tc19hbGlnbl9zZXFpbnIsIFxuICAgICAgICAgIGNodW5rc2l6ZSA9IDYwKSJ9
 </div>
-<p>We can change the <strong>step size</strong> by altering the value of the <code>by</code> argument given to the function <code>seq()</code>. For example, if we want to create a sequence of numbers from 1-100 in steps of 20 (i.e.. 1, 21, 41, … 101), we can type:</p>
+</div>
+<div id="displaying-an-msa-as-an-r-plot" class="section level4" number="29.7.2.2">
+<h4><span class="header-section-number">29.7.2.2</span> Displaying an MSA as an R plot</h4>
+<p>I’m going to just show about 100 amino acids near the end of the alignment, where there is the most overlap across all of the sequences. This is set with the <code>start = ...</code> and <code>end = ...</code> arguments. Note that we’re using the <code>shrooms_align</code> object.</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXEoMSwgMTAxLFxuICAgIGJ5ID0gMjApIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJnZ21zYTo6Z2dtc2Eoc2hyb29tc19hbGlnbiwgICAjIHNocm9vbXNfYWxpZ24sIE5PVCBzaHJvb21zX2FsaWduX3NlcWluclxuICAgICAgc3RhcnQgPSAyMDAwLCBcbiAgICAgIGVuZCA9IDIxMDApICJ9
 </div>
 </div>
-<div id="vectors-can-hold-numeric-or-character-data" class="section level2" number="15.7">
-<h2><span class="header-section-number">15.7</span> Vectors can hold numeric or character data</h2>
-<p>The vector we created above holds numeric data, as indicated by <code>class()</code></p>
+<div id="saving-an-msa-as-pdf" class="section level4" number="29.7.2.3">
+<h4><span class="header-section-number">29.7.2.3</span> Saving an MSA as PDF</h4>
+<p>We can take a look at the alignment in PDF format if we want. I this case I’m going to just show about 100 amino acids near the end of the alignment, where there is the most overlap across all of the sequences. This is set with the <code>y = c(...)</code> argument.</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjbGFzcyhteXZlY3RvcikifQ==
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJtc2FQcmV0dHlQcmludChzaHJvb21zX2FsaWduLCAgICAgICAgICAgICAjIGFsaWdubWVudFxuICAgICAgICAgICAgICAgZmlsZSA9IFwic2hyb29tX21zYS5wZGZcIiwgICAjIGZpbGUgbmFtZVxuICAgICAgICAgICAgICAgeT1jKDIwMDAsIDIxMDApLCAgICAgICAgICAgIyByYW5nZVxuICAgICAgICAgICAgICAgYXNrRm9yT3ZlcndyaXRlPUZBTFNFKSJ9
 </div>
-<p>Vectors can also holder character data, like the genetic code:</p>
+You can see where R is saving thigns by running <code>getwd()</code>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHZlY3RvciBvZiBjaGFyYWN0ZXIgZGF0YVxubXl2ZWN0b3IgPC0gYyhcIkFcIixcIlRcIixcIkdcIilcblxuIyBob3cgaXQgbG9va3Ncbm15dmVjdG9yXG5cbiMgd2hhdCBpcyBcImlzXCJcbmNsYXNzKG15dmVjdG9yKSJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJnZXR3ZCgpIn0=
+</div>
+<p>On a Mac you can usually find the file by searching in Finder for the file name, which I set to be “shroom_msa.pdf” using the <code>file = ...</code> arguement above.</p>
 </div>
 </div>
-<div id="regular-expressions-can-modify-character-data" class="section level2" number="15.8">
-<h2><span class="header-section-number">15.8</span> Regular expressions can modify character data</h2>
-<p>We can use <strong>regular expressions</strong> to modify character data. For example, change the Ts to Us</p>
+</div>
+<div id="genetic-distance." class="section level2" number="29.8">
+<h2><span class="header-section-number">29.8</span> Genetic distance.</h2>
+<p>Next need to first get an estimate of how similar each sequences is. The more amino acids that are identical to each other, the more similar.</p>
+Instead of similarity, we usually work in terms of <em>difference</em> or <strong>genetic distance</strong> (a.k.a. <strong>evolutionary distance</strong>). This is done with the <code>dist.alignment()</code> function.
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvciA8LSBnc3ViKFwiVFwiLCBcIlVcIiwgbXl2ZWN0b3IpIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzaHJvb21zX2Rpc3QgPC0gc2VxaW5yOjpkaXN0LmFsaWdubWVudChzaHJvb21zX2FsaWduX3NlcWluciwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBtYXRyaXggPSBcImlkZW50aXR5XCIpIn0=
 </div>
-Now check it out
+We’ve made a matrix using <code>dist.alignment()</code>; let’s round it off so its easier to look at using the <code>round()</code> function.
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvciJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzaHJvb21zX2Rpc3Rfcm91bmRlZCA8LSByb3VuZChzaHJvb21zX2Rpc3QsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBkaWdpdHMgPSAzKSJ9
 </div>
-<p>Regular expressions are a deep subject in computing. You can find some more information about them <a href="https://rstudio-pubs-static.s3.amazonaws.com/74603_76cd14d5983f47408fdf0b323550b846.html">here</a>.</p>
+Now let’s look at it
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzaHJvb21zX2Rpc3Rfcm91bmRlZCJ9
+</div>
+</div>
+<div id="phylognetic-trees-finally" class="section level2" number="29.9">
+<h2><span class="header-section-number">29.9</span> Phylognetic trees (finally!)</h2>
+<p>We got our sequence, built multiple sequence alignment, and calcualted the genetic distance between sequences. Now we are - finally - ready to build a phylogenetic tree.</p>
+<p>First, we let R figure out the structure of the tree. There are <strong>MANY</strong> ways to build phylogenetic trees. We’ll use a common one used for exploring sequences called <strong>neighbor joining</strong> algorithm via the function <code>nj()</code>. Neighbor joining uses genetic distances to cluster sequences into <strong>clades</strong>.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ0cmVlIDwtIG5qKHNocm9vbXNfZGlzdCkifQ==
+</div>
+<div id="plotting-phylogenetic-trees" class="section level3" number="29.9.1">
+<h3><span class="header-section-number">29.9.1</span> Plotting phylogenetic trees</h3>
+Now we’ll make a quick plot of our tree using <code>plot()</code> (and add a little label using a function called <code>mtext()</code>).
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHBsb3QgdHJlZVxucGxvdC5waHlsbyAodHJlZSwgbWFpbj1cIlBoeWxvZ2VuZXRpYyBUcmVlXCIsIFxuICAgICAgICAgICAgdHlwZSA9IFwidW5yb290ZWRcIiwgXG4gICAgICAgICAgICB1c2UuZWRnZS5sZW5ndGggPSBGKVxuXG4jIGFkZCBsYWJlbFxubXRleHQodGV4dCA9IFwiU2hyb29tIGZhbWlseSBnZW5lIHRyZWUgLSB1bnJvb3RlZCwgbm8gYnJhbmNoIGxlbmd0aHNcIikifQ==
+</div>
+<p>This is an **unrooted tree*. For the sake of plotting we’ve also ignored the evolutionary distance between the sequences.</p>
+<p>To make a rooted tree we remove <code>type = "unrooted</code>.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHBsb3QgdHJlZVxucGxvdC5waHlsbyAodHJlZSwgbWFpbj1cIlBoeWxvZ2VuZXRpYyBUcmVlXCIsIFxuICAgICAgICAgICAgdXNlLmVkZ2UubGVuZ3RoID0gRilcblxuIyBhZGQgbGFiZWxcbm10ZXh0KHRleHQgPSBcIlNocm9vbSBmYW1pbHkgZ2VuZSB0cmVlIC0gcm9vdGVkLCBubyBicmFuY2ggbGVudGhzXCIpIn0=
+</div>
+<p>We can include information about branch length by setting <code>use.edge.length = ...</code> to <code>T</code>.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHBsb3QgdHJlZVxucGxvdC5waHlsbyAodHJlZSwgbWFpbj1cIlBoeWxvZ2VuZXRpYyBUcmVlXCIsIFxuICAgICAgICAgICAgdXNlLmVkZ2UubGVuZ3RoID0gVClcblxuIyBhZGQgbGFiZWxcbm10ZXh0KHRleHQgPSBcIlNocm9vbSBmYW1pbHkgZ2VuZSB0cmVlIC0gcm9vdGVkLCB3aXRoIGJyYW5jaCBsZW50aHNcIikifQ==
+</div>
+<p>Some of the branches are now very short, but most are very long, indicating that these genes have been evolvin independently for many millions of years.</p>
+<p>Let’s make a fancier plot. Don’t worry about all the steps; I’ve added some more code to add some annotations on the right-hand side to help us see what’s going on.</p>
+<!-- TODO: how does this render? -->
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJwbG90KHRyZWUsIG1haW49XCJQaHlsb2dlbmV0aWMgVHJlZVwiKVxubXRleHQodGV4dCA9IFwiU2hyb29tIGZhbWlseSBnZW5lIHRyZWVcIilcblxueCA8LSAwLjU1MVxueDIgPC0gMC42XG5cbiMgbGFiZWwgU2hybSAzXG5zZWdtZW50cyh4MCA9IHgsIHkwID0gMSwgXG4gICAgICAgICB4MSA9IHgsIHkxID0gNCxcbiAgICAgICAgIGx3ZD0yKVxudGV4dCh4ID0geCoxLjAxLCB5ID0gMi41LCBcIlNocm0gM1wiLGFkaiA9IDApXG5cbnNlZ21lbnRzKHgwID0geCwgeTAgPSA1LCBcbiAgICAgICAgIHgxID0geCwgeTEgPSA2LFxuICAgICAgICAgbHdkPTIpXG50ZXh0KHggPSB4KjEuMDEsIHkgPSA1LjUsIFwiU2hybSAyXCIsYWRqID0gMClcblxuc2VnbWVudHMoeDAgPSB4LCB5MCA9IDcsIFxuICAgICAgICAgeDEgPSB4LCB5MSA9IDksXG4gICAgICAgICBsd2Q9MilcbnRleHQoeCA9IHgqMS4wMSwgeSA9IDgsIFwiU2hybSAxXCIsYWRqID0gMClcblxuc2VnbWVudHMoeDAgPSB4LCB5MCA9IDEwLCBcbiAgICAgICAgIHgxID0geCwgeTEgPSAxMyxcbiAgICAgICAgIGx3ZD0yKVxudGV4dCh4ID0geCoxLjAxLCB5ID0gMTIsIFwiU2hybSA/XCIsYWRqID0gMClcblxuXG5zZWdtZW50cyh4MCA9IHgsIHkwID0gMTQsIFxuICAgICAgICAgeDEgPSB4LCB5MSA9IDE1LFxuICAgICAgICAgbHdkPTIpXG50ZXh0KHggPSB4KjEuMDEsIHkgPSAxNC41LCBcIlNocm0gNFwiLGFkaiA9IDApXG5cblxuc2VnbWVudHMoeDAgPSB4MiwgeTAgPSAxLCBcbiAgICAgICAgIHgxID0geDIsIHkxID0gNixcbiAgICAgICAgIGx3ZD0yKVxuXG5zZWdtZW50cyh4MCA9IHgyLCB5MCA9IDcsIFxuICAgICAgICAgeDEgPSB4MiwgeTEgPSA5LFxuICAgICAgICAgbHdkPTIpXG5cbnNlZ21lbnRzKHgwID0geDIsIHkwID0gMTAsIFxuICAgICAgICAgeDEgPSB4MiwgeTEgPSAxNSxcbiAgICAgICAgIGx3ZD0yKSJ9
+</div>
+<!-- Assignment - redo with DNA; how does PID compare -->
+<!-- compare pariwise PID to MSA similarity -->
 
+</div>
+</div>
+</div>
+
+
+
+<h3 class="unnumbered"></h3>
 </div>
 </div>
             </section>
@@ -655,8 +821,8 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvciJ9
           </div>
         </div>
       </div>
-<a href="mini-tutorial-vectors-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="plotting-vectors-in-base-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="unrooted-neighbor-joining-phylogenetic-trees.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix-01-getting-access-to-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -688,7 +854,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/brouwern/lbrb/edit/master/08-vectors-AC04-01.Rmd",
+"link": "https://github.com/brouwern/lbrb/edit/master/23-alignment-walkthrough-shroom.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -696,7 +862,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/brouwern/lbrb/blob/master/08-vectors-AC04-01.Rmd",
+"link": "https://github.com/brouwern/lbrb/blob/master/23-alignment-walkthrough-shroom.Rmd",
 "text": null
 },
 "download": ["lbrb.pdf", "lbrb.epub"],

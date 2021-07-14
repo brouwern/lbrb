@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 15 Functions | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Chapter 2 Test audio link | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 15 Functions | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Chapter 2 Test audio link | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 15 Functions | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Chapter 2 Test audio link | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="mini-tutorial-vectors-in-r.html"/>
-<link rel="next" href="plotting-vectors-in-base-r.html"/>
+<link rel="prev" href="how-to-review-this-book.html"/>
+<link rel="next" href="test-shiny-app.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -474,189 +474,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="functions-2" class="section level1" number="15">
-<h1><span class="header-section-number">Chapter 15</span> Functions</h1>
-<ul>
-<li><code>seq()</code></li>
-<li><code>is()</code>, <code>is.vector()</code>, <code>is.matrix()</code></li>
-<li><code>gsub()</code></li>
-</ul>
-<div id="vectors-in-r" class="section level2" number="15.1">
-<h2><span class="header-section-number">15.1</span> Vectors in R</h2>
-<p><strong>Variables</strong> in R include <strong>scalars</strong>, <strong>vectors</strong>, and <strong>lists</strong>. <strong>Functions</strong> in R carry out operations on variables, for example, using the <code>log10()</code> function to calculate the log to the base 10 of a scalar variable <code>x</code>, or using the <code>mean()</code> function to calculate the average of the values in a vector variable <code>myvector</code>. For example, we can use <code>log10()</code> on a scalar object like this:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHN0b3JlIHZhbHVlIGluIG9iamVjdFxueCA8LSAxMDBcblxuIyB0YWtlIGxvZyBiYXNlIDEwIG9mIG9iamVjdFxubG9nMTAoeCkifQ==
-</div>
-<p>Note that while mathematically x is a single number, or a scalar, R considers it to be a vector:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJpcy52ZWN0b3IoeCkifQ==
-</div>
-There are many “is” commands. What is returned when you run <code>is.matrix()</code> on a vector?
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJpcy5tYXRyaXgoeCkifQ==
-</div>
-<p>Mathematically this is a bit odd, since often a vector is defined as a one-dimensional matrix, e.g., a single column or single row of a matrix. But in <em>R</em> land, a vector is a vector, and matrix is a matrix, and there are no explicit scalars.</p>
-</div>
-<div id="math-on-vectors" class="section level2" number="15.2">
-<h2><span class="header-section-number">15.2</span> Math on vectors</h2>
-<p>Vectors can serve as the input for mathematical operations. When this is done <em>R</em> does the mathematical operation separately on each element of the vector. This is a unique feature of <em>R</em> that can be hard to get used to even for people with previous programming experience.</p>
-<p>Let’s make a vector of numbers:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvciA8LSBjKDMwLDE2LDMwMyw5OSwxMSwxMTEpIn0=
-</div>
-<p>What happens when we multiply <code>myvector</code> by 10?</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvcioxMCJ9
-</div>
-<p>R has taken each of the 6 values, 30 through 111, of <code>myvector</code> and multiplied each one by 10, giving us 6 results. That is, what R did was</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIzMCoxMCAgICAjIGZpcnN0IHZhbHVlIG9mIG15dmVjdG9yXG4xNioxMCAgICAjIHNlY29uZCB2YWx1ZSBvZiBteXZlY3RvclxuMzAzKjEwICAgIyAuLi4uXG45OSoxMFxuMTExKjEwICAgIyBsYXN0IHZhbHVlIG9mIG15dmVjdG9yIn0=
-</div>
-<p>The normal order of operations rules apply to vectors as they do to operations we’re more used to. So multiplying <code>myvector</code> by 10 is the same whether you put he 10 before or after vector. That is <code>myvector\*10</code> is the same as <code>10\*myvector</code>.</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvcioxMFxuMTAqbXl2ZWN0b3IifQ==
-</div>
-<p>What happen when you subtract 30 from myvector? Write the code below.</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3Rvci0zMCJ9
-</div>
-So, what R did was
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIzMC0zMCAgICAjIGZpcnN0IHZhbHVlIG9mIG15dmVjdG9yXG4xNi0zMCAgICAjIHNlY29uZCB2YWx1ZSBvZiBteXZlY3RvclxuMzAzLTMwICAgIyAuLi4uXG45OS0zMFxuMTExLTMwICAgIyBsYXN0IHZhbHVlIG9mIG15dmVjdG9yIn0=
-</div>
-<p>You can also square a vector</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3Rvcl4yIn0=
-</div>
-Which is the same as
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIzMF4yICAgICMgZmlyc3QgdmFsdWUgb2YgbXl2ZWN0b3JcbjE2XjIgICAgIyBzZWNvbmQgdmFsdWUgb2YgbXl2ZWN0b3JcbjMwM14yICAgIyAuLi4uXG45OV4yXG4xMTFeMiAgICMgbGFzdCB2YWx1ZSBvZiBteXZlY3RvciJ9
-</div>
-<p>Also you can take the square root of a vector…</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzcXJ0KG15dmVjdG9yKSJ9
-</div>
-<p>…and take the log of a vector…</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsb2cobXl2ZWN0b3IpIn0=
-</div>
-<p>…and just about any other mathematical operation. Here we are working on a separate vector object; all of these rules apply to a column in a matrix or a dataframe. This attribution of R is called <strong>vectorization</strong>.</p>
-</div>
-<div id="functions-on-vectors" class="section level2" number="15.3">
-<h2><span class="header-section-number">15.3</span> Functions on vectors</h2>
-We can use functions on vectors. Typically these use the vectors as an input and all the numbers are processed into an output. Call the <code>mean()</code> function on the vector we made called <code>myvector</code>.
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJtZWFuKG15dmVjdG9yKSJ9
-</div>
-<p>Note how we get a single value back - the mean of all the values in the vector. R saw that we had a vector of multiple and knew that the mean is a function that doesn’t get applied to single number, but sets of numbers.</p>
-<p>The function <code>sd()</code> calculates the standard deviation. Apply the <code>sd()</code> to myvector:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZChteXZlY3RvcikifQ==
-</div>
-</div>
-<div id="operations-with-two-vectors" class="section level2" number="15.4">
-<h2><span class="header-section-number">15.4</span> Operations with two vectors</h2>
-<p>You can also subtract one vector from another vector. This can be a little weird when you first see it. Make another vector with the numbers 5, 10, 15, 20, 25, 30. Call this myvector2:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvcjIgPC0gYyg1LCAxMCwgMTUsIDIwLCAyNSwgMzApIn0=
-</div>
-<p>Now subtract myvector2 from myvector. What happens?</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3Rvci1teXZlY3RvcjIifQ==
-</div>
-</div>
-<div id="subsetting-vectors" class="section level2" number="15.5">
-<h2><span class="header-section-number">15.5</span> Subsetting vectors</h2>
-<p>You can extract an <strong>element</strong> of a vector by typing the vector name with the index of that element given in <strong>square brackets</strong>. For example, to get the value of the 3rd element in the vector <code>myvector</code>, we type:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvclszXSJ9
-</div>
-<p>Extract the 4th element of the vector:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3Rvcls0XSJ9
-</div>
-<p>You can extract more than one element by using a vector in the brackets:</p>
-First, say I want to extract the 3rd and the 4th element. I can make a vector with 3 and 4 in it:
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJudW1zIDwtIGMoMyw0KSJ9
-</div>
-Then put that vector in the brackets:
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvcltudW1zXSJ9
-</div>
-<p>We can also do it directly like this, skipping the vector-creation step:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvcltjKDMsNCldIn0=
-</div>
-<p>In the chunk below extract the 1st and 2nd elements:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvcltjKDEsMildIn0=
-</div>
-</div>
-<div id="sequences-of-numbers" class="section level2" number="15.6">
-<h2><span class="header-section-number">15.6</span> Sequences of numbers</h2>
-Often we want a vector of numbers in <strong>sequential order</strong>. That is, a vector with the numbers 1, 2, 3, 4, … or 5, 10, 15, 20, … The easiest way to do this is using a colon
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIxOjEwIn0=
-</div>
-Note that in R 1:10 is equivalent to c(1:10)
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjKDE6MTApIn0=
-</div>
-<p>Usually to emphasize that a vector is being created I will use c(1:10)</p>
-We can do any number to any numbers
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjKDIwOjMwKSJ9
-</div>
-<p>We can also do it in <em>reverse</em>. In the code below put 30 before 20:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjKDMwOjIwKSJ9
-</div>
-<p>A useful function in <em>R</em> is the <code>seq()</code> function, which is an explicit function that can be used to create a vector containing a sequence of numbers that run from a particular number to another particular number.</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXEoMSwgMTApIn0=
-</div>
-<p>Using <code>seq()</code> instead of a <code>:</code> can be useful for readability to make it explicit what is going on. More importantly, <code>seq</code> has an argument <code>by = ...</code> so you can make a sequence of number with any interval between For example, if we want to create the sequence of numbers from 1 to 10 in steps of 1 (i.e.. 1, 2, 3, 4, … 10), we can type:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXEoMSwgMTAsXG4gICAgYnkgPSAxKSJ9
-</div>
-<p>We can change the <strong>step size</strong> by altering the value of the <code>by</code> argument given to the function <code>seq()</code>. For example, if we want to create a sequence of numbers from 1-100 in steps of 20 (i.e.. 1, 21, 41, … 101), we can type:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXEoMSwgMTAxLFxuICAgIGJ5ID0gMjApIn0=
-</div>
-</div>
-<div id="vectors-can-hold-numeric-or-character-data" class="section level2" number="15.7">
-<h2><span class="header-section-number">15.7</span> Vectors can hold numeric or character data</h2>
-<p>The vector we created above holds numeric data, as indicated by <code>class()</code></p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjbGFzcyhteXZlY3RvcikifQ==
-</div>
-<p>Vectors can also holder character data, like the genetic code:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHZlY3RvciBvZiBjaGFyYWN0ZXIgZGF0YVxubXl2ZWN0b3IgPC0gYyhcIkFcIixcIlRcIixcIkdcIilcblxuIyBob3cgaXQgbG9va3Ncbm15dmVjdG9yXG5cbiMgd2hhdCBpcyBcImlzXCJcbmNsYXNzKG15dmVjdG9yKSJ9
-</div>
-</div>
-<div id="regular-expressions-can-modify-character-data" class="section level2" number="15.8">
-<h2><span class="header-section-number">15.8</span> Regular expressions can modify character data</h2>
-<p>We can use <strong>regular expressions</strong> to modify character data. For example, change the Ts to Us</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvciA8LSBnc3ViKFwiVFwiLCBcIlVcIiwgbXl2ZWN0b3IpIn0=
-</div>
-Now check it out
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteXZlY3RvciJ9
-</div>
-<p>Regular expressions are a deep subject in computing. You can find some more information about them <a href="https://rstudio-pubs-static.s3.amazonaws.com/74603_76cd14d5983f47408fdf0b323550b846.html">here</a>.</p>
+<div id="test-audio-link" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Test audio link</h1>
+<p>Here is an example of an audio link embedded in a bookdown book.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="test-audio-link.html#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_url</span>(<span class="st">&quot;https://www.genome.gov/sites/default/files/tg/en/narration/single_nucleotide_polymorphisms_snps.mp3&quot;</span>)</span></code></pre></div>
+<iframe src="https://www.genome.gov/sites/default/files/tg/en/narration/single_nucleotide_polymorphisms_snps.mp3" width="672" height="400px">
+</iframe>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="mini-tutorial-vectors-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="plotting-vectors-in-base-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="how-to-review-this-book.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="test-shiny-app.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -688,7 +520,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/brouwern/lbrb/edit/master/08-vectors-AC04-01.Rmd",
+"link": "https://github.com/brouwern/lbrb/edit/master/00b_test_audio_link.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -696,7 +528,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/brouwern/lbrb/blob/master/08-vectors-AC04-01.Rmd",
+"link": "https://github.com/brouwern/lbrb/blob/master/00b_test_audio_link.Rmd",
 "text": null
 },
 "download": ["lbrb.pdf", "lbrb.epub"],
