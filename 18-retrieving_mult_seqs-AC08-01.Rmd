@@ -133,11 +133,11 @@ Print out the first 20 letters of the second sequence
 seq2[1:20]                                   
 ```
 
-We have these four sequences, each cleaned and in its own vector.  We can therefore do dotplots, alignments, and other analyses.  Creating all these seprate vectors is a bit laborious.  Luckily `entrez_fetch()` can download multiple sequences for us.
+We have these four sequences, each cleaned and in its own vector.  We can therefore do dotplots, alignments, and other analyses.  Creating all these separate vectors is a bit laborious.  Luckily `entrez_fetch()` can download multiple sequences for us.
 
 ## Downloading sequences in bulk
 
-Previously we were giving `entrez_fetch` the name of just one sequence at a time by using square brackets on our `seqnames` vector, e.g. `seqnames[1]`, `seqnames[2]` etc.  If don't include square brackets, `entrez_fetch()` will download *all* of the sequences in succession and package them up into a single long, formatted string.  This may take a second or two, depending on your internet connection and how busy the NCBI serverse are.
+Previously we were giving `entrez_fetch` the name of just one sequence at a time by using square brackets on our `seqnames` vector, e.g. `seqnames[1]`, `seqnames[2]` etc.  If don't include square brackets, `entrez_fetch()` will download *all* of the sequences in succession and package them up into a single long, formatted string.  This may take a second or two, depending on your internet connection and how busy the NCBI servers are.
 
 ```{r}
 seq_1_2_3_4 <- rentrez::entrez_fetch(db = "protein", 

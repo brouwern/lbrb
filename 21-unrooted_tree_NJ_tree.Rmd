@@ -1,0 +1,127 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Unrooted neighbor-joining phylogenetic trees
+
+**NOTE**: the code for this chapter works as intended but there are some differences between my results and what is reported by the original author of the chapter.  This is likely to do with different alignment software, though it could just be a typo.
+
+
+**By**: Avril Coghlan.
+Multiple Alignment and Phylogenetic trees
+https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html
+
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+<!-- should make a intro to phylogenetic trees to preced this -->
+
+## Preliminaries
+
+```{r}
+library(compbio4all)
+library(seqinr)
+```
+
+
+You will need to install the `ape` package if you do not have it already using `install.packages("ape")`.
+ 
+```{r, warning = F, error = F, message = F}
+library(ape)
+```
+ 
+ 
+### Key functions 
+
+* compbio4all::unrooted_NJ_tree (Coghlan 200x)
+
+### Key vocab
+
+* clade
+* bootstrap
+* resample
+* rooted vs. unrooted tree
+* outgroup
+
+
+
+## Building an unrooted phylogenetic tree for protein sequences
+
+<!-- when distance matrices discussed? -->
+
+Once we have a **distance matrix** that gives the **pairwise distances** between all our protein sequences, we can build a **phylogenetic tree** based on that distance matrix. One method for using this is the **neighbor-joining algorithm**.
+
+You can build a phylogenetic tree using the neighbor-joining (NJ) algorithm with the the `ape` package. The R function `unrooted_NJ_tree()` is a **wrapper** for functions from the `ape` package which builds a phylogenetic tree based on an alignment of sequences, using the NJ algorithm.
+
+The `unrooted_NJ_tree()` function takes an alignment of sequences its input, calculates **pairwise distances** between the sequences based on the alignment, and then builds a phylogenetic tree based on the pairwise distances. It returns the phylogenetic tree, and also makes a plot of that tree.
+
+The alignment is save in `compbio4all` as `virusaln` and can be loaded with the `data()` command.
+
+```{r}
+data(virusaln_seqinr)
+```
+
+Take a look at the structure of the data
+```{r}
+str(virusaln_seqinr)
+```
+
+
+Build the tree with `unrooted_NJ_tree()`
+```{r, eval = F}
+virusalntree <- unrooted_NJ_tree(virusaln_seqinr_clean,
+                               type="protein")
+```
+
+Note that you need to specify that the type of sequences that you are using are protein sequences when you use `unrooted_NJ_tree()`, by setting `type=protein`.
+
+We can see that `Q5VKP1` (Western Caucasian bat virus phosphoprotein) and `P06747` (rabies virus phosphoprotein) have been grouped together into a **clade** on the tree, and that `O56773` (Lagos bat virus phosphoprotein) and `P0C569` (Mokola virus phosphoprotein) are grouped together.
+
+<!-- Where is genetic distance code? -->
+
+This is consistent with what we saw above in the genetic distance matrix, which showed that the genetic distance between Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein (P0C569) is relatively small.
+
+## Boostrap values indicate support for clades
+
+In the plot, the numbers in blue boxes are **bootstrap values** for the nodes in the tree.  A bootstrap value for a particular node in the tree gives an idea of the confidence that we have in the clade (group) defined by that node in the tree. If a node has a high bootstrap value (near 100%) then we are very confident that the clade defined by the node is correct, while if it has a low bootstrap value (near 0%) then we are not so confident.
+
+Note that the fact that a bootstrap value for a node is high does not necessarily guarantee that the clade defined by the node is correct, but just tells us that it is quite likely that it is correct given the data and analysis we're using.
+
+The bootstrap values are calculated by making many (for example, 100) random **resamples** of the alignment that the phylogenetic tree was based upon. Each resample of the alignment consists of a certain number x (e.g.. 200) of randomly sampled *columns* from the alignment. Each resample of the alignment (e.g.. 200 randomly sampled columns) forms a sort of fake alignment of its own, and a phylogenetic tree can be based upon the *resample*. We can make 100 random resamples of the alignment, and build 100 phylogenetic trees based on the 100 resamples. These 100 trees are known as the **bootstrap trees**. For each clade (grouping) that we see in our original phylogenetic tree, we can count in how many of the 100 bootstrap trees it appears. This is known as the **bootstrap value** for the clade in our original phylogenetic tree.
+
+For example, if we calculate 100 random resamples of the virus phosphoprotein alignment, and build 100 phylogenetic trees based on these resamples, we can calculate the bootstrap values for each clade in the virus phosphoprotein phylogenetic tree.
+
+**NOTE:** I am currently not able to reproduce these results:
+
+In this case, the bootstrap value for the node defining the clade containing Q5VKP1 (Western Caucasian bat virus phosphoprotein) and P06747 (rabies virus phosphoprotein) is 25%, while the bootstrap value for node defining the clade containing of Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein (P0C569) is 100%. The bootstrap values for each of these clades is the percent of 100 bootstrap trees that the clade appears in.
+
+Therefore, we are very confident that Lagos bat virus and Mokola virus phosphoproteins should be grouped together in the tree. However, we are not so confident that the Western Caucasian bat virus and rabies virus phosphoproteins should be grouped together.
+
+## Branch lengths indicate divergence between sequences
+
+The lengths of the branches in the plot of the tree are proportional to the amount of evolutionary change (estimated number of mutations) along the branches.  In this case, the branches leading to Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein (P0C569) from the node representing their common ancestor are slightly shorter than the branches leading to the Western Caucasian bat virus (Q5VKP1) and rabies virus (P06747) phosphoproteins from the node representing their common ancestor.
+
+This suggests that there might have been more mutations in the Western Caucasian bat virus (Q5VKP1) and rabies virus (P06747) phosphoproteins since they shared a common ancestor, than in the Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein (P0C569) since they shared a common ancestor.
+
+## Unrooted trees lack an outgroup
+
+The tree above of the virus phosphoproteins is an **unrooted** phylogenetic tree as it does not contain an **outgroup** sequence; that is, a sequence of a protein that is known to be more distantly related to the other proteins in the tree than they are to each other.
+
+As a result, we cannot tell which direction evolutionary time ran in along the internal branches of the tree. For example, we cannot tell whether the node representing the common ancestor of (O56773, P0C569) was an ancestor of the node representing the common ancestor of (Q5VKP1, P06747), or the other way around.
+
+In order to build a **rooted **phylogenetic tree, we need to have an outgroup sequence in our tree. In the case of the virus phosphoproteins, this is unfortunately not possible, as there is not any protein known that is more distantly related to the four proteins already in our tree than they are to each other.
+
+However, in many other cases, an outgroup - a sequence known to be more distantly related to the other sequences in the tree than they are to each other - is known, and so it is possible to build a rooted phylogenetic tree.
+
+We discussed above that it is a good idea to investigate whether discarding the poorly conserved regions of a multiple alignment has an effect on the phylogenetic analysis. In this case, we made a filtered copy of the multiple alignment and stored it in the variable virusln_seqinr_clean (see above). We can make a phylogenetic tree based this filtered alignment, and see if it agrees with the phylogenetic tree based on the original alignment:
+
+```{r, eval = F}
+data(virusaln_seqinr_clean)
+cleanedvirusalntree <- unrooted_NJ_tree(virusaln_seqinr_clean,type="protein")
+```
+
+As in the phylogenetic tree based on the raw (unfiltered) multiple alignment, O56773 and P0C569 are still grouped together, and Q5VKP1 and P06747 are still grouped together.  Thus, filtering the multiple alignment does not have an effect on the tree.  The bootstrap value, however, have changed.
+
+If we had found a difference in the trees made using the unfiltered and filtered multiple alignments, we would have to examine the multiple alignments closely, to see if the unfiltered multiple alignment contains a lot of very poorly aligned regions that might be adding noise to the phylogenetic analysis (if this is true, the tree based on the filtered alignment is likely to be more reliable).
+

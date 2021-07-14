@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 22 Local protein aligments in R | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Chapter 16 FASTA Files | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 22 Local protein aligments in R | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Chapter 16 FASTA Files | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 22 Local protein aligments in R | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Chapter 16 FASTA Files | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="global-proteins-aligments-in-r.html"/>
-<link rel="next" href="retrieving-multiple-sequences-in-r.html"/>
+<link rel="prev" href="programming-in-r-functions.html"/>
+<link rel="next" href="downloading-dna-sequences-as-fasta-files-in-r.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -444,41 +444,71 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="local-protein-aligments-in-r" class="section level1" number="22">
-<h1><span class="header-section-number">Chapter 22</span> Local protein aligments in <em>R</em></h1>
-<p><strong>By</strong>: Avril Coghlan.</p>
-<p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
-<div id="preliminaries-6" class="section level2" number="22.1">
-<h2><span class="header-section-number">22.1</span> Preliminaries</h2>
-<!-- is compbio4all needed? -->
-<!-- have on gone over biodoncdutor and biostrings? -->
+<div id="fasta-files" class="section level1" number="16">
+<h1><span class="header-section-number">Chapter 16</span> FASTA Files</h1>
+<!-- TODO: Add images / examples -->
+<p>Adapted from <a href="https://en.wikipedia.org/wiki/FASTA_format">Wikipedia</a>: <a href="https://en.wikipedia.org/wiki/FASTA_format" class="uri">https://en.wikipedia.org/wiki/FASTA_format</a></p>
+<!-- begin wikipedia -->
+<p>"In bioinformatics, the FASTA format is a text-based format for representing either nucleotide sequences or amino acid (protein) sequences, in which nucleotides or amino acids are represented using single-letter codes. The format allows for sequence names and comments to precede the sequences. The format originates from the FASTA alignment software, but has now become a near universal standard in the field of bioinformatics.</p>
+<p>"The simplicity of FASTA format makes it easy to manipulate and parse sequences using text-processing tools and scripting languages like the R programming language and Python.</p>
+<p>“The first line in a FASTA file starts with a”&gt;" (greater-than) symbol and holds summary information about the sequence, often starting with a unique accession number and followed by information like the name of the gene, the type of sequence, and the organism it is from.</p>
+<p>"On the next is the sequence itself in a standard one-letter character string. Anything other than a valid character is be ignored (including spaces, tabs, asterisks, etc…).</p>
+<p>"A multiple sequence FASTA format can be obtained by concatenating several single sequence FASTA files in a common file (also known as multi-FASTA format).</p>
+<p>"Following the header line, the actual sequence is represented. Sequences may be protein sequences or nucleic acid sequences, and they can contain gaps or alignment characters. Sequences are expected to be represented in the standard amino acid and nucleic acid codes. Lower-case letters are accepted and are mapped into upper-case; a single hyphen or dash can be used to represent a gap character; and in amino acid sequences, U and * are acceptable letters.</p>
+<p>"FASTQ format is a form of FASTA format extended to indicate information related to sequencing. It is created by the Sanger Centre in Cambridge.</p>
+<p>"Bioconductor.org’s Biostrings package can be used to read and manipulate FASTA files in R</p>
+<!-- end wikipedia -->
+<p>from <a href="https://zhanglab.dcmb.med.umich.edu/FASTA/" class="uri">https://zhanglab.dcmb.med.umich.edu/FASTA/</a></p>
+<p>“FASTA format is a text-based format for representing either nucleotide sequences or peptide sequences, in which base pairs or amino acids are represented using single-letter codes. A sequence in FASTA format begins with a single-line description, followed by lines of sequence data. The description line is distinguished from the sequence data by a greater-than (”&gt;“) symbol in the first column. It is recommended that all lines of text be shorter than 80 characters in length.”</p>
+<div id="example-fasta-file" class="section level2" number="16.1">
+<h2><span class="header-section-number">16.1</span> Example FASTA file</h2>
+<p>Here is an example of the contents of a FASTA file. (If your are viewing this chapter in the form of the source .Rmd file, the <code>cat()</code> function is included just to print out the content properly and is not part of the FASTA format).</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsaWJyYXJ5KGNvbXBiaW80YWxsKVxubGlicmFyeShCaW9zdHJpbmdzKSJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjYXQoXCI+Z2l8MTg2NjgxMjI4fHJlZnxZUF8wMDE4NjQ0MjQuMXwgcGh5Y29lcnl0aHJvYmlsaW46ZmVycmVkb3hpbiBveGlkb3JlZHVjdGFzZVxuTU5TRVJTRFZUTFlRUEZMRFlBSUFZTVJTUkxETEVQWVBJUFRHRkVTTlNBVlZHS0dLTlFFRVZWVFRTWUFGUVRBS0xSUUlSQVxuQUhWUUdHTlNMUVZMTkZWSUZQSExOWURMUEZGR0FETFZUTFBHR0hMSUFMRE1RUExGUkREU0FZUUFLWVRFUElMUElGSEFIUVxuUUhMU1dHR0RGUEVFQVFQRkZTUEFGTFdUUlBRRVRBVlZFVFFWRkFBRktEWUxLQVlMREZWRVFBRUFWVERTUU5MVkFJS1FBUVxuTFJZTFJZUkFFS0RQQVJHTUZLUkZZR0FFV1RFRVlJSEdGTEZETEVSS0xUVlZLXCIpIn0=
 </div>
-<div id="download-sequences-2" class="section level3" number="22.1.1">
-<h3><span class="header-section-number">22.1.1</span> Download sequences</h3>
-<p>As we did in the previous lesson on dotplots, we’ll look at two sequences.</p>
+</div>
+<div id="multiple-sequences-in-a-single-fasta-file" class="section level2" number="16.2">
+<h2><span class="header-section-number">16.2</span> Multiple sequences in a single FASTA file</h2>
+<p>Multiple sequences can be stored in a single FASTA file, each on separated by a line and have its own headline.</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIERvd25sb2FkXG4jIyBzZXF1ZW5jZSAxOiBROUNEODNcbmxlcHJhZV9mYXN0YSA8LSByZW50cmV6OjplbnRyZXpfZmV0Y2goZGIgPSBcInByb3RlaW5cIixcbiAgICAgICAgICAgICAgICAgICAgICAgIGlkID0gXCJROUNEODNcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICByZXR0eXBlID0gXCJmYXN0YVwiKVxuIyMgc2VxdWVuY2UgMjogT0lOMTc2MTkuMVxudWxjZXJhbnNfZmFzdGEgPC0gcmVudHJlejo6ZW50cmV6X2ZldGNoKGRiID0gXCJwcm90ZWluXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgaWQgPSBcIk9JTjE3NjE5LjFcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICByZXR0eXBlID0gXCJmYXN0YVwiKVxuXG4jIGNsZWFuXG5sZXByYWVfdmVjdG9yICAgPC0gZmFzdGFfY2xlYW5lcihsZXByYWVfZmFzdGEpXG51bGNlcmFuc192ZWN0b3IgPC0gZmFzdGFfY2xlYW5lcih1bGNlcmFuc19mYXN0YSlcblxuIyBjb252ZXJ0IGxlcHJhZV92ZWN0b3IgdG8gYW4gb2JqZWN0IGxlcHJhZXNlcV9zdHJpbmdcbmxlcHJhZXNlcV9zdHJpbmcgPC1wYXN0ZShsZXByYWVfdmVjdG9yLGNvbGxhcHNlID0gXCJcIikgICAgXG5cbiMgY29udmVydCB1bGNlcmFuc192ZWN0b3IgdG8gYW4gb2JqZWN0IHVsY2VyYW5zc2VxX3N0cmluZ1xudWxjZXJhbnNzZXFfc3RyaW5nIDwtcGFzdGUodWxjZXJhbnNfdmVjdG9yLGNvbGxhcHNlID0gXCJcIikgIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjYXQoXCI+TENCTyAtIFByb2xhY3RpbiBwcmVjdXJzb3IgLSBCb3ZpbmVcbk1EU0tHU1NRS0dTUkxMTExMVlZTTkxMTENRR1ZWU1RQVkNQTkdQR05DUVZTTFJETEZEUkFWTVZTSFlJSERMU1NcbkVNRk5FRkRLUllBUUdLR0ZJVE1BTE5TQ0hUU1NMUFRQRURLRVFBUVFUSEhFVkxNU0xJTEdMTFJTV05EUExZSExcblZURVZSR01LR0FQREFJTFNSQUlFSUVFRU5LUkxMRUdNRU1JRkdRVklQR0FLRVRFUFlQVldTR0xQU0xRVEtERURcbkFSWVNBRllOTExIQ0xSUkRTU0tJRFRZTEtMTE5DUklJWU5OTkMqXG5cbj5NQ0hVIC0gQ2FsbW9kdWxpbiAtIEh1bWFuLCByYWJiaXQsIGJvdmluZSwgcmF0LCBhbmQgY2hpY2tlblxuTUFEUUxURUVRSUFFRktFQUZTTEZES0RHREdUSVRUS0VMR1RWTVJTTEdRTlBURUFFTFFETUlORVZEQURHTkdUSURcbkZQRUZMVE1NQVJLTUtEVERTRUVFSVJFQUZSVkZES0RHTkdZSVNBQUVMUkhWTVROTEdFS0xUREVFVkRFTUlSRUFcbkRJREdER1FWTllFRUZWUU1NVEFLKlxuXG4+Z2l8NTUyNDIxMXxnYnxBQUQ0NDE2Ni4xfCBjeXRvY2hyb21lIGIgW0VsZXBoYXMgbWF4aW11cyBtYXhpbXVzXVxuTENMWVRISUdSTklZWUdTWUxZU0VUV05UR0lNTExMSVRNQVRBRk1HWVZMUFdHUU1TRldHQVRWSVROTEZTQUlQWUlHVE5MVlxuRVdJV0dHRlNWREtBVExOUkZGQUZIRklMUEZUTVZBTEFHVkhMVEZMSEVUR1NOTlBMR0xUU0RTREtJUEZIUFlZVElLREZMR1xuTExJTElMTExMTExBTExTUERNTEdEUEROSE1QQURQTE5UUExISUtQRVdZRkxGQVlBSUxSU1ZQTktMR0dWTEFMRkxTSVZJTFxuR0xNUEZMSFRTS0hSU01NTFJQTFNRQUxGV1RMVE1ETExUTFRXSUdTUVBWRVlQWVRJSUdRTUFTSUxZRlNJSUxBRkxQSUFHWFxuSUVOWVwiKSJ9
 </div>
+<!-- TODO: newline character, multiple entries per a single file, need for processing, etc.  Move info from chapter to here. -->
 </div>
-</div>
-<div id="pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm" class="section level2" number="22.2">
-<h2><span class="header-section-number">22.2</span> Pairwise local alignment of protein sequences using the Smith-Waterman algorithm</h2>
-<p>You can use the <code>pairwiseAlignment()</code> function to find the optimal <strong>local alignment</strong> of two sequences, that is the best alignment of parts (<strong>subsequences</strong>) of those sequences, by using the <code>type=local</code> argument in <code>pairwiseAlignment()</code>. This uses the <strong><a href="https://en.wikipedia.org/wiki/Smith%E2%80%93Waterman_algorithm">Smith-Waterman algorithm</a></strong> for local alignment. This is the classic bioinformatics algorithm for finding optimal local alignments. (We’ll discuss updated approaches when we get into <strong>database searches</strong> with <strong>BLAST</strong>, the **Basic, Local Alignment Search Tool* that is the workhorse of many day-to-day bioinformatics tasks).</p>
-<p>For example, to find the best local alignment between the <em>M. leprae</em> and <em>M. ulcerans</em> chorismate lyase proteins, we can run:</p>
+<div id="multiple-sequence-alignments-can-be-stored-in-fasta-format" class="section level2" number="16.3">
+<h2><span class="header-section-number">16.3</span> Multiple sequence alignments can be stored in FASTA format</h2>
+<p><strong>Aligned FASTA format</strong> can be used to store the output of <strong>Multiple Sequence Alignment (MSA)</strong>. This format contains</p>
+<ol style="list-style-type: decimal">
+<li>Multiple entries, each with their own header line</li>
+<li><strong>Gaps</strong> inserted to align sequences are indicated by <code>.</code></li>
+<li>Each spaces added to the beginning and end of sequences that vary in length are indicated by <code>~</code></li>
+</ol>
+<p>In the sample FASTA file below, the <code>example1</code> sequence has a gap of 8 near its beginning. The <code>example2</code> sequence has numerous <code>~</code> indicating that this sequence is missing data from its beginning that are present in the other sequences. The <code>example3</code> sequence has numerous <code>~</code> at its end, indicating that this sequence is shorter than the others.</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGxvYWQgc2NvcmluZyBtYXRyaXhcbmRhdGEoQkxPU1VNNTApXG5cbiMgcnVuIGFsaWdubWVudFxubG9jYWxBbGlnbkxlcHJhZVVsY2VyYW5zIDwtIHBhaXJ3aXNlQWxpZ25tZW50KGxlcHJhZXNlcV9zdHJpbmcsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVsY2VyYW5zc2VxX3N0cmluZyxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdWJzdGl0dXRpb25NYXRyaXggPSBCTE9TVU01MCwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZ2FwT3BlbmluZyA9IC0yLCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBnYXBFeHRlbnNpb24gPSAtOCwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgc2NvcmVPbmx5ID0gRkFMU0UsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHR5cGU9XCJsb2NhbFwiKSAgIyA8PSB0eXBlID0gXCJsb2NhbCAhIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjYXQoXCI+ZXhhbXBsZTEgXG5NS0FMV0FMTExWUExMVEdDTEEuLi4uLi4uLkVHRUxFVlREUUxQR1FTRFFQLldFUUFMTlJGV0RZTFJXVlFcbkdOUUFSRFJMRUVWUkVRTUVFVlJTS01FRVFUUVFJUkxRQUVJRlFBUklLR1dGRVBMVkVETVFSUVdBTkxNRVxuS0lRQVNWQVROU0lBU1RUVlBMRU5RXG4+ZXhhbXBsZTIgXG5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fktWUVFFTEVQRUFHV1FUR1FQLldFQUFMQVJGV0RZTFJXVlFcblNTUkFSR0hMRUVNUkVRSVFFVlJWS01FRVFBRFFJUlFLQUVBRlFBUkxLU1dGRVBMTEVETVFSUVdER0xWRVxuS1ZRQUFWQVQuSVBUU0tQVkVFUH5+XG4+ZXhhbXBsZTMgXG5NUlNMVlZGRkFMQVZMVEdDUUFSU0xGUUFELi4uLi4uLi4uLi4uLi5BUFFQUldFRU1WRFJGV1FZVlNFTE5cbkFHQUxLRUtMRUVUQUVOTC4uLlJUU0xFR1JWREVMVFNMTEFQWVNRS0lSRVFMUUVWTURLSUtFQVRBQUxQVFxuUUF+fn5+fn5+fn5+fn5+fn5+fn5+XCIpIn0=
 </div>
-Print out the optimal local alignment and its score
+</div>
+<div id="fastq-format" class="section level2" number="16.4">
+<h2><span class="header-section-number">16.4</span> FASTQ Format</h2>
+<p>Adapted from <a href="https://en.wikipedia.org/wiki/FASTQ_format">Wikipedia</a>: <a href="https://en.wikipedia.org/wiki/FASTQ_format" class="uri">https://en.wikipedia.org/wiki/FASTQ_format</a></p>
+<p>"FASTQ format is a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores. Both the sequence letter and quality score are each encoded with a single ASCII character for brevity.</p>
+<p>"It was originally developed at the Wellcome Trust Sanger Institute to bundle a FASTA formatted sequence and its quality data, but has recently become the de facto standard for storing the output of high-throughput sequencing instruments such as the Illumina Genome Analyzer.</p>
+<p>"A FASTQ file normally uses four lines per sequence.</p>
+<ul>
+<li>Line 1 begins with a <code>@</code> character and is followed by a sequence identifier and an optional description (like a FASTA title line).</li>
+<li>Line 2 is the raw sequence letters.</li>
+<li>Line 3 begins with a <code>+</code> character and is optionally followed by the same sequence identifier (and any description) again.</li>
+<li>Line 4 encodes the <strong>quality values</strong> for the sequence in Line 2 of the file, and must contain the same number of symbols as letters in the sequence.</li>
+</ul>
+<p>“A FASTQ file containing a single sequence might look like this:”</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsb2NhbEFsaWduTGVwcmFlVWxjZXJhbnMgIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjYXQoXCJAU0VRX0lEXG5HQVRUVEdHR0dUVENBQUFHQ0FHVEFUQ0dBVENBQUFUQUdUQUFBVENDQVRUVEdUVENBQUNUQ0FDQUdUVFRcbitcbiEnJyooKCgoKioqKykpJSUlKyspKCUlJSUpLjEqKiotKyonJykpKio1NUNDRj4+Pj4+PkNDQ0NDQ0M2NVwiKSJ9
 </div>
-As before, we can print out the full alignment with <code>printPairwiseAlignment()</code>:
+<p>“Here are the quality value characters in left-to-right increasing order of quality (ASCII):”</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJwcmludFBhaXJ3aXNlQWxpZ25tZW50KGxvY2FsQWxpZ25MZXByYWVVbGNlcmFucywgNjApIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIgIVwiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXFxdXl9gYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXp7fH1+In0=
 </div>
-<p>We see that the optimal local alignment is quite similar to the optimal global alignment in this case, except that it excludes a short region of poorly aligned sequence at the start and at the ends of the two proteins.</p>
+<p>FASTQ files typically do not include line breaks and do not wrap around when they reach the width of a normal page or file.</p>
 
 </div>
 </div>
@@ -487,8 +517,8 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJwcmludFBhaXJ3aXNlQWxpZ25tZW50KGxvY2FsQWxpZ25M
           </div>
         </div>
       </div>
-<a href="global-proteins-aligments-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="retrieving-multiple-sequences-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="programming-in-r-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="downloading-dna-sequences-as-fasta-files-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -520,7 +550,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/brouwern/lbrb/edit/master/17-alignment_local-protein_in_R-AC07-02.Rmd",
+"link": "https://github.com/brouwern/lbrb/edit/master/11a-FASTA_files.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -528,7 +558,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/brouwern/lbrb/blob/master/17-alignment_local-protein_in_R-AC07-02.Rmd",
+"link": "https://github.com/brouwern/lbrb/blob/master/11a-FASTA_files.Rmd",
 "text": null
 },
 "download": ["lbrb.pdf", "lbrb.epub"],

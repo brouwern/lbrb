@@ -118,7 +118,7 @@
 
 \title{A Little Book of R for Bioinformatics 2.0}
 \author{Avirl Coghlan, with contributions by Nathan L. Brouwer}
-\date{2021-07-13}
+\date{2021-07-14}
 
 \begin{document}
 \maketitle
@@ -234,6 +234,8 @@ Some files will have exercises at the end. I don't always include the key, and y
 
 \hypertarget{test-shiny-app}{%
 \chapter{Test shiny app}\label{test-shiny-app}}
+
+Here is an example of a Shiny app embedded in a bookdown book.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1457,6 +1459,98 @@ When you are typing R, if you want to, you can write comments by writing the com
 
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4IDwtIDEwMFxubG9nMTAoeCkgIyBGaW5kcyB0aGUgbG9nIHRvIHRoZSBiYXNlIDEwIG9mIHZhcmlhYmxlIHguIn0=
 
+\hypertarget{fasta-files}{%
+\chapter{FASTA Files}\label{fasta-files}}
+
+Adapted from \href{https://en.wikipedia.org/wiki/FASTA_format}{Wikipedia}: \url{https://en.wikipedia.org/wiki/FASTA_format}
+
+"In bioinformatics, the FASTA format is a text-based format for representing either nucleotide sequences or amino acid (protein) sequences, in which nucleotides or amino acids are represented using single-letter codes. The format allows for sequence names and comments to precede the sequences. The format originates from the FASTA alignment software, but has now become a near universal standard in the field of bioinformatics.
+
+"The simplicity of FASTA format makes it easy to manipulate and parse sequences using text-processing tools and scripting languages like the R programming language and Python.
+
+``The first line in a FASTA file starts with a''\textgreater" (greater-than) symbol and holds summary information about the sequence, often starting with a unique accession number and followed by information like the name of the gene, the type of sequence, and the organism it is from.
+
+"On the next is the sequence itself in a standard one-letter character string. Anything other than a valid character is be ignored (including spaces, tabs, asterisks, etc\ldots).
+
+"A multiple sequence FASTA format can be obtained by concatenating several single sequence FASTA files in a common file (also known as multi-FASTA format).
+
+"Following the header line, the actual sequence is represented. Sequences may be protein sequences or nucleic acid sequences, and they can contain gaps or alignment characters. Sequences are expected to be represented in the standard amino acid and nucleic acid codes. Lower-case letters are accepted and are mapped into upper-case; a single hyphen or dash can be used to represent a gap character; and in amino acid sequences, U and * are acceptable letters.
+
+"FASTQ format is a form of FASTA format extended to indicate information related to sequencing. It is created by the Sanger Centre in Cambridge.
+
+"Bioconductor.org's Biostrings package can be used to read and manipulate FASTA files in R
+
+from \url{https://zhanglab.dcmb.med.umich.edu/FASTA/}
+
+``FASTA format is a text-based format for representing either nucleotide sequences or peptide sequences, in which base pairs or amino acids are represented using single-letter codes. A sequence in FASTA format begins with a single-line description, followed by lines of sequence data. The description line is distinguished from the sequence data by a greater-than (''\textgreater{}``) symbol in the first column. It is recommended that all lines of text be shorter than 80 characters in length.''
+
+\hypertarget{example-fasta-file}{%
+\section{Example FASTA file}\label{example-fasta-file}}
+
+Here is an example of the contents of a FASTA file. (If your are viewing this chapter in the form of the source .Rmd file, the \texttt{cat()} function is included just to print out the content properly and is not part of the FASTA format).
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjYXQoXCI+Z2l8MTg2NjgxMjI4fHJlZnxZUF8wMDE4NjQ0MjQuMXwgcGh5Y29lcnl0aHJvYmlsaW46ZmVycmVkb3hpbiBveGlkb3JlZHVjdGFzZVxuTU5TRVJTRFZUTFlRUEZMRFlBSUFZTVJTUkxETEVQWVBJUFRHRkVTTlNBVlZHS0dLTlFFRVZWVFRTWUFGUVRBS0xSUUlSQVxuQUhWUUdHTlNMUVZMTkZWSUZQSExOWURMUEZGR0FETFZUTFBHR0hMSUFMRE1RUExGUkREU0FZUUFLWVRFUElMUElGSEFIUVxuUUhMU1dHR0RGUEVFQVFQRkZTUEFGTFdUUlBRRVRBVlZFVFFWRkFBRktEWUxLQVlMREZWRVFBRUFWVERTUU5MVkFJS1FBUVxuTFJZTFJZUkFFS0RQQVJHTUZLUkZZR0FFV1RFRVlJSEdGTEZETEVSS0xUVlZLXCIpIn0=
+
+\hypertarget{multiple-sequences-in-a-single-fasta-file}{%
+\section{Multiple sequences in a single FASTA file}\label{multiple-sequences-in-a-single-fasta-file}}
+
+Multiple sequences can be stored in a single FASTA file, each on separated by a line and have its own headline.
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjYXQoXCI+TENCTyAtIFByb2xhY3RpbiBwcmVjdXJzb3IgLSBCb3ZpbmVcbk1EU0tHU1NRS0dTUkxMTExMVlZTTkxMTENRR1ZWU1RQVkNQTkdQR05DUVZTTFJETEZEUkFWTVZTSFlJSERMU1NcbkVNRk5FRkRLUllBUUdLR0ZJVE1BTE5TQ0hUU1NMUFRQRURLRVFBUVFUSEhFVkxNU0xJTEdMTFJTV05EUExZSExcblZURVZSR01LR0FQREFJTFNSQUlFSUVFRU5LUkxMRUdNRU1JRkdRVklQR0FLRVRFUFlQVldTR0xQU0xRVEtERURcbkFSWVNBRllOTExIQ0xSUkRTU0tJRFRZTEtMTE5DUklJWU5OTkMqXG5cbj5NQ0hVIC0gQ2FsbW9kdWxpbiAtIEh1bWFuLCByYWJiaXQsIGJvdmluZSwgcmF0LCBhbmQgY2hpY2tlblxuTUFEUUxURUVRSUFFRktFQUZTTEZES0RHREdUSVRUS0VMR1RWTVJTTEdRTlBURUFFTFFETUlORVZEQURHTkdUSURcbkZQRUZMVE1NQVJLTUtEVERTRUVFSVJFQUZSVkZES0RHTkdZSVNBQUVMUkhWTVROTEdFS0xUREVFVkRFTUlSRUFcbkRJREdER1FWTllFRUZWUU1NVEFLKlxuXG4+Z2l8NTUyNDIxMXxnYnxBQUQ0NDE2Ni4xfCBjeXRvY2hyb21lIGIgW0VsZXBoYXMgbWF4aW11cyBtYXhpbXVzXVxuTENMWVRISUdSTklZWUdTWUxZU0VUV05UR0lNTExMSVRNQVRBRk1HWVZMUFdHUU1TRldHQVRWSVROTEZTQUlQWUlHVE5MVlxuRVdJV0dHRlNWREtBVExOUkZGQUZIRklMUEZUTVZBTEFHVkhMVEZMSEVUR1NOTlBMR0xUU0RTREtJUEZIUFlZVElLREZMR1xuTExJTElMTExMTExBTExTUERNTEdEUEROSE1QQURQTE5UUExISUtQRVdZRkxGQVlBSUxSU1ZQTktMR0dWTEFMRkxTSVZJTFxuR0xNUEZMSFRTS0hSU01NTFJQTFNRQUxGV1RMVE1ETExUTFRXSUdTUVBWRVlQWVRJSUdRTUFTSUxZRlNJSUxBRkxQSUFHWFxuSUVOWVwiKSJ9
+
+\hypertarget{multiple-sequence-alignments-can-be-stored-in-fasta-format}{%
+\section{Multiple sequence alignments can be stored in FASTA format}\label{multiple-sequence-alignments-can-be-stored-in-fasta-format}}
+
+\textbf{Aligned FASTA format} can be used to store the output of \textbf{Multiple Sequence Alignment (MSA)}. This format contains
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Multiple entries, each with their own header line
+\item
+  \textbf{Gaps} inserted to align sequences are indicated by \texttt{.}
+\item
+  Each spaces added to the beginning and end of sequences that vary in length are indicated by \texttt{\textasciitilde{}}
+\end{enumerate}
+
+In the sample FASTA file below, the \texttt{example1} sequence has a gap of 8 near its beginning. The \texttt{example2} sequence has numerous \texttt{\textasciitilde{}} indicating that this sequence is missing data from its beginning that are present in the other sequences. The \texttt{example3} sequence has numerous \texttt{\textasciitilde{}} at its end, indicating that this sequence is shorter than the others.
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjYXQoXCI+ZXhhbXBsZTEgXG5NS0FMV0FMTExWUExMVEdDTEEuLi4uLi4uLkVHRUxFVlREUUxQR1FTRFFQLldFUUFMTlJGV0RZTFJXVlFcbkdOUUFSRFJMRUVWUkVRTUVFVlJTS01FRVFUUVFJUkxRQUVJRlFBUklLR1dGRVBMVkVETVFSUVdBTkxNRVxuS0lRQVNWQVROU0lBU1RUVlBMRU5RXG4+ZXhhbXBsZTIgXG5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fn5+fktWUVFFTEVQRUFHV1FUR1FQLldFQUFMQVJGV0RZTFJXVlFcblNTUkFSR0hMRUVNUkVRSVFFVlJWS01FRVFBRFFJUlFLQUVBRlFBUkxLU1dGRVBMTEVETVFSUVdER0xWRVxuS1ZRQUFWQVQuSVBUU0tQVkVFUH5+XG4+ZXhhbXBsZTMgXG5NUlNMVlZGRkFMQVZMVEdDUUFSU0xGUUFELi4uLi4uLi4uLi4uLi5BUFFQUldFRU1WRFJGV1FZVlNFTE5cbkFHQUxLRUtMRUVUQUVOTC4uLlJUU0xFR1JWREVMVFNMTEFQWVNRS0lSRVFMUUVWTURLSUtFQVRBQUxQVFxuUUF+fn5+fn5+fn5+fn5+fn5+fn5+XCIpIn0=
+
+\hypertarget{fastq-format}{%
+\section{FASTQ Format}\label{fastq-format}}
+
+Adapted from \href{https://en.wikipedia.org/wiki/FASTQ_format}{Wikipedia}: \url{https://en.wikipedia.org/wiki/FASTQ_format}
+
+"FASTQ format is a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores. Both the sequence letter and quality score are each encoded with a single ASCII character for brevity.
+
+"It was originally developed at the Wellcome Trust Sanger Institute to bundle a FASTA formatted sequence and its quality data, but has recently become the de facto standard for storing the output of high-throughput sequencing instruments such as the Illumina Genome Analyzer.
+
+"A FASTQ file normally uses four lines per sequence.
+
+\begin{itemize}
+\tightlist
+\item
+  Line 1 begins with a \texttt{@} character and is followed by a sequence identifier and an optional description (like a FASTA title line).
+\item
+  Line 2 is the raw sequence letters.
+\item
+  Line 3 begins with a \texttt{+} character and is optionally followed by the same sequence identifier (and any description) again.
+\item
+  Line 4 encodes the \textbf{quality values} for the sequence in Line 2 of the file, and must contain the same number of symbols as letters in the sequence.
+\end{itemize}
+
+``A FASTQ file containing a single sequence might look like this:''
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjYXQoXCJAU0VRX0lEXG5HQVRUVEdHR0dUVENBQUFHQ0FHVEFUQ0dBVENBQUFUQUdUQUFBVENDQVRUVEdUVENBQUNUQ0FDQUdUVFRcbitcbiEnJyooKCgoKioqKykpJSUlKyspKCUlJSUpLjEqKiotKyonJykpKio1NUNDRj4+Pj4+PkNDQ0NDQ0M2NVwiKSJ9
+
+``Here are the quality value characters in left-to-right increasing order of quality (ASCII):''
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIgIVwiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXFxdXl9gYWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd4eXp7fH1+In0=
+
+FASTQ files typically do not include line breaks and do not wrap around when they reach the width of a normal page or file.
+
 \hypertarget{downloading-dna-sequences-as-fasta-files-in-r}{%
 \chapter{Downloading DNA sequences as FASTA files in R}\label{downloading-dna-sequences-as-fasta-files-in-r}}
 
@@ -2284,12 +2378,12 @@ Print out the first 20 letters of the second sequence
 
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXEyWzE6MjBdICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAifQ==
 
-We have these four sequences, each cleaned and in its own vector. We can therefore do dotplots, alignments, and other analyses. Creating all these seprate vectors is a bit laborious. Luckily \texttt{entrez\_fetch()} can download multiple sequences for us.
+We have these four sequences, each cleaned and in its own vector. We can therefore do dotplots, alignments, and other analyses. Creating all these separate vectors is a bit laborious. Luckily \texttt{entrez\_fetch()} can download multiple sequences for us.
 
 \hypertarget{downloading-sequences-in-bulk}{%
 \section{Downloading sequences in bulk}\label{downloading-sequences-in-bulk}}
 
-Previously we were giving \texttt{entrez\_fetch} the name of just one sequence at a time by using square brackets on our \texttt{seqnames} vector, e.g.~\texttt{seqnames{[}1{]}}, \texttt{seqnames{[}2{]}} etc. If don't include square brackets, \texttt{entrez\_fetch()} will download \emph{all} of the sequences in succession and package them up into a single long, formatted string. This may take a second or two, depending on your internet connection and how busy the NCBI serverse are.
+Previously we were giving \texttt{entrez\_fetch} the name of just one sequence at a time by using square brackets on our \texttt{seqnames} vector, e.g.~\texttt{seqnames{[}1{]}}, \texttt{seqnames{[}2{]}} etc. If don't include square brackets, \texttt{entrez\_fetch()} will download \emph{all} of the sequences in succession and package them up into a single long, formatted string. This may take a second or two, depending on your internet connection and how busy the NCBI servers are.
 
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfMV8yXzNfNCA8LSByZW50cmV6OjplbnRyZXpfZmV0Y2goZGIgPSBcInByb3RlaW5cIiwgXG4gICAgICAgICAgICAgICAgICAgICAgICAgIGlkID0gc2VxbmFtZXMsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICByZXR0eXBlID0gXCJmYXN0YVwiKSJ9
 
@@ -2382,11 +2476,23 @@ WE'll use a package called \texttt{msa} (\href{https://academic.oup.com/bioinfor
 
 The data is stored in object in combio4all
 
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkYXRhKHNlcV8xXzJfM180KSJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkYXRhKHNlcV8xXzJfM180KSAifQ==
+
+This data is in the form of a list
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJpcy5saXN0KHNlcV8xXzJfM180KSJ9
+
+First we need to clean each one using \texttt{fasta\_cleaner()}.
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfMV8yXzNfNFtbMV1dIDwtIGZhc3RhX2NsZWFuZXIoc2VxXzFfMl8zXzRbWzFdXSlcbnNlcV8xXzJfM180W1syXV0gPC0gZmFzdGFfY2xlYW5lcihzZXFfMV8yXzNfNFtbMl1dKVxuc2VxXzFfMl8zXzRbWzNdXSA8LSBmYXN0YV9jbGVhbmVyKHNlcV8xXzJfM180W1szXV0pXG5zZXFfMV8yXzNfNFtbNF1dIDwtIGZhc3RhX2NsZWFuZXIoc2VxXzFfMl8zXzRbWzRdXSkifQ==
+
+We need to put it into the form of a vector; in particular a \textbf{named vector}.
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfMV8yXzNfNF92ZWN0b3IgPC0gYyhQMDY3NDcgPSBwYXN0ZShzZXFfMV8yXzNfNFtbMV1dLCBjb2xsYXBzZSA9IFwiXCIpLFxuICAgICAgICAgICAgICAgICBQMEM1NjkgPSBwYXN0ZShzZXFfMV8yXzNfNFtbMl1dLCBjb2xsYXBzZSA9IFwiXCIpLFxuICAgICAgICAgICAgICAgICBPNTY3NzMgPSBwYXN0ZShzZXFfMV8yXzNfNFtbM11dLCBjb2xsYXBzZSA9IFwiXCIpLFxuICAgICAgICAgICAgICAgICBRNVZLUDEgPSBwYXN0ZShzZXFfMV8yXzNfNFtbNF1dLCBjb2xsYXBzZSA9IFwiXCIpKSJ9
 
 We'll need need to convert our set of sequences to a particular format in preparation for alignment. This is done with the \texttt{AAStringSet()} function from \texttt{Biostrings}.
 
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfMV8yXzNfNF9zdHJpbmdzZXQgPC0gQmlvc3RyaW5nczo6QUFTdHJpbmdTZXQoc2VxXzFfMl8zXzQpIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfMV8yXzNfNF9zdHJpbmdzZXQgPC0gQmlvc3RyaW5nczo6QUFTdHJpbmdTZXQoc2VxXzFfMl8zXzRfdmVjdG9yKSJ9
 
 This just puts things in a format that makes the software happy. Doing this is a theme of bioinformatics work!
 
@@ -2552,6 +2658,249 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJwcmludF9tc2EodmlydXNhbG5fc2VxaW5yX2NsZWFuKSJ9
 The filtered alignment is shorter, and is missing some of the poorly conserved regions of the original alignment.
 
 Note that it is not a good idea to filter out too much of your alignment, as if you are left with few columns in your filtered alignment, you will be basing your phylogenetic tree upon a very short alignment (little data), and so the tree may be unreliable. Therefore, you need to achieve a balance between discarding the dodgy (poorly aligned) parts of your alignment, and retaining enough columns of the alignment that you will have enough data to based your tree upon.
+
+\hypertarget{calculating-genetic-distances-between-sequences}{%
+\chapter{Calculating genetic distances between sequences}\label{calculating-genetic-distances-between-sequences}}
+
+\textbf{By}: Nathan Brouwer, with some content adapted Coghlan (2011) \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html}{Multiple Alignment and Phylogenetic trees} and under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}. Functions print\_msa() and clean\_alignment() adapted from (\href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/\#}{Coglan 2011}).
+
+\hypertarget{preliminaries-8}{%
+\section{Preliminaries}\label{preliminaries-8}}
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsaWJyYXJ5KGNvbXBiaW80YWxsKVxubGlicmFyeShtc2EpXG5saWJyYXJ5KHNlcWlucilcbmxpYnJhcnkoYXBlKSJ9
+
+\hypertarget{introduction-1}{%
+\section{Introduction}\label{introduction-1}}
+
+A common first step in performing a \textbf{phylogenetic analysis} is to calculate the \textbf{pairwise genetic distances} between sequences. The \textbf{genetic distance} is an estimate of the evolutionary \textbf{divergence} between two sequences, and is usually measured in quantity of evolutionary change, e.g., an estimate of the number of mutations that have occurred since the two sequences shared a \textbf{common ancestor}.
+
+We can calculate the genetic distances between protein sequences using the \texttt{dist.alignment()} function in the \texttt{seqinr} package. The \texttt{dist.alignment()} function takes a multiple sequence alignment (MSA) as input. Based on the MSA that you give it, \texttt{dist.alignment()} calculates the genetic distance between each \textbf{\emph{pair}} of proteins in the multiple alignment, yielding pairwise distances. For example, to calculate genetic distances between the virus phosphoproteins based on the multiple sequence alignment stored in virusaln, we type:
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkYXRhKHZpcnVzYWxuKVxudmlydXNkaXN0IDwtIHNlcWlucjo6ZGlzdC5hbGlnbm1lbnQodmlydXNhbG5fc2VxaW5yKSAgIyBDYWxjdWxhdGUgdGhlIGdlbmV0aWMgZGlzdGFuY2VzXG5cbnZpcnVzZGlzdCAjIFByaW50IG91dCB0aGUgZ2VuZXRpYyBkaXN0YW5jZSBtYXRyaXgifQ==
+
+\textbf{NOTE} My result are different from the original results, shown here:
+I need to check the settings used for the MSA\\
+P0C569 O56773 P06747
+O56773 0.4142670
+P06747 0.4678196 0.4714045
+Q5VKP1 0.4828127 0.5067117 0.5034130
+
+The genetic distance matrix above shows the genetic distance between each pair of proteins. The sequences are referred to by their \textbf{UniProt accessions}. Recall that
+
+\begin{itemize}
+\tightlist
+\item
+  P06747 = rabies virus phosphoprotein
+\item
+  P0C569 is Mokola virus phosphoprotein
+\item
+  O56773 is Lagos bat virus phosphoprotein
+\item
+  Q5VKP1 is Western Caucasian bat virus phosphoprotein.
+\end{itemize}
+
+Based on the genetic \textbf{distance matrix} above, we can see that the genetic distance between Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein (P0C569) is smallest (about 0.414). Similarly, the genetic distance between Western Caucasian bat virus phosphoprotein (Q5VKP1) and Lagos bat virus phosphoprotein (O56773) is the biggest (about 0.507).
+
+The larger the genetic distance between two sequences, the more amino acid changes (such as change from Asp to Met) or \textbf{indels} that have occurred since they shared a common ancestor, and the longer ago their \textbf{common ancestor} probably lived. (The relationship between number of mutations and time, however, depends on the mutation rate and generation time of the oranism).
+
+\hypertarget{calculating-genetic-distances-between-dnamrna-sequences}{%
+\section{Calculating genetic distances between DNA/mRNA sequences}\label{calculating-genetic-distances-between-dnamrna-sequences}}
+
+Just like for protein sequences, you can calculate genetic distances between DNA (or mRNA) sequences based on an alignment of the sequences. The RefSeq DNA accession numbers for the proteins we've been using are:
+
+\begin{itemize}
+\tightlist
+\item
+  AF049118 = mRNA sequence for Mokola virus phosphoprotein,
+\item
+  AF049114 = mRNA sequence for Mokola virus phosphoprotein,
+\item
+  AF049119 = mRNA sequence for Lagos bat virus phosphoprotein,
+\item
+  AF049115 = mRNA sequence for Duvenhage virus phosphoprotein.
+\end{itemize}
+
+We can retrieve these DNA sequences using \texttt{entrez\_fetch\_list()}. Some notes about how we'll use this function works:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \texttt{db} is short for ``database''
+\item
+  the database is called \texttt{nuccore} (not \texttt{genebank} or \texttt{gene})
+\item
+  the argument \texttt{rettype} is ``tt''; I think it stands for ``REtURN type'' (I also forget the second ``t'')
+\end{enumerate}
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHB1dCBhY2NyZXNzaW9ucyBpbiB2ZWN0b3JcbmFjY2Vzc2lvbnNfbXJuYSA8LSBjKFwiQUYwNDkxMThcIixcIkFGMDQ5MTE0XCIsXCJBRjA0OTExOVwiLFwiQUYwNDkxMTVcIilcblxuIyBnZXQgc2VxdWVuY2VzXG52aXJ1c19tcm5hX2xpc3QgPC0gZW50cmV6X2ZldGNoX2xpc3QoZGIgPSBcIm51Y2NvcmVcIiwgICMgXCJudWNjb3JlXCIgZGIgZm9yIEROQSBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWQgPSBhY2Nlc3Npb25zX21ybmEsIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR0eXBlID0gXCJGQVNUQVwiKSAjIHJldHR5cGUgaGFzIHR3byB0In0=
+
+We can clean these three sequences using a simple \texttt{for()} loop. We set \texttt{parse\ =\ F} so we get things back as single character string.
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJmb3IoaSBpbiAxOmxlbmd0aCh2aXJ1c19tcm5hX2xpc3QpKXtcbiAgdmlydXNfbXJuYV9saXN0W1tpXV0gPC0gZmFzdGFfY2xlYW5lcih2aXJ1c19tcm5hX2xpc3RbaV0sIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFyc2UgPSBGKVxufSJ9
+
+Now we need to convert each of these into a named vector of sequences.
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJtcmFfc2VxX3ZlY3RvciA8LSBjKEFGMDQ5MTE4ID0gIHZpcnVzX21ybmFfbGlzdFtbMV1dICxcbiAgICAgICAgICAgICAgICAgQUYwNDkxMTQgPSB2aXJ1c19tcm5hX2xpc3RbWzJdXSAsXG4gICAgICAgICAgICAgICAgIEFGMDQ5MTE5ID0gdmlydXNfbXJuYV9saXN0W1szXV0gLFxuICAgICAgICAgICAgICAgICBBRjA0OTExNSA9IHZpcnVzX21ybmFfbGlzdFtbNF1dKSJ9
+
+Finally convert this to a ``stringset'' using \texttt{Biostrings::DNAStringSet()}.
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkbmFfc2VxX3N0cmluZ3NldCA8LSBCaW9zdHJpbmdzOjpETkFTdHJpbmdTZXQobXJhX3NlcV92ZWN0b3IpIn0=
+
+Let's see what we got
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkbmFfc2VxX3N0cmluZ3NldCJ9
+
+Now we can make an alignment use \texttt{msa()}.
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ2aXJ1c19tcm5hX2FsbiA8LSBtc2EoaW5wdXRTZXFzID0gZG5hX3NlcV9zdHJpbmdzZXQsXG4gICAgICAgICAgICAgICAgICAgICBtZXRob2QgPSBcIkNsdXN0YWxXXCIpIn0=
+
+The output looks like this
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ2aXJ1c19tcm5hX2FsbiJ9
+
+This looks a LOT different than an amino acid alignment, which looked like this:
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkYXRhKHZpcnVzYWxuKVxudmlydXNhbG4ifQ==
+
+Why might the be different? First, examine the output above and determine how long the DNA alignment is versus the amino acid alignment? Why are they different, and why is one longer than the other?
+
+The DNA alignment is 1097 columns, while the amino acid alignment is only 306 rows. Note that 306*3 = 918. 1097 is pretty close to 1097. What's the relevance of multiplying by 3?
+
+\hypertarget{calculationg-genetic-distance}{%
+\section{Calculationg genetic distance}\label{calculationg-genetic-distance}}
+
+You can calculate a genetic distance for DNA or mRNA sequences using the \texttt{dist.dna()} function in the \texttt{ape} package. \texttt{dist.dna()} takes a MSA of DNA or mRNA sequences as its input, and calculates the genetic distance between each pair of DNA sequences in the multiple alignment.
+
+The \texttt{dist.dna()} function requires the input alignment to be in a special format known as \texttt{DNAbin} format, so we must use the \texttt{as.DNAbin()} function to convert our DNA alignment into this format before using the \texttt{dist.dna()} function.
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIgIyBDb252ZXJ0IHRoZSBhbGlnbm1lbnQgdG8gXCJETkFiaW5cIiBmb3JtYXRcbnZpcnVzX21ybmFfYWxuX2JpbiA8LSBhcGU6OmFzLkROQWJpbih2aXJ1c19tcm5hX2FsbikifQ==
+
+The output of \texttt{as.DNAbin()} gives us a short summery of the alignment
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ2aXJ1c19tcm5hX2Fsbl9iaW4ifQ==
+
+Now to make and view the alignment:
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIgIyBDYWxjdWxhdGUgdGhlIGdlbmV0aWMgZGlzdGFuY2UgbWF0cml4XG52aXJ1c19tcm5hX2Rpc3QgPC0gYXBlOjpkaXN0LmRuYSh2aXJ1c19tcm5hX2Fsbl9iaW4pXG5cbiAjIFByaW50IG91dCB0aGUgZ2VuZXRpYyBkaXN0YW5jZSBtYXRyaXhcbnZpcnVzX21ybmFfZGlzdCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIn0=
+
+NOTE: my results for this alignment are the same as the original by Coghlan. I'm not sure why my amino acid alignment produces divergent results but the DNA is the same.
+
+\hypertarget{unrooted-neighbor-joining-phylogenetic-trees}{%
+\chapter{Unrooted neighbor-joining phylogenetic trees}\label{unrooted-neighbor-joining-phylogenetic-trees}}
+
+\textbf{NOTE}: the code for this chapter works as intended but there are some differences between my results and what is reported by the original author of the chapter. This is likely to do with different alignment software, though it could just be a typo.
+
+\textbf{By}: Avril Coghlan.
+Multiple Alignment and Phylogenetic trees
+\url{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html}
+
+\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+
+\hypertarget{preliminaries-9}{%
+\section{Preliminaries}\label{preliminaries-9}}
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsaWJyYXJ5KGNvbXBiaW80YWxsKVxubGlicmFyeShzZXFpbnIpIn0=
+
+You will need to install the \texttt{ape} package if you do not have it already using \texttt{install.packages("ape")}.
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsaWJyYXJ5KGFwZSkifQ==
+
+\hypertarget{key-functions}{%
+\subsection{Key functions}\label{key-functions}}
+
+\begin{itemize}
+\tightlist
+\item
+  compbio4all::unrooted\_NJ\_tree (Coghlan 200x)
+\end{itemize}
+
+\hypertarget{key-vocab}{%
+\subsection{Key vocab}\label{key-vocab}}
+
+\begin{itemize}
+\tightlist
+\item
+  clade
+\item
+  bootstrap
+\item
+  resample
+\item
+  rooted vs.~unrooted tree
+\item
+  outgroup
+\end{itemize}
+
+\hypertarget{building-an-unrooted-phylogenetic-tree-for-protein-sequences}{%
+\section{Building an unrooted phylogenetic tree for protein sequences}\label{building-an-unrooted-phylogenetic-tree-for-protein-sequences}}
+
+Once we have a \textbf{distance matrix} that gives the \textbf{pairwise distances} between all our protein sequences, we can build a \textbf{phylogenetic tree} based on that distance matrix. One method for using this is the \textbf{neighbor-joining algorithm}.
+
+You can build a phylogenetic tree using the neighbor-joining (NJ) algorithm with the the \texttt{ape} package. The R function \texttt{unrooted\_NJ\_tree()} is a \textbf{wrapper} for functions from the \texttt{ape} package which builds a phylogenetic tree based on an alignment of sequences, using the NJ algorithm.
+
+The \texttt{unrooted\_NJ\_tree()} function takes an alignment of sequences its input, calculates \textbf{pairwise distances} between the sequences based on the alignment, and then builds a phylogenetic tree based on the pairwise distances. It returns the phylogenetic tree, and also makes a plot of that tree.
+
+The alignment is save in \texttt{compbio4all} as \texttt{virusaln} and can be loaded with the \texttt{data()} command.
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkYXRhKHZpcnVzYWxuX3NlcWlucikifQ==
+
+Take a look at the structure of the data
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzdHIodmlydXNhbG5fc2VxaW5yKSJ9
+
+Build the tree with \texttt{unrooted\_NJ\_tree()}
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ2aXJ1c2FsbnRyZWUgPC0gdW5yb290ZWRfTkpfdHJlZSh2aXJ1c2Fsbl9zZXFpbnJfY2xlYW4sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdHlwZT1cInByb3RlaW5cIikifQ==
+
+Note that you need to specify that the type of sequences that you are using are protein sequences when you use \texttt{unrooted\_NJ\_tree()}, by setting \texttt{type=protein}.
+
+We can see that \texttt{Q5VKP1} (Western Caucasian bat virus phosphoprotein) and \texttt{P06747} (rabies virus phosphoprotein) have been grouped together into a \textbf{clade} on the tree, and that \texttt{O56773} (Lagos bat virus phosphoprotein) and \texttt{P0C569} (Mokola virus phosphoprotein) are grouped together.
+
+This is consistent with what we saw above in the genetic distance matrix, which showed that the genetic distance between Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein (P0C569) is relatively small.
+
+\hypertarget{boostrap-values-indicate-support-for-clades}{%
+\section{Boostrap values indicate support for clades}\label{boostrap-values-indicate-support-for-clades}}
+
+In the plot, the numbers in blue boxes are \textbf{bootstrap values} for the nodes in the tree. A bootstrap value for a particular node in the tree gives an idea of the confidence that we have in the clade (group) defined by that node in the tree. If a node has a high bootstrap value (near 100\%) then we are very confident that the clade defined by the node is correct, while if it has a low bootstrap value (near 0\%) then we are not so confident.
+
+Note that the fact that a bootstrap value for a node is high does not necessarily guarantee that the clade defined by the node is correct, but just tells us that it is quite likely that it is correct given the data and analysis we're using.
+
+The bootstrap values are calculated by making many (for example, 100) random \textbf{resamples} of the alignment that the phylogenetic tree was based upon. Each resample of the alignment consists of a certain number x (e.g.. 200) of randomly sampled \emph{columns} from the alignment. Each resample of the alignment (e.g.. 200 randomly sampled columns) forms a sort of fake alignment of its own, and a phylogenetic tree can be based upon the \emph{resample}. We can make 100 random resamples of the alignment, and build 100 phylogenetic trees based on the 100 resamples. These 100 trees are known as the \textbf{bootstrap trees}. For each clade (grouping) that we see in our original phylogenetic tree, we can count in how many of the 100 bootstrap trees it appears. This is known as the \textbf{bootstrap value} for the clade in our original phylogenetic tree.
+
+For example, if we calculate 100 random resamples of the virus phosphoprotein alignment, and build 100 phylogenetic trees based on these resamples, we can calculate the bootstrap values for each clade in the virus phosphoprotein phylogenetic tree.
+
+\textbf{NOTE:} I am currently not able to reproduce these results:
+
+In this case, the bootstrap value for the node defining the clade containing Q5VKP1 (Western Caucasian bat virus phosphoprotein) and P06747 (rabies virus phosphoprotein) is 25\%, while the bootstrap value for node defining the clade containing of Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein (P0C569) is 100\%. The bootstrap values for each of these clades is the percent of 100 bootstrap trees that the clade appears in.
+
+Therefore, we are very confident that Lagos bat virus and Mokola virus phosphoproteins should be grouped together in the tree. However, we are not so confident that the Western Caucasian bat virus and rabies virus phosphoproteins should be grouped together.
+
+\hypertarget{branch-lengths-indicate-divergence-between-sequences}{%
+\section{Branch lengths indicate divergence between sequences}\label{branch-lengths-indicate-divergence-between-sequences}}
+
+The lengths of the branches in the plot of the tree are proportional to the amount of evolutionary change (estimated number of mutations) along the branches. In this case, the branches leading to Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein (P0C569) from the node representing their common ancestor are slightly shorter than the branches leading to the Western Caucasian bat virus (Q5VKP1) and rabies virus (P06747) phosphoproteins from the node representing their common ancestor.
+
+This suggests that there might have been more mutations in the Western Caucasian bat virus (Q5VKP1) and rabies virus (P06747) phosphoproteins since they shared a common ancestor, than in the Lagos bat virus phosphoprotein (O56773) and Mokola virus phosphoprotein (P0C569) since they shared a common ancestor.
+
+\hypertarget{unrooted-trees-lack-an-outgroup}{%
+\section{Unrooted trees lack an outgroup}\label{unrooted-trees-lack-an-outgroup}}
+
+The tree above of the virus phosphoproteins is an \textbf{unrooted} phylogenetic tree as it does not contain an \textbf{outgroup} sequence; that is, a sequence of a protein that is known to be more distantly related to the other proteins in the tree than they are to each other.
+
+As a result, we cannot tell which direction evolutionary time ran in along the internal branches of the tree. For example, we cannot tell whether the node representing the common ancestor of (O56773, P0C569) was an ancestor of the node representing the common ancestor of (Q5VKP1, P06747), or the other way around.
+
+In order to build a \textbf{rooted }phylogenetic tree, we need to have an outgroup sequence in our tree. In the case of the virus phosphoproteins, this is unfortunately not possible, as there is not any protein known that is more distantly related to the four proteins already in our tree than they are to each other.
+
+However, in many other cases, an outgroup - a sequence known to be more distantly related to the other sequences in the tree than they are to each other - is known, and so it is possible to build a rooted phylogenetic tree.
+
+We discussed above that it is a good idea to investigate whether discarding the poorly conserved regions of a multiple alignment has an effect on the phylogenetic analysis. In this case, we made a filtered copy of the multiple alignment and stored it in the variable virusln\_seqinr\_clean (see above). We can make a phylogenetic tree based this filtered alignment, and see if it agrees with the phylogenetic tree based on the original alignment:
+
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkYXRhKHZpcnVzYWxuX3NlcWlucl9jbGVhbilcbmNsZWFuZWR2aXJ1c2FsbnRyZWUgPC0gdW5yb290ZWRfTkpfdHJlZSh2aXJ1c2Fsbl9zZXFpbnJfY2xlYW4sdHlwZT1cInByb3RlaW5cIikifQ==
+
+As in the phylogenetic tree based on the raw (unfiltered) multiple alignment, O56773 and P0C569 are still grouped together, and Q5VKP1 and P06747 are still grouped together. Thus, filtering the multiple alignment does not have an effect on the tree. The bootstrap value, however, have changed.
+
+If we had found a difference in the trees made using the unfiltered and filtered multiple alignments, we would have to examine the multiple alignments closely, to see if the unfiltered multiple alignment contains a lot of very poorly aligned regions that might be adding noise to the phylogenetic analysis (if this is true, the tree based on the filtered alignment is likely to be more reliable).
 
 \hypertarget{part-appendices}{%
 \part{Appendices}\label{part-appendices}}

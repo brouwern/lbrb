@@ -18,16 +18,31 @@ A key component of GenBank are the **GeneBank Records**, which are annotated sum
 A key feature of PubMed records is that they are **hyperlinked** to other NCBI databases.  For example, you can click link under the name of the paper which reported the sequence of the gene and it will take you to the PubMed record for that paper (see below).  You can also click the "Run BLAST" link and you can search the database for similar sequences.  This protein coded for by this particular gene has had its structured solved using x-ray crystalography, and you can see these results under "Protein 3D Structure."  In a later chapter we'll get to know these records in further detail.
 
 ```{r, echo = F}
-genbank_record
 knitr::include_graphics("images/genbank_record.png")
 ```
 
 
 ## PubMed and PubMed Central article database
 
-PubMed and **PubMed Central (PMC)** are databases of articles related to data contained in NCBI databases.  PubMed contains basic biolographic information, the abstract,  relevant links to sequences, and to the websites of the actual publishers of the papers.  If the text of an article is open-access, PMC should have a copy of it.  Articles in PMC contain relevant hyperlinks, such as to any sequences that are mentioned.  For example, the image below show where the sequence of Tp0751 is mentioned in a paper and linked to the GenBank record we looked at above.
+**PubMed** and **PubMed Central (PMC)** are databases of scientific articles related to data contained in NCBI databases.  PubMed contains basic biolographic information, the abstract,  relevant links to sequences, and to the websites of the actual publishers of the papers.  If the text of an article is open-access, PMC should have a copy of it.  Articles in PMC contain relevant hyperlinks, such as to any sequences that are mentioned.  For example, the image below show where the sequence of Tp0751 is mentioned in a paper and linked to the GenBank record we looked at above.
 
 
+## Entrez
 
+https://en.wikipedia.org/wiki/Entrez
+
+<!-- This paragraph is from Wikipedia -->
+"Entrez is a federated search engine and web portal that allows users to search many discrete health sciences databases of the NCBI website.  The name "Entrez" (a greeting meaning "Come in" in French) was chosen to reflect the spirit of welcoming the public to search the content available from NCBI."
+
+<!-- This paragraph is from Wikipedia -->
+"Entrez Global Query is an integrated search and retrieval system that provides access to all databases simultaneously with a single query  and user interface. Entrez can efficiently retrieve related sequences, structures, and references. The Entrez system can provide views of gene and protein sequences and chromosome maps. Some textbooks are also available online through the Entrez system."
+
+
+## BLAST
+
+https://en.wikipedia.org/wiki/BLAST_(biotechnology)
+
+<!-- This paragraph is from Wikipedia -->
+"BLAST (basic local alignment search tool)is an algorithm and program for comparing primary biological sequence information, such as the amino-acid sequences of proteins or the nucleotides of DNA and/or RNA sequences. A BLAST search enables a researcher to compare a subject protein or nucleotide sequence (called a query) with a library or database of sequences, and identify database sequences that resemble the query sequence above a certain threshold. For example, following the discovery of a previously unknown gene in the mouse, a scientist will typically perform a BLAST search of the human genome to see if humans carry a similar gene; BLAST will identify sequences in the human genome that resemble the mouse gene based on similarity of sequence."
 
 

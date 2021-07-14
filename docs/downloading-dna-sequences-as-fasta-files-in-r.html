@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 16 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Chapter 17 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 16 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Chapter 17 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 16 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Chapter 17 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -24,14 +24,14 @@
 <meta name="author" content="Avirl Coghlan, with contributions by Nathan L. Brouwer" />
 
 
-<meta name="date" content="2021-07-13" />
+<meta name="date" content="2021-07-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="programming-in-r-functions.html"/>
+<link rel="prev" href="fasta-files.html"/>
 <link rel="next" href="downloading-dna-sequences-as-fasta-files-in-r-1.html"/>
 <script src="libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -270,101 +270,127 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.4" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#functions-in-r"><i class="fa fa-check"></i><b>15.4</b> Functions in R</a></li>
 <li class="chapter" data-level="15.5" data-path="programming-in-r-functions.html"><a href="programming-in-r-functions.html#comments-in-r"><i class="fa fa-check"></i><b>15.5</b> Comments in R</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html"><i class="fa fa-check"></i><b>16</b> Downloading DNA sequences as FASTA files in R</a>
+<li class="chapter" data-level="16" data-path="fasta-files.html"><a href="fasta-files.html"><i class="fa fa-check"></i><b>16</b> FASTA Files</a>
 <ul>
-<li class="chapter" data-level="16.0.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#functions-4"><i class="fa fa-check"></i><b>16.0.1</b> Functions</a></li>
-<li class="chapter" data-level="16.0.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#softwarewebsites"><i class="fa fa-check"></i><b>16.0.2</b> Software/websites</a></li>
-<li class="chapter" data-level="16.0.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#r-vocabulary"><i class="fa fa-check"></i><b>16.0.3</b> R vocabulary</a></li>
-<li class="chapter" data-level="16.0.4" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#file-types"><i class="fa fa-check"></i><b>16.0.4</b> File types</a></li>
-<li class="chapter" data-level="16.0.5" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#bioinformatics-vocabulary"><i class="fa fa-check"></i><b>16.0.5</b> Bioinformatics vocabulary</a></li>
-<li class="chapter" data-level="16.0.6" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#organisms-and-sequence-accessions"><i class="fa fa-check"></i><b>16.0.6</b> Organisms and Sequence accessions</a></li>
-<li class="chapter" data-level="16.0.7" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#preliminaries-1"><i class="fa fa-check"></i><b>16.0.7</b> Preliminaries</a></li>
-<li class="chapter" data-level="16.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#dna-sequence-statistics-part-1"><i class="fa fa-check"></i><b>16.1</b> DNA Sequence Statistics: Part 1</a>
-<ul>
-<li class="chapter" data-level="16.1.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#using-r-for-bioinformatics"><i class="fa fa-check"></i><b>16.1.1</b> Using R for Bioinformatics</a></li>
-<li class="chapter" data-level="16.1.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#r-packages-for-bioinformatics-bioconductor-and-seqinr"><i class="fa fa-check"></i><b>16.1.2</b> R packages for bioinformatics: Bioconductor and SeqinR</a></li>
-<li class="chapter" data-level="16.1.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#fasta-file-format"><i class="fa fa-check"></i><b>16.1.3</b> FASTA file format</a></li>
-<li class="chapter" data-level="16.1.4" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#the-ncbi-sequence-database"><i class="fa fa-check"></i><b>16.1.4</b> The NCBI sequence database</a></li>
-<li class="chapter" data-level="16.1.5" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#retrieving-genome-sequence-data-using-rentrez"><i class="fa fa-check"></i><b>16.1.5</b> Retrieving genome sequence data using rentrez</a></li>
+<li class="chapter" data-level="16.1" data-path="fasta-files.html"><a href="fasta-files.html#example-fasta-file"><i class="fa fa-check"></i><b>16.1</b> Example FASTA file</a></li>
+<li class="chapter" data-level="16.2" data-path="fasta-files.html"><a href="fasta-files.html#multiple-sequences-in-a-single-fasta-file"><i class="fa fa-check"></i><b>16.2</b> Multiple sequences in a single FASTA file</a></li>
+<li class="chapter" data-level="16.3" data-path="fasta-files.html"><a href="fasta-files.html#multiple-sequence-alignments-can-be-stored-in-fasta-format"><i class="fa fa-check"></i><b>16.3</b> Multiple sequence alignments can be stored in FASTA format</a></li>
+<li class="chapter" data-level="16.4" data-path="fasta-files.html"><a href="fasta-files.html#fastq-format"><i class="fa fa-check"></i><b>16.4</b> FASTQ Format</a></li>
 </ul></li>
-<li class="chapter" data-level="16.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#optional-saving-fasta-files"><i class="fa fa-check"></i><b>16.2</b> OPTIONAL: Saving FASTA files</a></li>
-<li class="chapter" data-level="16.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#next-steps"><i class="fa fa-check"></i><b>16.3</b> Next steps</a></li>
-</ul></li>
-<li class="chapter" data-level="17" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html"><i class="fa fa-check"></i><b>17</b> Downloading DNA sequences as FASTA files in R</a>
+<li class="chapter" data-level="17" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html"><i class="fa fa-check"></i><b>17</b> Downloading DNA sequences as FASTA files in R</a>
 <ul>
-<li class="chapter" data-level="17.1" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#preliminaries-2"><i class="fa fa-check"></i><b>17.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="17.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#convert-fasta-sequence-to-an-r-variable"><i class="fa fa-check"></i><b>17.2</b> Convert FASTA sequence to an R variable</a>
+<li class="chapter" data-level="17.0.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#functions-4"><i class="fa fa-check"></i><b>17.0.1</b> Functions</a></li>
+<li class="chapter" data-level="17.0.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#softwarewebsites"><i class="fa fa-check"></i><b>17.0.2</b> Software/websites</a></li>
+<li class="chapter" data-level="17.0.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#r-vocabulary"><i class="fa fa-check"></i><b>17.0.3</b> R vocabulary</a></li>
+<li class="chapter" data-level="17.0.4" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#file-types"><i class="fa fa-check"></i><b>17.0.4</b> File types</a></li>
+<li class="chapter" data-level="17.0.5" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#bioinformatics-vocabulary"><i class="fa fa-check"></i><b>17.0.5</b> Bioinformatics vocabulary</a></li>
+<li class="chapter" data-level="17.0.6" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#organisms-and-sequence-accessions"><i class="fa fa-check"></i><b>17.0.6</b> Organisms and Sequence accessions</a></li>
+<li class="chapter" data-level="17.0.7" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#preliminaries-1"><i class="fa fa-check"></i><b>17.0.7</b> Preliminaries</a></li>
+<li class="chapter" data-level="17.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#dna-sequence-statistics-part-1"><i class="fa fa-check"></i><b>17.1</b> DNA Sequence Statistics: Part 1</a>
 <ul>
-<li class="chapter" data-level="17.2.1" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#removing-unwanted-characters"><i class="fa fa-check"></i><b>17.2.1</b> Removing unwanted characters</a></li>
-<li class="chapter" data-level="17.2.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#spliting-unbroken-strings-in-character-vectors"><i class="fa fa-check"></i><b>17.2.2</b> Spliting unbroken strings in character vectors</a></li>
+<li class="chapter" data-level="17.1.1" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#using-r-for-bioinformatics"><i class="fa fa-check"></i><b>17.1.1</b> Using R for Bioinformatics</a></li>
+<li class="chapter" data-level="17.1.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#r-packages-for-bioinformatics-bioconductor-and-seqinr"><i class="fa fa-check"></i><b>17.1.2</b> R packages for bioinformatics: Bioconductor and SeqinR</a></li>
+<li class="chapter" data-level="17.1.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#fasta-file-format"><i class="fa fa-check"></i><b>17.1.3</b> FASTA file format</a></li>
+<li class="chapter" data-level="17.1.4" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#the-ncbi-sequence-database"><i class="fa fa-check"></i><b>17.1.4</b> The NCBI sequence database</a></li>
+<li class="chapter" data-level="17.1.5" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#retrieving-genome-sequence-data-using-rentrez"><i class="fa fa-check"></i><b>17.1.5</b> Retrieving genome sequence data using rentrez</a></li>
+</ul></li>
+<li class="chapter" data-level="17.2" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#optional-saving-fasta-files"><i class="fa fa-check"></i><b>17.2</b> OPTIONAL: Saving FASTA files</a></li>
+<li class="chapter" data-level="17.3" data-path="downloading-dna-sequences-as-fasta-files-in-r.html"><a href="downloading-dna-sequences-as-fasta-files-in-r.html#next-steps"><i class="fa fa-check"></i><b>17.3</b> Next steps</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html"><i class="fa fa-check"></i><b>18</b> Downloading DNA sequences as FASTA files in R</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#preliminaries-2"><i class="fa fa-check"></i><b>18.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="18.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#convert-fasta-sequence-to-an-r-variable"><i class="fa fa-check"></i><b>18.2</b> Convert FASTA sequence to an R variable</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#removing-unwanted-characters"><i class="fa fa-check"></i><b>18.2.1</b> Removing unwanted characters</a></li>
+<li class="chapter" data-level="18.2.2" data-path="downloading-dna-sequences-as-fasta-files-in-r-1.html"><a href="downloading-dna-sequences-as-fasta-files-in-r-1.html#spliting-unbroken-strings-in-character-vectors"><i class="fa fa-check"></i><b>18.2.2</b> Spliting unbroken strings in character vectors</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html"><i class="fa fa-check"></i><b>18</b> Downloading protein sequences in <em>R</em></a>
+<li class="chapter" data-level="19" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html"><i class="fa fa-check"></i><b>19</b> Downloading protein sequences in <em>R</em></a>
 <ul>
-<li class="chapter" data-level="18.1" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#preliminaries-3"><i class="fa fa-check"></i><b>18.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="18.2" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#retrieving-a-uniprot-protein-sequence-using-rentrez"><i class="fa fa-check"></i><b>18.2</b> Retrieving a UniProt protein sequence using rentrez</a></li>
+<li class="chapter" data-level="19.1" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#preliminaries-3"><i class="fa fa-check"></i><b>19.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="19.2" data-path="downloading-protein-sequences-in-r.html"><a href="downloading-protein-sequences-in-r.html#retrieving-a-uniprot-protein-sequence-using-rentrez"><i class="fa fa-check"></i><b>19.2</b> Retrieving a UniProt protein sequence using rentrez</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html"><i class="fa fa-check"></i><b>19</b> Sequence dotplots in <em>R</em></a>
+<li class="chapter" data-level="20" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html"><i class="fa fa-check"></i><b>20</b> Sequence dotplots in <em>R</em></a>
 <ul>
-<li class="chapter" data-level="19.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#preliminaries-4"><i class="fa fa-check"></i><b>19.1</b> Preliminaries</a>
+<li class="chapter" data-level="20.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#preliminaries-4"><i class="fa fa-check"></i><b>20.1</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="19.1.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#download-sequences"><i class="fa fa-check"></i><b>19.1.1</b> Download sequences</a></li>
+<li class="chapter" data-level="20.1.1" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#download-sequences"><i class="fa fa-check"></i><b>20.1.1</b> Download sequences</a></li>
 </ul></li>
-<li class="chapter" data-level="19.2" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualzing-two-identical-sequences"><i class="fa fa-check"></i><b>19.2</b> Visualzing two identical sequences</a></li>
-<li class="chapter" data-level="19.3" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualizing-repeats"><i class="fa fa-check"></i><b>19.3</b> Visualizing repeats</a></li>
-<li class="chapter" data-level="19.4" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#inversions"><i class="fa fa-check"></i><b>19.4</b> Inversions</a></li>
-<li class="chapter" data-level="19.5" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#translocations"><i class="fa fa-check"></i><b>19.5</b> Translocations</a></li>
-<li class="chapter" data-level="19.6" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#random-sequence"><i class="fa fa-check"></i><b>19.6</b> Random sequence</a></li>
-<li class="chapter" data-level="19.7" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#comparing-two-real-sequences-using-a-dotplot"><i class="fa fa-check"></i><b>19.7</b> Comparing two real sequences using a dotplot</a></li>
+<li class="chapter" data-level="20.2" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualzing-two-identical-sequences"><i class="fa fa-check"></i><b>20.2</b> Visualzing two identical sequences</a></li>
+<li class="chapter" data-level="20.3" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#visualizing-repeats"><i class="fa fa-check"></i><b>20.3</b> Visualizing repeats</a></li>
+<li class="chapter" data-level="20.4" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#inversions"><i class="fa fa-check"></i><b>20.4</b> Inversions</a></li>
+<li class="chapter" data-level="20.5" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#translocations"><i class="fa fa-check"></i><b>20.5</b> Translocations</a></li>
+<li class="chapter" data-level="20.6" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#random-sequence"><i class="fa fa-check"></i><b>20.6</b> Random sequence</a></li>
+<li class="chapter" data-level="20.7" data-path="sequence-dotplots-in-r.html"><a href="sequence-dotplots-in-r.html#comparing-two-real-sequences-using-a-dotplot"><i class="fa fa-check"></i><b>20.7</b> Comparing two real sequences using a dotplot</a></li>
 </ul></li>
-<li class="chapter" data-level="20" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html"><i class="fa fa-check"></i><b>20</b> Global proteins aligments in <em>R</em></a>
+<li class="chapter" data-level="21" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html"><i class="fa fa-check"></i><b>21</b> Global proteins aligments in <em>R</em></a>
 <ul>
-<li class="chapter" data-level="20.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#preliminaries-5"><i class="fa fa-check"></i><b>20.1</b> Preliminaries</a>
+<li class="chapter" data-level="21.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#preliminaries-5"><i class="fa fa-check"></i><b>21.1</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="20.1.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#download-sequences-1"><i class="fa fa-check"></i><b>20.1.1</b> Download sequences</a></li>
+<li class="chapter" data-level="21.1.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#download-sequences-1"><i class="fa fa-check"></i><b>21.1.1</b> Download sequences</a></li>
 </ul></li>
-<li class="chapter" data-level="20.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-dna-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>20.2</b> Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm</a></li>
-<li class="chapter" data-level="20.3" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-protein-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>20.3</b> Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm</a>
+<li class="chapter" data-level="21.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-dna-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>21.2</b> Pairwise global alignment of DNA sequences using the Needleman-Wunsch algorithm</a></li>
+<li class="chapter" data-level="21.3" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#pairwise-global-alignment-of-protein-sequences-using-the-needleman-wunsch-algorithm"><i class="fa fa-check"></i><b>21.3</b> Pairwise global alignment of protein sequences using the Needleman-Wunsch algorithm</a>
 <ul>
-<li class="chapter" data-level="20.3.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#protein-score-matrices"><i class="fa fa-check"></i><b>20.3.1</b> Protein score matrices</a></li>
-<li class="chapter" data-level="20.3.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#example-protein-alignment"><i class="fa fa-check"></i><b>20.3.2</b> Example protein alignment</a></li>
+<li class="chapter" data-level="21.3.1" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#protein-score-matrices"><i class="fa fa-check"></i><b>21.3.1</b> Protein score matrices</a></li>
+<li class="chapter" data-level="21.3.2" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#example-protein-alignment"><i class="fa fa-check"></i><b>21.3.2</b> Example protein alignment</a></li>
 </ul></li>
-<li class="chapter" data-level="20.4" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#aligning-uniprot-sequences"><i class="fa fa-check"></i><b>20.4</b> Aligning UniProt sequences</a></li>
-<li class="chapter" data-level="20.5" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#viewing-a-long-pairwise-alignment"><i class="fa fa-check"></i><b>20.5</b> Viewing a long pairwise alignment</a></li>
+<li class="chapter" data-level="21.4" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#aligning-uniprot-sequences"><i class="fa fa-check"></i><b>21.4</b> Aligning UniProt sequences</a></li>
+<li class="chapter" data-level="21.5" data-path="global-proteins-aligments-in-r.html"><a href="global-proteins-aligments-in-r.html#viewing-a-long-pairwise-alignment"><i class="fa fa-check"></i><b>21.5</b> Viewing a long pairwise alignment</a></li>
 </ul></li>
-<li class="chapter" data-level="21" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html"><i class="fa fa-check"></i><b>21</b> Local protein aligments in <em>R</em></a>
+<li class="chapter" data-level="22" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html"><i class="fa fa-check"></i><b>22</b> Local protein aligments in <em>R</em></a>
 <ul>
-<li class="chapter" data-level="21.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#preliminaries-6"><i class="fa fa-check"></i><b>21.1</b> Preliminaries</a>
+<li class="chapter" data-level="22.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#preliminaries-6"><i class="fa fa-check"></i><b>22.1</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="21.1.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#download-sequences-2"><i class="fa fa-check"></i><b>21.1.1</b> Download sequences</a></li>
+<li class="chapter" data-level="22.1.1" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#download-sequences-2"><i class="fa fa-check"></i><b>22.1.1</b> Download sequences</a></li>
 </ul></li>
-<li class="chapter" data-level="21.2" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm"><i class="fa fa-check"></i><b>21.2</b> Pairwise local alignment of protein sequences using the Smith-Waterman algorithm</a></li>
+<li class="chapter" data-level="22.2" data-path="local-protein-aligments-in-r.html"><a href="local-protein-aligments-in-r.html#pairwise-local-alignment-of-protein-sequences-using-the-smith-waterman-algorithm"><i class="fa fa-check"></i><b>22.2</b> Pairwise local alignment of protein sequences using the Smith-Waterman algorithm</a></li>
 </ul></li>
-<li class="chapter" data-level="22" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html"><i class="fa fa-check"></i><b>22</b> Retrieving multiple sequences in R</a>
+<li class="chapter" data-level="23" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html"><i class="fa fa-check"></i><b>23</b> Retrieving multiple sequences in R</a>
 <ul>
-<li class="chapter" data-level="22.1" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#prelminaries"><i class="fa fa-check"></i><b>22.1</b> Prelminaries</a></li>
-<li class="chapter" data-level="22.2" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#retrieving-a-set-of-sequences-from-uniprot"><i class="fa fa-check"></i><b>22.2</b> Retrieving a set of sequences from UniProt</a></li>
-<li class="chapter" data-level="22.3" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#downloading-sequences-in-bulk"><i class="fa fa-check"></i><b>22.3</b> Downloading sequences in bulk</a></li>
+<li class="chapter" data-level="23.1" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#prelminaries"><i class="fa fa-check"></i><b>23.1</b> Prelminaries</a></li>
+<li class="chapter" data-level="23.2" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#retrieving-a-set-of-sequences-from-uniprot"><i class="fa fa-check"></i><b>23.2</b> Retrieving a set of sequences from UniProt</a></li>
+<li class="chapter" data-level="23.3" data-path="retrieving-multiple-sequences-in-r.html"><a href="retrieving-multiple-sequences-in-r.html#downloading-sequences-in-bulk"><i class="fa fa-check"></i><b>23.3</b> Downloading sequences in bulk</a></li>
 </ul></li>
-<li class="chapter" data-level="23" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html"><i class="fa fa-check"></i><b>23</b> Multiple sequence alignment in R</a>
+<li class="chapter" data-level="24" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html"><i class="fa fa-check"></i><b>24</b> Multiple sequence alignment in R</a>
 <ul>
-<li class="chapter" data-level="23.1" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#preliminaries-7"><i class="fa fa-check"></i><b>23.1</b> Preliminaries</a>
+<li class="chapter" data-level="24.1" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#preliminaries-7"><i class="fa fa-check"></i><b>24.1</b> Preliminaries</a>
 <ul>
-<li class="chapter" data-level="23.1.1" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#packages"><i class="fa fa-check"></i><b>23.1.1</b> Packages</a></li>
-<li class="chapter" data-level="23.1.2" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#functions-5"><i class="fa fa-check"></i><b>23.1.2</b> Functions</a></li>
+<li class="chapter" data-level="24.1.1" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#packages"><i class="fa fa-check"></i><b>24.1.1</b> Packages</a></li>
+<li class="chapter" data-level="24.1.2" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#functions-5"><i class="fa fa-check"></i><b>24.1.2</b> Functions</a></li>
 </ul></li>
-<li class="chapter" data-level="23.2" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#multiple-sequence-alignment-msa"><i class="fa fa-check"></i><b>23.2</b> Multiple sequence alignment (MSA)</a></li>
-<li class="chapter" data-level="23.3" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#make-msa-with-msa"><i class="fa fa-check"></i><b>23.3</b> Make MSA with msa()</a>
+<li class="chapter" data-level="24.2" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#multiple-sequence-alignment-msa"><i class="fa fa-check"></i><b>24.2</b> Multiple sequence alignment (MSA)</a></li>
+<li class="chapter" data-level="24.3" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#make-msa-with-msa"><i class="fa fa-check"></i><b>24.3</b> Make MSA with msa()</a>
 <ul>
-<li class="chapter" data-level="23.3.1" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#data-preparation"><i class="fa fa-check"></i><b>23.3.1</b> Data preparation</a></li>
+<li class="chapter" data-level="24.3.1" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#data-preparation"><i class="fa fa-check"></i><b>24.3.1</b> Data preparation</a></li>
 </ul></li>
-<li class="chapter" data-level="23.4" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#viewing-your-msa"><i class="fa fa-check"></i><b>23.4</b> Viewing your MSA</a>
+<li class="chapter" data-level="24.4" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#viewing-your-msa"><i class="fa fa-check"></i><b>24.4</b> Viewing your MSA</a>
 <ul>
-<li class="chapter" data-level="23.4.1" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#viewing-a-long-multiple-alignment-in-the-r-console."><i class="fa fa-check"></i><b>23.4.1</b> Viewing a long multiple alignment in the R console.</a></li>
-<li class="chapter" data-level="23.4.2" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#visualizing-alignments-as-an-r-plot"><i class="fa fa-check"></i><b>23.4.2</b> Visualizing alignments as an R plot</a></li>
-<li class="chapter" data-level="23.4.3" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#optional-print-msa-to-pdf"><i class="fa fa-check"></i><b>23.4.3</b> OPTIONAL: Print MSA to PDF</a></li>
+<li class="chapter" data-level="24.4.1" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#viewing-a-long-multiple-alignment-in-the-r-console."><i class="fa fa-check"></i><b>24.4.1</b> Viewing a long multiple alignment in the R console.</a></li>
+<li class="chapter" data-level="24.4.2" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#visualizing-alignments-as-an-r-plot"><i class="fa fa-check"></i><b>24.4.2</b> Visualizing alignments as an R plot</a></li>
+<li class="chapter" data-level="24.4.3" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#optional-print-msa-to-pdf"><i class="fa fa-check"></i><b>24.4.3</b> OPTIONAL: Print MSA to PDF</a></li>
 </ul></li>
-<li class="chapter" data-level="23.5" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#discarding-very-poorly-conserved-regions-from-an-alignment"><i class="fa fa-check"></i><b>23.5</b> Discarding very poorly conserved regions from an alignment</a></li>
+<li class="chapter" data-level="24.5" data-path="multiple-sequence-alignment-in-r.html"><a href="multiple-sequence-alignment-in-r.html#discarding-very-poorly-conserved-regions-from-an-alignment"><i class="fa fa-check"></i><b>24.5</b> Discarding very poorly conserved regions from an alignment</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="calculating-genetic-distances-between-sequences.html"><a href="calculating-genetic-distances-between-sequences.html"><i class="fa fa-check"></i><b>25</b> Calculating genetic distances between sequences</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="calculating-genetic-distances-between-sequences.html"><a href="calculating-genetic-distances-between-sequences.html#preliminaries-8"><i class="fa fa-check"></i><b>25.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="25.2" data-path="calculating-genetic-distances-between-sequences.html"><a href="calculating-genetic-distances-between-sequences.html#introduction-1"><i class="fa fa-check"></i><b>25.2</b> Introduction</a></li>
+<li class="chapter" data-level="25.3" data-path="calculating-genetic-distances-between-sequences.html"><a href="calculating-genetic-distances-between-sequences.html#calculating-genetic-distances-between-dnamrna-sequences"><i class="fa fa-check"></i><b>25.3</b> Calculating genetic distances between DNA/mRNA sequences</a></li>
+<li class="chapter" data-level="25.4" data-path="calculating-genetic-distances-between-sequences.html"><a href="calculating-genetic-distances-between-sequences.html#calculationg-genetic-distance"><i class="fa fa-check"></i><b>25.4</b> Calculationg genetic distance</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="unrooted-neighbor-joining-phylogenetic-trees.html"><a href="unrooted-neighbor-joining-phylogenetic-trees.html"><i class="fa fa-check"></i><b>26</b> Unrooted neighbor-joining phylogenetic trees</a>
+<ul>
+<li class="chapter" data-level="26.1" data-path="unrooted-neighbor-joining-phylogenetic-trees.html"><a href="unrooted-neighbor-joining-phylogenetic-trees.html#preliminaries-9"><i class="fa fa-check"></i><b>26.1</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="26.1.1" data-path="unrooted-neighbor-joining-phylogenetic-trees.html"><a href="unrooted-neighbor-joining-phylogenetic-trees.html#key-functions"><i class="fa fa-check"></i><b>26.1.1</b> Key functions</a></li>
+<li class="chapter" data-level="26.1.2" data-path="unrooted-neighbor-joining-phylogenetic-trees.html"><a href="unrooted-neighbor-joining-phylogenetic-trees.html#key-vocab"><i class="fa fa-check"></i><b>26.1.2</b> Key vocab</a></li>
+</ul></li>
+<li class="chapter" data-level="26.2" data-path="unrooted-neighbor-joining-phylogenetic-trees.html"><a href="unrooted-neighbor-joining-phylogenetic-trees.html#building-an-unrooted-phylogenetic-tree-for-protein-sequences"><i class="fa fa-check"></i><b>26.2</b> Building an unrooted phylogenetic tree for protein sequences</a></li>
+<li class="chapter" data-level="26.3" data-path="unrooted-neighbor-joining-phylogenetic-trees.html"><a href="unrooted-neighbor-joining-phylogenetic-trees.html#boostrap-values-indicate-support-for-clades"><i class="fa fa-check"></i><b>26.3</b> Boostrap values indicate support for clades</a></li>
+<li class="chapter" data-level="26.4" data-path="unrooted-neighbor-joining-phylogenetic-trees.html"><a href="unrooted-neighbor-joining-phylogenetic-trees.html#branch-lengths-indicate-divergence-between-sequences"><i class="fa fa-check"></i><b>26.4</b> Branch lengths indicate divergence between sequences</a></li>
+<li class="chapter" data-level="26.5" data-path="unrooted-neighbor-joining-phylogenetic-trees.html"><a href="unrooted-neighbor-joining-phylogenetic-trees.html#unrooted-trees-lack-an-outgroup"><i class="fa fa-check"></i><b>26.5</b> Unrooted trees lack an outgroup</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path=""><a href="#part-appendices"><i class="fa fa-check"></i>(PART) Appendices</a>
 <ul>
@@ -372,31 +398,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html"><i class="fa fa-check"></i>Appendix 01: Getting access to R</a>
 <ul>
-<li class="chapter" data-level="23.6" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-started-with-r-and-rstudio"><i class="fa fa-check"></i><b>23.6</b> Getting Started With R and RStudio</a>
+<li class="chapter" data-level="26.6" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-started-with-r-and-rstudio"><i class="fa fa-check"></i><b>26.6</b> Getting Started With R and RStudio</a>
 <ul>
-<li class="chapter" data-level="23.6.1" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#rstudio-cloud"><i class="fa fa-check"></i><b>23.6.1</b> RStudio Cloud</a></li>
-<li class="chapter" data-level="23.6.2" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-r-onto-your-own-computer"><i class="fa fa-check"></i><b>23.6.2</b> Getting R onto your own computer</a></li>
-<li class="chapter" data-level="23.6.3" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-rstudio-onto-your-computer"><i class="fa fa-check"></i><b>23.6.3</b> Getting RStudio onto your computer</a></li>
-<li class="chapter" data-level="23.6.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#keep-r-and-rstudio-current"><i class="fa fa-check"></i><b>23.6.4</b> Keep R and RStudio current</a></li>
+<li class="chapter" data-level="26.6.1" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#rstudio-cloud"><i class="fa fa-check"></i><b>26.6.1</b> RStudio Cloud</a></li>
+<li class="chapter" data-level="26.6.2" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-r-onto-your-own-computer"><i class="fa fa-check"></i><b>26.6.2</b> Getting R onto your own computer</a></li>
+<li class="chapter" data-level="26.6.3" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-rstudio-onto-your-computer"><i class="fa fa-check"></i><b>26.6.3</b> Getting RStudio onto your computer</a></li>
+<li class="chapter" data-level="26.6.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#keep-r-and-rstudio-current"><i class="fa fa-check"></i><b>26.6.4</b> Keep R and RStudio current</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html"><i class="fa fa-check"></i>Getting started with R itself (or not)</a>
 <ul>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#vocabulary-2"><i class="fa fa-check"></i>Vocabulary</a></li>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#r-commands"><i class="fa fa-check"></i>R commands</a></li>
-<li class="chapter" data-level="23.7" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#help"><i class="fa fa-check"></i><b>23.7</b> Help!</a>
+<li class="chapter" data-level="26.7" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#help"><i class="fa fa-check"></i><b>26.7</b> Help!</a>
 <ul>
-<li class="chapter" data-level="23.7.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-r"><i class="fa fa-check"></i><b>23.7.1</b> Getting “help” from R</a></li>
-<li class="chapter" data-level="23.7.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-the-internet"><i class="fa fa-check"></i><b>23.7.2</b> Getting help from the internet</a></li>
-<li class="chapter" data-level="23.7.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-online-forums"><i class="fa fa-check"></i><b>23.7.3</b> Getting help from online forums</a></li>
-<li class="chapter" data-level="23.7.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-twitter"><i class="fa fa-check"></i><b>23.7.4</b> Getting help from twitter</a></li>
+<li class="chapter" data-level="26.7.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-r"><i class="fa fa-check"></i><b>26.7.1</b> Getting “help” from R</a></li>
+<li class="chapter" data-level="26.7.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-the-internet"><i class="fa fa-check"></i><b>26.7.2</b> Getting help from the internet</a></li>
+<li class="chapter" data-level="26.7.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-online-forums"><i class="fa fa-check"></i><b>26.7.3</b> Getting help from online forums</a></li>
+<li class="chapter" data-level="26.7.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-twitter"><i class="fa fa-check"></i><b>26.7.4</b> Getting help from twitter</a></li>
 </ul></li>
-<li class="chapter" data-level="23.8" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#other-features-of-rstudio"><i class="fa fa-check"></i><b>23.8</b> Other features of RStudio</a>
+<li class="chapter" data-level="26.8" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#other-features-of-rstudio"><i class="fa fa-check"></i><b>26.8</b> Other features of RStudio</a>
 <ul>
-<li class="chapter" data-level="23.8.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#ajusting-pane-the-layout"><i class="fa fa-check"></i><b>23.8.1</b> Ajusting pane the layout</a></li>
-<li class="chapter" data-level="23.8.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#adjusting-size-of-windows"><i class="fa fa-check"></i><b>23.8.2</b> Adjusting size of windows</a></li>
+<li class="chapter" data-level="26.8.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#ajusting-pane-the-layout"><i class="fa fa-check"></i><b>26.8.1</b> Ajusting pane the layout</a></li>
+<li class="chapter" data-level="26.8.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#adjusting-size-of-windows"><i class="fa fa-check"></i><b>26.8.2</b> Adjusting size of windows</a></li>
 </ul></li>
-<li class="chapter" data-level="23.9" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>23.9</b> Practice (OPTIONAL)</a></li>
+<li class="chapter" data-level="26.9" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>26.9</b> Practice (OPTIONAL)</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
@@ -418,13 +444,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="downloading-dna-sequences-as-fasta-files-in-r" class="section level1" number="16">
-<h1><span class="header-section-number">Chapter 16</span> Downloading DNA sequences as FASTA files in R</h1>
+<div id="downloading-dna-sequences-as-fasta-files-in-r" class="section level1" number="17">
+<h1><span class="header-section-number">Chapter 17</span> Downloading DNA sequences as FASTA files in R</h1>
 <p>This is a modification of <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html">“DNA Sequence Statistics”</a> from Avril Coghlan’s <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html"><em>A little book of R for bioinformatics.</em></a>. Most of the text and code was originally written by Dr. Coghlan and distributed under the <a href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons 3.0</a> license.</p>
 <!-- how much is sequinr actually useD? -->
 <p><strong>NOTE</strong>: There is some reduncnacy in this current draft that needs to be eliminated.</p>
-<div id="functions-4" class="section level3" number="16.0.1">
-<h3><span class="header-section-number">16.0.1</span> Functions</h3>
+<div id="functions-4" class="section level3" number="17.0.1">
+<h3><span class="header-section-number">17.0.1</span> Functions</h3>
 <ul>
 <li>library()</li>
 <li>help()</li>
@@ -435,15 +461,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>seqinr::write.fasta()</li>
 </ul>
 </div>
-<div id="softwarewebsites" class="section level3" number="16.0.2">
-<h3><span class="header-section-number">16.0.2</span> Software/websites</h3>
+<div id="softwarewebsites" class="section level3" number="17.0.2">
+<h3><span class="header-section-number">17.0.2</span> Software/websites</h3>
 <ul>
 <li>www.ncbi.nlm.nih.gov</li>
 <li>Text editors (e.g. Notepad++, TextWrangler)</li>
 </ul>
 </div>
-<div id="r-vocabulary" class="section level3" number="16.0.3">
-<h3><span class="header-section-number">16.0.3</span> R vocabulary</h3>
+<div id="r-vocabulary" class="section level3" number="17.0.3">
+<h3><span class="header-section-number">17.0.3</span> R vocabulary</h3>
 <ul>
 <li>list</li>
 <li>library</li>
@@ -452,14 +478,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>wrapper</li>
 </ul>
 </div>
-<div id="file-types" class="section level3" number="16.0.4">
-<h3><span class="header-section-number">16.0.4</span> File types</h3>
+<div id="file-types" class="section level3" number="17.0.4">
+<h3><span class="header-section-number">17.0.4</span> File types</h3>
 <ul>
 <li>FASTA</li>
 </ul>
 </div>
-<div id="bioinformatics-vocabulary" class="section level3" number="16.0.5">
-<h3><span class="header-section-number">16.0.5</span> Bioinformatics vocabulary</h3>
+<div id="bioinformatics-vocabulary" class="section level3" number="17.0.5">
+<h3><span class="header-section-number">17.0.5</span> Bioinformatics vocabulary</h3>
 <ul>
 <li>accession, accession number</li>
 <li>NCBI</li>
@@ -468,8 +494,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>FASTA file</li>
 </ul>
 </div>
-<div id="organisms-and-sequence-accessions" class="section level3" number="16.0.6">
-<h3><span class="header-section-number">16.0.6</span> Organisms and Sequence accessions</h3>
+<div id="organisms-and-sequence-accessions" class="section level3" number="17.0.6">
+<h3><span class="header-section-number">17.0.6</span> Organisms and Sequence accessions</h3>
 <ul>
 <li>Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4.</li>
 </ul>
@@ -479,21 +505,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>“Dengue virus (DENV) is the cause of dengue fever. It is a mosquito-borne, single positive-stranded RNA virus … Five serotypes of the virus have been found, all of which can cause the full spectrum of disease. Nevertheless, scientists’ understanding of dengue virus may be simplistic, as rather than distinct … groups, a continuum appears to exist.” <a href="https://en.wikipedia.org/wiki/Dengue_virus" class="uri">https://en.wikipedia.org/wiki/Dengue_virus</a></p>
 </blockquote>
 </div>
-<div id="preliminaries-1" class="section level3" number="16.0.7">
-<h3><span class="header-section-number">16.0.7</span> Preliminaries</h3>
+<div id="preliminaries-1" class="section level3" number="17.0.7">
+<h3><span class="header-section-number">17.0.7</span> Preliminaries</h3>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsaWJyYXJ5KHJlbnRyZXopXG5saWJyYXJ5KGNvbXBiaW80YWxsKSAifQ==
 </div>
 </div>
-<div id="dna-sequence-statistics-part-1" class="section level2" number="16.1">
-<h2><span class="header-section-number">16.1</span> DNA Sequence Statistics: Part 1</h2>
-<div id="using-r-for-bioinformatics" class="section level3" number="16.1.1">
-<h3><span class="header-section-number">16.1.1</span> Using R for Bioinformatics</h3>
+<div id="dna-sequence-statistics-part-1" class="section level2" number="17.1">
+<h2><span class="header-section-number">17.1</span> DNA Sequence Statistics: Part 1</h2>
+<div id="using-r-for-bioinformatics" class="section level3" number="17.1.1">
+<h3><span class="header-section-number">17.1.1</span> Using R for Bioinformatics</h3>
 <p>The chapter will guide you through the process of using R to carry out simple analyses that are common in bioinformatics and computational biology. In particular, the focus is on computational analysis of biological sequence data such as genome sequences and protein sequences. The programming approaches, however, are broadly generalizable to statistics and data science.</p>
 <p>The tutorials assume that the reader has some basic knowledge of biology, but not necessarily of bioinformatics. The focus is to explain simple bioinformatics analysis, and to explain how to carry out these analyses using <em>R</em>.</p>
 </div>
-<div id="r-packages-for-bioinformatics-bioconductor-and-seqinr" class="section level3" number="16.1.2">
-<h3><span class="header-section-number">16.1.2</span> R packages for bioinformatics: Bioconductor and SeqinR</h3>
+<div id="r-packages-for-bioinformatics-bioconductor-and-seqinr" class="section level3" number="17.1.2">
+<h3><span class="header-section-number">17.1.2</span> R packages for bioinformatics: Bioconductor and SeqinR</h3>
 <p>Many authors have written <em>R</em> packages for performing a wide variety of analyses. These do not come with the standard <em>R</em> installation, but must be installed and loaded as “add-ons”.</p>
 <!-- old Loading the dayoff package will automatically load most of the packages we need. -->
 <!-- have these as dependencies of combio4all? -->
@@ -512,14 +538,14 @@ You can also do this
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiI/bGlicmFyeSJ9
 </div>
 </div>
-<div id="fasta-file-format" class="section level3" number="16.1.3">
-<h3><span class="header-section-number">16.1.3</span> FASTA file format</h3>
+<div id="fasta-file-format" class="section level3" number="17.1.3">
+<h3><span class="header-section-number">17.1.3</span> FASTA file format</h3>
 <p>The FASTA format is a simple and widely used format for storing biological (e.g. DNA or protein) sequences. It was first used by the <a href="https://en.wikipedia.org/wiki/FASTA">FASTA program</a> for sequence alignment in the 1980s and has been adopted as standard by many other programs.</p>
 <p>FASTA files begin with a single-line description starting with a greater-than sign <code>&gt;</code> character, followed on the next line by the sequences. Here is an example of a FASTA file. (If you’re looking at the source script for this lesson you’ll see the <code>cat()</code> command, which is just a text display function used format the text when you run the code).</p>
 <pre><code>## &gt;A06852 183 residues MPRLFSYLLGVWLLLSQLPREIPGQSTNDFIKACGRELVRLWVEICGSVSWGRTALSLEEPQLETGPPAETMPSSITKDAEILKMMLEFVPNLPQELKATLSERQPSLRELQQSASKDSNLNFEEFKKIILNRQNEAEDKSLLELKNLGLDKHSRKKRLFRMTLSEKCCQVGCIRKDIARLC</code></pre>
 </div>
-<div id="the-ncbi-sequence-database" class="section level3" number="16.1.4">
-<h3><span class="header-section-number">16.1.4</span> The NCBI sequence database</h3>
+<div id="the-ncbi-sequence-database" class="section level3" number="17.1.4">
+<h3><span class="header-section-number">17.1.4</span> The NCBI sequence database</h3>
 <p>The US <a href="www.ncbi.nlm.nih.gov">National Centre for Biotechnology Information (NCBI)</a> maintains the <strong>NCBI Sequence Database</strong>, a huge database of all the DNA and protein sequence data that has been collected. There are also similar databases in Europe, the <a href="www.ebi.ac.uk/embl">European Molecular Biology Laboratory (EMBL) Sequence Database</a>, and Japan, the <a href="www.ddbj.nig.ac.jp">DNA Data Bank of Japan (DDBJ)</a>. These three databases exchange data every night, so at any one point in time, they contain almost identical data.</p>
 <p>Each sequence in the NCBI Sequence Database is stored in a separate <strong>record</strong>, and is assigned a unique identifier that can be used to refer to that record. The identifier is known as an <strong>accession</strong>, and consists of a mixture of numbers and letters.</p>
 <p>For example, Dengue virus causes Dengue fever, which is classified as a <strong>neglected tropical disease</strong> by the World Health Organization (WHO), is classified by any one of four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are</p>
@@ -532,8 +558,8 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiI/bGlicmFyeSJ9
 </ul>
 <p>Note that because the NCBI Sequence Database, the EMBL Sequence Database, and DDBJ exchange data every night, the DEN-1 (and DEN-2, DEN-3, DEN-4) Dengue virus sequence are present in all three databases, but they have different accessions in each database, as they each use their own numbering systems for referring to their own sequence records.</p>
 </div>
-<div id="retrieving-genome-sequence-data-using-rentrez" class="section level3" number="16.1.5">
-<h3><span class="header-section-number">16.1.5</span> Retrieving genome sequence data using rentrez</h3>
+<div id="retrieving-genome-sequence-data-using-rentrez" class="section level3" number="17.1.5">
+<h3><span class="header-section-number">17.1.5</span> Retrieving genome sequence data using rentrez</h3>
 <p>You can retrieve sequence data from NCBI directly from <em>R</em> using the <code>rentrez</code> package. The DEN-1 Dengue virus genome sequence has NCBI accession NC_001477. To retrieve a sequence with a particular NCBI accession, you can use the function <code>entrez_fetch()</code> from the <code>rentrez</code> package. Note that to be specific where the function comes from I write it as <code>package::function()</code>.</p>
 <!-- QUESTION: How many arguments does entrez_fetch take in this call? -->
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
@@ -606,8 +632,8 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJuY2hhcihkZW5ndWVzZXFfZmFzdGEpIn0=
 </div>
 </div>
 </div>
-<div id="optional-saving-fasta-files" class="section level2" number="16.2">
-<h2><span class="header-section-number">16.2</span> OPTIONAL: Saving FASTA files</h2>
+<div id="optional-saving-fasta-files" class="section level2" number="17.2">
+<h2><span class="header-section-number">17.2</span> OPTIONAL: Saving FASTA files</h2>
 <p>We can save our data as .fasta file for safe keeping. The <code>write()</code> function will save the data we downloaded as a plain text file.</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ3cml0ZShkZW5ndWVzZXFfZmFzdGEsIFxuICAgICAgZmlsZT1cImRlbmd1ZXNlcS5mYXN0YVwiKSJ9
@@ -617,8 +643,8 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ3cml0ZShkZW5ndWVzZXFfZmFzdGEsIFxuICAgICAgZmls
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJnZXR3ZCgpIn0=
 </div>
 </div>
-<div id="next-steps" class="section level2" number="16.3">
-<h2><span class="header-section-number">16.3</span> Next steps</h2>
+<div id="next-steps" class="section level2" number="17.3">
+<h2><span class="header-section-number">17.3</span> Next steps</h2>
 <p>On their own, FASTA files in R are not directly useful. In the next lesson we’ll process our <code>dengueseq_fasta</code> file so that we can use it in analyses.</p>
 
 </div>
@@ -628,7 +654,7 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJnZXR3ZCgpIn0=
           </div>
         </div>
       </div>
-<a href="programming-in-r-functions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="fasta-files.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="downloading-dna-sequences-as-fasta-files-in-r-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -661,7 +687,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/brouwern/lbrb/edit/master/11-download_FASTA_in_R.Rmd",
+"link": "https://github.com/brouwern/lbrb/edit/master/11b-download_FASTA_in_R.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -669,7 +695,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/brouwern/lbrb/blob/master/11-download_FASTA_in_R.Rmd",
+"link": "https://github.com/brouwern/lbrb/blob/master/11b-download_FASTA_in_R.Rmd",
 "text": null
 },
 "download": ["lbrb.pdf", "lbrb.epub"],

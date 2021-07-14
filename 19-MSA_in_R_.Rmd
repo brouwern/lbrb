@@ -56,14 +56,41 @@ WE'll use a package called `msa` ([Bodenhofer et al. 2015](https://academic.oup.
 
 The data is stored in object in combio4all
 ```{r}
-data(seq_1_2_3_4)
+data(seq_1_2_3_4) 
 ```
 
+This data is in the form of a list
+```{r}
+is.list(seq_1_2_3_4)
+```
+
+First we need to clean each one using `fasta_cleaner()`.  
+
+<!-- Update this so parse = F and we can skip the paste() step -->
+```{r}
+seq_1_2_3_4[[1]] <- fasta_cleaner(seq_1_2_3_4[[1]])
+seq_1_2_3_4[[2]] <- fasta_cleaner(seq_1_2_3_4[[2]])
+seq_1_2_3_4[[3]] <- fasta_cleaner(seq_1_2_3_4[[3]])
+seq_1_2_3_4[[4]] <- fasta_cleaner(seq_1_2_3_4[[4]])
+```
+
+<!-- Skipping some steps here e.g. why I'm using paste(), what a named vector is -->
+<!-- should write wrapper for this -->
+
+We need to put it into the form of a vector; in particular a **named vector**.
+
+<!-- Make function to do this -->
+```{r}
+seq_1_2_3_4_vector <- c(P06747 = paste(seq_1_2_3_4[[1]], collapse = ""),
+                 P0C569 = paste(seq_1_2_3_4[[2]], collapse = ""),
+                 O56773 = paste(seq_1_2_3_4[[3]], collapse = ""),
+                 Q5VKP1 = paste(seq_1_2_3_4[[4]], collapse = ""))
+```
 
 We'll need need to convert our set of sequences to a particular format in preparation for alignment.  This is done with the `AAStringSet()` function from `Biostrings`.
 
 ```{r}
-seq_1_2_3_4_stringset <- Biostrings::AAStringSet(seq_1_2_3_4)
+seq_1_2_3_4_stringset <- Biostrings::AAStringSet(seq_1_2_3_4_vector)
 ```
 
 This just puts things in a format that makes the software happy.  Doing this is a theme of bioinformatics work!

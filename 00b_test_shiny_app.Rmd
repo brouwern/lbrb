@@ -1,5 +1,8 @@
 # Test shiny app
 
+Here is an example of a Shiny app embedded in a bookdown book.
+
+
 ```{r}
 knitr::include_app(url = "https://wrightaprilm.shinyapps.io/treesiftr_app/")
 ```
