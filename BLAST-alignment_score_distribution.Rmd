@@ -1,20 +1,6 @@
----
-title: "Pevsner Figure 4.14"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Pevsner Figure 4.14}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
+# BLAST Alignment score distribution
 
-
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+**By**: Nathan Brouwer
 
 ```{r  eval = T}
 library(compbio4all)
@@ -24,7 +10,7 @@ library(compbio4all)
 
 
 
-The following code creates a figure similar to Figure 4.14 in Chapter 4 of Pevsner (page 141).
+<!-- The following code creates a figure similar to Figure 4.14 in Chapter 4 of Pevsner (page 141). -->
 
 
 ## Packages
@@ -42,7 +28,7 @@ library(evd)
 
 ## Distributions of alignment scores
 
-Imagine we could keep track of all of the steps of a BLAST search.  At a certain point, BLAST will have made many **local alignmens** of a few dozen to a couple hundred bases between the **query sequence** you submitted and sequences in the database.  Each of these local, pairwise alignments met all the criteria for being worthy of consideration and so are recored as **hits**.  Now we want to judge objectively how good these hits are and which ones are most worthy of further consideration.  We can do this by working of an **E-value**.
+Imagine we could keep track of all of the steps of a BLAST search.  At a certain point, BLAST will have made many **local alignments** of a few dozen to a couple hundred bases between the **query sequence** you submitted and sequences in the database.  Each of these local, pairwise alignments met all the criteria for being worthy of consideration and so are recored as **hits**.  Now we want to judge objectively how good these hits are and which ones are most worthy of further consideration.  We can do this by working of an **E-value**.
 
 With our collection of hits, we could take their scores and plot them.  Many things in biology when plotted will take on a bell-curve or normal distribution.  Scores for alignments, however, take on an **extreme value distribution** (EVD).  That is, compared to a **symmetric** normal distribution an EVD has too few low numbers (lower alignment scores) and extra high scores.
 
@@ -235,7 +221,7 @@ abline(v = mean0, col = 2)
 
 ## Replicating Figure 4.14
 
-This code evokes figrure 4.14.  You don't need to know these functions.
+This code evokes Pevsner Figrure 4.14.  You don't need to know these functions.
 
 Note that the main differences correspond to values around -2 and 2.
 ```{r}
@@ -250,7 +236,7 @@ points(extreme.curve~range.x.axis,type = "l", lty = 2, col = 2)
 
 ## Why do we care?
 
-THe starting point for most statistics is the normal distribution.  This is where we get z-scores, most p-values, standard errors, and most 95% confidence intervals.  When we don't use normal distributions, we use other common distributions (eg the binomial distribution for binary data, the poisson for count data).  None of these common distributions work if we want to do any statistics with DNA alginment; we need tow rok with the extreme value distribution.  (Indeed, in 10 years of spending lots of time doing statiscs, this is the only application I've run in to of the EVD)
+The starting point for most statistics is the normal distribution.  This is where we get z-scores, most p-values, standard errors, and most 95% confidence intervals.  When we don't use normal distributions, we use other common distributions (eg the binomial distribution for binary data, the poisson for count data).  None of these common distributions work if we want to do any statistics with DNA alginment; we need tow rok with the extreme value distribution.  (Indeed, in 10 years of spending lots of time doing statiscs, this is the only application I've run in to of the EVD)
 
 
 ```{r}

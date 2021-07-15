@@ -1,18 +1,6 @@
----
-title: "BLAST Summary"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{BLAST Summary}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
+# BLAST Summary
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+**By**: Nathan Brouwer
 
 ```{r  eval = T}
 library(compbio4all)
@@ -21,9 +9,9 @@ library(compbio4all)
 
 I have discovered that there are many minor but annoying inconsistencies in how the BLAST algorithm is described in text books.  Additionally, most gloss over key computational steps, such as how BLAST actually searches through sequences.  While this doesn't have many - if any - consequences for a user of BLAST, it makes it very difficult to determine the computational steps involved and to appreciate exactly what is going on.  The following notes are my attempt to summarize all the key features and computational steps of BLAST.
 
-In a few cases I not provided every detail, which I usually note.  I also occasionally use my own analogy or terminology which I think provides a useful description.
+In a few cases I have not provided every detail, which I usually note.  I also occasionally use my own analogy or terminology which I think provides a useful description.
 
-In the *dayoff* package I have written code that simulates some steps of the BLAST algorithm.  This code is meant to emulate or evoke the process of BLAST and is NOT written as the actual program is.  For example, as discussed below, BLAST's actual searching of databases involves computational tool called a **deterministic finite-state automata (DFSA)** (Zvelebil & Baum 2008).  This is a rather complicated sub-program, buts it general behavior can be evoked using a simple regular expression or for() loop.  (I'd like to write code for a DFSA but have yet to find R or Python examples).
+In the `combio4all package I have written code that simulates some steps of the BLAST algorithm.  This code is meant to emulate or evoke the process of BLAST and is NOT written as the actual program is.  For example, as discussed below, BLAST's actual searching of databases involves computational tool called a **deterministic finite-state automata (DFSA)** (Zvelebil & Baum 2008).  This is a rather complicated sub-program, buts it general behavior can be evoked using a simple regular expression or `for()` loop.  (I'd like to write code for a DFSA but have yet to find R or Python examples).
 
 ## BLAST Overview
 
