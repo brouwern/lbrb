@@ -1,0 +1,133 @@
+# Representing phylogenetic trees in Newick format
+
+**By*: Nathan Brouwer
+
+```{r, echo = F}
+library(ape)
+library(phangorn)
+```
+
+
+## Vocab
+
+* Newick notation
+* topology
+* clade
+
+## Introduction
+
+**Newick format** is a common way to store information about **rooted phylogenetic trees** in a compact, written format.  In its standard format, Newick does not store information about branch lengths, though it can be augmented to include lengths.
+
+## Trees with three taxa
+
+A simple phylogenetic tree with three species can be represented in Newick as:
+\[((Human, Chimp), Gorilla)\]
+
+In Newick format, **clades** are enclosed in parentheses.  So, in the example above, "(Human, Chimp)" means that humans and chimps are a **clade** and are each other's closest neighbors on the tree.  
+
+```{r, echo = F}
+par(mfrow = c(1,1))
+str1 <- c("((Human, Chimp),Gorilla);")
+
+## convert character string to tree
+tree1<-ape::read.tree(text=str1)
+
+## plot tree
+plot.phylo(tree1,edge.width=2, main = "")
+```
+
+
+The general **mathematical rules of parentheses** apply to Newick format.  Therefore, the *order* within the parentheses doesn't matter: "(Human, Chimp)" is the same as "(Chimp, Human)".
+
+The two version of the trees result in differences in the order the taxa appear from top to bottom, but do not change its **toplogy** or interpretation.
+```{r, echo = F}
+par(mfrow = c(1,2))
+plot.phylo(tree1,edge.width=2, main = "(Human, Chimp)")
+
+str2 <- c("((Chimp, Human),Gorilla);")
+
+## convert character string to tree
+tree2<-ape::read.tree(text=str2)
+
+## plot tree
+plot.phylo(tree2,edge.width=2, main = "(Chimp, Human)")
+
+```
+
+
+Similarly, "((Human, Chimp), Gorilla)" is the same as "(Gorilla, (Human, Chimp))".  
+
+```{r, echo = F}
+par(mfrow = c(1,2))
+
+plot.phylo(tree1,edge.width=2, main = "((Human, Chimp), Gorilla)")
+
+
+
+str4 <- c("(Gorilla,(Chimp, Human));")
+
+## convert character string to tree
+tree4<-ape::read.tree(text=str4)
+
+## plot tree
+plot.phylo(tree4,edge.width=2, main = "(Gorilla, (Chimp, Human))")
+```
+
+
+These rules for Newick are analogous to the rules for using parentheses in math: (1+2) is the same as (2+1), and ((2+1) * 2) is the same as (2*(2+1)).
+
+
+## Trees with four taxa
+
+If we split Gorillas into the two major groups, western Gorillas in Gabon and eastern Gorillas in the Democratic Republic of Congo, we would put them in a clade: "(Gorilla-W, Gorilla-E)".  We'll now have two separate clades of two taxa.  We would then build up the full tree as
+
+\[((Human, Chimp), (Gorilla-W, Gorilla-E))\]
+
+This has two clades of two taxa each
+
+1. Humans-Chimps
+1. Western gorillas-Eastern Gorillas
+```{r, echo = F}
+par(mfrow = c(1,1))
+str5 <- c("((Chimp, Human), (Gorilla-W, Gorilla-E));")
+
+## convert character string to tree
+tree5<-ape::read.tree(text=str5)
+
+## plot tree
+plot.phylo(tree5,edge.width=2, main = "((Chimp, Human), (Gorilla-W, Gorilla-E))")
+```
+
+
+
+
+If wanted to represent a tree with humans, chimps, gorillas and orangutan we would represent it like this:
+
+\[(((Human, Chimp),Gorilla), Orangutan)\]
+
+The parenthesis to the right of Gorilla indicates that Gorilla falls within the human-chimp clade. 
+
+```{r, echo = F}
+str6 <- c("(((Human, Chimp),Gorilla), Orangutan);")
+
+## convert character string to tree
+str6<-ape::read.tree(text=str6)
+
+## plot tree
+plot.phylo(str6,edge.width=2, main = "(((Human, Chimp),Gorilla), Orangutan)")
+
+plotrix::draw.ellipse(x = 3, y = 2, a = 0.9, b = 1.12, angle = 0, segment = NULL,
+arc.only = TRUE, deg = TRUE, nv = 100, 
+col = NA, lty = 2, lwd = 2, border = "darkgreen")
+```
+
+
+
+
+Just as in math, the number of parentheses needs to balance out.  In this case, there are three parentheses open to the right, all next to human.  There therefore needs to be 3 parentheses open to the right.
+
+```{r}
+# 321            1        2           3
+# (((Human, Chimp),Gorilla), Orangutan)
+```
+

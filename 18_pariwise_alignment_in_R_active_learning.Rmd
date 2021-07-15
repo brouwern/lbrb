@@ -1,0 +1,157 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Alignment in R
+
+**By**: Nathan Brouwer
+
+## Preliminaries
+
+### Packages
+
+```{r}
+library(Biostrings)
+```
+
+### Data
+
+```{r}
+hShrm3  <- "EPEREPEWRDRPGSP"
+
+mShrm3   <- "EAEREASWSEDRPGT"
+```
+
+
+
+We can do a pairwise alignment directly in *R* using `pairwiseAlignment()` from Biostrings, a package from Bioconductor.  We'll use this function to check the math on our alignment calculations from the previous lesson.
+
+Normally this `pairwiseAlignment()` will insert gaps.  Alignment algorithms allow you to set a **penalty** for first creating a gap, and for how large it is.  As noted above, usually the penalty is largest for first allowing a gap initially, but less for each additional space.  So a gap of 1 might have a penalty of -14 (-10 + -4), but a gap of 2 might have total penalty of -18 (-10 + -4 + -4).
+
+
+In `pairwiseAlignment()` the arguments related to gaps are `gapOpening = ` and `gapExtension = `, where `gapOpening` is the for starting the gap and `gapExtension` is the penalty for the size of the gap (*including* the first insertion).
+ 
+In *R* you can get information about a function using the `?` function.  If we want to know about the `pairwiseAlignment()` function we run `?pairwiseAlignment`.  
+
+Call up the help file for `pairwiseAlignment` and see if you can see what the **defaults** are for gap opening (aka gap creation) and gap extension.  Hint: Its int the first 50 lines of the help file - don't scroll too far down).
+
+*R* help files are pretty dense so this might be hard.  Note that the penalties are set as positive numbers in the help file but get converted to negative values.
+
+```{r}
+# Call up the help file for pairwiseAlignment()
+
+# What is the gap opening penalty? Replace the "NA" with the penalty
+
+gapOpen <- NA
+
+
+# What is the gap extension ? Replace the "NA" with the penalty
+
+gapExtend <- NA
+
+```
+
+
+
+We can force the alignment to NOT allow gaps by setting the penalties for gaps to be REALLY large. 
+
+```{r}
+nogap <- pairwiseAlignment(hShrm3,
+                  mShrm3,
+                  gapOpening = -100,
+                  gapExtension = -100,
+                  substitutionMatrix = "BLOSUM62")
+
+
+```
+
+We can check the alignment by calling up the object
+```{r}
+
+
+```
+
+
+We can get the score directly using the score() function
+
+```{r}
+
+
+
+```
+
+
+We can get the percent identity using the pid() function
+
+```{r}
+
+
+
+```
+
+
+
+Note that In the code above I've set the penalties to be negative, which is more intuitive.  Confirm that positive numbers for these penalties result in the same score by changing the 100 values to -100.  Copy the code from above and make the appropriate changes.
+
+```{r}
+
+
+
+```
+
+
+
+
+Why does setting the gap penalties high make the algorithm *not* insert gaps?  We haven't covered this directly yet, but the goal of an alignment algorithm is to maximize the score by lining up the two sequences and adding gaps and deletions as necessary.  Recalling what's along the diagonal of the BLOSUM matrix, direct matches (identity) between the residues on two sequences result in the highest scores, and differences have lower scores based on how different the residues are.  Look at the BLOSUM matrix and see if there are any entries that are as low as -10, the gap penalty.
+
+
+
+We can allow gaps by removing the gapOpening and gapExtension arguments (deleting them).  Copy the code from above, remove those arguments, and assign the output to an object called gap.  
+```{r}
+
+
+
+```
+
+When we don't assign anything to  gapOpening and gapExtension arguments in the code above, the function uses the defaults. We can also specify the gap penalties directly.  COpy the code again, leave the arguments in but change the penalties to -10 for gap creation and -4 for gap extension.
+
+
+```{r}
+
+
+
+```
+
+
+
+Look at the alignment; How many indels were added on the "pattern" strand?
+```{r}
+
+
+```
+
+
+What is the score of this alignment?  Use the appropriate function to access it directly and save into an object called score.gap
+```{r}
+
+
+# remove the NA and add the appropriate code 
+score.gap <- NA
+
+
+
+```
+
+
+
+What is the percent identity? Use the appropriate function to access it directly and save it to and object called pid.gap
+
+```{r}
+# remove the NA and add the appropriate code 
+pid.gap <- NA
+
+
+```
+

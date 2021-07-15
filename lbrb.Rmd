@@ -131,7 +131,8 @@ Here is an example of an audio link  embedded in a bookdown book.
 
 
 ```{r}
-knitr::include_url("https://www.genome.gov/sites/default/files/tg/en/narration/single_nucleotide_polymorphisms_snps.mp3")
+knitr::include_url("https://www.genome.gov/sites/default/files/tg/en/narration/single_nucleotide_polymorphisms_snps.mp3",
+                   height = "50px")
 ```
 
 
@@ -154,14 +155,10 @@ knitr::include_app(url = "https://wrightaprilm.shinyapps.io/treesiftr_app/")
 Here is an example of a YouTube video  embedded in a bookdown book.
 
 
-As tag
-![](https://youtu.be/zNzZ1PfUDNk)
-
-
 
 via knitr chunk
 ```{r}
-knitr::include_url("https://youtu.be/zNzZ1PfUDNk")
+knitr::include_url("https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be")
 ```
 
 <!--chapter:end:00b_test_youtube.Rmd-->
@@ -2812,6 +2809,1354 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
+# Matrix vocabulary
+
+**By** Nathan Brouwer
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+<!-- Other to do -->
+<!-- first work with smaller matrix (DNA? distance matrix?) -->
+<!-- transpose -->
+<!-- mirror symmetry -->
+<!-- remove ambig codes while working with it -->
+
+
+## Introduction 
+
+In this exercise we will practice manipulating matrices and vector by exploring the structure of **scoring matrices** and **alignments**.
+
+## Preliminaries
+
+
+### Packages 
+
+* BiocManager
+* Biostrings
+* combio4all
+
+### Vocab
+
+#### Math / R vocab
+
+* triangular matrix
+* square matrix
+* lower triangle
+* upper triangle
+* symmetric matrix
+* matrix diagonal
+
+
+#### Bioinformatics vocab 
+* scoring matrix
+* BLOSUM scoring matrix
+
+
+
+### Functions used
+
+#### Base R functions
+* `data()`
+* `is()`
+* `nrow()`, `ncol()`, 
+* `dim()`,
+* `names()`, `colnames()`, `rownames()`, 
+* `head()`,  `tail()`
+
+#### Specific function
+
+* combio4all::tri_print()
+* combio4all::diag_show()
+
+
+## Load packages
+
+Load basic packages
+```{r}
+library(flextable)
+library(webshot)
+```
+
+
+Install the Biostrings package from Bioconductor; you don't have to run this if you already happen to have downloaded Biostrings before
+```{r, echo = F, eval = F}
+library(BiocManager)
+BiocManager::install("Biostrings") #Manipulate biological string data
+```
+
+
+
+In the *R* console the matrix looks like this. 
+
+```{r}
+BLOSUM62
+```
+
+
+
+The function `tri_print()` will print just the lower triangle, with all the other values left empty. (This might be a bit slow)
+```{r}
+tri_print(BLOSUM62, as.image = T)
+```
+
+
+We can also look at the upper triangle.
+```{r}
+tri_print(BLOSUM62,triangle = "upper", as.image = T)
+```
+
+
+## Matrix structure
+
+The BLOSUM62 matrix is a **square matrix** since the number of rows equals the number of columns.  It is also a symmetrical matrix since the **lower triangle** of the matrix is the same as the **upper triangle**.  The `compbio4all` package has functions for displaying these.  
+
+*R* shows us the full **symmetric matrix**, though in books usually they just show the **lower triangle**.  A symmetric matrix is one where the upper and lower triangles are identical.
+
+
+## Diagonal of a matrix
+
+The **diagonal of a matrix** is the set of numbers that falls directly in a diagonal line from the upper left corner to the lower right.
+
+The diagonal of a scoring matrix represents an amino acid that hasn't changed or diverged between two sequences (in theory it could change and then change back).  We can access the diagonal in *R* `diag()`.
+
+What does `diag(BLOSUM62)` tell you?
+
+
+```{r}
+diag(BLOSUM62)
+```
+
+This is showing you the entries that fall along the diagonal of the matrix.  But the output is just a string of numbers. We can look at the diagonal in context using the `diag_show()` function from the compbio4all package.
+
+```{r}
+diag_show(BLOSUM62)
+```
+
+
+
+<!--chapter:end:18_matrix_vocab.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Alignment in R
+
+**By**: Nathan Brouwer
+
+## Preliminaries
+
+### Packages
+
+```{r}
+library(Biostrings)
+```
+
+### Data
+
+```{r}
+hShrm3  <- "EPEREPEWRDRPGSP"
+
+mShrm3   <- "EAEREASWSEDRPGT"
+```
+
+
+
+We can do a pairwise alignment directly in *R* using `pairwiseAlignment()` from Biostrings, a package from Bioconductor.  We'll use this function to check the math on our alignment calculations from the previous lesson.
+
+Normally this `pairwiseAlignment()` will insert gaps.  Alignment algorithms allow you to set a **penalty** for first creating a gap, and for how large it is.  As noted above, usually the penalty is largest for first allowing a gap initially, but less for each additional space.  So a gap of 1 might have a penalty of -14 (-10 + -4), but a gap of 2 might have total penalty of -18 (-10 + -4 + -4).
+
+
+In `pairwiseAlignment()` the arguments related to gaps are `gapOpening = ` and `gapExtension = `, where `gapOpening` is the for starting the gap and `gapExtension` is the penalty for the size of the gap (*including* the first insertion).
+ 
+In *R* you can get information about a function using the `?` function.  If we want to know about the `pairwiseAlignment()` function we run `?pairwiseAlignment`.  
+
+Call up the help file for `pairwiseAlignment` and see if you can see what the **defaults** are for gap opening (aka gap creation) and gap extension.  Hint: Its int the first 50 lines of the help file - don't scroll too far down).
+
+*R* help files are pretty dense so this might be hard.  Note that the penalties are set as positive numbers in the help file but get converted to negative values.
+
+```{r}
+# Call up the help file for pairwiseAlignment()
+
+# What is the gap opening penalty? Replace the "NA" with the penalty
+
+gapOpen <- NA
+
+
+# What is the gap extension ? Replace the "NA" with the penalty
+
+gapExtend <- NA
+
+```
+
+
+
+We can force the alignment to NOT allow gaps by setting the penalties for gaps to be REALLY large. 
+
+```{r}
+nogap <- pairwiseAlignment(hShrm3,
+                  mShrm3,
+                  gapOpening = -100,
+                  gapExtension = -100,
+                  substitutionMatrix = "BLOSUM62")
+
+
+```
+
+We can check the alignment by calling up the object
+```{r}
+
+
+```
+
+
+We can get the score directly using the score() function
+
+```{r}
+
+
+
+```
+
+
+We can get the percent identity using the pid() function
+
+```{r}
+
+
+
+```
+
+
+
+Note that In the code above I've set the penalties to be negative, which is more intuitive.  Confirm that positive numbers for these penalties result in the same score by changing the 100 values to -100.  Copy the code from above and make the appropriate changes.
+
+```{r}
+
+
+
+```
+
+
+
+
+Why does setting the gap penalties high make the algorithm *not* insert gaps?  We haven't covered this directly yet, but the goal of an alignment algorithm is to maximize the score by lining up the two sequences and adding gaps and deletions as necessary.  Recalling what's along the diagonal of the BLOSUM matrix, direct matches (identity) between the residues on two sequences result in the highest scores, and differences have lower scores based on how different the residues are.  Look at the BLOSUM matrix and see if there are any entries that are as low as -10, the gap penalty.
+
+
+
+We can allow gaps by removing the gapOpening and gapExtension arguments (deleting them).  Copy the code from above, remove those arguments, and assign the output to an object called gap.  
+```{r}
+
+
+
+```
+
+When we don't assign anything to  gapOpening and gapExtension arguments in the code above, the function uses the defaults. We can also specify the gap penalties directly.  COpy the code again, leave the arguments in but change the penalties to -10 for gap creation and -4 for gap extension.
+
+
+```{r}
+
+
+
+```
+
+
+
+Look at the alignment; How many indels were added on the "pattern" strand?
+```{r}
+
+
+```
+
+
+What is the score of this alignment?  Use the appropriate function to access it directly and save into an object called score.gap
+```{r}
+
+
+# remove the NA and add the appropriate code 
+score.gap <- NA
+
+
+
+```
+
+
+
+What is the percent identity? Use the appropriate function to access it directly and save it to and object called pid.gap
+
+```{r}
+# remove the NA and add the appropriate code 
+pid.gap <- NA
+
+
+```
+
+
+<!--chapter:end:18_pariwise_alignment_in_R_active_learning.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Manipulating matrices and vectors: worked example
+
+**By** Nathan Brouwer
+
+<!-- use DNA matrix first? distance matrix? other? -->
+
+## Introduction 
+
+In this exercise we will practice manipulating matrices and vectors by exploring the structure of **scoring matrices**.
+
+## Preliminaries
+
+
+### Packages 
+
+* BiocManager
+* Biostrings
+* combio4all
+
+### Vocab
+
+#### Math / R vocab
+
+* triangular matrix
+* square matrix
+* lower triangle
+* upper triangle
+* symmetric matrix
+* matrix diagonal
+* named vectors
+* named matrices
+* accessing items in named vectors or matrices
+* square bracket notation
+
+#### Bioinformatics vocab 
+* scoring matrix
+* BLOSUM scoring matrix
+
+
+### Functions used
+
+#### Base R functions
+* `data()`
+* `is()`
+* `nrow()`, `ncol()`, 
+* `dim()`,
+* `names()`, `colnames()`, `rownames()`, 
+* `head()`,  `tail()`
+
+
+### Packages
+
+```{r}
+library(Biostrings)
+```
+
+### Data
+
+```{r}
+data(BLOSUM62)
+```
+
+
+## Matrix elements can be accessed with square bracket notation
+
+We often want to access just subsets of data from a matrix or a dataframe.  This can take some getting used to.  We can use **square brackets** to get certain subsets or ranges of cells. If we want just the upper left-hand cell we can do this:
+
+```{r}
+BLOSUM62[1,1]
+```
+
+If we want the first four cells in the upper left hand corner we can do this
+
+```{r}
+BLOSUM62[c(1:4), c(1:4)]
+```
+
+
+If we want to get rid of the **ambiguity code** cells on the bottom which are `B`, `J`, `Z`, `X` and `*` we can specify that we want elements 1 through 20.  Let me step through this.
+
+First, run the code below; what happens?
+```{r}
+
+1:4
+
+```
+
+Now do the same thing for 1 to 20:
+```{r}
+
+
+
+```
+
+Note that this next line should provide the same result as what you just did.
+```{r}
+c(1:20)
+```
+
+
+If we *really* wanted to type all of this out, we would have to do this:
+```{r}
+c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)
+```
+
+
+
+We can get just the first row of the BLOSUM matrix by telling *R* we want row 1 and columns 1 to 20.
+
+We get just *row* 1 like this:
+
+```{r}
+BLOSUM62[1, ]
+```
+
+We get columns 1:20 like this:
+```{r}
+BLOSUM62[ , c(1:20)]
+```
+
+Note that leaving the first part blank gives us ALL the rows.
+
+If we want just the first row AND the first 20 columns, we do this:
+```{r}
+
+BLOSUM62[1 , c(1:20)]
+
+```
+
+Assign the output of the code `c(1:20)` to an object called `i` using the assignment operator `<-`.  The code should like like this `i <- c(1:20)`.
+
+```{r, echo = T}
+i <- c(1:20)
+```
+
+
+```{r}
+
+
+
+```
+
+This thing `i` we just  made is a **vector** of numbers.  Vectors are a 1-dimensional sequence of numbers.  You can think of a matrix as a bunch of vectors stacked on top of each other.
+
+Unfortunately, if you call `is()` in the `i` object you don't get a totally clear picture of what it is.  Where does the word `vector` show up?
+```{r}
+
+
+
+```
+
+I'm not sure why `vector` isn't the first thing to be printed.  We can check whether `i` is a vector more directly by asking it "hey i, are you a vector" using the `is.vector()` command
+
+```{r}
+is.vector(i)
+```
+
+Its a vector, so it shouldn't be a matrix, but we can check with `is.matrix()`
+```{r}
+is.matrix(i)
+```
+
+Math books may tell you that a vector is a 1-dimensional matrix, but in *R* land vectors are distinct from matrices.
+
+Vectors show up *everywhere* in R.  In this case I've defined a vector, `i`, which is holding the row and column numbers I want to isolated from the BLOSUM62 matrix.
+
+I can call up just these rows and columns like this
+
+
+```{r}
+BLOSUM62[i , i]
+```
+
+If I hadn't defined the vector `i`, I could write
+
+```{r}
+BLOSUM62[c(1:20) ,c(1:20)  ]
+```
+
+Let's isolate just the first 20 rows and columns and put them into a new object called `BLOSUM62.subset`.
+
+```{r}
+BLOSUM62.subset <-  BLOSUM62[i ,i ]
+```
+
+
+We can get the scores for when there is no change in an amino acid from the diagonal with `diag()`
+```{r}
+diag(BLOSUM62.subset)
+```
+
+If you're scoring an alignment by hand you can pull up the diagonal of the matrix this way so you don't have to squint at the whole matrix.  We can make it even easier if we alphabetize thing, though this requires some extra code which you don't need to worry about.  (I'm making a new vector, `i2`, which will do the alphabetizing).
+```{r}
+# get column names
+n <- colnames(BLOSUM62.subset)
+
+# sort
+i2 <- sort(n)
+```
+
+
+Now things are in alphabetical order
+```{r}
+diag(BLOSUM62.subset)[i2]
+```
+
+Save this alphabetized diagonal to an `R` object called `BLOSUM62.diag` using the assignment operator `<-`
+
+```{r, echo = T}
+BLOSUM62.diag <- diag(BLOSUM62.subset)[i2]
+```
+
+```{r}
+
+
+
+```
+
+What are the names attached to this `BLOSUM62.diag` object? Unfortunately *R* is picky about how you do this so you need to figure out whether the functions `names()`, `rownames()`, or `colnames()` gets you want you want
+```{r}
+rownames(BLOSUM62.diag)
+colnames(BLOSUM62.diag)
+names(BLOSUM62.diag)
+```
+
+
+## R object names
+
+When an *R* object has "names" assigned to it we can use the name to call up elements of the object.
+
+### Accessing items in names vectors
+
+We can call up just the score for an E to E transition stored in our matrix diagonal like this, which is a way of saying "Hey R, give me the value in this `BLOSUM62.diag` object that is in the slot labeled "E".
+```{r}
+BLOSUM62.diag["E"]
+```
+
+
+E is the 4th slot so we can also get this value like this with the slot number.
+```{r}
+
+BLOSUM62.diag[4]
+
+```
+
+
+We could get the first four values using `c(1:4)`.  Try it
+```{r}
+
+
+
+```
+
+
+What type of object is this diagonal thingy anyway?  The command starts with "i".
+```{r}
+
+
+
+```
+
+
+### Accessing items in names matrices
+
+If we want to get something from the main matrix (the full BLOSUM matrix, not the diagonal) we can also specify things using the row and column names.  This will give us the value for an E to E transition:
+
+```{r}
+
+BLOSUM62.subset["E","E"]
+
+```
+
+
+How could you get the whole "E" *column*?
+```{r}
+
+
+```
+
+
+How could you get the whole "E" *row*?
+```{r}
+
+
+```
+
+We can use numbers too if we want.  "E" is in the 7th column, so we can get the E to E value like this:
+```{r}
+
+BLOSUM62.subset[7,7]
+
+```
+
+How would you get the whole "E" column?
+```{r}
+
+
+
+```
+
+How would you get the whole "E" row?
+```{r}
+BLOSUM62.subset[7, ]
+```
+
+We can of course specify any score we want.  For a P to A transition we could do this:
+```{r}
+BLOSUM62.subset["P","A"]
+
+```
+
+
+Or specify the row and column numbers
+```{r}
+BLOSUM62.subset[15,1]
+```
+
+What happens when you do ["A","P"] instead (reverse of what was above?
+
+```{r}
+
+
+
+```
+
+So, if you are doing an alignment by hand, you can quickly query the matrix and pull up the scores.  If you have a sequence "EPEERPEWRDRPGSP" and "EAEREASWSEDRPGT" you can get the score for the E to E matching again like this
+
+```{r}
+BLOSUM62.subset["E","E"]
+```
+
+
+and P to A like this
+
+```{r}
+BLOSUM62.subset["P","A"]
+```
+
+and so on.  
+
+<!--chapter:end:18_working_with_matrices_and_vectors_worked_example.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Alignment by eye in R
+
+**By** Nathan Brouwer
+
+## Preliminaries
+
+### Packages
+
+```{r}
+library(compbio4all)
+library(Biostrings)
+```
+
+### Data
+
+```{r}
+data("BLOSUM62")
+```
+
+
+
+
+Let's do an alignment between two parts of a shroom protein.  We'll look at part of the ASD2 domain of Shroom 3.  We'll look at human shroom (hShrm3) and call this the "Query" sequence.  We'll use mouse shroom (mShrm3) as the "subject" or "target".  (The accession number for human shroom 3 is NP_065910.3)
+
+```{r}
+hShrm3  <- "EPEREPEWRDRPGSP"
+
+mShrm3   <- "EAEREASWSEDRPGT"
+```
+
+
+Use nchar() to see how many characters are in them
+
+```{r}
+
+
+
+```
+
+
+We can make a little matrix and look at how they align using the rbind() function, which stands for "row bind"
+
+```{r}
+rbind(hShrm3,
+      mShrm3)
+```
+
+Assign this to an object called shrms
+
+```{r}
+shrms <- rbind(hShrm3, mShrm3)
+
+```
+
+
+What type of object is shrms?
+
+```{r}
+
+
+
+```
+
+How big is it?  See if you can guess first before using R to check
+
+```{r}
+
+
+```
+
+
+If we want to do an alignment by eye it would help if instead of having all the letters stuck together they were separated.  We would do this by hand but it would require a lot of typing:
+
+```{r}
+hShrm3_alt <- c("E","P","E","R","E","P","E","W","R","D","R","P","G","S","P")
+
+mShrm3_alt <- c("E","A","E","R","E","A","S","W","S","E","D","R","P","G","T")
+```
+
+
+
+One thing that is annoying about R is that vectors have "length" but no dimension.  Compare the output of the length() command and dim() command when called on hShrm3_alt
+```{r}
+# run length()
+
+
+# run dim()
+
+
+
+```
+
+
+Use is,  is.vector, length, is.character, and n.char on hShrm3 and hShrm3_alt.  How is hShrm3 ("EPEREPEWRDRPGSP") different from hShrm3_alt?  Can you figure out why nchar() is doing what its doing?
+```{r}
+# run is() on hShrm3 AND hShrm3_alt
+
+
+# run is.vector on hShrm3 AND hShrm3_alt
+
+
+# do this for the rest of the commands
+
+
+
+```
+
+
+Typing all this stuff out is a pain.  Instead of typing all those commas to make hShrm3_alt we could take hShrm3 and have *R* do the work for us.  Lots of people work with **character data** (data make up of alphabetic and other characters that can NOT be interpreted as numbers) so there are lots of functions for manipulating characters. We'll use the `strsplit()` function.
+
+If we just all strsplit() on the hShrm3 object we get something a little annoying.  
+```{r}
+strsplit(hShrm3, split = "")
+```
+
+Note that the output above is on too lines, and the first line is `[[1]]`.
+
+Ok, what's up?
+
+Assign the thing we just made to an object called hShrm3_vec for "hShrm3 vector".
+
+```{r}
+hShrm3_vec <- strsplit(hShrm3, split = "")
+
+```
+
+Now figure out what the heck it "is":
+```{r}
+
+
+```
+
+If you used the right command to figure out what it **is** (hint) the first thing you see is "list."  Lists are rather complex **data structures** in R because they aren't the kind of thing you run in to if you just have experience working in a spreadsheet.  Lists allow you to make collections of different R objects.  For now you just need to know that they exist; we'll run into them again later.  For now, we want to get rid of this listy-ness of our R object.  We can do this with the function unlist().  Call unlist() on your hShrm3_vec object and re-assign it to the same object hShrm3_vec, eg, run 
+hShrm3_vec <- unlist(hShrm3_vec)
+
+
+```{r}
+hShrm3_vec <- unlist(hShrm3_vec)
+```
+
+
+Now we need to repeat these steps for the mouse shroom sequence.  
+```{r}
+# split up mShrm3 with strsplit()
+mShrm3_vec <- strsplit(mShrm3, split = "")
+
+# unlist it with unlist()
+mShrm3_vec <- unlist(mShrm3_vec)
+
+```
+
+
+Something that is useful once you get good at reading R code is that you can wrap functions within functions.  So instead of doing this in separate steps I could just do this:
+
+```{r}
+hShrm3_vec <- unlist(strsplit(hShrm3, split = ""))
+mShrm3_vec <- unlist(strsplit(mShrm3, split = ""))
+```
+
+Before moving on confirm that these two factors are the same length.  If they aren't R will get angry
+```{r}
+# length of hShrm3_vec
+
+# length of mShrm3_vec
+
+```
+
+
+Now let's make a little matrix so we can think about aligning these sequences.  The rbind() function binds two rows together into a matrix.
+
+```{r}
+rbind(hShrm3_vec, mShrm3_vec)
+```
+
+
+For what we want to do next aligning them vertically will actually work better.  We can align them as columns using cbind(), which stands for "column bind"
+
+```{r}
+cbind(hShrm3_vec, mShrm3_vec)
+```
+
+
+Save that to an object called shrm
+
+```{r, echo = T}
+cbind(hShrm3_vec, mShrm3_vec)
+```
+
+
+```{r, echo = T}
+shrm <- cbind(hShrm3_vec, mShrm3_vec)
+```
+
+```{r}
+
+
+```
+
+
+The most basic way to do an alignment is to determine the which bases are identical and to score those as 1, and anything that is mismatched score as 0.  From this you can determine **percent identity**. 
+
+A handy way to do this quickly in R is to use the ifelse() command.  What you can do is tell it to do this: "IF a base in the first sequence the same as the aligned base in the second sequence, return a value of 1, ELSE return a value of 0."
+
+I'll do a really transparent example. First, let me make some very simple objects with just a single letter in them.
+
+```{r}
+aa1 <- "A"
+aa2 <- "A"
+aa3 <- "W"
+```
+
+
+What kind of object have I just made? Use is, is.vector, length, dim, and is.matrix.  Can you understand why you get the results that you do?
+```{r}
+
+
+```
+
+Now let me use ifelse().  First, let me check if aa1 is the same as aa2, an if they R, return a value of 1, else return a value of 0
+```{r}
+ifelse(aa1 == aa2, yes =  1, no = 0)
+```
+
+The first part of the function asks a true/false question: is aa1 the same as aa2?  Note that it is TWO equals signs
+
+This is a **logical comparison** or **logical test** in R. It would work on its own outside of ifelse, like this:
+
+```{r}
+aa1 == aa2
+```
+
+Now compare aa1 and aa2.  First try the logical test
+```{r}
+
+
+```
+
+
+Now try the ifelse() command
+
+```{r}
+
+
+
+```
+
+
+Something that is very hand in R is that it can process things in a series. First, let's turn our single amino acids into some sequences.
+
+```{r}
+
+seq1 <- c(aa1, aa2, aa3)
+seq2 <- c(aa3, aa2, aa1)
+
+```
+
+Do you know what kind of R object we just made?  Run an appropriate check
+
+```{r}
+
+
+```
+
+
+Now let's compare these two sequences. First a logical comparison. Can you tell what this code is doing?
+```{r}
+
+seq1 == seq2
+
+```
+
+What is going on here?  It might help to line everything up using rbind() to make a little matrix. First, save the output of the logical comparison to an R object
+
+```{r}
+
+identical <- seq1==seq2
+
+```
+
+
+Now stack the two sequences and the logical comparison into a matrix
+```{r}
+
+rbind(seq1, seq2, identical)
+
+```
+
+
+We can also run ifelse() on the two sequences
+```{r}
+ifelse(seq1 == seq2, yes = 1, no = 0)
+```
+
+Save this output to an object called align.score for "alignment score"
+
+```{r, echo = T}
+align.score <- ifelse(seq1 == seq2, yes = 1, no = 0)
+```
+
+
+```{r}
+
+
+
+```
+
+
+Now stack everything up into a matrix using rbind
+
+```{r}
+
+rbind(seq1, seq2, identical, align.score )
+
+
+```
+
+
+Now let's try this on our shroom vectors.  First, do a logical comparison of the hShrm3_vec vector and the mShrm3_vec vector.  Remember there are two equals signs (==)
+
+```{r}
+
+
+```
+
+
+Now use ifelse() to assign a 1 to a match and a 0 to a mismatch.
+
+```{r}
+
+
+
+```
+
+
+Again, can you describe what's going on here?
+
+Again we can make a little matrix with rbind(). I'm going to embed the ifelse() function within rbind(); this might be a little dense but see if you can figure out what each separate command is.
+
+```{r}
+rbind(hShrm3_vec, 
+      mShrm3_vec,
+      identical = hShrm3_vec == mShrm3_vec,
+      score= ifelse(hShrm3_vec == mShrm3_vec,yes = 1, no = 0 ))
+```
+
+If we want the total score we can assign the results of ifelse() to an object
+```{r}
+scores <-ifelse(hShrm3_vec == mShrm3_vec,yes = 1, no = 0 )
+```
+
+I can then total up the score with sum()
+
+```{r}
+sum(scores)
+```
+
+
+I can easily call up the number of amino acids with length().  Do that below
+
+```{r}
+
+
+```
+
+
+Percent identity is a common statistic when comparing sequences.  If my score is 5 and my total number of residues is 15 my percent identity is:
+```{r}
+
+5/15
+
+```
+
+
+I can do this directly on the objects like this
+
+```{r}
+
+sum(scores)/length(scores)
+
+```
+
+
+
+We can do this sort of scoring on sequences in a matrix or data frame.  Remember that we made a matrix called shrm with our two sequences in it. Matrices and dataframes are very similar, but its usually easier to work with dataframes.  We can convert the matrix to a dataframe like this
+
+```{r}
+shrm <- data.frame(shrm, stringsAsFactors = F)
+```
+
+
+There's a lot relate to the "stringsAsFactors = F"; basically it makes sure we are working with raw character data.
+
+
+Calling summary() on the shrm dataframe can confirm that its character data:
+
+```{r}
+summary(shrm)
+```
+
+
+You can call up the human shroom 3 columns with this code: shrm[, "hShrm3_vec"]. try it below
+
+```{r}
+
+
+```
+
+How would you call up the other column with mouse shroom?
+
+```{r}
+
+
+
+```
+
+
+One tricky thin about R is that you can access the column of dataframes in more than one way.  You can get the first column also using the dollar sign
+
+```{r}
+shrm$hShrm3_vec
+```
+
+Note that even though we're calling a column, R prints it out left to right like a row.
+
+We can do a logical comparisons of the two columns like this:
+```{r}
+
+shrm[, "hShrm3_vec"] == shrm[,"mShrm3_vec"]
+
+```
+
+
+Can you re-write this using the dollar sign notation?  Try it below
+
+```{r}
+
+
+
+```
+
+
+Now let's use ifelse() on these two columns
+```{r}
+
+ifelse(shrm[, "hShrm3_vec"] == shrm[,"mShrm3_vec"], yes = 1, no = 0)
+
+```
+
+
+Rewrite the code above using dollar sign notation
+
+```{r}
+
+
+
+```
+
+
+We can add this information to the dataframe like this
+
+
+```{r}
+shrm$identical <- ifelse(shrm[, "hShrm3_vec"] == shrm[,"mShrm3_vec"], yes = 1, no = 0)
+```
+
+
+Now what do we have?  Call up the dataframe shrm we just made:
+
+```{r}
+
+
+
+```
+
+
+
+Now call summary on it.  What types of data are each variable?
+
+```{r}
+ 
+
+```
+
+
+
+Comparing an alignment to a scoring matrix by hand is a lot of work, so there's a function called `score_alignment()` in the `compbio4all` package which can do basic comparisons.  The function has the following arguments
+
+* seq.df = A dataframe with aligned sequences in columns
+* seq1 = the name of the column with a sequence in it; name must be in quotes
+* seq2 = the other, aligned sequence
+* gap.penalty = -10
+
+Running the function returns a dataframe with a new column called "score".
+
+```{r}
+
+shrm <-score_alignment(seq.df = shrm, 
+                seq1=  "hShrm3_vec",  #note the quotation marks
+                seq2 = "mShrm3_vec",
+                sub.mat = BLOSUM62,
+                gap.penalty =  -10)
+```
+
+
+
+We can call the sum() function on the score column of the shrm dataframe to calculate the overall score for the alignment.  This is a metric that tells use how good the alignment is based on the number of identical residues in the sequence, how different any mutations are from the original residue, and how many gaps there are.
+```{r}
+sum(shrm$score)
+```
+
+
+
+I happen to know that we can make this alignment better if we add a gap.  I'll do it by hand because I don't have a function yet to do it automatically.  I'll put a gap into the human shroom 3 sequence (hShrm3_alt) after the "W" that's about in the middle of the sequence.
+
+
+```{r}
+
+hShrm3_alt  <- c("E","P","E","R","E","P","E","W","-","R","D","R","P","G","S","P")
+
+```
+
+
+Using an appropriate function, confirm that the insertion has made the sequence longer (hint: its not nchar)
+```{r}
+
+
+```
+
+Now we'll do the other sequence.  To make this work we need to add an insertion to the end of the mouse sequence (mShrm3_alt) so that the two sequences are the same length.
+```{r}
+
+mShrm3_alt  <- c("E","A","E","R","E","A","S","W","S","E","D","R","P","G","T","-")
+
+```
+
+
+Again, check that this sequence is longer than it was before
+
+```{r}
+
+
+```
+
+
+A handy trick is to do a **logical comparison** to check that the two vectors are the same.  Run the following code and see if you can interpret what is going on.  Remember that the double equals sign == carries out a logical comparison that returns TRUE if two values are the same.
+
+```{r}
+
+length(hShrm3_alt) == length(mShrm3_alt)
+
+```
+
+
+
+Now, for a challenge, see if you can figure out what's going on here
+```{r}
+
+hShrm3_alt == mShrm3_alt
+
+```
+
+
+
+It might be easier if we stack thing in to a little matrix with rbind().  I've put a lot of stuff in the rbind() function but see if you can figure it out.
+
+```{r}
+
+rbind(hShrm3_alt = hShrm3_alt,
+      mShrm3_alt = mShrm3_alt,
+      identical = hShrm3_alt == mShrm3_alt)
+
+```
+
+
+Now let's compare these two sequences by scoring them.  First, we'll put them into a dataframe using data.frame(). We'll call the object shrm.gap.
+
+```{r}
+
+shrm.gap <-data.frame(hShrm3_alt,
+                      mShrm3_alt, 
+                      stringsAsFactors = F)
+
+```
+
+
+Run an appropriate function to confirm that this is a dataframe
+```{r}
+
+
+```
+
+
+Check what the size of the dataframe is:
+```{r}
+
+
+
+```
+
+
+Now look at the full dataframe
+```{r}
+
+
+
+```
+
+Now run a function to just look at the top of the dataframe:
+```{r}
+
+
+
+```
+
+
+
+Run a function to just look at the bottom of the dataframe
+```{r}
+
+
+
+```
+
+
+
+Ok, we have a sense of what we're working with.  Let's calculate the score
+```{r}
+
+shrm.gap <- score_alignment(shrm.gap, 
+                     seq1=  "hShrm3_alt",
+                     seq2 = "mShrm3_alt",
+                     sub.mat= BLOSUM62,
+                     gap.penalty =-10)
+
+```
+
+
+Look at the dataframe and make sure it looks right.  Note that each gap ("-") has a score of 10 as defined by the gap.penalty.
+```{r}
+
+
+
+```
+
+
+Now calculate the total score
+
+```{r}
+  
+sum(shrm.gap$score)
+
+```
+
+
+There is one issue here which I haven't yet resolved.  When alignment are scored we take into account two things: the creation of a gap (yes there is a gap there) and its length (how long it it).
+
+Each gap that get's created gets scores -10 for occurring and -4 for each insertion in the gap.  So a gap of 1 insertion ("-") gets score -10 + -4
+
+```{r}
+
+-10 + -4
+
+```
+
+
+A gap of 2 insertions ("--") gets a score of
+
+```{r}
+
+(-10 + -4) + -4
+
+```
+
+A gap of 3 insertions ("---") gets a score of
+
+```{r}
+
+(-10 + -4) + -4 + -4
+
+```
+
+
+Our alignment has two separate insertions, one in the middle and one on the end.  In the logic of alignment this is two separate insertions each of length one, so each one gets scored -10 + -4 = -14
+
+
+I haven't written a function yet to implement counting up the length of the insertions, so the score returned by score_alignment() is not correct.  Based on the description above, what is the correct score?  Write out R code using sum() to calculate the correct score.
+
+
+
+```{r}
+
+
+
+```
+
+
+
+
+
+
+<!--chapter:end:18-alignment_by_hand_shrm_active_learning.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Retrieving multiple sequences in R
 
 ```{r eval = T}
@@ -3318,6 +4663,285 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
+# The BLOSUM scoring matrix in R
+
+**By** Nathan Brouwer
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+## Introduction 
+
+In this lesson we will introduce the basic structure of the BLOSUM scoring matrix.
+
+## Preliminaries
+
+
+### Packages 
+
+<!-- this lesson has been split up -  not stuff below now  used  -->
+
+* BiocManager
+* Biostrings
+* combio4all
+
+### Vocab
+
+#### Math / R vocab
+
+* triangular matrix
+* square matrix
+* lower triangle
+* upper triangle
+* symmetric matrix
+* matrix diagonal
+* named vectors
+* named matrices
+* accessing items in named vectors or matrices
+* square bracket notation
+
+#### Bioinformatics vocab 
+* scoring matrix
+* BLOSUM scoring matrix
+* ambiguity codes
+
+
+### Functions used
+
+#### Base R functions
+* `data()`
+* `is()`
+* `nrow()`, `ncol()`, 
+* `dim()`,
+* `names()`, `colnames()`, `rownames()`, 
+* `head()`,  `tail()`
+
+#### Specific function
+
+* combio4all::tri_print()
+* combio4all::diag_show()
+
+
+## Load packages
+
+Load basic packages
+```{r}
+library(flextable)
+library(webshot)
+```
+
+
+Install the Biostrings package from Bioconductor; you don't have to run this if you already happen to have downloaded Biostrings before
+```{r, echo = F, eval = F}
+library(BiocManager)
+BiocManager::install("Biostrings") #Manipulate biological string data
+```
+
+
+```{r}
+library(Biostrings)
+```
+
+## The BLOSUM matrix
+
+When data is contained within an R package we can load it using the data() function.  We'll work with a version of the BLOSUM62 matrix in the Biostrings package
+
+Load BLOSUM62 amino acid substitution matrix using data()
+```{r}
+data(BLOSUM62)
+```
+
+
+Bioinformatics uses a lot of difference data structures, including dataframes, matrices, vectors, etc.
+
+What is the **data structure** of BLOSUM62?  Use is()
+```{r}
+
+
+```
+
+Take a look at the whole matrix by just calling up the object on its own:
+```{r}
+
+
+```
+
+
+
+Whenever you start working with data its important to get a sense of what's there, how much of its there, and if there is anything goofy.  Since it can be hard to see a dataframe or matrix on a screen its important to explore it with various commands, including `nrow()`, `ncol()`, `dim()`, `colnames()`, `rownames()`, `head()`, and `tail()`
+
+Use `nrow()` and `ncol()` to determine the number of rows and columns.
+```{r}
+
+
+
+```
+
+This is a **square matrix** since the number of rows equals the number of columns.  It is also a symmetrical matrix since the **lower triangle** of the matrix is the same as the **upper triangle**.  The compbio4all package has functions for displaying these.
+
+*R* shows us the full **symmetric matrix**, though in books usually they just show the **lower triangle**.  A symmetric matrix is one where the upper and lower triangles are identical.
+
+```{r}
+BLOSUM62
+```
+
+
+
+The function `tri_print()` will print just the lower triangle, with all the other values left empty. (This might be a bit slow)
+```{r}
+tri_print(BLOSUM62, as.image = T)
+```
+
+
+
+**BLOSUM62** is a matrix for scoring differences between sequences of amino acids.  Is the size of this *R* object therefore a bit odd?  We should check out what these rows and columns actually are.
+
+What are the row names of the matrix?  Use rownames() to determine this.
+```{r}
+
+
+
+```
+
+
+What are the column names?  Run the appropriate command below to determine this.
+```{r}
+
+
+
+```
+
+
+
+Look at the top of the matrix using `head()`.
+```{r}
+
+
+```
+
+
+Look at the bottom of the matrix using `tail()`.
+```{r}
+
+
+```
+
+
+
+What have we learned?  There's more than 20 rows and columns (why is 20 the reference point?).  The `B`, `J`, `Z`, `X` and `*` represent more **ambiguity codes**.  These usually show up due to sequencing errors or lack of full resolution of an amino acid in the sequence because they are so close chemically (e.g. Asparagine versus aspartic acid)  .
+
+* **B** means its ambiguous whether the amino acid is asparagine or aspartici acid (D or N)
+* **J** is used when its ambiguous whether its I or L.
+* **Z** means its ambiguous whether the amino acid is glutamine or glutamic acid (E or Q).
+* **X** is a stand in for any or an unknown code.  This might occur if there is a sequencing error.
+* The **asterisk** "\*" is used to represent **stop codons**.  
+
+We'll be working with sequences without any ambiguities.  In the following sections of code we'll remove these ambiguity codes.
+
+
+
+
+## Visualizing the BLOSUM matrix
+
+We can visualize the BLOSUM matrix by first drawing all 20 amino acids in a circle.
+
+```{r, echo = F}
+# install.packages("igraph")
+library(Biostrings)
+library(igraph)
+data(BLOSUM62)
+BLOSUM62_all_pos <- BLOSUM62[1:20,1:20]+5
+BLOSUM62_all_pos <- BLOSUM62_all_pos*BLOSUM62_all_pos
+blosum.graph <- graph_from_adjacency_matrix(BLOSUM62_all_pos,
+                                            diag = F, 
+                                            weighted = T)
+blosum.graph.circle <- layout_in_circle(blosum.graph)
+
+plot.igraph(blosum.graph ,
+            layout = blosum.graph.circle, 
+            edge.arrow.size = 0,
+            vertex.color= 1:20, 
+            edge.color = 0)
+```
+
+
+In theory, all mutations can change any codon into any other codon.  We can represent mutations that result in a changed in the amino acid by connecting each amino acid with an arrow.  We'll do this for adenine.  Thicker arrows represent more common transitions.  
+```{r, echo = F}
+BLOSUM62_all_pos_A <- BLOSUM62_all_pos
+BLOSUM62_all_pos_A[-1,] <- 0
+
+hist(BLOSUM62_all_pos_A[1,])
+blosum.graph.A <- graph_from_adjacency_matrix(BLOSUM62_all_pos_A,
+                                              diag = F,
+                                              weighted = T,
+                                              mode = "directed")
+
+plot.igraph(blosum.graph.A ,
+            layout = blosum.graph.circle, 
+            edge.arrow.size =0.5,
+            vertex.color= 1:20, 
+            edge.color = 1:20,
+            edge.width = E(blosum.graph.A)$weight/3
+            )
+
+```
+
+Often, there will be no change in a codon, the changes don't impact which amino acid, or a mutation to a different codon is reversed due to a **back mutation**.  We can represent the fact that an adenine can stay as adenine with a **self loop**.  You can see that the most common "transition" is for adenine to remain as adenine.
+
+```{r}
+blosum.graph.A <- graph_from_adjacency_matrix(BLOSUM62_all_pos_A,
+                                              diag = T,
+                                              weighted = T,
+                                              mode = "directed")
+
+
+plot.igraph(blosum.graph.A ,
+            layout = blosum.graph.circle, 
+            edge.arrow.size =0.5,
+            vertex.color= 1:20, 
+            edge.color = 1:20,
+            edge.width = E(blosum.graph.A)$weight/10
+            )
+```
+
+
+Instead of laying things out in circle, we can have them oriented so that the amino acids adenine is most likely to transition to are closest to it.
+```{r}
+blosum.graph.A <- graph_from_adjacency_matrix(BLOSUM62_all_pos_A,
+                                              diag = F,
+                                              weighted = T,
+                                              mode = "directed")
+plot.igraph(blosum.graph.A ,
+            #layout = blosum.graph.circle, 
+            edge.arrow.size =0.5,
+            vertex.color= 1:20, 
+            edge.color = 1:20,
+            edge.width = E(blosum.graph.A)$weight/10
+            )
+```
+
+We can extend this by considering all possible transition and making a plot that tries to orient each amino acid close to the other amino acids its likely to transition to, and far from those its unlikely to.  This is a bit tricky, since all transitions are now being consider. 
+```{r}
+blosum.graph.all <- graph_from_adjacency_matrix(BLOSUM62_all_pos,
+                                              diag = F,
+                                              weighted = T,
+                                              mode = "directed")
+plot.igraph(blosum.graph.all,
+            edge.arrow.size = 0,
+            vertex.color= 1:20,
+            edge.color = 1)
+            
+```
+
+
+<!--chapter:end:20_BLOSUM_matrix.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Calculating genetic distances between sequences
 
 **By**: Nathan Brouwer, with some content adapted Coghlan (2011) [Multiple Alignment and Phylogenetic trees](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter5.html) and under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  Functions print_msa() and clean_alignment() adapted from ([Coglan 2011](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/#)).
@@ -3476,7 +5100,7 @@ NOTE: my results for this alignment are the same as the original by Coghlan.  I'
 
 
 
-<!--chapter:end:20_genetic_distance.Rmd-->
+<!--chapter:end:20a-genetic_distance.Rmd-->
 
 ---
 output: html_document
@@ -3632,6 +5256,38 @@ If we had found a difference in the trees made using the unfiltered and filtered
 <!-- TODO: create function to simplify the prepwork -->
 
 **By**: Nathan L. Brouwer
+
+# "Worked example: Building a phylogeny in R" 
+
+## Introduction
+
+Phylogenies play an important role in computational biology and bioinformatics.  Phylogenetics itself is an obligatly computational field that only began rapid growth when computational power allowed the many algorithms it relies on to be done rapidly.  Phylogeneies of species, genes and proteins are used to address many biological issues, including
+
+* Patterns of protein evolution
+* Origin and evolution of phenotypic traits
+* Origin and progression of epidemics
+* Origin of evolution of diseases (eg, zooenoses)
+* Prediction of protein function from its sequence
+* ... and many more
+
+The actual building of a phylogeny is a computationally intensive task; moreover, there are many bioinformatics and computational tasks the precede the construction of a phylogeny:
+
+* genome sequencing and assembly
+* computational gene prediction and annotation
+* database searching and results screening
+* pairwise sequence alignment
+* data organization and cleaning
+* multiple sequence alignment
+* evaluation and validation of alignment accuracy
+
+Once all of these steps have been carried out, the building of a phylogeny involves
+
+* picking a model of sequence evolution or other description of evolution
+* picking a statistical approach to tree construction
+* evaluationg uncertainty in the final tree
+
+In this chapter we will work through many of these steps.  In most cases we will pick the easiest or fastest option; in later chapters we will unpack the various options.  This chapter is written as an interactive R sessions.  You can follow along by opening the .Rmd file of the chapter or typing the appropriate commands into your own script.  I assume that all the necessary packages have been installed and they only need to be loaded into R using the *library()* command.
+
 
 This lesson walks you through and entire workflow for a bioinformatics, including
 
@@ -4545,4 +6201,2782 @@ exp(log(sqrt(42)^2))
 
 
 <!--chapter:end:99-A02_getting_started_with_R.Rmd-->
+
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Calculating the number of possible phylogenetic trees
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+<!-- remove all R code? move to other section -->
+
+## Repliminaries
+
+## Concepts
+
+#### Biology Concepts / Vocab
+
+* toplogy
+* rotation
+* Number of possible phylogenetics trees 
+
+## Functions
+
+* factorial
+
+
+
+## Introduction
+
+**Phylogenetics** is one of the original fields of computational biology.  This is because as the number of **taxa** that need to be organized on a tree increases, the number of *unique* phylogenetic trees describing possible relationships among those taxa increases rapidly.
+
+<!-- Add example -->
+
+The following refers to **bifurcating** tree which always branch into two branches at each **node**.  There are the type of branches built for phylogenies. 
+
+
+## Number of rooted trees
+
+The number of possible rooted phylogenetic trees is calculated using the equation below, where n is the number of taxa:
+
+In text, the equation looks like this:
+(2n-3)!/(2^(n-2))(n-2)!
+
+
+Written in a math book it would look like this:
+
+$\frac{(2*n-3)!}{2^{n-2} * (n-2)!}$
+
+This equation is occasionally mis-printed (as I did in the part of this original assignment) so its worth being explicit:
+
+The numerator is: (2n-3)!, where "!" is factorial
+The denominator is: (2^n-2)*(n-2)!; the factorial is evaluated first.
+
+So, for n = 3 taxa
+
+  (2n-3)!/(2^(n-2))(n-2)!
+= (2x3-3)!/(2^(3-2))x(3-2)!
+= (6  -3)!/(2^(1))x(1)!
+= (3)!/(2)x(1)!
+= (1 x 2 x 3)/(2 x 1)
+= 6 / 2
+= 3
+
+One of our first tasks will be to translate this equation into R code.
+
+## Number of rooted trees in R
+
+In R we take factorials using the `factorial()` function
+
+```{r}
+factorial(3)
+3*2*1
+
+factorial(4)
+4*3*2*1
+```
+
+We can re-write our text equation above as:
+factorial(2n-3)/(2^(n-2))*(factorial(n-2))
+
+In this would be
+
+```{r}
+n<-3
+
+factorial(2*n-3)/((2^(n-2))*factorial(n-2))
+```
+
+All of the parentheses make this a bit nutty.  Let me write this out as a separate numerator and denominator
+
+```{r}
+#numerator
+numerator   <- factorial(2*n-3)
+
+#denominator
+denominator <- 2^(n-2)*factorial(n-2)
+
+#division
+numerator/denominator
+```
+
+
+
+### Unique topologies versus rotations
+
+Note that this applies to all tree typologies.  For n = 3 species  the three typologies are
+
+1. ((Human, Chimp), Gorilla)
+1. ((Human, Gorilla), Chimp)
+1. ((Chimp, Gorilla), Human)
+
+In this discussion Since we are referring to evolutionary  *unique* typologies.  Therefore order within a clade does *not* matter. Therefore, these two are identical typologies and don't get counted among the three unique typologies the equation is telling use exist:.
+
+1. ((Human, Chimp), Gorilla)
+1. ((Chimp, Human), Gorilla)
+
+<!-- plot examples -->
+
+
+<!-- number of unrooted trees -->
+
+
+## Bilography
+
+This topic is discussed on page 187-189 of Baum & Smith Tree Thinking.  They discuss it in the concept of **maximum parsimony** estimation of phylogenetic trees.
+
+<!--chapter:end:tree-think_number_of_trees-theory.Rmd-->
+
+## UPGMA the hard way
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+
+## Introudction to UPGMA
+
+* UPGMA is a basic **clustering algorithm** which can be used for building phylognetic tree from **distance matrices**.  
+* It still has some applications because it is fast, but it has mostly beenn replaced by Neighbor Joining and Minimum Evolution methods.
+*  UPGMA is still useful for teaching the basic steps involved in data clustering and building trees.
+* UPGMA is a particular variant of a general class of algorithms.  Another varient is WPGMA.
+
+## Preliminaries
+
+### R Libraries
+
+The phangorn package contains the functions 
+
+* upgma()
+* wpgma()
+
+The ape package has the function nj() for neighbor joinging, which is useful for comparison to UPGMA.
+
+#### Phylogenetic libraries
+
+```{r}
+#install.packages("ape")
+#install.packages("phangorn")
+library(ape)
+library(phangorn)
+```
+
+#### Plotting libraries
+
+```{r}
+#install.packages("plotrix")
+library(plotrix)
+```
+
+
+
+### Custom function we'll use
+
+To help us understand clustering and UPGMA I've written a cusome function.
+
+This function, plot_dist_as_nmds(), will make a 2-dimensional (2D) representation of the distance matrices we'll be working with.  This is only an approximation and will occassionally result in distorions.
+
+What this function does is take a **distance matix** and attempt to plot the data as if they were in 2-dimensional space.  If we were giving it the distance between building on campus it would plot a reasonable map.  Since we'll be plotting data that isn't physical distance but genetic distances this will not be a real evolutionary tree.  The intent here is to help you build your intuition about what a distane matrix is.
+
+```{r}
+## Load ALL of this code
+
+# TODO: ylim and xlim are current hard coded
+
+plot_dist_as_nmds <- function(mat, x.lim = c(-20,20), y.lim = c(-20,20)){
+  matno0 <- mat
+  
+matno0[is.na(matno0)] <- 0
+
+
+d2  <- stats::cmdscale(matno0, add =T)
+x <- d2$points[,1]
+y <- d2$points[,2]
+plot(x,y, main = "APPROXIMATE 2D distances",
+     xlim = x.lim, 
+     ylim = y.lim)
+text(x, y, labels = row.names(d2$points), cex=3)
+
+return(d2)
+
+}
+```
+
+## Data matrix
+
+We'll use data from a study that built a tree using rRNA from bacteria.
+
+The data and a worked example are available at https://en.wikipedia.org/wiki/UPGMA#First_step
+
+This particular matrix is set up as the number of bases that are different between each sequence.  (In the next unit we'll discuss how they didn't use just a simple count of the differences).
+
+
+### Building the matrix
+
+One way to make the data is to use the rbind() individual vectors as rows
+
+```{r}
+# The data
+#      a   b   c   d   e
+a <- c(0,	 17, 21, 31, 23)
+b <- c(17, 0,	 30, 34, 21)
+c	<- c(21, 30, 0,  28, 39)
+d	<- c(31, 34, 28,	0, 43)
+e	<- c(23, 21, 39, 43,	0)
+
+# Bind into a matrix
+dmat1 <- rbind(a,b,c,d,e)
+
+```
+
+rbind() takes each vector (a through e) and glues them together into a matrix
+```{r}
+is(dmat1)
+```
+
+As a challenge, can you take these data and make these data into a matrix using the matrix() function?
+
+
+The finished matrix looks like this
+```{r}
+dmat1
+```
+
+Add names using colnames()
+```{r}
+colnames(dmat1) <- c("a","b","c","d","e")
+```
+
+The matrix is **symmetrical**.  
+
+**Challenge questions:** How would we interpret the diagonal?  Why is it not 1?  Why is this matrix symmetrical?
+
+
+Its easier if you make redundant elements NA because we don't need them.
+
+We can access the **diagonal** of the matrix directly and set it to NA using the diag() function
+```{r}
+diag(dmat1) <- NA
+```
+
+Now the matrix looks like this
+
+```{r}
+dmat1
+```
+
+We only need the lower left-hand part of the matrix.  We can set the upper right-hand  part of the matrix to NA like this:
+```{r}
+dmat1[upper.tri(dmat1)] <- NA
+```
+
+(don't worry about exactly what's going on here)
+
+Matrix now looks like this
+```{r}
+dmat1
+```
+
+
+
+## What does this distance matrix represent?
+
+### Genetic distances conceptualized as pairwise linear distances
+
+* Each element of the matrix is a **pairwise distance.**  
+* These distances were computed using **pairwise alignments** of each sequence.
+* In this case, it is the number of nucleotides that are different between two sequences.
+* As is standard, these alginments ignored any **indels.**
+* There are 5 sequences, and if each is compared against the other then there are 10 total **distances.**  
+* Mathematically these are called **Hamming distances**.  
+
+Each distance is the distance between two species, and it can be conceptualized on its own as a linear distance.
+
+You could visualize a single **pairwise distance** like a linear distance like this:
+
+(note: you don't need to understand all of this code, but you do need to understand how it relates to the distance amtrix)
+
+```{r}
+par(mfrow = c(1,1))
+plot(0, 0, xlim = c(0,max(dmat1,na.rm = T)), 
+     ylim = c(0,12), 
+     type = "l",
+     xlab = c("Distance (number of mutations)"),
+     ylab = "Pairwise comparison",
+     main = "Linear distance a vs. b")
+points(0, 1, pch = "a")
+points(dmat1[2,1], 1, pch = "b")
+segments(x0 = 0, y0 = 1, 
+         x1 = dmat1[2,1],y1 = 1)
+abline(h = 1.5, col = 2)
+```
+
+
+We can look at all of the distance  Note that each line is *independent* and cannot be compared (the y axis has no meaning). This is NOT a 2D map!
+
+```{r}
+# This code is complex and the goal is to assess the plot, not understand the code
+plot(0, 0, xlim = c(0,max(dmat1,na.rm = T)), 
+     ylim = c(0,12), 
+     type = "l",
+     xlab = c("Distance (number of mutations)"),
+     ylab = "Pairwise comparison")
+pair.k <-0
+for(i in 1:nrow(dmat1)){
+  for(j in 1:nrow(dmat1)){
+
+dist.ij <- dmat1[i,j] 
+if(is.na(dist.ij) == FALSE){
+  pair.k <- pair.k+1    
+
+       
+spp.i <- rownames(dmat1)[i]
+spp.j <- colnames(dmat1)[j]
+points(-0.5,               pair.k, pch = spp.j, col = which(LETTERS %in% toupper(spp.j)), cex = 1.75)
+points(dist.ij+0.75,       pair.k, pch =spp.i, col = which(LETTERS %in% toupper(spp.i)), cex = 1.75)
+segments(x0 = 0, y0 = pair.k, 
+         x1 = dist.ij, y1 = pair.k)
+abline(h = pair.k+0.5, col = 2)
+}
+
+  }
+}
+
+```
+
+* We can see that the distance between a and b is the smallest, at 17 amino acid changes. 
+* UPGMA, WPGMA and related algorithms all begin by identifying the two taxa that are closest together.
+* These 2 taxa form a clade (cluster).  THe algorithm then proceeds by finding the next taxa (eg, c, d or e) which is closest to that clade of a and b
+* We can summarize this first clad using **Newick notation** as:  (a, b)
+
+
+
+### Genetic distances conceptualized as 2D map of linear distances
+
+* We can extend the analogy of linear distance to two dimensions.  
+* With some fancy math we can make a 2D plot where the distances in 2D space are *similar* to the distances in the matrix.  
+* This is NOT exact and should not be taken literally.  (See Pevsner Chapter 7 for a similar use of a 2D map)
+* This is just a tool for teaching and not something done as part of an actual analysis.
+
+
+```{r}
+par(mfrow = c(1,1), mar= c(2,2,2,2))
+dmat1no0 <- dmat1
+  
+dmat1no0[is.na(dmat1no0)] <- 0
+
+d2  <- cmdscale(dmat1no0, add =T)
+x <- d2$points[,1]
+y <- d2$points[,2]
+plot(x,y, main = "APPROXIMATE 2D distances",xlim = c(-20,20), ylim = c(-20,20))
+text(x, y, labels = row.names(d2$points), cex=3)
+
+```
+
+* In this plot, things appear to have been distorted a bit.
+* a and b are close to each other as expect,
+* but b looks closest than e (to me).  
+* It does show how a and b are close, and d and e are further apart.
+
+
+
+## From linear distances to "tree distances"
+
+**Genetic distances** aren't actually linear - we are assuming a "tree shape" to represent the divergence of two species genetically (and possibly geographically).
+
+The simplest methods of building trees assume that all branch lengths terminate at the same distance from the root, and the total mutational distance traversed by each species is the same. (This is the assumption or constraint related to **ultrametricity**).  
+
+The distance between a and b is 17.  We assume that both species a and species b have undergone the same number of mutations since they split, so the branch lengths for each are 17/2 = 8.5.  (You obviously can't have 8.5 mutations, but this is how the math works).
+
+The following plots shows how the linear distnace of 17 between a and b (bottom) gets split into two branches, each of 8.5.
+```{r}
+# This code is dense; run it and focus on the plot
+par(mfrow = c(1,1), mar= c(2,2,2,2))
+plot(0, 0, xlim = c(0,max(dmat1,na.rm = T)), 
+     ylim = c(0,12), 
+     type = "l",
+     xlab = c("Distance (number of mutations)"),
+     ylab = "Pairwise comparison")
+points(0, 1, pch = "a")
+points(dmat1[2,1], 1, pch = "b")
+segments(x0 = 0, y0 = 1, 
+         x1 = dmat1[2,1],y1 = 1)
+abline(h = 1.5, col = 2)
+
+
+branch.length <- dmat1[2,1]/2
+points(0, 4)
+points(branch.length+0.75, 4, pch = "a")
+points(0, 6)
+points(branch.length+0.75, 6, pch = "b")
+
+segments(x0 = 0, y0 = 4, 
+         x1 = branch.length,y1 = 4)
+segments(x0 = 0, y0 = 6, 
+         x1 = branch.length,y1 = 6)
+
+segments(x0 = 0, y0 = 4, 
+         x1 = 0, y1 = 6, col = 1, lty = 2)
+
+abline(h = 8, col = 2)
+```
+
+
+Again, in **Newick notation**, we'd write (a, b) to indicate that a and b are a clade.
+
+## The UPGMA algorithm
+
+*The UPGMA algorithm is described by Swofford et al (1996?, page 486) as below.  
+* The word "cluster" means "taxa" in some cases and "clade" in others.  
+* This is a bit tricky at first but once you get a sense for the whole algorithm it will make more sense.
+* To keep track of everything we'll use subscripts i and j, represented in plain text as e.g. d.ij for the distance (d) in row i and column j.
+
+
+### Step 1: find the 2 taxa that are currently closest together
+
+1. "Given a matrix of **pairwise distances**, find the clusters (taxa) i and j such the d.ij is the minmum value in the table." (d.ij is the distance between taxa i and taxa j)
+
+In our example, d.ij = d.ba = 17, with i = b and j = a.
+
+```{r}
+dmat1["b","a"]
+```
+
+### Step 2: calculate the branch lengths connect the taxa to their shared node
+
+2. "Define the depth of the branching between i and j (l.ij) to be d.ij/2" ("depth of branching" = **branch length**; so i is attached to a branch of d.ij/2 and j is attached to a separate branch of d.ij/2)
+
+d.ab/2 = 8.5
+
+### Step 3a: determine if the algorithm is done
+
+3. "If i and j were the last two clusters, the tree is complete"
+
+
+### Step 3a: Continue on if needed and combine the previous cluster into cluster "u"
+
+3. If there is more to do, "create a new cluster called u".  This new cluster is a clade of a and b will represent the combined features of a and b.
+
+What this means is that now that we've mapped taxa a and b into a clade we need to update our matrix to determine how far all the remaining taca (c, d and e) are from that clade.
+
+### Step 4: Determine the distance from u to the other remaining clusters.
+
+4. "Define the distance from [the new cluster] u to each other [remaining] cluster (k, with k=\=i or j) [here cluster = clade in the first part of the sentence and taxa in the other] to be an **average** of the distnace d.ki and d.jk".  That is, calculate the distance from the new clade u to all the remaining taxa, which we'll generically call "k".  The new distance will be called d.ku, for "distance from taxa k to clade u."  
+
+The exact calculation of the average can take different forms.  This will be unpacked below.
+
+### Step 5: Create a new matrix 
+
+5.  "Go back to step 1 with one less cluster; cluster i and j have been eliminated, and cluster u has been added."  The distance matrix is now shrunk with all distance related to i and j removed and replaced by information about u.
+
+
+### Key step: calculating the distance from a clade to the remaining taxa
+
+For step 4, UPGMA uses the equation below to calculate distances.  This will require some notation:
+
+* Ti = the number of taxa in cluster i. This is 1 if the "cluster" is a single taxa (eg. 1 species), or it can be >1 if a previous iteration has created a clade.  
+* Tj = the number of taxa in cluster j.
+* d.ku = the distance from k to u.  k and u can be individual taxa OR clades created by the algorithm.
+
+The key quantity d.ku is calculated as:
+
+d.ku = (Ti x d.ki + Tj x d.kj)/(Ti + Tj)
+
+(You should know this equation AND you should be able to write R code to calcualte it)
+
+You can think of this as a **weighted mean** where the **weights** are the number of taxa in each clade.  Its a very annoying that the "U" in UPGMA means "un-weighted" even though there is, from one perspective weighting, but this is how the math people say we should think about it (the un-weighted part has to do with some other aspect of the math).
+
+In the above outline of the algorithm, if i and j are the first two taxa grouped then the equation would be
+
+d.ku = (Ti x d.ki + Tj x d.kj)/(Ti + Tj)
+Ti = 1, Tj = 1, so
+d.ku = (1  x d.ki + 1  x d.kj)/(1  + 1)
+d.ku = (d.ki + d.kj)/2
+
+
+
+
+## Calculate 2D representation
+
+We can think about this using a 2D representation.  
+
+First, plot the 2D map.
+
+```{r}
+dmat1.out<- plot_dist_as_nmds(dmat1)
+```
+
+a and b are closest together, so we group them
+
+I'll show this in the code below; you don't need to understand exactly how this code works.
+
+```{r}
+dmat1.out<- plot_dist_as_nmds(dmat1)
+
+#get x y coord of a and b
+
+a.<-dmat1.out$points["a",]
+b.<-dmat1.out$points["b",]
+
+plot_dist_as_nmds(dmat1)
+draw.ellipse(x = mean(c(a.[1],b.[1])), 
+             y = mean(c(a.[2],b.[2])),
+             a =3, 
+             b = 10, 
+             angle = 30
+             )
+```
+
+
+Once we have created a cluster (clade) we can consider the distance from the members of clade to all the remaining points.  For example, here's the distnace from  a and b to c
+```{r}
+# distance from ab to c
+c.<-dmat1.out$points["c",]
+
+plot_dist_as_nmds(dmat1)
+segments(x0 = a.[1],x1 = c.[1],
+         y0 = a.[2],y1 = c.[2])
+segments(x0 = b.[1],x1 = c.[1],
+         y0 = b.[2],y1 = c.[2])                                    
+                                
+```
+
+
+In UPGMA, we first define a clade.  We then need to see which taxa is closest to that clade.  Visually it looks like this
+
+```{r}
+par(mfrow = c(2,2), mar = c(2,2,2,2))
+
+# ab to c
+plot_dist_as_nmds(dmat1)
+
+#get x y coord of a and b
+a.<-dmat1.out$points["a",]
+b.<-dmat1.out$points["b",]
+
+draw.ellipse(x = mean(c(a.[1],b.[1])), 
+             y = mean(c(a.[2],b.[2])),
+             a =3, 
+             b = 10, 
+             angle = 30)
+c.<-d2$points["c",]
+segments(x0 = a.[1],x1 = c.[1],
+         y0 = a.[2],y1 = c.[2])
+segments(x0 = b.[1],x1 = c.[1],
+         y0 = b.[2],y1 = c.[2])  
+
+# ab to d
+plot_dist_as_nmds(dmat1)
+draw.ellipse(x = mean(c(a.[1],b.[1])), 
+             y = mean(c(a.[2],b.[2])),
+             a =3, 
+             b = 10, 
+             angle = 30)
+d.<-d2$points["d",]
+segments(x0 = a.[1],x1 = d.[1],
+         y0 = a.[2],y1 = d.[2])
+segments(x0 = b.[1],x1 = d.[1],
+         y0 = b.[2],y1 = d.[2])  
+
+# ab to e
+plot_dist_as_nmds(dmat1)
+draw.ellipse(x = mean(c(a.[1],b.[1])), 
+             y = mean(c(a.[2],b.[2])),
+             a =3, 
+             b = 10, 
+             angle = 30)
+e.<-d2$points["e",]
+segments(x0 = a.[1],x1 = e.[1],
+         y0 = a.[2],y1 = e.[2])
+segments(x0 = b.[1],x1 = e.[1],
+         y0 = b.[2],y1 = e.[2]) 
+```
+
+
+
+
+## Algorithm - round 1
+
+We will now implement the algorithm.
+
+NOTE: I am not using a consistent system of nomeclature - I am mixing my own conventions with hose of Swofford et al.  Sorry :(
+
+First we'll need a dataframe to hold tings
+
+
+* it = iteration
+* clust.i, clust.j = the two taxa or clades being combined
+* dist.ij = value from distnace matrix between the taxa
+* clust.u = name of the new combined cluster (clade)
+* branch.l.ij = branch lengths 
+
+A matrix to hold things as I work
+```{r}
+n.taxa <- nrow(dmat1)
+UPGMA_output <- data.frame(it = c(1:n.taxa),
+                           clust.i = NA,
+                           clust.j = NA,
+                           dist.ij = NA,
+                           clust.u = NA,
+                           branch.l.ij = NA)
+```
+
+### Determine minimum value in current matrix
+
+The minimum distance using the min() function
+```{r}
+dist.min.i <- min(dmat1, na.rm = T)
+```
+
+The index value of the minimum, using which()
+```{r}
+index.min.i <- which(dmat1 == dist.min.i, arr.ind =T)
+index.row.i <- index.min.i[1]
+index.col.i <- index.min.i[2]
+```
+
+We can get the names of our taxa using rownames() and colnames()
+```{r}
+cluster.i2 <- rownames(dmat1)[index.row.i]
+cluster.i1 <- colnames(dmat1)[index.col.i]
+```
+
+
+Add output to dataframe
+```{r}
+# the clusters we're working iwth
+UPGMA_output[1,"clust.i"] <- cluster.i1
+UPGMA_output[1,"clust.j"] <- cluster.i2
+
+# the distance between them
+UPGMA_output[1,"dist.ij"] <- dist.min.i
+```
+
+
+
+### Combine species into clade
+
+Combine the two taxa names into a new name.  This can be done a couple ways.
+```{r}
+# name of our clade
+
+## hard-code "ab"
+clade.i <- "ab"
+
+## use paste() to generate name
+clade.i <- paste("a","b",sep = "")
+
+## general, re-usable code using paste() and object names
+clade.i <- paste(cluster.i1,cluster.i2, sep = "")
+```
+
+We'll add this to the dataframe
+
+```{r}
+UPGMA_output[1,"clust.u"] <- clade.i
+```
+
+Look at things so far
+
+```{r}
+UPGMA_output
+```
+
+
+### Calculate branch length
+
+Branch length is the distance between the two taxa: distance/2 or d.ij/2
+
+We can access the distance in our first row of the matrix like this
+```{r}
+UPGMA_output[1,"dist.ij"]
+```
+
+
+We can divided the distance betyween a and b by 2 to get our branch length like this
+```{r}
+UPGMA_output[1,"dist.ij"]/2
+```
+
+Now store the distance d in the dataframe 
+```{r}
+UPGMA_output[1,"branch.l.ij"] <- UPGMA_output[1,"dist.ij"]/2
+```
+
+
+We've now completed our first round of calculations
+```{r}
+UPGMA_output
+```
+
+
+### Calculate distance from clade to all other points
+
+Distance (ab) to all other points
+
+* ab to c
+* ab to d
+* ab to e
+
+
+#### ab to c
+
+This is calculated at the average of the distance 
+
+* from a to c, and 
+* from b to c.
+
+In the Wikipedia article the math is framed like this
+
+
+D(ab to c) = [D(a to c) + D(b to c)] / 2
+D(ab to c) = [    21    +     30   ] / 2
+D(ab to c) = [    21    +     30   ] / 2
+D(ab to c) = 25.5
+
+Dab_c      = [Da_c + Db_c] / 2
+Dab_c      = 25.5
+
+The math in the wikipedia article is more accurately written out as this, which is more similar to Swofford's notation.
+
+D(ab to c) = [T.i*D(a to c) + T.j*D(b to c)] / 2
+D(ab to c) = [1*D(a to c) + 1*D(b to c)] / (1+1)
+D(ab to c) = [    1*21    +     1*30   ] / (1+1)
+D(ab to c) = [    1*21    +     1*30   ] / (1+1)
+D(ab to c) = 25.5
+
+Dab_c      = [1*Da_c + 1*Db_c] / (1+1)
+Dab_c      = 25.5
+
+Using Swofford et al's notation we'd do this:
+
+d.ku = (Ti x d.ki + Tj x d.kj)/(Ti + Tj)
+
+I'll just switch the subscripts to be consistent with the Wikipedia notation
+
+d.uk = (Ti x d.ik + Tj x d.jk)/(Ti + Tj)
+
+
+where 
+
+u = our new cluster ab
+k = the remaining clusters; we'll start with c
+Ti, Tj = the number of clusters the constitute the clusters that were just combined.  This starts out at 1.
+Ti = Ta = 1
+Tj = Tb = 1
+d.ik = the distance from cluster i to the reamining clusters; we'll start with c
+d.ik = d.ac = 21
+d.jk = d.bc = 30
+
+d.ku = (Ti x d.ik + Tj x d.jk)/(Ti + Tj)
+d.ku = (1  x 21   +  1 x 30  )/( 1 + 1 )
+d.ku = (  21      +    30  )/(2)
+d.ku = 51/2
+d.ku = 25.5
+
+The Swofford notation is more generic and useful because in the next iteration we'll have a cluster of ab which will have two taxa in it.
+
+```{r}
+Ta <- 1
+Tb <- 1
+Da_c <- 21
+Db_c <- 30
+Dab_c <- (Ta*Da_c+Tb*Db_c)/2
+```
+
+
+
+#### ab to d
+
+We now continue for the other distances.  I'll stick to the wikipedia notation for now.
+
+D(ab to d) = [D(a to d) + D(b to d)] / 2
+D(ab to d) = [    31    +     34   ] / 2
+D(ab to d) = [    31    +     34   ] / 2
+D(ab to d) = 32.5
+
+Dab_d      = [Da_d + Db_d] / 2
+Dab_d      = 32.5
+
+```{r}
+Da_d <- 31
+Db_d <- 34
+Dab_d <- (Da_d+Db_d)/2
+```
+
+#### ab to e
+
+
+D(ab to d) = [D(a to d) + D(b to d)] / 2
+D(ab to d) = [    23    +     21   ] / 2
+D(ab to d) = [    23    +     21   ] / 2
+D(ab to d) = Dab_e
+
+Dab_d      = [Da_d + Db_d] / 2
+Dab_d      = Dab_e
+
+```{r}
+
+Da_e <- 23
+Db_e <- 21
+Dab_e <- (Da_e+Db_e)/2
+
+```
+
+
+### Update matrix with new distance
+
+Old matrix has distances  from a and b to all other points: we want to replace these.  distances among c, d, and e are still the same values.
+
+```{r}
+dmat1
+```
+
+#### Illustration
+
+Values in parenthesese will be REPLACED
+
+```{r}
+a <- c(NA, NA, NA, NA, NA)
+b <- c("(17)", NA, NA, NA, NA)
+c	<- c("(21)", "(30)", NA, NA, NA)
+d	<- c("(31)", "(34)", "28", NA, NA)
+e	<- c("(23)", "(21)", "39", "43",	NA)
+dmat1.alt <- rbind(a,b,c,d,e)
+colnames(dmat1.alt) <- c("a","b","c","d","e")
+dmat1.alt
+```
+
+Create smaller matrix with clade ab
+```{r}
+#       ab      c   d   e
+ab  <- c(NA,    NA,  NA, NA)
+c	  <- c(Dab_c, NA,  NA, NA)
+d	  <- c(Dab_d, 28,	 NA, NA)
+e	  <- c(Dab_e, 39,  43, NA)
+
+dmat2 <- rbind(ab,c,d,e)
+colnames(dmat2) <- c("ab","c","d","e")
+
+```
+
+#### Estimate 2 D
+
+Estimate of 2D representation of the new matrix.
+
+```{r}
+
+plot_dist_as_nmds(dmat2)
+
+```
+
+
+
+## Algorithm - next round
+
+We've combined a and b and calculated the disnace of this clade (a,b) to the remaining taxa.  What is now the minimum distance?
+
+
+The minimum distance of the current matrix
+```{r}
+dist.min.i <- min(dmat2, na.rm = T)
+```
+
+The index value of the current minimum
+```{r}
+index.min.i <- which(dmat2 == dist.min.i, arr.ind =T)
+index.row.i <- index.min.i[1]
+index.col.i <- index.min.i[2]
+```
+
+We can get the names of our taxa using the 
+
+```{r}
+cluster.i2 <- rownames(dmat2)[index.row.i]
+cluster.i1 <- colnames(dmat2)[index.col.i]
+```
+
+
+Add output to dataframe
+```{r}
+UPGMA_output[2,"clust.i"] <- cluster.i1
+UPGMA_output[2,"clust.j"] <- cluster.i2
+UPGMA_output[2,"dist.ij"] <- dist.min.i
+```
+
+### Combine species into clade
+
+Combine the two taxa names into a new name.  This can be done a couple ways.
+```{r}
+clade.i <- "abe"
+clade.i <- paste("ab","e",sep = "")
+
+clade.i <- paste(cluster.i1,cluster.i2, sep = "")
+```
+
+We'll add this to the dataframe
+
+```{r}
+UPGMA_output[2,"clust.u"] <- clade.i
+```
+
+
+### Calculate branch length
+
+Branch length is distance/2 or d.ij/2 = d.ab.e = 22/2
+```{r}
+UPGMA_output[2,"branch.l.ij"] <- UPGMA_output[2,"dist.ij"]/2
+```
+
+### Recalculate distance from abe to all remainign taxa
+
+In the current matrix, the smallest distance is between ab and e
+
+We therefore want to form a clade between ab and e (abe), the measure the distance from this clade to allthe other species.
+
+Visualize this as an approximate 2D situation
+
+```{r}
+
+par(mfrow = c(1,1))
+dmat2.out <- plot_dist_as_nmds(dmat2)
+
+#get x y coord of ab and e
+ab.<-dmat2.out$points["ab",]
+e.<-dmat2.out$points["e",]
+
+draw.ellipse(x = mean(c(ab.[1],e.[1])), 
+             y = mean(c(ab.[2],e.[2])),
+             a =7, 
+             b = 7, 
+             angle = 0)
+c.<-dmat2.out$points["c",]
+
+segments(x0 = ab.[1],x1 = c.[1],
+         y0 = ab.[2],y1 = c.[2])
+segments(x0 = e.[1],x1 = c.[1],
+         y0 = e.[2],y1 = c.[2]) 
+
+```
+
+
+
+
+#### abe to c
+
+NOTE: calculations are "weighted" in proportion number of species in clade.
+So D(ab to c) is multiplied by two because ab is 2 species
+
+The denominators is 3 because of the weights used in the numerator.
+
+The notation in the Wikipedia article is:
+
+D(abe to c) = [D(ab to c)*2  + D(e to c)*1] / (2+1)
+D(abe to c) = [    25.5*2    +     39*1   ] / (2+1)
+D(abe to c) = [    25.5*2    +     39*1   ] / (2+1)
+D(abe to c) = 32.5
+
+Dabe_c      = [Dab_c*2 + De_c*1] / (2+1)
+Dabe_c       = 32.5
+
+
+
+```{r}
+Dab_c <- 25.5
+De_c  <- 39
+Dabe_c <- (Dab_c*2 + De_c*1)/(2+1)
+```
+
+#### abe to c
+
+For abe to d
+
+```{r}
+Dab_d <- 32.5
+De_d  <- 43
+Dabe_d <- (Dab_d*2 + De_d*1)/(2+1)
+
+```
+
+### Update the matrix
+
+```{r}
+abe <- c(NA,     NA,  NA)
+c	   <- c(Dabe_c, NA,  NA)
+d	   <- c(Dabe_d, 28,	 NA)
+
+
+dmat3 <- rbind(abe,c,d)
+colnames(dmat3) <- c("abe","c","d")
+```
+
+
+## Next iteration
+
+#### Estimate 2 D
+
+a, b, e are now combined into a clade
+
+
+```{r}
+
+par(mfrow = c(1,1))
+dmat3.out <- plot_dist_as_nmds(dmat3)
+
+#get x y coord of ab and e
+c. <-dmat3.out$points["c",]
+d.<-dmat3.out$points["d",]
+
+draw.ellipse(x = mean(c(c.[1],d.[1])), 
+             y = mean(c(c.[2],d.[2])),
+             a =14, 
+             b = 4, 
+             angle = 105)
+abe.<-dmat3.out$points["abe",]
+
+segments(x0 = c.[1],x1 = abe.[1],
+         y0 = c.[2],y1 = abe.[2])
+segments(x0 = d.[1],x1 = abe.[1],
+         y0 = d.[2],y1 = abe.[2]) 
+
+```
+
+
+### Calculate branch lengths
+
+
+The minimum distance of the current matrix
+```{r}
+dist.min.i <- min(dmat3, na.rm = T)
+```
+
+The index value of the current minimum
+```{r}
+index.min.i <- which(dmat3 == dist.min.i, arr.ind =T)
+index.row.i <- index.min.i[1]
+index.col.i <- index.min.i[2]
+```
+
+We can get the names of our taxa using the 
+
+```{r}
+cluster.i2 <- rownames(dmat3)[index.row.i]
+cluster.i1 <- colnames(dmat3)[index.col.i]
+```
+
+
+Add output to dataframe
+```{r}
+UPGMA_output[3,"clust.i"] <- cluster.i1
+UPGMA_output[3,"clust.j"] <- cluster.i2
+UPGMA_output[3,"dist.ij"] <- dist.min.i
+```
+
+### Combine species into clade
+
+Combine the two taxa names into a new name.  This can be done a couple ways.
+```{r}
+clade.i <- "cd"
+clade.i <- paste("c","d",sep = "")
+
+clade.i <- paste(cluster.i1,cluster.i2, sep = "")
+```
+
+We'll add this to the dataframe
+
+```{r}
+UPGMA_output[3,"clust.u"] <- clade.i
+```
+
+
+### Calculate branch length
+
+Branch length is distance/2 or d.ij/2 = d.d.e = 28/2
+```{r}
+UPGMA_output[3,"branch.l.ij"] <- UPGMA_output[3,"dist.ij"]/2
+```
+
+
+
+
+### Distance of c to abe and d to abe
+
+```{r}
+Dc_abe <- 30
+Dd_abe <- 36
+
+# abe is composted of 3 
+Ddc_abe <- (Dc_abe*3 + Dd_abe*3)/(3+3)
+
+# factor out 3
+Ddc_abe <- 3*(Dc_abe*1 + Dd_abe*1)/6
+
+# simplify
+Ddc_abe <- 1*(Dc_abe*1 + Dd_abe*1)/2
+Ddc_abe <- (Dc_abe*1 + Dd_abe)/2
+
+```
+
+Create matrix
+```{r}
+abe <- c(NA,     NA)
+cd	 <- c(Ddc_abe, NA)
+
+
+
+dmat4 <- rbind(abe,cd)
+colnames(dmat4) <- c("abe","cd")
+
+
+```
+
+## Finish up
+
+The final entry of the matrix is 33.  This means that the distnace from the clade abe to the clade de is 33, with branch length of 33/2 = 16.5
+
+The minimum distance
+```{r}
+dist.min.i <- min(dmat4, na.rm = T)
+```
+
+The index value of the minimum
+```{r}
+index.min.i <- which(dmat4 == dist.min.i, arr.ind =T)
+index.row.i <- index.min.i[1]
+index.col.i <- index.min.i[2]
+```
+
+We can get the names of our taxa using the 
+
+```{r}
+cluster.i2 <- rownames(dmat4)[index.row.i]
+cluster.i1 <- colnames(dmat4)[index.col.i]
+```
+
+
+Add output to dataframe
+```{r}
+UPGMA_output[4,"clust.i"] <- cluster.i1
+UPGMA_output[4,"clust.j"] <- cluster.i2
+UPGMA_output[4,"dist.ij"] <- dist.min.i
+```
+
+
+
+### Combine species into clade
+
+Combine the two taxa names into a new name.  This can be done a couple ways.
+```{r}
+clade.i <- paste(cluster.i1,cluster.i2, sep = "")
+```
+
+We'll add this to the dataframe
+
+```{r}
+UPGMA_output[4,"clust.u"] <- clade.i
+```
+
+
+### Calculate branch length
+
+Branch length is distance/2 or d.ij/2
+```{r}
+UPGMA_output[4,"branch.l.ij"] <- UPGMA_output[4,"dist.ij"]/2
+```
+
+
+
+## Finalizing branch lengths
+
+We now have a final tree structure.  In Newick format it would be
+
+```{r}
+full.tree <- "((c,d),(e,(b, a)));" # semi colon!
+full.tree <-read.tree(text=full.tree)
+plot(full.tree, main = "3-taxa tree")
+```
+
+While we've done our clustering we've calcualte branch lengths and put them in the column branch.l.ij of the dataframe UPGMA_output
+```{r}
+UPGMA_output
+```
+
+The following code adds them to the tree.  
+
+First, the brnach lenghts from a to b
+```{r}
+plot(full.tree, main = "")
+# a-b branch lengths= 8.5
+text(x = 3.5,y = 5.1,labels = 8.5)
+text(x = 3.5,y = 4.1,labels = 8.5)
+
+```
+
+now a to b, and ab to e
+```{r}
+plot(full.tree, main = "")
+# a-b branch lengths= 8.5
+text(x = 3.5,y = 5.1,labels = 8.5)
+text(x = 3.5,y = 4.1,labels = 8.5)
+# ab-e branch lengths= 1
+text(x = 3.5,y = 3.1,labels = 11)
+```
+
+There's a branch between the clade ab and the node that connects with e.  What's its length?  FOr a simple ultrametric tree calcualted with UPGMA we can calculate this by subtraction
+
+```{r}
+11-8.5
+```
+
+We'll added this short branch of 2.5.  Note this things ARE NOT to scale.
+
+```{r}
+plot(full.tree, main = "")
+# a-b branch lengths= 8.5
+text(x = 3.5,y = 5.1,labels = 8.5)
+text(x = 3.5,y = 4.1,labels = 8.5)
+# ab-e branch lengths= 1
+text(x = 3.5,y = 3.1,labels = 11)
+
+# short branch
+text(x = 2.5,y = 4.6,labels = 2.5)
+
+```
+
+To visualize exactly what is going on here its useful to add this
+
+```{r}
+par(mar = c(1,1,1,1))
+plot(full.tree, main = "")
+# a-b branch lengths= 8.5
+text(x = 3.5,y = 4.9,labels = 8.5)
+text(x = 3.5,y = 4.1,labels = 8.5)
+# ab-e branch lengths= 1
+text(x = 3.5,y = 3.1,labels = 11)
+
+# short branch
+text(x = 2.5,y = 4.6,labels = 2.5)
+
+arrows(x0 = 2,x1 = 4,y0 =5.15,y1=5.15, code =3,angle = 90,length =0.1, lty =2, col = 2)
+text(x = 2.5,y = 5,labels = "2.5+8.5=11")
+
+```
+
+
+
+We can now add the d-e branch of 14 (note again - not to scale!)
+```{r}
+plot(full.tree, main = "")
+# a-b branch lengths= 8.5
+text(x = 3.5,y = 5.1,labels = 8.5)
+text(x = 3.5,y = 4.1,labels = 8.5)
+# ab-e branch lengths= 1
+text(x = 3.5,y = 3.1,labels = 11)
+
+# short branch
+text(x = 2.5,y = 4.6,labels = 2.5)
+
+# d-e branch
+text(x = 3.5,y = 1.1,labels = 14)
+text(x = 3.5,y = 2.1,labels = 14)
+
+
+```
+
+The distance from abe to de is 16.5  We can visualize this as
+
+```{r}
+plot(full.tree, main = "")
+# a-b branch lengths= 8.5
+text(x = 3.5,y = 5.1,labels = 8.5)
+text(x = 3.5,y = 4.1,labels = 8.5)
+# ab-e branch lengths= 1
+text(x = 3.5,y = 3.1,labels = 11)
+
+# short branch
+text(x = 2.5,y = 4.6,labels = 2.5)
+
+# d-e branch
+text(x = 3.5,y = 1.1,labels = 14)
+text(x = 3.5,y = 2.1,labels = 14)
+
+
+arrows(x0 = 0,x1 = 4,y0 =0.85,y1=0.85, code =3,angle = 90,length =0.1, lty =2, col = 2)
+text(x = 1,y = 1,labels = 16.5)
+
+```
+
+We can calcualte the distance of the remaining short branch from de to the root as 16.5-14 = 2.5.  When we plot this again, it won't be to scale
+
+```{r}
+plot(full.tree, main = "")
+# a-b branch lengths= 8.5
+text(x = 3.5,y = 5.1,labels = 8.5)
+text(x = 3.5,y = 4.1,labels = 8.5)
+# ab-e branch lengths= 1
+text(x = 3.5,y = 3.1,labels = 11)
+
+# short branch
+text(x = 2.5,y = 4.6,labels = 2.5)
+
+# d-e branch
+text(x = 3.5,y = 1.1,labels = 14)
+text(x = 3.5,y = 2.1,labels = 14)
+
+
+arrows(x0 = 0,x1 = 4,y0 =0.85,y1=0.85, code =3,angle = 90,length =0.1, lty =2, col = 2)
+text(x = 1,y = 1,labels = "16.5 - 14 = 2.5")
+
+```
+
+
+We can calculate the remaining short branch from abe to the root as
+16.5-8.5-2.5
+=16.5-11
+=5.5
+
+```{r}
+plot(full.tree, main = "")
+# a-b branch lengths= 8.5
+text(x = 3.5,y = 5.1,labels = 8.5)
+text(x = 3.5,y = 4.1,labels = 8.5)
+# ab-e branch lengths= 1
+text(x = 3.5,y = 3.1,labels = 11)
+
+# short branch
+text(x = 2.5,y = 4.6,labels = 2.5)
+
+# d-e branch
+text(x = 3.5,y = 1.1,labels = 14)
+text(x = 3.5,y = 2.1,labels = 14)
+
+
+arrows(x0 = 0,x1 = 4,y0 =0.85,y1=0.85, code =3,angle = 90,length =0.1, lty =2, col = 2)
+text(x = 1,y = 1,labels = "16.5 - 14 = 2.5")
+
+arrows(x0 = 0,x1 = 4,y0 =5.1,y1=5.1, code =3,angle = 90,length =0.1, lty =2, col = 2)
+text(x = 1,y = 5,labels = "16.5 - 8.5 - 2.5 = 5.5")
+
+```
+
+So the final tree has branch lengths (not to scale!) of
+
+```{r}
+plot(full.tree, main = "")
+# a-b branch lengths= 8.5
+text(x = 3.5,y = 5.1,labels = 8.5)
+text(x = 3.5,y = 4.1,labels = 8.5)
+# ab-e branch lengths= 1
+text(x = 3.5,y = 3.1,labels = 11)
+
+# short branch
+text(x = 2.5,y = 4.6,labels = 2.5)
+
+# d-e branch
+text(x = 3.5,y = 1.1,labels = 14)
+text(x = 3.5,y = 2.1,labels = 14)
+
+
+
+text(x = 1,y = 1.6,labels = "2.5")
+
+
+text(x = 1,y = 4,labels = "5.5")
+```
+
+
+Most of the time we don't include branch lengths in Newick format, but there is a way to do it. You don't need to know how to do this - this is just for illustration
+```{r}
+full.tree <- "((c:14,d:14):2.5,(e:11,(b:8.5, a:8.5):2.5):5.5);" # semi colon!
+full.tree <-read.tree(text=full.tree)
+plot(full.tree, main = "")
+
+text(x = 10,y = 5.1,labels = 8.5)
+text(x = 10,y = 4.1,labels = 8.5)
+# ab-e branch lengths= 1
+text(x = 10,y = 3.1,labels = 11)
+
+# short branch
+text(x = 7,y = 4.6,labels = 2.5)
+
+# d-e branch
+text(x = 10,y = 1.1,labels = 14)
+text(x = 10,y = 2.1,labels = 14)
+
+
+
+text(x = 1.5,y = 1.6,labels = "2.5")
+
+
+text(x = 1.5,y = 3.9,labels = "5.5")
+```
+
+
+<!--chapter:end:tree-think_UPGMA_wikidat_compare_to_ordination_calcs_by_hand-UPDATED.Rmd-->
+
+# Representing phylogenetic trees in Newick format
+
+**By*: Nathan Brouwer
+
+```{r, echo = F}
+library(ape)
+library(phangorn)
+```
+
+
+## Vocab
+
+* Newick notation
+* topology
+* clade
+
+## Introduction
+
+**Newick format** is a common way to store information about **rooted phylogenetic trees** in a compact, written format.  In its standard format, Newick does not store information about branch lengths, though it can be augmented to include lengths.
+
+## Trees with three taxa
+
+A simple phylogenetic tree with three species can be represented in Newick as:
+\[((Human, Chimp), Gorilla)\]
+
+In Newick format, **clades** are enclosed in parentheses.  So, in the example above, "(Human, Chimp)" means that humans and chimps are a **clade** and are each other's closest neighbors on the tree.  
+
+```{r, echo = F}
+par(mfrow = c(1,1))
+str1 <- c("((Human, Chimp),Gorilla);")
+
+## convert character string to tree
+tree1<-ape::read.tree(text=str1)
+
+## plot tree
+plot.phylo(tree1,edge.width=2, main = "")
+```
+
+
+The general **mathematical rules of parentheses** apply to Newick format.  Therefore, the *order* within the parentheses doesn't matter: "(Human, Chimp)" is the same as "(Chimp, Human)".
+
+The two version of the trees result in differences in the order the taxa appear from top to bottom, but do not change its **toplogy** or interpretation.
+```{r, echo = F}
+par(mfrow = c(1,2))
+plot.phylo(tree1,edge.width=2, main = "(Human, Chimp)")
+
+str2 <- c("((Chimp, Human),Gorilla);")
+
+## convert character string to tree
+tree2<-ape::read.tree(text=str2)
+
+## plot tree
+plot.phylo(tree2,edge.width=2, main = "(Chimp, Human)")
+
+```
+
+
+Similarly, "((Human, Chimp), Gorilla)" is the same as "(Gorilla, (Human, Chimp))".  
+
+```{r, echo = F}
+par(mfrow = c(1,2))
+
+plot.phylo(tree1,edge.width=2, main = "((Human, Chimp), Gorilla)")
+
+
+
+str4 <- c("(Gorilla,(Chimp, Human));")
+
+## convert character string to tree
+tree4<-ape::read.tree(text=str4)
+
+## plot tree
+plot.phylo(tree4,edge.width=2, main = "(Gorilla, (Chimp, Human))")
+```
+
+
+These rules for Newick are analogous to the rules for using parentheses in math: (1+2) is the same as (2+1), and ((2+1) * 2) is the same as (2*(2+1)).
+
+
+## Trees with four taxa
+
+If we split Gorillas into the two major groups, western Gorillas in Gabon and eastern Gorillas in the Democratic Republic of Congo, we would put them in a clade: "(Gorilla-W, Gorilla-E)".  We'll now have two separate clades of two taxa.  We would then build up the full tree as
+
+\[((Human, Chimp), (Gorilla-W, Gorilla-E))\]
+
+This has two clades of two taxa each
+
+1. Humans-Chimps
+1. Western gorillas-Eastern Gorillas
+```{r, echo = F}
+par(mfrow = c(1,1))
+str5 <- c("((Chimp, Human), (Gorilla-W, Gorilla-E));")
+
+## convert character string to tree
+tree5<-ape::read.tree(text=str5)
+
+## plot tree
+plot.phylo(tree5,edge.width=2, main = "((Chimp, Human), (Gorilla-W, Gorilla-E))")
+```
+
+
+
+
+If wanted to represent a tree with humans, chimps, gorillas and orangutan we would represent it like this:
+
+\[(((Human, Chimp),Gorilla), Orangutan)\]
+
+The parenthesis to the right of Gorilla indicates that Gorilla falls within the human-chimp clade. 
+
+```{r, echo = F}
+str6 <- c("(((Human, Chimp),Gorilla), Orangutan);")
+
+## convert character string to tree
+str6<-ape::read.tree(text=str6)
+
+## plot tree
+plot.phylo(str6,edge.width=2, main = "(((Human, Chimp),Gorilla), Orangutan)")
+
+plotrix::draw.ellipse(x = 3, y = 2, a = 0.9, b = 1.12, angle = 0, segment = NULL,
+arc.only = TRUE, deg = TRUE, nv = 100, 
+col = NA, lty = 2, lwd = 2, border = "darkgreen")
+```
+
+
+
+
+Just as in math, the number of parentheses needs to balance out.  In this case, there are three parentheses open to the right, all next to human.  There therefore needs to be 3 parentheses open to the right.
+
+```{r}
+# 321            1        2           3
+# (((Human, Chimp),Gorilla), Orangutan)
+```
+
+
+<!--chapter:end:tree-think-03-newick_format.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Plotting trees from Newick notation in R
+
+In R, a phylogenetic tree in Newick format can be input as a character string and plotted using the ape package.
+
+## Preliminaries 
+
+```{r}
+library(ape)
+library(phangorn)
+```
+
+## Note
+
+Throughout this lesson I use the `par()` command to set up plots.  You can ignore this command because its pretty tricky to use.
+
+## 3 taxa tree in Newick
+
+We input the tree as quoted text; note the semi colon at the end!
+
+```{r}
+# two taxa in clade
+"(H,C)"
+
+# third taxa
+"( (H,C) , G )"
+
+# full string
+str1 <- "((H, C), G );" # semi colon!
+```
+
+We then convert the tree using `read.tree()`
+```{r}
+tree1 <-ape::read.tree(text=str1)
+```
+
+We plot with `plot()`
+```{r}
+plot(tree1, main = "3-taxa tree")
+```
+
+
+We can change the orientation of the tree by changing the order within the parentheses.  For example, if we want Gorillas to appear at the bottom of the graph
+
+```{r}
+str2<- "(G,(H, C));"         # semi colon!
+tree2 <-read.tree(text=str2)
+plot(tree2, main = "3-taxa tree")
+```
+
+
+Perhaps we want humans at the top
+```{r}
+str3<- "(G,(C, H));"           # semi colon!
+tree3 <-read.tree(text=str3)
+plot(tree3, main = "3-taxa tree")
+```
+
+
+Note that all of these trees have the same **branching order** and therefore the exact same **topology**.  
+
+**Challenge:** Try to add the forth possible format of the tree that has the same topology.
+
+TODO doesnt render
+```{r , fig.height = 3, fig.width = 5, eval = F}
+par(mfrow = c(2,2))
+plot(tree1, main = "3-taxa tree 1")
+plot(tree2, main = "3-taxa tree 2")
+plot(tree3, main = "3-taxa tree 3")
+```
+
+
+
+## 4 taxa tree in Newick
+
+When there are four taxa, there are two main topologies.  The first is a simple **ladder branching** typology.  This is represented like this
+```{r}
+str4<- "(((Human, Chimp),Gorilla), Orangutan);"
+tree4 <-read.tree(text=str4)
+
+par(mfrow = c(1,1), mar = c(2,2,2,2))
+plot(tree4, main = "4-taxa ladder tree")
+
+```
+
+The second major topology is when there are *two* major clades, each with two taxa
+```{r}
+str5<- "((Human, Chimp), (Gorilla-W, Gorilla-E));"
+tree5 <-read.tree(text=str5)
+plot(tree5, main = "4-taxa, 2 clade tree")
+
+```
+
+Within each of the topologies, the grouping of species can be switched depending on what the evidence suggests.  For example, some researchers have proposed the humans are more closely related to Orangutans.  Their hypothesis has a **ladder branching** typology with the order of the species switched.
+
+
+```{r}
+str6<- "(((Human, Orangutan),Chimp), Gorilla);"
+tree6 <-read.tree(text=str6)
+plot(tree6, main = "")
+```
+
+
+## 5 taxa in Newick Format
+
+Five taxa can occur in a number of general typologies.  The most basic is a continuous ladder.  After Orangutans, humans next-most distantly related "cousin" are the Gibbons.  
+
+```{r}
+par(mfrow = c(1,1), mar = c(2,2,2,2))
+str7<- "((((Human, Chimp),Gorilla), Orangutan),Gibbons);"
+tree7 <-read.tree(text=str7)
+plot(tree7, main = "5-taxa ladder tree")
+```
+
+
+Let's say there's a hypothesis that Gibbons and Orangutans form a clade (there's no actual evidence of this). This typology would create a tree with two main clades, one with 3 species and one with two.
+
+```{r}
+str8 <- "((((Human, Chimp),Gorilla), (Orangutan,Gibbons)));"
+tree8 <-read.tree(text=str8)
+plot(tree8, main = "5-taxa, 2 big clades tree")
+```
+
+
+A third major typology occurs if there are four taxa in a clade on a branch.  Let's say there's a hypothesis that Orangutans and Gorillas are sister species (they aren't), and Gibbons are there more distantly related cousins.
+```{r}
+
+str9 <- "(((Human, Chimp), (Orangutan, Gorilla)), Gibbons);"
+tree9 <-read.tree(text=str9)
+plot(tree9, main = "5-taxa, with 4-taxa clade ")
+```
+
+
+
+Here's another example of this format, dropping Gibbons and adding the two Gorilla subspecies (unlike many of the previous examples, this one is true).
+
+```{r}
+str10<- "(((Human, Chimp),(Gorilla-W, Gorilla-E)), Orangutan);"
+tree10 <-read.tree(text=str10)
+plot(tree9, main = "")
+```
+
+
+
+## Many-taxa tree
+
+Newick format can be used to represent any kind of tree, though in practice this can be very difficult to write out by hand.  Here is an example of a number of vertebrates
+
+```{r}
+par(mfrow = c(1,1), mar = c(2,2,2,2))
+str.vert<-    "(((((((cow, pig),whale),(bat,(lemur,human))),(robin,iguana)),coelacanth),gold_fish),shark);"
+vert.tree<-read.tree(text=str.vert)
+plot(vert.tree,no.margin=TRUE,edge.width=2)
+```
+
+
+## Newick and Branch lengths
+
+Below is an example of a BIG tree which also has branch lengths represented.  The original analysis was in  Miyamoto and Goodman (1986) "Biomolecular Systematics of Eutherian Mammals: Phylogenetic Patterns and Classification."
+```{r}
+str.vert<-  "(Edentata:55, (((Orycteropus:12, Trichechus:43):1, (Procavia:29, (Elephas:18, Loxodonta:5):55):10):15, (((Chiroptera:27, (Tupaia:43, ((Talpa:24, (Suncus:24, Erinaceus:58):6):4, (Manis:5, ((Felis:13, Leo:7):32, ((Canis:37, Ursidae:12):4, ((Phocidae:19, Zalophus:17):7, (Procyonidae:12, Mustelidae:22):9):5):17):13):3):10):6):8, (((Lemuridae:46, (Galago:16, Nycticebus:27):10):8, (Tarsius:15, ((Cebus:10, (Atelinae:5, (Aotus:6, Callithrix:9):3):3):18, ((Hylobates:6, (Pongo:1, (Gorilla:2, (Homo:22, Pan:1):2):6):2):5, (Presbytis:1, (Cercopithecus:1, (Erythrocebus:0, ('Macaca fascicularis':2, ('Macaca mulatta':5, 'Macaca fuscata':0):1, (Theropithecus:2, Papio:4):15):2):1):8):6):9):22):10):13, ((Ochotona:7, Oryctolagus:54):4, (Caviomorpha:107, (Spermophilus:29, (Spalax:23, ((Rattus:71, Mus:19):15, (Ondatra:27, Mesocricetus:32):27):20):8):12):15):11):9):12, ((Sus:50, ((Lama:10, Camelus:24):31, (Hippopotamus:31, (((Ovis:9, Capra:8):19, ((Antilocapra:13, Giraffa:14):7, (Cervus:8, Alces:9):11):2):9, (Tragelaphinae:6, ('Bos grunniens':6, (Bison:5, 'Bos taurus':15):7):11):6):47):10):19):18, ((('Equus (Asinus)':6, 'Equus caballus':31):24, (Tapirus:19, Rhinocerotidae:23):11):22, ((Phocoena:4, Tursiops:17):5, (Balaenoptera:36, Eschrichtius:2):8):29):12):12):16):55);"
+vert.tree<-read.tree(text=str.vert)
+plot(vert.tree,no.margin=TRUE,edge.width=2)
+```
+
+
+
+## Additional Reading
+
+The Wikipedia article on Newick format shows how it can be extended for more complex scenarios, including annotation of branch lengths.
+https://en.wikipedia.org/wiki/Newick_format
+
+Newick format is briefly mentioned on page 47 of Baum & Smith Tree Thinking.
+
+
+<!--chapter:end:tree-think-04-newick_in_R.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Phylogenetic trees using the UPGMA clustering algoirthm
+
+**By**: Nathan Brouwer
+
+## Introduction
+
+**UPGMA** is a method for constructing **phylogenetic trees** using **genetic distances**.  It is an old, outmoded method that is rarely ever used any more for building final versions of trees.  Instead of UPGMA, the **neighbor-joining** (NJ) algorithm is used when a distance-based phylogeny is made.  UPGMA's relative simplicity, however, makes it a useful starting point for thinking about how to construct phylogenetic trees and code up algorithms to build them.  UPGMA has also been used in the past in statistics, machine learning, transcriptomics, and community ecology as a general **clustering algorithm** and so is a useful starting point when understanding current algorithms in those fields.
+
+
+
+## Preliminaries
+
+```{r, message = FALSE}
+# Potentially new packages
+## install.packages("phangorn")
+## install.packages("ape")
+
+library(ape)
+library(phangorn)
+```
+
+
+### Vocab
+
+* matrix, matrices
+* diagonal of matrix
+* symmetrical matrix
+* lower triangle of matrix
+* Newick format
+* character string
+* function, argument
+* branch, edge, clade
+
+
+
+### General R functions
+* `c()`
+* `matrix()`
+* colnames, rownames
+* cbind, rbind
+* class
+* as.dist()
+* par
+* min
+* str
+
+### Specific functions
+* phangorn::phangorn()
+* ape::read.tree
+* ape::as.DNAbin
+* ape::dist.dna()
+
+## Sequence comparisons
+
+Let's consider three short, hypothetical DNA sequences.  We'll put each into a **vector** using `c(...)`:
+```{r}
+human   <- c("a","t","c","g","a","t","c","g")
+chimp   <- c("a","t","c","a","a","t","c","a")
+gorilla <- c("a","a","a","a","a","a","a","a")
+```
+
+The sequences are each 8 bases long.  
+```{r}
+length(gorilla)
+```
+
+This means we'll have 8 **loci**, or unique **homologous positions**, to consider.
+
+We can examine each pair of sequences and count up the number of differences between each one.  This gives us a preliminary estimate of how **diverged** the sequences are.  
+Humans and chimps have 2 differences, at the 4th and 8th loci
+```{r}
+rbind(human, chimp)
+```
+
+Chimps and gorillas have 4 differences (2nd, 3rd, 6th, and 7th loci):
+```{r}
+rbind(chimp, gorilla)
+```
+
+
+Humans and gorillas have 6 differences (all but 1st and 6th different)
+```{r}
+rbind(human, gorilla)
+```
+
+## Distance matrices
+
+Having counted up the number **pairwise differences** between each pair of sequences, we can represent this data as a genetic **distance matrix** like this.
+
+First, make the matrix using the `matrix()` command.
+```{r}
+# make the matrix
+dist_mat <- matrix(data = c(NA, NA, NA,
+                            2, NA,NA,
+                            6, 4, NA),
+                  nrow = 3, 
+                  byrow = T)
+```
+
+Now, label the rows and columns.
+```{r}
+# label the matrix
+colnames(dist_mat) <- c("H","C","G")
+rownames(dist_mat) <- c("H","C","G")
+
+```
+
+The final matrix looks like this
+```{r}
+# look at the output
+dist_mat
+```
+
+
+**ASIDE: Building matrices**:
+
+Alternatively, we could make each row of the matrix into a vector and then stack them with `rbind()`.
+```{r}
+# make vectors
+human.row <- c(NA,NA,NA)
+chimp.row <- c( 2,NA,NA)
+gorilla.row <- c(6,4,NA)
+
+# stack vectors by row using rbind()
+dist_mat <- rbind(human.row, 
+                  chimp.row, 
+                  gorilla.row)
+
+# add names
+spp.names <- c("human","chimp","gorilla")
+colnames(dist_mat) <- spp.names
+rownames(dist_mat) <- spp.names
+
+# look at output
+dist_mat
+```
+
+**End ASIDE**
+
+Note that we leave the values on the **diagonal** of the matrix as `NA` because the genetic distance between humans and humans, or chimps and chimps, is 0 and isn't helpful.  A matrix like this is also **symmetrical**, where the **lower triangle** portion is the same as the upper portion  We could build an **upper triangular matrix** like the one below if we wanted, but the convention is to use the lower.
+
+```{r}
+# An upper triangular matrix
+## make data in vectors
+human.row <- c(NA,2,6)
+chimp.row <- c( NA,NA,4)
+gorilla.row <- c(NA,NA,NA)
+
+# stack with ribind()
+dist_mat_upper <- rbind(human.row, 
+                       chimp.row, 
+                       gorilla.row)
+
+# add names
+colnames(dist_mat_upper) <- spp.names
+rownames(dist_mat_upper) <- spp.names
+```
+
+Compare lower triangular matrix form of these data to the upper triangular for: 
+```{r}
+# lower triangular matrix:
+dist_mat
+
+# upper triangular matrix
+dist_mat_upper
+```
+
+In both matrices the distance from humans to gorillas is 6 differences, humans to chimps is 2, and chimps to gorillas is 4.  Make sure you understand why this is true.
+
+Again, the lower triangular form is the form usually used.  Because `NA` occurs in the entire top row and last column, people often omit it by dropping the row and column of all NAs.
+
+```{r, echo = T}
+dist_mat[-1, -3]
+```
+
+
+## From a distance matrix to phylogenetic tree
+
+These calculations imply that humans and chimps are more closely related (the sequences are made up, but this is true). Using data like this, **[phylogenetic algorithms**  therefore cluster humans and chimps into a **clade**.  In **Newick Format** this would be (H,C).
+
+Since we have just three taxa, we add G outside the first clade: ((H,C),G).
+
+We can plot a tree from Newick like this
+
+```{r}
+# define tree
+## NOTE: the string ends with a semi-colon!
+str1<- c("(G,(C, H) );")
+
+## convert character string to tree
+tree1<-ape::read.tree(text=str1)
+
+## plot tree
+plot.phylo(tree1,edge.width=2, main = "")
+```
+
+Newick format does not represent **genetic distances** and therefore the **branch length** of phylogenetic, only the clade structure and branching pattern of the tree.  We can calculate branch lengths using the UPGMA algorithm.
+
+
+## Distance matrix in R from raw sequences
+
+To make a distance matrix in R from the original sequences we first need to put our original sequences into a matrix with the `rbind()` command.
+
+```{r}
+my_seqs <- rbind(human, 
+                 chimp, 
+                 gorilla)
+```
+
+This is what it looks like
+```{r}
+my_seqs
+```
+
+
+We then need to do some fancy processing (this has to do with how the packages we're going to use works, which is picky about formats because its optimized to accommodate real sequences which can be very very long).  We'll use the `as.DNAbin()` function.
+
+```{r}
+my_seqs_bin <- ape::as.DNAbin(my_seqs)
+```
+
+We then can calculate the **distance** between each sequence in terms of the number (N) of mutations.  This uses the `dist.dna()` function.  We set the argument `model = "N"`.  This is the most basic and naive model of mutation and ignores the possibility of back mutations.
+
+```{r}
+seq_dist0 <- ape::dist.dna(my_seqs_bin, model = "N")
+```
+
+This gives us a distance matrix
+```{r}
+seq_dist0
+```
+
+Note that there is a subtle difference in how R looks at the matrix we made earlier with the matrix() command and this matrix.
+
+Them matrices have the same data, but slightly different formats.
+```{r}
+dist_mat
+seq_dist0
+```
+
+They also each have a different class
+
+```{r}
+class(dist_mat)
+class(seq_dist0)
+```
+
+
+## Distance matrix in R from normal matrix
+
+Sometimes we already have a distance matrix computed that we want to enter directly into R.  For example, perhaps it was reported in a paper and we want to explore the matrix on our own.  In this case we can convert our normal matrix we made initially into a properly formatted distance matrix.  This requires the base R `as.dist()` function.  I'll call this object "seq_dist_from_mat" to indicate that it came "from a matrix".  Note that I'm going to give it the full 3 x 3 matrix, `dist_mat`.
+```{r}
+# input matrix
+dist_mat
+
+# covert to distance matrix
+seq_dist_from_mat <- as.dist(dist_mat)
+
+# new format
+seq_dist_from_mat
+```
+
+
+
+I'll now compare the two ways of making the matrix: `seq_dist0`, which was build from the original sequences, and `seq_dist_from_mat`, which was built from the hand-entered matrix.
+
+First, let's compare their structure
+
+```{r}
+seq_dist0
+seq_dist_from_mat
+```
+
+Then check them out with is() and class()
+
+```{r}
+is(seq_dist0) == is(seq_dist_from_mat)
+class(seq_dist0) == class(seq_dist_from_mat)
+```
+
+Now I'll confirm that that have the same content (Note that distance matrices are not indexed internally by rows and columns, but by the order that the values appear.  The following code therefore returns only 3 responses, not 4.)
+```{r}
+seq_dist0 == seq_dist_from_mat
+```
+
+Cool, so we can make a matrix either from the raw sequences or from a hand-entered matrix.
+
+## UPGMA in R
+
+Once you have a distance matrix, UPGMA is easy in R with the `upgma()` function
+
+```{r}
+seq_upgma0 <- upgma(seq_dist0)
+```
+
+Now plot it with `plot()`
+```{r}
+plot(seq_upgma0, main = "Original data")
+
+```
+
+This doesn't look too different than the phylogeny produced from Newick.  Let's play with the distance matrix to see what happens.
+
+First, make some more copies of the distance matrix
+```{r}
+seq.dist1 <- seq_dist0
+seq.dist2 <- seq_dist0
+seq.dist3 <- seq_dist0
+```
+
+
+The relationship between humans and chimps in in the upper left hand cell of the matrix.  Internally, *R* is calling this the first cell of the matrix
+
+```{r}
+seq.dist1[1]
+```
+
+
+Let's increase and decrease this value
+```{r}
+seq.dist1[1] <- 20   #change from 2 to 20
+seq.dist2[1] <- 0.5  #change from 2 to 0.5
+seq.dist3[1] <- 0.05 #change from 2 to 0.05
+```
+
+
+Now we'll build trees with our original matrix and the news ones to compare them. 
+
+Note: We'll make a grid of plots using some fancy-looking code `par(mfrow = c(2,2), mar = c(2,2,2,2))`.  Don't worry about what exactly this means; it just sets up some graphical parameters to make things look nice.  I've also added some code to make the plot of the original data look a little different
+```{r}
+# set up graphical parameters
+par(mfrow = c(2,2), mar = c(2,2,2,2))
+
+# build 1st tree and plot
+## build tree
+seq_upgma0 <- upgma(seq_dist0)
+
+## plot, in upper left-hand corner
+plot.phylo(seq_upgma0, 
+           main = "Original data",
+           edge.color = "darkgreen",
+           edge.width = 4)
+
+# build 2nd tree and plot
+seq.upgma1 <- upgma(seq.dist1)
+plot(seq.upgma1, main = "Very long distance humans vs. chimps!")
+
+seq.upgma2 <- upgma(seq.dist2)
+plot(seq.upgma2, main = "Shorter distance humans vs. chimps")
+
+
+seq.upgma3 <- upgma(seq.dist3)
+plot(seq.upgma3, main = "Much shorter distance humans vs. chimps!")
+
+```
+
+
+## How UPGMA clustering works
+
+UPGMA and other **clustering algorithms** work by finding looking at a distance matrix and finding the two things that are closet together. 
+
+Human and chimps are closest
+```{r}
+seq_dist0
+```
+
+UPGAM therefore extracts the this minimum distance.  We'll extract it by hand using the `min()` function.
+```{r}
+d.min <- min(seq_dist0)
+```
+
+When two individual taxa are grouped into a clade the branch lengths are set at 1/2 the distance between them.  So, the total distance is 2, so the branch lengths will be 1.
+
+```{r}
+d.min/2
+```
+
+We can confirm that this is correct by checking what R calculated via the `upgma()` function.  We can access *R's* calculations by looking at the object we saved the UPGMA output too
+```{r}
+seq_upgma0
+```
+
+On its own this isn't helpful.  But what we can do is use the `str()` command to look under the hood of the object
+```{r}
+str(seq_upgma0)
+```
+
+The output tells us there is something called `edge.length` associated with the `seq_upgma0` object, and the smallest two values are 1. This looks promising, since **edge** is the math term for branches in a tree.
+
+Next, UPGMA builds a new matrix that replace the Human and Chimp columns with a combined Humans-chimp column.  The algorithm then re-calculates the distance from this human-chimp clade to the remaining gorilla group  The distance from this human-chimp group to gorillas is the average distance from humans to gorillas and chimps to gorillas.
+
+The original distance from humans to gorillas was 6, and the distance from chimps to gorillas was 4, as shown by the distance matrix
+```{r}
+seq_dist0
+```
+
+Let's store these values in R objects.
+```{r}
+#distance humans to gorillas
+Dh_g <- 6
+
+#distance chimps to gorillas
+Dc_g <- 4
+```
+
+Now, we'll take the average of these two distance.  The math written out in explicit detail is:
+```{r}
+Dhc_g <- (Dh_g*1 + Dc_g*1)/(1+1)
+Dhc_g
+```
+
+The result is total distance between our new human-chimp clade and gorillas.  
+
+
+### Challenge
+
+This new distance allows us to calculate the branch lengths for the rest of the tree.  The branch length from the human-chimp (h-c) clade to the gorillas (g) is 1/2 half the distance we just calculated:
+
+Dhc_g/2 = 5/2 = 2.5
+
+The remaining branch length is
+2.5 - 1 = 1.5. 
+
+See if you can figure out why this is done by sketching out the tree.
+
+These values match what is in the upgma object
+
+```{r}
+str(seq_upgma0)
+```
+
+
+
+## Further information
+
+### General info
+
+A good, no-math overview of the general ideas of UPGMA is at this [blog post](https://medium.com/@sharma.ravit/upgma-method-designing-a-phylogenetic-tree-9a708de18419)
+
+[Wikipedia](https://en.wikipedia.org/wiki/UPGMA) provides a good overview with math that isn't too daunting (though it could be improved).  https://en.wikipedia.org/wiki/UPGMA
+
+
+### Worked examples: 
+
+An excellent worked example is at [this site](http://www.slimsuite.unsw.edu.au/teaching/upgma/).  http://www.slimsuite.unsw.edu.au/teaching/upgma/
+This example breaks down the math into basic steps, but there's a lot of taxa so its still complicated.
+
+A worked example showing the limits of UPGMA is [here](https://www.icp.ucl.ac.be/~opperd/private/upgma.html):
+https://www.icp.ucl.ac.be/~opperd/private/upgma.html
+
+Another, dense-looking example is [here](http://www.nmsr.org/upgma.htm):
+http://www.nmsr.org/upgma.htm
+
+Another worked example is
+https://www.mun.ca/biology/scarr/2900_UPGMA.htm
+
+
+### Additional notes: 
+
+Some useful but terse notes are [here](https://www.sequentix.de/gelquest/help/upgma_method.htm):
+https://www.sequentix.de/gelquest/help/upgma_method.htm
+
+If you want to understand what the **ultrametricity** assumption is, check out [this site](https://www.sequentix.de/gelquest/help/explanation_of_the_term_ultrametric.htm) (however, I don't get hung up on this):
+https://www.sequentix.de/gelquest/help/explanation_of_the_term_ultrametric.htm
+
+Explanation of the convoluted meaning of "Un-weighted" is [here](https://www.mun.ca/biology/scarr/UPGMA_vs_WPGMA.html)
+https://www.mun.ca/biology/scarr/UPGMA_vs_WPGMA.html
+
+```{r}
+
+```
+
+
+<!--chapter:end:tree-think-05-UPGMA_in_R.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Tutorial: Writing functions to calculate the number of phylogenetic trees
+
+**By** Nathan Brouwer
+
+## Repliminaries
+
+### Functions
+
+* factorial()
+* seq()
+* print()
+* c()
+* if()
+* function()
+* args()
+
+## Concepts
+
+#### Biology Concepts:
+
+* Number of possible phylogenetics trees 
+
+#### Programming concepts
+
+* vectorized inputs to functions
+* conditional statements
+* Role of arguments in writing function
+* Role of { and } in writing functions
+* function source code
+* functions with defaults
+* functions with 1 arguments
+* functions with 2 arguments
+
+### Vocab:
+
+#### Programming vocab
+
+* function
+* function argument
+* function default
+* conditional statement
+
+
+### Packages:
+
+None
+
+
+## Introduction
+
+## Number of rooted trees
+
+The number of possible rooted phylogenetic trees is calculated using the equation below, where n is the number of taxa:
+
+
+$\frac{(2*n-3)!}{2^{n-2} * (n-2)!}$
+
+## Number of rooted trees in R
+
+In R we take factorials using the `factorial()` function
+
+```{r}
+factorial(3)
+3*2*1
+
+factorial(4)
+4*3*2*1
+```
+
+We can re-write our text equation above as:
+factorial(2n-3)/(2^(n-2))*(factorial(n-2))
+
+In R would be for n = 3
+```{r}
+n<-3
+factorial(2*n-3)/((2^(n-2))*factorial(n-2))
+```
+
+For n = 4
+```{r}
+n<-4
+factorial(2*n-3)/((2^(n-2))*factorial(n-2))
+```
+
+All of the parentheses make this a bit nutty.  Let me write this out as a separate numerator and denominator
+
+```{r}
+#numerator
+numerator   <- factorial(2*n-3)
+
+#denominator
+denominator <- 2^(n-2)*factorial(n-2)
+
+#division
+numerator/denominator
+```
+
+
+
+## Functions in R
+
+Functions in R have the general format
+
+```{r, eval = F}
+function_name <- function(arguments = ...){
+ output <- ...  # math etc saved to object
+ print(output)
+}
+```
+
+
+The `function_name` can be any valid R object name.  The function `function()` creates the function.
+
+A function can have any number of arguments.  Note that the arguments are enclosed in parentheses, and after the last  `)` there is a `}`.
+
+After all the stuff inside the function (e.g. the math we want the function to do) its finished with a `}`.
+
+## Function to calculate the number of possible phylogenetic trees
+
+We can set up a function to encapsulate this.  We'll call the function `tree_count()`.  It has one **argument** (`n`),   the number of taxa on the tree.  We'll set the **default value** of the argument to be `n = 3` taxa.
+
+I use the function `print()` at the end so that the function actually returns output.  If this isn't included then nothing will be returned by the function.
+
+In the code below note the locations of the following things
+
+* function name
+* function-making command
+* The opening parenthesis `(`
+* the argument
+* the default
+* the closing parenthesis `)`
+* the opening curly bracket `{`
+* the math
+* the `print()` command
+* the closing curly bracket `}`
+
+```{r}
+
+#             [ ]function-making command
+#             |
+# [ ]Function |         [ ] argument
+# name        |          |
+# |           |          |    [ ]closing ")"
+# |           |          |     |
+# |           | [ ] "("  |     |  [ ]"{"
+# |           |      \   |     | /
+tree_count <- function(  n = 3 ){    # note the "}"
+  
+  # [ ] math
+  numerator   <- factorial(2*n-3)
+  denominator <- 2^(n-2)*factorial(n-2)
+  trees  <- numerator / denominator 
+  
+  # [ ] print output
+  print(trees)
+  
+}  # end with the "}"
+#\
+# [ ] "}"
+
+           
+```
+
+Does it work?
+```{r}
+tree_count()
+tree_count(n = 3)
+```
+
+When working on a function its also good to check your output against against a source with the correct results. Tables with the number of trees per taxa are in many books, and also available here: https://en.wikipedia.org/wiki/Phylogenetic_tree
+
+We can view the **function source code** by just running the name of the function without any parentheses (or arguments)
+```{r}
+tree_count
+```
+
+
+We can see just the arguments, and any defaults, for a function using `args()`
+```{r}
+args(tree_count)
+```
+
+
+**ASIDE**: The `print()` function is key.  Make and run this function and see what happens.
+```{r}
+                                 #/ don't forget this!
+tree_count_bad <- function(n = 3){
+  
+  # math
+  numerator   <- factorial(2*n-3)
+  denominator <- 2^(n-2)*factorial(n-2)
+  trees  <- numerator / denominator 
+  
+}
+#\ don't forget this!
+
+tree_count_bad()
+```
+
+**END ASIDE**
+
+How rapidly does the number of possible trees grow?
+```{r}
+tree_count(n = 3)
+tree_count(n = 4)
+tree_count(n = 5)
+tree_count(n = 6)
+```
+
+One of my favorite example data sets has 11 taxa.
+```{r}
+tree_count(n = 11)
+```
+
+
+
+This number grows very rapidly.  According to [Bianconi et al (2012)](https://www.tandfonline.com/doi/full/10.3109/03014460.2013.807878)  there are 3.72*10^13 cells in the body (37,200,000,000,000, or 3.72e13).
+
+```{r}
+### with all the zeros
+37200000000000
+
+### "e" scientific notation
+3.72e13
+
+3.72e+13
+```
+
+If we put 14 taxa on a tree there are this many possible trees
+```{r}
+tree_count(n = 14)
+```
+
+If we put 15 taxa on the tree
+```{r}
+tree_count(n = 15)
+```
+
+
+## Vectorized inputs to functions
+
+One of R's most powerful features is that it works on vectors.  I want to make a plot of the the number of possible trees for 3 to 11 taxa.  I can make a vector any way I chose
+
+```{r}
+#typing out all numbers
+n.taxa <- c(3,4,5,6,7,8,9,11)
+
+# using seq with arguments spelled out
+n.taxa <- seq(from = 3,to = 11,by = 1)
+
+#using seq w/o arguments
+n.taxa <- seq(3, 11, 1)
+
+#shortcuts
+n.taxa <- c(3:11)
+n.taxa <- 3:11
+```
+
+I can then put the vector as an input into my function
+
+```{r}
+tree_count(n = n.taxa)
+```
+
+I can save this output to a vector
+```{r}
+n.trees <- tree_count(n = n.taxa)
+```
+
+And plot things.  type = "b" plots points and a line.
+
+```{r}
+plot(n.trees ~ n.taxa, type = "b")
+```
+
+<!-- note that this is greater than exponential growth -->
+
+
+## Adding conditional statements
+
+The equation above is only valid for 2 or more taxa.  If we put in a lower number the result doesn't make sense
+
+```{r}
+tree_count(n = 0)
+tree_count(n = 1)
+```
+
+Only when we put in 2 or more taxa does it work
+```{r}
+tree_count(n = 2)
+tree_count(n = 3)
+```
+
+Additionally, we can input non-integers and get a result.
+```{r}
+tree_count(n = 3.5)
+```
+
+
+We can add a **conditional statement** so that if 0 or 1 are input then an warning is given.  Conditional statements test a logical condition which, if false, can be used to throw a warning, error, etc.
+
+I'll use the conditional statement if(n < 3) to test if the number of taxa entered into my tree_count() function is going to be valid.  The warning() function allows me to remind the user of the function of what they should  enter.
+
+Note that the conditional statement has the logical operation in parentheses, eg (n <2), and then what to do if n < 2 is true in curly brackets
+
+```{r}
+tree_count2 <- function(n = 3){
+  
+  # conditional statement
+  ## is n a valid number for using in this equation?
+  ## if it is NOT, throw a warning
+  ## if it is a valid number, skip everything in the 
+  ## { } and go to the math
+  if(n < 3){
+    
+    # warning if test is TRUE
+    warning("This function is only valid for 2 or more taxa.")
+  }
+  
+  # If test is FALSE (n = 3 or n > 3)
+  ## continue with the math
+  numerator   <- factorial(2*n-3)
+  denominator <- 2^(n-2)*factorial(n-2)
+  trees  <- numerator / denominator 
+  
+  # print the results
+  print(trees)
+}
+```
+
+Now we can test this
+
+```{r}
+tree_count2(n = 0)
+tree_count2(n = 1)
+```
+
+## Adding multiple conditional statements
+
+The tree_count2() function above is still throwing error messages because even though it doesn't work with n <2, and even though its now giving us a warning, its still dong the math.  We can add a second conditional statement around the math to remedy this.
+
+```{r}
+tree_count2b <- function(n = 3){
+  
+  # conditional statement with if(){...}
+  ## the condition: if n < 2, 
+  if(n < 2){
+    
+    # the result 
+    warning("This function is only valid for 2 or more taxa.")
+    
+  }
+  
+  #do the math
+  if(n > 2){
+    numerator   <- factorial(2*n-3)
+  denominator <- 2^(n-2)*factorial(n-2)
+  trees  <- numerator / denominator 
+  
+  #return the result
+  return(trees)
+  }
+  
+}
+```
+
+Now we just get the warning we wrote but nothing else
+```{r}
+tree_count2b(0)
+tree_count2b(1)
+```
+
+
+## Adding additional arguments
+
+Perhaps we want provide the option of always printing the results in scientific notation.  We can another argument to our tree_count() function called "format".  If the argument is set to "sci", "scientific" or "e", the function will change the options for how numbers are printed.
+
+```{r}
+tree_count <- function(n = 3,                # 1st argument: number of taxa
+                       format = "standard"){ # 2nd argument: format
+  
+  # conditional statement with if(){...}
+  ## the condition: if n < 2, 
+  if(n < 2){
+    
+    # the result 
+    warning("This function is only valid for 2 or more taxa.")
+  }
+  
+  # the math
+  numerator   <- factorial(2*n-3)
+  denominator <- 2^(n-2)*factorial(n-2)
+  trees  <- numerator / denominator 
+  
+  # another conditional statement:
+  ## set formatting
+  if(format %in% c("sci","scientific","e")){
+    options(scipen = -2,digits = 3)
+  }
+  
+  # print the output
+  print(trees)
+  
+  # re-set the formatting
+  options(scipen = 0,digits = 7)
+}
+```
+
+Check out the source code
+```{r}
+tree_count
+```
+
+Check out the agruements
+```{r}
+args(tree_count)
+```
+
+
+Check the output
+```{r}
+tree_count(n = 10)
+tree_count(n = 10, format = "sci")
+tree_count(n = 10, format = "scientific")
+tree_count(n = 10, format = "e")
+```
+
+
+
+## Assignment: _un_rooted trees
+
+We often don't root phylogenetic trees.  This reduces the number of possible trees and is described by the equation
+
+Text (note: this had a typo in previous version of assignmen!)
+(2n-5)!/(2^(n-3))(n-3)!
+
+Rendered:
+
+$\frac{(2*n-5)!}{2^{n-3} * (n-3)!}$
+
+
+## Assignment part 1
+
+Modify the equation used above to work for unrooted trees.  Call the function tree_count_unrooted() Compare your results to http://carrot.mcb.uconn.edu/mcb396_41/tree_number.html
+
+You can use the simplest form of the function which doesn't have any additional argument, eg
+
+```{r}
+#NOTE: this is for a ROOTED TREE
+## change math to be for UN-ROOTED TREE
+## change name of function to t()ree_count_unrooted
+tree_count_rooted <- function(n = 3){
+  numerator   <- factorial(2*n-3)
+  denominator <- 2^(n-2)*factorial(n-2)
+  trees  <- numerator / denominator 
+  return(trees)
+}
+
+#Always test!
+tree_count_rooted(4)
+```
+
+
+
+### Part 1 answer
+
+```{r}
+tree_count_unrooted <- function(n = 3){
+  numerator   <- factorial(2*n-5)
+  denominator <- 2^(n-3)*factorial(n-3)
+  trees  <- numerator / denominator 
+  return(trees)
+}
+```
+
+CHeck against
+```{r}
+tree_count_unrooted(n = 3)
+tree_count_unrooted(n = 4)
+tree_count_unrooted(n = 5)
+```
+
+Compare rooted and unrooted
+```{r}
+tree_count_unrooted(n = 5)
+tree_count_rooted(n = 5)
+```
+
+
+## Assignment part 2
+
+Create a function that will work for rooted OR unrooted trees.  Do this by adding an additional argument like
+
+type = "rooted"
+
+and conditional statements like
+
+if(type == "rooted"){
+ #do this
+}
+
+if(type == "unrooted"){
+ #do something else
+}
+
+
+Again, you can use the simplest form of the argument.
+
+(Note: there was a typo in the original version of this where there were missing quotation marks around "rooted" and "unrooted" eg "rooted, so if you copy and pasted the code - which is what I would've done! - it wouldn't have worked).
+
+### Answer
+
+here is one way this could be written.
+
+```{r}
+tree_count3 <- function(n = 3, 
+                           type = "rooted"){
+  
+if(type == "rooted"){
+  #run rooted vs. of the calculation
+  numerator   <- factorial(2*n-3)
+  denominator <- 2^(n-2)*factorial(n-2)
+  trees  <- numerator / denominator 
+  }
+
+if(type == "unrooted"){
+  #unrooted version of the equation
+  numerator   <- factorial(2*n-5)
+  denominator <- 2^(n-3)*factorial(n-3)
+  trees  <- numerator / denominator 
+  return(trees)
+ }
+  
+return(trees)  
+
+}
+```
+
+Check the answer
+
+```{r}
+tree_count3(n= 5, type = "rooted")
+tree_count3(n= 5, type = "unrooted")
+```
+
+We can plot rooted vs unrooted
+
+```{r}
+n.taxa <- seq(3,9,1)
+y.rooted <- tree_count3(n= n.taxa, type = "rooted")
+y.unrooted <- tree_count3(n= n.taxa, type = "unrooted")
+
+plot(y.rooted ~ n.taxa, type = "b")
+points(y.unrooted ~ n.taxa, type = "b", col = 3, lty = 2)
+```
+
+
+
+<!--chapter:end:tree-think-number_of_phylogenetic_trees.Rmd-->
 

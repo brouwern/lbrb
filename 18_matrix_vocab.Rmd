@@ -1,0 +1,131 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Matrix vocabulary
+
+**By** Nathan Brouwer
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+<!-- Other to do -->
+<!-- first work with smaller matrix (DNA? distance matrix?) -->
+<!-- transpose -->
+<!-- mirror symmetry -->
+<!-- remove ambig codes while working with it -->
+
+
+## Introduction 
+
+In this exercise we will practice manipulating matrices and vector by exploring the structure of **scoring matrices** and **alignments**.
+
+## Preliminaries
+
+
+### Packages 
+
+* BiocManager
+* Biostrings
+* combio4all
+
+### Vocab
+
+#### Math / R vocab
+
+* triangular matrix
+* square matrix
+* lower triangle
+* upper triangle
+* symmetric matrix
+* matrix diagonal
+
+
+#### Bioinformatics vocab 
+* scoring matrix
+* BLOSUM scoring matrix
+
+
+
+### Functions used
+
+#### Base R functions
+* `data()`
+* `is()`
+* `nrow()`, `ncol()`, 
+* `dim()`,
+* `names()`, `colnames()`, `rownames()`, 
+* `head()`,  `tail()`
+
+#### Specific function
+
+* combio4all::tri_print()
+* combio4all::diag_show()
+
+
+## Load packages
+
+Load basic packages
+```{r}
+library(flextable)
+library(webshot)
+```
+
+
+Install the Biostrings package from Bioconductor; you don't have to run this if you already happen to have downloaded Biostrings before
+```{r, echo = F, eval = F}
+library(BiocManager)
+BiocManager::install("Biostrings") #Manipulate biological string data
+```
+
+
+
+In the *R* console the matrix looks like this. 
+
+```{r}
+BLOSUM62
+```
+
+
+
+The function `tri_print()` will print just the lower triangle, with all the other values left empty. (This might be a bit slow)
+```{r}
+tri_print(BLOSUM62, as.image = T)
+```
+
+
+We can also look at the upper triangle.
+```{r}
+tri_print(BLOSUM62,triangle = "upper", as.image = T)
+```
+
+
+## Matrix structure
+
+The BLOSUM62 matrix is a **square matrix** since the number of rows equals the number of columns.  It is also a symmetrical matrix since the **lower triangle** of the matrix is the same as the **upper triangle**.  The `compbio4all` package has functions for displaying these.  
+
+*R* shows us the full **symmetric matrix**, though in books usually they just show the **lower triangle**.  A symmetric matrix is one where the upper and lower triangles are identical.
+
+
+## Diagonal of a matrix
+
+The **diagonal of a matrix** is the set of numbers that falls directly in a diagonal line from the upper left corner to the lower right.
+
+The diagonal of a scoring matrix represents an amino acid that hasn't changed or diverged between two sequences (in theory it could change and then change back).  We can access the diagonal in *R* `diag()`.
+
+What does `diag(BLOSUM62)` tell you?
+
+
+```{r}
+diag(BLOSUM62)
+```
+
+This is showing you the entries that fall along the diagonal of the matrix.  But the output is just a string of numbers. We can look at the diagonal in context using the `diag_show()` function from the compbio4all package.
+
+```{r}
+diag_show(BLOSUM62)
+```
+
+

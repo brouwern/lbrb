@@ -1,0 +1,126 @@
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Calculating the number of possible phylogenetic trees
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+<!-- remove all R code? move to other section -->
+
+## Repliminaries
+
+## Concepts
+
+#### Biology Concepts / Vocab
+
+* toplogy
+* rotation
+* Number of possible phylogenetics trees 
+
+## Functions
+
+* factorial
+
+
+
+## Introduction
+
+**Phylogenetics** is one of the original fields of computational biology.  This is because as the number of **taxa** that need to be organized on a tree increases, the number of *unique* phylogenetic trees describing possible relationships among those taxa increases rapidly.
+
+<!-- Add example -->
+
+The following refers to **bifurcating** tree which always branch into two branches at each **node**.  There are the type of branches built for phylogenies. 
+
+
+## Number of rooted trees
+
+The number of possible rooted phylogenetic trees is calculated using the equation below, where n is the number of taxa:
+
+In text, the equation looks like this:
+(2n-3)!/(2^(n-2))(n-2)!
+
+
+Written in a math book it would look like this:
+
+$\frac{(2*n-3)!}{2^{n-2} * (n-2)!}$
+
+This equation is occasionally mis-printed (as I did in the part of this original assignment) so its worth being explicit:
+
+The numerator is: (2n-3)!, where "!" is factorial
+The denominator is: (2^n-2)*(n-2)!; the factorial is evaluated first.
+
+So, for n = 3 taxa
+
+  (2n-3)!/(2^(n-2))(n-2)!
+= (2x3-3)!/(2^(3-2))x(3-2)!
+= (6  -3)!/(2^(1))x(1)!
+= (3)!/(2)x(1)!
+= (1 x 2 x 3)/(2 x 1)
+= 6 / 2
+= 3
+
+One of our first tasks will be to translate this equation into R code.
+
+## Number of rooted trees in R
+
+In R we take factorials using the `factorial()` function
+
+```{r}
+factorial(3)
+3*2*1
+
+factorial(4)
+4*3*2*1
+```
+
+We can re-write our text equation above as:
+factorial(2n-3)/(2^(n-2))*(factorial(n-2))
+
+In this would be
+
+```{r}
+n<-3
+
+factorial(2*n-3)/((2^(n-2))*factorial(n-2))
+```
+
+All of the parentheses make this a bit nutty.  Let me write this out as a separate numerator and denominator
+
+```{r}
+#numerator
+numerator   <- factorial(2*n-3)
+
+#denominator
+denominator <- 2^(n-2)*factorial(n-2)
+
+#division
+numerator/denominator
+```
+
+
+
+### Unique topologies versus rotations
+
+Note that this applies to all tree typologies.  For n = 3 species  the three typologies are
+
+1. ((Human, Chimp), Gorilla)
+1. ((Human, Gorilla), Chimp)
+1. ((Chimp, Gorilla), Human)
+
+In this discussion Since we are referring to evolutionary  *unique* typologies.  Therefore order within a clade does *not* matter. Therefore, these two are identical typologies and don't get counted among the three unique typologies the equation is telling use exist:.
+
+1. ((Human, Chimp), Gorilla)
+1. ((Chimp, Human), Gorilla)
+
+<!-- plot examples -->
+
+
+<!-- number of unrooted trees -->
+
+
+## Bilography
+
+This topic is discussed on page 187-189 of Baum & Smith Tree Thinking.  They discuss it in the concept of **maximum parsimony** estimation of phylogenetic trees.

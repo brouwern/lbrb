@@ -4,6 +4,7 @@ Here is an example of an audio link  embedded in a bookdown book.
 
 
 ```{r}
-knitr::include_url("https://www.genome.gov/sites/default/files/tg/en/narration/single_nucleotide_polymorphisms_snps.mp3")
+knitr::include_url("https://www.genome.gov/sites/default/files/tg/en/narration/single_nucleotide_polymorphisms_snps.mp3",
+                   height = "50px")
 ```
 

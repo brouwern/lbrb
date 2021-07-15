@@ -1,18 +1,4 @@
----
-title: "UPGMA the hard way"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{UPGMA the hard way}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+## UPGMA the hard way
 
 ```{r  eval = T}
 library(compbio4all)

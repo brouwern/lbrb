@@ -1,0 +1,276 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# The BLOSUM scoring matrix in R
+
+**By** Nathan Brouwer
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+## Introduction 
+
+In this lesson we will introduce the basic structure of the BLOSUM scoring matrix.
+
+## Preliminaries
+
+
+### Packages 
+
+<!-- this lesson has been split up -  not stuff below now  used  -->
+
+* BiocManager
+* Biostrings
+* combio4all
+
+### Vocab
+
+#### Math / R vocab
+
+* triangular matrix
+* square matrix
+* lower triangle
+* upper triangle
+* symmetric matrix
+* matrix diagonal
+* named vectors
+* named matrices
+* accessing items in named vectors or matrices
+* square bracket notation
+
+#### Bioinformatics vocab 
+* scoring matrix
+* BLOSUM scoring matrix
+* ambiguity codes
+
+
+### Functions used
+
+#### Base R functions
+* `data()`
+* `is()`
+* `nrow()`, `ncol()`, 
+* `dim()`,
+* `names()`, `colnames()`, `rownames()`, 
+* `head()`,  `tail()`
+
+#### Specific function
+
+* combio4all::tri_print()
+* combio4all::diag_show()
+
+
+## Load packages
+
+Load basic packages
+```{r}
+library(flextable)
+library(webshot)
+```
+
+
+Install the Biostrings package from Bioconductor; you don't have to run this if you already happen to have downloaded Biostrings before
+```{r, echo = F, eval = F}
+library(BiocManager)
+BiocManager::install("Biostrings") #Manipulate biological string data
+```
+
+
+```{r}
+library(Biostrings)
+```
+
+## The BLOSUM matrix
+
+When data is contained within an R package we can load it using the data() function.  We'll work with a version of the BLOSUM62 matrix in the Biostrings package
+
+Load BLOSUM62 amino acid substitution matrix using data()
+```{r}
+data(BLOSUM62)
+```
+
+
+Bioinformatics uses a lot of difference data structures, including dataframes, matrices, vectors, etc.
+
+What is the **data structure** of BLOSUM62?  Use is()
+```{r}
+
+
+```
+
+Take a look at the whole matrix by just calling up the object on its own:
+```{r}
+
+
+```
+
+
+
+Whenever you start working with data its important to get a sense of what's there, how much of its there, and if there is anything goofy.  Since it can be hard to see a dataframe or matrix on a screen its important to explore it with various commands, including `nrow()`, `ncol()`, `dim()`, `colnames()`, `rownames()`, `head()`, and `tail()`
+
+Use `nrow()` and `ncol()` to determine the number of rows and columns.
+```{r}
+
+
+
+```
+
+This is a **square matrix** since the number of rows equals the number of columns.  It is also a symmetrical matrix since the **lower triangle** of the matrix is the same as the **upper triangle**.  The compbio4all package has functions for displaying these.
+
+*R* shows us the full **symmetric matrix**, though in books usually they just show the **lower triangle**.  A symmetric matrix is one where the upper and lower triangles are identical.
+
+```{r}
+BLOSUM62
+```
+
+
+
+The function `tri_print()` will print just the lower triangle, with all the other values left empty. (This might be a bit slow)
+```{r}
+tri_print(BLOSUM62, as.image = T)
+```
+
+
+
+**BLOSUM62** is a matrix for scoring differences between sequences of amino acids.  Is the size of this *R* object therefore a bit odd?  We should check out what these rows and columns actually are.
+
+What are the row names of the matrix?  Use rownames() to determine this.
+```{r}
+
+
+
+```
+
+
+What are the column names?  Run the appropriate command below to determine this.
+```{r}
+
+
+
+```
+
+
+
+Look at the top of the matrix using `head()`.
+```{r}
+
+
+```
+
+
+Look at the bottom of the matrix using `tail()`.
+```{r}
+
+
+```
+
+
+
+What have we learned?  There's more than 20 rows and columns (why is 20 the reference point?).  The `B`, `J`, `Z`, `X` and `*` represent more **ambiguity codes**.  These usually show up due to sequencing errors or lack of full resolution of an amino acid in the sequence because they are so close chemically (e.g. Asparagine versus aspartic acid)  .
+
+* **B** means its ambiguous whether the amino acid is asparagine or aspartici acid (D or N)
+* **J** is used when its ambiguous whether its I or L.
+* **Z** means its ambiguous whether the amino acid is glutamine or glutamic acid (E or Q).
+* **X** is a stand in for any or an unknown code.  This might occur if there is a sequencing error.
+* The **asterisk** "\*" is used to represent **stop codons**.  
+
+We'll be working with sequences without any ambiguities.  In the following sections of code we'll remove these ambiguity codes.
+
+
+
+
+## Visualizing the BLOSUM matrix
+
+We can visualize the BLOSUM matrix by first drawing all 20 amino acids in a circle.
+
+```{r, echo = F}
+# install.packages("igraph")
+library(Biostrings)
+library(igraph)
+data(BLOSUM62)
+BLOSUM62_all_pos <- BLOSUM62[1:20,1:20]+5
+BLOSUM62_all_pos <- BLOSUM62_all_pos*BLOSUM62_all_pos
+blosum.graph <- graph_from_adjacency_matrix(BLOSUM62_all_pos,
+                                            diag = F, 
+                                            weighted = T)
+blosum.graph.circle <- layout_in_circle(blosum.graph)
+
+plot.igraph(blosum.graph ,
+            layout = blosum.graph.circle, 
+            edge.arrow.size = 0,
+            vertex.color= 1:20, 
+            edge.color = 0)
+```
+
+
+In theory, all mutations can change any codon into any other codon.  We can represent mutations that result in a changed in the amino acid by connecting each amino acid with an arrow.  We'll do this for adenine.  Thicker arrows represent more common transitions.  
+```{r, echo = F}
+BLOSUM62_all_pos_A <- BLOSUM62_all_pos
+BLOSUM62_all_pos_A[-1,] <- 0
+
+hist(BLOSUM62_all_pos_A[1,])
+blosum.graph.A <- graph_from_adjacency_matrix(BLOSUM62_all_pos_A,
+                                              diag = F,
+                                              weighted = T,
+                                              mode = "directed")
+
+plot.igraph(blosum.graph.A ,
+            layout = blosum.graph.circle, 
+            edge.arrow.size =0.5,
+            vertex.color= 1:20, 
+            edge.color = 1:20,
+            edge.width = E(blosum.graph.A)$weight/3
+            )
+
+```
+
+Often, there will be no change in a codon, the changes don't impact which amino acid, or a mutation to a different codon is reversed due to a **back mutation**.  We can represent the fact that an adenine can stay as adenine with a **self loop**.  You can see that the most common "transition" is for adenine to remain as adenine.
+
+```{r}
+blosum.graph.A <- graph_from_adjacency_matrix(BLOSUM62_all_pos_A,
+                                              diag = T,
+                                              weighted = T,
+                                              mode = "directed")
+
+
+plot.igraph(blosum.graph.A ,
+            layout = blosum.graph.circle, 
+            edge.arrow.size =0.5,
+            vertex.color= 1:20, 
+            edge.color = 1:20,
+            edge.width = E(blosum.graph.A)$weight/10
+            )
+```
+
+
+Instead of laying things out in circle, we can have them oriented so that the amino acids adenine is most likely to transition to are closest to it.
+```{r}
+blosum.graph.A <- graph_from_adjacency_matrix(BLOSUM62_all_pos_A,
+                                              diag = F,
+                                              weighted = T,
+                                              mode = "directed")
+plot.igraph(blosum.graph.A ,
+            #layout = blosum.graph.circle, 
+            edge.arrow.size =0.5,
+            vertex.color= 1:20, 
+            edge.color = 1:20,
+            edge.width = E(blosum.graph.A)$weight/10
+            )
+```
+
+We can extend this by considering all possible transition and making a plot that tries to orient each amino acid close to the other amino acids its likely to transition to, and far from those its unlikely to.  This is a bit tricky, since all transitions are now being consider. 
+```{r}
+blosum.graph.all <- graph_from_adjacency_matrix(BLOSUM62_all_pos,
+                                              diag = F,
+                                              weighted = T,
+                                              mode = "directed")
+plot.igraph(blosum.graph.all,
+            edge.arrow.size = 0,
+            vertex.color= 1:20,
+            edge.color = 1)
+            
+```
+
