@@ -1,0 +1,86 @@
+
+# add to compbio4all
+
+## function to add 
+unrootedNJtree  
+
+## data to add 
+
+1. protein sequences form rabies etc
+1. virusaln
+
+# from canvas
+
+1. add existing wikipedia entries i've already curage
+
+# misc
+
+1. write study question
+1. where are original questions from original book?
+1. 
+ 
+
+# References to add / explore
+
+Courses
+
+https://4va.github.io/biodatasci/r-ggtree.html
+
+Introduction to bioinformatics
+https://uclouvain-cbio.github.io/WSBIM1207/
+
+Bioinformatics
+https://uclouvain-cbio.github.io/WSBIM1322/
+
+Omics data analysis
+https://uclouvain-cbio.github.io/WSBIM2122/
+
+UniprotR: Retrieving and visualizing protein sequence and functional information from Universal Protein Resource (UniProt knowledgebase)
+Journal of Proteomics
+https://www.sciencedirect.com/science/article/pii/S1874391919303859?casa_token=mOl5FCsRf5cAAAAA:zxlkQyVIt2MobNplBpH2_oUxvTedT724oLnCYGDmvdn1YPV9har4HK_wCu5ixG9_iCqlVSi-Zw
+
+The Bio3D packages for structural bioinformatics
+https://onlinelibrary.wiley.com/doi/epdf/10.1002/pro.3923
+http://thegrantlab.org/bio3d/index.html
+
+KeBABS - An R Package for Kernel-Based Analysis of Biological Sequences
+http://www.bioinf.jku.at/software/kebabs/
+
+A workflow with R: Phylogenetic analyses and visualizations using mitochondrial cytochrome b gene sequences
+https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0243927
+
+Rchemcpp: An R package for computing the similarity of molecules
+http://www.bioinf.jku.at/software/Rchemcpp/index.html
+
+
+
+Orchestrating high-throughput genomic analysis with Bioconductor
+https://www.nature.com/articles/nmeth.3252
+
+# datacamp-light.js. 
+
+https://community.rstudio.com/t/bookdown-contest-submission-introduction-to-econometrics-with-r/15372
+
+https://www.econometrics-with-r.org/2-3-exercises.html
+
+https://cdn.datacamp.com/dcl-react-prod/index.html#tutorial-exercise-element
+
+# Use Moder stats - Modern bio style?
+
+https://www-huber.embl.de/users/msmith/msmbstyle/questions-and-solutions.html
+
+# Exercises with soluions notes
+
+https://community.rstudio.com/t/bookdown-reveal-solution-to-exercise/16496/5
+
+## unilur
+
+http://koncina.github.io/unilur/reference/index.html
+
+# custom blocks
+
+https://github.com/yihui/rmarkdown-cookbook/issues/50
+
+## excellent examples
+
+https://cehs-research.github.io/eBook_install/index.html#blocked-notes

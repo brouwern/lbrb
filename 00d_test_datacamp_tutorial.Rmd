@@ -8,7 +8,7 @@ editor_options:
 
 <script src=https://cdn.datacamp.com/datacamp-light-latest.min.js></script>
 
-```{r, include=FALSE}
+```{r, include=FALSE, eval = F}
 tutorial::go_interactive()
 ```
 

@@ -5,6 +5,6 @@ Here is an example of a YouTube video  embedded in a bookdown book.
 
 
 via knitr chunk
-```{r}
+```{r eval = F}
 knitr::include_url("https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be")
 ```

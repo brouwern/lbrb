@@ -32,9 +32,10 @@ Alas, the ACNUC sub-databases do not have a one-to-one correspondence with the N
 
 Three of the most important sub-databases in ACNUC which can be searched from R are:
 
-“genbank”: this contains DNA and RNA sequences from the NCBI Sequence Database, except for certain classes of sequences (eg. draft genome sequence data from genome sequencing projects)
-“refseq”: this contains DNA and RNA sequences from Refseq, the curated part of the NCBI Sequence Database
-“refseqViruses”: this contains DNA, RNA and proteins sequences from viruses from RefSeq
+1. **genbank**: this contains DNA and RNA sequences from the NCBI Sequence Database, except for certain classes of sequences (e.g. draft genome sequence data from genome sequencing projects)
+1. **refseq**: this contains DNA and RNA sequences from Refseq, the curated part of the NCBI Sequence Database
+1. **refseqViruses**: this contains DNA, RNA and proteins sequences from viruses from RefSeq
+
 You can find more information about what each of these ACNUC databases contains by looking at the ACNUC website.
 
 You can carry out complex queries using the “query()” function from the SeqinR package. If you look at the help page for the query() function (by typing “help(query)”, you will see that it allows you to specify criteria that you require the sequences to fulfill.
@@ -44,26 +45,27 @@ For example, to search for a sequence with a particular NCBI accession, you can 
 Just as you can use “AC=” to specify an accession in a search, you can specify that you want to find sequences whose NCBI records contain a certain keywords by using “K=” as an argument (input) to the “query()” function. Likewise you can limit a search to either DNA or mRNA sequences by using the “M=” argument for the “query()” function. Here are some more possible arguments you can use in the “query()” function:
 
 Argument	Example	Restricts your search to sequences:
-“AC=”	“AC=NC_001477”	With a particular accession number
-“SP=”	“SP=Chlamydia”	From a particular organism or taxon
-“M=”	“M=mRNA”	Of a specific type (eg. mRNA)
-“J=”	“J=Nature”	Described in a paper published in a particular journal
-“R=”	“R=Nature/460/352”	Described in a paper in a particular journal, volume and start-page
-“AU=”	“AU=Smith”	Described in a paper, or submitted to NCBI, by a particular author
+1. “AC=”	“AC=NC_001477”	With a particular accession number
+1. “SP=”	“SP=Chlamydia”	From a particular organism or taxon
+1. “M=”	“M=mRNA”	Of a specific type (e.g. mRNA)
+1. “J=”	“J=Nature”	Described in a paper published in a particular journal
+1. “R=”	“R=Nature/460/352”	Described in a paper in a particular journal, volume and start-page
+1. “AU=”	“AU=Smith”	Described in a paper, or submitted to NCBI, by a particular author
 The full list of possible arguments for the “query()” funtion are given on its help page. Here are some examples using the query function:
 
 Input to the query() function	Searches for sequences:
-“AC=NC_001477”	With accession number NC_001477
-“R=Nature/460/352”	Published in Nature 460:352-358
-“SP=Chlamydia trachomatis”	From the bacterium Chlamydia trachomatis
-“AU=Berriman”	Published in a paper, or submitted to NCBI, by someone called Berriman
-“K=flagellin OR K=fibrinogen”	Which have the keyword ‘flagellin’ or ‘fibrinogen’
-“SP=Mycobacterium leprae AND K=dnaA”	Which are from M. leprae, and have the keyword “dnaA”
-“SP=Homo sapiens AND K=colon cancer”	Which are from human, and have the keyword “colon cancer”
-“SP=Homo sapiens AND K=malaria”	Which are from human, and have the keyword “malaria”
-“SP=Homo sapiens AND M=mrna”	Which are mRNA sequences from human
-“SP=Bacteria”	Which are sequences from Bacteria
-As explained above, the ACNUC database contains the NCBI sequence data organised into several sub-databases, and you can view the list of those sub-databases by using the “choosebank()” function from the SeqinR package. When you want to use “query()” to carry out a particular sub-database (eg. “genbank”, which contains DNA and RNA sequences from the NCBI Sequence Database), you need to first specify the database that you want to search by using the “choosebank()” function, for example:
+1. “AC=NC_001477”	With accession number NC_001477
+1. “R=Nature/460/352”	Published in Nature 460:352-358
+1. “SP=Chlamydia trachomatis”	From the bacterium Chlamydia trachomatis
+1. “AU=Berriman”	Published in a paper, or submitted to NCBI, by someone called Berriman
+1. K=flagellin OR K=fibrinogen”	Which have the keyword ‘flagellin’ or ‘fibrinogen’
+1. “SP=Mycobacterium leprae AND K=dnaA”	Which are from M. leprae, and have the keyword “dnaA”
+1. “SP=Homo sapiens AND K=colon cancer”	Which are from human, and have the keyword “colon cancer”
+1. “SP=Homo sapiens AND K=malaria”	Which are from human, and have the keyword “malaria”
+1. “SP=Homo sapiens AND M=mrna”	Which are mRNA sequences from human
+1. “SP=Bacteria”	Which are sequences from Bacteria
+
+As explained above, the ACNUC database contains the NCBI sequence data organised into several sub-databases, and you can view the list of those sub-databases by using the “choosebank()” function from the SeqinR package. When you want to use “query()” to carry out a particular sub-database (e.g. “genbank”, which contains DNA and RNA sequences from the NCBI Sequence Database), you need to first specify the database that you want to search by using the “choosebank()” function, for example:
 
 ```{r, eval = F}
 choosebank("genbank") # Specify that we want to search the 'genbank' ACNUC sub-database
@@ -211,7 +213,6 @@ naturepaper$nelem
 ```
 
 
-
 This tells us that there were 19022 sequences in the ‘genbank’ ACNUC database that matched the query. The ‘genbank’ ACNUC database contains DNA or RNA sequences from the NCBI Nucleotide database. Why don’t we get the same number of sequences as found by carrying out the search on the NCBI website (where we found 50890 hits to the NCBI Nucleotide database)? The reason is that the ACNUC ‘genbank’ database does not contain all the sequences in the NCBI Nucleotide database, for example, it does not contain sequences that are in RefSeq or many short DNA sequences from sequencing projects.
 
 To obtain the accession numbers of the first five of the 19022 sequences, we can type:
@@ -267,7 +268,7 @@ In the above code, we get the sequences of the human tRNAs using the function �
 Finding the genome sequence for a particular species
 Microbial genomes are generally smaller than eukaryotic genomes (Escherichia coli has about 5 million base pair in its genome, while the human genome is about 3 billion base pairs). Because they are considerably less expensive to sequence, many microbial genome sequencing projects have been completed.
 
-If you don’t know the accession number for a genome sequence (eg. for Mycobacterium leprae, the bacterium that causes leprosy), how can you find it out?
+If you don’t know the accession number for a genome sequence (e.g. for Mycobacterium leprae, the bacterium that causes leprosy), how can you find it out?
 
 The easiest way to do this is to look at the NCBI Genome website, which lists all fully sequenced genomes and gives the accession numbers for the corresponding DNA sequences.
 
@@ -280,11 +281,13 @@ The list of sequenced genomes on the NCBI Genomes website is not a definitive li
 
 Go to the NCBI website (www.ncbi.nlm.nih.gov).
 Select ‘Genome’ from the drop-down list above the search box.
-Type the name of the species you are interested in in the search box (eg. “Mycobacterium leprae”[ORGN]). Press ‘Search’.
-Note that you could also have found the Mycobacterium leprae genome sequence by searching the NCBI Nucleotide database, as the NCBI Genome database is just a subset of the NCBI Nucleotide database.
+Type the name of the species you are interested in in the search box (e.g. “Mycobacterium leprae”[ORGN]). Press ‘Search’.
 
-How many genomes have been sequenced, or are being sequenced now?
-On the NCBI Genome website (http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome), the front page gives a link to a list of all sequenced genomes in the groups Eukaryota, Prokaryota (Bacteria and Archaea) and Viruses. If you click on one of these links (eg. Prokaryota), at the top of the page it will give the number of sequenced genomes in that group (eg. number of sequenced prokaryotic genomes). For example, in this screenshot (from January 2011), we see that there were 1409 complete prokaryotic genomes (94 archaeal, 1315 bacterial):
+Note that you could also have found the *Mycobacterium leprae* genome sequence by searching the NCBI Nucleotide database, as the NCBI Genome database is just a subset of the NCBI Nucleotide database.
+
+## How many genomes have been sequenced, or are being sequenced now?
+
+On the NCBI Genome website (http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome), the front page gives a link to a list of all sequenced genomes in the groups Eukaryota, Prokaryota (Bacteria and Archaea) and Viruses. If you click on one of these links (e.g. Prokaryota), at the top of the page it will give the number of sequenced genomes in that group (e.g. number of sequenced prokaryotic genomes). For example, in this screenshot (from January 2011), we see that there were 1409 complete prokaryotic genomes (94 archaeal, 1315 bacterial):
 
 image1
 
@@ -294,14 +297,17 @@ Go to the GOLD website (http://genomesonline.org/).
 Click on the yellow ‘Enter GOLD’ button in the centre of the webpage. On the subsequent page, it will give the number of ongoing bacterial, archaeal and eukaryotic genome sequencing projects.
 
 Click on the ‘Bacterial Ongoing’ link to see the list of ongoing bacterial genome sequencing projects. By default, just the first 100 projects are listed, and the rest are listed on subsequent pages. In one of the columns of the page, this gives the university or institute that the genome was sequenced in. Other columns give the taxonomic information for the organism, and links to the sequence data.
+
 Find the number of published genome sequencing projects. Go back one page, to the page with the ‘Bacterial Ongoing’ link. You will see that this page also lists the number of complete published genomes. To see a list of these genomes, click on ‘Complete Published’. This will bring up a page that gives the number of published genomes at the top of the page. In one column of the page, this gives the university or institute that the genome was sequenced in.
-As explained above, it is possible to identify genome sequence data in the NCBI Genome database. The GOLD database also gives some information about ongoing genome projects. Often, the GOLD database lists some ongoing projects that are not yet present in the NCBI Genome Database, because the sequence data has not yet been submitted to the NCBI Database. If you are interested in finding out how many genomes have been sequenced or are currently being sequenced for a particular species (eg. Mycobacterium leprae), it is a good idea to look at both the NCBI Genome database and at GOLD.
+
+As explained above, it is possible to identify genome sequence data in the NCBI Genome database. The GOLD database also gives some information about ongoing genome projects. Often, the GOLD database lists some ongoing projects that are not yet present in the NCBI Genome Database, because the sequence data has not yet been submitted to the NCBI Database. If you are interested in finding out how many genomes have been sequenced or are currently being sequenced for a particular species (e.g. Mycobacterium leprae), it is a good idea to look at both the NCBI Genome database and at GOLD.
 
 ## Summary
 
 In this chapter, you have learnt how to retrieve sequences from the NCBI Sequence database, as well as to find out how many genomes have been sequenced or are currently being sequenced for a particular species.
 
-Links and Further Reading
+## Links and Further Reading
+
 There is detailed information on how to search the NCBI database on the NCBI Help website at http://www.ncbi.nlm.nih.gov/bookshelf/br.fcgi?book=helpentrez?part=EntrezHelp.
 
 There is more information about the GOLD database in the paper describing GOLD by Liolios et al, which is available at http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2808860/?tool=pubmed.
@@ -313,15 +319,7 @@ There is also a very nice chapter on “Analyzing Sequences”, which includes e
 ## Acknowledgements
 
 
-
-'
-Contact
-I will be grateful if you will send me (Avril Coghlan) corrections or suggestions for improvements to my email address alc@sanger.ac.uk
-
-License
-The content in this book is licensed under a Creative Commons Attribution 3.0 License.
-
-Exercises
+## Exercises
 Answer the following questions. For each question, please record your answer, and what you did/typed to get this answer.
 
 Model answers to the exercises are given in Answers to the exercises on Sequence Databases.
@@ -329,16 +327,16 @@ Model answers to the exercises are given in Answers to the exercises on Sequence
 1. What information about the rabies virus sequence (NCBI accession NC_001542) can you obtain from its annotations in the NCBI Sequence Database?
 What does it say in the DEFINITION and ORGANISM fields of its NCBI record? Note: rabies virus is the virus responsible for rabies, which is classified by the WHO as a neglected tropical disease.
 1. How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the NCBI Sequence Database?
-Note: the bacterium Chlamydia trachomatis is responsible for causing trachoma, which is classified by the WHO as a neglected tropical disease.
-1. How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the RefSeq part of the NCBI Sequence Database?
+Note: the bacterium *Chlamydia trachomatis* is responsible for causing trachoma, which is classified by the WHO as a neglected tropical disease.
+1. How many nucleotide sequences are there from the bacterium *Chlamydia trachomatis* in the RefSeq part of the NCBI Sequence Database?
 1. How many nucleotide sequences were submitted to NCBI by Matthew Berriman?
 1. How many nucleotide sequences from nematode worms are there in the RefSeq Database?
-Note that several parasitic nematode worms cause neglected tropical diseases, including *Brugia malayi* and *Wucheria bancrofti*, which cause lymphatic filariasis; Loa loa, which causes subcutaneous filariasis; Onchocerca volvulus, which causes onchocerciasis; and Necator americanus, which causes soil-transmitted helminthiasis.
+Note that several parasitic nematode worms cause neglected tropical diseases, including *Brugia malayi* and *Wucheria bancrofti*, which cause lymphatic filariasis; *Loa loa*, which causes subcutaneous filariasis; Onchocerca volvulus, which causes onchocerciasis; and *Necator americanus*, which causes soil-transmitted helminthiasis.
 1. How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database?
 1. How many mRNA sequences for collagen genes from nematode worms are there in the NCBI Database?
 1. How many protein sequences for collagen proteins from nematode worms are there in the NCBI database?
 1. What is the accession number for the *Trypanosoma cruzi* genome in NCBI?
-Do you see genome sequences for more than one strain of Trypanosoma cruzi? Note that the Trypanosoma cruzi causes Chagas disease, which is classified as a neglected tropical disease by the WHO.
+Do you see genome sequences for more than one strain of *Trypanosoma cruzi*? Note that the *Trypanosoma cruzi* causes Chagas disease, which is classified as a neglected tropical disease by the WHO.
 1. How many fully sequenced nematode worm species are represented in the NCBI Genome database?
 
 

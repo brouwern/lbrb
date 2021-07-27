@@ -1,29 +1,19 @@
 ---
-title: "BLAST via R"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{BLAST via R}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
-
-
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+# BLAST via R
 
 ```{r  eval = T}
 library(compbio4all)
 ```
 
 
-The Drosophila shroom GenBank page is at https://www.ncbi.nlm.nih.gov/protein/ABA81834 (I think)
+The *Drosophila* shroom GenBank page is at https://www.ncbi.nlm.nih.gov/protein/ABA81834 (I think)
 
-Sequence can be obtained by licking on "FASTA.  I copy and past it from https://www.ncbi.nlm.nih.gov/protein/ABA81834.1?report=fasta .  Note the quotation marks around the string.
+Sequence can be obtained by clicking on "FASTA.  I copy and pasted it from https://www.ncbi.nlm.nih.gov/protein/ABA81834.1?report=fasta .  Note the quotation marks around the string.
+
 ```{r}
 dmshrm <- c("MKMRNHKENGNGSEMGESTKSLAKMEPENNNKISVVSVSKLLLKDSNGANSRSSNSNASFSSASVAGSVQ
 DDLPHHNSSSSQLGQQHGSSLDQCGLTQAGLEEYNNRSSSYYDQTAFHHQKQPSYAQSEGYHSYVSSSDS
@@ -58,7 +48,6 @@ dmshrm
 ```
 
 
-
 Check out how long it is. Why is length 1?
 ```{r}
 length(dmshrm)
@@ -69,7 +58,8 @@ How many characters?
 nchar(dmshrm)
 ```
 
-Use the gsub() regular expression to get rid of the newline characters (regular expressions are tough and I will always write them for you)
+Use the `gsub()` regular expression to get rid of the newline characters (regular expressions are tough and I will always write them for you).
+
 ```{r}
 dmshrm <- gsub("\n", "", dmshrm)
 ```
@@ -79,17 +69,17 @@ Now how many character?
 nchar(dmshrm)
 ```
 
-
 Another example of regular expression: Let's say I wanted to turn all the I to ¯\_(ツ)_/¯ for some weird reason (one example of why regular expressions are tough: I can't figure out how to get one of the arms to be correct)
 ```{r}
 gsub("I", "¯\\_(ツ)_/¯", dmshrm)
 ```
 
 
-
 Use just the actin binding part of shroom2
 ```{r}
-dmshrm.actin <- substr(dmshrm, start = 445, stop =920)
+dmshrm.actin <- substr(dmshrm, 
+                       start = 445, 
+                       stop =920)
 ```
 
 Use nchar to confirm change
@@ -194,7 +184,7 @@ order and rev are functions I don't expect you to remember; I'll always give the
 Ok, now back to our main event.
 
 The bio3d package lets you do blast searches from R.  Install it if needed
-```{r}
+```{r, warning = F, message = F}
 # install.packages("bio3d")
 library(bio3d)
 
@@ -202,10 +192,10 @@ library(bio3d)
 
 We run the blast like this
 ```{r}
-dmshrm.blast.1 <- bio3d::blast.pdb(dmshrm.actin)
+dmshrm_blast_1 <- bio3d::blast.pdb(dmshrm.actin)
 ```
 
-How many results are resumed?  I got 5.  Why is that?
+How many results are returned?  I got 5.  Why is that?
 
 The protein data band (pdb) is a special database: "The Protein Data Bank (PDB) is a database for the three-dimensional structural data of large biological molecules, such as proteins and nucleic acids." (wikipedia).  We don't have good 3D data on most proteins, so there aren't that many entries in the pdb (https://en.wikipedia.org/wiki/Protein_Data_Bank).
 
@@ -215,31 +205,31 @@ This version of the code should return more than 5 results.
 
 TODO: add data to package
 ```{r, eval = F}
-dmshrm.blast.2 <- blastr(dmshrm.actin)
+dmshrm_blast_2 <- blastr(dmshrm.actin)
 ```
 
 
 What kind of object do we get?
 
 ```{r eval = F}
-is(dmshrm.blast.2)
+is(dmshrm_blast_2)
 ```
 
 
 ```{r eval = F}
-class(dmshrm.blast.2)
+class(dmshrm_blast_2)
 ```
 
 This is a special type of object created by these package authors. Its basically a list though
 
 ```{r eval = F}
-is.list(dmshrm.blast.2)
+is.list(dmshrm_blast_2)
 ```
 
 
 Peak at the structure
 ```{r eval = F}
-str(dmshrm.blast.2, max.level = 1)
+str(dmshrm_blast_2, max.level = 1)
 ```
 
 
@@ -250,7 +240,7 @@ head(dmshrm.blast$hit.tbl)
 
 We can save hit.tbl to its own object if we want
 ```{r eval = F}
-hit.tbl <-dmshrm.blast.2$hit.tbl
+hit.tbl <- dmshrm_blast_2$hit.tbl
 ```
 
 

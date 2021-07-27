@@ -1,0 +1,443 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Computational gene finding
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+**NOTE: this chapter has not been significantly revised**
+
+## Preliminaries
+
+### Packages
+
+```{r, warning = F, message = F}
+library(Biostrings)
+library(seqinr)
+library(compbio4all)
+```
+
+
+## The genetic code
+
+A **protein-coding gene** starts with an “ATG” and is followed by codons (DNA triplets) that code for amino acids.  Protein-coding geneds end with a “TGA”, “TAA”, or “TAG”. That is, the **start codon** of a gene is always “ATG”, while the stop codon of a gene can be “TGA”, “TAA” or “TAG”.  The start codon ATG also codes for the amino acid **methionine (Met)**.   In some proteins this initial Met is part of the final protein, but in others is cleaved of as part of **post-transnational modification** of the polypeptide chain.  
+
+
+<!-- add note about alternative genetic code? -->
+<!-- more biodetails? -->
+
+In *R*, you can view the **standard genetic code**, the correspondence between codons and the amino acids that they are translated into, by using the `tablecode()` function in the `seqinr` package:
+
+```{r}
+seqinr::tablecode()
+```
+
+You can see from this table that “ATG” is translated to Met (the amino acid methionine), and that “TAA”, “TGA” and “TAG” correspond to "Stp" (stop codons), which are not translated to any amino acid, but signal the end of translation.
+
+## Finding start and stop codons in a DNA sequence
+
+When a stretch of a genome is sequence for the first time researchers do not know if there are any genes present.  Fhe first requirement for a gene is a start codon and a stop codon.  To look for all the potential start and stop codons in a DNA sequence, we need to find all the “ATG”s, “TGA”s, “TAA”s, and “TAG”s in the sequence.
+
+To do this, we can use the `matchPattern()` function from the `Biostrings` package, which identifies all occurrences of a particular **motif** (eg. “ATG”) in a sequence. As input, `matchPattern()`  requires that the sequences be in the form of a **string** of single characters with no spaces.
+
+For example, we can look for all “ATG”s in the sequence “AAAATGCAGTAACCCATGCCC” like this.  First, define the sequence we want to scan.
+
+```{r}
+s1 <- "aaaatgcagtaacccatgccc"
+```
+
+Then use `matchPattern()` from `Biostrings`  to located all of the `atg` codons.
+```{r}
+matchPattern("atg", s1) # Find all ATGs in the sequence s1
+```
+
+<!-- add should out or prefae on gsub? -->
+<!-- can tidy tools do this? -->
+
+The output from `matchPattern()` tells us that there are two “ATG”s in the sequence, at nucleotides 4-6, and at nucleotides 16-18.  Beause this its a short sequence, we can see these by visually inspecting the sequence “AAAATGCAGTAACCCATGCCC”.  For long sequences of 100s to 1000s to tens of thousands of bases this is not a tenable approach.
+
+Similarly, if you use `matchPattern()` to find the positions of “TAA”s, “TGA”s, and “TAG”s in the sequence “AAAATGCAGTAACCCATGCCC”, you will find that it has one “TAA” at nucleotides 10-12, but no “TAG”s or “TGA”s.
+
+<!-- add code? -->
+
+The function `find_start_stop_codons()` written by Coghlan (2011) and included in `combio4all` can be used to find all potential start and stop codons in a DNA sequence:
+
+
+```{r}
+compbio4all::find_start_stop_codons(s1)
+```
+
+The result of the function is returned as a list variable that contains two elements: the first element of the list is a vector containing the positions of potential start and stop codons in the input sequence, and the second element of the list is a vector containing the type of those start/stop codons (“atg”, “taa”, “tag”, or “tga”).
+
+The output for sequence s1 tells us that sequence s1 has an “ATG” starting at nucleotide 4, a “TAA” starting at nucleotide 10, and another “ATG” starting at nucleotide 16.
+
+We can use the function `find_start_stop_codons()` to find all potential start and stop codons in longer sequences. For example, say we want to find all potential start and stop codons in the first 500 nucleotides of the genome sequence of the DEN-1 Dengue virus (NCBI accession NC_001477).
+
+In a previous chapter, you learned that you can retrieve a sequence for an NCBI accession using the `entrez_fetch()` function. Thus, to retrieve the genome sequence of the DEN-1 Dengue virus (NCBI accession NC_001477), we can type:
+
+
+```{r, eval = F}
+dengueseq_fasta <- rentrez::entrez_fetch(db = "nucleotide", 
+                          id = "NC_001477", 
+                          rettype = "fasta")
+```
+
+The data are also included in the `combio4all` package 
+```{r}
+data(dengueseq_fasta)
+```
+
+
+```{r}
+is(dengueseq_fasta)
+```
+
+
+```{r}
+str(dengueseq_fasta)
+```
+
+
+
+The raw FASTA file needs to be cleaned up a bit first.
+```{r}
+dengueseq_fasta <- gsub("\n", "", dengueseq_fasta)
+header. <- ">NC_001477.1 Dengue virus 1, complete genome"
+dengueseq_fasta <- gsub(header.,"", dengueseq_fasta)
+```
+
+```{r}
+str(dengueseq_fasta)
+```
+
+
+And the format finallized
+```{r}
+dengueseq_fasta_vector <- stringr::str_split(dengueseq_fasta,"")
+
+```
+
+```{r}
+is(dengueseq_fasta_vector)
+```
+
+```{r}
+length(dengueseq_fasta_vector)
+```
+
+```{r}
+dengueseq_fasta_vector <- unlist(dengueseq_fasta_vector)
+```
+
+
+```{r}
+is(dengueseq_fasta_vector)
+```
+
+```{r}
+length(dengueseq_fasta_vector)
+```
+
+
+```{r}
+dengueseq_fasta_vector[1]
+```
+
+
+The object `dengueseq_fasta_vector` is a vector, and each letter in the DEN-1 Dengue virus DNA sequence is stored in one element of this vector.
+
+
+```{r}
+str(dengueseq_fasta_vector)
+dengueseq_fasta_vector[1:10]
+```
+
+<!-- Dengue virus causes Dengue fever, which is classified as a neglected tropical disease by the WHO. -->
+
+To cut out the first 500 nucleotides of the DEN-1 Dengue virus sequence, we can just take the first 500 elements of this vector using bracket notation:
+
+```{r, eval = T}
+dengueseqstart <- dengueseq_fasta_vector[1:500] 
+```
+
+Find the length of the `dengueseqstart` start vector
+
+```{r, eval = T}
+length(dengueseqstart)             
+```
+
+Next we want to find potential start and stop codons in the first 500 nucleotides of the Dengue virus sequence. We can do this using the `find_start_stop_codons() function described above. However, the `find_start_stop_codons() function requires that the input sequence be in the format of a string of characters, rather than a vector. Therefore, we first need to convert the vector dengueseqstart into a string of characters. We can do that using the `c2s()` function in the seqinr package:
+
+```{r, eval = T}
+dengueseqstart                    # Print out the vector dengueseqstart
+```
+
+Convert the vector "dengueseqstart" to a string of characters
+```{r, eval = T}
+dengueseqstartstring <- c2s(dengueseqstart) # 
+```
+
+
+Print out the object string of characters `dengueseqstartstring`
+```{r, eval = T}
+dengueseqstartstring                      
+```
+
+
+```{r}
+dengueseqstartstring <- tolower(dengueseqstartstring)
+```
+
+We can then find potential start and stop codons in the first 500 nucleotides of the DEN-1 Dengue virus sequence by typing:
+
+<!-- add check for lower case / automatic convertion to lower case to this function -->
+```{r, eval = T}
+find_start_stop_codons(dengueseqstartstring)
+```
+
+We see that the lambda sequence has many different potential start and stop codons, for example, a potential stop codon (TAG) at nucleotide 7, a potential stop codon (TAA) at nucleotide 53, a potential stop codon (TAG) at nucleotide 58, and so on.
+
+## Reading frames
+
+<!-- Define reading frames (take notes from my slides) -->
+
+<!-- re-write this?  insert images from my slides? -->
+
+<!-- this section seems hard to understand  -->
+
+Potential start and stop codons in a single-standed DNA sequence can be in three different possible **reading frames**. A potential start/stop codon is said to be in the **+1 reading frame** if there is an integer number of triplets *x* between the first nucleotide of the sequence and the start of the start/stop codon. Thus, a potential start/stop codon that begins at nucleotides 1 (0 triplets), 4 (1 triplet), 7 (2 triplets)... will be in the +1 reading frame.
+
+If there is an integer number of triplets x, plus one nucleotide (ie. x.3 triplets), between the first nucleotide of the sequence and the start of the start/stop codon, then the start/stop codon is said to be in the **+2 reading frame**. A potential start/stop codon that begins at nucleotides 2 (0.3 triplets), 5 (1.3 triplets), 8 (2.3 triplets) ... is in the +2 reading frame.
+
+Similarly, if there is an integer number of triplets x, plus two nucleotides (ie. x.6 triplets), between the first nucleotides of the sequence and the start of the start/stop codon, the start/stop codon is in the **+3 reading frame**. So a potential start/stop codon that begins at nucleotides 3 (0.6 triplets), 6 (1.6 triplets), 9 (2.6 triplets)... is in the +3 reading frame.
+
+For a potential start and stop codon to be part of the same gene, they must be in the same reading frame.
+
+From the output of `find_start_stop_codons()` for the first 500 nucleotides of the genome of DEN-1 Dengue virus (see above), you can see that there is a potential start codon (ATG) that starts at nucleotide 137, and a potential stop codon (TGA) that starts at nucleotide 141. That is, the potential start codon is from nucleotides 137-139 and the potential stop codon is from nucleotides 141-143. Could the region from nucleotides 137 to 143 possibly be a gene?
+
+We can cut out the region from nucleotides 137 to 143 of the sequence `dengueseqstartstring` to have a look, by using the `substring()` function. If you look at the help page for the `substring()` function, you will see that its arguments (inputs) are the name of the variable containing the string of characters (ie., the DNA sequence), and the coordinates of the substring that you want:
+
+```{r, eval = T}
+substring(dengueseqstartstring,137,143)
+```
+
+If we look at the sequence from nucleotides 137-143, “ATGCTGA”, we see that it starts with a potential start codon (ATG) and ends with a potential stop codon (TGA).
+
+However, the **ribosome** reads the sequence by scanning the codons (triplets) one-by-one from left to right, and when we break up the sequence into codons (triplets) we see that it does not contain an integer (whole) number of triplets: “ATG CTG A”.
+
+This means that even if the ribosome will not recognise the region from 137-143 as a potential gene, as the ATG at nucleotide 137 is not separated from the TGA at nucleotide 141 by an integer number of codons. That is, this ATG and TGA are not in the same reading frame, and so cannot be the start and stop codon of the same gene.
+
+<!-- where was lambdaseqstartstring created? -->
+
+The potential start codon at nucleotide 137 of the `lambdaseqstartstring` sequence is in the +2 reading frame, as there is an integer number of triplets, plus one nucleotide, between the start of the sequence and the start of the start codon (ie. triplets 1-3, 4-6, 7-9, 10-12, 13-15, 16-18, 19-21, 22-24, 25-27, 28-30, ..., 133-135, and a single nucleotide 136).
+
+However, the potential stop codon at nucleotide 141 is the +3 reading frame, as there are two nucleotides plus an integer number of triplets between the start of the sequence and the start of the stop codon (ie. triplets 1-3, 4-6, 7-9, 10-12, 13-15, 16-18, 19-21, 22-24, 25-27, 28-30, 31-33, 34-36, 37-39, 40-42, 43-45, ..., 133-135, 136-138, and two nucleotides 139, 140).
+
+As the potential start codon at nucleotide 137 and the potential stop codon at nucleotide 141 are in different reading frames, they are not separated by an integer number of codons, and therefore cannot be part of the same gene.
+
+## Finding open reading frames on the forward strand of a DNA sequence
+
+To find potential genes, we need to look for a potential start codon, followed by an integer number of codons, followed by a potential stop codon. This is eqivalent to looking for a potential start codon followed by a potential stop codon that is in the same reading frame. Such a stretch of DNA is known as an **open reading frame (ORF), and is a good candidate for a potential gene.
+
+The function `plot_ORFs_in_seq()` (Coghlan 2011) plots the potential start and stop codons in the three different reading frames of a DNA sequence.  For example, to plot the potential start and stop codons in the first 500 nucleotides of the DEN-1 Dengue virus genome, we type:
+
+<!-- doesn't work -->
+```{r, eval = T}
+par(mfrow = c(1,1))
+plot_start_stop_codons(sq = dengueseqstartstring)
+```
+
+
+In the picture produced by `plot_ORFs_in_seq()`, the x-axis represents the input sequence (`dengueseqstartstring` here). The potential start codons are represented by vertical red lines, and potential stop codons are represented by vertical blue lines.
+
+Three different layers in the picture show potential start/stop codons in the +1 reading frame (bottom layer), +2 reading frame (middle layer), and +3 reading frame (top layer).
+
+We can see that the start codon at nucleotide 137 is represented by a vertical red line in the layer corresponding to the +2 reading frame (middle layer). There are no potential stop codons in the +2 reading frame to the right of that start codon. Thus, the start codon at nucleotide 137 does not seem to be part of an open reading frame.
+
+We can see however that in the +3 reading frame (top layer) there is a predicted start codon (red line) at position 318 and that this is followed by a predicted stop codon (blue line) at position 371. Thus, the region from nucleotides 318 to 371 could be a potential gene in the +3 reading frame. In other words, the region from nucleotides 318 to 371 is an open reading frame, or ORF.
+
+For example, we can use `find_start_stop_codons()` to find all ORFs in the sequence s1:
+
+
+```{r, eval = T}
+s1 <- "aaaatgcagtaacccatgccc"
+```
+
+```{r, eval = T}
+find_start_stop_codons(s1)
+```
+
+
+<!-- duplicated information? -->
+The function `find_ORFs_in_seq()` returns a list variable, where the first element of the list is a vector of the start positions of ORFs, the second element of the list is a vector of the end positions of those ORFs, and the third element is a vector containing the lengths of the ORFs.
+
+The output for the `find_ORFs_in_seq()` function for s1 tells us that there is one ORF in the sequence s1, and that the predicted start codon starts at nucleotide 4 in the sequence, and that the predicted stop codon ends at nucleotide 12 in the sequence.
+
+We can use the function `find_ORFs_in_seq()` to find the ORFs in the first 500 nucleotides of the DEN-1 Dengue virus genome sequence by typing:
+
+```{r, eval = T}
+find_ORFs_in_seq(dengueseqstartstring)
+```
+
+
+The result from `find_ORFs_in_seq()` indicates that there are two ORFs in the first 500 nucleotides of the DEN-1 Dengue virus genome, at nucleotides 298-480 (start codon at 298-300, stop codon at 478-480), and 318-371 (start codon at 318-320, stop codon at 369-371).
+
+The `compbio4all` function `plot_ORFs_in_seq()` plots the positions of ORFs in a sequence.
+You can then use this function to plot the positions of the ORFs in dengueseqstartstring by typing:
+
+
+```{r, eval = T}
+plot_ORFs_in_seq(dengueseqstartstring)
+```
+
+
+The picture produced by `plot_ORFs_in_seq()` represents the two ORFs in the first 500 nucleotides of the lambda genome as blue rectangles.
+
+One of the ORFs is in the +3 reading frame, and one is in the +1 reading frame. There are no ORFs in the +2 reading frame, as there are no potential stop codons to the right (3’) of the potential start codons in the +2 reading frame, as we can see from the picture produced by `find_start_stop_codons()` above.
+
+## Predicting the protein sequence for an ORF
+
+If you find an ORF in a DNA sequence, it is interesting to find the DNA sequence of the ORF. For example, the function `find_start_stop_codons()` indicates that there is an ORF from nucleotides 4-12 of the sequence s1 (aaaatgcagtaacccatgccc). To look at the DNA sequence for just the ORF, we can use the `substring()` function to cut out that piece of DNA. For example, to cut out the substring of sequence s1 that corresponds to the ORF from nucleotides 4-12, we type:
+
+<!-- same as above? -->
+```{r, eval = T}
+s1 <- "aaaatgcagtaacccatgccc"
+
+```
+
+
+```{r, eval = T}
+myorf <- substring(s1, 4, 12)
+
+```
+
+Print out the sequence of "myorf"
+```{r, eval = T}
+myorf 
+```
+
+As you can see, the ORF starts with a predicted start codon (ATG), is followed by an integer number of codons (just one codon, CAG, in this case), and ends with a predicted stop codon (TAA).
+
+If you have the DNA sequence of an ORF, you can predict the protein sequence for the ORF by using the `translate()` function from the `seqinr` package. Note that as there is a function called `translate()` in both the `Biostrings` and `seqinr` packages, we need to type `seqinr::translate()` to specify that we want to use the `seqinr` version of the `translate() function.
+
+The `translate()` function requires that the input sequence be in the form of a _vector_ of characters. If your sequence is in the form of a string of characters, you can convert it to a vector of characters using the `s2c()` function from `seqinr` For example, to predict the protein sequence of the ORF myorf, you would type:
+
+```{r, eval = T}
+myorfvector <- s2c(myorf) # Convert the sequence of characters to a vector
+
+```
+
+Print out the value of "myorfvector"
+```{r, eval = T}
+myorfvector               
+```
+
+
+Now tanslate:
+```{r, eval = T}
+seqinr::translate(myorfvector)
+```
+
+From the output of the `seqinr::translate()` function, we see that the predicted start codon (ATG) is translated as a Methionine (M), and that this is followed by a Glutamine (Q). The predicted stop codon is represented as “*” as it is not translated into any amino acid.
+
+## Finding open reading frames on the reverse strand of a DNA sequence
+
+Genes in a genome sequence can occur either on the **forward (plus) strand** of the DNA, or on the **reverse (minus) strand**. To find ORFs on the reverse strand of a sequence, we must first infer the reverse strand sequence, and then use our `find_start_stop_codons()` function to find ORFs on the reverse strand.
+
+<!-- discuss this more in detail? -->
+The reverse strand sequence easily can be inferred from the forward strand sequence, as it is always the **reverse complement** sequence of the forward strand sequence. We can use the `comp()` function from the seqinr package to determine the complement of a sequence, and  `rev()` to reverse that sequence in order to give us the reverse complement sequence.
+
+The `comp()` and `rev()` functions require that the input sequence is in the form of a vector of characters. The `s2c()` function can be used to convert a sequence in the form of a string of characters to a vector, while the `c2s()` function is useful for convering a vector back to a string of characters.
+
+For example, if our forward strand sequence is “AAAATGCTTAAACCATTGCCC”, and we want to find the reverse strand sequence, we type:
+
+```{r}
+forward <- "AAAATGCTTAAACCATTGCCC"
+
+```
+
+Convert the string of characters to a vector
+```{r}
+forwardvector <- s2c(forward)             
+```
+
+Print out the vector containing the forward strand sequence
+```{r}
+forwardvector                                
+```
+
+```{r}
+comp(forwardvector)
+```
+
+Find the reverse strand sequence, by finding the reverse complement
+
+```{r}
+reversevector <- rev(comp(forwardvector))    
+
+```
+
+
+Print out the vector containing the reverse strand sequence
+
+```{r}
+reversevector                             
+```
+
+
+Convert the vector to a string of characters
+```{r}
+reverse <- c2s(reversevector)                
+```
+
+Print out the string of characters containing the reverse strand sequence
+
+```{r}
+reverse                                      
+```
+
+
+In the command `reversevector <- rev(comp(forwardvector))` above, we are first using the `comp()` function to find the **complement** of the forward strand sequence. We are then using the `rev()` function to take the output sequence given by `comp()` and reverse the order of the letters in that sequence. An equivalent way of doing the same thing would be to type:
+
+
+Find the complement of the forward strand sequence
+```{r}
+complement <- comp(forwardvector)            
+```
+
+Reverse the order of the letters in sequence "complement", to find the reverse strand sequence (the reverse complement sequence)
+```{r}
+reversevector <- rev(complement)             # 
+```
+
+Once we have inferred the reverse strand sequence, we can then use the `find_start_stop_codons()` function to find ORFs in the reverse strand sequence:
+
+```{r , eval = T}
+find_start_stop_codons(reverse)
+```
+
+
+This indicates that there is one ORF of length 9 bp in the reverse strand of sequence “AAAATGCTTAAACCATTGCCC”, that has a predicted start codon that starts at nucleotide 6 in the reverse strand sequence and a predicted stop codon that ends at nucleotide 14 in the reverse strand sequence.
+
+## Lengths of open reading frames
+
+As you can see from the picture displaying the genetic code made using `tablecode()` (above), three of the 64 different codons are stop codons. This means that in a random DNA sequence the probability that any codon is a potential stop codon is 3/64, or about 1/21 (about 5%).
+
+Therefore, you might expect that sometimes potential start and stop codons can occur in a DNA sequence just due to chance alone, not because they are actually part of any real gene that is transcribed and translated into a protein.
+
+As a result, many of the ORFs in a DNA sequence will not correspond to real genes, but just be stretches of DNA between potential start and stop codons that happened by chance to be found in the sequence.
+
+In other words, an open reading frame (ORF) is just a gene prediction, or a potential gene. It may correspond to a real gene (may be a true positive gene prediction), but it may not (may be a false positive gene prediction).
+
+How can we tell whether the potential start and stop codons of an ORF are probably real start and stop codons, that is, whether an ORF probably corresponds to a real gene that is transcribed and translated into a protein?
+
+In fact, we cannot tell using bioinformatics methods alone (we actually need to do some lab experiments to know), but we can make a fairly confident prediction. We can make our prediction based on the length of the ORF.
+
+By definition, an ORF is a stretch of DNA that starts with a potential start codon, and ends with a potential stop codon in the same reading frame, and so has no internal stop codons in that reading frame. Because about 1/21 of codons (~5%) in a random DNA sequence are expected to be potential stop codons just by chance alone, if we see a very long ORF of hundreds of codons, it would be surprising that there would be no internal stop codons in such a long stretch of DNA if the ORF were not a real gene.
+
+In other words, long ORFs that are hundreds of codons long are unlikely to occur due to chance alone, and therefore we can be fairly confident that such long ORFs probably correspond to real genes.
+

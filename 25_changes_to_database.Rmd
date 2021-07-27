@@ -1,0 +1,22 @@
+# A note on changes to database entries
+
+Sometimes databases entries not linked or database entries get removed.  When revising this chapter I had to update three of the accession numbers because the UniProt accessions in the original version weren't working for me.
+
+For example the original UniProt entry included in the chapter
+[E3M2K8](https://www.uniprot.org/uniprot/E3M2K8) does not currently link directly to the NCBI entry for this same protein.  Instead, I had to use the NCBI accession XP_003109757.1.  I'm not sure why this is.
+
+Two accession numbers in the original version of this chapter appear to have been removed from UniProt because they were preliminary and perhaps did not meet the quality standards for UniProt.  While the NCBI Gene and Protein are meant to be a record of *all* sequence, NCBI RefSeq and UniProt are carefully curated to contain information that is consistent, accurate, and represents biological reality.  
+
+Searching the UniProt data base for two accessions in the original version of this chapter,
+[E1FUV2](https://www.uniprot.org/uniprot/E1FUV2) (*Loa loa*) and
+[A8NSK3](https://www.uniprot.org/uniprot/A8NSK3)(*Brugia malayi*), both yielded the result: 
+>"This entry is obsolete... this entry was deleted.  The protein sequence for this entry is available in UniParc. For previous versions of this entry, please look at its history."
+
+Looking at the history for the *Loa loa* version of the protein we can see it was listed as "unreviewed" prior to it being pulled and has the note "The sequence shown here is derived from an ... whole genome shotgun (WGS) entry which i preliminary data."  (https://www.uniprot.org/uniprot/E1FUV2.txt?version=9).  Once they got around to reviewing in, the curators at UniProt must have decided that it didn't meet the standards for inclusion in the database.  The information about the sequence in other databases, however, was not deleted, just the entry in UniProt.
+
+Most proteins are not experimentally studied in a lab, let alone their structure determined or their expression levels assessed.  They are therefore predicted to be real based on their similarity to proteins that have been studied in model organisms.  
+
+To track down these sequences, I used BLAST. BLASTing the well-studied model organism *C. elegans* version of the protein against the *Loa loa* genome resulted in a hypothetical protein [LOAG_18175](https://blast.ncbi.nlm.nih.gov/Blast.cgi#alnHdr_XP_020305433) a 93% query coverage with C. elegans and 44% identity.  The accession number for this predicted protein in NCBI is [XP_020305433.1](https://blast.ncbi.nlm.nih.gov/Blast.cgi#alnHdr_XP_020305433).  I similarly tracked down the accession for the *Brugia malayi* version of the protein.
+
+<!-- Turn this into an assignment. -->
+<!-- BLASTing the *C. elegans* version of the protein against the *Brugia malayi* genome resulted in a two high-ranked results.  I'll just consider the first because they are just different alternatively spliced versions of the same protein (consider, though how this could impact phylogenetic inference. The highest-ranked results was [BMA-SPN-4, isoform a] which also has  93% query coverage with *C. elegans* and 44% identity.  The accession number for this  protein in NCBI is [CRZ25068.1](https://www.ncbi.nlm.nih.gov/protein/CRZ25068.1?report=genbank&log$=protalign&blast_rank=1&RID=FXV3B98S016).  The other splice variant accession number CRZ25069.1 had almost the exact same results but was 9 amino acids longer.  The occurrence of two splice variants of this protein may have resulted in it being pulled from UniProt. -->

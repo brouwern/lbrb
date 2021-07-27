@@ -8,6 +8,7 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 description: "An entry-level text for bioinformatics and computational biology"
+#geometry: margin=1in
 ---
 
 # Preface to version 2.0 {-}
@@ -33,6 +34,8 @@ Nathan Brouwer, June 2021
 1. Reorganized the order of some material.
 1. Added links to the book I am developing, *Computational Biology for All*.
 1. Moved most functions and datasets to my teaching package [compbio4all](https://github.com/brouwern/compbio4all).
+1. Functions names changed from camelCase to underscore_format
+1. Functions re-written so as not to use Bioconductor to reduce/eliminate dependency of compbio4all on Bioconductor
 1. Changed some plotting to ggplot2 or ggpubr.
 1. Added additional subheadings
 1. Added vocab and function lists to the beginning of many chapters

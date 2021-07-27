@@ -1,4 +1,4 @@
-## UPGMA the hard way
+# UPGMA the hard way
 
 ```{r  eval = T}
 library(compbio4all)

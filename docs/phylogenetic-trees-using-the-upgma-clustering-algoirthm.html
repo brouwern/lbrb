@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 38 Phylogenetic trees using the UPGMA clustering algoirthm | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Chapter 43 Phylogenetic trees using the UPGMA clustering algoirthm | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 38 Phylogenetic trees using the UPGMA clustering algoirthm | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Chapter 43 Phylogenetic trees using the UPGMA clustering algoirthm | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 38 Phylogenetic trees using the UPGMA clustering algoirthm | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Chapter 43 Phylogenetic trees using the UPGMA clustering algoirthm | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Avirl Coghlan, with contributions by Nathan L. Brouwer" />
 
 
-<meta name="date" content="2021-07-15" />
+<meta name="date" content="2021-07-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,7 @@
 
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/tabwid-1.0.0/tabwid.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -484,176 +485,225 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="35.10.1" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#plotting-phylogenetic-trees"><i class="fa fa-check"></i><b>35.10.1</b> Plotting phylogenetic trees</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="36" data-path="logarithms-in-r.html"><a href="logarithms-in-r.html"><i class="fa fa-check"></i><b>36</b> Logarithms in R</a></li>
 <li class="chapter" data-level="" data-path=""><a href="#part-appendices"><i class="fa fa-check"></i>(PART) Appendices</a>
 <ul>
 <li><a href="#section"></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html"><i class="fa fa-check"></i>Appendix 01: Getting access to R</a>
 <ul>
-<li class="chapter" data-level="35.11" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-started-with-r-and-rstudio"><i class="fa fa-check"></i><b>35.11</b> Getting Started With R and RStudio</a>
+<li class="chapter" data-level="36.1" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-started-with-r-and-rstudio"><i class="fa fa-check"></i><b>36.1</b> Getting Started With R and RStudio</a>
 <ul>
-<li class="chapter" data-level="35.11.1" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#rstudio-cloud"><i class="fa fa-check"></i><b>35.11.1</b> RStudio Cloud</a></li>
-<li class="chapter" data-level="35.11.2" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-r-onto-your-own-computer"><i class="fa fa-check"></i><b>35.11.2</b> Getting R onto your own computer</a></li>
-<li class="chapter" data-level="35.11.3" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-rstudio-onto-your-computer"><i class="fa fa-check"></i><b>35.11.3</b> Getting RStudio onto your computer</a></li>
-<li class="chapter" data-level="35.11.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#keep-r-and-rstudio-current"><i class="fa fa-check"></i><b>35.11.4</b> Keep R and RStudio current</a></li>
+<li class="chapter" data-level="36.1.1" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#rstudio-cloud"><i class="fa fa-check"></i><b>36.1.1</b> RStudio Cloud</a></li>
+<li class="chapter" data-level="36.1.2" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-r-onto-your-own-computer"><i class="fa fa-check"></i><b>36.1.2</b> Getting R onto your own computer</a></li>
+<li class="chapter" data-level="36.1.3" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#getting-rstudio-onto-your-computer"><i class="fa fa-check"></i><b>36.1.3</b> Getting RStudio onto your computer</a></li>
+<li class="chapter" data-level="36.1.4" data-path="appendix-01-getting-access-to-r.html"><a href="appendix-01-getting-access-to-r.html#keep-r-and-rstudio-current"><i class="fa fa-check"></i><b>36.1.4</b> Keep R and RStudio current</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html"><i class="fa fa-check"></i>Getting started with R itself (or not)</a>
 <ul>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#vocabulary-2"><i class="fa fa-check"></i>Vocabulary</a></li>
 <li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#r-commands"><i class="fa fa-check"></i>R commands</a></li>
-<li class="chapter" data-level="35.12" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#help"><i class="fa fa-check"></i><b>35.12</b> Help!</a>
+<li class="chapter" data-level="36.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#help"><i class="fa fa-check"></i><b>36.2</b> Help!</a>
 <ul>
-<li class="chapter" data-level="35.12.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-r"><i class="fa fa-check"></i><b>35.12.1</b> Getting “help” from R</a></li>
-<li class="chapter" data-level="35.12.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-the-internet"><i class="fa fa-check"></i><b>35.12.2</b> Getting help from the internet</a></li>
-<li class="chapter" data-level="35.12.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-online-forums"><i class="fa fa-check"></i><b>35.12.3</b> Getting help from online forums</a></li>
-<li class="chapter" data-level="35.12.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-twitter"><i class="fa fa-check"></i><b>35.12.4</b> Getting help from twitter</a></li>
+<li class="chapter" data-level="36.2.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-r"><i class="fa fa-check"></i><b>36.2.1</b> Getting “help” from R</a></li>
+<li class="chapter" data-level="36.2.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-the-internet"><i class="fa fa-check"></i><b>36.2.2</b> Getting help from the internet</a></li>
+<li class="chapter" data-level="36.2.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-online-forums"><i class="fa fa-check"></i><b>36.2.3</b> Getting help from online forums</a></li>
+<li class="chapter" data-level="36.2.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-twitter"><i class="fa fa-check"></i><b>36.2.4</b> Getting help from twitter</a></li>
 </ul></li>
-<li class="chapter" data-level="35.13" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#other-features-of-rstudio"><i class="fa fa-check"></i><b>35.13</b> Other features of RStudio</a>
+<li class="chapter" data-level="36.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#other-features-of-rstudio"><i class="fa fa-check"></i><b>36.3</b> Other features of RStudio</a>
 <ul>
-<li class="chapter" data-level="35.13.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#ajusting-pane-the-layout"><i class="fa fa-check"></i><b>35.13.1</b> Ajusting pane the layout</a></li>
-<li class="chapter" data-level="35.13.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#adjusting-size-of-windows"><i class="fa fa-check"></i><b>35.13.2</b> Adjusting size of windows</a></li>
+<li class="chapter" data-level="36.3.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#ajusting-pane-the-layout"><i class="fa fa-check"></i><b>36.3.1</b> Ajusting pane the layout</a></li>
+<li class="chapter" data-level="36.3.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#adjusting-size-of-windows"><i class="fa fa-check"></i><b>36.3.2</b> Adjusting size of windows</a></li>
 </ul></li>
-<li class="chapter" data-level="35.14" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>35.14</b> Practice (OPTIONAL)</a></li>
-<li class="chapter" data-level="35.15" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#repliminaries"><i class="fa fa-check"></i><b>35.15</b> Repliminaries</a></li>
-<li class="chapter" data-level="35.16" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#concepts"><i class="fa fa-check"></i><b>35.16</b> Concepts</a></li>
-<li class="chapter" data-level="35.17" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#functions-6"><i class="fa fa-check"></i><b>35.17</b> Functions</a></li>
-<li class="chapter" data-level="35.18" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#introduction-6"><i class="fa fa-check"></i><b>35.18</b> Introduction</a></li>
-<li class="chapter" data-level="35.19" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#number-of-rooted-trees"><i class="fa fa-check"></i><b>35.19</b> Number of rooted trees</a></li>
-<li class="chapter" data-level="35.20" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#number-of-rooted-trees-in-r"><i class="fa fa-check"></i><b>35.20</b> Number of rooted trees in R</a>
-<ul>
-<li class="chapter" data-level="35.20.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#unique-topologies-versus-rotations"><i class="fa fa-check"></i><b>35.20.1</b> Unique topologies versus rotations</a></li>
+<li class="chapter" data-level="36.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>36.4</b> Practice (OPTIONAL)</a></li>
 </ul></li>
-<li class="chapter" data-level="35.21" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#bilography"><i class="fa fa-check"></i><b>35.21</b> Bilography</a></li>
-<li class="chapter" data-level="35.22" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#upgma-the-hard-way"><i class="fa fa-check"></i><b>35.22</b> UPGMA the hard way</a></li>
-<li class="chapter" data-level="35.23" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#introudction-to-upgma"><i class="fa fa-check"></i><b>35.23</b> Introudction to UPGMA</a></li>
-<li class="chapter" data-level="35.24" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#preliminaries-15"><i class="fa fa-check"></i><b>35.24</b> Preliminaries</a>
+<li class="chapter" data-level="37" data-path="blast-summary.html"><a href="blast-summary.html"><i class="fa fa-check"></i><b>37</b> BLAST Summary</a>
 <ul>
-<li class="chapter" data-level="35.24.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#r-libraries"><i class="fa fa-check"></i><b>35.24.1</b> R Libraries</a></li>
-<li class="chapter" data-level="35.24.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#custom-function-well-use"><i class="fa fa-check"></i><b>35.24.2</b> Custom function we’ll use</a></li>
+<li class="chapter" data-level="37.1" data-path="blast-summary.html"><a href="blast-summary.html#blast-overview"><i class="fa fa-check"></i><b>37.1</b> BLAST Overview</a>
+<ul>
+<li class="chapter" data-level="37.1.1" data-path="blast-summary.html"><a href="blast-summary.html#why-do-a-blast-search"><i class="fa fa-check"></i><b>37.1.1</b> Why do a BLAST search?</a></li>
+<li class="chapter" data-level="37.1.2" data-path="blast-summary.html"><a href="blast-summary.html#what-does-blast-let-you-do"><i class="fa fa-check"></i><b>37.1.2</b> What does BLAST let you do?</a></li>
 </ul></li>
-<li class="chapter" data-level="35.25" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#data-matrix"><i class="fa fa-check"></i><b>35.25</b> Data matrix</a>
+<li class="chapter" data-level="37.2" data-path="blast-summary.html"><a href="blast-summary.html#blast-recipe"><i class="fa fa-check"></i><b>37.2</b> BLAST recipe</a></li>
+<li class="chapter" data-level="37.3" data-path="blast-summary.html"><a href="blast-summary.html#modules-in-the-blast-workflow-and-algorithm"><i class="fa fa-check"></i><b>37.3</b> Modules in the BLAST Workflow and Algorithm</a>
 <ul>
-<li class="chapter" data-level="35.25.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#building-the-matrix"><i class="fa fa-check"></i><b>35.25.1</b> Building the matrix</a></li>
+<li class="chapter" data-level="37.3.1" data-path="blast-summary.html"><a href="blast-summary.html#module-1-setup-query-sequence-protein-blast-oriented"><i class="fa fa-check"></i><b>37.3.1</b> Module 1: Setup query sequence (Protein BLAST oriented)</a></li>
+<li class="chapter" data-level="37.3.2" data-path="blast-summary.html"><a href="blast-summary.html#module-2-scanning-database-for-high-scoring-words"><i class="fa fa-check"></i><b>37.3.2</b> Module 2: Scanning database for high-scoring words</a></li>
+<li class="chapter" data-level="37.3.3" data-path="blast-summary.html"><a href="blast-summary.html#module-3-traceback"><i class="fa fa-check"></i><b>37.3.3</b> Module 3: Traceback</a></li>
 </ul></li>
-<li class="chapter" data-level="35.26" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#what-does-this-distance-matrix-represent"><i class="fa fa-check"></i><b>35.26</b> What does this distance matrix represent?</a>
-<ul>
-<li class="chapter" data-level="35.26.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#genetic-distances-conceptualized-as-pairwise-linear-distances"><i class="fa fa-check"></i><b>35.26.1</b> Genetic distances conceptualized as pairwise linear distances</a></li>
-<li class="chapter" data-level="35.26.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#genetic-distances-conceptualized-as-2d-map-of-linear-distances"><i class="fa fa-check"></i><b>35.26.2</b> Genetic distances conceptualized as 2D map of linear distances</a></li>
+<li class="chapter" data-level="37.4" data-path="blast-summary.html"><a href="blast-summary.html#blast-alignment-statistics"><i class="fa fa-check"></i><b>37.4</b> BLAST alignment statistics</a></li>
 </ul></li>
-<li class="chapter" data-level="35.27" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#from-linear-distances-to-tree-distances"><i class="fa fa-check"></i><b>35.27</b> From linear distances to “tree distances”</a></li>
-<li class="chapter" data-level="35.28" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#the-upgma-algorithm"><i class="fa fa-check"></i><b>35.28</b> The UPGMA algorithm</a>
+<li class="chapter" data-level="38" data-path="blast-alignment-score-distribution.html"><a href="blast-alignment-score-distribution.html"><i class="fa fa-check"></i><b>38</b> BLAST Alignment score distribution</a>
 <ul>
-<li class="chapter" data-level="35.28.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#step-1-find-the-2-taxa-that-are-currently-closest-together"><i class="fa fa-check"></i><b>35.28.1</b> Step 1: find the 2 taxa that are currently closest together</a></li>
-<li class="chapter" data-level="35.28.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#step-2-calculate-the-branch-lengths-connect-the-taxa-to-their-shared-node"><i class="fa fa-check"></i><b>35.28.2</b> Step 2: calculate the branch lengths connect the taxa to their shared node</a></li>
-<li class="chapter" data-level="35.28.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#step-3a-determine-if-the-algorithm-is-done"><i class="fa fa-check"></i><b>35.28.3</b> Step 3a: determine if the algorithm is done</a></li>
-<li class="chapter" data-level="35.28.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#step-3a-continue-on-if-needed-and-combine-the-previous-cluster-into-cluster-u"><i class="fa fa-check"></i><b>35.28.4</b> Step 3a: Continue on if needed and combine the previous cluster into cluster “u”</a></li>
-<li class="chapter" data-level="35.28.5" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#step-4-determine-the-distance-from-u-to-the-other-remaining-clusters."><i class="fa fa-check"></i><b>35.28.5</b> Step 4: Determine the distance from u to the other remaining clusters.</a></li>
-<li class="chapter" data-level="35.28.6" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#step-5-create-a-new-matrix"><i class="fa fa-check"></i><b>35.28.6</b> Step 5: Create a new matrix</a></li>
-<li class="chapter" data-level="35.28.7" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#key-step-calculating-the-distance-from-a-clade-to-the-remaining-taxa"><i class="fa fa-check"></i><b>35.28.7</b> Key step: calculating the distance from a clade to the remaining taxa</a></li>
+<li class="chapter" data-level="38.1" data-path="blast-alignment-score-distribution.html"><a href="blast-alignment-score-distribution.html#packages-7"><i class="fa fa-check"></i><b>38.1</b> Packages</a></li>
+<li class="chapter" data-level="38.2" data-path="blast-alignment-score-distribution.html"><a href="blast-alignment-score-distribution.html#distributions-of-alignment-scores"><i class="fa fa-check"></i><b>38.2</b> Distributions of alignment scores</a></li>
+<li class="chapter" data-level="38.3" data-path="blast-alignment-score-distribution.html"><a href="blast-alignment-score-distribution.html#simulating-data"><i class="fa fa-check"></i><b>38.3</b> Simulating data</a></li>
+<li class="chapter" data-level="38.4" data-path="blast-alignment-score-distribution.html"><a href="blast-alignment-score-distribution.html#lots-of-data-in-biology-is-normal"><i class="fa fa-check"></i><b>38.4</b> Lots of data in biology is normal</a></li>
+<li class="chapter" data-level="38.5" data-path="blast-alignment-score-distribution.html"><a href="blast-alignment-score-distribution.html#simulating-the-normal-distribution"><i class="fa fa-check"></i><b>38.5</b> Simulating the normal distribution</a></li>
+<li class="chapter" data-level="38.6" data-path="blast-alignment-score-distribution.html"><a href="blast-alignment-score-distribution.html#the-extreme-value-distribution"><i class="fa fa-check"></i><b>38.6</b> The extreme value distribution</a></li>
+<li class="chapter" data-level="38.7" data-path="blast-alignment-score-distribution.html"><a href="blast-alignment-score-distribution.html#replicating-figure-4.14"><i class="fa fa-check"></i><b>38.7</b> Replicating Figure 4.14</a></li>
+<li class="chapter" data-level="38.8" data-path="blast-alignment-score-distribution.html"><a href="blast-alignment-score-distribution.html#why-do-we-care"><i class="fa fa-check"></i><b>38.8</b> Why do we care?</a></li>
 </ul></li>
-<li class="chapter" data-level="35.29" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#calculate-2d-representation"><i class="fa fa-check"></i><b>35.29</b> Calculate 2D representation</a></li>
-<li class="chapter" data-level="35.30" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#algorithm---round-1"><i class="fa fa-check"></i><b>35.30</b> Algorithm - round 1</a>
+<li class="chapter" data-level="39" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><i class="fa fa-check"></i><b>39</b> Calculating E values, Bit scores, and P-values from BLAST output</a>
 <ul>
-<li class="chapter" data-level="35.30.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#determine-minimum-value-in-current-matrix"><i class="fa fa-check"></i><b>35.30.1</b> Determine minimum value in current matrix</a></li>
-<li class="chapter" data-level="35.30.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#combine-species-into-clade"><i class="fa fa-check"></i><b>35.30.2</b> Combine species into clade</a></li>
-<li class="chapter" data-level="35.30.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#calculate-branch-length"><i class="fa fa-check"></i><b>35.30.3</b> Calculate branch length</a></li>
-<li class="chapter" data-level="35.30.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#calculate-distance-from-clade-to-all-other-points"><i class="fa fa-check"></i><b>35.30.4</b> Calculate distance from clade to all other points</a></li>
-<li class="chapter" data-level="35.30.5" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#update-matrix-with-new-distance"><i class="fa fa-check"></i><b>35.30.5</b> Update matrix with new distance</a></li>
+<li class="chapter" data-level="39.1" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#introduction-6"><i class="fa fa-check"></i><b>39.1</b> Introduction</a></li>
+<li class="chapter" data-level="39.2" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#case-study"><i class="fa fa-check"></i><b>39.2</b> Case Study</a></li>
+<li class="chapter" data-level="39.3" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#blast-statistics"><i class="fa fa-check"></i><b>39.3</b> BLAST Statistics</a></li>
+<li class="chapter" data-level="39.4" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#dotplot"><i class="fa fa-check"></i><b>39.4</b> Dotplot</a>
+<ul>
+<li class="chapter" data-level="39.4.1" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#dotplot-in-r---optional-experimental-code"><i class="fa fa-check"></i><b>39.4.1</b> Dotplot in R - optional, experimental code</a></li>
 </ul></li>
-<li class="chapter" data-level="35.31" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#algorithm---next-round"><i class="fa fa-check"></i><b>35.31</b> Algorithm - next round</a>
+<li class="chapter" data-level="39.5" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#blast-search-summary"><i class="fa fa-check"></i><b>39.5</b> BLAST “Search Summary”</a></li>
+<li class="chapter" data-level="39.6" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#blast-alignments"><i class="fa fa-check"></i><b>39.6</b> BLAST Alignments</a></li>
+<li class="chapter" data-level="39.7" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#equations"><i class="fa fa-check"></i><b>39.7</b> Equations</a>
 <ul>
-<li class="chapter" data-level="35.31.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#combine-species-into-clade-1"><i class="fa fa-check"></i><b>35.31.1</b> Combine species into clade</a></li>
-<li class="chapter" data-level="35.31.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#calculate-branch-length-1"><i class="fa fa-check"></i><b>35.31.2</b> Calculate branch length</a></li>
-<li class="chapter" data-level="35.31.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#recalculate-distance-from-abe-to-all-remainign-taxa"><i class="fa fa-check"></i><b>35.31.3</b> Recalculate distance from abe to all remainign taxa</a></li>
-<li class="chapter" data-level="35.31.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#update-the-matrix"><i class="fa fa-check"></i><b>35.31.4</b> Update the matrix</a></li>
+<li class="chapter" data-level="39.7.1" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#e-value-eq-4.5-pg-142"><i class="fa fa-check"></i><b>39.7.1</b> E value (eq 4.5, pg 142)</a></li>
 </ul></li>
-<li class="chapter" data-level="35.32" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#next-iteration"><i class="fa fa-check"></i><b>35.32</b> Next iteration</a>
+<li class="chapter" data-level="39.8" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#bit-scores-s"><i class="fa fa-check"></i><b>39.8</b> Bit Scores (S’)</a></li>
+<li class="chapter" data-level="39.9" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#e-from-bit-scores"><i class="fa fa-check"></i><b>39.9</b> E from Bit scores</a></li>
+<li class="chapter" data-level="39.10" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#p-values"><i class="fa fa-check"></i><b>39.10</b> P values</a></li>
+<li class="chapter" data-level="39.11" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#repliminaries"><i class="fa fa-check"></i><b>39.11</b> Repliminaries</a></li>
+<li class="chapter" data-level="39.12" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#concepts"><i class="fa fa-check"></i><b>39.12</b> Concepts</a></li>
+<li class="chapter" data-level="39.13" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#functions-6"><i class="fa fa-check"></i><b>39.13</b> Functions</a></li>
+<li class="chapter" data-level="39.14" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#introduction-7"><i class="fa fa-check"></i><b>39.14</b> Introduction</a></li>
+<li class="chapter" data-level="39.15" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#number-of-rooted-trees"><i class="fa fa-check"></i><b>39.15</b> Number of rooted trees</a></li>
+<li class="chapter" data-level="39.16" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#number-of-rooted-trees-in-r"><i class="fa fa-check"></i><b>39.16</b> Number of rooted trees in R</a>
 <ul>
-<li class="chapter" data-level="35.32.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#calculate-branch-lengths"><i class="fa fa-check"></i><b>35.32.1</b> Calculate branch lengths</a></li>
-<li class="chapter" data-level="35.32.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#combine-species-into-clade-2"><i class="fa fa-check"></i><b>35.32.2</b> Combine species into clade</a></li>
-<li class="chapter" data-level="35.32.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#calculate-branch-length-2"><i class="fa fa-check"></i><b>35.32.3</b> Calculate branch length</a></li>
-<li class="chapter" data-level="35.32.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#distance-of-c-to-abe-and-d-to-abe"><i class="fa fa-check"></i><b>35.32.4</b> Distance of c to abe and d to abe</a></li>
+<li class="chapter" data-level="39.16.1" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#unique-topologies-versus-rotations"><i class="fa fa-check"></i><b>39.16.1</b> Unique topologies versus rotations</a></li>
 </ul></li>
-<li class="chapter" data-level="35.33" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#finish-up"><i class="fa fa-check"></i><b>35.33</b> Finish up</a>
-<ul>
-<li class="chapter" data-level="35.33.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#combine-species-into-clade-3"><i class="fa fa-check"></i><b>35.33.1</b> Combine species into clade</a></li>
-<li class="chapter" data-level="35.33.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#calculate-branch-length-3"><i class="fa fa-check"></i><b>35.33.2</b> Calculate branch length</a></li>
+<li class="chapter" data-level="39.17" data-path="calculating-e-values-bit-scores-and-p-values-from-blast-output.html"><a href="calculating-e-values-bit-scores-and-p-values-from-blast-output.html#bilography"><i class="fa fa-check"></i><b>39.17</b> Bilography</a></li>
 </ul></li>
-<li class="chapter" data-level="35.34" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#finalizing-branch-lengths"><i class="fa fa-check"></i><b>35.34</b> Finalizing branch lengths</a></li>
+<li class="chapter" data-level="40" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html"><i class="fa fa-check"></i><b>40</b> UPGMA the hard way</a>
+<ul>
+<li class="chapter" data-level="40.1" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#introudction-to-upgma"><i class="fa fa-check"></i><b>40.1</b> Introudction to UPGMA</a></li>
+<li class="chapter" data-level="40.2" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#preliminaries-15"><i class="fa fa-check"></i><b>40.2</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="40.2.1" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#r-libraries"><i class="fa fa-check"></i><b>40.2.1</b> R Libraries</a></li>
+<li class="chapter" data-level="40.2.2" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#custom-function-well-use"><i class="fa fa-check"></i><b>40.2.2</b> Custom function we’ll use</a></li>
 </ul></li>
-<li class="chapter" data-level="36" data-path="representing-phylogenetic-trees-in-newick-format.html"><a href="representing-phylogenetic-trees-in-newick-format.html"><i class="fa fa-check"></i><b>36</b> Representing phylogenetic trees in Newick format</a>
+<li class="chapter" data-level="40.3" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#data-matrix"><i class="fa fa-check"></i><b>40.3</b> Data matrix</a>
 <ul>
-<li class="chapter" data-level="36.1" data-path="representing-phylogenetic-trees-in-newick-format.html"><a href="representing-phylogenetic-trees-in-newick-format.html#vocab-7"><i class="fa fa-check"></i><b>36.1</b> Vocab</a></li>
-<li class="chapter" data-level="36.2" data-path="representing-phylogenetic-trees-in-newick-format.html"><a href="representing-phylogenetic-trees-in-newick-format.html#introduction-7"><i class="fa fa-check"></i><b>36.2</b> Introduction</a></li>
-<li class="chapter" data-level="36.3" data-path="representing-phylogenetic-trees-in-newick-format.html"><a href="representing-phylogenetic-trees-in-newick-format.html#trees-with-three-taxa"><i class="fa fa-check"></i><b>36.3</b> Trees with three taxa</a></li>
-<li class="chapter" data-level="36.4" data-path="representing-phylogenetic-trees-in-newick-format.html"><a href="representing-phylogenetic-trees-in-newick-format.html#trees-with-four-taxa"><i class="fa fa-check"></i><b>36.4</b> Trees with four taxa</a></li>
+<li class="chapter" data-level="40.3.1" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#building-the-matrix"><i class="fa fa-check"></i><b>40.3.1</b> Building the matrix</a></li>
 </ul></li>
-<li class="chapter" data-level="37" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html"><i class="fa fa-check"></i><b>37</b> Plotting trees from Newick notation in R</a>
+<li class="chapter" data-level="40.4" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#what-does-this-distance-matrix-represent"><i class="fa fa-check"></i><b>40.4</b> What does this distance matrix represent?</a>
 <ul>
-<li class="chapter" data-level="37.1" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#preliminaries-16"><i class="fa fa-check"></i><b>37.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="37.2" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#note"><i class="fa fa-check"></i><b>37.2</b> Note</a></li>
-<li class="chapter" data-level="37.3" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#taxa-tree-in-newick"><i class="fa fa-check"></i><b>37.3</b> 3 taxa tree in Newick</a></li>
-<li class="chapter" data-level="37.4" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#taxa-tree-in-newick-1"><i class="fa fa-check"></i><b>37.4</b> 4 taxa tree in Newick</a></li>
-<li class="chapter" data-level="37.5" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#taxa-in-newick-format"><i class="fa fa-check"></i><b>37.5</b> 5 taxa in Newick Format</a></li>
-<li class="chapter" data-level="37.6" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#many-taxa-tree"><i class="fa fa-check"></i><b>37.6</b> Many-taxa tree</a></li>
-<li class="chapter" data-level="37.7" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#newick-and-branch-lengths"><i class="fa fa-check"></i><b>37.7</b> Newick and Branch lengths</a></li>
-<li class="chapter" data-level="37.8" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#additional-reading"><i class="fa fa-check"></i><b>37.8</b> Additional Reading</a></li>
+<li class="chapter" data-level="40.4.1" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#genetic-distances-conceptualized-as-pairwise-linear-distances"><i class="fa fa-check"></i><b>40.4.1</b> Genetic distances conceptualized as pairwise linear distances</a></li>
+<li class="chapter" data-level="40.4.2" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#genetic-distances-conceptualized-as-2d-map-of-linear-distances"><i class="fa fa-check"></i><b>40.4.2</b> Genetic distances conceptualized as 2D map of linear distances</a></li>
 </ul></li>
-<li class="chapter" data-level="38" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><i class="fa fa-check"></i><b>38</b> Phylogenetic trees using the UPGMA clustering algoirthm</a>
+<li class="chapter" data-level="40.5" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#from-linear-distances-to-tree-distances"><i class="fa fa-check"></i><b>40.5</b> From linear distances to “tree distances”</a></li>
+<li class="chapter" data-level="40.6" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#the-upgma-algorithm"><i class="fa fa-check"></i><b>40.6</b> The UPGMA algorithm</a>
 <ul>
-<li class="chapter" data-level="38.1" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#introduction-8"><i class="fa fa-check"></i><b>38.1</b> Introduction</a></li>
-<li class="chapter" data-level="38.2" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#preliminaries-17"><i class="fa fa-check"></i><b>38.2</b> Preliminaries</a>
-<ul>
-<li class="chapter" data-level="38.2.1" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#vocab-8"><i class="fa fa-check"></i><b>38.2.1</b> Vocab</a></li>
-<li class="chapter" data-level="38.2.2" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#general-r-functions"><i class="fa fa-check"></i><b>38.2.2</b> General R functions</a></li>
-<li class="chapter" data-level="38.2.3" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#specific-functions"><i class="fa fa-check"></i><b>38.2.3</b> Specific functions</a></li>
+<li class="chapter" data-level="40.6.1" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#step-1-find-the-2-taxa-that-are-currently-closest-together"><i class="fa fa-check"></i><b>40.6.1</b> Step 1: find the 2 taxa that are currently closest together</a></li>
+<li class="chapter" data-level="40.6.2" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#step-2-calculate-the-branch-lengths-connect-the-taxa-to-their-shared-node"><i class="fa fa-check"></i><b>40.6.2</b> Step 2: calculate the branch lengths connect the taxa to their shared node</a></li>
+<li class="chapter" data-level="40.6.3" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#step-3a-determine-if-the-algorithm-is-done"><i class="fa fa-check"></i><b>40.6.3</b> Step 3a: determine if the algorithm is done</a></li>
+<li class="chapter" data-level="40.6.4" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#step-3a-continue-on-if-needed-and-combine-the-previous-cluster-into-cluster-u"><i class="fa fa-check"></i><b>40.6.4</b> Step 3a: Continue on if needed and combine the previous cluster into cluster “u”</a></li>
+<li class="chapter" data-level="40.6.5" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#step-4-determine-the-distance-from-u-to-the-other-remaining-clusters."><i class="fa fa-check"></i><b>40.6.5</b> Step 4: Determine the distance from u to the other remaining clusters.</a></li>
+<li class="chapter" data-level="40.6.6" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#step-5-create-a-new-matrix"><i class="fa fa-check"></i><b>40.6.6</b> Step 5: Create a new matrix</a></li>
+<li class="chapter" data-level="40.6.7" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#key-step-calculating-the-distance-from-a-clade-to-the-remaining-taxa"><i class="fa fa-check"></i><b>40.6.7</b> Key step: calculating the distance from a clade to the remaining taxa</a></li>
 </ul></li>
-<li class="chapter" data-level="38.3" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#sequence-comparisons"><i class="fa fa-check"></i><b>38.3</b> Sequence comparisons</a></li>
-<li class="chapter" data-level="38.4" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#distance-matrices"><i class="fa fa-check"></i><b>38.4</b> Distance matrices</a></li>
-<li class="chapter" data-level="38.5" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#from-a-distance-matrix-to-phylogenetic-tree"><i class="fa fa-check"></i><b>38.5</b> From a distance matrix to phylogenetic tree</a></li>
-<li class="chapter" data-level="38.6" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#distance-matrix-in-r-from-raw-sequences"><i class="fa fa-check"></i><b>38.6</b> Distance matrix in R from raw sequences</a></li>
-<li class="chapter" data-level="38.7" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#distance-matrix-in-r-from-normal-matrix"><i class="fa fa-check"></i><b>38.7</b> Distance matrix in R from normal matrix</a></li>
-<li class="chapter" data-level="38.8" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#upgma-in-r"><i class="fa fa-check"></i><b>38.8</b> UPGMA in R</a></li>
-<li class="chapter" data-level="38.9" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#how-upgma-clustering-works"><i class="fa fa-check"></i><b>38.9</b> How UPGMA clustering works</a>
+<li class="chapter" data-level="40.7" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#calculate-2d-representation"><i class="fa fa-check"></i><b>40.7</b> Calculate 2D representation</a></li>
+<li class="chapter" data-level="40.8" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#algorithm---round-1"><i class="fa fa-check"></i><b>40.8</b> Algorithm - round 1</a>
 <ul>
-<li class="chapter" data-level="38.9.1" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#challenge"><i class="fa fa-check"></i><b>38.9.1</b> Challenge</a></li>
+<li class="chapter" data-level="40.8.1" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#determine-minimum-value-in-current-matrix"><i class="fa fa-check"></i><b>40.8.1</b> Determine minimum value in current matrix</a></li>
+<li class="chapter" data-level="40.8.2" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#combine-species-into-clade"><i class="fa fa-check"></i><b>40.8.2</b> Combine species into clade</a></li>
+<li class="chapter" data-level="40.8.3" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#calculate-branch-length"><i class="fa fa-check"></i><b>40.8.3</b> Calculate branch length</a></li>
+<li class="chapter" data-level="40.8.4" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#calculate-distance-from-clade-to-all-other-points"><i class="fa fa-check"></i><b>40.8.4</b> Calculate distance from clade to all other points</a></li>
+<li class="chapter" data-level="40.8.5" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#update-matrix-with-new-distance"><i class="fa fa-check"></i><b>40.8.5</b> Update matrix with new distance</a></li>
 </ul></li>
-<li class="chapter" data-level="38.10" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#further-information"><i class="fa fa-check"></i><b>38.10</b> Further information</a>
+<li class="chapter" data-level="40.9" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#algorithm---next-round"><i class="fa fa-check"></i><b>40.9</b> Algorithm - next round</a>
 <ul>
-<li class="chapter" data-level="38.10.1" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#general-info"><i class="fa fa-check"></i><b>38.10.1</b> General info</a></li>
-<li class="chapter" data-level="38.10.2" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#worked-examples"><i class="fa fa-check"></i><b>38.10.2</b> Worked examples:</a></li>
-<li class="chapter" data-level="38.10.3" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#additional-notes"><i class="fa fa-check"></i><b>38.10.3</b> Additional notes:</a></li>
+<li class="chapter" data-level="40.9.1" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#combine-species-into-clade-1"><i class="fa fa-check"></i><b>40.9.1</b> Combine species into clade</a></li>
+<li class="chapter" data-level="40.9.2" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#calculate-branch-length-1"><i class="fa fa-check"></i><b>40.9.2</b> Calculate branch length</a></li>
+<li class="chapter" data-level="40.9.3" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#recalculate-distance-from-abe-to-all-remainign-taxa"><i class="fa fa-check"></i><b>40.9.3</b> Recalculate distance from abe to all remainign taxa</a></li>
+<li class="chapter" data-level="40.9.4" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#update-the-matrix"><i class="fa fa-check"></i><b>40.9.4</b> Update the matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="40.10" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#next-iteration"><i class="fa fa-check"></i><b>40.10</b> Next iteration</a>
+<ul>
+<li class="chapter" data-level="40.10.1" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#calculate-branch-lengths"><i class="fa fa-check"></i><b>40.10.1</b> Calculate branch lengths</a></li>
+<li class="chapter" data-level="40.10.2" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#combine-species-into-clade-2"><i class="fa fa-check"></i><b>40.10.2</b> Combine species into clade</a></li>
+<li class="chapter" data-level="40.10.3" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#calculate-branch-length-2"><i class="fa fa-check"></i><b>40.10.3</b> Calculate branch length</a></li>
+<li class="chapter" data-level="40.10.4" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#distance-of-c-to-abe-and-d-to-abe"><i class="fa fa-check"></i><b>40.10.4</b> Distance of c to abe and d to abe</a></li>
+</ul></li>
+<li class="chapter" data-level="40.11" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#finish-up"><i class="fa fa-check"></i><b>40.11</b> Finish up</a>
+<ul>
+<li class="chapter" data-level="40.11.1" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#combine-species-into-clade-3"><i class="fa fa-check"></i><b>40.11.1</b> Combine species into clade</a></li>
+<li class="chapter" data-level="40.11.2" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#calculate-branch-length-3"><i class="fa fa-check"></i><b>40.11.2</b> Calculate branch length</a></li>
+</ul></li>
+<li class="chapter" data-level="40.12" data-path="upgma-the-hard-way.html"><a href="upgma-the-hard-way.html#finalizing-branch-lengths"><i class="fa fa-check"></i><b>40.12</b> Finalizing branch lengths</a></li>
+</ul></li>
+<li class="chapter" data-level="41" data-path="representing-phylogenetic-trees-in-newick-format.html"><a href="representing-phylogenetic-trees-in-newick-format.html"><i class="fa fa-check"></i><b>41</b> Representing phylogenetic trees in Newick format</a>
+<ul>
+<li class="chapter" data-level="41.1" data-path="representing-phylogenetic-trees-in-newick-format.html"><a href="representing-phylogenetic-trees-in-newick-format.html#vocab-7"><i class="fa fa-check"></i><b>41.1</b> Vocab</a></li>
+<li class="chapter" data-level="41.2" data-path="representing-phylogenetic-trees-in-newick-format.html"><a href="representing-phylogenetic-trees-in-newick-format.html#introduction-8"><i class="fa fa-check"></i><b>41.2</b> Introduction</a></li>
+<li class="chapter" data-level="41.3" data-path="representing-phylogenetic-trees-in-newick-format.html"><a href="representing-phylogenetic-trees-in-newick-format.html#trees-with-three-taxa"><i class="fa fa-check"></i><b>41.3</b> Trees with three taxa</a></li>
+<li class="chapter" data-level="41.4" data-path="representing-phylogenetic-trees-in-newick-format.html"><a href="representing-phylogenetic-trees-in-newick-format.html#trees-with-four-taxa"><i class="fa fa-check"></i><b>41.4</b> Trees with four taxa</a></li>
+</ul></li>
+<li class="chapter" data-level="42" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html"><i class="fa fa-check"></i><b>42</b> Plotting trees from Newick notation in R</a>
+<ul>
+<li class="chapter" data-level="42.1" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#preliminaries-16"><i class="fa fa-check"></i><b>42.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="42.2" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#note"><i class="fa fa-check"></i><b>42.2</b> Note</a></li>
+<li class="chapter" data-level="42.3" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#taxa-tree-in-newick"><i class="fa fa-check"></i><b>42.3</b> 3 taxa tree in Newick</a></li>
+<li class="chapter" data-level="42.4" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#taxa-tree-in-newick-1"><i class="fa fa-check"></i><b>42.4</b> 4 taxa tree in Newick</a></li>
+<li class="chapter" data-level="42.5" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#taxa-in-newick-format"><i class="fa fa-check"></i><b>42.5</b> 5 taxa in Newick Format</a></li>
+<li class="chapter" data-level="42.6" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#many-taxa-tree"><i class="fa fa-check"></i><b>42.6</b> Many-taxa tree</a></li>
+<li class="chapter" data-level="42.7" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#newick-and-branch-lengths"><i class="fa fa-check"></i><b>42.7</b> Newick and Branch lengths</a></li>
+<li class="chapter" data-level="42.8" data-path="plotting-trees-from-newick-notation-in-r.html"><a href="plotting-trees-from-newick-notation-in-r.html#additional-reading"><i class="fa fa-check"></i><b>42.8</b> Additional Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="43" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><i class="fa fa-check"></i><b>43</b> Phylogenetic trees using the UPGMA clustering algoirthm</a>
+<ul>
+<li class="chapter" data-level="43.1" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#introduction-9"><i class="fa fa-check"></i><b>43.1</b> Introduction</a></li>
+<li class="chapter" data-level="43.2" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#preliminaries-17"><i class="fa fa-check"></i><b>43.2</b> Preliminaries</a>
+<ul>
+<li class="chapter" data-level="43.2.1" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#vocab-8"><i class="fa fa-check"></i><b>43.2.1</b> Vocab</a></li>
+<li class="chapter" data-level="43.2.2" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#general-r-functions"><i class="fa fa-check"></i><b>43.2.2</b> General R functions</a></li>
+<li class="chapter" data-level="43.2.3" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#specific-functions"><i class="fa fa-check"></i><b>43.2.3</b> Specific functions</a></li>
+</ul></li>
+<li class="chapter" data-level="43.3" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#sequence-comparisons"><i class="fa fa-check"></i><b>43.3</b> Sequence comparisons</a></li>
+<li class="chapter" data-level="43.4" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#distance-matrices"><i class="fa fa-check"></i><b>43.4</b> Distance matrices</a></li>
+<li class="chapter" data-level="43.5" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#from-a-distance-matrix-to-phylogenetic-tree"><i class="fa fa-check"></i><b>43.5</b> From a distance matrix to phylogenetic tree</a></li>
+<li class="chapter" data-level="43.6" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#distance-matrix-in-r-from-raw-sequences"><i class="fa fa-check"></i><b>43.6</b> Distance matrix in R from raw sequences</a></li>
+<li class="chapter" data-level="43.7" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#distance-matrix-in-r-from-normal-matrix"><i class="fa fa-check"></i><b>43.7</b> Distance matrix in R from normal matrix</a></li>
+<li class="chapter" data-level="43.8" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#upgma-in-r"><i class="fa fa-check"></i><b>43.8</b> UPGMA in R</a></li>
+<li class="chapter" data-level="43.9" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#how-upgma-clustering-works"><i class="fa fa-check"></i><b>43.9</b> How UPGMA clustering works</a>
+<ul>
+<li class="chapter" data-level="43.9.1" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#challenge"><i class="fa fa-check"></i><b>43.9.1</b> Challenge</a></li>
+</ul></li>
+<li class="chapter" data-level="43.10" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#further-information"><i class="fa fa-check"></i><b>43.10</b> Further information</a>
+<ul>
+<li class="chapter" data-level="43.10.1" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#general-info"><i class="fa fa-check"></i><b>43.10.1</b> General info</a></li>
+<li class="chapter" data-level="43.10.2" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#worked-examples"><i class="fa fa-check"></i><b>43.10.2</b> Worked examples:</a></li>
+<li class="chapter" data-level="43.10.3" data-path="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#additional-notes"><i class="fa fa-check"></i><b>43.10.3</b> Additional notes:</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="39" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><i class="fa fa-check"></i><b>39</b> Tutorial: Writing functions to calculate the number of phylogenetic trees</a>
+<li class="chapter" data-level="44" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><i class="fa fa-check"></i><b>44</b> Tutorial: Writing functions to calculate the number of phylogenetic trees</a>
 <ul>
-<li class="chapter" data-level="39.1" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#repliminaries-1"><i class="fa fa-check"></i><b>39.1</b> Repliminaries</a>
+<li class="chapter" data-level="44.1" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#repliminaries-1"><i class="fa fa-check"></i><b>44.1</b> Repliminaries</a>
 <ul>
-<li class="chapter" data-level="39.1.1" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#functions-7"><i class="fa fa-check"></i><b>39.1.1</b> Functions</a></li>
+<li class="chapter" data-level="44.1.1" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#functions-7"><i class="fa fa-check"></i><b>44.1.1</b> Functions</a></li>
 </ul></li>
-<li class="chapter" data-level="39.2" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#concepts-1"><i class="fa fa-check"></i><b>39.2</b> Concepts</a>
+<li class="chapter" data-level="44.2" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#concepts-1"><i class="fa fa-check"></i><b>44.2</b> Concepts</a>
 <ul>
-<li class="chapter" data-level="39.2.1" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#vocab-9"><i class="fa fa-check"></i><b>39.2.1</b> Vocab:</a></li>
-<li class="chapter" data-level="39.2.2" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#packages-7"><i class="fa fa-check"></i><b>39.2.2</b> Packages:</a></li>
+<li class="chapter" data-level="44.2.1" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#vocab-9"><i class="fa fa-check"></i><b>44.2.1</b> Vocab:</a></li>
+<li class="chapter" data-level="44.2.2" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#packages-8"><i class="fa fa-check"></i><b>44.2.2</b> Packages:</a></li>
 </ul></li>
-<li class="chapter" data-level="39.3" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#introduction-9"><i class="fa fa-check"></i><b>39.3</b> Introduction</a></li>
-<li class="chapter" data-level="39.4" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#number-of-rooted-trees-1"><i class="fa fa-check"></i><b>39.4</b> Number of rooted trees</a></li>
-<li class="chapter" data-level="39.5" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#number-of-rooted-trees-in-r-1"><i class="fa fa-check"></i><b>39.5</b> Number of rooted trees in R</a></li>
-<li class="chapter" data-level="39.6" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#functions-in-r-1"><i class="fa fa-check"></i><b>39.6</b> Functions in R</a></li>
-<li class="chapter" data-level="39.7" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#function-to-calculate-the-number-of-possible-phylogenetic-trees"><i class="fa fa-check"></i><b>39.7</b> Function to calculate the number of possible phylogenetic trees</a></li>
-<li class="chapter" data-level="39.8" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#vectorized-inputs-to-functions"><i class="fa fa-check"></i><b>39.8</b> Vectorized inputs to functions</a></li>
-<li class="chapter" data-level="39.9" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#adding-conditional-statements"><i class="fa fa-check"></i><b>39.9</b> Adding conditional statements</a></li>
-<li class="chapter" data-level="39.10" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#adding-multiple-conditional-statements"><i class="fa fa-check"></i><b>39.10</b> Adding multiple conditional statements</a></li>
-<li class="chapter" data-level="39.11" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#adding-additional-arguments"><i class="fa fa-check"></i><b>39.11</b> Adding additional arguments</a></li>
-<li class="chapter" data-level="39.12" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#assignment-_un_rooted-trees"><i class="fa fa-check"></i><b>39.12</b> Assignment: _un_rooted trees</a></li>
-<li class="chapter" data-level="39.13" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#assignment-part-1"><i class="fa fa-check"></i><b>39.13</b> Assignment part 1</a>
+<li class="chapter" data-level="44.3" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#introduction-10"><i class="fa fa-check"></i><b>44.3</b> Introduction</a></li>
+<li class="chapter" data-level="44.4" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#number-of-rooted-trees-1"><i class="fa fa-check"></i><b>44.4</b> Number of rooted trees</a></li>
+<li class="chapter" data-level="44.5" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#number-of-rooted-trees-in-r-1"><i class="fa fa-check"></i><b>44.5</b> Number of rooted trees in R</a></li>
+<li class="chapter" data-level="44.6" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#functions-in-r-1"><i class="fa fa-check"></i><b>44.6</b> Functions in R</a></li>
+<li class="chapter" data-level="44.7" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#function-to-calculate-the-number-of-possible-phylogenetic-trees"><i class="fa fa-check"></i><b>44.7</b> Function to calculate the number of possible phylogenetic trees</a></li>
+<li class="chapter" data-level="44.8" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#vectorized-inputs-to-functions"><i class="fa fa-check"></i><b>44.8</b> Vectorized inputs to functions</a></li>
+<li class="chapter" data-level="44.9" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#adding-conditional-statements"><i class="fa fa-check"></i><b>44.9</b> Adding conditional statements</a></li>
+<li class="chapter" data-level="44.10" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#adding-multiple-conditional-statements"><i class="fa fa-check"></i><b>44.10</b> Adding multiple conditional statements</a></li>
+<li class="chapter" data-level="44.11" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#adding-additional-arguments"><i class="fa fa-check"></i><b>44.11</b> Adding additional arguments</a></li>
+<li class="chapter" data-level="44.12" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#assignment-_un_rooted-trees"><i class="fa fa-check"></i><b>44.12</b> Assignment: _un_rooted trees</a></li>
+<li class="chapter" data-level="44.13" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#assignment-part-1"><i class="fa fa-check"></i><b>44.13</b> Assignment part 1</a>
 <ul>
-<li class="chapter" data-level="39.13.1" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#part-1-answer"><i class="fa fa-check"></i><b>39.13.1</b> Part 1 answer</a></li>
+<li class="chapter" data-level="44.13.1" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#part-1-answer"><i class="fa fa-check"></i><b>44.13.1</b> Part 1 answer</a></li>
 </ul></li>
-<li class="chapter" data-level="39.14" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#assignment-part-2"><i class="fa fa-check"></i><b>39.14</b> Assignment part 2</a>
+<li class="chapter" data-level="44.14" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#assignment-part-2"><i class="fa fa-check"></i><b>44.14</b> Assignment part 2</a>
 <ul>
-<li class="chapter" data-level="39.14.1" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#answer"><i class="fa fa-check"></i><b>39.14.1</b> Answer</a></li>
+<li class="chapter" data-level="44.14.1" data-path="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html"><a href="tutorial-writing-functions-to-calculate-the-number-of-phylogenetic-trees.html#answer"><i class="fa fa-check"></i><b>44.14.1</b> Answer</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -676,20 +726,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="phylogenetic-trees-using-the-upgma-clustering-algoirthm" class="section level1" number="38">
-<h1><span class="header-section-number">Chapter 38</span> Phylogenetic trees using the UPGMA clustering algoirthm</h1>
+<div id="phylogenetic-trees-using-the-upgma-clustering-algoirthm" class="section level1" number="43">
+<h1><span class="header-section-number">Chapter 43</span> Phylogenetic trees using the UPGMA clustering algoirthm</h1>
 <p><strong>By</strong>: Nathan Brouwer</p>
-<div id="introduction-8" class="section level2" number="38.1">
-<h2><span class="header-section-number">38.1</span> Introduction</h2>
+<div id="introduction-9" class="section level2" number="43.1">
+<h2><span class="header-section-number">43.1</span> Introduction</h2>
 <p><strong>UPGMA</strong> is a method for constructing <strong>phylogenetic trees</strong> using <strong>genetic distances</strong>. It is an old, outmoded method that is rarely ever used any more for building final versions of trees. Instead of UPGMA, the <strong>neighbor-joining</strong> (NJ) algorithm is used when a distance-based phylogeny is made. UPGMA’s relative simplicity, however, makes it a useful starting point for thinking about how to construct phylogenetic trees and code up algorithms to build them. UPGMA has also been used in the past in statistics, machine learning, transcriptomics, and community ecology as a general <strong>clustering algorithm</strong> and so is a useful starting point when understanding current algorithms in those fields.</p>
 </div>
-<div id="preliminaries-17" class="section level2" number="38.2">
-<h2><span class="header-section-number">38.2</span> Preliminaries</h2>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIFBvdGVudGlhbGx5IG5ldyBwYWNrYWdlc1xuIyMgaW5zdGFsbC5wYWNrYWdlcyhcInBoYW5nb3JuXCIpXG4jIyBpbnN0YWxsLnBhY2thZ2VzKFwiYXBlXCIpXG5cbmxpYnJhcnkoYXBlKVxubGlicmFyeShwaGFuZ29ybikifQ==
-</div>
-<div id="vocab-8" class="section level3" number="38.2.1">
-<h3><span class="header-section-number">38.2.1</span> Vocab</h3>
+<div id="preliminaries-17" class="section level2" number="43.2">
+<h2><span class="header-section-number">43.2</span> Preliminaries</h2>
+<div class="sourceCode" id="cb971"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb971-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb971-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Potentially new packages</span></span>
+<span id="cb971-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb971-2" aria-hidden="true" tabindex="-1"></a><span class="do">## install.packages(&quot;phangorn&quot;)</span></span>
+<span id="cb971-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb971-3" aria-hidden="true" tabindex="-1"></a><span class="do">## install.packages(&quot;ape&quot;)</span></span>
+<span id="cb971-4"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb971-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb971-5"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb971-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb971-6"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb971-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phangorn)</span></code></pre></div>
+<div id="vocab-8" class="section level3" number="43.2.1">
+<h3><span class="header-section-number">43.2.1</span> Vocab</h3>
 <ul>
 <li>matrix, matrices</li>
 <li>diagonal of matrix</li>
@@ -701,8 +754,8 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIFBvdGVudGlhbGx5IG5ldyBwYWNrYWdlc1xuIyMgaW5z
 <li>branch, edge, clade</li>
 </ul>
 </div>
-<div id="general-r-functions" class="section level3" number="38.2.2">
-<h3><span class="header-section-number">38.2.2</span> General R functions</h3>
+<div id="general-r-functions" class="section level3" number="43.2.2">
+<h3><span class="header-section-number">43.2.2</span> General R functions</h3>
 <ul>
 <li><code>c()</code></li>
 <li><code>matrix()</code></li>
@@ -715,8 +768,8 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIFBvdGVudGlhbGx5IG5ldyBwYWNrYWdlc1xuIyMgaW5z
 <li>str</li>
 </ul>
 </div>
-<div id="specific-functions" class="section level3" number="38.2.3">
-<h3><span class="header-section-number">38.2.3</span> Specific functions</h3>
+<div id="specific-functions" class="section level3" number="43.2.3">
+<h3><span class="header-section-number">43.2.3</span> Specific functions</h3>
 <ul>
 <li>phangorn::phangorn()</li>
 <li>ape::read.tree</li>
@@ -725,219 +778,327 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIFBvdGVudGlhbGx5IG5ldyBwYWNrYWdlc1xuIyMgaW5z
 </ul>
 </div>
 </div>
-<div id="sequence-comparisons" class="section level2" number="38.3">
-<h2><span class="header-section-number">38.3</span> Sequence comparisons</h2>
-Let’s consider three short, hypothetical DNA sequences. We’ll put each into a <strong>vector</strong> using <code>c(...)</code>:
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJodW1hbiAgIDwtIGMoXCJhXCIsXCJ0XCIsXCJjXCIsXCJnXCIsXCJhXCIsXCJ0XCIsXCJjXCIsXCJnXCIpXG5jaGltcCAgIDwtIGMoXCJhXCIsXCJ0XCIsXCJjXCIsXCJhXCIsXCJhXCIsXCJ0XCIsXCJjXCIsXCJhXCIpXG5nb3JpbGxhIDwtIGMoXCJhXCIsXCJhXCIsXCJhXCIsXCJhXCIsXCJhXCIsXCJhXCIsXCJhXCIsXCJhXCIpIn0=
-</div>
-The sequences are each 8 bases long.<br />
-
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsZW5ndGgoZ29yaWxsYSkifQ==
-</div>
+<div id="sequence-comparisons" class="section level2" number="43.3">
+<h2><span class="header-section-number">43.3</span> Sequence comparisons</h2>
+<p>Let’s consider three short, hypothetical DNA sequences. We’ll put each into a <strong>vector</strong> using <code>c(...)</code>:</p>
+<div class="sourceCode" id="cb972"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb972-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb972-1" aria-hidden="true" tabindex="-1"></a>human   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;t&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;g&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;t&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;g&quot;</span>)</span>
+<span id="cb972-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb972-2" aria-hidden="true" tabindex="-1"></a>chimp   <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;t&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;t&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;a&quot;</span>)</span>
+<span id="cb972-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb972-3" aria-hidden="true" tabindex="-1"></a>gorilla <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;a&quot;</span>,<span class="st">&quot;a&quot;</span>)</span></code></pre></div>
+<p>The sequences are each 8 bases long.</p>
+<div class="sourceCode" id="cb973"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb973-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb973-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(gorilla)</span></code></pre></div>
+<pre><code>## [1] 8</code></pre>
 <p>This means we’ll have 8 <strong>loci</strong>, or unique <strong>homologous positions</strong>, to consider.</p>
-We can examine each pair of sequences and count up the number of differences between each one. This gives us a preliminary estimate of how <strong>diverged</strong> the sequences are.<br />
-Humans and chimps have 2 differences, at the 4th and 8th loci
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJyYmluZChodW1hbiwgY2hpbXApIn0=
+<p>We can examine each pair of sequences and count up the number of differences between each one. This gives us a preliminary estimate of how <strong>diverged</strong> the sequences are.<br />
+Humans and chimps have 2 differences, at the 4th and 8th loci</p>
+<div class="sourceCode" id="cb975"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb975-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb975-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(human, chimp)</span></code></pre></div>
+<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## human &quot;a&quot;  &quot;t&quot;  &quot;c&quot;  &quot;g&quot;  &quot;a&quot;  &quot;t&quot;  &quot;c&quot;  &quot;g&quot; 
+## chimp &quot;a&quot;  &quot;t&quot;  &quot;c&quot;  &quot;a&quot;  &quot;a&quot;  &quot;t&quot;  &quot;c&quot;  &quot;a&quot;</code></pre>
+<p>Chimps and gorillas have 4 differences (2nd, 3rd, 6th, and 7th loci):</p>
+<div class="sourceCode" id="cb977"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb977-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb977-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(chimp, gorilla)</span></code></pre></div>
+<pre><code>##         [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## chimp   &quot;a&quot;  &quot;t&quot;  &quot;c&quot;  &quot;a&quot;  &quot;a&quot;  &quot;t&quot;  &quot;c&quot;  &quot;a&quot; 
+## gorilla &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;</code></pre>
+<p>Humans and gorillas have 6 differences (all but 1st and 6th different)</p>
+<div class="sourceCode" id="cb979"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb979-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb979-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(human, gorilla)</span></code></pre></div>
+<pre><code>##         [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## human   &quot;a&quot;  &quot;t&quot;  &quot;c&quot;  &quot;g&quot;  &quot;a&quot;  &quot;t&quot;  &quot;c&quot;  &quot;g&quot; 
+## gorilla &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;</code></pre>
 </div>
-Chimps and gorillas have 4 differences (2nd, 3rd, 6th, and 7th loci):
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJyYmluZChjaGltcCwgZ29yaWxsYSkifQ==
-</div>
-Humans and gorillas have 6 differences (all but 1st and 6th different)
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJyYmluZChodW1hbiwgZ29yaWxsYSkifQ==
-</div>
-</div>
-<div id="distance-matrices" class="section level2" number="38.4">
-<h2><span class="header-section-number">38.4</span> Distance matrices</h2>
+<div id="distance-matrices" class="section level2" number="43.4">
+<h2><span class="header-section-number">43.4</span> Distance matrices</h2>
 <p>Having counted up the number <strong>pairwise differences</strong> between each pair of sequences, we can represent this data as a genetic <strong>distance matrix</strong> like this.</p>
-First, make the matrix using the <code>matrix()</code> command.
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIG1ha2UgdGhlIG1hdHJpeFxuZGlzdF9tYXQgPC0gbWF0cml4KGRhdGEgPSBjKE5BLCBOQSwgTkEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgMiwgTkEsTkEsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgNiwgNCwgTkEpLFxuICAgICAgICAgICAgICAgICAgbnJvdyA9IDMsIFxuICAgICAgICAgICAgICAgICAgYnlyb3cgPSBUKSJ9
-</div>
-Now, label the rows and columns.
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGxhYmVsIHRoZSBtYXRyaXhcbmNvbG5hbWVzKGRpc3RfbWF0KSA8LSBjKFwiSFwiLFwiQ1wiLFwiR1wiKVxucm93bmFtZXMoZGlzdF9tYXQpIDwtIGMoXCJIXCIsXCJDXCIsXCJHXCIpIn0=
-</div>
-The final matrix looks like this
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGxvb2sgYXQgdGhlIG91dHB1dFxuZGlzdF9tYXQifQ==
-</div>
+<p>First, make the matrix using the <code>matrix()</code> command.</p>
+<div class="sourceCode" id="cb981"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb981-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb981-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make the matrix</span></span>
+<span id="cb981-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb981-2" aria-hidden="true" tabindex="-1"></a>dist_mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="at">data =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>,</span>
+<span id="cb981-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb981-3" aria-hidden="true" tabindex="-1"></a>                            <span class="dv">2</span>, <span class="cn">NA</span>,<span class="cn">NA</span>,</span>
+<span id="cb981-4"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb981-4" aria-hidden="true" tabindex="-1"></a>                            <span class="dv">6</span>, <span class="dv">4</span>, <span class="cn">NA</span>),</span>
+<span id="cb981-5"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb981-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">nrow =</span> <span class="dv">3</span>, </span>
+<span id="cb981-6"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb981-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">byrow =</span> T)</span></code></pre></div>
+<p>Now, label the rows and columns.</p>
+<div class="sourceCode" id="cb982"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb982-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb982-1" aria-hidden="true" tabindex="-1"></a><span class="co"># label the matrix</span></span>
+<span id="cb982-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb982-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dist_mat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;H&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;G&quot;</span>)</span>
+<span id="cb982-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb982-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(dist_mat) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;H&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;G&quot;</span>)</span></code></pre></div>
+<p>The final matrix looks like this</p>
+<div class="sourceCode" id="cb983"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb983-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb983-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the output</span></span>
+<span id="cb983-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb983-2" aria-hidden="true" tabindex="-1"></a>dist_mat</span></code></pre></div>
+<pre><code>##    H  C  G
+## H NA NA NA
+## C  2 NA NA
+## G  6  4 NA</code></pre>
 <p><strong>ASIDE: Building matrices</strong>:</p>
-Alternatively, we could make each row of the matrix into a vector and then stack them with <code>rbind()</code>.
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIG1ha2UgdmVjdG9yc1xuaHVtYW4ucm93IDwtIGMoTkEsTkEsTkEpXG5jaGltcC5yb3cgPC0gYyggMixOQSxOQSlcbmdvcmlsbGEucm93IDwtIGMoNiw0LE5BKVxuXG4jIHN0YWNrIHZlY3RvcnMgYnkgcm93IHVzaW5nIHJiaW5kKClcbmRpc3RfbWF0IDwtIHJiaW5kKGh1bWFuLnJvdywgXG4gICAgICAgICAgICAgICAgICBjaGltcC5yb3csIFxuICAgICAgICAgICAgICAgICAgZ29yaWxsYS5yb3cpXG5cbiMgYWRkIG5hbWVzXG5zcHAubmFtZXMgPC0gYyhcImh1bWFuXCIsXCJjaGltcFwiLFwiZ29yaWxsYVwiKVxuY29sbmFtZXMoZGlzdF9tYXQpIDwtIHNwcC5uYW1lc1xucm93bmFtZXMoZGlzdF9tYXQpIDwtIHNwcC5uYW1lc1xuXG4jIGxvb2sgYXQgb3V0cHV0XG5kaXN0X21hdCJ9
-</div>
+<p>Alternatively, we could make each row of the matrix into a vector and then stack them with <code>rbind()</code>.</p>
+<div class="sourceCode" id="cb985"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb985-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make vectors</span></span>
+<span id="cb985-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-2" aria-hidden="true" tabindex="-1"></a>human.row <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb985-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-3" aria-hidden="true" tabindex="-1"></a>chimp.row <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">2</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb985-4"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-4" aria-hidden="true" tabindex="-1"></a>gorilla.row <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">6</span>,<span class="dv">4</span>,<span class="cn">NA</span>)</span>
+<span id="cb985-5"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb985-6"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-6" aria-hidden="true" tabindex="-1"></a><span class="co"># stack vectors by row using rbind()</span></span>
+<span id="cb985-7"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-7" aria-hidden="true" tabindex="-1"></a>dist_mat <span class="ot">&lt;-</span> <span class="fu">rbind</span>(human.row, </span>
+<span id="cb985-8"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-8" aria-hidden="true" tabindex="-1"></a>                  chimp.row, </span>
+<span id="cb985-9"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-9" aria-hidden="true" tabindex="-1"></a>                  gorilla.row)</span>
+<span id="cb985-10"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb985-11"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-11" aria-hidden="true" tabindex="-1"></a><span class="co"># add names</span></span>
+<span id="cb985-12"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-12" aria-hidden="true" tabindex="-1"></a>spp.names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;human&quot;</span>,<span class="st">&quot;chimp&quot;</span>,<span class="st">&quot;gorilla&quot;</span>)</span>
+<span id="cb985-13"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dist_mat) <span class="ot">&lt;-</span> spp.names</span>
+<span id="cb985-14"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-14" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(dist_mat) <span class="ot">&lt;-</span> spp.names</span>
+<span id="cb985-15"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb985-16"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-16" aria-hidden="true" tabindex="-1"></a><span class="co"># look at output</span></span>
+<span id="cb985-17"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb985-17" aria-hidden="true" tabindex="-1"></a>dist_mat</span></code></pre></div>
+<pre><code>##         human chimp gorilla
+## human      NA    NA      NA
+## chimp       2    NA      NA
+## gorilla     6     4      NA</code></pre>
 <p><strong>End ASIDE</strong></p>
 <p>Note that we leave the values on the <strong>diagonal</strong> of the matrix as <code>NA</code> because the genetic distance between humans and humans, or chimps and chimps, is 0 and isn’t helpful. A matrix like this is also <strong>symmetrical</strong>, where the <strong>lower triangle</strong> portion is the same as the upper portion We could build an <strong>upper triangular matrix</strong> like the one below if we wanted, but the convention is to use the lower.</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIEFuIHVwcGVyIHRyaWFuZ3VsYXIgbWF0cml4XG4jIyBtYWtlIGRhdGEgaW4gdmVjdG9yc1xuaHVtYW4ucm93IDwtIGMoTkEsMiw2KVxuY2hpbXAucm93IDwtIGMoIE5BLE5BLDQpXG5nb3JpbGxhLnJvdyA8LSBjKE5BLE5BLE5BKVxuXG4jIHN0YWNrIHdpdGggcmliaW5kKClcbmRpc3RfbWF0X3VwcGVyIDwtIHJiaW5kKGh1bWFuLnJvdywgXG4gICAgICAgICAgICAgICAgICAgICAgIGNoaW1wLnJvdywgXG4gICAgICAgICAgICAgICAgICAgICAgIGdvcmlsbGEucm93KVxuXG4jIGFkZCBuYW1lc1xuY29sbmFtZXMoZGlzdF9tYXRfdXBwZXIpIDwtIHNwcC5uYW1lc1xucm93bmFtZXMoZGlzdF9tYXRfdXBwZXIpIDwtIHNwcC5uYW1lcyJ9
-</div>
-Compare lower triangular matrix form of these data to the upper triangular for:
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGxvd2VyIHRyaWFuZ3VsYXIgbWF0cml4OlxuZGlzdF9tYXRcblxuIyB1cHBlciB0cmlhbmd1bGFyIG1hdHJpeFxuZGlzdF9tYXRfdXBwZXIifQ==
-</div>
+<div class="sourceCode" id="cb987"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb987-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-1" aria-hidden="true" tabindex="-1"></a><span class="co"># An upper triangular matrix</span></span>
+<span id="cb987-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-2" aria-hidden="true" tabindex="-1"></a><span class="do">## make data in vectors</span></span>
+<span id="cb987-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-3" aria-hidden="true" tabindex="-1"></a>human.row <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="dv">2</span>,<span class="dv">6</span>)</span>
+<span id="cb987-4"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-4" aria-hidden="true" tabindex="-1"></a>chimp.row <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="cn">NA</span>,<span class="cn">NA</span>,<span class="dv">4</span>)</span>
+<span id="cb987-5"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-5" aria-hidden="true" tabindex="-1"></a>gorilla.row <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb987-6"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb987-7"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-7" aria-hidden="true" tabindex="-1"></a><span class="co"># stack with ribind()</span></span>
+<span id="cb987-8"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-8" aria-hidden="true" tabindex="-1"></a>dist_mat_upper <span class="ot">&lt;-</span> <span class="fu">rbind</span>(human.row, </span>
+<span id="cb987-9"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-9" aria-hidden="true" tabindex="-1"></a>                       chimp.row, </span>
+<span id="cb987-10"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-10" aria-hidden="true" tabindex="-1"></a>                       gorilla.row)</span>
+<span id="cb987-11"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb987-12"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-12" aria-hidden="true" tabindex="-1"></a><span class="co"># add names</span></span>
+<span id="cb987-13"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(dist_mat_upper) <span class="ot">&lt;-</span> spp.names</span>
+<span id="cb987-14"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb987-14" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(dist_mat_upper) <span class="ot">&lt;-</span> spp.names</span></code></pre></div>
+<p>Compare lower triangular matrix form of these data to the upper triangular for:</p>
+<div class="sourceCode" id="cb988"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb988-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb988-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lower triangular matrix:</span></span>
+<span id="cb988-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb988-2" aria-hidden="true" tabindex="-1"></a>dist_mat</span></code></pre></div>
+<pre><code>##         human chimp gorilla
+## human      NA    NA      NA
+## chimp       2    NA      NA
+## gorilla     6     4      NA</code></pre>
+<div class="sourceCode" id="cb990"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb990-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb990-1" aria-hidden="true" tabindex="-1"></a><span class="co"># upper triangular matrix</span></span>
+<span id="cb990-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb990-2" aria-hidden="true" tabindex="-1"></a>dist_mat_upper</span></code></pre></div>
+<pre><code>##         human chimp gorilla
+## human      NA     2       6
+## chimp      NA    NA       4
+## gorilla    NA    NA      NA</code></pre>
 <p>In both matrices the distance from humans to gorillas is 6 differences, humans to chimps is 2, and chimps to gorillas is 4. Make sure you understand why this is true.</p>
 <p>Again, the lower triangular form is the form usually used. Because <code>NA</code> occurs in the entire top row and last column, people often omit it by dropping the row and column of all NAs.</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkaXN0X21hdFstMSwgLTNdIn0=
+<div class="sourceCode" id="cb992"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb992-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb992-1" aria-hidden="true" tabindex="-1"></a>dist_mat[<span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">3</span>]</span></code></pre></div>
+<pre><code>##         human chimp
+## chimp       2    NA
+## gorilla     6     4</code></pre>
 </div>
-</div>
-<div id="from-a-distance-matrix-to-phylogenetic-tree" class="section level2" number="38.5">
-<h2><span class="header-section-number">38.5</span> From a distance matrix to phylogenetic tree</h2>
+<div id="from-a-distance-matrix-to-phylogenetic-tree" class="section level2" number="43.5">
+<h2><span class="header-section-number">43.5</span> From a distance matrix to phylogenetic tree</h2>
 <p>These calculations imply that humans and chimps are more closely related (the sequences are made up, but this is true). Using data like this, <strong>[phylogenetic algorithms</strong> therefore cluster humans and chimps into a <strong>clade</strong>. In <strong>Newick Format</strong> this would be (H,C).</p>
 <p>Since we have just three taxa, we add G outside the first clade: ((H,C),G).</p>
 <p>We can plot a tree from Newick like this</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGRlZmluZSB0cmVlXG4jIyBOT1RFOiB0aGUgc3RyaW5nIGVuZHMgd2l0aCBhIHNlbWktY29sb24hXG5zdHIxPC0gYyhcIihHLChDLCBIKSApO1wiKVxuXG4jIyBjb252ZXJ0IGNoYXJhY3RlciBzdHJpbmcgdG8gdHJlZVxudHJlZTE8LWFwZTo6cmVhZC50cmVlKHRleHQ9c3RyMSlcblxuIyMgcGxvdCB0cmVlXG5wbG90LnBoeWxvKHRyZWUxLGVkZ2Uud2lkdGg9MiwgbWFpbiA9IFwiXCIpIn0=
-</div>
+<div class="sourceCode" id="cb994"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb994-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb994-1" aria-hidden="true" tabindex="-1"></a><span class="co"># define tree</span></span>
+<span id="cb994-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb994-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span><span class="al">NOTE</span><span class="do">: the string ends with a semi-colon!</span></span>
+<span id="cb994-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb994-3" aria-hidden="true" tabindex="-1"></a>str1<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;(G,(C, H) );&quot;</span>)</span>
+<span id="cb994-4"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb994-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb994-5"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb994-5" aria-hidden="true" tabindex="-1"></a><span class="do">## convert character string to tree</span></span>
+<span id="cb994-6"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb994-6" aria-hidden="true" tabindex="-1"></a>tree1<span class="ot">&lt;-</span>ape<span class="sc">::</span><span class="fu">read.tree</span>(<span class="at">text=</span>str1)</span>
+<span id="cb994-7"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb994-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb994-8"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb994-8" aria-hidden="true" tabindex="-1"></a><span class="do">## plot tree</span></span>
+<span id="cb994-9"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb994-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.phylo</span>(tree1,<span class="at">edge.width=</span><span class="dv">2</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="lbrb_files/figure-html/unnamed-chunk-680-1.png" width="672" /></p>
 <p>Newick format does not represent <strong>genetic distances</strong> and therefore the <strong>branch length</strong> of phylogenetic, only the clade structure and branching pattern of the tree. We can calculate branch lengths using the UPGMA algorithm.</p>
 </div>
-<div id="distance-matrix-in-r-from-raw-sequences" class="section level2" number="38.6">
-<h2><span class="header-section-number">38.6</span> Distance matrix in R from raw sequences</h2>
+<div id="distance-matrix-in-r-from-raw-sequences" class="section level2" number="43.6">
+<h2><span class="header-section-number">43.6</span> Distance matrix in R from raw sequences</h2>
 <p>To make a distance matrix in R from the original sequences we first need to put our original sequences into a matrix with the <code>rbind()</code> command.</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteV9zZXFzIDwtIHJiaW5kKGh1bWFuLCBcbiAgICAgICAgICAgICAgICAgY2hpbXAsIFxuICAgICAgICAgICAgICAgICBnb3JpbGxhKSJ9
-</div>
-This is what it looks like
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteV9zZXFzIn0=
-</div>
+<div class="sourceCode" id="cb995"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb995-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb995-1" aria-hidden="true" tabindex="-1"></a>my_seqs <span class="ot">&lt;-</span> <span class="fu">rbind</span>(human, </span>
+<span id="cb995-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb995-2" aria-hidden="true" tabindex="-1"></a>                 chimp, </span>
+<span id="cb995-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb995-3" aria-hidden="true" tabindex="-1"></a>                 gorilla)</span></code></pre></div>
+<p>This is what it looks like</p>
+<div class="sourceCode" id="cb996"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb996-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb996-1" aria-hidden="true" tabindex="-1"></a>my_seqs</span></code></pre></div>
+<pre><code>##         [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## human   &quot;a&quot;  &quot;t&quot;  &quot;c&quot;  &quot;g&quot;  &quot;a&quot;  &quot;t&quot;  &quot;c&quot;  &quot;g&quot; 
+## chimp   &quot;a&quot;  &quot;t&quot;  &quot;c&quot;  &quot;a&quot;  &quot;a&quot;  &quot;t&quot;  &quot;c&quot;  &quot;a&quot; 
+## gorilla &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;  &quot;a&quot;</code></pre>
 <p>We then need to do some fancy processing (this has to do with how the packages we’re going to use works, which is picky about formats because its optimized to accommodate real sequences which can be very very long). We’ll use the <code>as.DNAbin()</code> function.</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJteV9zZXFzX2JpbiA8LSBhcGU6OmFzLkROQWJpbihteV9zZXFzKSJ9
-</div>
+<div class="sourceCode" id="cb998"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb998-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb998-1" aria-hidden="true" tabindex="-1"></a>my_seqs_bin <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">as.DNAbin</span>(my_seqs)</span></code></pre></div>
 <p>We then can calculate the <strong>distance</strong> between each sequence in terms of the number (N) of mutations. This uses the <code>dist.dna()</code> function. We set the argument <code>model = "N"</code>. This is the most basic and naive model of mutation and ignores the possibility of back mutations.</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfZGlzdDAgPC0gYXBlOjpkaXN0LmRuYShteV9zZXFzX2JpbiwgbW9kZWwgPSBcIk5cIikifQ==
-</div>
-This gives us a distance matrix
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfZGlzdDAifQ==
-</div>
+<div class="sourceCode" id="cb999"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb999-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb999-1" aria-hidden="true" tabindex="-1"></a>seq_dist0 <span class="ot">&lt;-</span> ape<span class="sc">::</span><span class="fu">dist.dna</span>(my_seqs_bin, <span class="at">model =</span> <span class="st">&quot;N&quot;</span>)</span></code></pre></div>
+<p>This gives us a distance matrix</p>
+<div class="sourceCode" id="cb1000"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1000-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1000-1" aria-hidden="true" tabindex="-1"></a>seq_dist0</span></code></pre></div>
+<pre><code>##         human chimp
+## chimp       2      
+## gorilla     6     4</code></pre>
 <p>Note that there is a subtle difference in how R looks at the matrix we made earlier with the matrix() command and this matrix.</p>
-Them matrices have the same data, but slightly different formats.
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkaXN0X21hdFxuc2VxX2Rpc3QwIn0=
-</div>
+<p>Them matrices have the same data, but slightly different formats.</p>
+<div class="sourceCode" id="cb1002"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1002-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1002-1" aria-hidden="true" tabindex="-1"></a>dist_mat</span></code></pre></div>
+<pre><code>##         human chimp gorilla
+## human      NA    NA      NA
+## chimp       2    NA      NA
+## gorilla     6     4      NA</code></pre>
+<div class="sourceCode" id="cb1004"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1004-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1004-1" aria-hidden="true" tabindex="-1"></a>seq_dist0</span></code></pre></div>
+<pre><code>##         human chimp
+## chimp       2      
+## gorilla     6     4</code></pre>
 <p>They also each have a different class</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjbGFzcyhkaXN0X21hdClcbmNsYXNzKHNlcV9kaXN0MCkifQ==
+<div class="sourceCode" id="cb1006"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1006-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1006-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dist_mat)</span></code></pre></div>
+<pre><code>## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+<div class="sourceCode" id="cb1008"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1008-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1008-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(seq_dist0)</span></code></pre></div>
+<pre><code>## [1] &quot;dist&quot;</code></pre>
 </div>
-</div>
-<div id="distance-matrix-in-r-from-normal-matrix" class="section level2" number="38.7">
-<h2><span class="header-section-number">38.7</span> Distance matrix in R from normal matrix</h2>
-Sometimes we already have a distance matrix computed that we want to enter directly into R. For example, perhaps it was reported in a paper and we want to explore the matrix on our own. In this case we can convert our normal matrix we made initially into a properly formatted distance matrix. This requires the base R <code>as.dist()</code> function. I’ll call this object “seq_dist_from_mat” to indicate that it came “from a matrix”. Note that I’m going to give it the full 3 x 3 matrix, <code>dist_mat</code>.
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGlucHV0IG1hdHJpeFxuZGlzdF9tYXRcblxuIyBjb3ZlcnQgdG8gZGlzdGFuY2UgbWF0cml4XG5zZXFfZGlzdF9mcm9tX21hdCA8LSBhcy5kaXN0KGRpc3RfbWF0KVxuXG4jIG5ldyBmb3JtYXRcbnNlcV9kaXN0X2Zyb21fbWF0In0=
-</div>
+<div id="distance-matrix-in-r-from-normal-matrix" class="section level2" number="43.7">
+<h2><span class="header-section-number">43.7</span> Distance matrix in R from normal matrix</h2>
+<p>Sometimes we already have a distance matrix computed that we want to enter directly into R. For example, perhaps it was reported in a paper and we want to explore the matrix on our own. In this case we can convert our normal matrix we made initially into a properly formatted distance matrix. This requires the base R <code>as.dist()</code> function. I’ll call this object “seq_dist_from_mat” to indicate that it came “from a matrix.” Note that I’m going to give it the full 3 x 3 matrix, <code>dist_mat</code>.</p>
+<div class="sourceCode" id="cb1010"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1010-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1010-1" aria-hidden="true" tabindex="-1"></a><span class="co"># input matrix</span></span>
+<span id="cb1010-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1010-2" aria-hidden="true" tabindex="-1"></a>dist_mat</span></code></pre></div>
+<pre><code>##         human chimp gorilla
+## human      NA    NA      NA
+## chimp       2    NA      NA
+## gorilla     6     4      NA</code></pre>
+<div class="sourceCode" id="cb1012"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1012-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1012-1" aria-hidden="true" tabindex="-1"></a><span class="co"># covert to distance matrix</span></span>
+<span id="cb1012-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1012-2" aria-hidden="true" tabindex="-1"></a>seq_dist_from_mat <span class="ot">&lt;-</span> <span class="fu">as.dist</span>(dist_mat)</span>
+<span id="cb1012-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1012-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1012-4"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1012-4" aria-hidden="true" tabindex="-1"></a><span class="co"># new format</span></span>
+<span id="cb1012-5"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1012-5" aria-hidden="true" tabindex="-1"></a>seq_dist_from_mat</span></code></pre></div>
+<pre><code>##         human chimp
+## chimp       2      
+## gorilla     6     4</code></pre>
 <p>I’ll now compare the two ways of making the matrix: <code>seq_dist0</code>, which was build from the original sequences, and <code>seq_dist_from_mat</code>, which was built from the hand-entered matrix.</p>
 <p>First, let’s compare their structure</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfZGlzdDBcbnNlcV9kaXN0X2Zyb21fbWF0In0=
-</div>
+<div class="sourceCode" id="cb1014"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1014-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1014-1" aria-hidden="true" tabindex="-1"></a>seq_dist0</span></code></pre></div>
+<pre><code>##         human chimp
+## chimp       2      
+## gorilla     6     4</code></pre>
+<div class="sourceCode" id="cb1016"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1016-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1016-1" aria-hidden="true" tabindex="-1"></a>seq_dist_from_mat</span></code></pre></div>
+<pre><code>##         human chimp
+## chimp       2      
+## gorilla     6     4</code></pre>
 <p>Then check them out with is() and class()</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJpcyhzZXFfZGlzdDApID09IGlzKHNlcV9kaXN0X2Zyb21fbWF0KVxuY2xhc3Moc2VxX2Rpc3QwKSA9PSBjbGFzcyhzZXFfZGlzdF9mcm9tX21hdCkifQ==
-</div>
-Now I’ll confirm that that have the same content (Note that distance matrices are not indexed internally by rows and columns, but by the order that the values appear. The following code therefore returns only 3 responses, not 4.)
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfZGlzdDAgPT0gc2VxX2Rpc3RfZnJvbV9tYXQifQ==
-</div>
+<div class="sourceCode" id="cb1018"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1018-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1018-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is</span>(seq_dist0) <span class="sc">==</span> <span class="fu">is</span>(seq_dist_from_mat)</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE</code></pre>
+<div class="sourceCode" id="cb1020"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1020-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1020-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(seq_dist0) <span class="sc">==</span> <span class="fu">class</span>(seq_dist_from_mat)</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Now I’ll confirm that that have the same content (Note that distance matrices are not indexed internally by rows and columns, but by the order that the values appear. The following code therefore returns only 3 responses, not 4.)</p>
+<div class="sourceCode" id="cb1022"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1022-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1022-1" aria-hidden="true" tabindex="-1"></a>seq_dist0 <span class="sc">==</span> seq_dist_from_mat</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE</code></pre>
 <p>Cool, so we can make a matrix either from the raw sequences or from a hand-entered matrix.</p>
 </div>
-<div id="upgma-in-r" class="section level2" number="38.8">
-<h2><span class="header-section-number">38.8</span> UPGMA in R</h2>
+<div id="upgma-in-r" class="section level2" number="43.8">
+<h2><span class="header-section-number">43.8</span> UPGMA in R</h2>
 <p>Once you have a distance matrix, UPGMA is easy in R with the <code>upgma()</code> function</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfdXBnbWEwIDwtIHVwZ21hKHNlcV9kaXN0MCkifQ==
-</div>
-Now plot it with <code>plot()</code>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJwbG90KHNlcV91cGdtYTAsIG1haW4gPSBcIk9yaWdpbmFsIGRhdGFcIikifQ==
-</div>
+<div class="sourceCode" id="cb1024"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1024-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1024-1" aria-hidden="true" tabindex="-1"></a>seq_upgma0 <span class="ot">&lt;-</span> <span class="fu">upgma</span>(seq_dist0)</span></code></pre></div>
+<p>Now plot it with <code>plot()</code></p>
+<div class="sourceCode" id="cb1025"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1025-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1025-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(seq_upgma0, <span class="at">main =</span> <span class="st">&quot;Original data&quot;</span>)</span></code></pre></div>
+<p><img src="lbrb_files/figure-html/unnamed-chunk-693-1.png" width="672" /></p>
 <p>This doesn’t look too different than the phylogeny produced from Newick. Let’s play with the distance matrix to see what happens.</p>
-First, make some more copies of the distance matrix
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXEuZGlzdDEgPC0gc2VxX2Rpc3QwXG5zZXEuZGlzdDIgPC0gc2VxX2Rpc3QwXG5zZXEuZGlzdDMgPC0gc2VxX2Rpc3QwIn0=
-</div>
+<p>First, make some more copies of the distance matrix</p>
+<div class="sourceCode" id="cb1026"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1026-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1026-1" aria-hidden="true" tabindex="-1"></a>seq.dist1 <span class="ot">&lt;-</span> seq_dist0</span>
+<span id="cb1026-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1026-2" aria-hidden="true" tabindex="-1"></a>seq.dist2 <span class="ot">&lt;-</span> seq_dist0</span>
+<span id="cb1026-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1026-3" aria-hidden="true" tabindex="-1"></a>seq.dist3 <span class="ot">&lt;-</span> seq_dist0</span></code></pre></div>
 <p>The relationship between humans and chimps in in the upper left hand cell of the matrix. Internally, <em>R</em> is calling this the first cell of the matrix</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXEuZGlzdDFbMV0ifQ==
-</div>
-Let’s increase and decrease this value
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXEuZGlzdDFbMV0gPC0gMjAgICAjY2hhbmdlIGZyb20gMiB0byAyMFxuc2VxLmRpc3QyWzFdIDwtIDAuNSAgI2NoYW5nZSBmcm9tIDIgdG8gMC41XG5zZXEuZGlzdDNbMV0gPC0gMC4wNSAjY2hhbmdlIGZyb20gMiB0byAwLjA1In0=
-</div>
+<div class="sourceCode" id="cb1027"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1027-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1027-1" aria-hidden="true" tabindex="-1"></a>seq.dist1[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p>Let’s increase and decrease this value</p>
+<div class="sourceCode" id="cb1029"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1029-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1029-1" aria-hidden="true" tabindex="-1"></a>seq.dist1[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">20</span>   <span class="co">#change from 2 to 20</span></span>
+<span id="cb1029-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1029-2" aria-hidden="true" tabindex="-1"></a>seq.dist2[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fl">0.5</span>  <span class="co">#change from 2 to 0.5</span></span>
+<span id="cb1029-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1029-3" aria-hidden="true" tabindex="-1"></a>seq.dist3[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fl">0.05</span> <span class="co">#change from 2 to 0.05</span></span></code></pre></div>
 <p>Now we’ll build trees with our original matrix and the news ones to compare them.</p>
-Note: We’ll make a grid of plots using some fancy-looking code <code>par(mfrow = c(2,2), mar = c(2,2,2,2))</code>. Don’t worry about what exactly this means; it just sets up some graphical parameters to make things look nice. I’ve also added some code to make the plot of the original data look a little different
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHNldCB1cCBncmFwaGljYWwgcGFyYW1ldGVyc1xucGFyKG1mcm93ID0gYygyLDIpLCBtYXIgPSBjKDIsMiwyLDIpKVxuXG4jIGJ1aWxkIDFzdCB0cmVlIGFuZCBwbG90XG4jIyBidWlsZCB0cmVlXG5zZXFfdXBnbWEwIDwtIHVwZ21hKHNlcV9kaXN0MClcblxuIyMgcGxvdCwgaW4gdXBwZXIgbGVmdC1oYW5kIGNvcm5lclxucGxvdC5waHlsbyhzZXFfdXBnbWEwLCBcbiAgICAgICAgICAgbWFpbiA9IFwiT3JpZ2luYWwgZGF0YVwiLFxuICAgICAgICAgICBlZGdlLmNvbG9yID0gXCJkYXJrZ3JlZW5cIixcbiAgICAgICAgICAgZWRnZS53aWR0aCA9IDQpXG5cbiMgYnVpbGQgMm5kIHRyZWUgYW5kIHBsb3RcbnNlcS51cGdtYTEgPC0gdXBnbWEoc2VxLmRpc3QxKVxucGxvdChzZXEudXBnbWExLCBtYWluID0gXCJWZXJ5IGxvbmcgZGlzdGFuY2UgaHVtYW5zIHZzLiBjaGltcHMhXCIpXG5cbnNlcS51cGdtYTIgPC0gdXBnbWEoc2VxLmRpc3QyKVxucGxvdChzZXEudXBnbWEyLCBtYWluID0gXCJTaG9ydGVyIGRpc3RhbmNlIGh1bWFucyB2cy4gY2hpbXBzXCIpXG5cblxuc2VxLnVwZ21hMyA8LSB1cGdtYShzZXEuZGlzdDMpXG5wbG90KHNlcS51cGdtYTMsIG1haW4gPSBcIk11Y2ggc2hvcnRlciBkaXN0YW5jZSBodW1hbnMgdnMuIGNoaW1wcyFcIikifQ==
+<p>Note: We’ll make a grid of plots using some fancy-looking code <code>par(mfrow = c(2,2), mar = c(2,2,2,2))</code>. Don’t worry about what exactly this means; it just sets up some graphical parameters to make things look nice. I’ve also added some code to make the plot of the original data look a little different</p>
+<div class="sourceCode" id="cb1030"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1030-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set up graphical parameters</span></span>
+<span id="cb1030-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb1030-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1030-4"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-4" aria-hidden="true" tabindex="-1"></a><span class="co"># build 1st tree and plot</span></span>
+<span id="cb1030-5"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-5" aria-hidden="true" tabindex="-1"></a><span class="do">## build tree</span></span>
+<span id="cb1030-6"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-6" aria-hidden="true" tabindex="-1"></a>seq_upgma0 <span class="ot">&lt;-</span> <span class="fu">upgma</span>(seq_dist0)</span>
+<span id="cb1030-7"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1030-8"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-8" aria-hidden="true" tabindex="-1"></a><span class="do">## plot, in upper left-hand corner</span></span>
+<span id="cb1030-9"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.phylo</span>(seq_upgma0, </span>
+<span id="cb1030-10"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-10" aria-hidden="true" tabindex="-1"></a>           <span class="at">main =</span> <span class="st">&quot;Original data&quot;</span>,</span>
+<span id="cb1030-11"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-11" aria-hidden="true" tabindex="-1"></a>           <span class="at">edge.color =</span> <span class="st">&quot;darkgreen&quot;</span>,</span>
+<span id="cb1030-12"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">edge.width =</span> <span class="dv">4</span>)</span>
+<span id="cb1030-13"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1030-14"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-14" aria-hidden="true" tabindex="-1"></a><span class="co"># build 2nd tree and plot</span></span>
+<span id="cb1030-15"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-15" aria-hidden="true" tabindex="-1"></a>seq.upgma1 <span class="ot">&lt;-</span> <span class="fu">upgma</span>(seq.dist1)</span>
+<span id="cb1030-16"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(seq.upgma1, <span class="at">main =</span> <span class="st">&quot;Very long distance humans vs. chimps!&quot;</span>)</span>
+<span id="cb1030-17"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1030-18"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-18" aria-hidden="true" tabindex="-1"></a>seq.upgma2 <span class="ot">&lt;-</span> <span class="fu">upgma</span>(seq.dist2)</span>
+<span id="cb1030-19"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(seq.upgma2, <span class="at">main =</span> <span class="st">&quot;Shorter distance humans vs. chimps&quot;</span>)</span>
+<span id="cb1030-20"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1030-21"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1030-22"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-22" aria-hidden="true" tabindex="-1"></a>seq.upgma3 <span class="ot">&lt;-</span> <span class="fu">upgma</span>(seq.dist3)</span>
+<span id="cb1030-23"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1030-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(seq.upgma3, <span class="at">main =</span> <span class="st">&quot;Much shorter distance humans vs. chimps!&quot;</span>)</span></code></pre></div>
+<p><img src="lbrb_files/figure-html/unnamed-chunk-697-1.png" width="672" /></p>
 </div>
-</div>
-<div id="how-upgma-clustering-works" class="section level2" number="38.9">
-<h2><span class="header-section-number">38.9</span> How UPGMA clustering works</h2>
+<div id="how-upgma-clustering-works" class="section level2" number="43.9">
+<h2><span class="header-section-number">43.9</span> How UPGMA clustering works</h2>
 <p>UPGMA and other <strong>clustering algorithms</strong> work by finding looking at a distance matrix and finding the two things that are closet together.</p>
-Human and chimps are closest
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfZGlzdDAifQ==
-</div>
-UPGAM therefore extracts the this minimum distance. We’ll extract it by hand using the <code>min()</code> function.
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkLm1pbiA8LSBtaW4oc2VxX2Rpc3QwKSJ9
-</div>
+<p>Human and chimps are closest</p>
+<div class="sourceCode" id="cb1031"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1031-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1031-1" aria-hidden="true" tabindex="-1"></a>seq_dist0</span></code></pre></div>
+<pre><code>##         human chimp
+## chimp       2      
+## gorilla     6     4</code></pre>
+<p>UPGAM therefore extracts the this minimum distance. We’ll extract it by hand using the <code>min()</code> function.</p>
+<div class="sourceCode" id="cb1033"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1033-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1033-1" aria-hidden="true" tabindex="-1"></a>d.min <span class="ot">&lt;-</span> <span class="fu">min</span>(seq_dist0)</span></code></pre></div>
 <p>When two individual taxa are grouped into a clade the branch lengths are set at 1/2 the distance between them. So, the total distance is 2, so the branch lengths will be 1.</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJkLm1pbi8yIn0=
-</div>
-We can confirm that this is correct by checking what R calculated via the <code>upgma()</code> function. We can access <em>R’s</em> calculations by looking at the object we saved the UPGMA output too
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfdXBnbWEwIn0=
-</div>
-On its own this isn’t helpful. But what we can do is use the <code>str()</code> command to look under the hood of the object
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzdHIoc2VxX3VwZ21hMCkifQ==
-</div>
+<div class="sourceCode" id="cb1034"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1034-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1034-1" aria-hidden="true" tabindex="-1"></a>d.min<span class="sc">/</span><span class="dv">2</span></span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>We can confirm that this is correct by checking what R calculated via the <code>upgma()</code> function. We can access <em>R’s</em> calculations by looking at the object we saved the UPGMA output too</p>
+<div class="sourceCode" id="cb1036"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1036-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1036-1" aria-hidden="true" tabindex="-1"></a>seq_upgma0</span></code></pre></div>
+<pre><code>## 
+## Phylogenetic tree with 3 tips and 2 internal nodes.
+## 
+## Tip labels:
+##   human, chimp, gorilla
+## 
+## Rooted; includes branch lengths.</code></pre>
+<p>On its own this isn’t helpful. But what we can do is use the <code>str()</code> command to look under the hood of the object</p>
+<div class="sourceCode" id="cb1038"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1038-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1038-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(seq_upgma0)</span></code></pre></div>
+<pre><code>## List of 4
+##  $ edge       : int [1:4, 1:2] 5 5 4 4 1 2 3 5
+##  $ edge.length: num [1:4] 1 1 2.5 1.5
+##  $ tip.label  : chr [1:3] &quot;human&quot; &quot;chimp&quot; &quot;gorilla&quot;
+##  $ Nnode      : int 2
+##  - attr(*, &quot;class&quot;)= chr &quot;phylo&quot;
+##  - attr(*, &quot;order&quot;)= chr &quot;postorder&quot;</code></pre>
 <p>The output tells us there is something called <code>edge.length</code> associated with the <code>seq_upgma0</code> object, and the smallest two values are 1. This looks promising, since <strong>edge</strong> is the math term for branches in a tree.</p>
 <p>Next, UPGMA builds a new matrix that replace the Human and Chimp columns with a combined Humans-chimp column. The algorithm then re-calculates the distance from this human-chimp clade to the remaining gorilla group The distance from this human-chimp group to gorillas is the average distance from humans to gorillas and chimps to gorillas.</p>
-The original distance from humans to gorillas was 6, and the distance from chimps to gorillas was 4, as shown by the distance matrix
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzZXFfZGlzdDAifQ==
-</div>
-Let’s store these values in R objects.
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjZGlzdGFuY2UgaHVtYW5zIHRvIGdvcmlsbGFzXG5EaF9nIDwtIDZcblxuI2Rpc3RhbmNlIGNoaW1wcyB0byBnb3JpbGxhc1xuRGNfZyA8LSA0In0=
-</div>
-Now, we’ll take the average of these two distance. The math written out in explicit detail is:
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJEaGNfZyA8LSAoRGhfZyoxICsgRGNfZyoxKS8oMSsxKVxuRGhjX2cifQ==
-</div>
+<p>The original distance from humans to gorillas was 6, and the distance from chimps to gorillas was 4, as shown by the distance matrix</p>
+<div class="sourceCode" id="cb1040"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1040-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1040-1" aria-hidden="true" tabindex="-1"></a>seq_dist0</span></code></pre></div>
+<pre><code>##         human chimp
+## chimp       2      
+## gorilla     6     4</code></pre>
+<p>Let’s store these values in R objects.</p>
+<div class="sourceCode" id="cb1042"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1042-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1042-1" aria-hidden="true" tabindex="-1"></a><span class="co">#distance humans to gorillas</span></span>
+<span id="cb1042-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1042-2" aria-hidden="true" tabindex="-1"></a>Dh_g <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb1042-3"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1042-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1042-4"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1042-4" aria-hidden="true" tabindex="-1"></a><span class="co">#distance chimps to gorillas</span></span>
+<span id="cb1042-5"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1042-5" aria-hidden="true" tabindex="-1"></a>Dc_g <span class="ot">&lt;-</span> <span class="dv">4</span></span></code></pre></div>
+<p>Now, we’ll take the average of these two distance. The math written out in explicit detail is:</p>
+<div class="sourceCode" id="cb1043"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1043-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1043-1" aria-hidden="true" tabindex="-1"></a>Dhc_g <span class="ot">&lt;-</span> (Dh_g<span class="sc">*</span><span class="dv">1</span> <span class="sc">+</span> Dc_g<span class="sc">*</span><span class="dv">1</span>)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb1043-2"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1043-2" aria-hidden="true" tabindex="-1"></a>Dhc_g</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
 <p>The result is total distance between our new human-chimp clade and gorillas.</p>
-<div id="challenge" class="section level3" number="38.9.1">
-<h3><span class="header-section-number">38.9.1</span> Challenge</h3>
+<div id="challenge" class="section level3" number="43.9.1">
+<h3><span class="header-section-number">43.9.1</span> Challenge</h3>
 <p>This new distance allows us to calculate the branch lengths for the rest of the tree. The branch length from the human-chimp (h-c) clade to the gorillas (g) is 1/2 half the distance we just calculated:</p>
 <p>Dhc_g/2 = 5/2 = 2.5</p>
 <p>The remaining branch length is
 2.5 - 1 = 1.5.</p>
 <p>See if you can figure out why this is done by sketching out the tree.</p>
 <p>These values match what is in the upgma object</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJzdHIoc2VxX3VwZ21hMCkifQ==
+<div class="sourceCode" id="cb1045"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1045-1"><a href="phylogenetic-trees-using-the-upgma-clustering-algoirthm.html#cb1045-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(seq_upgma0)</span></code></pre></div>
+<pre><code>## List of 4
+##  $ edge       : int [1:4, 1:2] 5 5 4 4 1 2 3 5
+##  $ edge.length: num [1:4] 1 1 2.5 1.5
+##  $ tip.label  : chr [1:3] &quot;human&quot; &quot;chimp&quot; &quot;gorilla&quot;
+##  $ Nnode      : int 2
+##  - attr(*, &quot;class&quot;)= chr &quot;phylo&quot;
+##  - attr(*, &quot;order&quot;)= chr &quot;postorder&quot;</code></pre>
 </div>
 </div>
-</div>
-<div id="further-information" class="section level2" number="38.10">
-<h2><span class="header-section-number">38.10</span> Further information</h2>
-<div id="general-info" class="section level3" number="38.10.1">
-<h3><span class="header-section-number">38.10.1</span> General info</h3>
+<div id="further-information" class="section level2" number="43.10">
+<h2><span class="header-section-number">43.10</span> Further information</h2>
+<div id="general-info" class="section level3" number="43.10.1">
+<h3><span class="header-section-number">43.10.1</span> General info</h3>
 <p>A good, no-math overview of the general ideas of UPGMA is at this <a href="https://medium.com/@sharma.ravit/upgma-method-designing-a-phylogenetic-tree-9a708de18419">blog post</a></p>
 <p><a href="https://en.wikipedia.org/wiki/UPGMA">Wikipedia</a> provides a good overview with math that isn’t too daunting (though it could be improved). <a href="https://en.wikipedia.org/wiki/UPGMA" class="uri">https://en.wikipedia.org/wiki/UPGMA</a></p>
 </div>
-<div id="worked-examples" class="section level3" number="38.10.2">
-<h3><span class="header-section-number">38.10.2</span> Worked examples:</h3>
+<div id="worked-examples" class="section level3" number="43.10.2">
+<h3><span class="header-section-number">43.10.2</span> Worked examples:</h3>
 <p>An excellent worked example is at <a href="http://www.slimsuite.unsw.edu.au/teaching/upgma/">this site</a>. <a href="http://www.slimsuite.unsw.edu.au/teaching/upgma/" class="uri">http://www.slimsuite.unsw.edu.au/teaching/upgma/</a>
 This example breaks down the math into basic steps, but there’s a lot of taxa so its still complicated.</p>
 <p>A worked example showing the limits of UPGMA is <a href="https://www.icp.ucl.ac.be/~opperd/private/upgma.html">here</a>:
@@ -947,8 +1108,8 @@ This example breaks down the math into basic steps, but there’s a lot of taxa 
 <p>Another worked example is
 <a href="https://www.mun.ca/biology/scarr/2900_UPGMA.htm" class="uri">https://www.mun.ca/biology/scarr/2900_UPGMA.htm</a></p>
 </div>
-<div id="additional-notes" class="section level3" number="38.10.3">
-<h3><span class="header-section-number">38.10.3</span> Additional notes:</h3>
+<div id="additional-notes" class="section level3" number="43.10.3">
+<h3><span class="header-section-number">43.10.3</span> Additional notes:</h3>
 <p>Some useful but terse notes are <a href="https://www.sequentix.de/gelquest/help/upgma_method.htm">here</a>:
 <a href="https://www.sequentix.de/gelquest/help/upgma_method.htm" class="uri">https://www.sequentix.de/gelquest/help/upgma_method.htm</a></p>
 <p>If you want to understand what the <strong>ultrametricity</strong> assumption is, check out <a href="https://www.sequentix.de/gelquest/help/explanation_of_the_term_ultrametric.htm">this site</a> (however, I don’t get hung up on this):

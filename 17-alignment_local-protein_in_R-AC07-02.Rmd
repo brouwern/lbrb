@@ -77,9 +77,9 @@ localAlignLepraeUlcerans
 ```
 
 
-As before, we can print out the full alignment with `printPairwiseAlignment()`:
+As before, we can print out the full alignment with `print_pairwise_alignment()`:
 ```{r}
-printPairwiseAlignment(localAlignLepraeUlcerans, 60)
+print_pairwise_alignment(localAlignLepraeUlcerans, 60)
 ```
 
 

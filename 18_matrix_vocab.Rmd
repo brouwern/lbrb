@@ -7,9 +7,6 @@ editor_options:
 
 **By** Nathan Brouwer
 
-```{r  eval = T}
-library(compbio4all)
-```
 
 <!-- Other to do -->
 <!-- first work with smaller matrix (DNA? distance matrix?) -->
@@ -71,8 +68,14 @@ Load basic packages
 ```{r}
 library(flextable)
 library(webshot)
+
+library(compbio4all)
 ```
 
+Data
+```{r}
+data(BLOSUM62)
+```
 
 Install the Biostrings package from Bioconductor; you don't have to run this if you already happen to have downloaded Biostrings before
 ```{r, echo = F, eval = F}

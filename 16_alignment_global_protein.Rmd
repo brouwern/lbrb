@@ -255,10 +255,10 @@ As the alignment is very long, when you type `globalAlignLepraeUlcerans`, you on
 
 If you want to view a long pairwise alignment such as that between the *M. leprae* and *M. ulerans* chorismate lyase proteins, it is convenient to print out the alignment in blocks.
 
-The R function `printPairwiseAlignment()` below will do this for you:
+The R function `print_pairwise_alignment()` below will do this for you:
 
 ```{r}
-printPairwiseAlignment(globalAlignLepraeUlcerans, 60)
+print_pairwise_alignment(globalAlignLepraeUlcerans, 60)
 ```
 
 The position in the protein of the amino acid that is at the end of each line of the printed alignment is shown after the end of the line. For example, the first line of the alignment above finishes at amino acid position 50 in the *M. leprae* protein and also at amino acid position 60 in the *M. ulcerans* protein.  Becaues there as a difference of 60-50 = 10 bases, there must be 10 insertions in the *M. leprae* to get it to line up.  Count the number of dashes in the sequence to see how many there are.

@@ -1,0 +1,362 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Calculating E values, Bit scores, and P-values from BLAST output
+
+
+**By:** Nathan Brouwer
+
+**NOTE**: This has NOT be edited and NOT been spell checked
+
+## Introduction
+
+BLAST gives you a number of statistics for understanding the output of a search.  Below I R code showing how this output relates to the underlying equations used to derive them.
+
+```{r}
+library(Biostrings)
+library(seqinr)
+data(BLOSUM62)
+```
+
+
+
+## Case Study
+
+To explore BLAST we'll do a protein "BLAST 2 sequences" search comparing an isoform of Drosophila enabled (NP_725859.2) against its human homolog (NP_060682.2).  We'll use the default BLOSUM 62 scoring matrix, but modify a few things
+
+* Use Gap costs of existence = 12 and extension = 1
+* No compositional adjustment
+* No masking low complexity sequences
+
+
+Here are the sequences:
+```{r}
+d.ena <- c("MAMKKLYAKTSFTSKKPSSAANSTPILAYHQQQHQQPGNGICEFQVVAPGHSGELMIRRSQSMHHKMSPPVGGLGSKSEYYSIEELQELDLLDYRHPMYHHYQQQELRQRYHEHEQLVLQLPKATSPKAGPIYEAPQRSQQQQDQMFEQSIIGARASVMVYDDNQKKWVPSGSSSGLSKVQIYHHQQNNTFRVVGRKLQDHEVVINCSIL
+KGLKYNQATATFHQWRDSKFVYGLNFSSQNDAENFARAMMHALEVLSGRVANNPGGPPTNGNGYEEDMGY
+RTMTSEDAAILRQNNSIGGHVTPSAQTPTSQTNQNNIPQSPPTPQGHHRTSRNSLSAPPAPQPQQQQQQQ
+QAQQMGQPGSHYGPTGNGPTSNGLPQQVNSQIPPAPQQQPQQQQFQQQQQQQQYQQMVQAGYAPSQQYQQ
+PHYVLSNSNPNLTVHQYPTQQAQQQPPQAPQPPLQNGGMYMVGHGHLPSSASANSVVYASQQQMLPQAHP
+QAPQAPTMPGPGYGGPPVPPPQQQAENPYGQVPMPPPMNPSQQQQPGQVPLNRMSSQGGPGGPPAPAPPP
+PPPSFGGAAGGGPPPPAPPQMFNGAPPPPAMGGGPPPAPPAPPAMGGGPPPAPGGPGAPPPPPPPPGLGG
+APKKEDPQADLMGSLASQLQQIKLKKNKVTTSAPENSGSSTSSGGSGNYGTIGRSSNGMASMMDEMAKTL
+ARRRAQAEKKDPDPEAEVKKRPWEKSNTLPHKLSGGAGSGSAGSGHEGANGNSGGAGSNTTNSGGESPRP
+MRKRFGSASEETILKQVNGDGLSLALSNGDLDTLKAEIVREMRLEIQKVKNEIIDAIKSEFNRR
+")
+
+h.ena <- c("MSEQSICQARAAVMVYDDANKKWVPAGGSTGFSRVHIYHHTGNNTFRVVGRKIQDHQVVINCAIPKGLKYNQATQTFHQWRDARQVYGLNFGSKEDANVFASAMMHALEVLNSQETGPTLPRQNSQLPAQVQNGPSQEELEIQRRQLQEQQRQKELERERLERERMERERLERERLERERLERERLEQEQLERERQERERQERLERQERL
+ERQERLERQERLDRERQERQERERLERLERERQERERQEQLEREQLEWERERRISSAAAPASVETPLNSV
+LGDSSASEPGLQAASQPAETPSQQGIVLGPLAPPPPPPLPPGPAQASVALPPPPGPPPPPPLPSTGPPPP
+PPPPPLPNQVPPPPPPPPAPPLPASGFFLASMSEDNRPLTGLAAAIAGAKLRKVSRMEDTSFPSGGNAIG
+VNSASSKTDTGRGNGPLPLGGSGLMEEMSALLARRRRIAEKGSTIETEQKEDKGEDSEPVTSKASSTSTP
+EPTRKPWERTNTMNGSKSPVISRPKSTPLSQPSANGVQTEGLDYDRLKQDILDEMRKELTKLKEELIDAI
+RQELSKSNTA")
+```
+
+We have to remove the newline characters:
+```{r}
+d.ena <- gsub("\n","",d.ena)
+h.ena <- gsub("\n","",h.ena)
+
+```
+
+
+
+## BLAST Statistics
+
+* E values = "Expected values"
+* Bit scores = Scores which can be compared between searches with different parameters.  BLAST output just refers to these as "scores" though sometimes indicates that the units is "bits".  In equations this is S' ("S-prime").
+* Scores (S) = raw scores derived from scoring matrix and gap penalties.  Available when looking at the individual local alignments.
+
+On the main output screen BLAST gives the "max score", "total score", and "E-value."  This should be read as "max bit score" and "total bit score."  The total bit score is the sum of the bit scores of all the high-scoring local alignments that were created within each database sequence.
+
+For our case study, E is returned as 8e-70, the max bit score is 236, and the total bit score is 256 (again, BLAST is showing BIT scores, not raw scores).  We can save these in R object
+
+```{r}
+E <- 8e-70
+S.bit.max <- 236
+S.bit.total <- 256
+```
+
+The main page also tells use the size of our query sequence, which we'll call m.  This is the length of our Drosophila enabled protein
+```{r}
+m <- 834
+```
+
+
+Because we did a "BLAST two sequences" search we are also shown "Subject length"; this is the length of our human enabled homolog. 
+```{r}
+n <- 570
+```
+
+Since we specified a single sequence for comparison, this second sequence is the totality of our database for this search.
+
+m x n is our **search space**.  As will be discussed below, this is our raw search space; BLAST will use a small effective search space for actual calculations.
+
+```{r}
+mn <- m*n
+
+mn
+```
+
+m x n = 475380; this is the total number of amino acids compared by the search.
+
+## Dotplot
+
+BLAST produces dotplots which are quick visual representations of alignments.  When only a two sequences are compare with BLAST 2 sequences, the dotplot is a visual represent representation of the search space.
+
+### Dotplot in R - optional, experimental code
+
+We can make a dotplot in R, but its kind of clunky and I have yet to be able to really reproduce BLASTs output.
+
+First set up the data (don't worry about the details)
+```{r}
+d.ena.vect <- unlist(strsplit(d.ena,""))
+h.ena.vect <- unlist(strsplit(h.ena,""))
+```
+
+Then make the dotplot (this is slooooooow, and I'm not happy with the results.  I don't recommend running it.).
+```{r, eval = F}
+dotPlot(seq1 = d.ena.vect,
+        seq2 = h.ena.vect,
+        wsize = 3,
+        wstep = 1,
+        nmatch = 3)
+```
+
+
+I started writing my own dotplot code but haven't gotten very far.
+```{r, eval = F}
+df <- matrix(data = 0,
+       nrow = length(h.ena.vect),
+       ncol = length(h.ena.vect))
+
+for(i in 1:length(h.ena.vect)){
+  for(j in 1:length(h.ena.vect)){
+    n.i <- d.ena.vect[i]
+    m.j <- h.ena.vect[j]
+    score.ij <- BLOSUM62[n.i, m.j]
+    df[i,j] <- ifelse( score.ij> 0,score.ij,0)
+  }
+}
+
+image(x = 1:length(h.ena.vect),
+        y = 1:length(h.ena.vect),
+        z = df)
+
+```
+
+
+
+
+## BLAST "Search Summary" 
+
+BLAST provides a "Search summary" tab.  At the top of the results three tabs are listed
+
+Edit Search | Save Search | Search Summary
+
+The search summary summarizes key aspects of how you defined the search (matrix, gap penalties, etc) and also the underlying parameters (lambda, K) defined in the equations below.
+
+
+
+The "effective search space" is smaller than just m*n; after the test we'll talk about the difference between the search space and the effective search space.
+
+I'll save the effective search space as an object
+```{r}
+mn.effective <- 428800
+```
+
+Lambda can be obtained from the "search summary" tab.  We want the value in the right-hand column.
+
+```{r}
+lambda <- 0.283
+```
+
+K is also in the search summary tab.
+```{r}
+K <- 0.059
+```
+
+
+## BLAST Alignments
+
+On its main results page BLAST report the bit scores.  BLAST reports raw scores derived directly from the scoring matrix on the "Alignments" tab.
+
+When two sequences are compared BLAST can find more than one high-scoring, non-overlapping alignment.  The Alignment tab shows us the two alignments for this search which passed BLASTs thresholds.
+
+The first alignment has the annotation under "Score" as "236 bits(570)".  This is "bit score = 236 (raw score = 570)".  Bit score is S' (S prime) and raw score is just S in equations.  To be clear we'll call this S.bit.max.  S we'll call S.max.  We made S.bit.max above.
+
+```{r}
+S.max <- 570
+```
+
+There's a second alignment which has the annotation "19.6 bits(38).
+
+```{r}
+S.bit.other <- 19.6
+S.other <- 38
+```
+
+<!-- Check these equations -->
+Note that 
+```{r}
+S.max+S.bit.other
+round(S.max+S.bit.other)
+```
+
+This is the total bit score (rounded up) that BLAST reports on the main results page
+
+```{r}
+S.bit.total == round(S.max + S.bit.other)
+```
+
+The local alignments also have an E value listed.  The E-value for the best alignment is identical to the E-value from the main results page.
+
+## Equations
+
+Equation numbers refer to Pevsner
+
+### E value (eq 4.5, pg 142)
+
+The E value is calculate as:
+E = Kmne^(-lambda*S)
+
+* K = a constant dependent on the scoring matrix (eg K for PAM200 is different than BLOSUM62)
+* m and n are the size of the query sequence and the size of the database
+* m*n = the search space: all possible aligned positions under consideration; in practice this gets tweaked to be the effective search space.  
+* e = e^...; the exp() function in R
+* lambda = A constant; depends on scoring matrix (eg lambda for PAM200 is different than BLOSUM62)
+* S = raw score from local BLAST alignment (raw score, NOT bit score)
+
+BLAST uses an **effective search space** which can be obtained from the Search Summary tab.
+
+We can try to replicate BLASTs calculation with this equation.  Instead of m*n we'll use mn.effective, but ignore why for now.  We'll use S.max instead of S to be clear which of the 2 searches we're looking at.
+
+I'll do the calculation and save it into an object called "E from K" to distinguish it from the official E from BLAST
+```{r}
+E.from.K <- K*mn.effective*exp(-lambda*S.max)
+
+E.from.K
+```
+
+This result is fairly close but not exactly to what BLAST reports as the E value.
+```{r}
+E
+```
+
+This could be within rounding error.  For example, perhaps lambda or K have been rounded off.  It could also potentially be due to R's limitations on working with a value like e-66.
+
+Let's check the other S value to see what we get
+
+```{r}
+K*mn.effective*exp(-lambda*S.other)
+
+```
+
+This is very close the the value reported in BLAST.
+
+
+## Bit Scores (S')
+
+Bit scores can be compared between BLAST searches.
+
+S' = (lambda*S - ln K)/(ln 2)
+
+Recall that the natural log in R is just log()
+
+We can try to reproduce BLASTS bit score.  This doesn't require any exceptional calculations on R's part so there's should be numeric problems.
+```{r}
+(lambda*S.max - log(K))/log(2)
+
+S.bit.max
+```
+
+This is very very close to what BLAST reports, but is just a bit off.  The alignment score (S.max) should be reported exactly because scoring matrices use integer values.  For example
+
+```{r}
+data("BLOSUM62")
+BLOSUM62[1:10,1:10]
+```
+
+Lambda and/or K might be reported or rounded just a bit off.
+
+
+## E from Bit scores
+
+
+E = mn*2^-S'
+
+For our best score
+
+```{r}
+E.from.bit <- mn.effective*2^(-S.bit.max)
+
+E
+E.from.bit
+E.from.K
+```
+
+The official E from BLAST is larger by a bit, while E from the bit score and E from the K (and Lambda) are the same order of magnitude.  Not sure what's going on here.
+
+
+We can see what happens if we calculate "E from K" using the total bit score
+
+```{r}
+K*mn.effective*exp(-lambda*(S.max+S.other))
+```
+
+
+From our E value we can back calculate our (effective) search space
+
+From 
+
+E = mn*2^-S'
+
+we divide by both sides by 2^-S' to get.
+E/2^-S' = mn
+
+So mn is
+```{r}
+E/(2^-S.bit.max)
+```
+
+Which is way off.
+
+But
+
+```{r}
+E.from.K/(2^-S.bit.max)
+mn
+```
+
+is kinda close.  
+
+## P values
+
+P = 1 - e^-E
+
+For the second of the two alignments
+```{r}
+E.other <- 0.53
+1 - exp(-E.other)
+```
+
+
+You can convert from a p-value if you had it to an E-value
+
+P = 1 - e^-E
+-1+P = -e^-E
+1-P = e^-E
+log(1-P) = -E
+-1*log(1-P) = E
+
+
+
+```{r}
+
+```
+
+
+
+

@@ -1,0 +1,70 @@
+# Working with vectors and matrices
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/) with assistant from Havannah Tung.
+
+
+In previous practicals, you learned how to create different types of variables in R such as scalars, vectors and lists. Sometimes it is useful to create a variable before you actually need to store any data in the variable. To create a vector without actually storing any data in it, you can use the numeric() command to create a vector for storing numbers, or the character() command to create a vector for storing characters (eg. “A”, “hello”, etc.) For example, you may want to create a vector variable for storing the square of a number, and then store numbers in its elements afterwards:
+
+```{r}
+# Create a vector "myvector" for storing numbers
+myvector <- numeric()   
+
+# Fill in the values in the vector "myvector"
+for (i in 1:10){ 
+  myvector[i] <- i*i 
+  } 
+
+# Print out the vector "myvector"
+myvector                               
+```
+
+Note that if you try to store numbers in the elements of a vector that you have not yet created, you will get an error message, for example:
+```{r, eval = F}
+for (i in 1:10) { 
+  avector[i] <- i*i 
+  }  
+```
+
+Another very useful type of variable is a **matrix**. You can create a matrix in *R* using the *matrix()* command. If you look at the help page for the *matrix()* command, you will see that its arguments (inputs) are the data to store in the matrix, the number of rows to store it in, the number of columns to store it in, and whether to fill the matrix with data column-by-column or row-by-row. For example, say you have the heights and weights of eight patients in a hospital in two different vectors:
+```{r}
+heights <- c(180, 170, 175, 160, 183, 177, 179, 182)
+weights <- c(90, 88, 100, 68, 95, 120, 88, 93)
+```
+
+To store this data in a matrix that has one column per person, and one row for heights and one row for weights, we type:
+```{r}
+mymatrix <- matrix(c(heights,weights), 2, 8, byrow=TRUE)
+mymatrix # Print out the matrix
+```
+
+We needed to use the argument `byrow=TRUE` to tell the *matrix()* command to fill the matrix row-by-row (i.e.. to put the values from the vector heights into the first row of the matrix, and the values from the vector weights into the second row of the matrix).
+
+You can assign names to the rows and columns of a matrix using the rownames() and colnames() commands, respectively. For example, to assign names to the rows and columns of matrix mymatrix, you could type:
+```{r}
+rownames(mymatrix) <- c("height", "weight")
+colnames(mymatrix) <- c("patient1", "patient2", "patient3", 
+                        "patient4", "patient5", "patient6",
+                        "patient7", "patient8")
+
+mymatrix # Print out the matrix now
+```
+
+Once you have created a matrix, you can access the values in the elements of the matrix by using square brackets containing the indices of the row and column of the element. For example, if you want to access the value in the second row and fourth column of matrix mymatrix, you can type:
+
+```{r}
+mymatrix[2,4]
+```
+
+If you want to access all the values in a particular row of the matrix, you can just type the index for the row, and leave out the index for the column. For example, if you want to get the values in the second row of the matrix mymatrix, type:
+
+```{r}
+mymatrix[2,]
+```
+
+Likewise, if you want to get the values in a particular column of a matrix, leave out the index for the row, and just type the column index. For example, if you want to get the values in the fourth row of the mymatrix, type:
+
+```{r}
+mymatrix[,4]
+```
