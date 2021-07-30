@@ -1,0 +1,87 @@
+# Simulating random amino acid sequences
+
+**By**: Nathan Brouwer
+
+## Selecting random letters from a vector
+
+Make a vector with some letters
+```{r}
+my.letters <- c("A","B","C","D")
+```
+
+Use sample() to select one random letter
+
+```{r}
+sample(x = my.letters, size = 1, replace = T)
+```
+
+Select 10 letters, with replacement (replace = T), so that the same letter can occur more than once
+
+```{r}
+sample(x = my.letters, size = 10, replace = T)
+```
+
+Select 100 letters
+```{r}
+sample(x = my.letters, size = 10, replace = T)
+```
+
+
+## Select random letters from the whole alphabet
+
+The object LETTERS has the whole alphabet
+
+```{r}
+LETTERS
+```
+
+
+Select 10 letters from whole alphabet
+```{r}
+sample(x = my.letters, size = 10, replace = T)
+```
+
+
+## Select random amino acids to build polypeptide
+
+Make a vector of all letters that represent and amino acid
+```{r}
+all.aas <- c("A","C","D","E","F","G","H","I","K","L","M","N","P","Q","R","S","T","V","W","Y")
+```
+
+
+Randomly select an amino acid
+
+```{r}
+sample(x = all.aas, size = 1, replace = T)
+```
+
+Make a vector of 200 amino acids
+```{r, eval = F}
+sample(x = all.aas, size = 200, replace = T)
+```
+
+
+I may want to represent the size of the fake polypeptide with an object
+```{r, eval = F}
+my.polypep.size <- 200
+sample(x = all.aas, size = my.polypep.size, replace = T)
+```
+
+I can save this an object
+```{r}
+my.polypep.size <- 200
+my.pp <- sample(x = all.aas, size = my.polypep.size, replace = T)
+```
+
+I can make a single character string with not spaces using paste
+
+```{r}
+paste(x = my.pp,sep = "", collapse = "")
+```
+
+
+```{r}
+
+```
+

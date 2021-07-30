@@ -1,0 +1,175 @@
+# Intro to R objects
+
+**By**: Nathan Brouwer
+
+## Commands used
+
+* <-
+* c()
+* length()
+* dim()
+* is()
+* str()
+* dim()
+* list()
+
+
+
+
+## R Objects
+
+* Everything in R is an object, works with an object, tells you about an object, etc
+* We'll do a simple data analysis with a t.test and then look at properties of R objects
+* There are several types of objects: **vectors, matrices, lists, dataframes**
+* R objects can hold numbers, text, or both
+* A typical dataframe has columns of **numeric data** and colmns of text that represent **factor variables** (aka "**categoical variables**")
+
+
+
+## Differences between objects
+
+Different objects are used and show up in differnt contexts.
+
+* Most practical stats work in R is done with **dataframes** .  
+* A dataframe is kind of like a spreadsheet, loaded into R.
+* For the sake of simplicity, we often load data in as a **vector**.  This just makes things smoother when we are starting out.
+* **vectors** pop up in many places, usually in a support role until you start doing more programming.
+* **matrices** are occassionaly used for applied stats stuff but show up more for programming.  A matrix is like a stripped-down dataframe.
+* **lists** show up everywhere, but you often don't know it; many R functions make lists
+* Understanding **lists** will help you efficiently work with stats output and make plots.
+
+
+
+
+## The Data
+
+We'll use the following data to explore R objects.
+
+Motulsky 2nd Ed, Chapter 30, page 220, Table 30.1.  Maximal relaxaction of muscle strips of old and young rat bladders stimualted w/ high concentrations of nonrepinephrine (Frazier et al 2006).  Response variable is %E.max
+
+```{r, echo = F}
+
+#Old data
+old.E.max <- c(20.8,2.8,50.0,33.3,29.4,38.9, 29.4,52.6,14.3)
+
+#Young data
+young.E.max <- c(45.5,55.0, 60.7, 61.5, 61.1, 65.5,42.9,37.5)
+
+```
+
+
+
+## The assignment operator "<-" makes object
+
+The code above has made two objects.  We can use several commands to learn about these objects.
+
+* is(): what an object is, ie, vector, matrix, list, dataframe
+* length():how long an object is; only works with vectors and lists, not dataframes!
+* dim(): how long AND how wide and object is; doesn't work with vectors, only dataframes and matrices :(
+
+
+### is()
+
+What is our "old.E.max" object?
+
+```{r}
+
+is(old.E.max)
+is(young.E.max)
+```
+
+
+
+Its a vector, containing numeric data.
+
+
+What if we made a vector like this?
+```{r}
+cat.variables <- c("old","old","old","old",
+                   "old","old","old","old","old")
+```
+
+
+
+And used `is()`
+
+```{r}
+is(cat.variables)
+```
+
+It tells us we have a vector, containing chracter data.  Not sure why it feels the need to tell us all the other stuff...
+
+
+### length()
+
+Our vector has 9 elements, or is 9 elements long.
+```{r}
+length(old.E.max)
+```
+
+
+
+Note that `dim()`, for dimension, doens't work with vectors!
+
+```{r}
+dim(old.E.max)
+```
+
+It would be nice if it said something like "1 x 9" for 1 row tall and 9 elements long.  So it goes.
+
+
+### str()
+
+`str()` stands for "structure". 
+
+* It summarizes info about an object; 
+* I find it most useful for looking at lists.  
+* If our vector here was really really long, str() would only show the first part of the vector
+
+```{r}
+str(old.E.max)
+```
+
+
+
+### c()
+
+* We typically use `c()` to gather together things like numbers, as we did to make our objects above. 
+* note: this is *lower case* "c"! 
+* Uppercase is something else
+* For me, R's font makes it hard sometiems to tell the difference between "c" and "C"
+* If code isn't working, one problem might be a "C" instead of a "c"
+
+Use `c()` to combine two objects
+
+```{r}
+old.plus.new <- c(old.E.max, young.E.max)
+```
+
+
+
+Look at the legnth
+
+```{r}
+length(old.plus.new)
+```
+
+
+
+Note that `str()` just shows us the first few digits, not all 17
+```{r}
+str(old.plus.new)
+```
+
+
+
+
+## Debrief
+
+We can...
+
+* learn about objects using length(), is(), str()
+* access parts of list using $ (and also brackets)
+* access parts of vetors using square brackets [ ]
+* save the output of a model / test to an object
+* access part of lists for plotting instead of copying stuff

@@ -62,3183 +62,6 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# DNA descriptive statics - Part 1
-
-**By**: Avril Coghlan  
-
-**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
-
-## Preface
-
-This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  The text and code were originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
-
-## Writing TODO:
-
-* Add biology introduction
-* Work on flow
-* organize intial sections (intro, vocab, preliminaries)
-
-
-## Introduction
-
-<!-- Check the current status of the biology of this section -->
-<!-- ### Note on the biology in this section -->
-
-<!-- Some of the biology in this tutorial appears to be out of date.  Specifically, research on the biological basis of unusual frequencies of DNA "words" does not appear to be much current interest in bioinformatics and genomics.  (In contrast, methylation of bases within certain DNA words is being worked on.)  The examples are still good for practicing R skills. -->
-
-
-## Vocabulary
-
-* GC content
-* DNA words
-* scatterplots, histograms, piecharts, and boxplots
-
-
-## Functions
-* `seqinr::GC()`
-* `seqinr::count()`
-
-
-## Preliminaries
-
-```{r}
-library(compbio4all)
-library(seqinr)
-```
-
-
-
-
-## Converting DNA from FASTA format
-
-In a previous exercise we downloaded and examined DNA sequence in the FASTA format. The sequence we worked with is also stored as a data file within the `compbio4all` pa package and can be brought into memory using the `data()` command.
-
-```{r}
-data("dengueseq_fasta")
-```
-
-We can look at this data object with the `str()` command
-
-```{r}
-str(dengueseq_fasta)
-```
-
-This isn't in a format we can work with directly so we'll use the function fasta_cleaner() to set it up.
-
-```{r}
-header. <- ">NC_001477.1 Dengue virus 1, complete genome"
-dengueseq_vector <- compbio4all::fasta_cleaner(dengueseq_fasta)
-```
-
-
-Now check it out.
-```{r}
-str(dengueseq_vector)
-```
-
-What we have here is each base of the sequence in a seperate slot of our vector.
-
-The first four bases are "AGTT"
-
-We can see the first one like this
-```{r}
-dengueseq_vector[1]
-```
-
-The second one like this
-```{r}
-dengueseq_vector[2]
-```
-
-The first and second like this
-```{r}
-dengueseq_vector[1:2]
-```
-
-and all four like this
-```{r}
-dengueseq_vector[1:4]
-```
-
-
-## Length of a DNA sequence
-
-Once you have retrieved a DNA sequence, we can obtain some simple statistics to describe that sequence, such as the sequence’s total length in nucleotides. In the above example, we retrieved the DEN-1 Dengue virus genome sequence, and stored it in the vector variable dengueseq_vector To obtain the length of the genome sequence, we would use the length() function, typing:
-
-
-```{r}
-length(dengueseq_vector)
-```
-
-
-The length() function will give you back the length of the sequence stored in variable dengueseq_vector, in nucleotides. The length() function actually gives the number of **elements** (slots) in the input vector that you passed to it, which in this case in the number of elements in the vector dengueseq_vector. Since each element of the vector dengueseq_vector contains one nucleotide of the DEN-1 Dengue virus sequence, the result for the DEN-1 Dengue virus genome tells us the length of its genome sequence (ie. 10735 nucleotides long).
-
-### Base composition of a DNA sequence
-
-An obvious first analysis of any DNA sequence is to count the number of occurrences of the four different nucleotides (“A”, “C”, “G”, and “T”) in the sequence. This can be done using the the table() function. For example, to find the number of As, Cs, Gs, and Ts in the DEN-1 Dengue virus sequence (which you have put into vector variable dengueseq_vector, using the commands above), you would type:
-
-
-```{r}
-table(dengueseq_vector)
-```
-
-
-This means that the DEN-1 Dengue virus genome sequence has 3426 As occurring throughout the genome, 2240 Cs, and so forth.
-
-### GC Content of DNA
-
-One of the most fundamental properties of a genome sequence is its **GC content**, the fraction of the sequence that consists of Gs and Cs, ie. the %(G+C).
-
-The GC content can be calculated as the percentage of the bases in the genome that are Gs or Cs. That is, GC content = (number of Gs + number of Cs)*100/(genome length). For example, if the genome is 100 bp, and 20 bases are Gs and 21 bases are Cs, then the GC content is (20 + 21)*100/100 = 41%.
-
-You can easily calculate the GC content based on the number of As, Gs, Cs, and Ts in the genome sequence. For example, for the DEN-1 Dengue virus genome sequence, we know from using the table() function above that the genome contains 3426 As, 2240 Cs, 2770 Gs and 2299 Ts. Therefore, we can calculate the GC content using the command:
-
-```{r}
-(2240+2770)*100/(3426+2240+2770+2299)
-```
-
-
-Alternatively, if you are feeling lazy, you can use the GC() function in the SeqinR package, which gives the fraction of bases in the sequence that are Gs or Cs.
-
-```{r}
-seqinr::GC(dengueseq_vector)
-```
-
-The result above means that the fraction of bases in the DEN-1 Dengue virus genome that are Gs or Cs is 0.4666977. To convert the fraction to a percentage, we have to multiply by 100, so the GC content as a percentage is 46.66977%.
-
-### DNA words
-
-As well as the frequency of each of the individual nucleotides (“A”, “G”, “T”, “C”) in a DNA sequence, it is also interesting to know the frequency of longer **DNA words**, also referred to as **genomic words**. The individual nucleotides are DNA words that are 1 nucleotide long, but we may also want to find out the frequency of DNA words that are 2 nucleotides long (ie. “AA”, “AG”, “AC”, “AT”, “CA”, “CG”, “CC”, “CT”, “GA”, “GG”, “GC”, “GT”, “TA”, “TG”, “TC”, and “TT”), 3 nucleotides long (eg. “AAA”, “AAT”, “ACG”, etc.), 4 nucleotides long, etc.
-
-To find the number of occurrences of DNA words of a particular length, we can use the count() function from the R SeqinR package. 
-
-
-The count() function only works with lower-case letters, so first we have to use the tolower() function to convert our upper class genome to lower case
-
-```{r}
-dengueseq_vector <-tolower(dengueseq_vector)
-```
-
-Now we can look for words. For example, to find the number of occurrences of DNA words that are 1 nucleotide long in the sequence dengueseq_vector, we type:
-
-
-```{r}
-seqinr::count(dengueseq_vector, 1)
-```
-
-
-As expected, this gives us the number of occurrences of the individual nucleotides. To find the number of occurrences of DNA words that are 2 nucleotides long, we type:
-
-```{r}
-seqinr::count(dengueseq_vector, 2)
-```
-
-
-Note that by default the count() function includes all overlapping DNA words in a sequence. Therefore, for example, the sequence “ATG” is considered to contain two words that are two nucleotides long: “AT” and “TG”.
-
-If you type help(‘count’), you will see that the result (output) of the function count() is a table object. This means that you can use double square brackets to extract the values of elements from the table. For example, to extract the value of the third element (the number of Gs in the DEN-1 Dengue virus sequence), you can type:
-
-```{r}
-denguetable_2 <- seqinr::count(dengueseq_vector,2)
-denguetable_2[[3]]
-```
-
-The command above extracts the third element of the table produced by count(dengueseq_vector,1), which we have stored in the table variable denguetable.
-
-Alternatively, you can find the value of the element of the table in column “g” by typing:
-
-
-```{r}
-denguetable_2[["aa"]]
-```
-
-
-Once you have table you can make a basic plot
-```{r}
-barplot(denguetable_2)
-```
-
-We can sort by the number of words using the sort() command
-
-```{r}
-sort(denguetable_2)
-```
-
-
-Let's save over the original object
-```{r}
-denguetable_2 <- sort(denguetable_2)
-```
-
-
-```{r}
-barplot(denguetable_2)
-```
-
-R will automatically try to optimize the appearance of the labels on the graph so you may not see all of them; no worries.
-
-
-R can also make pie charts.  Piecharts only really work when there are a few items being plots, like the four bases.
-```{r}
-denguetable_1 <- seqinr::count(dengueseq_vector,1)
-```
-
-Make a piechart with pie()
-```{r}
-pie(denguetable_1)
-```
-
-
-
-
-
-### Summary
-
-In this practical, have learned to use the following R functions:
-
-length() for finding the length of a vector or list
-table() for printing out a table of the number of occurrences of each type of item in a vector or list.
-These functions belong to the standard installation of R.
-
-You have also learnt the following R functions that belong to the SeqinR package:
-
-GC() for calculating the GC content for a DNA sequence
-count() for calculating the number of occurrences of DNA words of a particular length in a DNA sequence
-
-
-## Acknowledgements
-
-This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  Almost all of text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
-
-In "A little book..." Coghlan noted: "Many of the ideas for the examples and exercises for this chapter were inspired by the Matlab case studies on Haemophilus influenzae (www.computational-genomics.net/case_studies/haemophilus_demo.html) and Bacteriophage lambda (http://www.computational-genomics.net/case_studies/lambdaphage_demo.html) from the website that accompanies the book Introduction to Computational Genomics: a case studies approach by Cristianini and Hahn (Cambridge University Press; www.computational-genomics.net/book/)."
-
-### License
-
-The content in this book is licensed under a Creative Commons Attribution 3.0 License.
-
-https://creativecommons.org/licenses/by/3.0/us/
-
-### Exercises
-
-Answer the following questions, using the R package. For each question, please record your answer, and what you typed into R to get this answer.
-
-Model answers to the exercises are given in Answers to the exercises on DNA Sequence Statistics (1).
-
-1. What are the last twenty nucleotides of the Dengue virus genome sequence?
-1. What is the length in nucleotides of the genome sequence for the bacterium Mycobacterium leprae strain TN (accession NC_002677)?
-Note: Mycobacterium leprae is a bacterium that is responsible for causing leprosy, which is classified by the WHO as a neglected tropical disease. As the genome sequence is a DNA sequence, if you are retrieving its sequence via the NCBI website, you will need to look for it in the NCBI Nucleotide database.
-1. How many of each of the four nucleotides A, C, T and G, and any other symbols, are there in the Mycobacterium leprae TN genome sequence?
-Note: other symbols apart from the four nucleotides A/C/T/G may appear in a sequence. They correspond to positions in the sequence that are are not clearly one base or another and they are due, for example, to sequencing uncertainties. or example, the symbol ‘N’ means ‘aNy base’, while ‘R’ means ‘A or G’ (puRine). There is a table of symbols at www.bioinformatics.org/sms/iupac.html.
-1. What is the GC content of the *Mycobacterium leprae TN* genome sequence, when (i) all non-A/C/T/G nucleotides are included, (ii) non-A/C/T/G nucleotides are discarded?
-Hint: look at the help page for the GC() function to find out how it deals with non-A/C/T/G nucleotides.
-1. How many of each of the four nucleotides A, C, T and G are there in the complement of the Mycobacterium leprae TN genome sequence?  *Hint*: you will first need to search for a function to calculate the complement of a sequence. Once you have found out what function to use, remember to use the help() function to find out what are the arguments (inputs) and results (outputs) of that function. How does the function deal with symbols other than the four nucleotides A, C, T and G? Are the numbers of As, Cs, Ts, and Gs in the complementary sequence what you would expect?
-1. How many occurrences of the DNA words CC, CG and GC occur in the Mycobacterium leprae TN genome sequence?
-1. How many occurrences of the DNA words CC, CG and GC occur in the (i) first 1000 and (ii) last 1000 nucleotides of the Mycobacterium leprae TN genome sequence?
-1.How can you check that the subsequence that you have looked at is 1000 nucleotides long?
-
-```{r}
-
-```
-
-
-<!--chapter:end:06-DNA_sequence_descriptive_stats-AC03-02.Rmd-->
-
-# Working with vectors and matrices
-
-**By**: Avril Coghlan.  
-
-**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/) with assistant from Havannah Tung.
-
-
-In previous practicals, you learned how to create different types of variables in R such as scalars, vectors and lists. Sometimes it is useful to create a variable before you actually need to store any data in the variable. To create a vector without actually storing any data in it, you can use the numeric() command to create a vector for storing numbers, or the character() command to create a vector for storing characters (eg. “A”, “hello”, etc.) For example, you may want to create a vector variable for storing the square of a number, and then store numbers in its elements afterwards:
-
-```{r}
-# Create a vector "myvector" for storing numbers
-myvector <- numeric()   
-
-# Fill in the values in the vector "myvector"
-for (i in 1:10){ 
-  myvector[i] <- i*i 
-  } 
-
-# Print out the vector "myvector"
-myvector                               
-```
-
-Note that if you try to store numbers in the elements of a vector that you have not yet created, you will get an error message, for example:
-```{r, eval = F}
-for (i in 1:10) { 
-  avector[i] <- i*i 
-  }  
-```
-
-Another very useful type of variable is a **matrix**. You can create a matrix in *R* using the *matrix()* command. If you look at the help page for the *matrix()* command, you will see that its arguments (inputs) are the data to store in the matrix, the number of rows to store it in, the number of columns to store it in, and whether to fill the matrix with data column-by-column or row-by-row. For example, say you have the heights and weights of eight patients in a hospital in two different vectors:
-```{r}
-heights <- c(180, 170, 175, 160, 183, 177, 179, 182)
-weights <- c(90, 88, 100, 68, 95, 120, 88, 93)
-```
-
-To store this data in a matrix that has one column per person, and one row for heights and one row for weights, we type:
-```{r}
-mymatrix <- matrix(c(heights,weights), 2, 8, byrow=TRUE)
-mymatrix # Print out the matrix
-```
-
-We needed to use the argument `byrow=TRUE` to tell the *matrix()* command to fill the matrix row-by-row (i.e.. to put the values from the vector heights into the first row of the matrix, and the values from the vector weights into the second row of the matrix).
-
-You can assign names to the rows and columns of a matrix using the rownames() and colnames() commands, respectively. For example, to assign names to the rows and columns of matrix mymatrix, you could type:
-```{r}
-rownames(mymatrix) <- c("height", "weight")
-colnames(mymatrix) <- c("patient1", "patient2", "patient3", 
-                        "patient4", "patient5", "patient6",
-                        "patient7", "patient8")
-
-mymatrix # Print out the matrix now
-```
-
-Once you have created a matrix, you can access the values in the elements of the matrix by using square brackets containing the indices of the row and column of the element. For example, if you want to access the value in the second row and fourth column of matrix mymatrix, you can type:
-
-```{r}
-mymatrix[2,4]
-```
-
-If you want to access all the values in a particular row of the matrix, you can just type the index for the row, and leave out the index for the column. For example, if you want to get the values in the second row of the matrix mymatrix, type:
-
-```{r}
-mymatrix[2,]
-```
-
-Likewise, if you want to get the values in a particular column of a matrix, leave out the index for the row, and just type the column index. For example, if you want to get the values in the fourth row of the mymatrix, type:
-
-```{r}
-mymatrix[,4]
-```
-
-<!--chapter:end:24-vectors_and_matrices.Rmd-->
-
-# A note on changes to database entries
-
-Sometimes databases entries not linked or database entries get removed.  When revising this chapter I had to update three of the accession numbers because the UniProt accessions in the original version weren't working for me.
-
-For example the original UniProt entry included in the chapter
-[E3M2K8](https://www.uniprot.org/uniprot/E3M2K8) does not currently link directly to the NCBI entry for this same protein.  Instead, I had to use the NCBI accession XP_003109757.1.  I'm not sure why this is.
-
-Two accession numbers in the original version of this chapter appear to have been removed from UniProt because they were preliminary and perhaps did not meet the quality standards for UniProt.  While the NCBI Gene and Protein are meant to be a record of *all* sequence, NCBI RefSeq and UniProt are carefully curated to contain information that is consistent, accurate, and represents biological reality.  
-
-Searching the UniProt data base for two accessions in the original version of this chapter,
-[E1FUV2](https://www.uniprot.org/uniprot/E1FUV2) (*Loa loa*) and
-[A8NSK3](https://www.uniprot.org/uniprot/A8NSK3)(*Brugia malayi*), both yielded the result: 
->"This entry is obsolete... this entry was deleted.  The protein sequence for this entry is available in UniParc. For previous versions of this entry, please look at its history."
-
-Looking at the history for the *Loa loa* version of the protein we can see it was listed as "unreviewed" prior to it being pulled and has the note "The sequence shown here is derived from an ... whole genome shotgun (WGS) entry which i preliminary data."  (https://www.uniprot.org/uniprot/E1FUV2.txt?version=9).  Once they got around to reviewing in, the curators at UniProt must have decided that it didn't meet the standards for inclusion in the database.  The information about the sequence in other databases, however, was not deleted, just the entry in UniProt.
-
-Most proteins are not experimentally studied in a lab, let alone their structure determined or their expression levels assessed.  They are therefore predicted to be real based on their similarity to proteins that have been studied in model organisms.  
-
-To track down these sequences, I used BLAST. BLASTing the well-studied model organism *C. elegans* version of the protein against the *Loa loa* genome resulted in a hypothetical protein [LOAG_18175](https://blast.ncbi.nlm.nih.gov/Blast.cgi#alnHdr_XP_020305433) a 93% query coverage with C. elegans and 44% identity.  The accession number for this predicted protein in NCBI is [XP_020305433.1](https://blast.ncbi.nlm.nih.gov/Blast.cgi#alnHdr_XP_020305433).  I similarly tracked down the accession for the *Brugia malayi* version of the protein.
-
-<!-- Turn this into an assignment. -->
-<!-- BLASTing the *C. elegans* version of the protein against the *Brugia malayi* genome resulted in a two high-ranked results.  I'll just consider the first because they are just different alternatively spliced versions of the same protein (consider, though how this could impact phylogenetic inference. The highest-ranked results was [BMA-SPN-4, isoform a] which also has  93% query coverage with *C. elegans* and 44% identity.  The accession number for this  protein in NCBI is [CRZ25068.1](https://www.ncbi.nlm.nih.gov/protein/CRZ25068.1?report=genbank&log$=protalign&blast_rank=1&RID=FXV3B98S016).  The other splice variant accession number CRZ25069.1 had almost the exact same results but was 9 amino acids longer.  The occurrence of two splice variants of this protein may have resulted in it being pulled from UniProt. -->
-
-<!--chapter:end:25-changes_to_database.Rmd-->
-
-# Writing functions - practice problems
-
-```{r  eval = T}
-library(compbio4all)
-```
-
-
-
-## Introduction
-
-Writing functions can be a hard skill to master.  Here are some practice problems.  A key is available.
-
-## Part 1: Pure practice
-
-### Practice Function 1: Hello world!
-
-Write a function that takes no arguement, and every time you run it says "Hello world!"  Call the function hello_world()
-
-### Practice Function 2: Hello _______ !
-
-Write a function that takes a word as an argument, and every time you run it says "Hello _____ ", where the blank is filled by the argument.  Try making the function with and without a default.  Call the function hello().
-
-**Advanced (for fun)**: Include in the function a test to see if what was passed to the arguement is a string and return the message "no valid string was entered" if something other than a string was entered.
-
-
-## Practice Function 3: Make you own natural log function
-
-R uses log() for natural and log10() for the base 10 log.  It would be easier for non-R peole to read code if there was a function with "e" in its name to indicate when the natural log is being used.  Write a function that takes a number as an argument and returns the natural log.  Call the function log_e
-
-**Advanced (for fun)**: make a function called my_log() that has an arguement "type" to specify the type of log you want.
-
-
-## Practice Function 4: Make function that converts DNA directly to RNA 
-
-The gsub() function can be used to replace characters in a string.  For example
-
-```{r}
-str <- "ATCG"
-gsub("T","U",str)
-
-
-str <- "ATTCG"
-gsub("T","U",str)
-
-str <- "ATTCGTTT"
-gsub("T","U",str)
-
-str <- "AAAA"
-gsub("T","U",str)
-```
-
-Create a function called dna_to_rna that takes a character string as an arguement and turns T to U.
-
-
-
-
-<!--chapter:end:_book60_programming-misc/prog_assignment-function_practice.Rmd-->
-
-# Computational Biology Portfolio: Practice Working with Strings
-
-```{r  eval = T}
-library(compbio4all)
-```
-
-
-
-
-
-
-## Introduction
-
-Gonder et al. (2007) published phylogenetic analyses of chimp population using the **XX Name of gene / sequence  XX** sequence from the chimp **XX Type of DNA - nuclear? mitochondrial? both XX**.  Gonder et al (2007) used both previously published and newly sequenced data to build their phylogenetic trees.  Chimp sequences were compared to **XX what was the outgroup?**.
-
-## Purpose
-
-**XX Write a brief summary of what this script does XX**.
-
-
-## Gonder et al 2007 data
-
-Gonder et al report their **XX What are these serial number thingy's called? XX** in two paragraphs.
-
-First, the previously published data they used was described as:
-
-> "We deposited all previously unpublished sequences in GenBank under the accession numbers DQ140188-DQ140269." (Gonder et al 2006 pg 1110)
-
-Second, the new sequences they worked up were described as:
-
-> "We obtained chimpanzee HVRI sequences from other studies from Gen-
-Bank under the accession numbers L35381–L35443, U77186–U77293,
-AFO59042–AFO59052, and AF137481–AF137412. We obtained human
-HVRI sequences from the Human Mitochondrial Genome Database
-(mtDB) at http://www.genpat.uu.se/mtDB/sequences.html. We aligned
-sequences from GenBank and mtDB with reference to sequences produced
-for the study. Sequences we produced and used correspond to bases
-16,048–16,391 of the human mtDNA Cambridge Reference Sequence
-(Andrews et al., 1999)."  (Gonder et al 2006 pg 1111)
-
-
-## Gonder et al 2007 new sequences
-
-
-The **XX What are these serial number thingy's called? XX** for their new sequences were reported as having the range:
-
-DQ140188-DQ140269
-
-This includes **XX How many sequences XX?** sequences.  **XX Describe what this code does in 1 to 2 sentences XX**
-
-### Creating the codes
-
-First, let me prepare some things
-
-```{r}
-## PREP
-
-## The first part of the code: letters
-prefix       <- "DQ"
-
-## The second part of the code:
-### Numeric
-### start
-suffix.start <- 140188
-
-### end
-suffix.end   <- 140269
-```
-
-Now I'll re-create the actual codes using seq() and paste()
-```{r}
-## RECREATE CODES
-
-## seq()
-## Use the seq() command to generate the whole range
-### of numeric values
-suffix <- seq(from = suffix.start, to = suffix.end, by = 1)
-
-## How many codes?
-length(suffix)
-
-## paste()
-## Use paste with sep = ""
-### 
-DQ.codes <- paste(prefix, suffix, sep = "")
-
-## check length
-length(DQ.codes)
-```
-
-### Selecting a code for demonstration
-
-The grep() function is a **XX What is the general name for the type of function grep() is? XX**?  I can use it to select particular elements from a vector containing text or numbers.  grep() is a difficult command to master and its VERY picky about its input.  I'm just going to demonstrate what it can do here - you'll need a lot of practice to get good with it.
-
-```{r}
-# Day of the month of was born
-## as CHARACTER data
-day.of.month.born <- "21"
-
-
-# What grep() does
-grep(pattern = day.of.month.born, # pattern to search for
-     x = DQ.codes)                   # where to search
-
-# storing grep() output
-my.DQ.index <- grep(pattern = day.of.month.born, 
-     x = DQ.codes)  
-```
-
-
-Locating a code to use
-```{r}
-DQ.codes[my.DQ.index]
-```
-
-I am going to use this code
-"DQ140221"
-
-When I enter it into the NCBI website I will drop the quotation marks
-
-DQ140221
-
-
-## Searching Genbank
-
-I searched the NCBI databases for this code (DQ140221) from this website
-
-https://www.ncbi.nlm.nih.gov/
-
-NCBI returned this summary
-
-https://www.ncbi.nlm.nih.gov/search/all/?term=DQ140221
-
-From the NCBI search results I search Genbank, which returned this entry.
-
-https://www.ncbi.nlm.nih.gov/nuccore/DQ140221.1/
-
-* The sequence is from **Pan troglodytes** with no subspecies specified.
-* The sequence is **344 bases long**
-* The authors are **Gonder et al. (unpublished)**
-* NCBI indicates that there are no publications linked to this entry.
-* NCBI indicates there is **1 "popset"** linked to this entry.  **The PopSet is available at https://www.ncbi.nlm.nih.gov/popset/?term=DQ140221**
-
-
-
-## Gonder et al 2007 previously published sequences
-
-The previously published sequences had the following code:
-
-* L35381–L35443 
-* U77186–U77293
-* AF059042–AF059052
-* AF137481–AF137412
-
-I selected the **XX what series? XX** series because **XX What did you select it?XX**.  This series has **XX after you work things up use length() to determine this number XX** codes in it.
-
-I then generate all the codes in the series and selected one that contained the day I was born.
-
-
-### Creating the codes
-
-First, let me prepare some things
-
-```{r}
-## PREP
-
-## The first part of the code: letters
-                      ##
-prefix       <- "DQ"  ##1) Change to your pick, L, U, or AF
-
-## The second part of the code:
-### Numeric
-### start
-                       ##
-suffix.start <- 140188 ##2a) Change to your pick
-                       ## MAKE SURE IT MATCHES THE PREFIX!
-
-### end
-                       ##
-                       ##2b) Change to your pick
-                       ## MAKE SURE IT MATCHES THE PREFIX
-suffix.end   <- 140269
-```
-
-Now I'll re-create the actual codes using seq() and paste()
-```{r}
-## RECREATE CODES
-
-## seq()
-## Use the seq() command to generate the whole range
-### of numeric values
-suffix <- seq(from = suffix.start, 
-              to = suffix.end, 
-              by = 1)
-
-## How many codes?
-              ##3)determine this and add it to the notes above
-
-
-## paste()
-## Use paste with sep = ""
-### 
-DQ.codes <- paste(prefix, 
-                  suffix, 
-                  sep = "")
-
-## check length
-
-
-```
-
-### Selecting a code for demonstration
-
-
-```{r}
-# Day of the month of was born
-## as CHARACTER data
-                       ##4) Change to a number 1 to 31
-day.of.month.born <- "21"
-
-
-# What grep() does
-grep(pattern = day.of.month.born, # pattern to search for
-     x = DQ.codes)                # where to search
-
-# storing grep() output
-my.DQ.index <- grep(pattern = day.of.month.born, 
-     x = DQ.codes)  
-```
-
-
-Locating a code to use
-```{r}
-DQ.codes[my.DQ.index]
-```
-
-I am going to use this code
-""   
-
-When I enter it into the NCBI website I will drop the quotation marks
-
-
-
-
-## Searching Genbank
-
-I searched the NCBI databases for this code (**## YOUR CODE HERE##**) from this website
-
-https://www.ncbi.nlm.nih.gov/
-
-NCBI returned this summary
-
-**## YOUR summary HERE##**
-
-From the NCBI search results I search Genbank, which returned this entry.
-
-**## YOUR genebank entry HERE##**
-
-* The sequence is from **##YOUR SPECIES w/SUBSPECIES if listed##** with no subspecies specified.
-* The sequence is **##YOUR SEQUENCE LENGTH##**
-* The authors are **##YOUR AUTHORS HERE##**
-* NCBI indicates **##NUMBER OF PUBLICATIONS IF ANY LINKED##**.
-* NCBI indicates there is **##NUMBER OF POPSETS IF ANY ##** linked to this entry.  **##LINK TO POPSET##**
-
-<!--chapter:end:_book60_programming-misc/prog_assignment-regex-accessions.Rmd-->
-
-# Writing user-friendly functions
-
-A function to simulate a random sequence
-
-## Version 1
-
-```{r}
-r_molec_seq_vs1 <- function(units,
-                        prob,
-                        length){  
-  # create sequnce
-  ## "units" = molecular subunits to sample from
-  ### can be DNA (ATCG), mRNA, amino acids, etc
-  ## "length" = length of squence to generate
-  ## "prob" = probablity of sampling an element of "units"
-  seq.n.i <- sample(x = units, 
-                  size = length, 
-                  replace = TRUE, 
-                  prob = prob)
-  
-  # convert to charater string
-  seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
-  
-  # return result
-  return(seq.n.i)
-  
-}
-```
-
-
-Test the function.  There's no defaults so it
-```{r, eval = F}
-r_molec_seq_vs1()
-```
-
-```{r}
-r_molec_seq_vs1(units =c("A","T","C","G"),
-                prob = c(0.25,0.25,0.25,0.25),
-                length = 10)
-
-```
-
-
-Test with real data, the Robinson and Robinson amino acid frequencies
-```{r}
-data(robinson_aafreq)
-r_molec_seq_vs1(units = robinson_aafreq$aa1,
-                prob = robinson_aafreq$aa.freq,
-                length = 10)
-```
-
-
-
-## Version 2
-
-Add defaults for units and prob
-
-```{r}
-r_molec_seq_vs2 <- function(units = c("A","T","C","G"),
-                            prob  = c(0.25,0.25,0.25,0.25),
-                            length){  
-  
-  seq.n.i <- sample(x = units, 
-                  size = length, 
-                  replace = TRUE, 
-                  prob = prob)
-  
-  seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
-  
-  return(seq.n.i)
-  
-}
-```
-
-
-Now it works even if all we give it is a length
-```{r}
-r_molec_seq_vs2(length = 100)
-```
-
-
-## Version 3
-
-Now we'll give it a deafult for length
-```{r}
-r_molec_seq_vs3 <- function(units = c("A","T","C","G"),
-                            prob  = c(0.25,0.25,0.25,0.25),
-                            length = 100){  
-  
-  seq.n.i <- sample(x = units, 
-                  size = length, 
-                  replace = TRUE, 
-                  prob = prob)
-  
-  seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
-  
-  return(seq.n.i)
-  
-}
-```
-
-
-Now it works even if the parentheses are empty
-```{r}
-r_molec_seq_vs3()
-```
-
-
-## Version 4: Adding conditions and warnigns
-
-This version tests whether the function in being run with the defaults, and throws a warning if that's true.  The defaults are meant just for testing the function, and if someone runs the function with the defaults it might be that they forgot to change them.
-```{r}
-r_molec_seq_vs4 <- function(units = c("A","T","C","G"),
-                            prob  = c(0.25,0.25,0.25,0.25),
-                            length = 100){ 
-  
-  if(all(units  == c("A","T","C","G")) == TRUE &
-     all(prob   == c(0.25,0.25,0.25,0.25)) == TRUE &
-     length == 100){
-    warning("Note: all parameters set to defaults.  Did you want to change something?")
-     }
-  
-  seq.n.i <- sample(x = units, 
-                  size = length, 
-                  replace = TRUE, 
-                  prob = prob)
-  
-  seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
-  
-  return(seq.n.i)
-  
-}
-```
-
-This throws a warning
-```{r}
-r_molec_seq_vs4()
-```
-
-This doesnt
-```{r}
-r_molec_seq_vs4(prob = c(0.3,0.3,0.2,0.2))
-```
-
-
-## Version 5
-
-Here I've added an additional condition to ask whether the user wants to return a string or a vetor.
-
-```{r}
-r_molec_seq_vs5 <- function(units = c("A","T","C","G"),
-                            prob  = c(0.25,0.25,0.25,0.25),
-                            length = 100,
-                             as.string = TRUE){ 
-  
-  if(all(units  == c("A","T","C","G")) == TRUE &
-     all(prob   == c(0.25,0.25,0.25,0.25)) == TRUE &
-     length == 100){
-    warning("Note: all parameters set to defaults.  Did you want to change something?")
-     }
-  
-  seq.n.i <- sample(x = units, 
-                  size = length, 
-                  replace = TRUE, 
-                  prob = prob)
-  
-  if(as.string == TRUE){
-    seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
-  
-  }
-  
-  return(seq.n.i)
-  
-}
-```
-
-Return as a vectro
-```{r}
-r_molec_seq_vs5(prob = c(0.3,0.3,0.2,0.2), 
-                as.string = F,
-                length = 10)
-```
-
-Return as a string
-```{r}
-r_molec_seq_vs5(prob = c(0.3,0.3,0.2,0.2), 
-                as.string = T,
-                length = 10)
-```
-
-The default is to return a string, so as.string = T is option
-
-```{r}
-r_molec_seq_vs5(prob = c(0.3,0.3,0.2,0.2), 
-                length = 10)
-```
-
-
-
-```{r}
-
-```
-
-
-<!--chapter:end:_book60_programming-misc/prog_functions_advanced_random_molec_seq.Rmd-->
-
-# Intro to R objects
-
-## Commands used
-
-* <-
-* c()
-* length()
-* dim()
-* is()
-* str()
-* dim()
-* list()
-
-
-
-
-## R Objects
-
-* Everything in R is an object, works with an object, tells you about an object, etc
-* We'll do a simple data analysis with a t.test and then look at properties of R objects
-* There are several types of objects: **vectors, matrices, lists, dataframes**
-* R objects can hold numbers, text, or both
-* A typical dataframe has columns of **numeric data** and colmns of text that represent **factor variables** (aka "**categoical variables**")
-
-
-
-## Differences between objects
-
-Different objects are used and show up in differnt contexts.
-
-* Most practical stats work in R is done with **dataframes** .  
-* A dataframe is kind of like a spreadsheet, loaded into R.
-* For the sake of simplicity, we often load data in as a **vector**.  This just makes things smoother when we are starting out.
-* **vectors** pop up in many places, usually in a support role until you start doing more programming.
-* **matrices** are occassionaly used for applied stats stuff but show up more for programming.  A matrix is like a stripped-down dataframe.
-* **lists** show up everywhere, but you often don't know it; many R functions make lists
-* Understanding **lists** will help you efficiently work with stats output and make plots.
-
-
-
-
-## The Data
-
-We'll use the following data to explore R objects.
-
-Motulsky 2nd Ed, Chapter 30, page 220, Table 30.1.  Maximal relaxaction of muscle strips of old and young rat bladders stimualted w/ high concentrations of nonrepinephrine (Frazier et al 2006).  Response variable is %E.max
-
-```{r, echo = F}
-
-#Old data
-old.E.max <- c(20.8,2.8,50.0,33.3,29.4,38.9, 29.4,52.6,14.3)
-
-#Young data
-young.E.max <- c(45.5,55.0, 60.7, 61.5, 61.1, 65.5,42.9,37.5)
-
-```
-
-
-
-## The assignment operator "<-" makes object
-
-The code above has made two objects.  We can use several commands to learn about these objects.
-
-* is(): what an object is, ie, vector, matrix, list, dataframe
-* length():how long an object is; only works with vectors and lists, not dataframes!
-* dim(): how long AND how wide and object is; doesn't work with vectors, only dataframes and matrices :(
-
-
-### is()
-
-What is our "old.E.max" object?
-
-```{r}
-
-is(old.E.max)
-is(young.E.max)
-```
-
-
-
-Its a vector, containing numeric data.
-
-
-What if we made a vector like this?
-```{r}
-
-cat.variables <- c("old","old","old","old",
-                   "old","old","old","old","old")
-
-
-```
-
-
-
-And used is()
-
-```{r}
-
-is(cat.variables)
-
-```
-
-It tells us we have a vector, containing chracter data.  Not sure why it feels the need to tell us all the other stuff...
-
-
-### length()
-
-Our vector has 9 elements, or is 9 elements long.
-```{r}
-
-length(old.E.max)
-
-```
-
-
-
-Note that dim(), for dimension, doens't work with vector
-
-```{r}
-
-dim(old.E.max)
-
-```
-
-It would be nice if it said somethign like "1 x 9" for 1 row tall and 9 elements long.  So it goes.
-
-
-
-### str()
-
-str() stands for "structure". 
-
-*It summarizes info about an object; 
-* I find it most useful for looking at lists.  
-* If our vector here was really really long, str() would only show the first part of the vector
-
-```{r}
-
-str(old.E.max)
-
-
-```
-
-
-
-### c()
-
-* We typically use c() to gather together things like numbers, as we did to make our objects above. 
-* note: this is lower case "c"! 
-* Uppercase is something else
-* For me, R's font makes it hard sometiems to tell the difference between "c" and "C"
-* If code isn't working, one problem might be a "C" instead of a "c"
-
-Use c() to combine two objects
-
-```{r}
-old.plus.new <- c(old.E.max, young.E.max)
-```
-
-
-
-Look at the legnth
-
-```{r}
-length(old.plus.new)
-```
-
-
-
-Note that str() just shows us the first few digits, not all 17
-```{r}
-str(old.plus.new)
-```
-
-
-
-
-
-## You can save statistical output as an object
-
-We can run a t.test like this, and the output goes to R's "console"
-
-```{r}
-
-t.test(old.E.max, young.E.max)
-
-```
-
-
-
-We can save the output to an object using the assignment operator
-
-```{r}
-
-rat.t.test <- t.test(old.E.max, young.E.max)
-
-```
-
-
-
-Then call up the output like this
-
-```{r}
-
-rat.t.test
-
-```
-
-
-
-
-
-## How does R save statistical output
-
-
-Let's use is() and str() to see what this rat.t.test object really is
-```{r}
-
-is(rat.t.test)
-
-```
-
-
-
-* Its an "htest" class of object.  Probably means "hypothesis test".  
-* Many R functions make their own special classes of objects
-* For example, the lm() function for linear regresssion (aka "linear model") makes an "lm" class of object
-* Many classes of objects behave like lists, as we'll explain below
-
-
-Let's use str()
-
-```{r}
-
-str(rat.t.test)
-
-```
-
-
-
-* Interesting; lots of stuff.  
-* THe first thing it says is "List of 9".  So its a list
-* Note that each one of these things corresponds to what is printed out as the output of t.test
-* (A peek a deepR: The difference between what str() is showing us and the organized table we get from running t.test has to do with what is known as the "print method" and how it interacts with objects of class htest.)
-
-
-
-
-
-
-## Lists in R
-
-* I used R for years without ever making a list
-* But lists are everywhere in R
-* Learning how to access lists can greatly aid in working with the output of statistical models and test
-* This is especially true when plotting
-* Components in lists can be accessed two different ways: using dollar signs $ and using square brackets [ ]
-* (the same is true for dataframes)
-* We'll focus on using dollar signs $
-
-If I run just the name of the object, I get all of the output of the list
-```{r}
-
-rat.t.test
-
-```
-
-
-
-Say I want to just see the p-value.  I can use the dollar sign like this
-
-```{r}
-
-rat.t.test$p.value
-
-```
-
-
-
-What about the "test statisic?"
-```{r}
-
-rat.t.test$statistic
-
-```
-
-
-
-The means of each group (old vs yound)
-```{r}
-
-rat.t.test$estimate
-
-```
-
-
-
-Try to get the confidence intervals ("confint"; answer below) ...
-
-```{r}
-
-#Type your attempt here:
-
-
-
-
-
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Confidence interval from t.test object:
-
-```{r}
-
-rat.t.test$conf.int
-
-```
-
-Do you know what this confidence interval means in this context?
-
-
-
-
-
-# An aside about t-tests
-
-* We often say we use a t-test to "test whether the means of 2 groups are different"
-* This is true, but the actual math is a bit different
-* If two groups have the same mean, the **difference** between those means should be approximatley zero
-* Any difference between those two groups is do to random noise / sampling variation / bad luck etc.
-* Mathematically, what a t-test does is test whether the **difference between two means** is statistically difference from 0.0
-* The **confidence interval** provided by t.test() is the the 95% CI around the difference between the 2 means.
-* If this CI is contains zero, we would say that the two means are not statistically diffrence from zero
-* Therefore, the two groups are not different
-
-
-
-
-
-# Working with square brackets
-
-* t.test doesn't directly give you the difference between the two means
-* we can calcualte it easily like this
-
-```{r}
-
-30.16667 - 53.71250 
-
-```
-
-
-
-Or like this
-```{r}
-
-mean(old.E.max) - mean(young.E.max)
-
-```
-
-
-
-
-Challenge: can you save the output from the mean() commands to objects, then do math on those objects?  Answer below...
-
-```{r}
-#Type your attempt here:
-
-
-
-
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Make objects holding the means
-
-```{r}
-
-#old
-old.mean   <- mean(old.E.max) 
-
-#young
-young.mean <- mean(young.E.max)
-
-```
-
-
-Subtract them
-```{r}
-
-old.mean - young.mean
-
-```
-
-
-
-
-Instead of calcuating the mean and their difference by hands let's get the info from the t.test output.  
-
-First, get the means.  Recall that for some reason they are called the "estimate"  Answer below...
-
-
-```{r}
-#Type your attempt here:
-
-
-
-
-
-```
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-  
-```{r}
-
-rat.t.test$estimate
-
-```
-
-
-
-Save this to an object
-```{r}
-
-rat.means <- rat.t.test$estimate
-
-```
-
-
-
-Take a look with length(), is() and str()
-
-```{r}
-#what is this object?
-is(rat.means)
-
-#how long is the vector?
-length(rat.means)
-
-#take a peek at it
-str(rat.means)
-
-```
-
-
-
-*Aside: This vector also happens to have labels attached to it, which we can access with the names() command*
-
-```{r}
-names(rat.means)
-```
-
-
-
-
-
-## Square brackets for real
-
-Now let's use this object to calcualte the difference between the means.  
-
-* length() told is that the vector object has length of 2.  
-* Each number in the vector is an "element"
-* we can select elements using square brackets
-
-The first element
-```{r}
-
-rat.means[1]
-
-```
-
-
-The 2nd element
-```{r}
-
-rat.means[2]
-
-```
-
-Note that it gets angry if we try to access the 5th element
-```{r}
-
-rat.means[5]
-
-```
-
-## Difference between means using square brackets
-
-Can you figure out how to calcualte the difference using our rat.means objects and square brackets?
-
-```{r}
-#Type your answer here:
-```
-
-
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-
-
-
-
-
-
-
-
-
-  
-```{r}
-
-rat.means[1] - rat.means[2]
-
-```
-
-Let's save that to an object
-
-```{r}
-
-diff.means <- rat.means[1] - rat.means[2]
-
-```
-
-
-
-
-
-
-## Upshot: plotting output of an R statistical test
-
-* The best way to make a plot of the results of a statistical test or model is to plot the "Effect size" and its confidence interval
-* For a t-test, the effect size is the difference between the means
-* This is important b/c the effect size is the most direct representation of what the test is doing
-* In contrast, people often plot group means with the confidence intervals.  
-* THis is fine, but isn't representing what the test is doing
-* (We'll talk a lot in this class about effect sizes...)
-
-How would we take the results of this t.test and plot it?
-
-* **Old school:** Pen and paper (if it were the 1980s...)
-* **What many people do:** Type numbers into Excel and make boxplots :(
-* **Not bad:** Type numbers into new data objects and make plots in R
-* **Best:** Access data from the lists and plot in R :)
-
-
-
-
-## The "not bad way": typing directly into R
-
-### "NOt bad way" with a bar plot
-
-We already have our difference between means
-```{r}
-
-diff.means
-
-```
-
-
-
-Let's make an object with the confidence interval
-```{r}
-
-ci <- c(-37.501081,-9.590586)
-
-```
-
-
-
-We can load the barplot2() function from gplots() and plot the data.  
-* Use library(gplots) to load the package
-* you can get so called "help" for barplot2 using ?barplot2
-* we want to use the height =.., plot.ci = TRUE, ci.l=, and ci.u= "arguements" of the function
-
-A very very ugly plot of just the mean
-```{r}
-
-library(gplots)
-barplot2(height = diff.means)
-
-```
-
-
-Try to add the rest of the info.  Hint: to get the lower ci access the 1st elemtn of our confidence itnerval object, ci, using square brackets
-```{r}
-#Your attempt:
-
-
-
-
-
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-```{r}
-library(gplots)
-pinkunicorn <- rat.t.test$conf.int
-  
-barplot2(height = diff.means,
-         plot.ci = TRUE,
-         ci.l=pinkunicorn[1],      #ci.l = lower CI
-         ci.u = pinkunicorn[2])    #ci.u = upper CI
-
-```
-
-Ok, this is pretty ugly but its technically correct.
-
-
-
-### "NOt bad way" with using a single dot
-
-* The gplots package has a function plotCI() which plots means as dots, instead of bars, and puts a CI around them
-* Note that the instead of ci.l= it uses li = for the lower limit
-* ... and instead of ci.u = it uses ui
-
-```{r}
-
-plotCI(x = diff.means,
-        li= ci[1],       #use "li", not "ci.l"!
-        ui = ci[2])
-
-```
-
-
-#### Making the plot better part 1
-
-* Since our hypothesis test is with respect to zero (no difference between means) we should include it as  reference point.
-* Most plotting functions can take on the arguement xlim = and ylim = 
-* You can play with its values to it suits your tastes
-
-```{r}
-
-plotCI(x = diff.means,
-       li=ci[1],         #use "li", not "ci.l"!!!!
-        ui = ci[2],
-        ylim = c(-40,5))  #y limits
-
-```
-
-
-
-Note that we can use a vector here with the ylim = arguement instead of nubmers.
-
-```{r}
-
-#make a vector containing the plotting limits
-ylimits <- c(-40,5)
-
-#plot
-plotCI(x = diff.means,
-       li=ci[1],
-        ui = ci[2],
-       ylim = ylimits)  #use vector of values for limits
-
-```
-
-
-
-
-#### Making the plot better part 2
-
-* To be really specific we could plot a line at 0.0 that shows the hypothesis being tested.  
-* The abline() function can plot lines at different angles.
-* the "ab" part relates to the common geometric formula for a line, y = m*x + b
-* or rather y = a*x+b
-* for just a horizontal line we can use abline(h = 0)
-
-
-Make a plot with line
-```{r}
-
-#make the plot
-plotCI(x = diff.means,
-       li=ci[1],
-        ui = ci[2],
-       ylim = ylimits) 
-
-#add the line
-abline(h = 0)
-
-```
-
-
-
-
-
-To change the colors of thigns we can use the col = arguement within abline.  col = 2 makes a red line  Try it
-
-```{r}
-# Your attempt
-
-
-
-
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Dot plot with red line at zero
-
-```{r}
-#make the plot
-plotCI(x = diff.means,
-       li=ci[1],
-        ui = ci[2],
-       ylim = ylimits) 
-
-#add the line
-abline(h = 0, col = 2)
-```
-
-
-
-* We can change the type of line from solid to dashed using the arguement "lty" for "line type"
-* lty = 1 is a solid line,
-* lty = 2 is a dashed line
-
-
-
-```{r}
-#Try it
-
-
-
-
-
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Answer:
-```{r}
-
-#make the plot
-plotCI(x = diff.means,
-       li=ci[1],
-        ui = ci[2],
-       ylim = ylimits) 
-
-#add the line
-abline(h = 0, col = 2, lty = 2)
-
-```
-
-
-
-
-## The best way
-
-Recall all of this stuff is in a list from the t.test
-
-```{r}
-rat.t.test
-```
-
-We can acceess components of lists using dollar signs $
-```{r}
-
-rat.t.test$conf.int
-
-```
-
-What if we want jsut the first confidence limt?  We can combine using a dollar sign and brackets
-
-```{r}
-rat.t.test$conf.int[1]
-```
-
-<br.
-
-We can therefore access everything directly from out t.test output when we plot.  First, let's use our diff.means for the mean difference and access the confidence intervals directly
-
-```{r}
-
-#make the plot
-plotCI(x = diff.means,
-       li= rat.t.test$conf.int[1],
-        ui = rat.t.test$conf.int[2],
-       ylim = ylimits) 
-
-#add the line
-abline(h = 0, col = 2, lty = 2)
-```
-
-
-
-This will get a big ugly, but let's even get our mean difference from the t.test object.  We'll do this by using rat.t.test$estimate[1] - rat.t.test$estimate[2]
-
-```{r}
-
-#make the plot
-plotCI(x = rat.t.test$estimate[1] -
-           rat.t.test$estimate[2],
-       li= rat.t.test$conf.int[1],
-        ui = rat.t.test$conf.int[2],
-        ylim = ylimits) 
-
-#add the line
-abline(h = 0, col = 2, lty = 2)
-```
-
-
-
-
-### A final fancy touch
-
-* Say we want to add the p-value for the test to this effect size plot.
-* We can do this with the text() command like this
-
-```{r}
-#make the plot
-plotCI(x = rat.t.test$estimate[1] -
-           rat.t.test$estimate[2],
-       li= rat.t.test$conf.int[1],
-        ui = rat.t.test$conf.int[2],
-        ylim = ylimits) 
-
-#add the line
-abline(h = 0, col = 2, lty = 2)
-
-# ADD THE TEXT
-text(x = 0.7627,   #x coordiante
-     y = -2.2,      #y coord
-     "p = 0.002") #text: the p values
-```
-
-
-
-
-Since we know how to access stuff from R objects we can do this also be 
-
-```{r}
-#make the plot
-plotCI(x = rat.t.test$estimate[1] -
-           rat.t.test$estimate[2],
-       li= rat.t.test$conf.int[1],
-        ui = rat.t.test$conf.int[2],
-        ylim = ylimits) 
-
-#add the line
-abline(h = 0, col = 2, lty = 2)
-
-# ADD THE TEXT
-text(x = 0.627,   #x coordiante
-     y = -2,      #y coord
-     rat.t.test$p.value) #text: the p values
-```
-
-
-
-
-Note that its plotted off center.  
-* This is annoying deafult of text().
-* this is fixed using pos = 4 to plot to the right of the coordinates you define
-
-
-```{r}
-#make the plot
-plotCI(x = rat.t.test$estimate[1] -
-           rat.t.test$estimate[2],
-       li= rat.t.test$conf.int[1],
-        ui = rat.t.test$conf.int[2],
-        ylim = ylimits) 
-
-#add the line
-abline(h = 0, col = 2, lty = 2)
-
-# ADD THE TEXT
-text(x = 0.627,   #x coordiante
-     y = -2,      #y coord
-     pos = 4,
-     rat.t.test$p.value) #text: the p values
-```
-
-
-
-
-
-Now maybe we should round this using the round() command
-* round(..., 3) will rond to 3 decimal places
-
-```{r}
-#make the plot
-plotCI(x = rat.t.test$estimate[1] -
-           rat.t.test$estimate[2],
-       li= rat.t.test$conf.int[1],
-        ui = rat.t.test$conf.int[2],
-        ylim = ylimits) 
-
-#add the line
-abline(h = 0, col = 2, lty = 2)
-
-# ADD THE TEXT
-text(x = 0.627,   #x coordiante
-     y = -2,      #y coord
-     pos = 4,
-     round(rat.t.test$p.value,3)) #text: the p values
-```
-
-
-
-
-## Debrief
-
-We can...
-
-* learn about objects using length(), is(), str()
-* access parts of list using $ (and also brackets)
-* access parts of vetors using square brackets [ ]
-* save the output of a model / test to an object
-* access part of lists for plotting instead of copying stuff
-
-<!--chapter:end:_book60_programming-misc/prog_R_objects_n_at-uses-barplot2.Rmd-->
-
-# or loops in R - copy? alt?
-
-<!-- TODO: merge? cut? -->
-
-## Introduction
-
-There are several way to write for() loops in R.  For this assignment, I asked you to write a loop which printed out each letter of the alphabet. 
-
-There are several ways to write a for loop in R.  I will show several different ways.  Out of habitat I will generally use the style of (for i in 1:length(x)), though this is not an optimal way to do things.  I will discuss this way as well as some more sounds approaches.
-
-## Reminders
-
-R has a built in object with has the data, called LETTERS.
-
-```{r}
-LETTERS
-```
-
-
-The object LETTERS is a vector containing character data.
-
-```{r}
-is(LETTERS)
-```
-
-We we access each element of a vector with its index number. To get "A"
-
-```{r}
-LETTERS[1]
-```
-
-To get "Z"
-```{r}
-LETTERS[26]
-```
-
-If I want, I can access a given letter by assigning its index number to an object.  Say I assign 26 to the letter i
-
-```{r}
-i <- 26
-```
-
-
-I can get Z like this then
-
-```{r}
-
-LETTERS[i]
-
-```
-
-
-
-## For loop 1: The hard-coded for loop (aka, the don't actually do this for loop)
-
-This is a bad way to do a for loop but makes the process totally transparent.  There are 26 letters in the alphabet, so there are 26 elements in the vector LETTERS.  Therefore, what we want R to do - print out a letter from the alphabet - need to be repeated 26 times.  So our for loop needs to repeat the same action 26 times.
-
-We can make an **index** for R like this
-```{r}
-1:26
-```
-
-Similarly, we could do this
-
-```{r}
-c(1:26)
-```
-
-
-The colon in R is used to expand a sequence of numbers.  Its a shortcut for the seq() command.
-
-```{r}
-seq(from = 1, to = 26, by = 1)
-```
-
-Remember that index values can be used to pull out elements from a vectors.  So as noted above if I want to print the letter A, which is stored in the first element of the LETTERS vector, I can do this
-
-```{r}
-LETTERS[1]
-```
-
-If I want, I could store this output in a an object
-
-```{r}
-letter.A <- LETTERS[1]
-letter.A
-```
-
-
-
-What a for loop can do is cycle through each index value, 1 to 26, and put it in between the bracket. It would look like this loop below;note that I added an extra step where I print out the index value.
-
-```{r}
-for(i in 1:26){
-  print(i)                #print the index
-  letter.i <- LETTERS[i]  #get leter i
-  print(letter.i)         #print letter i
-}
-```
-
-
-In this loop I used 1:26 for my index. This is **hard coding** the index values, which is never a good idea.  But for the sake of illustration i makes it totally obvious what we're doing.  
-
-
-As I said above 1:26 is the same as c(1:26), so this loop does the same thing
-
-```{r, eval = F}
-for(i in 1:26){
-  letter.i <- LETTERS[i]  #get leter i
-  print(letter.i)         #print letter i
-}
-```
-
-The colon : is a shortcut for the seq() command; if I wanted to be 100% transparent to someone who didn't know R I could write this:
-```{r, eval = F}
-for(i in seq(from = 1, to = 26, by = 1)){
-  letter.i <- LETTERS[i]  #get leter i
-  print(letter.i)         #print letter i
-}
-```
-
-
-The step of assigning the current letter indexed by i to an object letter.i isn't actually necessary.  I could simplify the code like this by **nesting** the LETTERS[i] statement within the print() statement.  The letter indexed by i therefore gets pulled up and directly **passed** to print().
-
-```{r, eval = F}
-for(i in 1:26){
-  print(LETTERS[i])         #print letter i
-}
-```
-
-Lines and spacing are arbitrary in R.  When a for loop is short you may see people do this to save space.
-
-```{r, eval = F}
-for(i in 1:26){ print(LETTERS[i]) }
-```
-
-Or even this, dropping the curly braces.
-```{r, eval = F}
-for(i in 1:26) print(LETTERS[i])  
-```
-
-Some people value compact code; there's no penalty in any way for using multiple lines so its generally considered best practice to split code over more lines rather than fewer.
-
-
-## For loop 3: the classic for loop
-
-A common way to code for loops is to use a function like length() for vectors or dim() for matrices to determine how many times a loop must repeat its action.  Instead of hard-coding 1:26 to get the values 1, 2, 3,... 26 I can do this:
-
-```{r}
-1:length(LETTERS)
-```
-
-This is useful in more complex situations where you could end up changing how many elements are in LETTERS. For this approach,the for loop looks like this
-
-```{r, eval= F}
-for(i in 1:length(LETTERS)){
-  letter.i <- LETTERS[i]  #get leter i
-  print(letter.i)         #print letter i
-}
-```
-
-In this formulation, R is making an index 1 to 26 based on the length of LETTERS. Its then assigning a value to i each time it goes through the loop. Then it pulls out the appropriate letter based on i.  This is basically the same as the first example, just the values of the index, 1 to 26, is determine by R and not set by hand.
-
-I've written hundreds of loops this way an it this way works just fine.  However, in more complicated code a problem can arise if someone a 0 gets its way into a loop.  See https://jef.works/R-style-guide/#loops for a reference to this.
-
-The code below is optional, but if your curious it displays a behavior which may not be desirable.
-
-```{r}
-bad.index <- NULL
-length(bad.index)
-
-for(i in 1:length(bad.index)){
-  print(bad.index[i])
-}
-```
-
-This problem is most likely to arise when a for loop is embedded in a larger program and vectors like LETTERS get generated by one part of the program and get fed later into the loop.
-
-For this course I will probably continue to use the general format of for(i in 1:length(x)) out of habit.  Hopefully by next year I'll be re-trained to use one of the techniques shown below.
-
-## For loop 3: The Power-user for loop
-
-Probably the cleanest way to do a for loop in R is like this next example. A scientific survey on Twitter indicates that this how the cool kids write their loops.
-
-In this version, R steps through each element of the vector LETTERS and on the fly assigns that element to the object i.  Print then tells R to print the letter to the console.
-
-```{r, eval = F}
-
-for(i in LETTERS){
-  print(i)
-}
-
-```
-
-
-Note that if we leave out print() then we get blank screen. R is basically just reading the numbers to itself.
-
-```{r, eval = F}
-for(i in LETTERS){
- i
-}
-
-```
-
-
-The use if "i" is arbitrary.  We could just j instead
-
-```{r, eval = F}
-for(j in LETTERS){
- print(j)
-}
-
-```
-
-
-To remember this format it might be useful to think about it like this: instead of using i or j, use something representative of what the loop is accessing from LETTERS.  In the next version, I'll use letter instead of i.
-
-```{r}
-for(letter in LETTERS){
-  print(letter)
-}
-```
-
-This kind of reads like "for each letter in the vector LETTERS, print the current letter.
-
-This general approach avoids the problem with the first two versions of the loops.  Recall that I made an object called bad.index that was just NULL
-
-```{r}
-bad.index <- NULL
-```
-
-This truly is nothing; it contains no data and has a length of zero.
-```{r}
-is(bad.index)
-class(bad.index)
-length(bad.index)
-```
-
-If I use this in a for loop in the current style I get no output
-```{r}
-for(i in bad.index){
-  print(i)
-}
-```
-
-This is because bad.index has nothing to in it.
-
-
-
-A limitation of this method is that i (or j, or letters) isn't an index, but takes on an assigned value from LETTERS.  So in my old school loop I can do this, which allows me to print 2 consecutive letters.  This is done by done math on the index i.
-```{r}
-for(i in 1:length(LETTERS)){
- print(LETTERS[c(i,i+1)])
-}
-```
-
-With the other approach, I can't do math on i
-```{r, eval = F}
-for(i in LETTERS){
-  print(i)
-  print(i+1)
-}
-```
-
-There's probably a way around this, but its not apparent to me right now.
-
-## For loop 4: A for loop for all purposes
-
-For the discerning R programming who doesn't like for loop version 3 there is a function called seq_along()
-
-
-seq_along() determines what is a valid index for a given object
-```{r}
-seq_along(LETTERS)
-```
-
-
-If you pass it a null value it can tell
-```{r}
-seq_along(bad.index)
-```
-
-seq_along therefore avoids the bad features of 1:length(x)
-```{r}
-for(i in seq_along(bad.index)){
- print(bad.index[i])
-}
-```
-
-
-
-A for loop with seq_along(LETTERS) looks like this
-```{r, eval = F}
-for(i in seq_along(LETTERS)){
- print(LETTERS[i])
-}
-```
-
-You can also do math on the index generated by seq_along)9
-
-
-```{r, eval = F}
-for(i in seq_along(LETTERS)){
- print(LETTERS[c(i, i+1)])
-}
-```
-
-
-
-## Advanced aside: if(), else and next statements
-
-The following is a more advanced bit of R programming information and can be skipped
-
-Its common to but if() statements within loop to screen for certain conditions.  In the code I've been using which prints out 2 consecutive letters, when I get to i = 26, the code LETTERS[c(i, i+1)] produces LETTERS[c(26, 26+1)] = LETTERS[c(26, 27)].  There is no letter 27 so an NA is thrown.  I could avoid this using an if statement
-
-```{r}
-for(i in seq_along(LETTERS)){
- if(i+1 > 26){
-   print(LETTERS[c(26,26)])
- } else
- print(LETTERS[c(i, i+1)])
-}
-```
-
-Instead of else I could also use next.
-
-```{r}
-for(i in seq_along(LETTERS)){
- if(i+1 > 26){
-   print(LETTERS[c(26,26)])
-   next
- } 
- print(LETTERS[c(i, i+1)])
-}
-```
-
-## On avoiding for loops
-
-The following section is for background.  You will not be expected to write any of the code shown.
-
-In many cases for() loops can be avoided in R.  This is because R is designed to make actions on entire vectors, dataframes, and matrices easy.  R also as a set of functions called apply(), and a package called purr, which allow you to avoid writing for loops directly.  This relates (in part) to the concept of **vectorization** in R.  For a deep dive in to some of these issues see https://www.noamross.net/archives/2014-04-16-vectorization-in-r-why/.
-
-Here's an example.  Let's say I had a DNA sequence stored in a vector, which each base in a seperate slot in the vector.
-
-```{r}
-a.sequence <- c("A","T","C","A","A","A","G","G","G")
-```
-
-What if for some reason I wanted these letters to be lower case. R has a handy function called tolower() which makes upper case tolower case
-
-```{r}
-tolower("A")
-```
-
-In some programming languages, to turn all of these letters to lower case you might have to do this (I've written this out with extra code to make it obvious what I'm doing)
-
-```{r}
-for(i in 1:length(a.sequence)){
-  lowercase.letter.i <- tolower(a.sequence[i]) #make lower case
-  a.sequence[i] <- lowercase.letter.i          #overwrite old entry
-}
-```
-
-In R (and perhaps some other languages) I can do this
-
-```{r}
-a.sequence <- c("A","T","C","A","A","A","G","G","G")
-tolower(a.sequence)
-```
-
-
-This is a somewhat trivial example. Let's say I have a matrix of DNA sequences, with each row a different sequence.
-
-First, I'll make up some data. Don't worry about what this is doing
-```{r}
-dna <- c("A","T","C","G")
-make_seq <- function() sample(x = dna,size = 5,replace = T)
-my.matrix <- rbind(make_seq(),make_seq(),make_seq(),make_seq(),make_seq())
-```
-
-The matrix looks like this
-```{r}
-my.matrix
-```
-
-In some programming languages I'd have to write a loop to change this to lower case.  In R I can use a fancy function called apply() to do it in one step
-
-```{r}
-apply(my.matrix,1,tolower)
-```
-
-
-
-## Challenge
-
-Create a vector that contains the four codes for the DNA bases, A, T, C, G.  Write a for() loop which prints these out.
-
-<!--chapter:end:_book60_programming-misc/prog-assignment-for_loops.Rmd-->
-
-# Function practice
-
-## Part 1: Pure practice
-
-### Practice Function 1: Hello world!
-
-Write a function that takes no arguement, and every time you run it says "Hello world!"  Call the function hello_world()
-
-```{r}
-#best
-hello_world <- function(){
-  return("Hello world")
-  }
-hello_world()
-
-
-# these work too
-hello_world <- function(){
-  print("Hello world")
-  }
-hello_world()
-
-
-
-hello_world <- function(){
-  cat("Hello world")
-  }
-hello_world()
-```
-
-
-### Practice Function 2: Hello _______ !
-
-Write a function that takes a word as an argument, and every time you run it says "Hello _____ ", where the blank is filled by the argument.  Try making the function with and without a default.  Call the function hello().
-
-```{r}
-hello <- function(x){
-  hello.x <- paste("Hello ",x)
-  return(hello.x)}
-hello("mom")
-
-hello <- function(x){
-  print("Hello")
-  print(x)
-  }
-hello("mom")
-```
-
-
-
-
-## Practice Function 3: Make you own natural log function
-
-R uses log() for natural and log10() for the base 10 log.  It would be easier for non-R peole to read code if there was a function with "e" in its name to indicate when the natural log is being used.  Write a function that takes a number as an argument and returns the natural log.  Call the function log_e
-
-```{r}
-log_e <- function(x){
-  log(x)
-}
-
-log_e(10)
-log(10)
-```
-
-
-<!--chapter:end:_book60_programming-misc/prog-assignment-function_practice_key.Rmd-->
-
-# for() loops in R
-
-```{r  eval = T}
-library(compbio4all)
-```
-
-
-
-## Introduction
-
-There are several way to write for() loops in R.  For this assignment, I asked you to write a loop which printed out each letter of the alphabet. 
-
-There are several ways to write a for loop in R.  I will show several different ways.  Out of habitat I will generally use the style of (for i in 1:length(x)), though this is not an optimal way to do things.  I will discuss this way as well as some more sounds approaches.
-
-## Reminders
-
-R has a built in object with has the data, called LETTERS.
-
-```{r}
-LETTERS
-```
-
-
-The object LETTERS is a vector containing character data.
-
-```{r}
-is(LETTERS)
-```
-
-We we access each element of a vector with its index number. To get "A"
-
-```{r}
-LETTERS[1]
-```
-
-To get "Z"
-```{r}
-LETTERS[26]
-```
-
-If I want, I can access a given letter by assigning its index number to an object.  Say I assign 26 to the letter i
-
-```{r}
-i <- 26
-```
-
-
-I can get Z like this then
-
-```{r}
-
-LETTERS[i]
-
-```
-
-
-
-## For loop 1: The hard-coded for loop (aka, the don't actually do this for loop)
-
-This is a bad way to do a for loop but makes the process totally transparent.  There are 26 letters in the alphabet, so there are 26 elements in the vector LETTERS.  Therefore, what we want R to do - print out a letter from the alphabet - need to be repeated 26 times.  So our for loop needs to repeat the same action 26 times.
-
-We can make an **index** for R like this
-```{r}
-1:26
-```
-
-Similarly, we could do this
-
-```{r}
-c(1:26)
-```
-
-
-The colon in R is used to expand a sequence of numbers.  Its a shortcut for the seq() command.
-
-```{r}
-seq(from = 1, to = 26, by = 1)
-```
-
-Remember that index values can be used to pull out elements from a vectors.  So as noted above if I want to print the letter A, which is stored in the first element of the LETTERS vector, I can do this
-
-```{r}
-LETTERS[1]
-```
-
-If I want, I could store this output in a an object
-
-```{r}
-letter.A <- LETTERS[1]
-letter.A
-```
-
-
-
-What a for loop can do is cycle through each index value, 1 to 26, and put it in between the bracket. It would look like this loop below;note that I added an extra step where I print out the index value.
-
-```{r}
-for(i in 1:26){
-  print(i)                #print the index
-  letter.i <- LETTERS[i]  #get leter i
-  print(letter.i)         #print letter i
-}
-```
-
-
-In this loop I used 1:26 for my index. This is **hard coding** the index values, which is never a good idea.  But for the sake of illustration i makes it totally obvious what we're doing.  
-
-
-As I said above 1:26 is the same as c(1:26), so this loop does the same thing
-
-```{r, eval = F}
-for(i in 1:26){
-  letter.i <- LETTERS[i]  #get leter i
-  print(letter.i)         #print letter i
-}
-```
-
-The colon : is a shortcut for the seq() command; if I wanted to be 100% transparent to someone who didn't know R I could write this:
-```{r, eval = F}
-for(i in seq(from = 1, to = 26, by = 1)){
-  letter.i <- LETTERS[i]  #get leter i
-  print(letter.i)         #print letter i
-}
-```
-
-
-The step of assigning the current letter indexed by i to an object letter.i isn't actually necessary.  I could simplify the code like this by **nesting** the LETTERS[i] statement within the print() statement.  The letter indexed by i therefore gets pulled up and directly **passed** to print().
-
-```{r, eval = F}
-for(i in 1:26){
-  print(LETTERS[i])         #print letter i
-}
-```
-
-Lines and spacing are arbitrary in R.  When a for loop is short you may see people do this to save space.
-
-```{r, eval = F}
-for(i in 1:26){ print(LETTERS[i]) }
-```
-
-Or even this, dropping the curly braces.
-```{r, eval = F}
-for(i in 1:26) print(LETTERS[i])  
-```
-
-Some people value compact code; there's no penalty in any way for using multiple lines so its generally considered best practice to split code over more lines rather than fewer.
-
-
-## For loop 3: the classic for loop
-
-A common way to code for loops is to use a function like length() for vectors or dim() for matrices to determine how many times a loop must repeat its action.  Instead of hard-coding 1:26 to get the values 1, 2, 3,... 26 I can do this:
-
-```{r}
-1:length(LETTERS)
-```
-
-This is useful in more complex situations where you could end up changing how many elements are in LETTERS. For this approach,the for loop looks like this
-
-```{r, eval= F}
-for(i in 1:length(LETTERS)){
-  letter.i <- LETTERS[i]  #get leter i
-  print(letter.i)         #print letter i
-}
-```
-
-In this formulation, R is making an index 1 to 26 based on the length of LETTERS. Its then assigning a value to i each time it goes through the loop. Then it pulls out the appropriate letter based on i.  This is basically the same as the first example, just the values of the index, 1 to 26, is determine by R and not set by hand.
-
-I've written hundreds of loops this way an it this way works just fine.  However, in more complicated code a problem can arise if someone a 0 gets its way into a loop.  See https://jef.works/R-style-guide/#loops for a reference to this.
-
-The code below is optional, but if your curious it displays a behavior which may not be desirable.
-
-```{r}
-bad.index <- NULL
-length(bad.index)
-
-for(i in 1:length(bad.index)){
-  print(bad.index[i])
-}
-```
-
-This problem is most likely to arise when a for loop is embedded in a larger program and vectors like LETTERS get generated by one part of the program and get fed later into the loop.
-
-For this course I will probably continue to use the general format of for(i in 1:length(x)) out of habit.  Hopefully by next year I'll be re-trained to use one of the techniques shown below.
-
-## For loop 3: The Power-user for loop
-
-Probably the cleanest way to do a for loop in R is like this next example. A scientific survey on Twitter indicates that this how the cool kids write their loops.
-
-In this version, R steps through each element of the vector LETTERS and on the fly assigns that element to the object i.  Print then tells R to print the letter to the console.
-
-```{r, eval = F}
-
-for(i in LETTERS){
-  print(i)
-}
-
-```
-
-
-Note that if we leave out print() then we get blank screen. R is basically just reading the numbers to itself.
-
-```{r, eval = F}
-for(i in LETTERS){
- i
-}
-
-```
-
-
-The use if "i" is arbitrary.  We could just j instead
-
-```{r, eval = F}
-for(j in LETTERS){
- print(j)
-}
-
-```
-
-
-To remember this format it might be useful to think about it like this: instead of using i or j, use something representative of what the loop is accessing from LETTERS.  In the next version, I'll use letter instead of i.
-
-```{r}
-for(letter in LETTERS){
-  print(letter)
-}
-```
-
-This kind of reads like "for each letter in the vector LETTERS, print the current letter.
-
-This general approach avoids the problem with the first two versions of the loops.  Recall that I made an object called bad.index that was just NULL
-
-```{r}
-bad.index <- NULL
-```
-
-This truly is nothing; it contains no data and has a length of zero.
-```{r}
-is(bad.index)
-class(bad.index)
-length(bad.index)
-```
-
-If I use this in a for loop in the current style I get no output
-```{r}
-for(i in bad.index){
-  print(i)
-}
-```
-
-This is because bad.index has nothing to in it.
-
-
-
-A limitation of this method is that i (or j, or letters) isn't an index, but takes on an assigned value from LETTERS.  So in my old school loop I can do this, which allows me to print 2 consecutive letters.  This is done by done math on the index i.
-```{r}
-for(i in 1:length(LETTERS)){
- print(LETTERS[c(i,i+1)])
-}
-```
-
-With the other approach, I can't do math on i
-```{r, eval = F}
-for(i in LETTERS){
-  print(i)
-  print(i+1)
-}
-```
-
-There's probably a way around this, but its not apparent to me right now.
-
-## For loop 4: A for loop for all purposes
-
-For the discerning R programming who doesn't like for loop version 3 there is a function called seq_along()
-
-
-seq_along() determines what is a valid index for a given object
-```{r}
-seq_along(LETTERS)
-```
-
-
-If you pass it a null value it can tell
-```{r}
-seq_along(bad.index)
-```
-
-seq_along therefore avoids the bad features of 1:length(x)
-```{r}
-for(i in seq_along(bad.index)){
- print(bad.index[i])
-}
-```
-
-
-
-A for loop with seq_along(LETTERS) looks like this
-```{r, eval = F}
-for(i in seq_along(LETTERS)){
- print(LETTERS[i])
-}
-```
-
-You can also do math on the index generated by seq_along)9
-
-
-```{r, eval = F}
-for(i in seq_along(LETTERS)){
- print(LETTERS[c(i, i+1)])
-}
-```
-
-
-
-## Advanced aside: if(), else and next statements
-
-The following is a more advanced bit of R programming information and can be skipped
-
-Its common to but if() statements within loop to screen for certain conditions.  In the code I've been using which prints out 2 consecutive letters, when I get to i = 26, the code LETTERS[c(i, i+1)] produces LETTERS[c(26, 26+1)] = LETTERS[c(26, 27)].  There is no letter 27 so an NA is thrown.  I could avoid this using an if statement
-
-```{r}
-for(i in seq_along(LETTERS)){
- if(i+1 > 26){
-   print(LETTERS[c(26,26)])
- } else
- print(LETTERS[c(i, i+1)])
-}
-```
-
-Instead of else I could also use next.
-
-```{r}
-for(i in seq_along(LETTERS)){
- if(i+1 > 26){
-   print(LETTERS[c(26,26)])
-   next
- } 
- print(LETTERS[c(i, i+1)])
-}
-```
-
-## On avoiding for loops
-
-The following section is for background.  You will not be expected to write any of the code shown.
-
-In many cases for() loops can be avoided in R.  This is because R is designed to make actions on entire vectors, dataframes, and matrices easy.  R also as a set of functions called apply(), and a package called purr, which allow you to avoid writing for loops directly.  This relates (in part) to the concept of **vectorization** in R.  For a deep dive in to some of these issues see https://www.noamross.net/archives/2014-04-16-vectorization-in-r-why/.
-
-Here's an example.  Let's say I had a DNA sequence stored in a vector, which each base in a seperate slot in the vector.
-
-```{r}
-a.sequence <- c("A","T","C","A","A","A","G","G","G")
-```
-
-What if for some reason I wanted these letters to be lower case. R has a handy function called tolower() which makes upper case tolower case
-
-```{r}
-tolower("A")
-```
-
-In some programming languages, to turn all of these letters to lower case you might have to do this (I've written this out with extra code to make it obvious what I'm doing)
-
-```{r}
-for(i in 1:length(a.sequence)){
-  lowercase.letter.i <- tolower(a.sequence[i]) #make lower case
-  a.sequence[i] <- lowercase.letter.i          #overwrite old entry
-}
-```
-
-In R (and perhaps some other languages) I can do this
-
-```{r}
-a.sequence <- c("A","T","C","A","A","A","G","G","G")
-tolower(a.sequence)
-```
-
-
-This is a somewhat trivial example. Let's say I have a matrix of DNA sequences, with each row a different sequence.
-
-First, I'll make up some data. Don't worry about what this is doing
-```{r}
-dna <- c("A","T","C","G")
-make_seq <- function() sample(x = dna,size = 5,replace = T)
-my.matrix <- rbind(make_seq(),make_seq(),make_seq(),make_seq(),make_seq())
-```
-
-The matrix looks like this
-```{r}
-my.matrix
-```
-
-In some programming languages I'd have to write a loop to change this to lower case.  In R I can use a fancy function called apply() to do it in one step
-
-```{r}
-apply(my.matrix,1,tolower)
-```
-
-
-
-## Challenge
-
-Create a vector that contains the four codes for the DNA bases, A, T, C, G.  Write a for() loop which prints these out.
-
-<!--chapter:end:_book60_programming-misc/prog-for_loops.Rmd-->
-
-# Random number generation
-
-
-## Introduction
-
-Generating random numbers is key to many tasks in statistics and computational biology.  Usually we can focus on our analysis or simulation experiments and not worry about the details, but its good to be familiar with some basic concerns when it comes to random number generations
-
-## Using set.seed() to make simulations reproducible
-
-The way that random numbers are generated in practice uses algorithms that produce random-looking numbers and random-behaving sets up numbers.  However, these algorithms are actually deterministic based on a given numberic input.  Normally when we generate a random number in R, R grabs a constantly value to use as the input.
-
-The sys.time() function can be used to tell us the time
-```{r}
-Sys.time()
-```
-
-R can keep track of very small scales of time; here, I set to measure seconds to 3 decimal places (1000s of sectons)
-```{r}
-options(digits.secs = 3)
-Sys.time()
-Sys.time()
-```
-
-Its a little more complicated than this, but basically R uses a constantly changing baseline as a starting point for random number generation.
-
-Normally, when we generate random numbers this means that every time we call a random number generation function we get a different results.
-
-For example, runif() generates a random value from 0 to 1.  Run this 4 times and you get four values.
-
-```{r}
-runif(n = 1)
-runif(n = 1)
-runif(n = 1)
-runif(n = 1)
-```
-
-Prior to generating a random number we can fix the starting point of the random number generator, called the **seed**.  R will use the same input (seed) each time it runs its random number generator, and so the same output will be given.  Every time you run this, you should get 0.5074782.
-
-```{r}
-set.seed(10)
-runif(n = 1)
-
-set.seed(10)
-runif(n = 1)
-
-set.seed(10)
-runif(n = 1)
-
-set.seed(10)
-runif(n = 1)
-```
-
-Note that the runif() generates randum uniform data, and rnorm() generates random normal data, so even with the same seed they give different results.  For random normal data, the random value shoudl be 0.01874617.
-
-```{r}
-set.seed(10)
-rnorm(n = 1)
-```
-
-A different seed will give you a different value
-
-```{r}
-set.seed(11)
-rnorm(n = 1)
-```
-
-And again
-```{r}
-set.seed(12)
-rnorm(n = 1)
-```
-
-The value of the seed has no inherent importance.
-
-## Types of random number generators
-
-R has many random number generators, with fancy names like
-
-* "Marsaglia-Multicarry"
-* "Super-Duper"
-* "Mersenne-Twister"
-* "L'Ecuyer-CMRG"
-
-You can see the default random number generator with RNGkind()
-
-```{r}
-RNGkind()
-```
-
-
-## Reporting simulations
-
-As long as you know the version of R someone used and the seed they used, you should be able to reproduce their results using their code.  Ideally the code definitive version of a simulation reported in a paper should report the seed so that the **exact** results of the paper can be reproduced by running the code.  So, in the case of my BLAST-related project, when I'm finally ready to write up a report, I should put set.seed() in the proper places in the code, give it a number, run the whole workflow, and report the results from that run.
-
-## Notes:
-
-From the set.seed help file:
-"Initially, there is no seed; a new one is created from the current time and the process ID when one is required. Hence different sessions will give different simulation results, by default."
-
-
-
-
-
-```{r}
-
-```
-
-
-
-```{r}
-Sys.time()
-set.seed(Sys.time())
-```
-
-R's sample() function actually had some problems
-https://arxiv.org/abs/1809.06520
-
-```{r}
-
-```
-
-
-<!--chapter:end:_book60_programming-misc/prog-random_number_generation-moved-to-combio4all.Rmd-->
-
-# Sample test question-Randomization
-
-```{r  eval = T}
-library(compbio4all)
-```
-
-
-
-## Sample test question:
-
-I have six groups in my class Neural Defects.  For homework they are reading a paper with six figures.  I want to randomly assign a figure to each group and make sure each figure is only used once, and that every figure is used.  How can I do this in R? 
-
-1. Store what you are randomizing in a vector called "figures"
-2. Write the code to do the randomization
-3. Store the output in a vector called "rand.figures"
-4. Use an appropriate command to check that the results the proper size
-5. Use an appropriate command to check that the result is the proper data structure
-
-
-
-## Your answer:
-
-Write the code needed to do this below.
-
-```{r}
-# your answer: replace the NAs with your code
-
-# object to hold figure names
-figures <- NA
-
-
-# object to to randomization
-rand.figures <- NA
-
-
-# check size of object
-
-
-
-# check data structure
-
-
-
-
-
-```
-
-
-## Hint 0
-
-* This will require something that we normally don't do when we generate random sequences of letters.
-
-
-## Hint 1:
-
-* To do this you'll want to use the sample() command.  
-For information about sample() call up the help file using ?sample
-
-```{r, eval = F}
-
-?sample
-
-```
-
-
-
-## Hint 2 (follow up to Hint 0)
-
-* sample() can **"sample with replacement"**, which is what we normally do for generating random sequences of letters
-* OR it can **sample "without replacement"** which is actually what I want to do to make sure every figure is used once and only once
-
-## Hint 3:
-
-A key arguement in sample() is replace = ...
-
-## Answer
-
-```{r}
-# your answer: replace the NAs with your code
-
-## All of these will work the same
-figures <- c(1,2,3,4,5,6)
-figures <- c("1","2","3","4","5","6")
-figures <- c("one","two","three","four","five","six")
-
-rand.figures <- sample(figures,size = 6, replace = FALSE)
-
-# check size
-length(rand.figures)
-
-# check data structure
-is(rand.figures)
-
-
-```
-
-Note: when you are sampling **WITH** replacement you could do this with the runinf() command.  However, this won't work when sampling without replacement.  (We'll, if you really wanted to you could make it work, but it would require a loop and would be inefficient.  If you want a challenge, you could try to figure this out using a while() loop instead of a for() loop)
-
-<!--chapter:end:_book60_programming-misc/prog-sample_question_randomization.Rmd-->
-
-# Simulating random amino acid sequences
-
-```{r  eval = T}
-library(compbio4all)
-```
-
-
-
-
-## Selecting random letters from a vector
-
-Make a vector with some letters
-```{r}
-my.letters <- c("A","B","C","D")
-```
-
-Use sample() to select one random letter
-
-```{r}
-sample(x = my.letters, size = 1, replace = T)
-```
-
-Select 10 letters, with replacement (replace = T), so that the same letter can occur more than once
-
-```{r}
-sample(x = my.letters, size = 10, replace = T)
-```
-
-Select 100 letters
-```{r}
-sample(x = my.letters, size = 10, replace = T)
-```
-
-
-## Select random letters from the whole alphabet
-
-The object LETTERS has the whole alphabet
-
-```{r}
-LETTERS
-```
-
-
-Select 10 letters from whole alphabet
-```{r}
-sample(x = my.letters, size = 10, replace = T)
-```
-
-
-## Select random amino acids to build polypeptide
-
-Make a vector of all letters that represent and amino acid
-```{r}
-all.aas <- c("A","C","D","E","F","G","H","I","K","L","M","N","P","Q","R","S","T","V","W","Y")
-```
-
-
-Randomly select an amino acid
-
-```{r}
-sample(x = all.aas, size = 1, replace = T)
-```
-
-Make a vector of 200 amino acids
-```{r, eval = F}
-sample(x = all.aas, size = 200, replace = T)
-```
-
-
-I may want to represent the size of the fake polypeptide with an object
-```{r, eval = F}
-my.polypep.size <- 200
-sample(x = all.aas, size = my.polypep.size, replace = T)
-```
-
-I can save this an object
-```{r}
-my.polypep.size <- 200
-my.pp <- sample(x = all.aas, size = my.polypep.size, replace = T)
-```
-
-I can make a single character string with not spaces using paste
-
-```{r}
-paste(x = my.pp,sep = "", collapse = "")
-```
-
-
-```{r}
-
-```
-
-
-<!--chapter:end:_book60_programming-misc/prog-simulate_random_aa_seqs.Rmd-->
-
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
 # How to review this book
 
 
@@ -3458,7 +281,7 @@ The original page is:
 
 Imagine sailing down a river in a small motorboat on a weekend afternoon; the water is smooth and you are enjoying the warm sunshine and cool breeze when suddenly you are hit in the head by a 20-pound silver carp. This is a risk now on many rivers and canal systems in Illinois and Missouri because of the presence of Asian carp.
 
-```{r, echo = F, fig.cap="Figure  45.0.1 : Asian carp jump out of the water in response to electrofishing. The Asian carp in the inset photograph were harvested from the Little Calumet River in Illinois in May, 2010, using rotenone, a toxin often used as an insecticide, in an effort to learn more about the population of the species. (credit main image: modification of work by USGS; credit inset: modification of work by Lt. David French, USCG)"}
+```{r, echo = F, out.width="50%", fig.cap="Figure  45.0.1 : Asian carp jump out of the water in response to electrofishing. The Asian carp in the inset photograph were harvested from the Little Calumet River in Illinois in May, 2010, using rotenone, a toxin often used as an insecticide, in an effort to learn more about the population of the species. (credit main image: modification of work by USGS; credit inset: modification of work by Lt. David French, USCG)"}
 knitr::include_url("https://bio.libretexts.org/@api/deki/files/2180/Figure_45_00_01.jpg?revision=1")
 ```
 
@@ -3474,6 +297,298 @@ knitr::include_url("https://bio.libretexts.org/@api/deki/files/2180/Figure_45_00
 
 
 <!--chapter:end:000-test_pages_and_misc/00f_libretext_image_called_from_libretext.Rmd-->
+
+# Nucleic Acids
+
+**Authors**: OpenStax Biology team.  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
+
+This chapter was adapted from [LibreText General Biology](), Chapter 3, Section 3.5: [Nucleic Acids](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.5%3A_Nucleic_Acids).  The LibreText book is based on  [OpenStax Biology 2nd edition](https://openstax.org/details/books/biology-2e), Chapter 3, Section 3.5: [Nucleic Acids](https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids).  A full list of authors is found under the **Contributors and Attributions** section at the end of this document. 
+
+
+>Nucleic acids are the most important macromolecules for the continuity
+of life. They carry the genetic blueprint of a cell and carry
+instructions for the functioning of the cell.
+
+## DNA and RNA
+
+The two main types of nucleic acids are deoxyribonucleic acid (DNA) 
+and ribonucleic acid (RNA). DNA is the genetic material found in all
+living organisms, ranging from single-celled bacteria to multicellular
+mammals. It is found in the nucleus of eukaryotes and in the
+organelles, chloroplasts, and mitochondria. In prokaryotes, the DNA is
+not enclosed in a membranous envelope.
+
+The entire genetic content of a cell is known as its genome, and the
+study of genomes is genomics. In eukaryotic cells but not in
+prokaryotes, DNA forms a complex with histone proteins to form
+chromatin, the substance of eukaryotic chromosomes. A chromosome may
+contain tens of thousands of genes. Many genes contain the information
+to make protein products; other genes code for RNA products. DNA
+controls all of the cellular activities by turning the genes "on" or
+"off."
+
+The other type of nucleic acid, RNA, is mostly involved in protein
+synthesis. The DNA molecules never leave the nucleus but instead use
+an intermediary to communicate with the rest of the cell. This
+intermediary is the messenger RNA (mRNA). Other types of RNA---like
+rRNA, tRNA, and microRNA---are involved in protein synthesis and its
+regulation.
+
+DNA and RNA are made up of monomers known as nucleotides. The
+nucleotides combine with each other to form a polynucleotide, DNA or
+RNA. Each nucleotide is made up of three components: a nitrogenous
+base, a pentose (five-carbon) sugar, and a phosphate group (Figure
+3.5.1). Each nitrogenous base in a nucleotide is attached to a sugar
+molecule, which is attached to one or more phosphate groups.
+
+```{r, echo = F}
+knitr::include_graphics(here::here("./images/image5.jpeg"))
+```
+
+
+
+Figure 3.5.1 : A nucleotide is made up of three components: a
+nitrogenous base, a pentose sugar, and one or more phosphate groups.
+Carbon residues in the pentose are numbered 1′ through 5′ (the prime
+distinguishes these residues from those in the base, which are
+numbered without using a prime notation). The base is attached to the
+1′ position of the ribose, and the phosphate is attached to the 5′
+position. When a polynucleotide is formed, the 5′ phosphate of the
+incoming nucleotide attaches to the 3′ hydroxyl group at the end of
+the growing chain. Two types of pentose are found in nucleotides,
+deoxyribose (found in DNA) and ribose (found in RNA). Deoxyribose is
+similar in structure to ribose, but it has an H instead of an OH at
+the 2′ position. Bases can be divided into two categories: purines and
+pyrimidines. Purines have a double ring structure, and pyrimidines
+have a single ring.
+
+The nitrogenous bases, important components of nucleotides, are
+organic molecules and are so named because they contain carbon and
+nitrogen. They are bases because they contain an amino group that has
+the potential of binding an extra hydrogen, and thus, decreases the
+hydrogen ion concentration in its environment, making it more basic.
+Each nucleotide in DNA contains one of four possible nitrogenous
+bases: adenine (A), guanine (G) cytosine (C), and thymine (T).
+
+Adenine and guanine are classified as purines. The primary structure
+of a purine is two carbon-nitrogen rings. Cytosine, thymine, and
+uracil are classified as pyrimidines which have a single
+carbon-nitrogen ring as their primary structure (Figure 3.5.1). Each
+of these basic carbon-nitrogen rings has different functional groups
+attached to it. In molecular biology shorthand, the nitrogenous bases are simply known by their symbols A, T, G, C, and U. DNA contains A, T, G, and C whereas RNA contains A, U, G, and
+C.
+
+The pentose sugar in DNA is deoxyribose, and in RNA, the sugar is
+ribose (Figure 3.5.1). The difference between the sugars is the
+presence of the hydroxyl group on the second carbon of the ribose and
+hydrogen on the second carbon of the deoxyribose. The carbon atoms of
+the sugar molecule are numbered as 1′, 2′, 3′, 4′, and 5′ (1′ is read
+as "one prime"). The phosphate residue is attached to the hydroxyl
+group of the 5′ carbon of one sugar and the hydroxyl group of the 3′
+carbon of the sugar of the next nucleotide, which forms a 5′--3′
+phosphodiester linkage. The phosphodiester linkage is not formed by
+simple dehydration reaction like the other linkages connecting
+monomers in macromolecules: its formation involves the removal of two
+phosphate groups. A polynucleotide may have thousands of such
+phosphodiester linkages.
+
+## DNA Double-Helix Structure
+
+DNA has a double-helix structure (Figure 3.5.2). The sugar and
+phosphate lie on the outside of the helix, forming the backbone of the
+DNA. The nitrogenous bases are stacked in the interior, like the steps
+of a staircase, in pairs; the pairs are bound to each other by
+hydrogen bonds. Every base pair in the double helivx is separated from
+the next base pair by 0.34 nm. The two strands of the helix run in
+opposite directions, meaning that the 5′ carbon end of one strand will
+face the 3′ carbon end of its matching strand. (This is referred to as
+antiparallel orientation and is important to DNA replication and in
+many nucleic acid interactions.)
+
+```{r, echo = F, fig.cap="Figure 3.5.2 : Native DNA is an antiparallel double helix. The phosphate backbone (indicated by the curvy lines) is on the outside, and the bases are on the inside. Each base from one strand interacts via hydrogen bonding with a base from the opposing strand. (credit: Jerome Walker/Dennis Myts)"}
+knitr::include_graphics(here::here("./images/image6.jpeg"))
+```
+
+
+
+
+Only certain types of base pairing are allowed. For example, a certain
+purine can only pair with a certain pyrimidine. This means A can pair
+with T, and G can pair with C, as shown in Figure 3.5.3. This is known
+as the base complementary rule. In other words, the DNA strands are
+complementary to each other. If the sequence of one strand is
+AATTGGCC, the complementary strand would have the sequence TTAACCGG.
+During DNA replication, each strand is copied, resulting in a daughter
+DNA double helix containing one parental DNA strand and a newly
+synthesized strand.
+
+Art Connection
+```{r, echo = F}
+knitr::include_graphics(here::here("./images/image7.jpeg"))
+```
+
+
+Figure 3.5.3 : In a double stranded DNA molecule, the two strands run
+antiparallel to one another so that one strand runs 5′ to 3′ and the
+other 3′ to 5′. The phosphate backbone is located on the outside, and
+the bases are in the middle. Adenine forms hydrogen bonds (or base
+pairs) with thymine, and guanine base pairs with cytosine.
+
+A mutation occurs, and cytosine is replaced with adenine. What impact
+do you think this will have on the DNA structure?
+
+## RNA
+
+Ribonucleic acid, or RNA, is mainly involved in the process of protein
+synthesis under the direction of DNA. RNA is usually single-stranded
+and is made of ribonucleotides that are linked by phosphodiester
+bonds. A ribonucleotide in the RNA chain contains ribose (the pentose
+sugar), one of the four nitrogenous bases (A, U, G, and C), and the
+phosphate group.
+
+There are four major types of RNA: messenger RNA (mRNA), ribosomal RNA
+(rRNA), transfer RNA (tRNA), and microRNA (miRNA). The first, mRNA,
+carries the message from DNA, which controls all of the cellular
+activities in a cell. If a cell requires a certain protein to be
+synthesized, the gene for this product is turned "on" and the
+messenger RNA is synthesized in the nucleus. The RNA base sequence is
+complementary to the coding sequence of the DNA from which it has been
+copied. However, in RNA, the base T is absent and U is present
+instead. If the DNA strand has a sequence AATTGCGC, the sequence of
+the complementary RNA is UUAACGCG. In the cytoplasm, the mRNA
+interacts with ribosomes and other cellular machinery (Figure 3.5.4).
+
+```{r, echo = F}
+knitr::include_graphics(here::here("./images/image8.jpeg"))
+```
+
+
+
+Figure 3.5.4 : A ribosome has two parts: a large subunit and a small
+subunit. The mRNA sits in between the two subunits. A tRNA molecule
+recognizes a codon on the mRNA, binds to it by complementary base
+pairing, and adds the correct amino acid to the growing peptide chain.
+
+The mRNA is read in sets of three bases known as codons. Each codon
+codes for a single amino acid. In this way, the mRNA is read and the
+protein product is made. Ribosomal RNA (rRNA) is a major constituent
+of ribosomes on which the mRNA binds. The rRNA ensures the proper
+alignment of the mRNA and the ribosomes; the rRNA of the ribosome also
+has an enzymatic activity (peptidyl transferase) and catalyzes the
+formation of the peptide bonds between two aligned amino acids.
+Transfer RNA (tRNA) is one of the smallest of the four types of RNA,
+usually 70--90 nucleotides long. It carries the correct amino acid to
+the site of protein synthesis. It is the base pairing between the tRNA
+and mRNA that allows for the correct amino acid to be inserted in the
+polypeptide chain. microRNAs are the smallest RNA molecules and their
+role involves the regulation of gene expression by interfering with
+the expression of certain mRNA messages. Table 3.5.1 below summarizes
+features of DNA and RNA.
+
+***Table*** 3.5.1 ***:** Features of DNA and RNA.
+
++---------------------+------------------------+-----------------------+
+|                     | Features of DNA and    |                       |
+|                     | RNA                    |                       |
++=====================+========================+=======================+
+|                     | DNA                    | RNA                 |
++---------------------+------------------------+-----------------------+
+| Function            | Carries genetic        | Involved in protein |
+|                     | information            | synthesis           |
++---------------------+------------------------+-----------------------+
+| Location            | Remains in the nucleus | Leaves the nucleus  |
++---------------------+------------------------+-----------------------+
+| Structure           | Double helix           | Usually             |
+|                     |                        | single-stranded     |
++---------------------+------------------------+-----------------------+
+| Sugar               | Deoxyribose            | Ribose              |
++---------------------+------------------------+-----------------------+
+| Pyrimidines         | Cytosine, thymine      | Cytosine, uracil    |
++---------------------+------------------------+-----------------------+
+| Purines             | Adenine, guanine       | Adenine, guanine    |
++---------------------+------------------------+-----------------------+
+
+Even though the RNA is single stranded, most RNA types show extensive
+intramolecular base pairing between complementary sequences, creating
+a predictable three-dimensional structure essential for their
+function.
+
+As you have learned, information flow in an organism takes place from
+DNA to RNA to protein. DNA dictates the structure of mRNA in a process
+known as transcription, and RNA dictates the structure of protein in a
+process known as translation. This is known as the Central Dogma of
+Life, which holds true for all organisms; however, exceptions to the
+rule occur in connection with viral infections.
+
+*Link to Learning*
+```{r, echo = F, out.width="10%"}
+knitr::include_graphics(here::here("./images/image9.png"))
+```
+
+
+
+
+* To learn more about DNA, explore the Howard Hughes Medical Institute
+BioInteractive animations on the topic of DNA.*
+
+## Summary
+
+Nucleic acids are molecules made up of nucleotides that direct
+cellular activities such as cell division and protein synthesis. Each
+nucleotide is made up of a pentose sugar, a nitrogenous base, and a
+phosphate group. There are two types of nucleic acids: DNA and RNA.
+DNA carries the genetic blueprint of the cell and is passed on from
+parents to offspring (in the form of chromosomes). It has a
+double-helical structure with the two strands running in opposite
+directions, connected by hydrogen bonds, and complementary to each
+other. RNA is single-stranded and is made of a pentose sugar (ribose),
+a nitrogenous base, and a phosphate group. RNA is involved in protein
+synthesis and its regulation. Messenger RNA (mRNA) is copied from the
+DNA, is exported from the nucleus to the cytoplasm, and contains
+information for the construction of proteins. Ribosomal RNA (rRNA) is
+a part of the ribosomes at the site of protein synthesis, whereas
+transfer RNA (tRNA) carries the amino acid to the site of protein
+synthesis. microRNA regulates the use of mRNA for protein synthesis.
+
+Art Connections
+
+## Analysis Questions
+
+Free Response
+
+## Glossary
+
+**deoxyribonucleic acid (DNA)**: double-helical molecule that carries the hereditary information of the cell  
+**messenger RNA (mRNA)**: DNA that carries information from DNA to ribosomes during proteinsynthesis   
+**nucleic acid**: biological macromolecule that carries the genetic blueprint of a cell
+and carries instructions for the functioning of the cell  
+**nucleotide**: monomer of nucleic acids; contains a pentose sugar, one or more phosphate groups, and a nitrogenous base  
+**phosphodiester**: linkage covalent chemical bond that holds together the polynucleotide
+chains with a phosphate group linking two pentose sugars of neighboring nucleotides  
+**polynucleotide**: long chain of nucleotides  
+**purine**: type of nitrogenous base in DNA and RNA; adenine and guanine are   
+**purines, pyrimidine**: type of nitrogenous base in DNA and RNA; cytosine, thymine, and uracil
+are pyrimidines  
+**ribonucleic acid (RNA)**: single-stranded, often internally base paired, molecule that is
+involved in protein synthesis  
+**ribosomal RNA (rRNA)**: RNA that ensures the proper alignment of the mRNA and the ribosomes
+during protein synthesis and catalyzes the formation of the peptide linkage  
+**transcription**: process through which messenger RNA forms on a template of DNA  
+**transfer RNA (tRNA)**: RNA that carries activated amino acids to the site of protein
+synthesis on the ribosome  
+**translation**: process through which RNA directs the formation of protein  
+
+## Contributors and Attributions
+
+Connie Rye (East Mississippi Community College), Robert Wise
+(University of Wisconsin, Oshkosh), Vladimir Jurukovski (Suffolk
+County Community College), Jean DeSaix (University of North Carolina
+at Chapel Hill), Jung Choi (Georgia Institute of Technology), Yael
+Avissar (Rhode Island College) among other contributing authors.
+Original content by OpenStax (CC BY 4.0; Download for free at
+[http://cnx.org/contents/185cbf87-c72\...f21b5eabd\@9.87](http://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd%409.87)).
+
+<!--chapter:end:000-test_pages_and_misc/00g-review-nucleic_acids-LibreText.Rmd-->
 
 # Downloading R
 
@@ -4640,6 +1755,184 @@ log10(x) # Finds the log to the base 10 of variable x.
 
 <!--chapter:end:002-R-programming_basics/10-programming_in_R-functions-AC04-02.Rmd-->
 
+# Intro to R objects
+
+**By**: Nathan Brouwer
+
+## Commands used
+
+* <-
+* c()
+* length()
+* dim()
+* is()
+* str()
+* dim()
+* list()
+
+
+
+
+## R Objects
+
+* Everything in R is an object, works with an object, tells you about an object, etc
+* We'll do a simple data analysis with a t.test and then look at properties of R objects
+* There are several types of objects: **vectors, matrices, lists, dataframes**
+* R objects can hold numbers, text, or both
+* A typical dataframe has columns of **numeric data** and colmns of text that represent **factor variables** (aka "**categoical variables**")
+
+
+
+## Differences between objects
+
+Different objects are used and show up in differnt contexts.
+
+* Most practical stats work in R is done with **dataframes** .  
+* A dataframe is kind of like a spreadsheet, loaded into R.
+* For the sake of simplicity, we often load data in as a **vector**.  This just makes things smoother when we are starting out.
+* **vectors** pop up in many places, usually in a support role until you start doing more programming.
+* **matrices** are occassionaly used for applied stats stuff but show up more for programming.  A matrix is like a stripped-down dataframe.
+* **lists** show up everywhere, but you often don't know it; many R functions make lists
+* Understanding **lists** will help you efficiently work with stats output and make plots.
+
+
+
+
+## The Data
+
+We'll use the following data to explore R objects.
+
+Motulsky 2nd Ed, Chapter 30, page 220, Table 30.1.  Maximal relaxaction of muscle strips of old and young rat bladders stimualted w/ high concentrations of nonrepinephrine (Frazier et al 2006).  Response variable is %E.max
+
+```{r, echo = F}
+
+#Old data
+old.E.max <- c(20.8,2.8,50.0,33.3,29.4,38.9, 29.4,52.6,14.3)
+
+#Young data
+young.E.max <- c(45.5,55.0, 60.7, 61.5, 61.1, 65.5,42.9,37.5)
+
+```
+
+
+
+## The assignment operator "<-" makes object
+
+The code above has made two objects.  We can use several commands to learn about these objects.
+
+* is(): what an object is, ie, vector, matrix, list, dataframe
+* length():how long an object is; only works with vectors and lists, not dataframes!
+* dim(): how long AND how wide and object is; doesn't work with vectors, only dataframes and matrices :(
+
+
+### is()
+
+What is our "old.E.max" object?
+
+```{r}
+
+is(old.E.max)
+is(young.E.max)
+```
+
+
+
+Its a vector, containing numeric data.
+
+
+What if we made a vector like this?
+```{r}
+cat.variables <- c("old","old","old","old",
+                   "old","old","old","old","old")
+```
+
+
+
+And used `is()`
+
+```{r}
+is(cat.variables)
+```
+
+It tells us we have a vector, containing chracter data.  Not sure why it feels the need to tell us all the other stuff...
+
+
+### length()
+
+Our vector has 9 elements, or is 9 elements long.
+```{r}
+length(old.E.max)
+```
+
+
+
+Note that `dim()`, for dimension, doens't work with vectors!
+
+```{r}
+dim(old.E.max)
+```
+
+It would be nice if it said something like "1 x 9" for 1 row tall and 9 elements long.  So it goes.
+
+
+### str()
+
+`str()` stands for "structure". 
+
+* It summarizes info about an object; 
+* I find it most useful for looking at lists.  
+* If our vector here was really really long, str() would only show the first part of the vector
+
+```{r}
+str(old.E.max)
+```
+
+
+
+### c()
+
+* We typically use `c()` to gather together things like numbers, as we did to make our objects above. 
+* note: this is *lower case* "c"! 
+* Uppercase is something else
+* For me, R's font makes it hard sometiems to tell the difference between "c" and "C"
+* If code isn't working, one problem might be a "C" instead of a "c"
+
+Use `c()` to combine two objects
+
+```{r}
+old.plus.new <- c(old.E.max, young.E.max)
+```
+
+
+
+Look at the legnth
+
+```{r}
+length(old.plus.new)
+```
+
+
+
+Note that `str()` just shows us the first few digits, not all 17
+```{r}
+str(old.plus.new)
+```
+
+
+
+
+## Debrief
+
+We can...
+
+* learn about objects using length(), is(), str()
+* access parts of list using $ (and also brackets)
+* access parts of vetors using square brackets [ ]
+* save the output of a model / test to an object
+* access part of lists for plotting instead of copying stuff
+
+<!--chapter:end:002-R-programming_basics/11-R_objects_n_at.Rmd-->
+
 ---
 output: html_document
 editor_options: 
@@ -5199,6 +2492,292 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
+# DNA descriptive statics - Part 1
+
+**By**: Avril Coghlan  
+
+**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+## Preface
+
+This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  The text and code were originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
+
+## Writing TODO:
+
+* Add biology introduction
+* Work on flow
+* organize intial sections (intro, vocab, preliminaries)
+
+
+## Introduction
+
+<!-- Check the current status of the biology of this section -->
+<!-- ### Note on the biology in this section -->
+
+<!-- Some of the biology in this tutorial appears to be out of date.  Specifically, research on the biological basis of unusual frequencies of DNA "words" does not appear to be much current interest in bioinformatics and genomics.  (In contrast, methylation of bases within certain DNA words is being worked on.)  The examples are still good for practicing R skills. -->
+
+
+## Vocabulary
+
+* GC content
+* DNA words
+* scatterplots, histograms, piecharts, and boxplots
+
+
+## Functions
+* `seqinr::GC()`
+* `seqinr::count()`
+
+
+## Preliminaries
+
+```{r}
+library(compbio4all)
+library(seqinr)
+```
+
+
+
+
+## Converting DNA from FASTA format
+
+In a previous exercise we downloaded and examined DNA sequence in the FASTA format. The sequence we worked with is also stored as a data file within the `compbio4all` pa package and can be brought into memory using the `data()` command.
+
+```{r}
+data("dengueseq_fasta")
+```
+
+We can look at this data object with the `str()` command
+
+```{r}
+str(dengueseq_fasta)
+```
+
+This isn't in a format we can work with directly so we'll use the function fasta_cleaner() to set it up.
+
+```{r}
+header. <- ">NC_001477.1 Dengue virus 1, complete genome"
+dengueseq_vector <- compbio4all::fasta_cleaner(dengueseq_fasta)
+```
+
+
+Now check it out.
+```{r}
+str(dengueseq_vector)
+```
+
+What we have here is each base of the sequence in a seperate slot of our vector.
+
+The first four bases are "AGTT"
+
+We can see the first one like this
+```{r}
+dengueseq_vector[1]
+```
+
+The second one like this
+```{r}
+dengueseq_vector[2]
+```
+
+The first and second like this
+```{r}
+dengueseq_vector[1:2]
+```
+
+and all four like this
+```{r}
+dengueseq_vector[1:4]
+```
+
+
+## Length of a DNA sequence
+
+Once you have retrieved a DNA sequence, we can obtain some simple statistics to describe that sequence, such as the sequence’s total length in nucleotides. In the above example, we retrieved the DEN-1 Dengue virus genome sequence, and stored it in the vector variable dengueseq_vector To obtain the length of the genome sequence, we would use the length() function, typing:
+
+
+```{r}
+length(dengueseq_vector)
+```
+
+
+The length() function will give you back the length of the sequence stored in variable dengueseq_vector, in nucleotides. The length() function actually gives the number of **elements** (slots) in the input vector that you passed to it, which in this case in the number of elements in the vector dengueseq_vector. Since each element of the vector dengueseq_vector contains one nucleotide of the DEN-1 Dengue virus sequence, the result for the DEN-1 Dengue virus genome tells us the length of its genome sequence (ie. 10735 nucleotides long).
+
+### Base composition of a DNA sequence
+
+An obvious first analysis of any DNA sequence is to count the number of occurrences of the four different nucleotides (“A”, “C”, “G”, and “T”) in the sequence. This can be done using the the table() function. For example, to find the number of As, Cs, Gs, and Ts in the DEN-1 Dengue virus sequence (which you have put into vector variable dengueseq_vector, using the commands above), you would type:
+
+
+```{r}
+table(dengueseq_vector)
+```
+
+
+This means that the DEN-1 Dengue virus genome sequence has 3426 As occurring throughout the genome, 2240 Cs, and so forth.
+
+### GC Content of DNA
+
+One of the most fundamental properties of a genome sequence is its **GC content**, the fraction of the sequence that consists of Gs and Cs, ie. the %(G+C).
+
+The GC content can be calculated as the percentage of the bases in the genome that are Gs or Cs. That is, GC content = (number of Gs + number of Cs)*100/(genome length). For example, if the genome is 100 bp, and 20 bases are Gs and 21 bases are Cs, then the GC content is (20 + 21)*100/100 = 41%.
+
+You can easily calculate the GC content based on the number of As, Gs, Cs, and Ts in the genome sequence. For example, for the DEN-1 Dengue virus genome sequence, we know from using the table() function above that the genome contains 3426 As, 2240 Cs, 2770 Gs and 2299 Ts. Therefore, we can calculate the GC content using the command:
+
+```{r}
+(2240+2770)*100/(3426+2240+2770+2299)
+```
+
+
+Alternatively, if you are feeling lazy, you can use the GC() function in the SeqinR package, which gives the fraction of bases in the sequence that are Gs or Cs.
+
+```{r}
+seqinr::GC(dengueseq_vector)
+```
+
+The result above means that the fraction of bases in the DEN-1 Dengue virus genome that are Gs or Cs is 0.4666977. To convert the fraction to a percentage, we have to multiply by 100, so the GC content as a percentage is 46.66977%.
+
+### DNA words
+
+As well as the frequency of each of the individual nucleotides (“A”, “G”, “T”, “C”) in a DNA sequence, it is also interesting to know the frequency of longer **DNA words**, also referred to as **genomic words**. The individual nucleotides are DNA words that are 1 nucleotide long, but we may also want to find out the frequency of DNA words that are 2 nucleotides long (ie. “AA”, “AG”, “AC”, “AT”, “CA”, “CG”, “CC”, “CT”, “GA”, “GG”, “GC”, “GT”, “TA”, “TG”, “TC”, and “TT”), 3 nucleotides long (eg. “AAA”, “AAT”, “ACG”, etc.), 4 nucleotides long, etc.
+
+To find the number of occurrences of DNA words of a particular length, we can use the count() function from the R SeqinR package. 
+
+
+The count() function only works with lower-case letters, so first we have to use the tolower() function to convert our upper class genome to lower case
+
+```{r}
+dengueseq_vector <-tolower(dengueseq_vector)
+```
+
+Now we can look for words. For example, to find the number of occurrences of DNA words that are 1 nucleotide long in the sequence dengueseq_vector, we type:
+
+
+```{r}
+seqinr::count(dengueseq_vector, 1)
+```
+
+
+As expected, this gives us the number of occurrences of the individual nucleotides. To find the number of occurrences of DNA words that are 2 nucleotides long, we type:
+
+```{r}
+seqinr::count(dengueseq_vector, 2)
+```
+
+
+Note that by default the count() function includes all overlapping DNA words in a sequence. Therefore, for example, the sequence “ATG” is considered to contain two words that are two nucleotides long: “AT” and “TG”.
+
+If you type help(‘count’), you will see that the result (output) of the function count() is a table object. This means that you can use double square brackets to extract the values of elements from the table. For example, to extract the value of the third element (the number of Gs in the DEN-1 Dengue virus sequence), you can type:
+
+```{r}
+denguetable_2 <- seqinr::count(dengueseq_vector,2)
+denguetable_2[[3]]
+```
+
+The command above extracts the third element of the table produced by count(dengueseq_vector,1), which we have stored in the table variable denguetable.
+
+Alternatively, you can find the value of the element of the table in column “g” by typing:
+
+
+```{r}
+denguetable_2[["aa"]]
+```
+
+
+Once you have table you can make a basic plot
+```{r}
+barplot(denguetable_2)
+```
+
+We can sort by the number of words using the sort() command
+
+```{r}
+sort(denguetable_2)
+```
+
+
+Let's save over the original object
+```{r}
+denguetable_2 <- sort(denguetable_2)
+```
+
+
+```{r}
+barplot(denguetable_2)
+```
+
+R will automatically try to optimize the appearance of the labels on the graph so you may not see all of them; no worries.
+
+
+R can also make pie charts.  Piecharts only really work when there are a few items being plots, like the four bases.
+```{r}
+denguetable_1 <- seqinr::count(dengueseq_vector,1)
+```
+
+Make a piechart with pie()
+```{r}
+pie(denguetable_1)
+```
+
+
+
+
+
+### Summary
+
+In this practical, have learned to use the following R functions:
+
+length() for finding the length of a vector or list
+table() for printing out a table of the number of occurrences of each type of item in a vector or list.
+These functions belong to the standard installation of R.
+
+You have also learnt the following R functions that belong to the SeqinR package:
+
+GC() for calculating the GC content for a DNA sequence
+count() for calculating the number of occurrences of DNA words of a particular length in a DNA sequence
+
+
+## Acknowledgements
+
+This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  Almost all of text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
+
+In "A little book..." Coghlan noted: "Many of the ideas for the examples and exercises for this chapter were inspired by the Matlab case studies on Haemophilus influenzae (www.computational-genomics.net/case_studies/haemophilus_demo.html) and Bacteriophage lambda (http://www.computational-genomics.net/case_studies/lambdaphage_demo.html) from the website that accompanies the book Introduction to Computational Genomics: a case studies approach by Cristianini and Hahn (Cambridge University Press; www.computational-genomics.net/book/)."
+
+### License
+
+The content in this book is licensed under a Creative Commons Attribution 3.0 License.
+
+https://creativecommons.org/licenses/by/3.0/us/
+
+### Exercises
+
+Answer the following questions, using the R package. For each question, please record your answer, and what you typed into R to get this answer.
+
+Model answers to the exercises are given in Answers to the exercises on DNA Sequence Statistics (1).
+
+1. What are the last twenty nucleotides of the Dengue virus genome sequence?
+1. What is the length in nucleotides of the genome sequence for the bacterium Mycobacterium leprae strain TN (accession NC_002677)?
+Note: Mycobacterium leprae is a bacterium that is responsible for causing leprosy, which is classified by the WHO as a neglected tropical disease. As the genome sequence is a DNA sequence, if you are retrieving its sequence via the NCBI website, you will need to look for it in the NCBI Nucleotide database.
+1. How many of each of the four nucleotides A, C, T and G, and any other symbols, are there in the Mycobacterium leprae TN genome sequence?
+Note: other symbols apart from the four nucleotides A/C/T/G may appear in a sequence. They correspond to positions in the sequence that are are not clearly one base or another and they are due, for example, to sequencing uncertainties. or example, the symbol ‘N’ means ‘aNy base’, while ‘R’ means ‘A or G’ (puRine). There is a table of symbols at www.bioinformatics.org/sms/iupac.html.
+1. What is the GC content of the *Mycobacterium leprae TN* genome sequence, when (i) all non-A/C/T/G nucleotides are included, (ii) non-A/C/T/G nucleotides are discarded?
+Hint: look at the help page for the GC() function to find out how it deals with non-A/C/T/G nucleotides.
+1. How many of each of the four nucleotides A, C, T and G are there in the complement of the Mycobacterium leprae TN genome sequence?  *Hint*: you will first need to search for a function to calculate the complement of a sequence. Once you have found out what function to use, remember to use the help() function to find out what are the arguments (inputs) and results (outputs) of that function. How does the function deal with symbols other than the four nucleotides A, C, T and G? Are the numbers of As, Cs, Ts, and Gs in the complementary sequence what you would expect?
+1. How many occurrences of the DNA words CC, CG and GC occur in the Mycobacterium leprae TN genome sequence?
+1. How many occurrences of the DNA words CC, CG and GC occur in the (i) first 1000 and (ii) last 1000 nucleotides of the Mycobacterium leprae TN genome sequence?
+1.How can you check that the subsequence that you have looked at is 1000 nucleotides long?
+
+```{r}
+
+```
+
+
+<!--chapter:end:003-downloading_seq_data_as_FASTA/13-DNA_sequence_descriptive_stats-AC03-02.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Downloading protein sequences in *R*
 
 **By**: Avril Coghlan.  
@@ -5257,6 +2836,31 @@ head(leprae_vector, 20)
 ```
 
 <!--chapter:end:003-downloading_seq_data_as_FASTA/14-download_protein_sequences.Rmd-->
+
+# Changes to database entries
+
+Sometimes databases entries not linked or database entries get removed.  When revising this chapter I had to update three of the accession numbers because the UniProt accessions in the original version weren't working for me.
+
+For example the original UniProt entry included in the chapter
+[E3M2K8](https://www.uniprot.org/uniprot/E3M2K8) does not currently link directly to the NCBI entry for this same protein.  Instead, I had to use the NCBI accession XP_003109757.1.  I'm not sure why this is.
+
+Two accession numbers in the original version of this chapter appear to have been removed from UniProt because they were preliminary and perhaps did not meet the quality standards for UniProt.  While the NCBI Gene and Protein are meant to be a record of *all* sequence, NCBI RefSeq and UniProt are carefully curated to contain information that is consistent, accurate, and represents biological reality.  
+
+Searching the UniProt data base for two accessions in the original version of this chapter,
+[E1FUV2](https://www.uniprot.org/uniprot/E1FUV2) (*Loa loa*) and
+[A8NSK3](https://www.uniprot.org/uniprot/A8NSK3)(*Brugia malayi*), both yielded the result: 
+>"This entry is obsolete... this entry was deleted.  The protein sequence for this entry is available in UniParc. For previous versions of this entry, please look at its history."
+
+Looking at the history for the *Loa loa* version of the protein we can see it was listed as "unreviewed" prior to it being pulled and has the note "The sequence shown here is derived from an ... whole genome shotgun (WGS) entry which i preliminary data."  (https://www.uniprot.org/uniprot/E1FUV2.txt?version=9).  Once they got around to reviewing in, the curators at UniProt must have decided that it didn't meet the standards for inclusion in the database.  The information about the sequence in other databases, however, was not deleted, just the entry in UniProt.
+
+Most proteins are not experimentally studied in a lab, let alone their structure determined or their expression levels assessed.  They are therefore predicted to be real based on their similarity to proteins that have been studied in model organisms.  
+
+To track down these sequences, I used BLAST. BLASTing the well-studied model organism *C. elegans* version of the protein against the *Loa loa* genome resulted in a hypothetical protein [LOAG_18175](https://blast.ncbi.nlm.nih.gov/Blast.cgi#alnHdr_XP_020305433) a 93% query coverage with C. elegans and 44% identity.  The accession number for this predicted protein in NCBI is [XP_020305433.1](https://blast.ncbi.nlm.nih.gov/Blast.cgi#alnHdr_XP_020305433).  I similarly tracked down the accession for the *Brugia malayi* version of the protein.
+
+<!-- Turn this into an assignment. -->
+<!-- BLASTing the *C. elegans* version of the protein against the *Brugia malayi* genome resulted in a two high-ranked results.  I'll just consider the first because they are just different alternatively spliced versions of the same protein (consider, though how this could impact phylogenetic inference. The highest-ranked results was [BMA-SPN-4, isoform a] which also has  93% query coverage with *C. elegans* and 44% identity.  The accession number for this  protein in NCBI is [CRZ25068.1](https://www.ncbi.nlm.nih.gov/protein/CRZ25068.1?report=genbank&log$=protalign&blast_rank=1&RID=FXV3B98S016).  The other splice variant accession number CRZ25069.1 had almost the exact same results but was 9 amino acids longer.  The occurrence of two splice variants of this protein may have resulted in it being pulled from UniProt. -->
+
+<!--chapter:end:003-downloading_seq_data_as_FASTA/15-changes_to_database.Rmd-->
 
 ---
 output: html_document
@@ -6501,144 +4105,7 @@ I haven't written a function yet to implement counting up the length of the inse
 
 
 
-<!--chapter:end:004-pairwise_alignment/18-alignment_by_hand_shrm_active_learning.Rmd-->
-
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-# Matrix vocabulary
-
-**By** Nathan Brouwer
-
-
-<!-- Other to do -->
-<!-- first work with smaller matrix (DNA? distance matrix?) -->
-<!-- transpose -->
-<!-- mirror symmetry -->
-<!-- remove ambig codes while working with it -->
-
-
-## Introduction 
-
-In this exercise we will practice manipulating matrices and vector by exploring the structure of **scoring matrices** and **alignments**.
-
-## Preliminaries
-
-
-### Packages 
-
-* BiocManager
-* Biostrings
-* combio4all
-
-### Vocab
-
-#### Math / R vocab
-
-* triangular matrix
-* square matrix
-* lower triangle
-* upper triangle
-* symmetric matrix
-* matrix diagonal
-
-
-#### Bioinformatics vocab 
-* scoring matrix
-* BLOSUM scoring matrix
-
-
-
-### Functions used
-
-#### Base R functions
-* `data()`
-* `is()`
-* `nrow()`, `ncol()`, 
-* `dim()`,
-* `names()`, `colnames()`, `rownames()`, 
-* `head()`,  `tail()`
-
-#### Specific function
-
-* combio4all::tri_print()
-* combio4all::diag_show()
-
-
-## Load packages
-
-Load basic packages
-```{r}
-library(flextable)
-library(webshot)
-
-library(compbio4all)
-```
-
-Data
-```{r}
-data(BLOSUM62)
-```
-
-Install the Biostrings package from Bioconductor; you don't have to run this if you already happen to have downloaded Biostrings before
-```{r, echo = F, eval = F}
-library(BiocManager)
-BiocManager::install("Biostrings") #Manipulate biological string data
-```
-
-
-
-In the *R* console the matrix looks like this. 
-
-```{r}
-BLOSUM62
-```
-
-
-
-The function `tri_print()` will print just the lower triangle, with all the other values left empty. (This might be a bit slow)
-```{r}
-tri_print(BLOSUM62, as.image = T)
-```
-
-
-We can also look at the upper triangle.
-```{r}
-tri_print(BLOSUM62,triangle = "upper", as.image = T)
-```
-
-
-## Matrix structure
-
-The BLOSUM62 matrix is a **square matrix** since the number of rows equals the number of columns.  It is also a symmetrical matrix since the **lower triangle** of the matrix is the same as the **upper triangle**.  The `compbio4all` package has functions for displaying these.  
-
-*R* shows us the full **symmetric matrix**, though in books usually they just show the **lower triangle**.  A symmetric matrix is one where the upper and lower triangles are identical.
-
-
-## Diagonal of a matrix
-
-The **diagonal of a matrix** is the set of numbers that falls directly in a diagonal line from the upper left corner to the lower right.
-
-The diagonal of a scoring matrix represents an amino acid that hasn't changed or diverged between two sequences (in theory it could change and then change back).  We can access the diagonal in *R* `diag()`.
-
-What does `diag(BLOSUM62)` tell you?
-
-
-```{r}
-diag(BLOSUM62)
-```
-
-This is showing you the entries that fall along the diagonal of the matrix.  But the output is just a string of numbers. We can look at the diagonal in context using the `diag_show()` function from the compbio4all package.
-
-```{r}
-diag_show(BLOSUM62)
-```
-
-
-
-<!--chapter:end:004-pairwise_alignment/18-matrix_vocab.Rmd-->
+<!--chapter:end:004-pairwise_alignment/18a-alignment_by_hand_shrm_active_learning.Rmd-->
 
 ---
 output: html_document
@@ -6799,7 +4266,215 @@ pid.gap <- NA
 ```
 
 
-<!--chapter:end:004-pairwise_alignment/18-pariwise_alignment_in_R_active_learning.Rmd-->
+<!--chapter:end:004-pairwise_alignment/18a-pariwise_alignment_in_R_active_learning.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Working with vectors and matrices
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/) with assistant from Havannah Tung.
+
+
+In previous practicals, you learned how to create different types of variables in R such as scalars, vectors and lists. Sometimes it is useful to create a variable before you actually need to store any data in the variable. To create a vector without actually storing any data in it, you can use the numeric() command to create a vector for storing numbers, or the character() command to create a vector for storing characters (eg. “A”, “hello”, etc.) For example, you may want to create a vector variable for storing the square of a number, and then store numbers in its elements afterwards:
+
+Create an empty vector "myvector" for storing numbers
+```{r}
+myvector <- numeric()   
+```
+
+```{r}
+myvector <- c(1,2,3,4,5,6,7,8,9,10)^2
+```
+
+```{r}
+myvector
+```
+
+Another very useful type of variable is a **matrix**. You can create a matrix in *R* using the *matrix()* command. If you look at the help page for the *matrix()* command, you will see that its arguments (inputs) are the data to store in the matrix, the number of rows to store it in, the number of columns to store it in, and whether to fill the matrix with data column-by-column or row-by-row. For example, say you have the heights and weights of eight patients in a hospital in two different vectors:
+```{r}
+heights <- c(180, 170, 175, 160, 183, 177, 179, 182)
+weights <- c(90, 88, 100, 68, 95, 120, 88, 93)
+```
+
+To store this data in a matrix that has one column per person, and one row for heights and one row for weights, we type:
+```{r}
+mymatrix <- matrix(c(heights,weights), 2, 8, byrow=TRUE)
+mymatrix # Print out the matrix
+```
+
+We needed to use the argument `byrow=TRUE` to tell the *matrix()* command to fill the matrix row-by-row (i.e.. to put the values from the vector heights into the first row of the matrix, and the values from the vector weights into the second row of the matrix).
+
+You can assign names to the rows and columns of a matrix using the rownames() and colnames() commands, respectively. For example, to assign names to the rows and columns of matrix mymatrix, you could type:
+```{r}
+rownames(mymatrix) <- c("height", "weight")
+colnames(mymatrix) <- c("patient1", "patient2", "patient3", 
+                        "patient4", "patient5", "patient6",
+                        "patient7", "patient8")
+
+mymatrix # Print out the matrix now
+```
+
+Once you have created a matrix, you can access the values in the elements of the matrix by using square brackets containing the indices of the row and column of the element. For example, if you want to access the value in the second row and fourth column of matrix mymatrix, you can type:
+
+```{r}
+mymatrix[2,4]
+```
+
+If you want to access all the values in a particular row of the matrix, you can just type the index for the row, and leave out the index for the column. For example, if you want to get the values in the second row of the matrix mymatrix, type:
+
+```{r}
+mymatrix[2,]
+```
+
+Likewise, if you want to get the values in a particular column of a matrix, leave out the index for the row, and just type the column index. For example, if you want to get the values in the fourth row of the mymatrix, type:
+
+```{r}
+mymatrix[,4]
+```
+
+<!--chapter:end:004-pairwise_alignment/18a-vectors_and_matrices.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Matrix vocabulary
+
+**By** Nathan Brouwer
+
+
+<!-- Other to do -->
+<!-- first work with smaller matrix (DNA? distance matrix?) -->
+<!-- transpose -->
+<!-- mirror symmetry -->
+<!-- remove ambig codes while working with it -->
+
+
+## Introduction 
+
+In this exercise we will practice manipulating matrices and vector by exploring the structure of **scoring matrices** and **alignments**.
+
+## Preliminaries
+
+
+### Packages 
+
+* BiocManager
+* Biostrings
+* combio4all
+
+### Vocab
+
+#### Math / R vocab
+
+* triangular matrix
+* square matrix
+* lower triangle
+* upper triangle
+* symmetric matrix
+* matrix diagonal
+
+
+#### Bioinformatics vocab 
+* scoring matrix
+* BLOSUM scoring matrix
+
+
+
+### Functions used
+
+#### Base R functions
+* `data()`
+* `is()`
+* `nrow()`, `ncol()`, 
+* `dim()`,
+* `names()`, `colnames()`, `rownames()`, 
+* `head()`,  `tail()`
+
+#### Specific function
+
+* combio4all::tri_print()
+* combio4all::diag_show()
+
+
+## Load packages
+
+Load basic packages
+```{r}
+library(flextable)
+library(webshot)
+
+library(compbio4all)
+```
+
+Data
+```{r}
+data(BLOSUM62)
+```
+
+Install the Biostrings package from Bioconductor; you don't have to run this if you already happen to have downloaded Biostrings before
+```{r, echo = F, eval = F}
+library(BiocManager)
+BiocManager::install("Biostrings") #Manipulate biological string data
+```
+
+
+
+In the *R* console the matrix looks like this. 
+
+```{r}
+BLOSUM62
+```
+
+
+
+The function `tri_print()` will print just the lower triangle, with all the other values left empty. (This might be a bit slow)
+```{r}
+tri_print(BLOSUM62, as.image = T)
+```
+
+
+We can also look at the upper triangle.
+```{r}
+tri_print(BLOSUM62,triangle = "upper", as.image = T)
+```
+
+
+## Matrix structure
+
+The BLOSUM62 matrix is a **square matrix** since the number of rows equals the number of columns.  It is also a symmetrical matrix since the **lower triangle** of the matrix is the same as the **upper triangle**.  The `compbio4all` package has functions for displaying these.  
+
+*R* shows us the full **symmetric matrix**, though in books usually they just show the **lower triangle**.  A symmetric matrix is one where the upper and lower triangles are identical.
+
+
+## Diagonal of a matrix
+
+The **diagonal of a matrix** is the set of numbers that falls directly in a diagonal line from the upper left corner to the lower right.
+
+The diagonal of a scoring matrix represents an amino acid that hasn't changed or diverged between two sequences (in theory it could change and then change back).  We can access the diagonal in *R* `diag()`.
+
+What does `diag(BLOSUM62)` tell you?
+
+
+```{r}
+diag(BLOSUM62)
+```
+
+This is showing you the entries that fall along the diagonal of the matrix.  But the output is just a string of numbers. We can look at the diagonal in context using the `diag_show()` function from the compbio4all package.
+
+```{r}
+diag_show(BLOSUM62)
+```
+
+
+
+<!--chapter:end:004-pairwise_alignment/18b-matrix_vocab.Rmd-->
 
 ---
 output: html_document
@@ -14247,6 +11922,1049 @@ points(y.unrooted ~ n.taxa, type = "b", col = 3, lty = 2)
 
 
 <!--chapter:end:666-treethinking/tree-think-number_of_phylogenetic_trees.Rmd-->
+
+# Writing functions - practice problems
+
+**By**: Nathan Brouwer
+
+## Introduction
+
+Writing functions can be a hard skill to master.  Here are some practice problems.  A key is available.
+
+## Part 1: Pure practice
+
+### Practice Function 1: Hello world!
+
+Write a function that takes no arguement, and every time you run it says "Hello world!"  Call the function hello_world()
+
+### Practice Function 2: Hello _______ !
+
+Write a function that takes a word as an argument, and every time you run it says "Hello _____ ", where the blank is filled by the argument.  Try making the function with and without a default.  Call the function hello().
+
+**Advanced (for fun)**: Include in the function a test to see if what was passed to the arguement is a string and return the message "no valid string was entered" if something other than a string was entered.
+
+
+## Practice Function 3: Make you own natural log function
+
+R uses log() for natural and log10() for the base 10 log.  It would be easier for non-R peole to read code if there was a function with "e" in its name to indicate when the natural log is being used.  Write a function that takes a number as an argument and returns the natural log.  Call the function log_e
+
+**Advanced (for fun)**: make a function called my_log() that has an arguement "type" to specify the type of log you want.
+
+
+## Practice Function 4: Make function that converts DNA directly to RNA 
+
+The gsub() function can be used to replace characters in a string.  For example
+
+```{r}
+str <- "ATCG"
+gsub("T","U",str)
+
+
+str <- "ATTCG"
+gsub("T","U",str)
+
+str <- "ATTCGTTT"
+gsub("T","U",str)
+
+str <- "AAAA"
+gsub("T","U",str)
+```
+
+Create a function called dna_to_rna that takes a character string as an arguement and turns T to U.
+
+
+
+
+<!--chapter:end:888-programming-misc/prog_assignment-function_practice.Rmd-->
+
+# Writing user-friendly functions
+
+**By**: Nathan Brouwer
+
+A function to simulate a random sequence
+
+## Version 1
+
+```{r}
+r_molec_seq_vs1 <- function(units,
+                        prob,
+                        length){  
+  # create sequnce
+  ## "units" = molecular subunits to sample from
+  ### can be DNA (ATCG), mRNA, amino acids, etc
+  ## "length" = length of squence to generate
+  ## "prob" = probablity of sampling an element of "units"
+  seq.n.i <- sample(x = units, 
+                  size = length, 
+                  replace = TRUE, 
+                  prob = prob)
+  
+  # convert to charater string
+  seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
+  
+  # return result
+  return(seq.n.i)
+  
+}
+```
+
+
+Test the function.  There's no defaults so it
+```{r, eval = F}
+r_molec_seq_vs1()
+```
+
+```{r}
+r_molec_seq_vs1(units =c("A","T","C","G"),
+                prob = c(0.25,0.25,0.25,0.25),
+                length = 10)
+
+```
+
+
+Test with real data, the Robinson and Robinson amino acid frequencies
+```{r}
+data(robinson_aafreq)
+r_molec_seq_vs1(units = robinson_aafreq$aa1,
+                prob = robinson_aafreq$aa.freq,
+                length = 10)
+```
+
+
+
+## Version 2
+
+Add defaults for units and prob
+
+```{r}
+r_molec_seq_vs2 <- function(units = c("A","T","C","G"),
+                            prob  = c(0.25,0.25,0.25,0.25),
+                            length){  
+  
+  seq.n.i <- sample(x = units, 
+                  size = length, 
+                  replace = TRUE, 
+                  prob = prob)
+  
+  seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
+  
+  return(seq.n.i)
+  
+}
+```
+
+
+Now it works even if all we give it is a length
+```{r}
+r_molec_seq_vs2(length = 100)
+```
+
+
+## Version 3
+
+Now we'll give it a deafult for length
+```{r}
+r_molec_seq_vs3 <- function(units = c("A","T","C","G"),
+                            prob  = c(0.25,0.25,0.25,0.25),
+                            length = 100){  
+  
+  seq.n.i <- sample(x = units, 
+                  size = length, 
+                  replace = TRUE, 
+                  prob = prob)
+  
+  seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
+  
+  return(seq.n.i)
+  
+}
+```
+
+
+Now it works even if the parentheses are empty
+```{r}
+r_molec_seq_vs3()
+```
+
+
+## Version 4: Adding conditions and warnigns
+
+This version tests whether the function in being run with the defaults, and throws a warning if that's true.  The defaults are meant just for testing the function, and if someone runs the function with the defaults it might be that they forgot to change them.
+```{r}
+r_molec_seq_vs4 <- function(units = c("A","T","C","G"),
+                            prob  = c(0.25,0.25,0.25,0.25),
+                            length = 100){ 
+  
+  if(all(units  == c("A","T","C","G")) == TRUE &
+     all(prob   == c(0.25,0.25,0.25,0.25)) == TRUE &
+     length == 100){
+    warning("Note: all parameters set to defaults.  Did you want to change something?")
+     }
+  
+  seq.n.i <- sample(x = units, 
+                  size = length, 
+                  replace = TRUE, 
+                  prob = prob)
+  
+  seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
+  
+  return(seq.n.i)
+  
+}
+```
+
+This throws a warning
+```{r}
+r_molec_seq_vs4()
+```
+
+This doesnt
+```{r}
+r_molec_seq_vs4(prob = c(0.3,0.3,0.2,0.2))
+```
+
+
+## Version 5
+
+Here I've added an additional condition to ask whether the user wants to return a string or a vetor.
+
+```{r}
+r_molec_seq_vs5 <- function(units = c("A","T","C","G"),
+                            prob  = c(0.25,0.25,0.25,0.25),
+                            length = 100,
+                             as.string = TRUE){ 
+  
+  if(all(units  == c("A","T","C","G")) == TRUE &
+     all(prob   == c(0.25,0.25,0.25,0.25)) == TRUE &
+     length == 100){
+    warning("Note: all parameters set to defaults.  Did you want to change something?")
+     }
+  
+  seq.n.i <- sample(x = units, 
+                  size = length, 
+                  replace = TRUE, 
+                  prob = prob)
+  
+  if(as.string == TRUE){
+    seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
+  
+  }
+  
+  return(seq.n.i)
+  
+}
+```
+
+Return as a vectro
+```{r}
+r_molec_seq_vs5(prob = c(0.3,0.3,0.2,0.2), 
+                as.string = F,
+                length = 10)
+```
+
+Return as a string
+```{r}
+r_molec_seq_vs5(prob = c(0.3,0.3,0.2,0.2), 
+                as.string = T,
+                length = 10)
+```
+
+The default is to return a string, so as.string = T is option
+
+```{r}
+r_molec_seq_vs5(prob = c(0.3,0.3,0.2,0.2), 
+                length = 10)
+```
+
+
+
+```{r}
+
+```
+
+
+<!--chapter:end:888-programming-misc/prog_functions_advanced_random_molec_seq.Rmd-->
+
+# Function practice exercises
+
+**By**: Nathan Brouwer
+
+## Part 1: Pure practice
+
+### Practice Function 1: Hello world!
+
+Write a function that takes no arguement, and every time you run it says "Hello world!"  Call the function hello_world()
+
+```{r}
+#best
+hello_world <- function(){
+  return("Hello world")
+  }
+hello_world()
+
+
+# these work too
+hello_world <- function(){
+  print("Hello world")
+  }
+hello_world()
+
+
+
+hello_world <- function(){
+  cat("Hello world")
+  }
+hello_world()
+```
+
+
+### Practice Function 2: Hello _______ !
+
+Write a function that takes a word as an argument, and every time you run it says "Hello _____ ", where the blank is filled by the argument.  Try making the function with and without a default.  Call the function hello().
+
+```{r}
+hello <- function(x){
+  hello.x <- paste("Hello ",x)
+  return(hello.x)}
+hello("mom")
+
+hello <- function(x){
+  print("Hello")
+  print(x)
+  }
+hello("mom")
+```
+
+
+
+
+## Practice Function 3: Make you own natural log function
+
+R uses log() for natural and log10() for the base 10 log.  It would be easier for non-R peole to read code if there was a function with "e" in its name to indicate when the natural log is being used.  Write a function that takes a number as an argument and returns the natural log.  Call the function log_e
+
+```{r}
+log_e <- function(x){
+  log(x)
+}
+
+log_e(10)
+log(10)
+```
+
+
+<!--chapter:end:888-programming-misc/prog-assignment-function_practice_key.Rmd-->
+
+# for() loops in R
+
+**By**: Nathan Brouwer
+
+
+## Introduction
+
+There are several way to write for() loops in R.  For this assignment, I asked you to write a loop which printed out each letter of the alphabet. 
+
+There are several ways to write a for loop in R.  I will show several different ways.  Out of habitat I will generally use the style of (for i in 1:length(x)), though this is not an optimal way to do things.  I will discuss this way as well as some more sounds approaches.
+
+## Reminders
+
+R has a built in object with has the data, called LETTERS.
+
+```{r}
+LETTERS
+```
+
+
+The object LETTERS is a vector containing character data.
+
+```{r}
+is(LETTERS)
+```
+
+We we access each element of a vector with its index number. To get "A"
+
+```{r}
+LETTERS[1]
+```
+
+To get "Z"
+```{r}
+LETTERS[26]
+```
+
+If I want, I can access a given letter by assigning its index number to an object.  Say I assign 26 to the letter i
+
+```{r}
+i <- 26
+```
+
+
+I can get Z like this then
+
+```{r}
+
+LETTERS[i]
+
+```
+
+
+
+## For loop 1: The hard-coded for loop (aka, the don't actually do this for loop)
+
+This is a bad way to do a for loop but makes the process totally transparent.  There are 26 letters in the alphabet, so there are 26 elements in the vector LETTERS.  Therefore, what we want R to do - print out a letter from the alphabet - need to be repeated 26 times.  So our for loop needs to repeat the same action 26 times.
+
+We can make an **index** for R like this
+```{r}
+1:26
+```
+
+Similarly, we could do this
+
+```{r}
+c(1:26)
+```
+
+
+The colon in R is used to expand a sequence of numbers.  Its a shortcut for the seq() command.
+
+```{r}
+seq(from = 1, to = 26, by = 1)
+```
+
+Remember that index values can be used to pull out elements from a vectors.  So as noted above if I want to print the letter A, which is stored in the first element of the LETTERS vector, I can do this
+
+```{r}
+LETTERS[1]
+```
+
+If I want, I could store this output in a an object
+
+```{r}
+letter.A <- LETTERS[1]
+letter.A
+```
+
+
+
+What a for loop can do is cycle through each index value, 1 to 26, and put it in between the bracket. It would look like this loop below;note that I added an extra step where I print out the index value.
+
+```{r}
+for(i in 1:26){
+  print(i)                #print the index
+  letter.i <- LETTERS[i]  #get leter i
+  print(letter.i)         #print letter i
+}
+```
+
+
+In this loop I used 1:26 for my index. This is **hard coding** the index values, which is never a good idea.  But for the sake of illustration i makes it totally obvious what we're doing.  
+
+
+As I said above 1:26 is the same as c(1:26), so this loop does the same thing
+
+```{r, eval = F}
+for(i in 1:26){
+  letter.i <- LETTERS[i]  #get leter i
+  print(letter.i)         #print letter i
+}
+```
+
+The colon : is a shortcut for the seq() command; if I wanted to be 100% transparent to someone who didn't know R I could write this:
+```{r, eval = F}
+for(i in seq(from = 1, to = 26, by = 1)){
+  letter.i <- LETTERS[i]  #get leter i
+  print(letter.i)         #print letter i
+}
+```
+
+
+The step of assigning the current letter indexed by i to an object letter.i isn't actually necessary.  I could simplify the code like this by **nesting** the LETTERS[i] statement within the print() statement.  The letter indexed by i therefore gets pulled up and directly **passed** to print().
+
+```{r, eval = F}
+for(i in 1:26){
+  print(LETTERS[i])         #print letter i
+}
+```
+
+Lines and spacing are arbitrary in R.  When a for loop is short you may see people do this to save space.
+
+```{r, eval = F}
+for(i in 1:26){ print(LETTERS[i]) }
+```
+
+Or even this, dropping the curly braces.
+```{r, eval = F}
+for(i in 1:26) print(LETTERS[i])  
+```
+
+Some people value compact code; there's no penalty in any way for using multiple lines so its generally considered best practice to split code over more lines rather than fewer.
+
+
+## For loop 3: the classic for loop
+
+A common way to code for loops is to use a function like length() for vectors or dim() for matrices to determine how many times a loop must repeat its action.  Instead of hard-coding 1:26 to get the values 1, 2, 3,... 26 I can do this:
+
+```{r}
+1:length(LETTERS)
+```
+
+This is useful in more complex situations where you could end up changing how many elements are in LETTERS. For this approach,the for loop looks like this
+
+```{r, eval= F}
+for(i in 1:length(LETTERS)){
+  letter.i <- LETTERS[i]  #get leter i
+  print(letter.i)         #print letter i
+}
+```
+
+In this formulation, R is making an index 1 to 26 based on the length of LETTERS. Its then assigning a value to i each time it goes through the loop. Then it pulls out the appropriate letter based on i.  This is basically the same as the first example, just the values of the index, 1 to 26, is determine by R and not set by hand.
+
+I've written hundreds of loops this way an it this way works just fine.  However, in more complicated code a problem can arise if someone a 0 gets its way into a loop.  See https://jef.works/R-style-guide/#loops for a reference to this.
+
+The code below is optional, but if your curious it displays a behavior which may not be desirable.
+
+```{r}
+bad.index <- NULL
+length(bad.index)
+
+for(i in 1:length(bad.index)){
+  print(bad.index[i])
+}
+```
+
+This problem is most likely to arise when a for loop is embedded in a larger program and vectors like LETTERS get generated by one part of the program and get fed later into the loop.
+
+For this course I will probably continue to use the general format of for(i in 1:length(x)) out of habit.  Hopefully by next year I'll be re-trained to use one of the techniques shown below.
+
+## For loop 3: The Power-user for loop
+
+Probably the cleanest way to do a for loop in R is like this next example. A scientific survey on Twitter indicates that this how the cool kids write their loops.
+
+In this version, R steps through each element of the vector LETTERS and on the fly assigns that element to the object i.  Print then tells R to print the letter to the console.
+
+```{r, eval = F}
+
+for(i in LETTERS){
+  print(i)
+}
+
+```
+
+
+Note that if we leave out print() then we get blank screen. R is basically just reading the numbers to itself.
+
+```{r, eval = F}
+for(i in LETTERS){
+ i
+}
+
+```
+
+
+The use if "i" is arbitrary.  We could just j instead
+
+```{r, eval = F}
+for(j in LETTERS){
+ print(j)
+}
+
+```
+
+
+To remember this format it might be useful to think about it like this: instead of using i or j, use something representative of what the loop is accessing from LETTERS.  In the next version, I'll use letter instead of i.
+
+```{r}
+for(letter in LETTERS){
+  print(letter)
+}
+```
+
+This kind of reads like "for each letter in the vector LETTERS, print the current letter.
+
+This general approach avoids the problem with the first two versions of the loops.  Recall that I made an object called bad.index that was just NULL
+
+```{r}
+bad.index <- NULL
+```
+
+This truly is nothing; it contains no data and has a length of zero.
+```{r}
+is(bad.index)
+class(bad.index)
+length(bad.index)
+```
+
+If I use this in a for loop in the current style I get no output
+```{r}
+for(i in bad.index){
+  print(i)
+}
+```
+
+This is because bad.index has nothing to in it.
+
+
+
+A limitation of this method is that i (or j, or letters) isn't an index, but takes on an assigned value from LETTERS.  So in my old school loop I can do this, which allows me to print 2 consecutive letters.  This is done by done math on the index i.
+```{r}
+for(i in 1:length(LETTERS)){
+ print(LETTERS[c(i,i+1)])
+}
+```
+
+With the other approach, I can't do math on i
+```{r, eval = F}
+for(i in LETTERS){
+  print(i)
+  print(i+1)
+}
+```
+
+There's probably a way around this, but its not apparent to me right now.
+
+## For loop 4: A for loop for all purposes
+
+For the discerning R programming who doesn't like for loop version 3 there is a function called seq_along()
+
+
+seq_along() determines what is a valid index for a given object
+```{r}
+seq_along(LETTERS)
+```
+
+
+If you pass it a null value it can tell
+```{r}
+seq_along(bad.index)
+```
+
+seq_along therefore avoids the bad features of 1:length(x)
+```{r}
+for(i in seq_along(bad.index)){
+ print(bad.index[i])
+}
+```
+
+
+
+A for loop with seq_along(LETTERS) looks like this
+```{r, eval = F}
+for(i in seq_along(LETTERS)){
+ print(LETTERS[i])
+}
+```
+
+You can also do math on the index generated by seq_along)9
+
+
+```{r, eval = F}
+for(i in seq_along(LETTERS)){
+ print(LETTERS[c(i, i+1)])
+}
+```
+
+
+
+## Advanced aside: if(), else and next statements
+
+The following is a more advanced bit of R programming information and can be skipped
+
+Its common to but if() statements within loop to screen for certain conditions.  In the code I've been using which prints out 2 consecutive letters, when I get to i = 26, the code LETTERS[c(i, i+1)] produces LETTERS[c(26, 26+1)] = LETTERS[c(26, 27)].  There is no letter 27 so an NA is thrown.  I could avoid this using an if statement
+
+```{r}
+for(i in seq_along(LETTERS)){
+ if(i+1 > 26){
+   print(LETTERS[c(26,26)])
+ } else
+ print(LETTERS[c(i, i+1)])
+}
+```
+
+Instead of else I could also use next.
+
+```{r}
+for(i in seq_along(LETTERS)){
+ if(i+1 > 26){
+   print(LETTERS[c(26,26)])
+   next
+ } 
+ print(LETTERS[c(i, i+1)])
+}
+```
+
+## On avoiding for loops
+
+The following section is for background.  You will not be expected to write any of the code shown.
+
+In many cases for() loops can be avoided in R.  This is because R is designed to make actions on entire vectors, dataframes, and matrices easy.  R also as a set of functions called apply(), and a package called purr, which allow you to avoid writing for loops directly.  This relates (in part) to the concept of **vectorization** in R.  For a deep dive in to some of these issues see https://www.noamross.net/archives/2014-04-16-vectorization-in-r-why/.
+
+Here's an example.  Let's say I had a DNA sequence stored in a vector, which each base in a seperate slot in the vector.
+
+```{r}
+a.sequence <- c("A","T","C","A","A","A","G","G","G")
+```
+
+What if for some reason I wanted these letters to be lower case. R has a handy function called tolower() which makes upper case tolower case
+
+```{r}
+tolower("A")
+```
+
+In some programming languages, to turn all of these letters to lower case you might have to do this (I've written this out with extra code to make it obvious what I'm doing)
+
+```{r}
+for(i in 1:length(a.sequence)){
+  lowercase.letter.i <- tolower(a.sequence[i]) #make lower case
+  a.sequence[i] <- lowercase.letter.i          #overwrite old entry
+}
+```
+
+In R (and perhaps some other languages) I can do this
+
+```{r}
+a.sequence <- c("A","T","C","A","A","A","G","G","G")
+tolower(a.sequence)
+```
+
+
+This is a somewhat trivial example. Let's say I have a matrix of DNA sequences, with each row a different sequence.
+
+First, I'll make up some data. Don't worry about what this is doing
+```{r}
+dna <- c("A","T","C","G")
+make_seq <- function() sample(x = dna,size = 5,replace = T)
+my.matrix <- rbind(make_seq(),make_seq(),make_seq(),make_seq(),make_seq())
+```
+
+The matrix looks like this
+```{r}
+my.matrix
+```
+
+In some programming languages I'd have to write a loop to change this to lower case.  In R I can use a fancy function called apply() to do it in one step
+
+```{r}
+apply(my.matrix,1,tolower)
+```
+
+
+
+## Challenge
+
+Create a vector that contains the four codes for the DNA bases, A, T, C, G.  Write a for() loop which prints these out.
+
+<!--chapter:end:888-programming-misc/prog-for_loops.Rmd-->
+
+# Random number generation
+
+**By**: Nathan Brouwer
+
+## Introduction
+
+Generating random numbers is key to many tasks in statistics and computational biology.  Usually we can focus on our analysis or simulation experiments and not worry about the details, but its good to be familiar with some basic concerns when it comes to random number generations
+
+## Using set.seed() to make simulations reproducible
+
+The way that random numbers are generated in practice uses algorithms that produce random-looking numbers and random-behaving sets up numbers.  However, these algorithms are actually deterministic based on a given numberic input.  Normally when we generate a random number in R, R grabs a constantly value to use as the input.
+
+The sys.time() function can be used to tell us the time
+```{r}
+Sys.time()
+```
+
+R can keep track of very small scales of time; here, I set to measure seconds to 3 decimal places (1000s of sectons)
+```{r}
+options(digits.secs = 3)
+Sys.time()
+Sys.time()
+```
+
+Its a little more complicated than this, but basically R uses a constantly changing baseline as a starting point for random number generation.
+
+Normally, when we generate random numbers this means that every time we call a random number generation function we get a different results.
+
+For example, runif() generates a random value from 0 to 1.  Run this 4 times and you get four values.
+
+```{r}
+runif(n = 1)
+runif(n = 1)
+runif(n = 1)
+runif(n = 1)
+```
+
+Prior to generating a random number we can fix the starting point of the random number generator, called the **seed**.  R will use the same input (seed) each time it runs its random number generator, and so the same output will be given.  Every time you run this, you should get 0.5074782.
+
+```{r}
+set.seed(10)
+runif(n = 1)
+
+set.seed(10)
+runif(n = 1)
+
+set.seed(10)
+runif(n = 1)
+
+set.seed(10)
+runif(n = 1)
+```
+
+Note that the runif() generates randum uniform data, and rnorm() generates random normal data, so even with the same seed they give different results.  For random normal data, the random value shoudl be 0.01874617.
+
+```{r}
+set.seed(10)
+rnorm(n = 1)
+```
+
+A different seed will give you a different value
+
+```{r}
+set.seed(11)
+rnorm(n = 1)
+```
+
+And again
+```{r}
+set.seed(12)
+rnorm(n = 1)
+```
+
+The value of the seed has no inherent importance.
+
+## Types of random number generators
+
+R has many random number generators, with fancy names like
+
+* "Marsaglia-Multicarry"
+* "Super-Duper"
+* "Mersenne-Twister"
+* "L'Ecuyer-CMRG"
+
+You can see the default random number generator with RNGkind()
+
+```{r}
+RNGkind()
+```
+
+
+## Reporting simulations
+
+As long as you know the version of R someone used and the seed they used, you should be able to reproduce their results using their code.  Ideally the code definitive version of a simulation reported in a paper should report the seed so that the **exact** results of the paper can be reproduced by running the code.  So, in the case of my BLAST-related project, when I'm finally ready to write up a report, I should put set.seed() in the proper places in the code, give it a number, run the whole workflow, and report the results from that run.
+
+## Notes:
+
+From the set.seed help file:
+"Initially, there is no seed; a new one is created from the current time and the process ID when one is required. Hence different sessions will give different simulation results, by default."
+
+
+
+
+
+```{r}
+
+```
+
+
+
+```{r}
+Sys.time()
+set.seed(Sys.time())
+```
+
+R's sample() function actually had some problems
+https://arxiv.org/abs/1809.06520
+
+```{r}
+
+```
+
+
+<!--chapter:end:888-programming-misc/prog-random_number_generation-moved-to-combio4all.Rmd-->
+
+# Randomization practice question
+
+**By**: Nathan Brouwer
+
+
+## Practice question:
+
+I have six groups in my class Neural Defects.  For homework they are reading a paper with six figures.  I want to randomly assign a figure to each group and make sure each figure is only used once, and that every figure is used.  How can I do this in R? 
+
+1. Store what you are randomizing in a vector called "figures"
+2. Write the code to do the randomization
+3. Store the output in a vector called "rand.figures"
+4. Use an appropriate command to check that the results the proper size
+5. Use an appropriate command to check that the result is the proper data structure
+
+
+
+## Your answer:
+
+Write the code needed to do this below.
+
+```{r}
+# your answer: replace the NAs with your code
+
+# object to hold figure names
+figures <- NA
+
+
+# object to to randomization
+rand.figures <- NA
+
+
+# check size of object
+
+
+
+# check data structure
+
+
+
+
+
+```
+
+
+## Hint 0
+
+* This will require something that we normally don't do when we generate random sequences of letters.
+
+
+## Hint 1:
+
+* To do this you'll want to use the sample() command.  
+For information about sample() call up the help file using ?sample
+
+```{r, eval = F}
+
+?sample
+
+```
+
+
+
+## Hint 2 (follow up to Hint 0)
+
+* sample() can **"sample with replacement"**, which is what we normally do for generating random sequences of letters
+* OR it can **sample "without replacement"** which is actually what I want to do to make sure every figure is used once and only once
+
+## Hint 3:
+
+A key arguement in sample() is replace = ...
+
+## Answer
+
+```{r}
+# your answer: replace the NAs with your code
+
+## All of these will work the same
+figures <- c(1,2,3,4,5,6)
+figures <- c("1","2","3","4","5","6")
+figures <- c("one","two","three","four","five","six")
+
+rand.figures <- sample(figures,size = 6, replace = FALSE)
+
+# check size
+length(rand.figures)
+
+# check data structure
+is(rand.figures)
+
+
+```
+
+Note: when you are sampling **WITH** replacement you could do this with the runinf() command.  However, this won't work when sampling without replacement.  (We'll, if you really wanted to you could make it work, but it would require a loop and would be inefficient.  If you want a challenge, you could try to figure this out using a while() loop instead of a for() loop)
+
+<!--chapter:end:888-programming-misc/prog-sample_question_randomization.Rmd-->
+
+# Simulating random amino acid sequences
+
+**By**: Nathan Brouwer
+
+## Selecting random letters from a vector
+
+Make a vector with some letters
+```{r}
+my.letters <- c("A","B","C","D")
+```
+
+Use sample() to select one random letter
+
+```{r}
+sample(x = my.letters, size = 1, replace = T)
+```
+
+Select 10 letters, with replacement (replace = T), so that the same letter can occur more than once
+
+```{r}
+sample(x = my.letters, size = 10, replace = T)
+```
+
+Select 100 letters
+```{r}
+sample(x = my.letters, size = 10, replace = T)
+```
+
+
+## Select random letters from the whole alphabet
+
+The object LETTERS has the whole alphabet
+
+```{r}
+LETTERS
+```
+
+
+Select 10 letters from whole alphabet
+```{r}
+sample(x = my.letters, size = 10, replace = T)
+```
+
+
+## Select random amino acids to build polypeptide
+
+Make a vector of all letters that represent and amino acid
+```{r}
+all.aas <- c("A","C","D","E","F","G","H","I","K","L","M","N","P","Q","R","S","T","V","W","Y")
+```
+
+
+Randomly select an amino acid
+
+```{r}
+sample(x = all.aas, size = 1, replace = T)
+```
+
+Make a vector of 200 amino acids
+```{r, eval = F}
+sample(x = all.aas, size = 200, replace = T)
+```
+
+
+I may want to represent the size of the fake polypeptide with an object
+```{r, eval = F}
+my.polypep.size <- 200
+sample(x = all.aas, size = my.polypep.size, replace = T)
+```
+
+I can save this an object
+```{r}
+my.polypep.size <- 200
+my.pp <- sample(x = all.aas, size = my.polypep.size, replace = T)
+```
+
+I can make a single character string with not spaces using paste
+
+```{r}
+paste(x = my.pp,sep = "", collapse = "")
+```
+
+
+```{r}
+
+```
+
+
+<!--chapter:end:888-programming-misc/prog-simulate_random_aa_seqs.Rmd-->
 
 # Logarithms in R
 
