@@ -9,11 +9,6 @@
 * length()
 * dim()
 * is()
-* str()
-* dim()
-* list()
-
-
 
 
 ## R Objects

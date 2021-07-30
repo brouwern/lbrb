@@ -65,7 +65,7 @@ In this exercise we will practice manipulating matrices and vector by exploring 
 ## Load packages
 
 Load basic packages
-```{r}
+```{r, message = F, warning = F}
 library(flextable)
 library(webshot)
 

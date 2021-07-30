@@ -19,7 +19,7 @@ editor_options:
 
 ## Preliminaries
 
-```{r}
+```{r, message = F, warning = F}
 library(compbio4all)
 ```
 

@@ -1,4 +1,4 @@
-# Programming in R: functions
+# Writing functions
 
 **By**: Avril Coghlan  
 

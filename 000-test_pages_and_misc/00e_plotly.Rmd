@@ -7,8 +7,8 @@ editor_options:
 
 The normal version of the graph looks like this.
 ```{r echo = F, message = F, waring = F}
-library(plotly)
-library(ggplot2)
+# library(plotly)
+# library(ggplot2)
 library(cowplot)
 
 data(lynx)
@@ -27,8 +27,6 @@ p
 
 The plotly version looks like this
 ```{r, warnings = F, message = F,  eval=knitr::is_html_output()}
-
-
 fig <- plotly::ggplotly(p)
 
 fig

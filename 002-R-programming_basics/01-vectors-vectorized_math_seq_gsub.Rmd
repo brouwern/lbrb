@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Mini tutorial: Vectors in R
+# A primer for working with vecotrs
 
 **By**: Avril Coghlan  
 
@@ -20,6 +20,7 @@ This is a modification of part of["DNA Sequence Statistics (2)"](https://a-littl
 
 * base R
 * scalar, vector, matrix
+* vectorized operation
 * regular expressions
 
 # Functions
@@ -64,9 +65,7 @@ Vectors can serve as the input for mathematical operations. When this is done *R
 Let's make a vector of numbers:
 
 ```{r}
-
 myvector <- c(30,16,303,99,11,111)
-
 ```
 
 What happens when we multiply `myvector` by 10?
@@ -85,8 +84,7 @@ R has taken each of the 6 values, 30 through 111, of `myvector` and multiplied e
 111*10   # last value of myvector
 ```
 
-
-The normal order of operations rules apply to vectors as they do to operations we're more used to.   So multiplying `myvector` by 10 is the same whether you put he 10 before or after vector.  That is `myvector\*10` is the same as `10\*myvector`.
+ The normal order of operations rules apply to vectors as they do to operations we're more used to.   So multiplying `myvector` by 10 is the same whether you put he 10 before or after vector.  That is `myvector\*10` is the same as `10\*myvector`.
 
 ```{r}
 myvector*10
@@ -109,6 +107,7 @@ So, what R did was
 111-30   # last value of myvector
 ```
 
+Again, `myvector-30` is vectorized operation.
 
 You can also square a vector
 
@@ -125,14 +124,14 @@ Which is the same as
 111^2   # last value of myvector
 ```
 
-Also you can take the square root of a vector...
+Also you can take the square root of a vector using the functions `sqrt()`...
 
 ```{r}
 sqrt(myvector)
 ```
 
 
-...and take the log of a vector...
+...and take the log of a vector with `log()`...
 
 ```{r}
 
@@ -140,12 +139,14 @@ log(myvector)
 
 ```
 
-...and just about any other mathematical operation.  Here we are working on a separate vector object; all of these rules apply to a column in a matrix or a dataframe.  This attribution of R is called **vectorization**.
+...and just about any other mathematical operation.  Here we are working on a separate vector object; all of these rules apply to a column in a matrix or a dataframe.  
+
+This attribute of R is called **vectorization**.  When you run the code `myvector*10` or `log(myvector)` you are doing a **vectorized** operation - its like normal math with special vector-based super power to get more done faster than you normally could.
 
 
 ## Functions on vectors
 
-We can use functions on vectors. Typically these use the vectors as an input and all the numbers are processed into an output.  Call the `mean()` function  on the vector we made called `myvector`.
+As we just saw, we can use functions on vectors.  Typically these use the vectors as an input and all the numbers are processed into an output.  Call the `mean()` function  on the vector we made called `myvector`.
 ```{r}
 mean(myvector)
 ```

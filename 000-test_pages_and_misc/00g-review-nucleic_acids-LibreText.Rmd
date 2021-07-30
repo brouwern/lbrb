@@ -1,8 +1,8 @@
 # Nucleic Acids
 
-**Authors**: OpenStax Biology team.  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
+**Authors**: OpenStax / Libretext  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
 
-This chapter was adapted from [LibreText General Biology](), Chapter 3, Section 3.5: [Nucleic Acids](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.5%3A_Nucleic_Acids).  The LibreText book is based on  [OpenStax Biology 2nd edition](https://openstax.org/details/books/biology-2e), Chapter 3, Section 3.5: [Nucleic Acids](https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids).  A full list of authors is found under the **Contributors and Attributions** section at the end of this document. 
+This chapter was adapted from [LibreText General Biology](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)), Chapter 3, Section 3.5: [Nucleic Acids](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.5%3A_Nucleic_Acids).  The LibreText book is based on  [OpenStax Biology 2nd edition](https://openstax.org/details/books/biology-2e), Chapter 3, Section 3.5: [Nucleic Acids](https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids).  A full list of authors is found under the **Contributors and Attributions** section at the end of this document. 
 
 
 >Nucleic acids are the most important macromolecules for the continuity

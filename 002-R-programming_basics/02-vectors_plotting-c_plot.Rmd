@@ -19,21 +19,22 @@ This is a modification of part of["DNA Sequence Statistics (2)"](https://a-littl
 
 ## Plotting numeric data
 
-R allows the production of a variety of plots, including **scatterplots**, **histograms**, **piecharts**, and **boxplots**.  Usually we make plots from dataframes with 2 or more columns, but we can also make them from two separate vectors.  This flexibility is useful, but also can cause some confusion.   
+R allows the production of a variety of plots, including **scatterplots**, **histograms**, **piecharts**, and **boxplots**.  Usually we make plots from **dataframes** with 2 or more columns, but we can also make them from two separate vectors.  This flexibility is useful, but also can cause some confusion.   
 
-For example, if you have two equal-length vectors of numbers `numeric.vect1` and `numeric.vect1`, you can plot a scatterplot of the values in `myvector1` against the values in `myvector2` using the **base R** `plot() `function. 
+For example, if you have two equal-length vectors of numbers `numeric.vect1` and `numeric.vect1`, you can plot a [**scatterplot**](https://en.wikipedia.org/wiki/Scatter_plot) of the values in `myvector1` against the values in `myvector2` using the **base R** `plot() `function. 
 
 First, let's make up some data in put it in vectors:
 
 ```{r}
-numeric.vect1 <- c(10, 15, 22, 35, 43)
-numeric.vect2 <- c(3, 3.2, 3.9, 4.1, 5.2)
+numeric.vect1 <- c(10, 15,  22,  35,  43)
+numeric.vect2 <- c(3,  3.2, 3.9, 4.1, 5.2)
 ```
 
 Not plot with the base R `plot()` function:
 ```{r}
 plot(numeric.vect1, numeric.vect2)
 ```
+
 Note that there is a comma between the two vector names.  When building plots from dataframes you usually see a tilde (~), but when you have two vectors you can use just a comma.  
 
 Also note the order of the vectors within the `plot()` command and which axes they appear on.  The first vector is `numeric.vect1` and it appears on the horizontal x-axis.

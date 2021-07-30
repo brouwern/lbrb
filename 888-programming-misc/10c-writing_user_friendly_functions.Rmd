@@ -1,8 +1,17 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Writing user-friendly functions
 
 **By**: Nathan Brouwer
 
-A function to simulate a random sequence
+**NOTE**: This is only an outline of a chapter
+
+## Introduction {-}
+
+The goal of this chapter to to learn how to write a function to simulate a random sequence of proteins.  We'll start with a function that does bare minimum, and build in additional features to make it easier to use.
 
 ## Version 1
 
@@ -30,11 +39,12 @@ r_molec_seq_vs1 <- function(units,
 ```
 
 
-Test the function.  There's no defaults so it
-```{r, eval = F}
-r_molec_seq_vs1()
+Test the function.  There's no defaults so it returns and error.
+```{r, eval = T, error = T}
+r_molec_seq_vs1() 
 ```
 
+Now provide the function some information.
 ```{r}
 r_molec_seq_vs1(units =c("A","T","C","G"),
                 prob = c(0.25,0.25,0.25,0.25),
@@ -45,6 +55,7 @@ r_molec_seq_vs1(units =c("A","T","C","G"),
 
 Test with real data, the Robinson and Robinson amino acid frequencies
 ```{r}
+library(compbio4all)
 data(robinson_aafreq)
 r_molec_seq_vs1(units = robinson_aafreq$aa1,
                 prob = robinson_aafreq$aa.freq,

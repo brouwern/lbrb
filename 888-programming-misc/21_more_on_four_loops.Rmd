@@ -1,4 +1,4 @@
-# for() loops in R
+# More on for() loops in R
 
 **By**: Nathan Brouwer
 

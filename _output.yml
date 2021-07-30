@@ -2,11 +2,13 @@ bookdown::gitbook:
   css: style.css
   config:
     toc:
+      collapse: subsection
       before: |
         <li><a href="./">A Little Book of R for Bioinformatics</a></li>
       after: |
         <li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
     # download: ["pdf", "epub"]
+    download: ["pdf"]
     edit: https://github.com/brouwern/lbrb/edit/master/%s
     view: https://github.com/brouwern/lbrb/blob/master/%s
 bookdown::pdf_book:

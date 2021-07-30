@@ -12,7 +12,7 @@ editor_options:
 
 ### Packages
 
-```{r}
+```{r, message = F, warning = F}
 library(Biostrings)
 data(BLOSUM62)
 ```

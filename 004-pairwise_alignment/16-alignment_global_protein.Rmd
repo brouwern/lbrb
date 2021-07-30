@@ -15,9 +15,8 @@ editor_options:
 <!-- is compbio4all needed? -->
 <!-- have on gone over biodoncdutor and biostrings? -->
 
-```{r}
+```{r, message = F, warning = F}
 library(compbio4all)
-
 library(Biostrings)
 ```
 
