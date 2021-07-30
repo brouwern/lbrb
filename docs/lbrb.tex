@@ -1227,7 +1227,7 @@ Test the function. There's no defaults so it
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "ACGAACCACG"
+## [1] "CCAAGATTTC"
 \end{verbatim}
 
 Test with real data, the Robinson and Robinson amino acid frequencies
@@ -1242,7 +1242,7 @@ Test with real data, the Robinson and Robinson amino acid frequencies
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "EVSTTKAVLE"
+## [1] "PQAPAAAFVN"
 \end{verbatim}
 
 \hypertarget{version-2}{%
@@ -1278,7 +1278,7 @@ Now it works even if all we give it is a length
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "CTACGTTTCAGCTACACGGCGCATGGAGAGCTAGATCCGTGGCAGGCAGTGGACGGATGAACGGTATTTGACTATGGAACCCTGCCCCTGGGAACGATCT"
+## [1] "AGGGGTTAATCTCGTTCTTCGCCTGATTGGGCGAGATCCCTTTAGCCACTCCGGTGATATCTGAGCTCTTGCATGTGGTCCTAATTGAGGTGTCTGACCG"
 \end{verbatim}
 
 \hypertarget{version-3}{%
@@ -1314,7 +1314,7 @@ Now it works even if the parentheses are empty
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "TTACGATAGACACGAATTACAACCGAATTGCCCTCCTCCGCTTGTCCAGTTTTGGGTAATTGTCTAGGACTCCCGTGGCGGTGCAGACCGTCACATGCTC"
+## [1] "GGGAGATCTGGGCCTCCATGCAGTCTGACACTTGTTACTTGATCATATCCCGTCCACAATATTTTGAGCAGTTAGGATGTAGCCAATATCCGGATTGGTC"
 \end{verbatim}
 
 \hypertarget{version-4-adding-conditions-and-warnigns}{%
@@ -1361,7 +1361,7 @@ This throws a warning
 \end{verbatim}
 
 \begin{verbatim}
-## [1] "AAGAAAGCCTCCACCCCGATTGAGCGTTGAACAAAGTTCTTCCGCCTCATATTGTCTTGATATGGTAAGTTGGCTTAGCGAAGACCCGATCTACCTCAGA"
+## [1] "TCGGATGCTGAATGACAATTAAGGCTGGTCAAGCAAGATCGAAGCTTCAATTCCGCAGACCATAATCCAATGGTTTACTTGGTCGTTAGGTTTGGTGGAG"
 \end{verbatim}
 
 This doesnt
@@ -1373,7 +1373,7 @@ This doesnt
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "ACATCAGCAATTGATTGGATAGATTCTAACTCGGTAGATAGTTGCTACAGACCACACGTCGGATTTGTATGATTCATCATTTTCTTATAGTAAGTACAGA"
+## [1] "CGAAGTATATGTAACCACCTATATACTCGTTCGAAAGGACTCTGACTTGCACAGCCCAGGGATAGAAATCTTGCCTCATATTTTTAGCCAATGTCTCCTC"
 \end{verbatim}
 
 \hypertarget{version-5}{%
@@ -1421,7 +1421,7 @@ Return as a vectro
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "A" "G" "A" "G" "T" "G" "T" "C" "G" "A"
+##  [1] "G" "G" "G" "G" "T" "T" "T" "A" "A" "A"
 \end{verbatim}
 
 Return as a string
@@ -1435,7 +1435,7 @@ Return as a string
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "TTGCTTGTAT"
+## [1] "CTTAACAGCA"
 \end{verbatim}
 
 The default is to return a string, so as.string = T is option
@@ -1448,7 +1448,7 @@ The default is to return a string, so as.string = T is option
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "GGACTGGAAA"
+## [1] "CGTTCCTTGC"
 \end{verbatim}
 
 \hypertarget{intro-to-r-objects}{%
@@ -3383,11 +3383,11 @@ The matrix looks like this
 
 \begin{verbatim}
 ##      [,1] [,2] [,3] [,4] [,5]
-## [1,] "C"  "G"  "A"  "C"  "A" 
-## [2,] "A"  "G"  "A"  "C"  "T" 
-## [3,] "T"  "G"  "T"  "A"  "T" 
-## [4,] "A"  "G"  "G"  "G"  "A" 
-## [5,] "C"  "T"  "T"  "A"  "G"
+## [1,] "C"  "A"  "T"  "C"  "C" 
+## [2,] "T"  "G"  "A"  "G"  "G" 
+## [3,] "T"  "T"  "A"  "C"  "C" 
+## [4,] "C"  "T"  "A"  "C"  "A" 
+## [5,] "A"  "A"  "T"  "A"  "T"
 \end{verbatim}
 
 In some programming languages I'd have to write a loop to change this to lower case. In R I can use a fancy function called apply() to do it in one step
@@ -3400,11 +3400,11 @@ In some programming languages I'd have to write a loop to change this to lower c
 
 \begin{verbatim}
 ##      [,1] [,2] [,3] [,4] [,5]
-## [1,] "c"  "a"  "t"  "a"  "c" 
-## [2,] "g"  "g"  "g"  "g"  "t" 
-## [3,] "a"  "a"  "t"  "g"  "t" 
-## [4,] "c"  "c"  "a"  "g"  "a" 
-## [5,] "a"  "t"  "t"  "a"  "g"
+## [1,] "c"  "t"  "t"  "c"  "a" 
+## [2,] "a"  "g"  "t"  "t"  "a" 
+## [3,] "t"  "a"  "a"  "a"  "t" 
+## [4,] "c"  "g"  "c"  "c"  "a" 
+## [5,] "c"  "g"  "c"  "a"  "t"
 \end{verbatim}
 
 \hypertarget{challenge}{%
@@ -4267,11 +4267,11 @@ The matrix looks like this
 
 \begin{verbatim}
 ##      [,1] [,2] [,3] [,4] [,5]
-## [1,] "G"  "T"  "G"  "T"  "A" 
-## [2,] "T"  "G"  "T"  "A"  "G" 
-## [3,] "T"  "G"  "G"  "A"  "T" 
-## [4,] "G"  "A"  "A"  "T"  "A" 
-## [5,] "T"  "C"  "A"  "C"  "A"
+## [1,] "G"  "T"  "T"  "A"  "A" 
+## [2,] "G"  "G"  "C"  "C"  "C" 
+## [3,] "G"  "T"  "A"  "G"  "A" 
+## [4,] "A"  "A"  "G"  "C"  "A" 
+## [5,] "A"  "T"  "T"  "C"  "C"
 \end{verbatim}
 
 In some programming languages I'd have to write a loop to change this to lower case. In R I can use a fancy function called apply() to do it in one step
@@ -4284,11 +4284,11 @@ In some programming languages I'd have to write a loop to change this to lower c
 
 \begin{verbatim}
 ##      [,1] [,2] [,3] [,4] [,5]
-## [1,] "g"  "t"  "t"  "g"  "t" 
-## [2,] "t"  "g"  "g"  "a"  "c" 
-## [3,] "g"  "t"  "g"  "a"  "a" 
-## [4,] "t"  "a"  "a"  "t"  "c" 
-## [5,] "a"  "g"  "t"  "a"  "a"
+## [1,] "g"  "g"  "g"  "a"  "a" 
+## [2,] "t"  "g"  "t"  "a"  "t" 
+## [3,] "t"  "c"  "a"  "g"  "t" 
+## [4,] "a"  "c"  "g"  "c"  "c" 
+## [5,] "a"  "c"  "a"  "a"  "c"
 \end{verbatim}
 
 \hypertarget{challenge-1}{%
@@ -4318,7 +4318,7 @@ The sys.time() function can be used to tell us the time
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2021-07-30 10:03:44 EDT"
+## [1] "2021-07-30 10:30:50 EDT"
 \end{verbatim}
 
 R can keep track of very small scales of time; here, I set to measure seconds to 3 decimal places (1000s of sectons)
@@ -4331,7 +4331,7 @@ R can keep track of very small scales of time; here, I set to measure seconds to
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2021-07-30 10:03:44.090 EDT"
+## [1] "2021-07-30 10:30:50.303 EDT"
 \end{verbatim}
 
 \begin{Shaded}
@@ -4341,7 +4341,7 @@ R can keep track of very small scales of time; here, I set to measure seconds to
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2021-07-30 10:03:44.092 EDT"
+## [1] "2021-07-30 10:30:50.304 EDT"
 \end{verbatim}
 
 Its a little more complicated than this, but basically R uses a constantly changing baseline as a starting point for random number generation.
@@ -4357,7 +4357,7 @@ For example, runif() generates a random value from 0 to 1. Run this 4 times and 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.7384709
+## [1] 0.9131988
 \end{verbatim}
 
 \begin{Shaded}
@@ -4367,7 +4367,7 @@ For example, runif() generates a random value from 0 to 1. Run this 4 times and 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.8272651
+## [1] 0.4262663
 \end{verbatim}
 
 \begin{Shaded}
@@ -4377,7 +4377,7 @@ For example, runif() generates a random value from 0 to 1. Run this 4 times and 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.8718126
+## [1] 0.7651837
 \end{verbatim}
 
 \begin{Shaded}
@@ -4387,7 +4387,7 @@ For example, runif() generates a random value from 0 to 1. Run this 4 times and 
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.4259107
+## [1] 0.2264268
 \end{verbatim}
 
 Prior to generating a random number we can fix the starting point of the random number generator, called the \textbf{seed}. R will use the same input (seed) each time it runs its random number generator, and so the same output will be given. Every time you run this, you should get 0.5074782.
@@ -4524,7 +4524,7 @@ From the set.seed help file:
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "2021-07-30 10:03:44.148 EDT"
+## [1] "2021-07-30 10:30:50.370 EDT"
 \end{verbatim}
 
 \begin{Shaded}
@@ -4697,7 +4697,7 @@ Use sample() to select one random letter
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "B"
+## [1] "D"
 \end{verbatim}
 
 Select 10 letters, with replacement (replace = T), so that the same letter can occur more than once
@@ -4709,7 +4709,7 @@ Select 10 letters, with replacement (replace = T), so that the same letter can o
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "D" "A" "A" "D" "C" "A" "B" "B" "D" "A"
+##  [1] "C" "D" "B" "C" "D" "A" "B" "C" "A" "B"
 \end{verbatim}
 
 Select 100 letters
@@ -4721,7 +4721,7 @@ Select 100 letters
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "D" "A" "A" "C" "D" "D" "C" "C" "D" "A"
+##  [1] "D" "C" "C" "C" "C" "D" "D" "B" "D" "D"
 \end{verbatim}
 
 \hypertarget{select-random-letters-from-the-whole-alphabet}{%
@@ -4749,7 +4749,7 @@ Select 10 letters from whole alphabet
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "C" "A" "B" "D" "C" "B" "A" "C" "D" "B"
+##  [1] "A" "D" "C" "D" "A" "C" "B" "D" "A" "B"
 \end{verbatim}
 
 \hypertarget{select-random-amino-acids-to-build-polypeptide}{%
@@ -4772,7 +4772,7 @@ Randomly select an amino acid
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "S"
+## [1] "K"
 \end{verbatim}
 
 Make a vector of 200 amino acids
@@ -4810,7 +4810,7 @@ I can make a single character string with not spaces using paste
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "LSAFMEYDWFIYLPDWSHLHQWHAGTGPMGTEGMSIDALCDVVSRWGTVHYRTNRAFWSRAMAHCVQRAHSHDQPNSKVQLAFFSTPNEMRMIASVTRETVQWKQARCINTFGGHSPLFIIGGDNNGMSHKSKGWTFGTVEQLGAKEKYRKPTMVQFHLFAAAWSPEHNRAYNIRKTPFIRSLFNDYEFERWCTSIVFWK"
+## [1] "DEQYMHDNTVYALCYYCRPMKYHYTDEFAQECGHWWPIGNTGHYLEDLRQTVNWTKFGMVSPFRCVCFDMGIPNWMRRWWSMFSLIHQPAGVFQYRDAQQVRDRTMLGGFAWNCEMLGKQFYPWTRMGHEMNGDLREFSENASAQQRTMDDYMKPKENHPPEKFVITTSFVRTCKFQLSYQHHEGRNNQWFSYTGAHYML"
 \end{verbatim}
 
 \hypertarget{how-to-review-this-book}{%
@@ -4884,20 +4884,24 @@ In HTML bookdown renders it like this:
 \hypertarget{test-shiny-app}{%
 \chapter{Test shiny app}\label{test-shiny-app}}
 
-Here is an example of a Shiny app embedded in a bookdown book.
+Here is an example of a Shiny app (treesiftr) embedded in a bookdown book.
 
 The direct link is \href{https://wrightaprilm.shinyapps.io/treesiftr_app/}{here}:
 \url{https://wrightaprilm.shinyapps.io/treesiftr_app/}
+
+It may take a few seconds for the app to appear (its a fairly big one I think)
 
 \hypertarget{test-youtube-vidoe}{%
 \chapter{Test YouTube vidoe}\label{test-youtube-vidoe}}
 
 Here is an example of a YouTube video embedded in a bookdown book.
 
+\textbf{THIS FUNCTIONALITY CURRENTLY ISN"T WORKING BUT WAS PREVIOUSLY}
+
 The \href{https://www.youtube.com/watch?v=zNzZ1PfUDNk\&feature=youtu.be}{original link} is: \url{https://www.youtube.com/watch?v=zNzZ1PfUDNk\&feature=youtu.be}
 
-\hypertarget{test-webpage-insertion}{%
-\chapter{Test webpage insertion}\label{test-webpage-insertion}}
+\hypertarget{test-google-doc-insertion}{%
+\chapter{Test google doc insertion}\label{test-google-doc-insertion}}
 
 A Google spreadsheet (or other google docs / form) can be embedded.
 
@@ -4909,6 +4913,8 @@ The original link is:
 \NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_url}\NormalTok{(}\AttributeTok{url =}\StringTok{"https://docs.google.com/spreadsheets/d/18dt7cYHAaszV5Iq8Y{-}7YOEFnv6hIXbD39Vn75{-}c3fQo/edit?usp=sharing"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\href{https://docs.google.com/spreadsheets/d/18dt7cYHAaszV5Iq8Y-7YOEFnv6hIXbD39Vn75-c3fQo/edit?usp=sharing}{\includegraphics{lbrb_files/figure-latex/unnamed-chunk-247-1.pdf}}
 
 \hypertarget{datacamp-test}{%
 \chapter{Datacamp test}\label{datacamp-test}}
@@ -4930,39 +4936,49 @@ By default, \texttt{tutorial} will convert all R chunks.
 \chapter{An example of a plotly graph}\label{an-example-of-a-plotly-graph}}
 
 The normal version of the graph looks like this.
-
-\begin{verbatim}
-## Loading required package: ggplot2
-\end{verbatim}
-
-\begin{verbatim}
-## 
-## Attaching package: 'plotly'
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:ggplot2':
-## 
-##     last_plot
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:stats':
-## 
-##     filter
-\end{verbatim}
-
-\begin{verbatim}
-## The following object is masked from 'package:graphics':
-## 
-##     layout
-\end{verbatim}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-250-1.pdf}
 
 The plotly version looks like this
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{fig }\OtherTok{\textless{}{-}}\NormalTok{ plotly}\SpecialCharTok{::}\FunctionTok{ggplotly}\NormalTok{(p)}
+
+\NormalTok{fig}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{directly-embedding-of-a-libretext-page}{%
+\chapter{Directly embedding of a libretext page}\label{directly-embedding-of-a-libretext-page}}
+
+This is a libretext page directly called from bookdown and embedded in HTML
+
+\hypertarget{libretext-image}{%
+\chapter{Libretext image}\label{libretext-image}}
+
+I've mocked up the content from a libretext page below. The main goal is to show how the image from this page doesn't need to be saved as a file, but can be pulled from librtext.
+
+The original page is:
+
+\url{https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book\%3A_General_Biology_(OpenStax)/8\%3A_Ecology/45\%3A_Population_and_Community_Ecology/45.0\%3A_Prelude_to_Population_and_Community_Ecology}
+
+\hypertarget{prelude-to-population-and-community-ecology}{%
+\section{45.0: Prelude to Population and Community Ecology}\label{prelude-to-population-and-community-ecology}}
+
+Imagine sailing down a river in a small motorboat on a weekend afternoon; the water is smooth and you are enjoying the warm sunshine and cool breeze when suddenly you are hit in the head by a 20-pound silver carp. This is a risk now on many rivers and canal systems in Illinois and Missouri because of the presence of Asian carp.
+
+\href{https://bio.libretexts.org/@api/deki/files/2180/Figure_45_00_01.jpg?revision=1}{\includegraphics{lbrb_files/figure-latex/unnamed-chunk-253-1.pdf}}
+
+This fish---actually a group of species including the silver, black, grass, and big head carp---has been farmed and eaten in China for over 1000 years. It is one of the most important aquaculture food resources worldwide. In the United States, however, Asian carp is considered a dangerous invasive species that disrupts community structure and composition to the point of threatening native species.
+
+\hypertarget{note}{%
+\section{Note}\label{note}}
+
+the code to put the image in is
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_url}\NormalTok{(}\StringTok{"https://bio.libretexts.org/@api/deki/files/2180/Figure\_45\_00\_01.jpg?revision=1"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -6474,7 +6490,7 @@ Not plot with the base R \texttt{plot()} function:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-337-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-340-1.pdf}
 Note that there is a comma between the two vector names. When building plots from dataframes you usually see a tilde (\textasciitilde), but when you have two vectors you can use just a comma.
 
 Also note the order of the vectors within the \texttt{plot()} command and which axes they appear on. The first vector is \texttt{numeric.vect1} and it appears on the horizontal x-axis.
@@ -6490,7 +6506,7 @@ If you want to label the axes on the plot, you can do this by giving the \texttt
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-338-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-341-1.pdf}
 
 We can store character data in vectors so if we want we could do this to set up our labels:
 
@@ -6511,7 +6527,7 @@ Then use bracket notation to call the labels from the vector
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-340-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-343-1.pdf}
 
 If we want we can use a tilde to make our plot like this:
 
@@ -6521,7 +6537,7 @@ If we want we can use a tilde to make our plot like this:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-341-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-344-1.pdf}
 
 Note that now, \texttt{numeric.vect2} is on the left and \texttt{numeric.vect1} is on the right. This flexibility can be tricky to keep track of.
 
@@ -6541,7 +6557,7 @@ Then we plot it like this, referencing the dataframe \texttt{df} via the \texttt
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-343-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-346-1.pdf}
 
 \hypertarget{other-plotting-packages}{%
 \section{Other plotting packages}\label{other-plotting-packages}}
@@ -6629,7 +6645,7 @@ You can view the code that makes up a function by typing its name (without any p
 ##   output <- (20 + (x*x)) 
 ##   return(output)
 ##   }
-## <bytecode: 0x7fe5d034e0d0>
+## <bytecode: 0x7fe63b3b1f68>
 \end{verbatim}
 
 \hypertarget{comments-in-r}{%
@@ -7594,7 +7610,7 @@ To help build our intuition about dotplots we'll first look at some artificial e
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-393-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-396-1.pdf}
 
 What we get is a perfect diagonal line.
 
@@ -7612,7 +7628,7 @@ Now lets' make a sequence where the alphabet gets repeats twice
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-394-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-397-1.pdf}
 
 Note the diagonal lines.
 
@@ -7627,7 +7643,7 @@ Now 3 repeats
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-395-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-398-1.pdf}
 
 Here's another example of repeats.
 
@@ -7649,7 +7665,7 @@ Make the dotplot:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-397-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-400-1.pdf}
 
 \hypertarget{inversions}{%
 \section{Inversions}\label{inversions}}
@@ -7665,7 +7681,7 @@ See if you can figure out what's going on here.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-398-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-401-1.pdf}
 
 \hypertarget{translocations}{%
 \section{Translocations}\label{translocations}}
@@ -7685,7 +7701,7 @@ See if you can figure out what's going on here.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-399-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-402-1.pdf}
 
 \hypertarget{random-sequence}{%
 \section{Random sequence}\label{random-sequence}}
@@ -7701,7 +7717,7 @@ See if you can figure out what's going on here.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-400-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-403-1.pdf}
 
 \hypertarget{comparing-two-real-sequences-using-a-dotplot}{%
 \section{Comparing two real sequences using a dotplot}\label{comparing-two-real-sequences-using-a-dotplot}}
@@ -7723,7 +7739,7 @@ First, let's look at a dotplot created using only a single sequence. You'd never
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-401-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-404-1.pdf}
 
 These two sequences are identical, so we have a very distinct diagonal line. But there's also other
 
@@ -7736,7 +7752,7 @@ Now we'll make a real dotplot of the \href{https://en.wikipedia.org/wiki/Chorism
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-402-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-405-1.pdf}
 
 In the dotplot above, the \emph{M. leprae} sequence is plotted along the x-axis (horizontal axis), and the \emph{M. ulcerans} sequence is plotted along the y-axis (vertical axis). The dotplot displays a dot at points where there is an identical amino acid in the two sequences.
 
@@ -10030,8 +10046,8 @@ We can use this function to generate 1000 7-letter amino acid sequences using a 
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "AAHPEEA" "AAEHHEP" "AAEAPEE" "AEEEPWP" "APEPEWW" "EEEHEAE" "AWPEEEE"
-##  [8] "PAAPHEE" "EEEAAWE" "WPPAPPE"
+##  [1] "AEPEWAP" "WEWEAEW" "AEAWAEH" "EAAWAHP" "WWEHPAH" "PEWPEPP" "EHEWWWA"
+##  [8] "AAPEEEA" "PWHPEPH" "WAEWAEE"
 \end{verbatim}
 
 The 1000 random sequences are stored in a vector \texttt{randomseqs} that has 1000 elements, each of which contains one of the random sequences.
@@ -10059,8 +10075,8 @@ For example, to align ``HEAGAWGHEE'' to the first of the 1000 random sequences (
 \begin{verbatim}
 ## Global PairwiseAlignmentsSingleSubject (1 of 1)
 ## pattern: HEAGAWGHEE
-## subject: --A-AHPEEA
-## score: -18
+## subject: AEP-EWA--P
+## score: -12
 \end{verbatim}
 
 If we use the \texttt{pairwiseAlignment()} function with the argument \texttt{scoreOnly=TRUE}, it will just give us the score for the alignment:
@@ -10076,7 +10092,7 @@ If we use the \texttt{pairwiseAlignment()} function with the argument \texttt{sc
 \end{Shaded}
 
 \begin{verbatim}
-## [1] -18
+## [1] -12
 \end{verbatim}
 
 If we repeat this 1000 times, that is, for each of the 1000 random sequences in vector randomseqs, we can get a distribution of alignment scores expected for aligning ``HEAGAWGHEE'' to random sequences of the same length and (approximately the same) amino acid composition as ``PAWHEAE''.
@@ -10110,7 +10126,7 @@ Once we have run the for loop, we can make a histogram plot of the 1000 scores i
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-534-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-537-1.pdf}
 
 We can see from the histogram that quite a lot of the random sequences seem to have higher alignment scores than -5 when aligned to ``HEAGAWGHEE'' (where -5 is the alignment score for ``PAWHEAE'' and ``HEAGAWGHEE'').
 
@@ -10123,7 +10139,7 @@ We can use the vector randomscores of scores for 1000 alignments of random seque
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 287
+## [1] 286
 \end{verbatim}
 
 We see that 266 of the 1000 alignments of random sequences to ``HEAGAWGHEE'' had alignment scores that were equal to or greater than -5. Thus, we can estimate that the probability of getting a score as large as the real alignment score by chance is (266/1000 =) 0.266. In other words, we can calculate a P-value of 0.266. This probability or P-value is quite high (almost 30\%, or 1 in 3), so we can conclude that it is quite probable that we could get an alignment score as high as -5 by chance alone. This indicates that the sequences ``HEAGAWGHEE'' and ``PAWHEAE'' are not more similar than any two random sequences, and so they are probably not related sequences.
@@ -11415,7 +11431,7 @@ First, let's look at the first 20 bases of our alignment. Note that we are using
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-613-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-616-1.pdf}
 
 \hypertarget{optional-file-types-used-by-ggmsa}{%
 \subsubsection{\texorpdfstring{OPTIONAL: File types used by \texttt{ggmsa}}{OPTIONAL: File types used by ggmsa}}\label{optional-file-types-used-by-ggmsa}}
@@ -12006,10 +12022,10 @@ We can visualize the BLOSUM matrix by first drawing all 20 amino acids in a circ
 ##     union
 \end{verbatim}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-633-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-636-1.pdf}
 
 In theory, all mutations can change any codon into any other codon. We can represent mutations that result in a changed in the amino acid by connecting each amino acid with an arrow. We'll do this for adenine. Thicker arrows represent more common transitions.\\
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-634-1.pdf} \includegraphics{lbrb_files/figure-latex/unnamed-chunk-634-2.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-637-1.pdf} \includegraphics{lbrb_files/figure-latex/unnamed-chunk-637-2.pdf}
 
 Often, there will be no change in a codon, the changes don't impact which amino acid, or a mutation to a different codon is reversed due to a \textbf{back mutation}. We can represent the fact that an adenine can stay as adenine with a \textbf{self loop}. You can see that the most common ``transition'' is for adenine to remain as adenine.
 
@@ -12031,7 +12047,7 @@ Often, there will be no change in a codon, the changes don't impact which amino 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-635-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-638-1.pdf}
 
 Instead of laying things out in circle, we can have them oriented so that the amino acids adenine is most likely to transition to are closest to it.
 
@@ -12051,7 +12067,7 @@ Instead of laying things out in circle, we can have them oriented so that the am
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-636-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-639-1.pdf}
 
 We can extend this by considering all possible transition and making a plot that tries to orient each amino acid close to the other amino acids its likely to transition to, and far from those its unlikely to. This is a bit tricky, since all transitions are now being consider.
 
@@ -12068,7 +12084,7 @@ We can extend this by considering all possible transition and making a plot that
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-637-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-640-1.pdf}
 
 \hypertarget{a-complete-bioinformatics-workflow-in-r}{%
 \chapter{A complete bioinformatics workflow in R}\label{a-complete-bioinformatics-workflow-in-r}}
@@ -12500,7 +12516,7 @@ We can remove this non-sequence information using a function I wrote called \tex
 ## 
 ##   return(fasta_object[[1]])
 ## }
-## <bytecode: 0x7fe5cb702d88>
+## <bytecode: 0x7fe6365ab0c0>
 ## <environment: namespace:compbio4all>
 \end{verbatim}
 
@@ -12875,7 +12891,7 @@ I'm going to just show about 100 amino acids near the end of the alignment, wher
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-667-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-670-1.pdf}
 
 \hypertarget{saving-an-msa-as-pdf}{%
 \subsubsection{Saving an MSA as PDF}\label{saving-an-msa-as-pdf}}
@@ -12997,7 +13013,7 @@ Now we'll make a quick plot of our tree using \texttt{plot()} (and add a little 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-674-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-677-1.pdf}
 
 This is an **unrooted tree*. For the sake of plotting we've also ignored the evolutionary distance between the sequences.
 
@@ -13014,7 +13030,7 @@ To make a rooted tree we remove \texttt{type\ =\ "unrooted}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-675-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-678-1.pdf}
 
 We can include information about branch length by setting \texttt{use.edge.length\ =\ ...} to \texttt{T}.
 
@@ -13029,7 +13045,7 @@ We can include information about branch length by setting \texttt{use.edge.lengt
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-676-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-679-1.pdf}
 
 Some of the branches are now very short, but most are very long, indicating that these genes have been evolvin independently for many millions of years.
 
@@ -13085,7 +13101,7 @@ Let's make a fancier plot. Don't worry about all the steps; I've added some more
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-677-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-680-1.pdf}
 
 \hypertarget{calculating-genetic-distances-between-sequences}{%
 \chapter{Calculating genetic distances between sequences}\label{calculating-genetic-distances-between-sequences}}
@@ -13435,7 +13451,7 @@ If we have the distance matrix already made we can make the tree like this using
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-693-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-696-1.pdf}
 
 \hypertarget{build-tree-with-unrooted_nj_tree}{%
 \subsection{\texorpdfstring{Build tree with \texttt{unrooted\_NJ\_tree()}}{Build tree with unrooted\_NJ\_tree()}}\label{build-tree-with-unrooted_nj_tree}}
@@ -13772,7 +13788,7 @@ It is common to use the data generated from a sliding window analysis to create 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-709-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-712-1.pdf}
 
 In the code above, the line \texttt{chunkGCs\ \textless{}-\ numeric(n)} makes a new vector \texttt{chunkGCs} which has the same number of elements as the vector starts (5 elements here). This vector chunkGCs is then used within the for loop for storing the GC content of each chunk of DNA.
 
@@ -13796,7 +13812,7 @@ This function will make a sliding window plot of GC content for a particular inp
 ## [1] 0.4653333
 \end{verbatim}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-710-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-713-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -13842,7 +13858,7 @@ This function will make a sliding window plot of GC content for a particular inp
 ## [1] 0.4833333
 \end{verbatim}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-711-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-714-1.pdf}
 
 \hypertarget{over-represented-and-under-represented-dna-words}{%
 \subsection{Over-represented and under-represented DNA words}\label{over-represented-and-under-represented-dna-words}}
@@ -14038,7 +14054,7 @@ In \emph{R}, you can view the \textbf{standard genetic code}, the correspondence
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-720-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-723-1.pdf}
 
 You can see from this table that ``ATG'' is translated to Met (the amino acid methionine), and that ``TAA'', ``TGA'' and ``TAG'' correspond to ``Stp'' (stop codons), which are not translated to any amino acid, but signal the end of translation.
 
@@ -14410,7 +14426,7 @@ The function \texttt{plot\_ORFs\_in\_seq()} (Coghlan 2011) plots the potential s
 ## This may take a second...
 \end{verbatim}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-746-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-749-1.pdf}
 
 In the picture produced by \texttt{plot\_ORFs\_in\_seq()}, the x-axis represents the input sequence (\texttt{dengueseqstartstring} here). The potential start codons are represented by vertical red lines, and potential stop codons are represented by vertical blue lines.
 
@@ -14476,7 +14492,7 @@ You can then use this function to plot the positions of the ORFs in dengueseqsta
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-750-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-753-1.pdf}
 
 The picture produced by \texttt{plot\_ORFs\_in\_seq()} represents the two ORFs in the first 500 nucleotides of the lambda genome as blue rectangles.
 
@@ -14745,7 +14761,7 @@ Generate one random sequence using the multinomial model
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "CACGCTAAGCTGCCTTTGAGA"
+## [1] "TAATAACGAACGAAACTACAG"
 \end{verbatim}
 
 We can then use the \texttt{find\_ORFs\_in\_seq()} function to find ORFs in this random sequence. If we repeat this 10 times, we can find the lengths of the ORFs found in the 10 random sequences. We can then compare the lengths of the ORFs found in the original sequence, to the lengths of the ORFs found in the random sequences.
@@ -14839,7 +14855,7 @@ We can then plot a histogram of the lengths of the ORFs in the real DEN-1 Dengue
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-777-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-780-1.pdf}
 
 In other words, the histogram of the lengths of the ORFs in the 10 random sequences gives us an idea of the length distribution of ORFs that you would expect by chance alone in a random DNA sequence (generated by a multinomial model in which the probabilities of the four bases are set equal to their frequencies in the DEN-1 Dengue virus genome sequence).
 
@@ -14852,7 +14868,7 @@ We can calculate the longest of the ORFs that occurs in the random sequences, us
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 429
+## [1] 426
 \end{verbatim}
 
 This indicates that the longest ORF that occurs in the random sequences is 342 nucleotides long. Thus, it is possible for an ORF of up to 342 nucleotides to occur by chance alone in a random sequence of the same length and roughly the same composition as the DEN-1 Dengue virus genome.
@@ -14886,7 +14902,7 @@ For example, to find the 99th quantile of randomseqorflengths, we type:
 
 \begin{verbatim}
 ##    99% 
-## 218.76
+## 240.54
 \end{verbatim}
 
 This means that 99\% of the ORFs in the random sequences have lengths less than 248 nucleotides long. In other words, the longest of the longest 99\% of ORFs in the random sequences is 248 nucleotides.
@@ -15662,8 +15678,8 @@ Generate a sequence
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "G" "G" "A" "T" "A" "T" "A" "C" "G" "G" "C" "G" "A" "T" "T" "G" "G" "C" "T"
-## [20] "T" "G" "G" "C" "G" "A" "T" "T" "T" "C" "T"
+##  [1] "A" "C" "T" "G" "A" "C" "G" "C" "C" "G" "G" "T" "T" "A" "G" "C" "G" "A" "C"
+## [20] "C" "C" "G" "A" "A" "T" "T" "T" "C" "T" "A"
 \end{verbatim}
 
 If you look at the help page for the function, you will find that its inputs are the vector to sample from (nucleotides here), the size of the sample (seqlength here), and a vector of probabilities for obtaining the elements of the vector being sampled (probabilities1 here). If we use the sample() function to generate a sequence again, it will create a different sequence using the same multinomial model:
@@ -15679,8 +15695,8 @@ If you look at the help page for the function, you will find that its inputs are
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "A" "G" "C" "G" "T" "T" "A" "C" "A" "T" "T" "C" "A" "C" "G" "G" "C" "G" "T"
-## [20] "T" "T" "C" "C" "G" "C" "C" "A" "T" "C" "G"
+##  [1] "A" "A" "A" "C" "C" "T" "C" "G" "G" "G" "A" "T" "T" "G" "A" "A" "G" "G" "C"
+## [20] "G" "C" "G" "A" "G" "C" "C" "G" "G" "G" "C"
 \end{verbatim}
 
 In the same way, we can generate a sequence using a different multinomial model, where pA=0.1, pC=0.41, pG=0.39, and pT=0.1:
@@ -15696,8 +15712,8 @@ In the same way, we can generate a sequence using a different multinomial model,
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "G" "A" "T" "A" "C" "C" "G" "G" "C" "G" "G" "C" "G" "A" "G" "G" "C" "C" "C"
-## [20] "G" "C" "G" "G" "G" "C" "G" "G" "A" "A" "A"
+##  [1] "C" "G" "G" "G" "T" "C" "G" "G" "G" "T" "C" "G" "C" "G" "C" "C" "G" "G" "G"
+## [20] "C" "G" "G" "A" "C" "G" "C" "G" "C" "G" "G"
 \end{verbatim}
 
 As you would expect, the sequences generated using this second multinomial model have a higher fraction of Cs and Gs compared to the sequences generated using the first multinomial model above. This is because pC and GT are higher for this second model than for the first model (pC=0.41 and GT=0.39 in the second model, versus pC=0.3 and GT=0.3 in the first model). That is, in the second multinomial model we are using a roulette wheel that has large slices labeled ``C'' and ``G'', while in the first multinomial model we were using a roulette wheel with relatively smaller slices labeled ``C'' and ``G'' (SEE THE PICTURE BELOW).
@@ -15815,8 +15831,8 @@ We can use the \texttt{generate\_markov\_seq()} function to generate a sequence 
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "T" "A" "A" "G" "C" "T" "A" "C" "C" "A" "T" "C" "T" "A" "C" "G" "A" "A" "G"
-## [20] "G" "G" "G" "G" "G" "G" "C" "G" "C" "A" "C"
+##  [1] "T" "A" "G" "C" "G" "T" "A" "G" "T" "C" "T" "A" "G" "C" "A" "G" "G" "G" "C"
+## [20] "C" "C" "C" "G" "T" "A" "A" "C" "G" "T" "A"
 \end{verbatim}
 
 As you can see, there are many ``A''s after ``T''s in the sequence. This is because pTA has a high value (0.5) in the Markov transition matrix mytransitionmatrix. Similarly, there are few ``A''s or ``T''s after ``C''s, which is because pCA and pCT have low values (0.1) in this transition matrix.
@@ -15944,35 +15960,35 @@ We can use the \texttt{generate\_hmm\_seq()} function to generate a sequence usi
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Position 1 , State GC-rich , Nucleotide =  G"
+## [1] "Position 1 , State AT-rich , Nucleotide =  A"
 ## [1] "Position 2 , State GC-rich , Nucleotide =  G"
-## [1] "Position 3 , State GC-rich , Nucleotide =  T"
+## [1] "Position 3 , State GC-rich , Nucleotide =  G"
 ## [1] "Position 4 , State GC-rich , Nucleotide =  C"
-## [1] "Position 5 , State GC-rich , Nucleotide =  C"
-## [1] "Position 6 , State GC-rich , Nucleotide =  G"
+## [1] "Position 5 , State GC-rich , Nucleotide =  T"
+## [1] "Position 6 , State GC-rich , Nucleotide =  C"
 ## [1] "Position 7 , State GC-rich , Nucleotide =  C"
-## [1] "Position 8 , State GC-rich , Nucleotide =  C"
-## [1] "Position 9 , State GC-rich , Nucleotide =  G"
+## [1] "Position 8 , State GC-rich , Nucleotide =  G"
+## [1] "Position 9 , State GC-rich , Nucleotide =  C"
 ## [1] "Position 10 , State GC-rich , Nucleotide =  T"
-## [1] "Position 11 , State AT-rich , Nucleotide =  C"
+## [1] "Position 11 , State GC-rich , Nucleotide =  A"
 ## [1] "Position 12 , State AT-rich , Nucleotide =  A"
-## [1] "Position 13 , State AT-rich , Nucleotide =  G"
-## [1] "Position 14 , State AT-rich , Nucleotide =  T"
-## [1] "Position 15 , State AT-rich , Nucleotide =  T"
-## [1] "Position 16 , State AT-rich , Nucleotide =  G"
+## [1] "Position 13 , State GC-rich , Nucleotide =  G"
+## [1] "Position 14 , State GC-rich , Nucleotide =  G"
+## [1] "Position 15 , State GC-rich , Nucleotide =  C"
+## [1] "Position 16 , State GC-rich , Nucleotide =  T"
 ## [1] "Position 17 , State AT-rich , Nucleotide =  A"
-## [1] "Position 18 , State GC-rich , Nucleotide =  A"
-## [1] "Position 19 , State GC-rich , Nucleotide =  C"
-## [1] "Position 20 , State GC-rich , Nucleotide =  G"
-## [1] "Position 21 , State GC-rich , Nucleotide =  G"
-## [1] "Position 22 , State GC-rich , Nucleotide =  G"
-## [1] "Position 23 , State GC-rich , Nucleotide =  G"
-## [1] "Position 24 , State GC-rich , Nucleotide =  A"
-## [1] "Position 25 , State GC-rich , Nucleotide =  A"
-## [1] "Position 26 , State GC-rich , Nucleotide =  A"
-## [1] "Position 27 , State GC-rich , Nucleotide =  A"
-## [1] "Position 28 , State GC-rich , Nucleotide =  C"
-## [1] "Position 29 , State GC-rich , Nucleotide =  G"
+## [1] "Position 18 , State AT-rich , Nucleotide =  A"
+## [1] "Position 19 , State AT-rich , Nucleotide =  A"
+## [1] "Position 20 , State AT-rich , Nucleotide =  T"
+## [1] "Position 21 , State AT-rich , Nucleotide =  A"
+## [1] "Position 22 , State AT-rich , Nucleotide =  C"
+## [1] "Position 23 , State AT-rich , Nucleotide =  A"
+## [1] "Position 24 , State AT-rich , Nucleotide =  A"
+## [1] "Position 25 , State AT-rich , Nucleotide =  A"
+## [1] "Position 26 , State GC-rich , Nucleotide =  C"
+## [1] "Position 27 , State GC-rich , Nucleotide =  T"
+## [1] "Position 28 , State GC-rich , Nucleotide =  G"
+## [1] "Position 29 , State GC-rich , Nucleotide =  C"
 ## [1] "Position 30 , State GC-rich , Nucleotide =  C"
 \end{verbatim}
 
@@ -16470,7 +16486,7 @@ So, this code generates a number between 0.5 and 6.5
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.670519
+## [1] 4.993767
 \end{verbatim}
 
 This code generates 10 numbers from 0.5 to 6.5.
@@ -16482,8 +16498,8 @@ This code generates 10 numbers from 0.5 to 6.5.
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 6.014692 1.951624 4.291488 5.356814 2.444955 1.044011 6.181269 5.878610
-##  [9] 2.962468 4.246984
+##  [1] 2.6750930 3.9464333 1.5390788 5.2999091 5.8396032 5.4402981 0.8153386
+##  [8] 5.5762625 1.3169116 2.5204600
 \end{verbatim}
 
 runif() allows for non-integers, so we can make this like a real dice using round()
@@ -16507,8 +16523,8 @@ If we want to simulate what would happen if 50 people in class all rolled a dice
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 5 1 1 3 1 3 6 2 4 6 4 5 2 6 1 1 2 2 6 4 1 4 3 1 6 3 5 4 2 2 5 6 5 4 3 3 6 2
-## [39] 4 6 6 2 4 6 2 6 1 2 3 4
+##  [1] 6 2 6 4 2 1 4 6 3 1 4 3 1 4 1 1 6 5 1 4 3 3 2 3 5 4 5 5 5 2 4 1 2 2 2 3 4 5
+## [39] 5 1 5 5 2 6 6 5 6 5 2 5
 \end{verbatim}
 
 If we had 10000 people in our class:
@@ -16520,284 +16536,284 @@ If we had 10000 people in our class:
 \end{Shaded}
 
 \begin{verbatim}
-##     [1] 1 2 4 4 3 5 2 6 2 5 3 6 4 1 1 5 2 6 6 6 4 3 3 5 4 2 5 2 2 6 5 5 2 6 1 4
-##    [37] 5 6 4 5 2 3 5 5 5 2 1 5 4 2 2 4 6 5 3 1 3 3 3 3 5 6 5 2 4 2 5 4 1 2 4 5
-##    [73] 5 4 2 3 6 4 1 5 6 6 6 6 3 4 6 2 4 5 1 2 1 5 1 1 1 5 1 5 1 6 1 4 6 2 2 3
-##   [109] 5 5 3 4 4 4 2 2 4 4 2 2 1 6 5 4 4 2 2 2 2 1 1 1 1 4 4 1 5 3 1 5 1 1 1 6
-##   [145] 6 4 4 2 4 4 6 2 1 4 2 5 4 5 2 5 6 3 5 1 6 2 3 1 3 1 4 5 2 3 6 5 3 4 1 5
-##   [181] 4 5 5 5 2 5 4 3 4 4 1 6 5 3 5 2 1 1 5 3 5 6 4 5 3 6 5 4 4 6 6 4 2 2 3 5
-##   [217] 2 4 2 1 2 3 2 6 5 3 4 5 5 1 3 3 6 1 5 5 2 4 2 6 1 5 1 5 4 4 5 4 6 6 3 3
-##   [253] 4 1 5 2 6 5 1 4 3 2 6 1 2 3 5 1 1 5 2 5 3 3 4 1 2 3 1 4 2 4 5 5 2 6 2 2
-##   [289] 4 5 6 1 2 2 1 6 6 1 1 2 2 2 6 3 6 6 2 3 2 5 1 6 2 1 6 2 1 3 3 5 3 3 5 4
-##   [325] 2 1 3 4 2 5 1 3 6 4 6 2 2 2 3 6 2 1 2 6 2 5 4 5 1 6 6 4 2 3 1 3 2 3 4 2
-##   [361] 5 3 6 1 5 2 2 5 4 1 1 1 1 5 6 1 5 4 3 2 3 2 3 3 5 2 3 3 3 1 4 3 5 4 2 3
-##   [397] 1 6 4 5 3 4 5 1 6 1 6 2 4 2 1 3 5 6 2 5 1 6 6 6 1 6 4 4 1 1 2 3 2 6 4 3
-##   [433] 2 1 3 2 6 5 2 3 3 5 4 6 1 2 2 1 6 5 1 4 5 4 6 4 5 2 2 6 6 6 6 4 4 6 3 3
-##   [469] 3 2 6 6 2 5 5 2 6 6 3 2 3 5 4 5 3 4 1 3 3 1 3 5 3 2 1 6 1 5 6 1 3 6 3 5
-##   [505] 2 5 4 5 5 6 3 1 1 6 2 5 2 4 4 5 2 2 3 1 4 3 4 5 1 5 6 5 1 6 5 2 4 5 6 4
-##   [541] 1 5 6 3 1 5 3 3 1 1 1 4 6 2 6 2 5 2 5 1 1 1 4 6 1 4 6 2 4 2 3 2 1 1 6 2
-##   [577] 4 6 2 2 6 6 3 6 4 4 4 5 3 6 4 2 1 3 5 1 4 5 3 3 5 5 3 3 6 1 6 5 1 5 1 6
-##   [613] 6 4 5 4 5 6 3 2 1 2 2 5 1 6 5 4 5 4 2 5 6 6 2 6 6 5 1 2 4 5 3 6 6 6 3 6
-##   [649] 4 6 5 3 1 2 5 5 1 2 1 4 1 3 1 5 1 2 4 1 3 6 5 4 3 1 4 3 5 3 5 5 2 5 3 5
-##   [685] 2 4 1 4 3 4 5 3 5 5 4 4 3 4 4 6 2 1 2 3 2 1 4 5 4 4 2 1 6 3 6 3 3 5 4 2
-##   [721] 4 3 4 6 4 6 4 1 1 3 2 5 5 2 4 3 5 1 3 1 1 4 3 1 1 2 5 6 1 2 5 2 2 5 2 5
-##   [757] 2 6 2 2 6 2 2 1 3 3 2 3 5 5 1 5 1 5 5 2 4 2 2 5 3 4 2 2 6 3 6 3 6 4 6 6
-##   [793] 2 3 3 5 5 4 5 3 5 3 6 2 1 4 5 6 5 1 4 2 2 6 6 2 4 3 6 4 2 5 4 6 6 5 1 4
-##   [829] 4 3 4 3 1 5 2 5 3 4 5 4 5 4 4 6 5 6 2 4 2 6 5 1 3 1 2 3 3 3 2 4 3 6 1 3
-##   [865] 6 2 6 6 3 2 1 6 5 6 2 1 5 5 4 4 5 6 5 1 4 2 1 3 1 4 1 1 1 4 6 5 3 2 6 3
-##   [901] 1 1 6 2 1 6 3 2 2 2 5 5 3 5 3 2 2 4 5 3 5 4 3 2 1 6 3 6 6 4 5 2 4 1 3 3
-##   [937] 1 4 5 4 6 2 2 5 3 6 1 4 3 1 5 6 4 6 2 6 2 6 6 6 2 5 3 5 2 4 1 6 1 6 1 2
-##   [973] 6 1 3 5 4 6 5 3 3 5 5 5 5 1 1 1 5 6 6 4 3 3 5 6 5 4 2 3 1 4 3 2 3 4 6 1
-##  [1009] 6 1 5 6 1 3 5 4 6 3 1 5 1 2 4 3 3 4 4 6 1 2 4 3 2 4 4 4 2 6 4 2 3 1 1 1
-##  [1045] 2 5 1 3 1 1 5 5 5 1 1 6 6 2 1 4 6 4 5 6 3 1 5 1 2 3 2 2 1 3 4 3 6 2 3 6
-##  [1081] 5 2 2 3 3 6 5 5 2 4 1 5 3 5 1 4 6 5 4 4 4 2 1 4 5 1 4 2 2 5 3 3 6 1 5 6
-##  [1117] 3 3 3 5 6 3 4 2 1 2 5 1 2 2 1 5 5 6 4 5 6 5 6 5 6 4 3 5 5 5 5 2 4 1 4 3
-##  [1153] 2 2 2 2 1 2 4 1 6 1 2 6 4 1 6 3 2 3 2 6 4 2 4 3 2 6 4 3 6 3 1 4 3 6 5 1
-##  [1189] 3 5 2 4 6 5 5 5 5 6 1 2 5 4 2 3 6 5 4 2 1 2 1 2 6 2 1 2 5 6 3 5 2 2 4 4
-##  [1225] 1 1 5 2 4 2 6 6 1 4 4 5 3 4 6 3 2 4 4 2 5 1 6 3 5 3 1 5 4 2 1 5 2 4 4 4
-##  [1261] 1 4 2 1 4 6 5 6 5 1 5 5 6 5 6 2 5 3 3 4 5 2 5 6 1 1 1 1 6 5 4 4 3 6 3 4
-##  [1297] 6 1 5 3 1 2 3 4 4 2 1 5 6 1 5 4 3 4 5 4 1 6 1 2 2 3 2 3 3 3 4 3 4 2 5 5
-##  [1333] 4 5 5 3 6 5 4 3 3 5 2 5 6 3 1 2 4 4 4 3 1 6 3 5 6 6 4 5 2 5 3 4 3 6 1 2
-##  [1369] 6 6 1 3 4 6 1 1 3 4 2 4 5 4 4 3 5 1 2 2 4 3 6 1 6 1 2 2 3 2 3 6 1 3 2 6
-##  [1405] 3 2 2 1 6 1 3 2 6 1 5 1 5 5 5 3 1 6 3 5 2 1 4 1 4 2 3 5 3 1 2 6 2 2 3 4
-##  [1441] 4 6 3 4 4 2 6 2 2 5 1 1 2 4 1 6 3 1 5 6 6 3 4 4 5 6 4 3 1 6 3 5 1 2 4 5
-##  [1477] 6 6 6 5 5 6 1 4 3 4 1 2 1 2 1 5 5 4 1 1 4 6 6 1 2 1 2 4 3 4 5 2 2 5 5 3
-##  [1513] 5 1 5 3 3 5 2 2 4 3 5 2 5 5 3 1 3 3 6 6 1 3 1 2 1 4 2 2 2 1 2 6 3 6 6 5
-##  [1549] 2 4 3 3 1 6 4 3 1 5 4 2 3 2 4 6 2 1 3 6 5 3 4 1 5 6 5 5 3 6 6 6 5 5 2 6
-##  [1585] 2 5 2 1 4 3 5 6 4 3 5 3 5 3 1 6 2 2 2 4 3 1 2 6 3 3 5 6 4 4 1 1 1 4 4 6
-##  [1621] 2 1 5 6 1 6 3 2 4 2 4 4 5 3 5 3 6 5 2 2 2 4 6 3 5 2 5 5 1 4 6 5 1 5 5 1
-##  [1657] 3 3 4 1 4 3 5 6 6 1 3 3 3 5 2 4 1 1 5 6 3 5 2 6 1 6 4 6 2 3 3 2 2 1 5 2
-##  [1693] 5 4 2 4 4 6 5 1 6 2 5 3 5 3 1 3 1 3 3 2 2 3 1 6 6 2 3 5 4 2 2 6 1 3 1 4
-##  [1729] 2 2 1 1 4 6 4 4 2 3 3 2 6 3 1 1 3 1 1 2 5 4 1 5 1 5 6 2 6 5 6 3 4 1 1 4
-##  [1765] 2 6 4 5 4 5 6 4 2 4 6 2 3 5 3 5 5 2 5 1 5 2 5 5 6 3 1 3 4 6 4 6 3 5 3 5
-##  [1801] 5 5 5 4 1 1 1 1 1 6 5 5 4 1 1 5 5 3 3 5 6 6 6 6 4 1 5 1 3 4 3 6 4 4 3 4
-##  [1837] 3 6 3 1 6 2 4 5 3 5 2 2 6 2 4 2 3 6 3 6 4 4 1 3 1 1 6 5 4 4 3 4 2 1 3 2
-##  [1873] 6 2 4 4 4 5 3 2 3 5 3 5 1 2 4 6 1 1 2 3 1 1 5 2 5 5 4 2 2 1 1 2 6 6 4 6
-##  [1909] 3 3 2 5 3 4 3 4 2 6 5 6 6 5 5 1 6 2 3 5 1 2 1 4 1 1 2 1 6 3 3 1 3 5 1 2
-##  [1945] 4 6 6 4 4 4 4 2 2 5 2 1 2 3 1 1 3 1 3 2 3 5 5 2 3 2 2 3 3 2 4 2 3 4 5 2
-##  [1981] 2 3 4 5 2 6 1 6 6 5 1 6 6 5 5 5 3 5 1 5 2 3 6 3 3 4 4 5 1 5 3 3 3 1 6 3
-##  [2017] 4 1 2 2 3 6 2 1 4 1 6 6 6 3 4 3 6 2 6 6 5 5 6 5 2 4 1 4 1 1 4 3 1 4 5 4
-##  [2053] 6 4 2 1 1 2 2 3 1 1 5 2 3 1 1 3 4 6 1 6 2 5 1 6 5 1 3 3 4 3 3 1 4 1 5 1
-##  [2089] 1 3 4 2 4 5 6 4 3 6 6 5 4 2 1 2 1 3 1 2 5 4 4 1 5 2 3 4 2 2 3 5 2 3 6 4
-##  [2125] 3 1 3 1 1 2 6 1 3 3 2 5 2 2 3 6 2 4 4 2 2 3 1 2 5 1 1 4 5 3 2 5 4 5 4 2
-##  [2161] 1 3 4 5 1 6 5 1 3 3 2 2 5 4 2 6 3 4 2 1 4 4 4 5 1 6 5 6 2 5 6 1 6 6 6 3
-##  [2197] 3 5 6 4 2 6 3 4 6 5 1 4 4 1 3 4 1 2 4 1 1 1 3 5 5 2 3 2 1 4 2 2 2 2 1 5
-##  [2233] 1 6 2 3 2 5 4 5 4 2 3 3 4 4 4 4 5 4 2 6 5 6 5 4 2 5 3 2 1 6 5 6 6 3 6 3
-##  [2269] 3 2 3 4 3 2 4 6 2 3 3 1 4 5 4 4 1 3 2 4 1 1 2 2 5 1 1 4 2 1 1 5 6 1 4 6
-##  [2305] 3 3 5 6 5 4 4 2 4 3 6 3 1 4 5 6 4 5 1 4 2 5 1 3 4 4 3 5 5 1 5 3 2 1 1 6
-##  [2341] 1 1 3 1 3 2 1 1 5 2 1 4 3 2 3 3 6 3 4 3 5 6 1 1 6 5 6 1 5 4 1 3 3 2 1 4
-##  [2377] 5 6 5 1 4 4 6 2 5 2 2 3 1 4 6 3 6 3 1 2 6 4 6 1 3 6 3 1 3 6 4 6 4 4 3 3
-##  [2413] 1 2 4 2 5 5 4 1 2 3 3 1 5 4 1 4 2 2 2 2 6 3 3 4 5 3 1 4 5 3 1 3 1 5 2 5
-##  [2449] 4 4 6 6 4 4 6 6 4 6 6 1 2 4 2 5 3 1 6 2 5 5 6 1 3 4 1 3 1 3 3 3 6 2 4 3
-##  [2485] 6 6 5 5 6 2 3 1 5 3 4 3 2 1 6 5 2 1 2 2 2 2 3 1 1 2 3 2 5 1 6 2 4 6 6 4
-##  [2521] 1 6 1 1 4 2 2 6 2 4 3 4 5 6 3 6 3 1 2 6 4 3 3 2 2 1 6 2 4 3 2 3 2 2 1 4
-##  [2557] 4 3 2 2 6 1 5 3 4 2 3 5 1 6 4 4 5 2 4 1 5 3 6 6 4 6 6 4 2 6 5 3 2 3 2 6
-##  [2593] 2 3 6 5 4 5 2 1 5 5 5 3 3 3 3 5 4 2 4 1 1 2 1 2 4 3 5 1 6 6 2 5 4 6 3 2
-##  [2629] 4 5 2 4 5 1 6 3 3 4 4 6 6 1 5 3 5 3 5 6 2 5 4 6 6 1 5 3 4 2 4 4 2 5 5 5
-##  [2665] 5 6 3 5 2 3 6 3 4 1 4 3 1 6 3 4 2 5 6 6 6 3 6 3 5 1 5 2 3 6 4 6 6 1 5 5
-##  [2701] 6 2 4 6 2 2 4 3 4 3 5 6 1 1 3 3 4 4 5 1 3 3 3 5 5 6 2 5 5 2 3 4 6 1 6 4
-##  [2737] 3 4 3 1 1 1 3 6 1 5 2 5 1 2 1 4 2 4 3 2 3 4 4 6 6 5 4 5 4 5 2 1 3 5 5 2
-##  [2773] 4 4 2 1 6 2 2 5 1 1 2 5 2 4 2 1 1 5 2 4 2 4 3 6 2 2 4 2 3 6 1 3 2 3 4 4
-##  [2809] 5 5 3 4 4 4 5 5 1 5 3 2 5 4 6 1 3 6 4 4 1 2 2 2 3 4 2 3 4 5 3 6 3 3 3 2
-##  [2845] 4 3 5 5 5 4 5 2 6 1 1 6 3 6 3 6 5 6 5 5 3 2 5 4 2 2 1 3 3 5 2 4 5 5 3 5
-##  [2881] 3 1 4 2 2 2 5 1 1 5 4 1 5 1 1 4 4 3 5 5 3 2 3 2 3 4 6 3 1 5 2 6 2 5 6 4
-##  [2917] 3 4 3 2 2 2 3 4 3 1 5 1 2 1 5 2 3 5 1 4 3 3 3 4 2 2 4 3 6 4 2 5 3 3 4 3
-##  [2953] 6 6 4 6 2 6 2 1 3 5 2 5 6 1 2 1 3 6 6 4 5 2 2 2 1 4 3 4 1 5 4 4 3 6 6 1
-##  [2989] 3 5 2 3 1 4 4 5 6 5 1 1 2 1 6 1 4 6 2 2 5 5 5 2 3 6 4 1 6 5 2 4 2 5 5 6
-##  [3025] 4 3 4 6 4 2 2 6 5 1 5 4 6 2 3 1 4 1 5 2 5 5 4 5 2 1 5 1 2 4 3 5 6 6 3 1
-##  [3061] 4 2 1 5 2 2 6 1 3 2 4 6 1 5 2 6 6 6 6 6 6 4 1 5 3 1 6 4 4 4 5 3 4 2 2 4
-##  [3097] 5 3 3 1 6 4 2 6 6 2 2 1 4 3 2 4 6 1 4 2 3 6 6 6 4 3 5 6 6 4 6 3 6 1 6 4
-##  [3133] 2 2 5 6 6 1 6 5 3 4 6 4 2 3 2 1 3 2 5 3 4 4 4 6 3 2 4 1 3 1 3 2 2 4 6 6
-##  [3169] 5 2 3 6 4 3 6 1 6 3 1 5 3 3 2 5 5 1 3 2 1 4 1 1 3 4 1 3 3 2 1 6 4 6 1 2
-##  [3205] 4 1 4 6 1 5 1 3 4 5 2 5 2 3 2 3 1 3 1 4 3 1 4 6 1 3 5 1 2 6 5 2 6 1 2 2
-##  [3241] 5 4 1 6 4 4 2 3 3 1 3 5 1 5 1 2 6 1 3 6 3 2 5 1 2 3 3 5 2 2 1 1 6 1 6 6
-##  [3277] 5 1 5 6 1 1 6 5 4 5 1 6 1 6 1 1 3 5 4 5 6 5 5 4 3 3 2 3 6 2 4 5 1 5 4 4
-##  [3313] 2 1 3 6 6 5 2 6 6 4 4 5 2 4 1 5 3 2 4 5 2 1 5 3 2 4 6 6 6 3 3 4 1 3 5 1
-##  [3349] 6 3 6 6 5 6 3 1 4 1 1 1 2 1 5 3 5 5 5 2 4 6 3 4 6 5 4 2 2 6 2 2 1 2 3 2
-##  [3385] 4 1 1 6 2 3 1 3 4 2 5 1 3 2 6 6 2 4 6 3 2 4 5 2 1 6 5 3 1 1 1 4 6 6 5 3
-##  [3421] 6 6 2 6 4 1 3 5 3 5 6 6 3 4 3 1 2 2 5 2 3 6 6 6 2 2 4 2 1 3 4 5 5 2 3 3
-##  [3457] 6 1 1 4 1 3 3 2 6 3 1 3 1 4 2 5 5 3 1 5 3 3 5 6 6 5 3 3 2 4 4 3 1 2 4 4
-##  [3493] 4 6 5 4 3 3 4 3 2 5 4 5 1 5 5 6 4 4 6 6 6 6 3 4 6 5 5 4 3 3 6 3 6 5 2 5
-##  [3529] 4 1 4 2 6 3 2 4 3 6 4 3 2 2 6 3 2 6 4 3 1 4 4 3 4 2 1 1 2 6 5 6 4 2 2 6
-##  [3565] 5 3 5 4 2 2 6 6 3 1 4 1 6 3 4 2 5 1 4 3 3 2 4 4 3 2 4 2 1 4 3 6 4 5 5 3
-##  [3601] 6 1 5 2 5 3 3 6 3 4 6 4 2 5 5 1 4 6 4 4 2 6 4 2 4 5 5 4 5 4 5 3 2 1 2 4
-##  [3637] 5 1 4 4 3 4 3 1 3 3 3 5 4 4 1 2 3 1 5 1 4 5 4 6 1 4 2 3 4 2 2 3 3 6 1 5
-##  [3673] 4 6 4 2 4 4 2 6 3 4 6 1 6 5 1 1 5 5 6 2 5 6 4 6 3 6 3 4 3 5 6 3 4 3 4 5
-##  [3709] 4 2 3 4 2 6 6 4 1 6 5 6 3 1 4 5 5 1 3 4 6 5 2 1 2 5 2 2 3 4 5 3 2 1 6 3
-##  [3745] 6 1 4 5 5 5 1 2 5 3 3 1 5 4 1 6 6 1 4 6 5 2 6 5 4 6 4 3 2 1 1 3 2 5 5 6
-##  [3781] 1 3 1 5 5 6 2 1 2 5 1 6 4 4 6 4 3 2 6 4 2 1 4 4 2 5 5 2 3 5 3 5 1 2 2 6
-##  [3817] 6 1 1 2 6 4 6 5 6 6 5 4 5 1 3 5 4 4 4 6 4 2 6 1 5 3 6 6 3 4 2 2 3 6 2 6
-##  [3853] 5 2 5 2 5 4 3 6 2 6 2 1 1 5 3 5 2 2 3 2 5 1 3 5 3 3 2 4 2 6 1 2 6 4 5 2
-##  [3889] 6 1 5 2 3 5 4 4 3 6 6 3 3 5 3 6 3 6 3 6 2 3 6 1 1 6 3 1 3 5 1 1 5 5 4 3
-##  [3925] 1 4 6 5 6 4 2 3 5 3 3 6 1 4 6 1 1 4 4 2 1 3 6 2 4 1 5 3 1 1 1 3 1 4 1 6
-##  [3961] 5 4 5 2 3 4 1 4 1 1 5 6 3 6 6 1 1 4 3 6 6 5 2 6 1 1 3 1 1 3 1 4 2 4 1 6
-##  [3997] 3 4 6 1 2 4 1 2 3 5 2 1 4 3 5 3 3 4 3 3 3 1 2 4 3 2 3 3 4 5 3 3 2 5 3 4
-##  [4033] 5 1 1 1 4 5 2 6 1 3 2 5 2 6 1 2 6 4 1 3 2 6 1 4 2 3 2 6 3 2 6 4 3 4 3 6
-##  [4069] 2 1 5 1 2 4 5 6 4 4 5 3 3 3 6 2 3 2 5 3 4 6 3 6 1 5 5 4 4 2 3 4 2 1 5 1
-##  [4105] 5 2 1 5 4 4 4 1 6 5 2 2 5 4 4 4 2 6 3 2 1 1 6 2 3 5 2 6 4 1 3 4 3 6 3 2
-##  [4141] 1 2 4 2 1 3 1 1 1 1 4 2 1 1 5 5 1 3 2 2 5 6 3 4 5 3 4 5 6 6 1 2 5 4 4 4
-##  [4177] 4 1 5 6 6 3 3 2 5 3 2 6 4 6 2 2 1 6 6 5 6 2 1 3 4 1 1 4 2 4 6 5 2 5 5 3
-##  [4213] 4 6 5 5 6 6 4 6 1 5 6 2 5 1 2 2 3 2 1 6 4 4 5 6 3 1 6 4 3 5 6 4 2 4 2 4
-##  [4249] 5 5 6 4 4 2 3 2 6 5 3 4 2 1 2 1 3 3 5 6 1 5 3 6 3 1 5 5 4 4 5 5 4 3 4 5
-##  [4285] 4 4 4 5 3 3 6 2 5 2 2 4 1 3 4 2 6 6 6 4 5 6 6 3 2 4 2 4 1 4 6 6 2 2 5 2
-##  [4321] 3 6 2 2 5 4 2 2 6 4 4 6 4 4 2 6 4 4 4 4 3 1 3 5 2 5 1 4 1 3 6 6 2 4 2 1
-##  [4357] 4 1 5 1 5 5 6 4 2 2 3 2 3 2 4 1 3 6 6 4 1 2 3 4 4 3 5 6 6 1 4 3 3 2 2 6
-##  [4393] 5 4 1 2 2 4 6 3 5 3 6 4 2 4 1 2 4 1 1 5 5 1 5 3 3 5 3 4 5 4 2 5 5 2 4 2
-##  [4429] 2 6 4 2 4 1 5 2 2 1 4 6 4 1 2 1 6 2 3 4 1 3 4 1 2 5 5 6 4 4 6 2 5 6 2 3
-##  [4465] 4 6 1 3 4 4 4 5 3 1 6 3 1 1 5 6 1 5 4 6 1 4 5 4 2 6 3 4 1 4 6 3 6 5 6 3
-##  [4501] 4 4 1 5 6 6 5 3 6 6 2 2 6 4 3 5 6 4 4 2 2 2 4 6 5 4 1 1 6 4 2 4 2 5 5 2
-##  [4537] 5 3 2 5 1 3 6 2 6 3 3 2 2 3 6 6 4 4 1 4 2 4 3 6 1 5 3 3 3 6 1 1 3 2 4 1
-##  [4573] 4 1 4 2 5 6 4 4 3 5 1 4 2 5 5 1 2 5 4 6 3 5 5 6 6 1 5 1 4 1 4 4 5 1 1 2
-##  [4609] 2 5 6 1 4 4 4 2 6 6 1 2 3 6 4 6 2 3 6 2 5 6 3 5 1 2 6 2 1 3 6 5 1 2 6 1
-##  [4645] 4 6 2 2 6 6 1 3 2 4 3 5 4 4 4 5 1 1 4 3 1 2 6 2 5 5 1 5 5 3 5 4 2 1 6 3
-##  [4681] 6 2 3 5 4 6 5 4 3 1 4 1 5 1 4 2 4 2 1 5 1 5 5 1 2 6 2 4 2 2 5 6 1 2 2 6
-##  [4717] 3 2 4 2 5 2 2 1 1 5 3 3 3 4 3 3 2 6 6 6 5 1 3 2 4 2 4 6 3 5 1 4 1 5 1 4
-##  [4753] 1 4 2 1 4 6 6 4 4 4 1 2 1 6 2 4 6 6 6 1 6 5 5 3 6 5 4 3 3 6 5 2 1 4 6 6
-##  [4789] 5 1 1 5 3 3 2 2 2 1 6 3 1 5 4 2 6 6 5 2 2 4 1 2 1 6 5 1 4 2 2 6 3 1 3 2
-##  [4825] 2 5 6 5 3 5 2 4 2 2 2 2 1 6 2 4 5 1 5 6 1 5 3 6 6 3 4 1 1 4 6 4 6 2 1 6
-##  [4861] 5 5 2 5 1 6 5 1 4 6 4 2 2 1 2 3 6 1 4 1 2 6 6 1 3 6 2 6 3 2 5 6 3 6 2 6
-##  [4897] 1 6 5 4 4 2 1 2 4 1 2 6 6 3 1 6 1 2 3 3 4 2 3 4 4 1 6 5 4 2 5 1 4 1 3 1
-##  [4933] 2 3 4 5 5 1 6 4 6 5 3 4 3 1 2 3 2 6 1 4 4 1 6 1 2 4 5 4 2 1 4 6 6 3 2 2
-##  [4969] 2 6 6 1 4 2 5 4 2 1 3 2 5 4 6 3 6 4 4 5 4 3 4 2 4 1 2 2 1 5 3 3 5 1 1 3
-##  [5005] 5 6 2 2 1 1 6 2 5 5 6 5 1 6 3 3 4 1 5 3 1 5 3 1 3 6 2 2 1 4 1 6 2 5 2 4
-##  [5041] 5 4 6 6 6 2 4 4 5 6 5 4 3 6 2 6 4 2 4 6 1 3 4 6 5 6 1 3 4 1 5 4 4 3 3 1
-##  [5077] 2 3 1 6 3 6 4 3 6 5 4 1 1 4 5 2 2 3 5 3 2 5 4 1 4 5 6 5 5 6 2 3 1 5 6 4
-##  [5113] 1 6 6 5 6 5 4 2 3 5 4 1 5 4 6 4 2 2 5 1 2 5 2 4 4 6 1 2 2 4 2 2 3 3 2 2
-##  [5149] 1 4 6 3 3 1 6 2 5 5 1 3 5 5 3 5 5 5 3 2 6 5 5 4 4 3 6 4 5 4 3 4 6 3 4 6
-##  [5185] 2 3 3 6 6 6 1 4 1 1 4 1 6 4 1 3 5 1 6 4 2 6 4 3 3 3 1 1 3 4 1 6 5 2 5 5
-##  [5221] 1 4 3 4 2 3 4 5 5 5 1 4 2 4 5 5 4 6 5 6 2 6 2 6 6 2 3 5 5 3 6 4 1 3 2 4
-##  [5257] 1 1 5 4 1 1 6 1 3 6 5 4 5 2 4 1 6 6 6 6 2 6 2 3 2 1 1 3 3 3 1 4 6 5 3 3
-##  [5293] 3 6 2 2 6 6 3 2 2 3 1 2 3 2 5 2 6 2 6 1 1 2 6 4 2 4 3 5 3 6 2 4 4 6 5 4
-##  [5329] 3 2 6 1 2 4 1 3 2 5 2 5 2 4 5 6 1 5 6 6 2 1 5 2 2 3 4 1 3 1 3 2 5 6 3 4
-##  [5365] 6 5 6 3 1 5 3 1 3 3 6 3 6 4 6 6 6 4 6 2 3 6 6 2 5 4 4 1 5 1 5 1 1 2 1 2
-##  [5401] 6 4 3 1 6 3 1 4 1 1 5 1 6 1 1 2 1 5 1 1 1 4 3 2 1 5 3 4 1 2 5 2 4 4 5 1
-##  [5437] 1 5 3 5 5 4 2 3 6 3 1 3 5 2 6 6 6 2 4 4 2 5 1 3 1 5 4 5 5 2 2 5 4 1 2 1
-##  [5473] 4 2 3 3 3 3 5 2 2 2 6 5 2 2 4 4 3 3 3 5 2 1 2 1 1 5 2 5 1 2 6 6 3 3 4 1
-##  [5509] 4 4 4 1 3 6 4 4 6 1 1 1 1 4 1 4 1 4 6 2 2 2 1 6 1 1 1 6 3 5 6 1 5 1 4 3
-##  [5545] 1 6 5 5 4 1 5 6 2 1 2 3 5 4 2 2 1 2 1 6 3 5 4 3 6 4 1 2 3 3 6 4 5 6 3 5
-##  [5581] 5 4 4 6 6 3 4 5 1 1 1 1 6 5 1 2 5 5 4 3 1 4 1 5 3 5 4 1 4 4 4 5 5 3 4 3
-##  [5617] 2 4 2 3 2 5 6 2 3 5 5 3 2 5 1 6 6 6 3 3 3 6 3 3 4 2 3 2 2 2 5 1 5 1 4 6
-##  [5653] 1 3 6 6 1 1 3 3 1 4 1 3 2 6 2 3 3 3 1 4 1 4 3 1 2 6 3 1 2 4 2 6 3 1 2 2
-##  [5689] 1 6 1 2 6 6 6 2 4 4 2 3 3 6 2 5 3 2 5 1 6 3 3 3 2 4 5 2 2 4 3 3 2 6 1 2
-##  [5725] 6 1 6 2 5 3 2 4 2 3 1 5 6 4 2 1 4 5 2 3 3 6 4 2 2 1 6 5 6 6 6 2 2 1 6 5
-##  [5761] 2 2 4 6 1 6 1 6 3 4 2 4 5 2 4 3 1 3 1 1 1 3 5 2 6 2 3 2 6 5 5 1 2 3 5 1
-##  [5797] 6 5 3 3 6 3 2 2 6 3 1 3 1 2 2 6 4 6 5 2 2 4 6 2 1 1 6 2 4 2 6 5 1 6 5 1
-##  [5833] 5 3 1 1 2 6 5 6 6 4 4 1 5 1 1 2 4 2 3 2 6 1 6 5 2 6 5 2 3 6 5 6 4 4 6 5
-##  [5869] 1 2 5 4 3 3 4 6 5 1 4 5 6 2 6 6 1 1 3 1 6 4 6 5 1 6 5 3 3 2 5 4 3 5 2 1
-##  [5905] 4 5 4 6 2 2 1 2 4 5 1 6 2 6 6 4 3 1 4 6 3 2 5 2 2 3 4 5 2 6 5 2 5 2 5 6
-##  [5941] 1 3 2 4 3 4 6 5 4 6 2 2 5 2 4 2 6 6 5 4 1 2 4 4 3 5 5 2 2 3 1 2 3 1 2 5
-##  [5977] 6 3 6 6 5 3 3 2 4 6 4 4 1 4 6 4 5 5 3 1 5 3 1 6 1 4 5 5 6 3 5 4 2 2 6 3
-##  [6013] 2 1 1 1 1 4 6 1 6 6 3 4 2 1 6 5 5 6 4 4 2 5 4 1 5 4 3 5 6 4 5 4 6 4 4 6
-##  [6049] 3 5 2 3 5 2 4 2 1 5 4 2 1 5 6 3 5 2 1 5 5 1 6 1 4 3 2 1 4 4 4 6 3 5 3 5
-##  [6085] 6 1 4 2 6 4 1 5 5 1 4 5 3 5 4 5 2 1 1 4 4 3 1 6 4 2 1 4 1 3 5 4 1 6 6 5
-##  [6121] 1 3 2 4 1 6 5 6 1 3 2 4 1 4 6 6 4 4 4 5 4 1 3 2 6 5 5 6 4 3 3 1 1 3 5 2
-##  [6157] 4 1 1 5 1 2 6 3 2 4 6 2 3 2 4 4 4 3 3 1 5 5 4 5 2 3 2 3 6 5 1 2 4 1 6 2
-##  [6193] 6 3 6 2 1 6 5 1 6 1 1 4 1 6 4 1 1 3 6 2 5 4 1 6 6 1 2 3 5 4 5 5 2 1 5 2
-##  [6229] 4 2 1 6 6 1 4 4 3 2 2 1 5 6 3 1 4 5 6 6 6 4 4 4 4 5 5 4 1 5 4 2 5 6 1 2
-##  [6265] 4 5 2 5 3 6 2 4 4 1 6 5 6 2 1 5 4 5 4 5 3 1 6 3 1 4 2 5 1 2 2 6 1 2 2 3
-##  [6301] 5 2 5 2 1 2 3 6 2 4 2 5 4 6 3 4 5 6 5 3 1 6 4 6 4 3 4 4 5 6 5 5 6 4 6 6
-##  [6337] 2 5 4 2 3 4 6 4 4 1 1 6 4 5 3 4 3 4 6 3 1 3 6 6 2 2 3 3 5 5 1 2 4 1 4 2
-##  [6373] 6 3 2 4 3 5 5 4 3 6 4 6 1 1 5 4 3 6 1 6 4 5 4 5 3 4 1 3 2 6 6 5 1 3 1 6
-##  [6409] 6 3 1 3 6 1 3 4 6 1 6 2 4 5 5 4 5 5 2 6 5 2 3 5 4 1 1 5 5 5 5 3 4 5 4 2
-##  [6445] 5 6 2 2 4 2 2 3 3 5 2 2 6 4 6 2 2 5 1 2 6 1 4 4 1 6 5 2 3 6 5 2 6 1 1 4
-##  [6481] 1 4 5 3 4 1 2 5 1 5 2 6 5 2 6 1 1 1 2 4 5 2 3 4 5 5 1 6 2 2 1 1 4 2 2 2
-##  [6517] 4 4 4 1 2 5 3 3 1 4 1 5 6 6 3 1 5 2 1 4 1 5 6 4 6 5 4 3 5 6 5 6 2 2 2 5
-##  [6553] 3 6 6 2 6 1 1 2 4 6 6 5 2 1 3 6 3 2 1 6 5 5 6 6 4 4 5 5 6 1 3 2 3 2 5 3
-##  [6589] 3 4 6 2 6 2 2 5 3 6 6 5 2 2 4 5 6 5 4 3 2 1 5 5 5 5 4 3 5 5 5 2 3 1 3 5
-##  [6625] 6 5 6 1 6 4 3 3 1 6 5 3 1 3 3 6 1 1 4 6 3 5 4 4 3 3 6 1 4 2 6 3 6 4 4 4
-##  [6661] 5 6 5 1 2 4 2 4 5 4 5 4 1 6 4 1 3 3 2 5 1 5 4 1 1 1 2 1 3 5 2 5 6 4 5 4
-##  [6697] 3 2 1 5 4 4 6 1 6 2 1 4 5 2 6 4 1 4 2 1 1 5 1 3 5 4 1 4 6 4 6 2 1 6 4 3
-##  [6733] 6 2 5 5 4 2 5 5 6 5 4 4 6 3 5 6 4 2 2 1 4 3 3 6 3 2 4 6 2 1 2 6 1 1 4 6
-##  [6769] 3 4 4 4 5 1 2 4 4 6 1 2 6 4 2 4 2 3 5 3 4 2 5 3 6 1 3 3 2 5 6 1 3 2 4 5
-##  [6805] 5 5 1 1 5 3 3 6 4 1 2 6 1 5 4 6 6 3 6 6 3 6 5 1 1 1 1 2 3 3 4 4 1 1 4 1
-##  [6841] 4 4 4 3 2 5 6 4 4 4 5 5 4 6 6 6 1 4 3 4 4 1 2 3 2 1 2 1 1 4 1 2 5 1 6 1
-##  [6877] 6 1 4 2 1 1 6 3 6 3 2 1 3 3 1 4 3 6 5 4 3 1 5 6 6 1 6 2 6 5 3 6 4 3 2 2
-##  [6913] 6 5 3 2 2 4 6 4 3 5 1 4 6 5 3 6 3 5 5 4 4 6 2 1 3 3 1 1 1 4 5 3 5 5 4 2
-##  [6949] 6 4 1 3 4 4 6 6 4 5 2 6 5 2 4 6 6 4 2 3 2 3 6 6 1 5 4 1 2 3 2 1 2 3 1 5
-##  [6985] 4 4 3 3 4 2 6 6 4 6 2 3 6 2 2 4 2 5 5 6 2 2 1 4 1 6 2 6 4 2 1 3 2 4 4 4
-##  [7021] 5 1 1 2 3 5 5 3 5 2 6 2 4 6 6 3 6 2 2 6 1 2 4 1 4 3 2 5 2 5 3 4 4 6 1 1
-##  [7057] 1 6 2 6 6 4 5 3 2 4 6 4 5 3 5 4 6 1 6 3 5 1 2 2 3 5 1 1 3 1 2 2 3 6 2 1
-##  [7093] 4 4 2 3 3 5 1 1 5 4 4 1 4 2 6 6 5 5 6 1 2 4 4 6 2 2 3 2 4 2 2 4 6 2 3 4
-##  [7129] 2 6 3 3 3 6 6 6 1 1 4 2 1 6 3 6 5 5 3 1 6 2 5 6 2 4 3 6 3 6 5 5 2 3 1 4
-##  [7165] 4 1 2 5 3 4 4 5 6 6 3 2 5 1 2 6 1 3 3 3 1 1 1 3 2 2 5 2 1 2 3 4 1 4 6 6
-##  [7201] 3 6 2 1 1 4 1 2 2 5 1 4 4 6 4 4 6 1 2 6 2 2 6 4 5 5 5 2 4 1 6 5 5 2 3 4
-##  [7237] 5 4 3 5 3 2 4 4 2 1 6 1 2 5 2 3 6 1 6 3 1 1 3 4 4 6 5 3 1 6 2 1 3 3 1 2
-##  [7273] 4 3 4 2 1 6 1 1 4 2 3 6 1 1 1 3 2 4 6 3 3 1 5 1 3 4 3 3 5 5 4 2 2 3 5 3
-##  [7309] 4 4 2 6 5 1 1 4 5 1 2 1 4 3 5 3 6 5 4 1 4 3 2 6 3 4 6 6 1 3 1 1 3 3 4 5
-##  [7345] 3 6 3 6 4 6 5 4 5 2 3 1 5 4 4 5 4 2 4 1 2 5 5 4 3 3 5 6 5 3 5 2 4 1 5 1
-##  [7381] 4 6 4 3 2 1 4 1 6 6 6 5 1 5 1 2 1 2 4 6 6 6 1 1 6 1 6 3 3 5 2 6 1 5 6 6
-##  [7417] 6 6 4 4 5 5 2 2 6 1 5 1 4 3 3 5 1 4 2 5 6 2 5 3 3 6 5 4 3 5 5 6 1 3 5 6
-##  [7453] 2 1 6 2 3 4 6 5 6 3 2 2 1 5 1 4 2 4 1 5 2 6 1 4 3 5 2 6 2 4 4 2 2 6 5 5
-##  [7489] 5 4 3 4 3 4 5 5 5 6 2 5 5 6 2 6 5 4 1 5 4 2 1 3 3 1 3 5 4 3 2 4 3 4 1 4
-##  [7525] 1 3 6 3 5 1 6 6 5 2 1 6 2 4 6 1 1 1 1 3 1 1 4 3 2 1 2 4 2 6 4 5 4 3 5 2
-##  [7561] 4 4 3 2 4 5 4 2 4 3 1 3 5 2 4 3 6 6 3 2 5 6 6 5 1 2 5 2 2 6 1 5 6 3 3 1
-##  [7597] 3 2 3 6 4 1 2 5 2 3 4 3 5 2 4 3 2 1 1 3 5 3 2 5 1 4 6 6 5 6 2 2 6 6 2 2
-##  [7633] 4 4 6 5 1 6 1 2 5 3 1 3 3 4 5 6 5 5 1 6 4 4 4 1 1 1 3 4 2 3 3 2 6 3 5 1
-##  [7669] 3 2 1 6 4 4 4 1 2 3 2 6 2 5 5 6 4 4 1 2 1 3 2 5 3 5 3 3 3 4 1 5 2 5 3 1
-##  [7705] 1 1 1 5 6 4 2 6 1 3 1 5 2 5 2 3 1 3 1 4 5 6 1 2 5 2 4 1 3 4 1 6 5 1 1 6
-##  [7741] 4 2 5 3 4 2 4 6 1 6 2 1 6 3 2 6 6 5 6 3 2 3 4 1 4 6 2 5 1 2 3 6 3 2 4 2
-##  [7777] 4 4 6 5 1 1 3 4 2 4 4 6 1 2 3 2 1 5 4 5 6 3 5 1 1 2 3 2 5 4 3 3 6 3 1 1
-##  [7813] 3 5 5 5 5 1 3 1 3 5 3 1 1 3 5 4 1 2 4 6 2 3 6 3 5 5 2 4 4 1 1 1 1 6 4 6
-##  [7849] 2 3 2 2 4 5 5 6 3 3 2 4 6 2 1 2 6 1 2 5 3 1 4 6 5 1 5 3 1 1 6 2 5 5 4 4
-##  [7885] 2 1 6 4 1 1 2 5 2 2 6 4 6 6 3 4 2 2 5 2 1 5 6 5 6 4 1 1 3 1 3 3 4 4 3 2
-##  [7921] 5 6 4 4 4 2 1 2 3 6 2 6 1 4 1 6 3 6 2 3 5 6 1 5 1 6 2 6 3 1 4 4 6 6 3 5
-##  [7957] 6 4 4 1 6 1 5 2 3 3 6 2 2 1 2 4 4 6 4 4 1 3 3 1 3 3 4 1 5 1 5 1 6 1 5 4
-##  [7993] 6 3 1 5 4 4 5 4 1 2 4 4 4 4 5 2 5 1 5 1 1 5 2 2 5 3 6 2 5 5 3 2 6 3 1 4
-##  [8029] 4 4 6 6 6 2 3 2 2 5 6 2 1 5 2 1 1 2 4 5 2 5 2 5 3 6 1 1 5 6 5 3 5 3 6 4
-##  [8065] 3 1 3 3 1 4 5 3 2 5 6 1 6 3 2 2 4 5 6 3 3 6 4 3 4 2 4 3 3 2 4 5 6 4 3 3
-##  [8101] 5 6 2 6 4 4 4 5 3 1 6 4 2 4 4 3 2 1 2 6 1 2 6 4 5 6 5 3 4 5 6 2 2 4 6 2
-##  [8137] 6 5 1 6 6 6 2 6 1 4 1 3 3 5 3 6 5 3 2 6 4 1 4 5 6 2 6 6 6 4 3 3 3 2 5 5
-##  [8173] 5 6 4 3 2 4 1 3 1 4 4 4 2 4 4 4 4 3 4 1 1 3 3 6 1 1 3 6 1 4 4 2 1 1 1 6
-##  [8209] 1 1 3 6 3 4 4 3 1 3 1 6 6 5 3 4 5 2 6 1 2 1 1 5 2 2 3 3 5 1 3 5 2 2 3 4
-##  [8245] 3 5 6 5 3 4 4 3 1 6 6 3 1 3 5 2 2 6 2 6 1 1 2 1 2 4 3 4 2 1 3 1 4 4 3 5
-##  [8281] 4 6 2 1 2 4 5 2 3 6 5 2 4 6 2 4 4 6 4 2 4 3 3 6 5 1 3 3 1 4 5 1 6 4 6 3
-##  [8317] 6 4 3 1 3 4 6 2 2 1 6 3 6 4 3 1 2 2 6 5 1 3 1 1 6 4 5 5 5 3 5 1 2 1 2 4
-##  [8353] 1 4 2 3 2 5 2 6 6 4 5 3 3 5 5 6 1 6 5 5 6 2 1 5 1 4 5 5 3 1 6 3 6 4 5 5
-##  [8389] 6 6 2 6 3 5 6 6 6 1 1 3 3 4 5 3 6 1 6 2 6 3 2 2 5 6 1 1 1 6 2 5 2 4 5 5
-##  [8425] 1 3 1 4 1 2 2 3 3 4 2 2 5 3 1 4 1 5 6 5 5 3 4 6 3 1 1 1 2 5 6 3 4 5 4 4
-##  [8461] 2 1 6 4 5 5 5 2 6 6 3 5 4 1 2 6 6 1 4 3 4 1 3 6 5 6 6 3 2 1 1 4 5 1 5 5
-##  [8497] 1 2 2 2 6 6 2 3 4 5 3 1 1 3 2 3 6 6 3 2 2 1 6 3 1 3 4 6 3 6 3 2 1 1 4 2
-##  [8533] 1 5 5 3 2 6 4 1 5 6 4 3 6 4 3 6 5 4 6 3 1 5 6 4 2 2 5 6 6 3 1 4 2 6 4 1
-##  [8569] 4 1 6 1 5 2 6 5 1 2 1 2 3 2 6 3 6 5 3 2 5 1 1 5 3 2 3 4 5 6 3 1 4 6 1 3
-##  [8605] 3 3 3 1 3 5 6 4 6 4 5 1 3 5 6 5 4 4 4 5 6 1 2 6 6 2 3 5 6 2 3 6 4 1 6 4
-##  [8641] 4 2 3 5 5 3 3 5 5 1 5 1 6 4 4 3 6 6 5 1 4 2 1 3 1 1 6 6 4 5 6 1 6 5 1 2
-##  [8677] 1 2 6 6 6 3 3 6 3 5 5 4 2 4 1 3 4 1 4 5 1 3 6 6 3 3 6 5 5 1 1 4 6 5 3 2
-##  [8713] 6 4 5 3 4 4 5 4 1 1 3 5 3 1 5 2 4 3 5 1 1 6 4 5 2 5 1 2 4 3 6 4 1 1 6 4
-##  [8749] 3 6 1 3 4 4 6 4 2 3 5 2 5 6 5 1 5 6 2 4 1 2 5 6 3 6 6 4 4 1 1 2 2 1 3 2
-##  [8785] 4 5 5 3 6 2 3 2 4 3 5 4 3 5 2 6 6 3 6 3 5 5 6 1 6 5 3 5 5 6 5 2 6 5 2 6
-##  [8821] 5 4 6 2 1 1 4 6 6 1 1 3 3 6 5 1 5 3 1 3 6 1 5 6 1 4 5 2 5 1 6 6 2 5 4 3
-##  [8857] 4 3 5 5 6 1 1 6 6 4 1 6 4 1 6 5 2 6 2 4 5 4 6 2 2 1 5 3 6 5 3 2 3 5 1 2
-##  [8893] 3 4 1 5 5 1 6 6 1 6 2 4 3 6 4 6 4 2 3 6 2 6 6 5 6 5 6 4 6 2 1 6 3 1 5 4
-##  [8929] 1 3 6 1 1 3 6 1 2 5 1 6 6 1 4 2 4 5 2 5 5 6 2 6 4 1 3 1 6 2 3 3 2 2 6 3
-##  [8965] 5 6 5 1 6 6 2 4 1 5 5 5 2 1 3 6 5 1 6 4 5 3 5 1 3 2 2 6 3 2 3 4 2 5 6 2
-##  [9001] 4 5 4 5 3 1 5 3 1 6 6 4 3 1 3 3 5 3 2 4 1 3 6 5 1 1 6 5 5 1 1 5 6 4 4 4
-##  [9037] 1 2 3 4 2 3 2 6 1 6 1 5 5 2 1 4 5 2 4 5 2 4 2 5 4 1 1 2 1 1 6 5 1 4 3 2
-##  [9073] 2 6 5 2 3 6 6 2 2 3 5 5 6 2 6 1 4 2 5 2 3 3 4 3 5 5 4 3 1 3 6 4 5 2 6 6
-##  [9109] 6 6 3 1 6 3 5 2 1 5 3 3 3 3 4 6 4 2 5 2 2 6 2 3 2 5 5 1 3 6 1 6 3 5 2 4
-##  [9145] 4 3 2 2 5 6 5 2 2 4 4 2 2 3 3 5 5 1 6 4 3 5 1 6 5 6 1 2 3 2 1 1 1 4 6 3
-##  [9181] 4 5 2 5 5 1 3 3 6 4 2 4 1 5 6 3 6 5 3 3 1 2 3 5 4 4 6 5 3 5 1 3 2 4 3 5
-##  [9217] 3 3 3 6 5 6 6 1 4 2 2 5 2 2 2 5 2 4 2 2 3 5 5 4 6 6 6 2 5 3 4 1 5 2 5 2
-##  [9253] 2 2 2 1 3 6 2 5 5 3 5 3 3 3 5 1 2 1 1 5 4 1 4 3 3 4 3 2 2 5 5 3 5 6 5 4
-##  [9289] 4 5 3 5 4 6 3 5 6 1 3 4 4 2 5 5 4 6 5 6 6 5 1 4 3 3 4 4 6 1 5 4 5 2 4 2
-##  [9325] 5 1 6 4 5 6 6 3 2 3 1 2 5 2 1 6 2 3 5 5 1 5 4 1 3 5 3 5 3 2 5 1 3 4 3 2
-##  [9361] 5 3 6 6 2 3 3 1 4 1 4 1 3 1 2 6 3 1 2 5 4 4 5 5 4 4 6 1 3 2 3 2 4 1 2 2
-##  [9397] 3 1 4 6 3 3 6 3 6 2 5 1 4 1 4 5 1 5 1 5 5 6 3 2 5 4 1 6 5 2 5 3 2 5 3 4
-##  [9433] 2 3 6 4 4 4 1 5 2 2 2 3 4 2 6 2 5 4 5 6 3 4 3 4 5 5 4 3 3 4 2 2 4 6 5 6
-##  [9469] 6 5 2 4 2 2 1 4 3 4 3 6 4 6 2 3 2 1 4 2 3 1 6 5 5 4 3 4 2 6 3 4 3 4 5 3
-##  [9505] 2 1 4 6 1 3 3 2 5 4 3 3 6 6 4 4 1 4 4 6 5 4 6 2 4 1 6 6 1 1 5 6 1 6 1 1
-##  [9541] 2 3 4 3 2 3 6 3 1 3 6 6 2 4 6 2 5 1 6 4 3 2 3 1 6 5 3 4 6 1 1 3 4 5 5 6
-##  [9577] 5 6 5 2 1 2 4 2 6 1 2 2 2 1 3 4 3 6 3 1 4 5 5 6 1 6 6 1 5 1 2 4 4 6 3 3
-##  [9613] 4 1 6 2 6 6 5 1 2 2 2 2 5 3 4 2 2 1 3 1 4 3 3 3 1 4 1 3 2 6 2 2 3 2 6 4
-##  [9649] 3 5 3 2 4 3 4 5 2 2 5 1 4 2 2 6 3 6 1 5 1 1 4 2 6 5 1 3 1 4 6 2 5 4 1 5
-##  [9685] 4 4 1 5 2 6 5 1 5 4 5 3 4 3 6 3 1 4 3 4 5 2 6 6 6 6 1 5 1 4 2 2 3 2 3 4
-##  [9721] 4 3 4 1 6 4 6 2 1 4 5 5 2 1 6 5 5 5 4 5 5 1 2 3 2 3 4 2 5 1 2 6 3 6 4 6
-##  [9757] 1 4 2 4 1 5 1 6 5 2 4 1 4 3 2 2 5 4 2 2 2 4 4 6 2 2 3 4 1 1 5 6 3 3 4 1
-##  [9793] 2 3 5 2 1 5 4 2 3 6 4 2 6 5 3 5 1 1 3 5 1 5 1 3 2 4 5 4 5 5 4 4 4 1 3 5
-##  [9829] 6 1 4 5 1 4 4 2 1 6 3 1 2 6 1 6 3 1 5 2 6 4 4 5 1 1 2 6 4 3 1 2 1 3 6 4
-##  [9865] 2 2 1 4 4 5 2 4 1 5 2 2 4 3 2 2 4 3 3 2 2 4 2 6 2 6 6 5 2 3 5 6 6 3 5 4
-##  [9901] 2 4 2 6 5 6 5 6 5 1 4 1 4 1 3 5 5 2 5 4 1 1 3 3 1 1 1 3 4 2 6 1 4 3 3 1
-##  [9937] 4 3 3 1 4 2 3 5 1 1 1 5 1 1 5 3 3 3 5 3 3 1 1 2 4 4 1 5 5 3 4 4 5 4 3 6
-##  [9973] 3 2 3 2 2 1 4 4 4 2 3 6 4 5 4 6 1 4 5 6 3 5 1 3 6 6 1 3
+##     [1] 2 5 3 1 2 3 5 6 3 3 1 4 1 3 6 2 2 1 1 3 5 2 5 1 4 3 2 1 4 4 4 2 2 4 6 2
+##    [37] 2 6 4 1 6 6 4 4 5 3 6 4 4 1 6 4 4 1 4 2 3 5 5 2 6 3 3 6 6 4 3 1 6 4 3 3
+##    [73] 3 2 4 1 2 3 1 3 5 2 6 6 2 2 5 4 1 2 3 5 3 5 1 5 5 6 4 3 5 3 4 3 1 3 5 2
+##   [109] 2 2 3 6 6 1 6 2 3 4 2 4 3 4 4 3 6 4 2 4 4 6 6 5 5 3 4 1 6 4 5 1 6 2 6 6
+##   [145] 3 5 6 6 4 4 6 6 1 2 1 3 1 6 2 4 6 2 1 5 2 4 2 3 5 3 5 6 3 2 3 5 5 3 2 3
+##   [181] 6 1 2 2 3 4 5 3 4 4 3 5 5 3 3 2 2 4 3 2 1 2 1 2 6 1 2 1 4 5 2 2 1 6 4 4
+##   [217] 5 1 1 3 4 1 6 2 6 1 4 4 3 5 5 2 3 5 5 2 1 5 2 2 6 3 6 5 3 2 6 5 2 5 4 2
+##   [253] 2 3 1 5 4 2 5 1 6 3 3 1 5 1 6 6 1 4 2 5 5 4 6 3 4 3 1 6 3 2 5 3 1 3 3 6
+##   [289] 6 4 5 2 6 6 4 6 4 4 3 2 2 5 1 4 3 5 3 6 4 6 1 1 1 2 6 4 1 6 2 4 4 1 3 1
+##   [325] 4 5 1 3 6 4 6 6 4 3 5 1 4 3 4 4 4 3 6 2 4 1 2 4 1 4 5 2 2 6 1 4 5 6 2 4
+##   [361] 2 3 6 1 3 5 2 4 5 2 1 6 6 1 5 2 4 6 6 2 4 3 2 2 5 4 3 4 6 6 3 1 2 6 6 4
+##   [397] 3 5 2 4 3 1 3 5 5 4 6 3 1 2 5 2 4 4 6 1 3 2 1 1 6 5 5 3 2 1 1 5 2 5 4 5
+##   [433] 4 2 5 2 2 4 6 1 6 3 5 1 6 4 4 1 2 4 6 6 1 6 3 5 6 4 2 3 5 4 6 2 5 4 2 5
+##   [469] 4 4 4 1 3 5 5 3 3 4 5 3 6 2 2 2 1 2 3 2 2 6 5 2 1 6 4 4 5 3 3 6 3 2 4 5
+##   [505] 3 1 5 5 4 3 2 1 4 5 2 3 5 6 1 5 3 2 6 3 5 4 3 5 1 1 2 3 2 2 5 3 3 3 3 5
+##   [541] 5 3 5 6 5 3 3 3 1 4 1 1 5 2 2 2 6 5 5 2 3 4 1 2 6 3 3 4 4 2 1 6 2 6 3 2
+##   [577] 1 3 4 2 1 3 1 5 5 1 6 2 4 5 5 1 5 4 3 4 1 3 2 2 1 1 2 2 4 1 3 5 1 4 1 1
+##   [613] 5 2 1 2 2 1 6 4 5 5 2 5 5 1 6 5 6 3 3 2 5 6 3 6 1 3 6 3 5 1 4 2 3 6 3 6
+##   [649] 3 5 6 3 6 4 5 1 4 2 3 5 2 1 5 2 5 5 5 4 5 4 4 4 2 3 6 6 6 2 1 1 5 3 3 2
+##   [685] 3 4 1 3 2 6 5 1 3 5 1 3 2 2 2 6 3 6 2 5 6 5 1 5 5 2 2 5 5 1 1 5 5 6 3 2
+##   [721] 5 4 2 4 5 6 4 4 4 5 2 5 4 5 1 4 4 2 5 4 3 6 2 1 6 6 5 1 5 1 2 5 6 1 6 6
+##   [757] 4 1 2 2 3 5 3 5 4 3 2 5 3 3 5 4 6 5 5 3 1 5 2 6 5 5 6 3 6 4 2 2 1 5 5 5
+##   [793] 2 6 2 4 2 5 6 2 6 6 1 6 2 2 5 5 4 1 5 2 5 4 2 6 6 6 1 3 5 4 4 6 6 5 3 1
+##   [829] 6 5 2 5 2 3 5 2 6 1 3 5 1 2 2 4 6 4 4 1 3 3 5 5 6 5 2 1 2 6 3 6 6 3 3 2
+##   [865] 2 4 3 6 6 2 5 3 1 2 5 4 2 2 3 6 1 3 5 4 6 2 4 3 2 6 5 5 6 4 6 1 5 2 5 4
+##   [901] 4 2 2 1 3 3 4 5 2 5 1 5 2 2 6 6 3 6 1 4 5 5 5 4 1 5 4 1 3 3 5 2 3 5 1 5
+##   [937] 6 6 4 2 6 2 5 1 5 4 4 6 6 2 3 5 2 6 6 4 1 2 6 4 1 1 6 3 1 4 4 2 2 5 4 2
+##   [973] 3 1 2 6 1 4 6 3 5 6 1 1 2 2 6 3 6 5 3 2 2 3 3 4 1 4 6 2 5 3 6 6 1 3 4 1
+##  [1009] 5 6 2 6 6 2 6 2 4 1 4 6 3 3 4 5 4 3 5 1 3 3 4 1 4 6 1 5 4 4 3 6 6 1 6 1
+##  [1045] 3 3 4 2 3 5 1 1 4 1 3 2 3 5 3 2 3 5 2 6 6 6 6 4 1 4 5 6 6 1 3 2 5 2 1 3
+##  [1081] 4 3 6 4 2 5 5 2 5 6 1 1 6 1 2 3 5 1 4 1 3 5 1 6 3 5 2 1 4 6 4 2 1 3 6 1
+##  [1117] 6 5 4 2 4 2 2 6 1 6 2 4 6 5 4 2 5 6 6 1 2 2 4 3 5 6 4 6 1 5 4 6 5 5 4 4
+##  [1153] 5 6 6 2 5 1 1 5 5 4 1 3 2 4 1 1 2 1 5 6 5 3 3 6 6 1 6 1 1 1 5 4 1 5 6 2
+##  [1189] 6 4 3 1 1 4 5 6 5 2 6 4 4 6 1 5 3 2 2 5 1 4 1 4 6 4 4 4 6 1 5 3 5 5 5 4
+##  [1225] 5 5 2 1 1 2 5 1 6 6 3 3 5 6 1 2 2 1 4 2 6 5 5 1 3 3 1 4 2 2 6 5 6 1 5 3
+##  [1261] 1 3 4 3 6 6 1 1 5 1 5 5 3 6 4 2 4 3 5 1 5 5 2 5 3 2 2 6 1 3 6 6 1 6 5 5
+##  [1297] 1 1 2 3 5 5 2 4 6 6 2 4 5 4 3 2 1 1 3 2 5 3 1 1 5 4 2 3 4 2 3 2 2 2 2 5
+##  [1333] 1 1 5 2 2 3 2 6 5 1 6 4 5 5 3 6 2 2 5 5 6 5 2 3 1 6 3 3 2 6 5 2 6 4 5 4
+##  [1369] 4 4 4 6 2 5 4 2 2 1 3 5 2 6 4 4 3 6 4 1 4 2 3 5 5 5 4 5 2 4 3 4 2 1 3 4
+##  [1405] 1 3 1 1 1 3 5 5 1 1 5 6 2 1 2 3 3 1 5 1 3 2 3 6 1 1 4 3 5 5 3 4 3 6 1 3
+##  [1441] 1 4 2 4 3 4 5 2 3 3 5 2 6 2 6 1 1 5 2 2 4 1 6 6 6 4 5 2 6 5 4 1 1 6 6 3
+##  [1477] 1 1 2 4 5 2 5 4 3 2 2 2 2 2 1 3 5 1 1 4 6 5 3 1 6 6 6 2 5 1 6 1 6 5 5 3
+##  [1513] 4 3 4 2 6 5 5 3 3 1 6 5 1 6 4 3 1 5 2 4 2 3 4 6 6 5 2 4 5 5 2 1 4 6 2 2
+##  [1549] 4 6 4 2 6 4 4 1 1 2 2 3 5 1 4 4 6 6 2 2 2 4 2 1 6 2 4 6 6 1 3 6 6 4 2 1
+##  [1585] 4 5 3 1 3 4 4 2 3 1 6 2 1 4 1 5 2 5 6 2 4 4 4 4 4 6 5 5 6 5 5 5 1 5 6 4
+##  [1621] 1 2 1 2 5 5 5 5 1 3 2 6 4 2 2 3 1 4 5 3 5 5 3 2 6 3 3 2 5 5 3 3 4 1 5 6
+##  [1657] 5 6 1 3 6 2 6 2 4 5 3 3 3 4 6 6 2 6 2 4 1 1 5 5 4 4 6 6 5 3 3 1 6 1 3 5
+##  [1693] 6 5 4 3 3 6 1 6 5 4 1 1 6 4 3 6 4 1 6 1 5 6 4 5 4 4 4 6 2 6 5 6 3 3 3 2
+##  [1729] 2 6 5 5 4 2 5 2 3 2 3 3 1 5 4 1 3 2 1 5 5 4 2 6 1 6 2 5 5 1 2 6 1 5 5 1
+##  [1765] 1 4 6 6 3 1 6 6 2 6 3 1 6 3 1 6 2 2 1 6 6 2 1 4 6 1 1 3 2 2 4 3 3 3 2 4
+##  [1801] 6 5 2 2 1 2 3 5 6 4 4 5 6 6 5 3 5 3 3 4 5 3 4 3 6 4 3 2 5 6 6 4 3 2 3 1
+##  [1837] 1 4 5 6 5 1 5 1 3 5 6 5 6 4 4 4 2 3 1 1 5 1 1 2 3 4 5 1 1 4 6 2 2 1 5 1
+##  [1873] 6 1 3 5 3 5 5 5 4 3 3 6 5 3 4 4 2 5 2 5 4 1 2 3 6 3 5 5 5 2 2 1 5 5 6 4
+##  [1909] 6 1 2 5 6 1 1 6 4 4 6 2 6 1 1 4 5 3 4 4 4 1 5 1 4 5 6 5 6 1 6 1 6 2 6 3
+##  [1945] 6 2 6 2 2 3 3 4 1 6 5 1 6 1 3 4 2 3 4 4 4 2 1 3 2 1 3 1 6 6 3 6 4 4 6 3
+##  [1981] 6 2 3 2 1 2 4 6 4 6 6 1 5 1 3 2 3 2 2 2 4 4 4 5 2 4 2 6 3 6 5 6 4 2 2 6
+##  [2017] 2 3 6 2 3 2 2 1 6 5 4 5 3 6 1 2 5 3 3 5 1 3 3 2 2 6 1 3 1 2 2 6 4 3 2 4
+##  [2053] 2 1 6 2 1 4 1 1 2 2 2 5 2 3 4 4 2 6 6 5 3 6 3 5 1 6 6 2 4 5 6 4 6 1 3 6
+##  [2089] 1 3 4 4 3 3 6 6 1 1 4 1 6 6 4 5 5 6 6 3 2 3 5 1 5 3 2 4 2 1 2 5 1 3 3 5
+##  [2125] 2 2 1 1 4 4 5 6 3 5 5 5 6 6 5 5 1 5 1 2 5 4 2 3 2 4 1 3 5 4 1 4 2 1 3 5
+##  [2161] 5 5 1 6 5 1 5 2 5 3 6 1 3 1 5 3 3 1 3 6 6 5 2 5 4 4 6 3 6 5 6 4 3 6 4 5
+##  [2197] 5 1 2 4 1 4 2 6 3 6 1 6 4 1 1 4 1 2 4 5 1 2 6 4 2 1 3 6 3 2 1 2 5 4 3 4
+##  [2233] 3 5 4 1 6 6 3 2 6 4 1 6 4 1 2 2 3 3 2 4 1 2 2 5 2 5 5 1 1 2 4 1 4 4 6 3
+##  [2269] 3 6 2 1 5 2 2 1 2 1 4 4 3 5 2 6 6 2 6 4 2 1 5 5 5 1 2 2 4 6 1 6 3 6 6 1
+##  [2305] 4 6 2 2 2 2 4 1 3 6 4 6 5 2 6 4 1 3 1 6 5 3 4 4 5 6 1 1 2 3 5 3 2 4 5 5
+##  [2341] 6 1 5 3 6 2 1 2 5 3 5 4 3 5 5 2 6 4 4 5 2 5 1 4 5 5 1 4 3 2 4 6 1 5 3 3
+##  [2377] 4 6 6 3 1 6 3 6 5 1 3 4 1 5 2 2 3 4 3 6 2 2 6 4 1 3 3 5 4 4 6 6 5 6 2 6
+##  [2413] 6 3 1 5 4 3 2 1 4 4 5 2 6 3 3 5 5 2 6 4 4 6 5 1 4 3 5 5 2 2 2 1 4 6 2 2
+##  [2449] 2 6 3 6 2 6 1 6 3 6 5 6 5 2 6 2 2 5 6 2 4 1 3 6 6 2 5 6 1 1 3 3 5 2 4 2
+##  [2485] 3 2 2 4 1 3 3 5 5 4 5 2 6 4 3 2 3 1 6 6 1 1 2 3 1 3 2 3 3 6 1 6 3 1 6 1
+##  [2521] 1 5 2 6 2 4 2 2 1 2 4 5 6 6 1 2 2 5 2 5 2 5 1 2 6 6 4 5 3 1 1 4 3 6 4 2
+##  [2557] 5 6 1 2 3 2 3 6 6 5 4 5 3 2 3 1 5 1 5 2 4 5 1 5 6 1 4 4 6 4 5 5 3 4 1 5
+##  [2593] 4 1 6 2 3 1 5 1 1 5 2 2 1 3 3 4 6 5 3 4 6 4 3 5 4 6 2 4 5 6 5 1 1 1 5 4
+##  [2629] 2 6 6 5 4 1 1 6 5 5 4 4 2 6 5 1 1 1 6 5 3 5 5 5 3 4 3 3 3 2 6 1 5 5 1 1
+##  [2665] 5 3 3 6 4 1 2 1 1 4 5 3 5 4 5 4 6 3 2 6 4 1 6 3 3 5 3 3 1 5 6 6 3 2 1 3
+##  [2701] 1 3 2 5 3 1 5 1 6 1 3 1 2 3 5 1 3 6 5 1 3 3 6 6 3 1 3 3 6 6 4 3 5 5 6 3
+##  [2737] 2 1 2 1 4 5 6 1 1 5 6 2 3 2 3 2 1 1 3 4 2 1 5 6 2 1 3 5 4 2 2 4 6 6 4 2
+##  [2773] 6 3 5 1 5 3 3 1 6 6 4 2 2 1 3 5 3 2 1 5 3 2 6 5 2 3 6 3 3 4 1 4 1 4 4 2
+##  [2809] 5 4 5 4 1 4 2 4 2 4 2 6 2 2 3 2 2 5 4 4 3 4 6 5 1 4 4 2 3 5 2 4 6 1 3 2
+##  [2845] 3 5 3 4 5 6 4 6 3 4 4 6 3 4 2 3 6 5 5 4 1 2 3 6 2 1 2 6 3 3 2 5 5 3 5 5
+##  [2881] 1 4 1 4 5 2 4 1 2 6 3 1 3 6 5 1 4 6 2 2 6 4 5 5 6 6 5 1 5 2 5 2 3 4 6 1
+##  [2917] 6 5 3 6 5 4 2 4 2 5 4 1 2 2 1 1 3 6 1 5 4 6 5 2 3 6 3 4 5 4 6 2 2 3 5 5
+##  [2953] 2 5 5 6 6 3 2 1 5 4 1 1 4 5 3 3 2 6 1 5 3 4 2 6 1 2 2 6 6 6 3 4 6 5 2 4
+##  [2989] 4 2 3 2 3 3 5 1 4 2 3 3 3 5 5 5 1 5 4 1 4 2 1 6 4 1 5 4 1 3 5 4 1 2 4 1
+##  [3025] 6 5 1 5 6 1 6 5 1 6 4 6 2 6 5 1 2 6 4 3 6 5 1 2 1 4 4 6 6 4 1 1 1 3 5 1
+##  [3061] 6 5 4 1 3 6 3 6 6 3 6 3 3 5 3 1 1 5 3 1 1 5 5 2 5 2 3 6 1 1 6 1 5 1 4 4
+##  [3097] 3 2 1 6 5 1 2 2 1 6 6 5 6 5 4 6 4 6 6 4 6 3 3 2 5 3 2 2 4 4 4 2 6 5 6 6
+##  [3133] 5 6 3 3 6 5 2 6 2 1 2 5 3 4 4 2 4 3 4 5 5 1 5 6 4 3 3 5 3 4 6 2 4 4 2 6
+##  [3169] 1 3 2 1 2 5 3 3 3 1 2 5 6 4 6 6 4 5 3 2 1 2 6 3 6 1 2 5 4 4 3 6 2 3 3 3
+##  [3205] 5 2 1 1 6 1 5 3 5 1 3 2 2 2 4 2 6 1 6 1 6 2 4 5 3 2 4 6 6 5 2 2 5 6 1 5
+##  [3241] 5 5 5 3 5 5 6 1 2 3 4 1 3 3 3 5 1 5 5 6 2 2 2 2 3 3 5 2 5 1 3 5 5 1 3 6
+##  [3277] 4 5 1 5 4 5 2 6 6 6 1 2 5 4 4 5 6 6 1 2 3 1 4 6 3 5 3 5 1 2 4 3 1 5 6 5
+##  [3313] 4 6 2 6 2 3 3 3 6 2 1 5 3 1 2 6 5 4 1 1 1 5 4 1 2 4 3 1 4 1 2 5 5 5 4 5
+##  [3349] 5 6 1 5 3 4 2 2 3 2 4 3 1 5 4 4 5 6 6 5 6 4 1 4 4 2 6 2 3 6 2 3 3 4 6 1
+##  [3385] 6 3 3 3 6 3 4 3 4 1 5 1 3 3 6 6 5 3 6 1 4 5 4 4 4 6 5 3 6 6 6 3 1 2 4 2
+##  [3421] 5 4 3 3 5 4 6 6 1 4 2 3 2 5 3 4 1 5 4 2 1 5 1 3 5 6 3 3 4 4 3 4 3 5 2 5
+##  [3457] 5 5 2 3 4 2 4 2 6 5 3 3 6 5 5 4 6 5 3 4 1 2 3 6 1 6 3 5 2 6 4 1 5 6 4 4
+##  [3493] 1 3 6 6 4 2 5 5 5 2 3 3 5 2 4 1 2 3 5 1 4 1 3 2 5 3 5 1 2 1 2 6 4 3 2 2
+##  [3529] 5 2 2 4 4 1 4 5 5 2 1 2 5 2 5 4 2 2 2 1 1 3 6 3 5 3 3 6 5 2 6 6 5 6 3 5
+##  [3565] 4 5 6 2 4 3 2 2 6 5 3 2 5 3 5 4 5 3 3 3 1 1 3 5 5 6 4 4 6 4 5 6 4 1 1 2
+##  [3601] 6 4 1 5 6 6 1 5 6 6 3 1 1 6 6 3 1 2 2 5 1 2 3 2 3 6 4 6 1 6 2 5 1 5 4 5
+##  [3637] 4 5 3 3 1 4 3 5 3 4 2 6 1 4 3 6 1 1 3 4 3 6 3 6 1 6 6 6 5 2 5 3 1 6 2 5
+##  [3673] 3 1 3 1 1 4 1 5 5 1 2 1 4 3 1 2 6 3 3 4 5 6 5 4 4 6 3 5 6 3 6 3 1 3 3 3
+##  [3709] 5 2 4 4 6 2 5 6 3 5 4 5 5 2 4 5 1 6 5 4 1 4 1 3 3 1 3 2 4 3 6 6 3 5 2 1
+##  [3745] 6 1 4 3 1 4 3 6 6 2 5 2 4 4 6 1 5 5 4 2 4 4 6 5 4 4 6 1 1 5 4 6 2 5 3 2
+##  [3781] 2 5 3 4 6 2 2 3 3 4 6 6 4 6 2 2 6 3 5 6 3 6 2 4 5 5 3 5 2 5 1 2 4 6 1 1
+##  [3817] 6 1 3 5 5 2 6 2 5 1 2 4 3 1 1 3 4 3 1 3 6 6 5 3 2 4 3 4 6 1 2 4 3 4 1 1
+##  [3853] 6 3 1 1 2 6 4 3 1 4 4 6 2 5 2 6 3 5 2 2 3 4 6 5 6 2 6 5 6 1 2 5 5 5 1 2
+##  [3889] 6 3 2 1 6 1 1 6 5 5 5 6 2 4 4 3 6 1 6 4 4 4 6 6 1 4 6 2 1 4 5 5 5 3 6 5
+##  [3925] 4 6 3 3 4 4 1 2 1 5 6 1 6 4 5 4 1 3 1 2 3 5 5 2 4 6 4 4 2 1 4 5 3 2 1 2
+##  [3961] 3 4 2 2 6 5 3 1 2 5 4 1 6 4 2 1 1 4 5 4 6 3 6 5 6 6 6 2 3 6 3 5 1 1 5 6
+##  [3997] 1 1 3 6 5 6 4 5 3 5 3 6 1 2 5 2 2 6 3 2 1 6 3 4 3 4 6 6 3 2 4 1 4 4 5 6
+##  [4033] 2 5 6 3 5 3 4 3 2 5 6 4 3 2 5 5 4 5 2 5 2 4 3 6 2 4 2 4 5 4 4 6 6 5 6 5
+##  [4069] 6 6 6 6 6 1 1 4 6 1 6 1 5 6 3 1 3 4 1 6 6 1 1 4 2 6 5 3 5 3 3 6 2 5 4 2
+##  [4105] 1 5 3 5 4 1 6 2 3 3 3 3 5 5 2 6 6 4 2 5 3 3 5 4 1 1 2 1 3 6 1 5 4 6 3 1
+##  [4141] 4 1 1 1 1 4 3 2 4 5 3 5 3 6 3 5 5 2 2 5 1 1 5 5 2 5 3 3 1 1 4 2 5 2 2 2
+##  [4177] 3 3 2 4 5 1 2 4 5 1 6 6 4 5 2 6 1 1 3 3 5 5 3 4 1 3 5 1 6 3 1 5 4 3 6 1
+##  [4213] 4 4 4 2 3 2 5 3 6 4 3 4 6 1 1 1 4 4 2 2 5 1 6 1 1 5 2 6 4 1 6 1 2 2 1 2
+##  [4249] 6 4 6 4 6 3 6 4 3 5 3 2 4 6 4 6 6 1 5 3 2 2 6 5 1 1 1 6 2 6 1 6 2 4 4 4
+##  [4285] 2 1 5 2 5 4 1 4 5 6 1 6 3 4 2 2 5 3 2 5 3 5 4 6 2 1 4 2 1 3 4 4 2 1 4 6
+##  [4321] 5 2 2 5 5 3 6 1 1 4 5 3 2 5 3 6 1 1 4 1 5 5 1 3 1 6 1 3 3 2 2 4 5 3 3 1
+##  [4357] 6 1 1 6 2 5 1 1 4 3 2 1 1 2 5 6 5 6 2 1 2 2 4 1 6 3 3 4 1 2 3 2 4 6 2 6
+##  [4393] 3 6 4 6 2 2 4 3 3 5 3 3 5 1 4 2 1 1 6 1 5 5 4 5 1 5 3 4 5 5 4 1 2 4 4 2
+##  [4429] 4 4 3 6 3 5 4 6 2 3 2 4 2 2 2 2 3 3 3 4 5 4 5 2 3 3 4 1 2 2 4 2 2 1 1 5
+##  [4465] 1 1 1 5 6 5 4 4 5 2 5 5 1 6 1 1 1 5 3 4 3 4 5 4 5 1 1 6 3 6 1 2 6 4 1 6
+##  [4501] 6 1 2 5 6 3 6 2 4 4 4 5 5 6 3 5 3 1 5 6 6 4 3 6 6 1 4 4 2 1 6 6 2 6 3 1
+##  [4537] 2 3 5 1 1 6 4 6 5 4 2 3 2 3 1 6 5 3 6 5 2 1 4 3 5 4 4 3 5 4 3 6 4 4 4 6
+##  [4573] 1 5 2 5 6 1 4 1 2 5 5 3 3 5 4 6 2 3 2 2 5 3 6 1 4 3 4 6 2 2 6 5 6 1 5 1
+##  [4609] 6 1 6 4 3 4 3 4 4 4 1 2 1 1 2 6 2 3 4 6 3 4 5 4 4 3 4 2 6 1 3 3 2 5 2 5
+##  [4645] 1 5 1 4 6 6 3 1 2 4 2 2 2 1 2 4 2 3 5 5 5 3 3 5 4 1 4 5 6 1 4 5 3 1 1 4
+##  [4681] 4 5 1 3 5 2 2 4 1 1 2 1 5 3 3 2 3 5 4 3 4 5 2 1 5 4 3 6 6 2 2 3 4 1 2 4
+##  [4717] 3 6 1 3 6 5 5 5 3 4 3 5 6 3 1 1 4 4 1 3 4 6 6 1 4 5 1 3 6 4 3 1 1 3 3 2
+##  [4753] 1 6 5 6 4 5 1 3 5 5 1 6 5 6 4 1 2 1 4 1 6 6 4 1 3 4 2 6 1 4 4 6 1 4 4 3
+##  [4789] 1 3 6 1 1 5 2 5 2 2 4 3 2 1 5 4 4 5 2 3 3 3 4 3 1 2 6 3 3 3 6 1 6 6 1 2
+##  [4825] 2 3 2 6 1 6 3 2 4 2 6 5 3 3 2 2 6 4 3 6 5 6 2 2 5 1 6 5 3 3 6 6 4 1 5 2
+##  [4861] 4 6 3 3 3 3 3 3 3 3 5 5 5 3 3 5 5 6 4 4 6 4 3 6 3 6 5 1 5 5 4 3 3 4 4 6
+##  [4897] 1 1 3 5 3 5 1 1 3 5 6 1 1 2 6 2 1 2 1 1 5 2 4 5 6 5 2 6 4 6 1 4 4 2 1 5
+##  [4933] 3 3 1 4 6 2 2 1 6 2 3 4 6 1 2 6 6 6 4 6 1 4 5 4 4 4 3 2 2 5 6 3 6 1 1 5
+##  [4969] 4 1 2 3 5 2 2 4 6 2 2 2 4 2 2 6 2 6 1 2 3 3 4 4 1 4 1 2 6 6 2 2 3 5 1 6
+##  [5005] 4 6 3 3 2 2 6 6 6 2 3 2 2 6 4 5 4 6 5 5 5 1 6 6 6 5 4 1 5 1 5 2 5 6 2 2
+##  [5041] 2 4 2 4 2 6 2 6 1 6 3 5 2 2 5 3 5 3 1 6 1 1 3 5 6 1 3 1 5 4 3 2 3 4 1 4
+##  [5077] 3 3 2 2 6 1 2 5 3 2 3 2 2 2 4 6 5 1 3 4 4 5 3 6 1 3 3 3 2 5 2 2 4 6 1 2
+##  [5113] 5 1 3 3 4 1 5 4 6 6 3 6 5 4 2 1 3 4 5 3 4 3 3 4 4 3 4 6 4 5 3 6 2 2 2 6
+##  [5149] 5 4 6 2 5 1 6 5 5 5 4 4 1 1 6 3 4 2 3 2 2 2 3 4 4 1 4 5 2 2 6 3 2 3 5 2
+##  [5185] 5 4 1 5 6 1 4 3 1 3 6 5 4 4 1 3 2 4 3 3 6 5 6 4 6 4 2 3 2 2 1 5 2 1 1 5
+##  [5221] 6 5 3 1 1 4 3 1 3 3 3 2 2 2 6 5 5 2 5 1 2 2 4 5 2 1 5 3 6 1 1 2 2 5 5 5
+##  [5257] 3 6 4 3 6 4 2 2 3 3 6 3 1 4 1 3 5 2 2 5 1 4 6 4 4 3 4 3 3 3 2 2 3 3 6 3
+##  [5293] 5 4 5 6 2 2 4 5 2 5 2 1 3 2 4 1 1 1 2 4 4 3 2 1 4 6 6 2 4 1 4 3 4 5 5 2
+##  [5329] 4 2 2 4 6 3 6 5 3 3 1 4 1 4 3 1 2 4 6 4 4 3 4 5 4 2 2 3 6 3 2 4 6 1 6 5
+##  [5365] 4 2 6 2 6 3 4 1 6 6 2 2 1 2 3 3 4 1 4 3 3 6 1 6 1 2 3 1 1 5 1 3 5 1 3 2
+##  [5401] 1 1 3 1 3 2 2 3 4 3 2 3 3 3 2 1 6 5 5 1 6 4 6 4 3 3 3 3 1 2 2 3 5 5 4 5
+##  [5437] 5 1 4 6 4 3 1 4 5 5 2 4 1 3 6 5 6 4 6 3 4 1 4 3 4 1 5 1 6 5 6 6 4 6 4 5
+##  [5473] 3 5 3 3 3 4 2 4 1 5 3 6 1 5 3 2 2 3 1 5 4 5 1 1 4 3 1 4 3 1 3 4 6 4 3 3
+##  [5509] 4 6 3 2 6 4 3 2 5 3 2 5 4 2 1 3 3 4 1 4 1 5 4 3 5 6 3 1 3 3 2 2 2 5 1 5
+##  [5545] 2 5 3 4 4 6 6 6 1 6 4 5 1 3 5 1 4 6 5 5 5 1 5 4 4 2 2 2 4 2 5 6 2 1 1 1
+##  [5581] 1 1 1 6 4 3 3 1 2 4 6 5 6 4 2 2 3 1 1 4 2 5 3 4 1 6 5 2 5 3 5 6 5 5 2 6
+##  [5617] 1 5 2 2 3 6 6 6 4 4 2 4 6 4 2 2 3 3 3 3 2 4 1 2 3 6 2 3 1 4 4 3 4 6 6 6
+##  [5653] 6 4 3 3 1 5 5 5 6 3 5 1 6 5 2 4 2 1 6 3 2 5 2 1 4 6 3 4 3 3 4 5 2 2 1 2
+##  [5689] 2 6 2 2 3 6 3 5 3 6 1 5 2 3 4 6 1 1 6 2 6 5 1 4 1 2 6 2 4 5 2 5 3 5 2 3
+##  [5725] 3 2 3 5 2 1 4 6 3 1 3 4 6 5 1 5 6 1 2 5 1 2 3 1 4 5 4 1 5 2 2 1 4 5 1 1
+##  [5761] 2 2 4 4 2 5 2 1 6 5 3 2 5 4 2 3 5 2 3 4 4 4 2 3 4 6 4 3 4 4 1 3 6 3 2 4
+##  [5797] 2 1 1 2 6 4 6 2 4 5 5 1 3 5 5 6 6 1 4 1 2 1 5 5 5 3 4 2 2 1 1 4 6 3 2 6
+##  [5833] 4 3 6 3 6 3 3 3 4 1 5 2 3 5 5 2 1 6 6 4 1 1 3 6 2 1 4 4 3 6 6 2 3 5 6 4
+##  [5869] 6 3 2 4 6 4 2 5 2 2 2 1 3 2 5 4 4 2 1 1 5 2 1 4 5 1 1 4 2 6 3 5 5 1 2 1
+##  [5905] 1 2 1 3 4 1 6 4 6 3 2 4 6 1 5 2 1 1 3 3 4 6 4 6 1 2 3 3 4 6 4 5 1 6 2 6
+##  [5941] 3 2 2 2 5 5 3 5 2 1 4 3 4 5 5 2 2 6 3 5 4 3 6 6 4 3 1 4 6 6 1 1 1 3 4 5
+##  [5977] 1 6 5 4 4 2 5 2 4 4 4 3 2 4 4 6 6 4 5 3 5 1 6 5 5 5 4 2 4 6 2 5 3 1 1 4
+##  [6013] 1 4 4 4 3 2 1 6 3 3 1 5 6 4 6 2 2 6 4 3 2 5 2 2 1 5 2 6 4 4 4 6 5 1 6 3
+##  [6049] 3 4 3 6 2 6 2 1 6 6 5 1 4 5 6 1 6 6 6 3 4 1 4 4 6 3 4 2 5 5 6 5 2 4 6 1
+##  [6085] 6 4 3 6 1 2 6 2 6 2 6 4 4 6 5 5 6 4 6 4 6 2 3 2 3 3 4 6 4 2 6 1 3 5 4 6
+##  [6121] 4 6 3 6 3 2 5 4 4 4 6 2 6 3 1 5 5 2 3 5 4 5 2 5 1 5 1 4 3 6 1 6 3 2 4 1
+##  [6157] 5 1 1 6 6 5 2 4 4 4 1 3 5 1 5 6 2 1 4 6 1 6 5 1 4 1 6 5 1 4 5 1 3 5 4 2
+##  [6193] 6 2 2 2 3 5 4 5 6 3 1 4 4 2 6 6 5 6 5 3 6 3 3 2 2 2 2 3 2 2 3 3 1 6 2 1
+##  [6229] 5 1 2 5 5 2 1 3 3 4 1 6 2 2 6 5 2 1 2 4 1 2 5 1 3 4 1 1 2 1 2 2 6 3 6 2
+##  [6265] 1 4 3 3 1 5 2 1 5 6 5 1 4 5 3 6 2 6 4 5 5 4 6 3 1 5 1 1 6 1 2 2 5 5 2 3
+##  [6301] 1 3 3 6 4 2 5 1 3 2 6 5 3 1 5 6 2 4 3 2 5 4 1 5 6 5 5 6 5 6 1 1 2 4 4 5
+##  [6337] 2 2 1 1 2 1 5 6 3 4 2 4 6 6 6 4 5 3 6 5 3 5 3 4 2 6 3 4 6 1 5 6 4 1 4 6
+##  [6373] 5 5 6 6 4 1 4 3 2 2 1 4 1 2 4 4 4 2 2 3 6 6 6 1 4 2 6 1 1 3 2 4 2 2 2 4
+##  [6409] 3 5 1 5 6 2 5 6 6 1 5 3 5 6 6 1 4 4 5 3 4 4 5 5 4 2 4 2 3 2 1 1 5 2 2 5
+##  [6445] 5 1 6 6 6 4 3 2 5 4 4 6 4 4 1 1 2 2 4 4 6 6 6 5 6 5 5 4 6 1 6 1 5 1 1 1
+##  [6481] 2 1 1 2 3 5 1 5 3 6 5 5 4 3 3 5 6 6 5 1 3 2 2 4 2 3 5 1 6 1 4 1 6 6 6 4
+##  [6517] 4 3 3 5 4 2 6 5 1 6 5 4 2 3 1 5 5 1 4 6 5 4 5 4 1 6 3 5 1 4 6 4 2 3 2 3
+##  [6553] 6 2 4 3 2 4 5 1 5 1 6 2 3 3 4 3 4 4 5 5 1 5 5 2 5 4 1 2 3 4 2 3 1 6 2 4
+##  [6589] 2 6 6 2 2 2 4 4 1 4 1 2 1 4 6 6 5 5 6 2 3 1 5 5 1 2 1 5 6 4 3 3 5 1 5 2
+##  [6625] 3 2 6 4 1 3 1 6 2 1 3 6 2 5 3 3 6 6 6 2 2 6 5 3 4 4 4 3 6 4 4 3 1 3 6 3
+##  [6661] 3 5 5 6 2 4 2 5 4 2 5 1 1 6 4 4 4 2 2 1 6 4 1 6 6 6 2 1 5 6 2 4 2 5 5 5
+##  [6697] 3 3 6 4 3 5 3 5 5 4 1 1 6 5 1 4 4 3 5 2 5 1 2 4 1 4 3 4 3 1 1 6 6 5 4 4
+##  [6733] 3 3 2 2 6 1 6 6 1 3 1 1 6 2 5 6 6 5 1 5 3 2 2 4 1 4 2 1 1 4 4 3 3 4 4 6
+##  [6769] 4 3 5 1 1 3 2 2 3 3 2 5 4 5 2 3 2 1 5 4 4 5 4 2 5 6 5 2 1 1 4 2 3 5 1 6
+##  [6805] 6 1 6 2 1 6 6 5 4 3 4 4 4 1 2 5 3 4 4 1 6 6 4 6 3 3 1 3 3 1 6 1 6 4 3 4
+##  [6841] 1 4 1 6 6 2 1 4 1 2 6 2 4 2 2 1 2 1 5 5 4 1 6 3 1 4 5 4 2 1 5 1 5 2 4 1
+##  [6877] 6 4 6 4 2 1 1 4 2 4 4 5 6 6 3 5 6 2 6 2 3 1 5 1 3 3 5 5 1 1 1 1 6 6 6 3
+##  [6913] 2 4 3 6 5 5 4 5 5 1 5 2 1 1 3 1 2 3 4 5 1 5 4 1 4 3 3 6 3 6 5 3 6 6 6 6
+##  [6949] 6 2 1 2 3 2 6 2 4 1 4 3 1 6 2 1 4 4 6 4 1 3 5 3 2 3 4 1 4 5 4 3 6 2 4 5
+##  [6985] 6 6 4 4 4 2 3 5 5 5 3 2 4 3 2 6 3 5 5 2 3 5 6 5 4 5 5 3 2 2 3 6 3 5 3 6
+##  [7021] 1 2 3 4 6 3 5 6 2 1 1 5 2 3 2 3 3 2 4 3 6 4 4 5 3 1 3 2 5 2 2 1 5 5 3 1
+##  [7057] 3 4 4 6 5 1 3 3 5 2 4 1 4 3 6 1 1 1 2 6 1 4 2 5 6 3 1 1 3 2 2 5 4 1 1 4
+##  [7093] 4 2 3 4 2 6 4 5 6 6 3 4 2 3 4 2 6 6 6 6 6 2 6 6 2 2 1 2 1 5 6 1 1 4 3 5
+##  [7129] 2 5 6 1 2 1 2 2 2 3 2 5 2 1 1 2 6 3 2 4 3 3 3 5 1 1 3 3 6 6 2 2 1 1 6 6
+##  [7165] 3 1 3 1 5 1 3 5 1 1 6 3 4 2 4 1 1 2 1 6 4 5 3 5 4 4 6 6 4 6 4 6 1 3 4 1
+##  [7201] 6 6 2 6 1 1 4 5 1 6 3 3 5 5 4 6 6 4 6 5 6 2 6 5 6 3 4 2 4 2 6 2 2 4 5 5
+##  [7237] 3 2 2 5 5 3 4 1 2 5 2 1 3 1 2 6 6 6 5 1 4 1 5 3 6 5 4 5 3 5 5 3 4 1 6 4
+##  [7273] 1 4 2 1 4 3 4 6 4 1 5 2 6 6 2 6 2 2 3 4 6 4 6 6 2 4 2 4 2 5 2 2 2 5 3 3
+##  [7309] 5 6 1 5 2 4 4 3 1 6 4 2 4 6 1 6 3 5 3 1 1 3 4 3 6 6 2 4 1 3 1 2 6 2 5 5
+##  [7345] 4 1 1 3 6 6 5 1 4 3 3 4 1 5 3 1 3 5 3 2 4 4 2 2 1 2 6 2 1 6 3 3 2 6 3 1
+##  [7381] 1 6 6 4 3 6 3 3 5 1 6 1 1 3 5 3 4 6 4 2 6 2 3 2 5 3 5 2 3 4 4 6 5 5 3 4
+##  [7417] 2 1 1 3 6 6 2 1 5 1 1 6 1 5 6 2 4 6 6 5 6 6 2 5 2 3 4 1 3 6 3 4 4 4 3 5
+##  [7453] 4 2 4 1 4 5 1 4 6 3 5 3 2 2 5 2 1 6 5 3 5 6 5 2 4 1 3 6 3 4 4 6 6 2 4 6
+##  [7489] 2 5 1 4 3 2 5 2 4 4 2 3 1 3 1 1 2 6 2 3 6 2 3 4 1 4 4 2 1 4 2 5 1 3 5 5
+##  [7525] 2 5 4 5 5 3 5 6 6 2 4 3 1 4 5 4 2 2 1 2 2 2 5 5 6 1 4 5 5 5 2 1 4 2 6 5
+##  [7561] 6 5 5 2 1 4 5 3 5 2 1 5 3 6 4 5 5 4 4 1 4 3 4 3 5 3 4 2 4 3 2 2 1 2 5 4
+##  [7597] 3 5 6 4 2 4 2 1 6 1 2 4 2 5 4 2 1 3 6 6 2 3 1 5 2 6 6 3 3 3 5 6 5 1 1 3
+##  [7633] 6 1 1 1 2 6 6 6 4 1 2 4 4 2 2 6 4 3 5 6 6 3 3 6 6 4 4 1 4 6 5 3 6 3 2 4
+##  [7669] 4 5 3 1 1 5 4 3 2 5 1 4 1 1 4 4 5 4 3 1 5 3 3 4 5 1 2 4 4 3 2 2 3 6 1 6
+##  [7705] 4 6 3 4 2 4 5 3 3 5 4 5 5 2 1 5 1 6 1 1 2 5 6 2 5 4 3 1 6 1 6 2 6 1 1 2
+##  [7741] 4 6 3 2 1 4 1 1 4 2 1 3 4 5 2 1 1 6 2 1 3 1 1 4 4 3 4 2 6 3 5 1 5 2 2 2
+##  [7777] 3 6 6 3 3 4 5 2 1 3 4 4 3 1 1 1 3 2 5 4 1 1 4 2 3 1 2 5 3 6 5 4 5 1 3 5
+##  [7813] 3 4 3 5 6 4 3 3 3 2 3 5 4 3 4 3 3 4 6 1 6 1 5 2 5 4 6 3 4 6 6 6 2 3 1 1
+##  [7849] 5 6 1 3 4 6 4 5 5 5 4 3 5 1 1 3 1 5 4 3 4 4 4 5 5 3 6 4 6 5 1 3 1 5 2 6
+##  [7885] 2 2 2 5 1 5 6 4 3 5 4 4 2 3 2 2 2 1 5 5 2 3 2 3 6 3 5 4 3 4 6 1 1 6 2 5
+##  [7921] 5 2 4 4 3 6 5 5 5 1 2 5 3 6 3 2 5 3 5 6 3 3 6 6 2 6 6 6 3 2 5 5 5 4 3 5
+##  [7957] 3 5 6 1 6 2 5 1 6 6 1 3 6 4 4 1 6 4 2 5 2 6 1 6 6 1 1 6 4 1 5 1 4 5 1 3
+##  [7993] 6 5 3 2 5 6 4 2 4 6 1 2 4 3 3 2 5 1 6 6 3 4 6 1 6 1 3 5 5 3 4 5 6 6 2 5
+##  [8029] 4 4 6 6 1 6 4 3 6 3 6 5 6 6 6 3 2 6 6 3 2 3 3 2 1 4 5 4 2 1 6 3 6 5 4 5
+##  [8065] 6 6 1 1 6 2 3 5 2 1 6 4 6 6 5 3 1 4 1 3 1 6 2 3 1 2 6 6 4 5 3 1 5 6 1 2
+##  [8101] 2 5 4 1 5 3 2 3 3 2 6 6 3 2 1 3 1 6 3 4 2 3 2 6 1 3 6 2 3 2 3 5 6 2 6 6
+##  [8137] 3 6 2 2 3 6 4 6 3 3 5 4 1 3 1 6 6 6 5 1 4 3 3 6 1 6 5 6 2 5 6 6 1 5 4 3
+##  [8173] 1 2 1 1 2 1 2 5 5 6 4 6 2 2 5 6 6 1 3 1 5 4 6 2 4 5 4 5 5 5 3 5 5 1 6 4
+##  [8209] 6 5 6 6 4 1 6 3 5 1 5 1 3 4 2 4 3 1 6 3 1 1 1 4 4 6 4 4 2 1 2 6 2 1 4 2
+##  [8245] 2 3 2 2 2 3 3 1 4 4 6 6 6 3 6 2 2 2 2 3 3 5 2 1 6 5 3 6 2 2 6 6 1 5 2 5
+##  [8281] 6 1 1 4 4 2 1 3 6 2 3 2 3 2 2 1 1 4 5 6 3 2 1 4 2 1 3 6 1 1 6 4 5 5 1 3
+##  [8317] 2 5 3 6 1 3 1 3 1 3 4 2 4 1 6 1 6 2 4 5 2 4 2 2 3 6 2 1 4 3 1 4 5 1 2 5
+##  [8353] 4 3 1 4 5 2 1 6 2 1 1 5 5 3 5 1 2 5 3 3 3 2 4 3 4 3 5 2 2 2 4 4 5 4 1 5
+##  [8389] 1 1 4 5 1 6 1 2 6 6 6 4 3 2 2 1 2 2 5 3 6 2 3 3 3 5 1 3 1 2 5 3 6 6 5 3
+##  [8425] 2 2 6 5 4 3 4 2 5 3 3 6 4 1 2 2 2 6 2 6 1 3 2 4 4 5 4 2 1 6 4 2 4 5 2 3
+##  [8461] 4 6 6 6 6 1 4 2 1 5 3 3 5 2 3 3 1 5 4 4 6 5 6 5 2 1 5 5 2 5 4 6 5 3 1 4
+##  [8497] 5 4 1 2 1 2 4 1 5 3 5 6 2 4 4 2 5 1 3 3 5 2 4 6 4 5 6 5 5 2 2 1 6 1 1 4
+##  [8533] 4 4 1 4 1 5 4 6 5 5 3 2 5 5 1 2 5 1 5 6 2 5 2 4 2 4 3 2 6 2 6 2 4 3 2 3
+##  [8569] 5 5 4 6 6 6 3 5 3 2 3 3 5 5 1 4 3 4 2 1 4 6 1 1 3 2 6 5 2 3 5 2 6 6 2 3
+##  [8605] 6 3 3 5 6 5 3 3 5 1 6 5 4 3 3 3 3 2 2 6 3 6 2 5 3 4 3 6 1 6 5 4 4 6 1 2
+##  [8641] 1 3 3 4 5 2 6 2 6 3 6 5 6 3 5 4 4 5 2 5 4 1 1 3 6 3 4 5 4 2 3 3 3 2 2 1
+##  [8677] 6 1 2 3 6 3 3 1 1 6 3 1 2 4 3 1 2 5 1 5 2 6 2 5 3 4 4 3 3 5 3 4 2 5 6 6
+##  [8713] 4 3 3 4 2 1 5 1 2 5 6 4 3 4 2 3 2 6 2 4 3 5 5 1 5 3 6 1 1 2 6 3 4 1 5 2
+##  [8749] 3 2 4 6 6 1 6 5 6 4 6 6 4 5 1 6 4 3 2 2 6 6 6 2 2 4 5 5 5 5 5 6 2 4 6 5
+##  [8785] 1 6 3 3 2 5 4 6 1 3 1 3 2 3 3 1 3 3 3 2 4 4 1 4 4 3 2 2 3 5 6 3 1 3 6 2
+##  [8821] 5 1 3 2 2 6 4 2 4 4 3 1 2 3 4 5 2 2 1 1 6 3 3 3 6 3 1 5 5 1 3 5 1 6 5 5
+##  [8857] 1 1 4 6 2 5 6 3 5 1 4 1 2 2 6 6 2 2 1 2 4 5 3 6 6 6 3 4 3 5 5 5 4 5 4 3
+##  [8893] 6 3 3 1 4 5 5 6 2 6 4 2 2 5 3 2 2 4 4 6 1 4 6 5 4 1 2 2 6 4 4 2 5 4 5 5
+##  [8929] 5 2 5 1 4 1 6 2 5 6 5 5 3 3 5 5 1 3 4 4 3 6 6 3 4 6 2 4 6 1 2 3 4 5 5 3
+##  [8965] 2 1 1 2 5 1 2 6 4 1 5 3 6 5 1 2 6 2 2 2 5 3 1 6 5 5 2 6 1 2 1 2 3 3 6 2
+##  [9001] 5 3 2 6 6 2 4 6 6 1 5 1 1 3 2 6 1 6 2 3 2 2 4 6 3 2 4 4 6 2 3 5 1 3 6 4
+##  [9037] 4 6 1 4 4 4 6 1 6 3 2 5 1 2 2 4 3 4 5 6 1 4 6 3 5 6 2 1 5 5 3 2 1 2 2 4
+##  [9073] 1 1 4 5 2 3 1 2 2 1 5 5 1 1 1 6 4 5 6 4 2 1 2 6 6 4 1 1 4 3 1 5 4 2 5 1
+##  [9109] 5 5 4 5 3 6 4 2 2 2 1 5 3 2 2 6 2 6 3 4 6 2 3 2 6 2 5 3 1 3 6 6 6 4 1 6
+##  [9145] 6 4 2 2 1 4 6 6 6 5 5 6 3 4 1 6 2 5 6 2 2 4 1 1 1 1 5 3 5 3 5 5 2 4 4 6
+##  [9181] 6 6 6 3 4 2 2 4 6 2 6 5 6 6 1 3 1 4 4 3 1 1 3 5 5 1 1 2 2 1 2 2 2 1 2 3
+##  [9217] 3 4 3 5 3 5 5 4 1 2 6 4 4 5 3 6 3 6 1 2 6 3 2 4 6 1 6 5 4 3 6 3 5 5 6 4
+##  [9253] 5 5 3 4 2 3 4 1 5 4 1 1 1 4 6 6 1 3 5 6 3 6 4 3 2 1 1 5 3 3 3 2 4 4 2 4
+##  [9289] 5 5 3 1 2 3 1 4 5 2 3 5 5 3 4 4 2 5 6 1 3 6 1 1 6 1 6 1 6 4 6 6 4 1 3 3
+##  [9325] 1 2 1 4 6 4 5 1 3 5 3 3 3 2 1 4 3 6 1 5 5 2 1 1 3 2 1 2 2 4 5 3 5 1 1 5
+##  [9361] 1 2 5 4 3 5 3 6 6 2 2 2 3 2 2 6 2 3 4 6 2 4 6 5 3 5 1 4 6 3 2 5 4 2 3 3
+##  [9397] 1 6 5 4 1 5 2 6 3 1 2 5 2 4 5 6 4 2 3 1 5 6 3 5 2 2 4 3 1 5 4 6 4 3 4 6
+##  [9433] 2 1 6 6 5 2 2 5 6 4 2 5 2 1 5 2 2 6 5 2 5 3 4 6 2 1 2 6 1 2 3 6 2 6 6 1
+##  [9469] 3 1 1 3 5 2 1 3 5 6 4 1 6 1 3 6 1 5 5 6 6 6 6 3 6 6 5 5 1 6 1 6 3 4 6 6
+##  [9505] 4 4 5 6 3 2 1 3 5 1 3 6 2 4 6 2 3 6 3 3 6 1 5 4 1 1 1 6 6 4 4 2 6 5 2 3
+##  [9541] 4 4 2 3 1 4 5 5 1 6 5 2 6 6 2 2 3 6 3 2 1 2 6 4 4 2 3 4 2 1 3 4 2 1 3 2
+##  [9577] 4 1 4 1 2 6 2 4 4 4 6 3 2 6 6 4 1 4 4 1 3 4 1 3 1 6 2 1 5 5 4 1 6 1 3 1
+##  [9613] 5 6 1 4 4 6 3 2 1 2 1 6 4 1 3 5 3 5 2 4 6 2 3 3 5 3 6 1 2 5 4 4 5 1 4 1
+##  [9649] 4 2 2 6 4 5 2 1 1 6 4 1 4 1 1 6 2 6 6 2 1 4 4 4 4 5 6 2 1 1 4 3 5 2 3 2
+##  [9685] 6 1 3 2 6 3 3 1 2 6 5 5 5 1 4 1 5 1 6 3 2 3 6 1 3 1 1 1 4 4 4 6 5 1 6 1
+##  [9721] 3 2 3 1 3 4 6 3 1 3 3 2 4 4 4 6 3 4 1 4 3 6 5 6 6 6 3 2 3 1 4 3 4 4 5 4
+##  [9757] 3 6 2 6 1 4 2 2 4 3 6 4 5 5 5 1 4 3 5 5 2 4 2 1 4 4 4 6 4 1 2 5 2 5 6 3
+##  [9793] 2 1 1 1 2 1 6 3 4 1 5 1 4 2 1 1 1 2 2 2 5 2 2 4 3 4 2 6 5 3 3 4 4 2 3 3
+##  [9829] 5 3 1 4 2 4 4 2 4 3 1 5 3 3 1 5 6 2 6 5 5 1 3 4 3 4 1 6 6 6 5 2 6 2 5 1
+##  [9865] 2 2 3 1 2 3 5 4 2 5 4 5 1 1 2 2 6 1 5 2 5 3 3 3 3 6 4 2 6 3 1 5 6 2 4 5
+##  [9901] 6 4 1 4 1 5 5 5 4 2 2 1 5 5 1 6 1 3 6 5 1 2 5 2 6 5 5 6 1 2 1 1 5 6 6 3
+##  [9937] 4 1 2 6 1 3 5 4 1 5 1 2 3 5 1 5 4 2 3 2 5 6 2 1 5 3 3 4 6 2 4 2 3 5 5 6
+##  [9973] 6 2 4 1 1 1 6 1 2 2 4 3 1 2 2 6 6 3 3 6 6 3 5 2 1 6 5 6
 \end{verbatim}
 
 We can save this and plot it:
@@ -16812,7 +16828,7 @@ We can save this and plot it:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-839-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-842-1.pdf}
 
 The height of the histogram is almost level, indicating that this is a uniform distribution.
 
@@ -16826,7 +16842,7 @@ The height of the histogram is almost level, indicating that this is a uniform d
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-840-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-843-1.pdf}
 
 The code above works if the probability of each number (1, 2, 3\ldots) is the same for all values, as for a fair dice.
 
@@ -16849,7 +16865,7 @@ I can roll it once like this
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 1
+## [1] 4
 \end{verbatim}
 
 I can roll it twice like this; replace = T means that the same value can occur (its like pulling numbers from a hat and putting each number back in to make it available again).
@@ -16861,7 +16877,7 @@ I can roll it twice like this; replace = T means that the same value can occur (
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 4
+## [1] 3
 \end{verbatim}
 
 I can simulate 50 dice like this:
@@ -16873,8 +16889,8 @@ I can simulate 50 dice like this:
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] 3 6 5 3 6 1 3 6 5 5 5 5 5 2 1 3 1 4 6 5 3 3 4 6 2 3 6 3 1 1 4 1 5 5 3 4 2 3
-## [39] 1 3 5 4 1 4 4 3 1 4 4 3
+##  [1] 4 3 6 6 3 1 3 2 6 3 5 2 6 4 3 3 1 1 2 4 6 1 3 4 2 2 3 2 4 5 2 2 6 4 3 2 3 1
+## [39] 6 6 5 2 3 3 4 5 3 1 4 1
 \end{verbatim}
 
 If I want to represent an unfair dice I can add a new arguement which allows me to define the probabilites.
@@ -16889,7 +16905,7 @@ A fair dice would be this
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 4
+## [1] 2
 \end{verbatim}
 
 A dice biased for 1could look like this
@@ -16902,7 +16918,7 @@ A dice biased for 1could look like this
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 4
+## [1] 5
 \end{verbatim}
 
 Let me see if its biased. I simulate 1000 dice
@@ -16914,7 +16930,7 @@ Let me see if its biased. I simulate 1000 dice
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-847-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-850-1.pdf}
 
 \hypertarget{lots-of-data-in-biology-is-normal}{%
 \section{Lots of data in biology is normal}\label{lots-of-data-in-biology-is-normal}}
@@ -16936,7 +16952,7 @@ In contrast, the normal distribution is common in the world. Many things are nor
 ## `bins`.
 \end{verbatim}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-848-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-851-1.pdf}
 
 The code below plots data on the size of flower petals by species. The middle panel is fairly normal. The left panel is normalish, but squished becuase the values are small and you can't have flower sizes \textless0.
 
@@ -16952,7 +16968,7 @@ The code below plots data on the size of flower petals by species. The middle pa
 ## `bins`.
 \end{verbatim}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-849-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-852-1.pdf}
 
 \hypertarget{simulating-the-normal-distribution}{%
 \section{Simulating the normal distribution}\label{simulating-the-normal-distribution}}
@@ -16980,7 +16996,7 @@ We can quickly plot it with hist()
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-851-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-854-1.pdf}
 
 \hypertarget{the-extreme-value-distribution}{%
 \section{The extreme value distribution}\label{the-extreme-value-distribution}}
@@ -17006,7 +17022,7 @@ We can plot the data like this
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-853-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-856-1.pdf}
 
 If you've taken a stats class you may have taken the log of a data set to make it more normal-like. If you do this with data that follows the extreme value distribution it doens't help - the data still don't look normal. Instead of being skewed one way, the skew is just flipped the other.
 
@@ -17026,7 +17042,7 @@ If you've taken a stats class you may have taken the log of a data set to make i
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-854-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-857-1.pdf}
 
 \hypertarget{replicating-figure-4.14}{%
 \section{Replicating Figure 4.14}\label{replicating-figure-4.14}}
@@ -17046,7 +17062,7 @@ Note that the main differences correspond to values around -2 and 2.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-855-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-858-1.pdf}
 
 \hypertarget{why-do-we-care}{%
 \section{Why do we care?}\label{why-do-we-care}}
@@ -18068,7 +18084,7 @@ You could visualize a single \textbf{pairwise distance} like a linear distance l
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-901-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-904-1.pdf}
 
 We can look at all of the distance Note that each line is \emph{independent} and cannot be compared (the y axis has no meaning). This is NOT a 2D map!
 
@@ -18103,7 +18119,7 @@ We can look at all of the distance Note that each line is \emph{independent} and
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-902-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-905-1.pdf}
 
 \begin{itemize}
 \tightlist
@@ -18147,7 +18163,7 @@ We can look at all of the distance Note that each line is \emph{independent} and
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-903-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-906-1.pdf}
 
 \begin{itemize}
 \tightlist
@@ -18206,7 +18222,7 @@ The following plots shows how the linear distnace of 17 between a and b (bottom)
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-904-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-907-1.pdf}
 
 Again, in \textbf{Newick notation}, we'd write (a, b) to indicate that a and b are a clade.
 
@@ -18344,7 +18360,7 @@ First, plot the 2D map.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-906-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-909-1.pdf}
 
 a and b are closest together, so we group them
 
@@ -18396,7 +18412,7 @@ I'll show this in the code below; you don't need to understand exactly how this 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-907-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-910-1.pdf}
 
 Once we have created a cluster (clade) we can consider the distance from the members of clade to all the remaining points. For example, here's the distnace from a and b to c
 
@@ -18440,7 +18456,7 @@ Once we have created a cluster (clade) we can consider the distance from the mem
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-908-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-911-1.pdf}
 
 In UPGMA, we first define a clade. We then need to see which taxa is closest to that clade. Visually it looks like this
 
@@ -18574,7 +18590,7 @@ In UPGMA, we first define a clade. We then need to see which taxa is closest to 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-909-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-912-1.pdf}
 
 \hypertarget{algorithm---round-1}{%
 \section{Algorithm - round 1}\label{algorithm---round-1}}
@@ -18954,7 +18970,7 @@ Estimate of 2D representation of the new matrix.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-928-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-931-1.pdf}
 
 \begin{verbatim}
 ## $points
@@ -19084,7 +19100,7 @@ Visualize this as an approximate 2D situation
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-936-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-939-1.pdf}
 
 \hypertarget{abe-to-c}{%
 \subsubsection{abe to c}\label{abe-to-c}}
@@ -19171,7 +19187,7 @@ a, b, e are now combined into a clade
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-940-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-943-1.pdf}
 
 \hypertarget{calculate-branch-lengths}{%
 \subsection{Calculate branch lengths}\label{calculate-branch-lengths}}
@@ -19365,7 +19381,7 @@ We now have a final tree structure. In Newick format it would be
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-957-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-960-1.pdf}
 
 While we've done our clustering we've calcualte branch lengths and put them in the column branch.l.ij of the dataframe UPGMA\_output
 
@@ -19397,7 +19413,7 @@ First, the brnach lenghts from a to b
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-959-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-962-1.pdf}
 
 now a to b, and ab to e
 
@@ -19412,7 +19428,7 @@ now a to b, and ab to e
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-960-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-963-1.pdf}
 
 There's a branch between the clade ab and the node that connects with e. What's its length? FOr a simple ultrametric tree calcualted with UPGMA we can calculate this by subtraction
 
@@ -19442,7 +19458,7 @@ We'll added this short branch of 2.5. Note this things ARE NOT to scale.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-962-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-965-1.pdf}
 
 To visualize exactly what is going on here its useful to add this
 
@@ -19464,7 +19480,7 @@ To visualize exactly what is going on here its useful to add this
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-963-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-966-1.pdf}
 
 We can now add the d-e branch of 14 (note again - not to scale!)
 
@@ -19486,7 +19502,7 @@ We can now add the d-e branch of 14 (note again - not to scale!)
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-964-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-967-1.pdf}
 
 The distance from abe to de is 16.5 We can visualize this as
 
@@ -19512,7 +19528,7 @@ The distance from abe to de is 16.5 We can visualize this as
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-965-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-968-1.pdf}
 
 We can calcualte the distance of the remaining short branch from de to the root as 16.5-14 = 2.5. When we plot this again, it won't be to scale
 
@@ -19538,7 +19554,7 @@ We can calcualte the distance of the remaining short branch from de to the root 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-966-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-969-1.pdf}
 
 We can calculate the remaining short branch from abe to the root as
 16.5-8.5-2.5
@@ -19570,7 +19586,7 @@ We can calculate the remaining short branch from abe to the root as
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-967-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-970-1.pdf}
 
 So the final tree has branch lengths (not to scale!) of
 
@@ -19599,7 +19615,7 @@ So the final tree has branch lengths (not to scale!) of
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-968-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-971-1.pdf}
 
 Most of the time we don't include branch lengths in Newick format, but there is a way to do it. You don't need to know how to do this - this is just for illustration
 
@@ -19630,7 +19646,7 @@ Most of the time we don't include branch lengths in Newick format, but there is 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-969-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-972-1.pdf}
 
 \hypertarget{representing-phylogenetic-trees-in-newick-format}{%
 \chapter{Representing phylogenetic trees in Newick format}\label{representing-phylogenetic-trees-in-newick-format}}
@@ -19663,16 +19679,16 @@ A simple phylogenetic tree with three species can be represented in Newick as:
 
 In Newick format, \textbf{clades} are enclosed in parentheses. So, in the example above, ``(Human, Chimp)'' means that humans and chimps are a \textbf{clade} and are each other's closest neighbors on the tree.
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-971-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-974-1.pdf}
 
 The general \textbf{mathematical rules of parentheses} apply to Newick format. Therefore, the \emph{order} within the parentheses doesn't matter: ``(Human, Chimp)'' is the same as ``(Chimp, Human)''.
 
 The two version of the trees result in differences in the order the taxa appear from top to bottom, but do not change its \textbf{toplogy} or interpretation.
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-972-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-975-1.pdf}
 
 Similarly, ``((Human, Chimp), Gorilla)'' is the same as ``(Gorilla, (Human, Chimp))''.
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-973-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-976-1.pdf}
 
 These rules for Newick are analogous to the rules for using parentheses in math: (1+2) is the same as (2+1), and ((2+1) * 2) is the same as (2*(2+1)).
 
@@ -19692,7 +19708,7 @@ This has two clades of two taxa each
   Humans-Chimps
 \item
   Western gorillas-Eastern Gorillas
-  \includegraphics{lbrb_files/figure-latex/unnamed-chunk-974-1.pdf}
+  \includegraphics{lbrb_files/figure-latex/unnamed-chunk-977-1.pdf}
 \end{enumerate}
 
 If wanted to represent a tree with humans, chimps, gorillas and orangutan we would represent it like this:
@@ -19701,7 +19717,7 @@ If wanted to represent a tree with humans, chimps, gorillas and orangutan we wou
 
 The parenthesis to the right of Gorilla indicates that Gorilla falls within the human-chimp clade.
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-975-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-978-1.pdf}
 
 Just as in math, the number of parentheses needs to balance out. In this case, there are three parentheses open to the right, all next to human. There therefore needs to be 3 parentheses open to the right.
 
@@ -19727,8 +19743,8 @@ In R, a phylogenetic tree in Newick format can be input as a character string an
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{note}{%
-\section{Note}\label{note}}
+\hypertarget{note-1}{%
+\section{Note}\label{note-1}}
 
 Throughout this lesson I use the \texttt{par()} command to set up plots. You can ignore this command because its pretty tricky to use.
 
@@ -19782,7 +19798,7 @@ We plot with \texttt{plot()}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-980-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-983-1.pdf}
 
 We can change the orientation of the tree by changing the order within the parentheses. For example, if we want Gorillas to appear at the bottom of the graph
 
@@ -19794,7 +19810,7 @@ We can change the orientation of the tree by changing the order within the paren
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-981-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-984-1.pdf}
 
 Perhaps we want humans at the top
 
@@ -19806,7 +19822,7 @@ Perhaps we want humans at the top
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-982-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-985-1.pdf}
 
 Note that all of these trees have the same \textbf{branching order} and therefore the exact same \textbf{topology}.
 
@@ -19838,7 +19854,7 @@ When there are four taxa, there are two main topologies. The first is a simple \
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-984-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-987-1.pdf}
 
 The second major topology is when there are \emph{two} major clades, each with two taxa
 
@@ -19850,7 +19866,7 @@ The second major topology is when there are \emph{two} major clades, each with t
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-985-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-988-1.pdf}
 
 Within each of the topologies, the grouping of species can be switched depending on what the evidence suggests. For example, some researchers have proposed the humans are more closely related to Orangutans. Their hypothesis has a \textbf{ladder branching} typology with the order of the species switched.
 
@@ -19862,7 +19878,7 @@ Within each of the topologies, the grouping of species can be switched depending
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-986-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-989-1.pdf}
 
 \hypertarget{taxa-in-newick-format}{%
 \section{5 taxa in Newick Format}\label{taxa-in-newick-format}}
@@ -19878,7 +19894,7 @@ Five taxa can occur in a number of general typologies. The most basic is a conti
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-987-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-990-1.pdf}
 
 Let's say there's a hypothesis that Gibbons and Orangutans form a clade (there's no actual evidence of this). This typology would create a tree with two main clades, one with 3 species and one with two.
 
@@ -19890,7 +19906,7 @@ Let's say there's a hypothesis that Gibbons and Orangutans form a clade (there's
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-988-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-991-1.pdf}
 
 A third major typology occurs if there are four taxa in a clade on a branch. Let's say there's a hypothesis that Orangutans and Gorillas are sister species (they aren't), and Gibbons are there more distantly related cousins.
 
@@ -19902,7 +19918,7 @@ A third major typology occurs if there are four taxa in a clade on a branch. Let
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-989-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-992-1.pdf}
 
 Here's another example of this format, dropping Gibbons and adding the two Gorilla subspecies (unlike many of the previous examples, this one is true).
 
@@ -19914,7 +19930,7 @@ Here's another example of this format, dropping Gibbons and adding the two Goril
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-990-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-993-1.pdf}
 
 \hypertarget{many-taxa-tree}{%
 \section{Many-taxa tree}\label{many-taxa-tree}}
@@ -19930,7 +19946,7 @@ Newick format can be used to represent any kind of tree, though in practice this
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-991-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-994-1.pdf}
 
 \hypertarget{newick-and-branch-lengths}{%
 \section{Newick and Branch lengths}\label{newick-and-branch-lengths}}
@@ -19950,7 +19966,7 @@ Below is an example of a BIG tree which also has branch lengths represented. The
 ## length(s) NA(s): branch lengths ignored in the plot
 \end{verbatim}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-992-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-995-1.pdf}
 
 \hypertarget{additional-reading}{%
 \section{Additional Reading}\label{additional-reading}}
@@ -20286,7 +20302,7 @@ We can plot a tree from Newick like this
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-1006-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-1009-1.pdf}
 
 Newick format does not represent \textbf{genetic distances} and therefore the \textbf{branch length} of phylogenetic, only the clade structure and branching pattern of the tree. We can calculate branch lengths using the UPGMA algorithm.
 
@@ -20517,7 +20533,7 @@ Now plot it with \texttt{plot()}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-1019-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-1022-1.pdf}
 
 This doesn't look too different than the phylogeny produced from Newick. Let's play with the distance matrix to see what happens.
 
@@ -20585,7 +20601,7 @@ Note: We'll make a grid of plots using some fancy-looking code \texttt{par(mfrow
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-1023-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-1026-1.pdf}
 
 \hypertarget{how-upgma-clustering-works}{%
 \section{How UPGMA clustering works}\label{how-upgma-clustering-works}}
@@ -21087,7 +21103,7 @@ We can view the \textbf{function source code} by just running the name of the fu
 ##   print(trees)
 ##   
 ## }
-## <bytecode: 0x7fe5d67d2b08>
+## <bytecode: 0x7fe61afbf150>
 \end{verbatim}
 
 We can see just the arguments, and any defaults, for a function using \texttt{args()}
@@ -21292,7 +21308,7 @@ And plot things. type = ``b'' plots points and a line.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-1052-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-1055-1.pdf}
 
 \hypertarget{adding-conditional-statements}{%
 \section{Adding conditional statements}\label{adding-conditional-statements}}
@@ -21819,7 +21835,7 @@ We can plot rooted vs unrooted
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-1070-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-1073-1.pdf}
 
 \hypertarget{logarithms-in-r}{%
 \chapter{Logarithms in R}\label{logarithms-in-r}}
@@ -22334,7 +22350,7 @@ Some functions in R can be executed within nothing in the parentheses.
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "Fri Jul 30 10:05:31 2021"
+## [1] "Fri Jul 30 10:33:00 2021"
 \end{verbatim}
 
 \textbf{Exponents}

@@ -3316,7 +3316,7 @@ In HTML bookdown renders it like this:
 
 ```{r eval=knitr::is_html_output(), echo=FALSE}
 knitr::include_url("https://www.genome.gov/sites/default/files/tg/en/narration/single_nucleotide_polymorphisms_snps.mp3",
-                   height = "50px")
+                   height = "100px")
 ```
 
 (In PDF there is a way to render just a screen shot and link, I think).
@@ -3325,10 +3325,12 @@ knitr::include_url("https://www.genome.gov/sites/default/files/tg/en/narration/s
 
 # Test shiny app
 
-Here is an example of a Shiny app embedded in a bookdown book.
+Here is an example of a Shiny app (treesiftr) embedded in a bookdown book.
 
 The direct link is [here](https://wrightaprilm.shinyapps.io/treesiftr_app/):
 https://wrightaprilm.shinyapps.io/treesiftr_app/
+
+It may take a few seconds for the app to appear (its a fairly big one I think)
 
 ```{r  eval=knitr::is_html_output(), echo=FALSE}
 knitr::include_app(url = "https://wrightaprilm.shinyapps.io/treesiftr_app/")
@@ -3341,6 +3343,8 @@ knitr::include_app(url = "https://wrightaprilm.shinyapps.io/treesiftr_app/")
 
 Here is an example of a YouTube video  embedded in a bookdown book.
 
+**THIS FUNCTIONALITY CURRENTLY ISN"T WORKING BUT WAS PREVIOUSLY**
+
 The [original link](https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be) is: [https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be](https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be)
 ```{r eval=knitr::is_html_output(), echo=FALSE}
 knitr::include_url("https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be")
@@ -3348,7 +3352,7 @@ knitr::include_url("https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be
 
 <!--chapter:end:000-test_pages_and_misc/00b_test_youtube.Rmd-->
 
-# Test webpage insertion
+# Test google doc insertion
 
 
 A Google spreadsheet (or other google docs / form) can be embedded.
@@ -3356,7 +3360,7 @@ A Google spreadsheet (or other google docs / form) can be embedded.
 The original link is:
 https://docs.google.com/spreadsheets/d/18dt7cYHAaszV5Iq8Y-7YOEFnv6hIXbD39Vn75-c3fQo/edit?usp=sharing
 
-```{r eval = F}
+```{r eval = T}
 knitr::include_url(url ="https://docs.google.com/spreadsheets/d/18dt7cYHAaszV5Iq8Y-7YOEFnv6hIXbD39Vn75-c3fQo/edit?usp=sharing")
 ```
 
@@ -3400,7 +3404,7 @@ editor_options:
 # An example of a plotly graph
 
 The normal version of the graph looks like this.
-```{r echo = F}
+```{r echo = F, message = F, waring = F}
 library(plotly)
 library(ggplot2)
 library(cowplot)
@@ -3414,6 +3418,8 @@ p <- ggplot2::ggplot(data = lynx.df,
                      aes(x=time, y=N)) +
     geom_point()    + 
     geom_line()
+
+p
 ```
 
 
@@ -3422,10 +3428,52 @@ The plotly version looks like this
 
 
 fig <- plotly::ggplotly(p)
+
+fig
 ```
 
 
 <!--chapter:end:000-test_pages_and_misc/00e_plotly.Rmd-->
+
+# Directly embedding of a libretext page
+
+This is a libretext page directly called from bookdown and embedded in HTML
+
+```{r, echo = F, eval=knitr::is_html_output()}
+knitr::include_url("https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/8%3A_Ecology/45%3A_Population_and_Community_Ecology/45.0%3A_Prelude_to_Population_and_Community_Ecology")
+```
+
+<!--chapter:end:000-test_pages_and_misc/00f_libretext_embedded_page.Rmd-->
+
+# Libretext image
+
+
+I've mocked up the content from a libretext page below.  The main goal is to show how the image from this page doesn't need to be saved as a file, but can be pulled from librtext. 
+
+The original page is:
+
+[https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/8%3A_Ecology/45%3A_Population_and_Community_Ecology/45.0%3A_Prelude_to_Population_and_Community_Ecology](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/8%3A_Ecology/45%3A_Population_and_Community_Ecology/45.0%3A_Prelude_to_Population_and_Community_Ecology)
+
+## 45.0: Prelude to Population and Community Ecology
+
+Imagine sailing down a river in a small motorboat on a weekend afternoon; the water is smooth and you are enjoying the warm sunshine and cool breeze when suddenly you are hit in the head by a 20-pound silver carp. This is a risk now on many rivers and canal systems in Illinois and Missouri because of the presence of Asian carp.
+
+```{r, echo = F, fig.cap="Figure  45.0.1 : Asian carp jump out of the water in response to electrofishing. The Asian carp in the inset photograph were harvested from the Little Calumet River in Illinois in May, 2010, using rotenone, a toxin often used as an insecticide, in an effort to learn more about the population of the species. (credit main image: modification of work by USGS; credit inset: modification of work by Lt. David French, USCG)"}
+knitr::include_url("https://bio.libretexts.org/@api/deki/files/2180/Figure_45_00_01.jpg?revision=1")
+```
+
+This fish—actually a group of species including the silver, black, grass, and big head carp—has been farmed and eaten in China for over 1000 years. It is one of the most important aquaculture food resources worldwide. In the United States, however, Asian carp is considered a dangerous invasive species that disrupts community structure and composition to the point of threatening native species.
+
+## Note
+
+the code to put the image in is
+
+```{r, echo = T, eval = F,fig.cap="Figure  45.0.1 : Asian carp jump out of the water in response to electrofishing. The Asian carp in the inset photograph were harvested from the Little Calumet River in Illinois in May, 2010, using rotenone, a toxin often used as an insecticide, in an effort to learn more about the population of the species. (credit main image: modification of work by USGS; credit inset: modification of work by Lt. David French, USCG)"}
+knitr::include_url("https://bio.libretexts.org/@api/deki/files/2180/Figure_45_00_01.jpg?revision=1")
+```
+
+
+<!--chapter:end:000-test_pages_and_misc/00f_libretext_image_called_from_libretext.Rmd-->
 
 # Downloading R
 

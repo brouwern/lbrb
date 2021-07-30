@@ -1,0 +1,27 @@
+# Libretext image
+
+
+I've mocked up the content from a libretext page below.  The main goal is to show how the image from this page doesn't need to be saved as a file, but can be pulled from librtext. 
+
+The original page is:
+
+[https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/8%3A_Ecology/45%3A_Population_and_Community_Ecology/45.0%3A_Prelude_to_Population_and_Community_Ecology](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/8%3A_Ecology/45%3A_Population_and_Community_Ecology/45.0%3A_Prelude_to_Population_and_Community_Ecology)
+
+## 45.0: Prelude to Population and Community Ecology
+
+Imagine sailing down a river in a small motorboat on a weekend afternoon; the water is smooth and you are enjoying the warm sunshine and cool breeze when suddenly you are hit in the head by a 20-pound silver carp. This is a risk now on many rivers and canal systems in Illinois and Missouri because of the presence of Asian carp.
+
+```{r, echo = F, fig.cap="Figure  45.0.1 : Asian carp jump out of the water in response to electrofishing. The Asian carp in the inset photograph were harvested from the Little Calumet River in Illinois in May, 2010, using rotenone, a toxin often used as an insecticide, in an effort to learn more about the population of the species. (credit main image: modification of work by USGS; credit inset: modification of work by Lt. David French, USCG)"}
+knitr::include_url("https://bio.libretexts.org/@api/deki/files/2180/Figure_45_00_01.jpg?revision=1")
+```
+
+This fish—actually a group of species including the silver, black, grass, and big head carp—has been farmed and eaten in China for over 1000 years. It is one of the most important aquaculture food resources worldwide. In the United States, however, Asian carp is considered a dangerous invasive species that disrupts community structure and composition to the point of threatening native species.
+
+## Note
+
+the code to put the image in is
+
+```{r, echo = T, eval = F,fig.cap="Figure  45.0.1 : Asian carp jump out of the water in response to electrofishing. The Asian carp in the inset photograph were harvested from the Little Calumet River in Illinois in May, 2010, using rotenone, a toxin often used as an insecticide, in an effort to learn more about the population of the species. (credit main image: modification of work by USGS; credit inset: modification of work by Lt. David French, USCG)"}
+knitr::include_url("https://bio.libretexts.org/@api/deki/files/2180/Figure_45_00_01.jpg?revision=1")
+```
+

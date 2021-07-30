@@ -6,7 +6,7 @@ editor_options:
 # An example of a plotly graph
 
 The normal version of the graph looks like this.
-```{r echo = F}
+```{r echo = F, message = F, waring = F}
 library(plotly)
 library(ggplot2)
 library(cowplot)
@@ -20,6 +20,8 @@ p <- ggplot2::ggplot(data = lynx.df,
                      aes(x=time, y=N)) +
     geom_point()    + 
     geom_line()
+
+p
 ```
 
 
@@ -28,5 +30,7 @@ The plotly version looks like this
 
 
 fig <- plotly::ggplotly(p)
+
+fig
 ```
 
