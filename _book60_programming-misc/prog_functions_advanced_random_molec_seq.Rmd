@@ -1,0 +1,203 @@
+# Writing user-friendly functions
+
+A function to simulate a random sequence
+
+## Version 1
+
+```{r}
+r_molec_seq_vs1 <- function(units,
+                        prob,
+                        length){  
+  # create sequnce
+  ## "units" = molecular subunits to sample from
+  ### can be DNA (ATCG), mRNA, amino acids, etc
+  ## "length" = length of squence to generate
+  ## "prob" = probablity of sampling an element of "units"
+  seq.n.i <- sample(x = units, 
+                  size = length, 
+                  replace = TRUE, 
+                  prob = prob)
+  
+  # convert to charater string
+  seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
+  
+  # return result
+  return(seq.n.i)
+  
+}
+```
+
+
+Test the function.  There's no defaults so it
+```{r, eval = F}
+r_molec_seq_vs1()
+```
+
+```{r}
+r_molec_seq_vs1(units =c("A","T","C","G"),
+                prob = c(0.25,0.25,0.25,0.25),
+                length = 10)
+
+```
+
+
+Test with real data, the Robinson and Robinson amino acid frequencies
+```{r}
+data(robinson_aafreq)
+r_molec_seq_vs1(units = robinson_aafreq$aa1,
+                prob = robinson_aafreq$aa.freq,
+                length = 10)
+```
+
+
+
+## Version 2
+
+Add defaults for units and prob
+
+```{r}
+r_molec_seq_vs2 <- function(units = c("A","T","C","G"),
+                            prob  = c(0.25,0.25,0.25,0.25),
+                            length){  
+  
+  seq.n.i <- sample(x = units, 
+                  size = length, 
+                  replace = TRUE, 
+                  prob = prob)
+  
+  seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
+  
+  return(seq.n.i)
+  
+}
+```
+
+
+Now it works even if all we give it is a length
+```{r}
+r_molec_seq_vs2(length = 100)
+```
+
+
+## Version 3
+
+Now we'll give it a deafult for length
+```{r}
+r_molec_seq_vs3 <- function(units = c("A","T","C","G"),
+                            prob  = c(0.25,0.25,0.25,0.25),
+                            length = 100){  
+  
+  seq.n.i <- sample(x = units, 
+                  size = length, 
+                  replace = TRUE, 
+                  prob = prob)
+  
+  seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
+  
+  return(seq.n.i)
+  
+}
+```
+
+
+Now it works even if the parentheses are empty
+```{r}
+r_molec_seq_vs3()
+```
+
+
+## Version 4: Adding conditions and warnigns
+
+This version tests whether the function in being run with the defaults, and throws a warning if that's true.  The defaults are meant just for testing the function, and if someone runs the function with the defaults it might be that they forgot to change them.
+```{r}
+r_molec_seq_vs4 <- function(units = c("A","T","C","G"),
+                            prob  = c(0.25,0.25,0.25,0.25),
+                            length = 100){ 
+  
+  if(all(units  == c("A","T","C","G")) == TRUE &
+     all(prob   == c(0.25,0.25,0.25,0.25)) == TRUE &
+     length == 100){
+    warning("Note: all parameters set to defaults.  Did you want to change something?")
+     }
+  
+  seq.n.i <- sample(x = units, 
+                  size = length, 
+                  replace = TRUE, 
+                  prob = prob)
+  
+  seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
+  
+  return(seq.n.i)
+  
+}
+```
+
+This throws a warning
+```{r}
+r_molec_seq_vs4()
+```
+
+This doesnt
+```{r}
+r_molec_seq_vs4(prob = c(0.3,0.3,0.2,0.2))
+```
+
+
+## Version 5
+
+Here I've added an additional condition to ask whether the user wants to return a string or a vetor.
+
+```{r}
+r_molec_seq_vs5 <- function(units = c("A","T","C","G"),
+                            prob  = c(0.25,0.25,0.25,0.25),
+                            length = 100,
+                             as.string = TRUE){ 
+  
+  if(all(units  == c("A","T","C","G")) == TRUE &
+     all(prob   == c(0.25,0.25,0.25,0.25)) == TRUE &
+     length == 100){
+    warning("Note: all parameters set to defaults.  Did you want to change something?")
+     }
+  
+  seq.n.i <- sample(x = units, 
+                  size = length, 
+                  replace = TRUE, 
+                  prob = prob)
+  
+  if(as.string == TRUE){
+    seq.n.i <- paste(seq.n.i,sep = "",collapse = "") 
+  
+  }
+  
+  return(seq.n.i)
+  
+}
+```
+
+Return as a vectro
+```{r}
+r_molec_seq_vs5(prob = c(0.3,0.3,0.2,0.2), 
+                as.string = F,
+                length = 10)
+```
+
+Return as a string
+```{r}
+r_molec_seq_vs5(prob = c(0.3,0.3,0.2,0.2), 
+                as.string = T,
+                length = 10)
+```
+
+The default is to return a string, so as.string = T is option
+
+```{r}
+r_molec_seq_vs5(prob = c(0.3,0.3,0.2,0.2), 
+                length = 10)
+```
+
+
+
+```{r}
+
+```
+

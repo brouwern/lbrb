@@ -1,0 +1,55 @@
+# Writing functions - practice problems
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+
+
+## Introduction
+
+Writing functions can be a hard skill to master.  Here are some practice problems.  A key is available.
+
+## Part 1: Pure practice
+
+### Practice Function 1: Hello world!
+
+Write a function that takes no arguement, and every time you run it says "Hello world!"  Call the function hello_world()
+
+### Practice Function 2: Hello _______ !
+
+Write a function that takes a word as an argument, and every time you run it says "Hello _____ ", where the blank is filled by the argument.  Try making the function with and without a default.  Call the function hello().
+
+**Advanced (for fun)**: Include in the function a test to see if what was passed to the arguement is a string and return the message "no valid string was entered" if something other than a string was entered.
+
+
+## Practice Function 3: Make you own natural log function
+
+R uses log() for natural and log10() for the base 10 log.  It would be easier for non-R peole to read code if there was a function with "e" in its name to indicate when the natural log is being used.  Write a function that takes a number as an argument and returns the natural log.  Call the function log_e
+
+**Advanced (for fun)**: make a function called my_log() that has an arguement "type" to specify the type of log you want.
+
+
+## Practice Function 4: Make function that converts DNA directly to RNA 
+
+The gsub() function can be used to replace characters in a string.  For example
+
+```{r}
+str <- "ATCG"
+gsub("T","U",str)
+
+
+str <- "ATTCG"
+gsub("T","U",str)
+
+str <- "ATTCGTTT"
+gsub("T","U",str)
+
+str <- "AAAA"
+gsub("T","U",str)
+```
+
+Create a function called dna_to_rna that takes a character string as an arguement and turns T to U.
+
+
+

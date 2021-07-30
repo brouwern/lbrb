@@ -1,6 +1,0 @@
-# Test webpage insertion
-
-```{r eval = F}
-knitr::include_url(url ="https://docs.google.com/spreadsheets/d/18dt7cYHAaszV5Iq8Y-7YOEFnv6hIXbD39Vn75-c3fQo/edit?usp=sharing")
-```
-

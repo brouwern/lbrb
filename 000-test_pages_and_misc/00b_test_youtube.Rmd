@@ -1,0 +1,8 @@
+# Test YouTube vidoe
+
+Here is an example of a YouTube video  embedded in a bookdown book.
+
+The [original link](https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be) is: [https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be](https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be)
+```{r eval=knitr::is_html_output(), echo=FALSE}
+knitr::include_url("https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be")
+```

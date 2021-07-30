@@ -1,0 +1,97 @@
+# Sample test question-Randomization
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+
+
+## Sample test question:
+
+I have six groups in my class Neural Defects.  For homework they are reading a paper with six figures.  I want to randomly assign a figure to each group and make sure each figure is only used once, and that every figure is used.  How can I do this in R? 
+
+1. Store what you are randomizing in a vector called "figures"
+2. Write the code to do the randomization
+3. Store the output in a vector called "rand.figures"
+4. Use an appropriate command to check that the results the proper size
+5. Use an appropriate command to check that the result is the proper data structure
+
+
+
+## Your answer:
+
+Write the code needed to do this below.
+
+```{r}
+# your answer: replace the NAs with your code
+
+# object to hold figure names
+figures <- NA
+
+
+# object to to randomization
+rand.figures <- NA
+
+
+# check size of object
+
+
+
+# check data structure
+
+
+
+
+
+```
+
+
+## Hint 0
+
+* This will require something that we normally don't do when we generate random sequences of letters.
+
+
+## Hint 1:
+
+* To do this you'll want to use the sample() command.  
+For information about sample() call up the help file using ?sample
+
+```{r, eval = F}
+
+?sample
+
+```
+
+
+
+## Hint 2 (follow up to Hint 0)
+
+* sample() can **"sample with replacement"**, which is what we normally do for generating random sequences of letters
+* OR it can **sample "without replacement"** which is actually what I want to do to make sure every figure is used once and only once
+
+## Hint 3:
+
+A key arguement in sample() is replace = ...
+
+## Answer
+
+```{r}
+# your answer: replace the NAs with your code
+
+## All of these will work the same
+figures <- c(1,2,3,4,5,6)
+figures <- c("1","2","3","4","5","6")
+figures <- c("one","two","three","four","five","six")
+
+rand.figures <- sample(figures,size = 6, replace = FALSE)
+
+# check size
+length(rand.figures)
+
+# check data structure
+is(rand.figures)
+
+
+```
+
+Note: when you are sampling **WITH** replacement you could do this with the runinf() command.  However, this won't work when sampling without replacement.  (We'll, if you really wanted to you could make it work, but it would require a loop and would be inefficient.  If you want a challenge, you could try to figure this out using a while() loop instead of a for() loop)

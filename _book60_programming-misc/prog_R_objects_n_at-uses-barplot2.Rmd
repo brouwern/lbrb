@@ -1,0 +1,1072 @@
+# Intro to R objects
+
+## Commands used
+
+* <-
+* c()
+* length()
+* dim()
+* is()
+* str()
+* dim()
+* list()
+
+
+
+
+## R Objects
+
+* Everything in R is an object, works with an object, tells you about an object, etc
+* We'll do a simple data analysis with a t.test and then look at properties of R objects
+* There are several types of objects: **vectors, matrices, lists, dataframes**
+* R objects can hold numbers, text, or both
+* A typical dataframe has columns of **numeric data** and colmns of text that represent **factor variables** (aka "**categoical variables**")
+
+
+
+## Differences between objects
+
+Different objects are used and show up in differnt contexts.
+
+* Most practical stats work in R is done with **dataframes** .  
+* A dataframe is kind of like a spreadsheet, loaded into R.
+* For the sake of simplicity, we often load data in as a **vector**.  This just makes things smoother when we are starting out.
+* **vectors** pop up in many places, usually in a support role until you start doing more programming.
+* **matrices** are occassionaly used for applied stats stuff but show up more for programming.  A matrix is like a stripped-down dataframe.
+* **lists** show up everywhere, but you often don't know it; many R functions make lists
+* Understanding **lists** will help you efficiently work with stats output and make plots.
+
+
+
+
+## The Data
+
+We'll use the following data to explore R objects.
+
+Motulsky 2nd Ed, Chapter 30, page 220, Table 30.1.  Maximal relaxaction of muscle strips of old and young rat bladders stimualted w/ high concentrations of nonrepinephrine (Frazier et al 2006).  Response variable is %E.max
+
+```{r, echo = F}
+
+#Old data
+old.E.max <- c(20.8,2.8,50.0,33.3,29.4,38.9, 29.4,52.6,14.3)
+
+#Young data
+young.E.max <- c(45.5,55.0, 60.7, 61.5, 61.1, 65.5,42.9,37.5)
+
+```
+
+
+
+## The assignment operator "<-" makes object
+
+The code above has made two objects.  We can use several commands to learn about these objects.
+
+* is(): what an object is, ie, vector, matrix, list, dataframe
+* length():how long an object is; only works with vectors and lists, not dataframes!
+* dim(): how long AND how wide and object is; doesn't work with vectors, only dataframes and matrices :(
+
+
+### is()
+
+What is our "old.E.max" object?
+
+```{r}
+
+is(old.E.max)
+is(young.E.max)
+```
+
+
+
+Its a vector, containing numeric data.
+
+
+What if we made a vector like this?
+```{r}
+
+cat.variables <- c("old","old","old","old",
+                   "old","old","old","old","old")
+
+
+```
+
+
+
+And used is()
+
+```{r}
+
+is(cat.variables)
+
+```
+
+It tells us we have a vector, containing chracter data.  Not sure why it feels the need to tell us all the other stuff...
+
+
+### length()
+
+Our vector has 9 elements, or is 9 elements long.
+```{r}
+
+length(old.E.max)
+
+```
+
+
+
+Note that dim(), for dimension, doens't work with vector
+
+```{r}
+
+dim(old.E.max)
+
+```
+
+It would be nice if it said somethign like "1 x 9" for 1 row tall and 9 elements long.  So it goes.
+
+
+
+### str()
+
+str() stands for "structure". 
+
+*It summarizes info about an object; 
+* I find it most useful for looking at lists.  
+* If our vector here was really really long, str() would only show the first part of the vector
+
+```{r}
+
+str(old.E.max)
+
+
+```
+
+
+
+### c()
+
+* We typically use c() to gather together things like numbers, as we did to make our objects above. 
+* note: this is lower case "c"! 
+* Uppercase is something else
+* For me, R's font makes it hard sometiems to tell the difference between "c" and "C"
+* If code isn't working, one problem might be a "C" instead of a "c"
+
+Use c() to combine two objects
+
+```{r}
+old.plus.new <- c(old.E.max, young.E.max)
+```
+
+
+
+Look at the legnth
+
+```{r}
+length(old.plus.new)
+```
+
+
+
+Note that str() just shows us the first few digits, not all 17
+```{r}
+str(old.plus.new)
+```
+
+
+
+
+
+## You can save statistical output as an object
+
+We can run a t.test like this, and the output goes to R's "console"
+
+```{r}
+
+t.test(old.E.max, young.E.max)
+
+```
+
+
+
+We can save the output to an object using the assignment operator
+
+```{r}
+
+rat.t.test <- t.test(old.E.max, young.E.max)
+
+```
+
+
+
+Then call up the output like this
+
+```{r}
+
+rat.t.test
+
+```
+
+
+
+
+
+## How does R save statistical output
+
+
+Let's use is() and str() to see what this rat.t.test object really is
+```{r}
+
+is(rat.t.test)
+
+```
+
+
+
+* Its an "htest" class of object.  Probably means "hypothesis test".  
+* Many R functions make their own special classes of objects
+* For example, the lm() function for linear regresssion (aka "linear model") makes an "lm" class of object
+* Many classes of objects behave like lists, as we'll explain below
+
+
+Let's use str()
+
+```{r}
+
+str(rat.t.test)
+
+```
+
+
+
+* Interesting; lots of stuff.  
+* THe first thing it says is "List of 9".  So its a list
+* Note that each one of these things corresponds to what is printed out as the output of t.test
+* (A peek a deepR: The difference between what str() is showing us and the organized table we get from running t.test has to do with what is known as the "print method" and how it interacts with objects of class htest.)
+
+
+
+
+
+
+## Lists in R
+
+* I used R for years without ever making a list
+* But lists are everywhere in R
+* Learning how to access lists can greatly aid in working with the output of statistical models and test
+* This is especially true when plotting
+* Components in lists can be accessed two different ways: using dollar signs $ and using square brackets [ ]
+* (the same is true for dataframes)
+* We'll focus on using dollar signs $
+
+If I run just the name of the object, I get all of the output of the list
+```{r}
+
+rat.t.test
+
+```
+
+
+
+Say I want to just see the p-value.  I can use the dollar sign like this
+
+```{r}
+
+rat.t.test$p.value
+
+```
+
+
+
+What about the "test statisic?"
+```{r}
+
+rat.t.test$statistic
+
+```
+
+
+
+The means of each group (old vs yound)
+```{r}
+
+rat.t.test$estimate
+
+```
+
+
+
+Try to get the confidence intervals ("confint"; answer below) ...
+
+```{r}
+
+#Type your attempt here:
+
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Confidence interval from t.test object:
+
+```{r}
+
+rat.t.test$conf.int
+
+```
+
+Do you know what this confidence interval means in this context?
+
+
+
+
+
+# An aside about t-tests
+
+* We often say we use a t-test to "test whether the means of 2 groups are different"
+* This is true, but the actual math is a bit different
+* If two groups have the same mean, the **difference** between those means should be approximatley zero
+* Any difference between those two groups is do to random noise / sampling variation / bad luck etc.
+* Mathematically, what a t-test does is test whether the **difference between two means** is statistically difference from 0.0
+* The **confidence interval** provided by t.test() is the the 95% CI around the difference between the 2 means.
+* If this CI is contains zero, we would say that the two means are not statistically diffrence from zero
+* Therefore, the two groups are not different
+
+
+
+
+
+# Working with square brackets
+
+* t.test doesn't directly give you the difference between the two means
+* we can calcualte it easily like this
+
+```{r}
+
+30.16667 - 53.71250 
+
+```
+
+
+
+Or like this
+```{r}
+
+mean(old.E.max) - mean(young.E.max)
+
+```
+
+
+
+
+Challenge: can you save the output from the mean() commands to objects, then do math on those objects?  Answer below...
+
+```{r}
+#Type your attempt here:
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Make objects holding the means
+
+```{r}
+
+#old
+old.mean   <- mean(old.E.max) 
+
+#young
+young.mean <- mean(young.E.max)
+
+```
+
+
+Subtract them
+```{r}
+
+old.mean - young.mean
+
+```
+
+
+
+
+Instead of calcuating the mean and their difference by hands let's get the info from the t.test output.  
+
+First, get the means.  Recall that for some reason they are called the "estimate"  Answer below...
+
+
+```{r}
+#Type your attempt here:
+
+
+
+
+
+```
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+```{r}
+
+rat.t.test$estimate
+
+```
+
+
+
+Save this to an object
+```{r}
+
+rat.means <- rat.t.test$estimate
+
+```
+
+
+
+Take a look with length(), is() and str()
+
+```{r}
+#what is this object?
+is(rat.means)
+
+#how long is the vector?
+length(rat.means)
+
+#take a peek at it
+str(rat.means)
+
+```
+
+
+
+*Aside: This vector also happens to have labels attached to it, which we can access with the names() command*
+
+```{r}
+names(rat.means)
+```
+
+
+
+
+
+## Square brackets for real
+
+Now let's use this object to calcualte the difference between the means.  
+
+* length() told is that the vector object has length of 2.  
+* Each number in the vector is an "element"
+* we can select elements using square brackets
+
+The first element
+```{r}
+
+rat.means[1]
+
+```
+
+
+The 2nd element
+```{r}
+
+rat.means[2]
+
+```
+
+Note that it gets angry if we try to access the 5th element
+```{r}
+
+rat.means[5]
+
+```
+
+## Difference between means using square brackets
+
+Can you figure out how to calcualte the difference using our rat.means objects and square brackets?
+
+```{r}
+#Type your answer here:
+```
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+```{r}
+
+rat.means[1] - rat.means[2]
+
+```
+
+Let's save that to an object
+
+```{r}
+
+diff.means <- rat.means[1] - rat.means[2]
+
+```
+
+
+
+
+
+
+## Upshot: plotting output of an R statistical test
+
+* The best way to make a plot of the results of a statistical test or model is to plot the "Effect size" and its confidence interval
+* For a t-test, the effect size is the difference between the means
+* This is important b/c the effect size is the most direct representation of what the test is doing
+* In contrast, people often plot group means with the confidence intervals.  
+* THis is fine, but isn't representing what the test is doing
+* (We'll talk a lot in this class about effect sizes...)
+
+How would we take the results of this t.test and plot it?
+
+* **Old school:** Pen and paper (if it were the 1980s...)
+* **What many people do:** Type numbers into Excel and make boxplots :(
+* **Not bad:** Type numbers into new data objects and make plots in R
+* **Best:** Access data from the lists and plot in R :)
+
+
+
+
+## The "not bad way": typing directly into R
+
+### "NOt bad way" with a bar plot
+
+We already have our difference between means
+```{r}
+
+diff.means
+
+```
+
+
+
+Let's make an object with the confidence interval
+```{r}
+
+ci <- c(-37.501081,-9.590586)
+
+```
+
+
+
+We can load the barplot2() function from gplots() and plot the data.  
+* Use library(gplots) to load the package
+* you can get so called "help" for barplot2 using ?barplot2
+* we want to use the height =.., plot.ci = TRUE, ci.l=, and ci.u= "arguements" of the function
+
+A very very ugly plot of just the mean
+```{r}
+
+library(gplots)
+barplot2(height = diff.means)
+
+```
+
+
+Try to add the rest of the info.  Hint: to get the lower ci access the 1st elemtn of our confidence itnerval object, ci, using square brackets
+```{r}
+#Your attempt:
+
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+library(gplots)
+pinkunicorn <- rat.t.test$conf.int
+  
+barplot2(height = diff.means,
+         plot.ci = TRUE,
+         ci.l=pinkunicorn[1],      #ci.l = lower CI
+         ci.u = pinkunicorn[2])    #ci.u = upper CI
+
+```
+
+Ok, this is pretty ugly but its technically correct.
+
+
+
+### "NOt bad way" with using a single dot
+
+* The gplots package has a function plotCI() which plots means as dots, instead of bars, and puts a CI around them
+* Note that the instead of ci.l= it uses li = for the lower limit
+* ... and instead of ci.u = it uses ui
+
+```{r}
+
+plotCI(x = diff.means,
+        li= ci[1],       #use "li", not "ci.l"!
+        ui = ci[2])
+
+```
+
+
+#### Making the plot better part 1
+
+* Since our hypothesis test is with respect to zero (no difference between means) we should include it as  reference point.
+* Most plotting functions can take on the arguement xlim = and ylim = 
+* You can play with its values to it suits your tastes
+
+```{r}
+
+plotCI(x = diff.means,
+       li=ci[1],         #use "li", not "ci.l"!!!!
+        ui = ci[2],
+        ylim = c(-40,5))  #y limits
+
+```
+
+
+
+Note that we can use a vector here with the ylim = arguement instead of nubmers.
+
+```{r}
+
+#make a vector containing the plotting limits
+ylimits <- c(-40,5)
+
+#plot
+plotCI(x = diff.means,
+       li=ci[1],
+        ui = ci[2],
+       ylim = ylimits)  #use vector of values for limits
+
+```
+
+
+
+
+#### Making the plot better part 2
+
+* To be really specific we could plot a line at 0.0 that shows the hypothesis being tested.  
+* The abline() function can plot lines at different angles.
+* the "ab" part relates to the common geometric formula for a line, y = m*x + b
+* or rather y = a*x+b
+* for just a horizontal line we can use abline(h = 0)
+
+
+Make a plot with line
+```{r}
+
+#make the plot
+plotCI(x = diff.means,
+       li=ci[1],
+        ui = ci[2],
+       ylim = ylimits) 
+
+#add the line
+abline(h = 0)
+
+```
+
+
+
+
+
+To change the colors of thigns we can use the col = arguement within abline.  col = 2 makes a red line  Try it
+
+```{r}
+# Your attempt
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Dot plot with red line at zero
+
+```{r}
+#make the plot
+plotCI(x = diff.means,
+       li=ci[1],
+        ui = ci[2],
+       ylim = ylimits) 
+
+#add the line
+abline(h = 0, col = 2)
+```
+
+
+
+* We can change the type of line from solid to dashed using the arguement "lty" for "line type"
+* lty = 1 is a solid line,
+* lty = 2 is a dashed line
+
+
+
+```{r}
+#Try it
+
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Answer:
+```{r}
+
+#make the plot
+plotCI(x = diff.means,
+       li=ci[1],
+        ui = ci[2],
+       ylim = ylimits) 
+
+#add the line
+abline(h = 0, col = 2, lty = 2)
+
+```
+
+
+
+
+## The best way
+
+Recall all of this stuff is in a list from the t.test
+
+```{r}
+rat.t.test
+```
+
+We can acceess components of lists using dollar signs $
+```{r}
+
+rat.t.test$conf.int
+
+```
+
+What if we want jsut the first confidence limt?  We can combine using a dollar sign and brackets
+
+```{r}
+rat.t.test$conf.int[1]
+```
+
+<br.
+
+We can therefore access everything directly from out t.test output when we plot.  First, let's use our diff.means for the mean difference and access the confidence intervals directly
+
+```{r}
+
+#make the plot
+plotCI(x = diff.means,
+       li= rat.t.test$conf.int[1],
+        ui = rat.t.test$conf.int[2],
+       ylim = ylimits) 
+
+#add the line
+abline(h = 0, col = 2, lty = 2)
+```
+
+
+
+This will get a big ugly, but let's even get our mean difference from the t.test object.  We'll do this by using rat.t.test$estimate[1] - rat.t.test$estimate[2]
+
+```{r}
+
+#make the plot
+plotCI(x = rat.t.test$estimate[1] -
+           rat.t.test$estimate[2],
+       li= rat.t.test$conf.int[1],
+        ui = rat.t.test$conf.int[2],
+        ylim = ylimits) 
+
+#add the line
+abline(h = 0, col = 2, lty = 2)
+```
+
+
+
+
+### A final fancy touch
+
+* Say we want to add the p-value for the test to this effect size plot.
+* We can do this with the text() command like this
+
+```{r}
+#make the plot
+plotCI(x = rat.t.test$estimate[1] -
+           rat.t.test$estimate[2],
+       li= rat.t.test$conf.int[1],
+        ui = rat.t.test$conf.int[2],
+        ylim = ylimits) 
+
+#add the line
+abline(h = 0, col = 2, lty = 2)
+
+# ADD THE TEXT
+text(x = 0.7627,   #x coordiante
+     y = -2.2,      #y coord
+     "p = 0.002") #text: the p values
+```
+
+
+
+
+Since we know how to access stuff from R objects we can do this also be 
+
+```{r}
+#make the plot
+plotCI(x = rat.t.test$estimate[1] -
+           rat.t.test$estimate[2],
+       li= rat.t.test$conf.int[1],
+        ui = rat.t.test$conf.int[2],
+        ylim = ylimits) 
+
+#add the line
+abline(h = 0, col = 2, lty = 2)
+
+# ADD THE TEXT
+text(x = 0.627,   #x coordiante
+     y = -2,      #y coord
+     rat.t.test$p.value) #text: the p values
+```
+
+
+
+
+Note that its plotted off center.  
+* This is annoying deafult of text().
+* this is fixed using pos = 4 to plot to the right of the coordinates you define
+
+
+```{r}
+#make the plot
+plotCI(x = rat.t.test$estimate[1] -
+           rat.t.test$estimate[2],
+       li= rat.t.test$conf.int[1],
+        ui = rat.t.test$conf.int[2],
+        ylim = ylimits) 
+
+#add the line
+abline(h = 0, col = 2, lty = 2)
+
+# ADD THE TEXT
+text(x = 0.627,   #x coordiante
+     y = -2,      #y coord
+     pos = 4,
+     rat.t.test$p.value) #text: the p values
+```
+
+
+
+
+
+Now maybe we should round this using the round() command
+* round(..., 3) will rond to 3 decimal places
+
+```{r}
+#make the plot
+plotCI(x = rat.t.test$estimate[1] -
+           rat.t.test$estimate[2],
+       li= rat.t.test$conf.int[1],
+        ui = rat.t.test$conf.int[2],
+        ylim = ylimits) 
+
+#add the line
+abline(h = 0, col = 2, lty = 2)
+
+# ADD THE TEXT
+text(x = 0.627,   #x coordiante
+     y = -2,      #y coord
+     pos = 4,
+     round(rat.t.test$p.value,3)) #text: the p values
+```
+
+
+
+
+## Debrief
+
+We can...
+
+* learn about objects using length(), is(), str()
+* access parts of list using $ (and also brackets)
+* access parts of vetors using square brackets [ ]
+* save the output of a model / test to an object
+* access part of lists for plotting instead of copying stuff

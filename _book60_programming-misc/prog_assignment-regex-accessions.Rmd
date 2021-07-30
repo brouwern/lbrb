@@ -1,0 +1,263 @@
+# Computational Biology Portfolio: Practice Working with Strings
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+
+
+
+
+
+## Introduction
+
+Gonder et al. (2007) published phylogenetic analyses of chimp population using the **XX Name of gene / sequence  XX** sequence from the chimp **XX Type of DNA - nuclear? mitochondrial? both XX**.  Gonder et al (2007) used both previously published and newly sequenced data to build their phylogenetic trees.  Chimp sequences were compared to **XX what was the outgroup?**.
+
+## Purpose
+
+**XX Write a brief summary of what this script does XX**.
+
+
+## Gonder et al 2007 data
+
+Gonder et al report their **XX What are these serial number thingy's called? XX** in two paragraphs.
+
+First, the previously published data they used was described as:
+
+> "We deposited all previously unpublished sequences in GenBank under the accession numbers DQ140188-DQ140269." (Gonder et al 2006 pg 1110)
+
+Second, the new sequences they worked up were described as:
+
+> "We obtained chimpanzee HVRI sequences from other studies from Gen-
+Bank under the accession numbers L35381–L35443, U77186–U77293,
+AFO59042–AFO59052, and AF137481–AF137412. We obtained human
+HVRI sequences from the Human Mitochondrial Genome Database
+(mtDB) at http://www.genpat.uu.se/mtDB/sequences.html. We aligned
+sequences from GenBank and mtDB with reference to sequences produced
+for the study. Sequences we produced and used correspond to bases
+16,048–16,391 of the human mtDNA Cambridge Reference Sequence
+(Andrews et al., 1999)."  (Gonder et al 2006 pg 1111)
+
+
+## Gonder et al 2007 new sequences
+
+
+The **XX What are these serial number thingy's called? XX** for their new sequences were reported as having the range:
+
+DQ140188-DQ140269
+
+This includes **XX How many sequences XX?** sequences.  **XX Describe what this code does in 1 to 2 sentences XX**
+
+### Creating the codes
+
+First, let me prepare some things
+
+```{r}
+## PREP
+
+## The first part of the code: letters
+prefix       <- "DQ"
+
+## The second part of the code:
+### Numeric
+### start
+suffix.start <- 140188
+
+### end
+suffix.end   <- 140269
+```
+
+Now I'll re-create the actual codes using seq() and paste()
+```{r}
+## RECREATE CODES
+
+## seq()
+## Use the seq() command to generate the whole range
+### of numeric values
+suffix <- seq(from = suffix.start, to = suffix.end, by = 1)
+
+## How many codes?
+length(suffix)
+
+## paste()
+## Use paste with sep = ""
+### 
+DQ.codes <- paste(prefix, suffix, sep = "")
+
+## check length
+length(DQ.codes)
+```
+
+### Selecting a code for demonstration
+
+The grep() function is a **XX What is the general name for the type of function grep() is? XX**?  I can use it to select particular elements from a vector containing text or numbers.  grep() is a difficult command to master and its VERY picky about its input.  I'm just going to demonstrate what it can do here - you'll need a lot of practice to get good with it.
+
+```{r}
+# Day of the month of was born
+## as CHARACTER data
+day.of.month.born <- "21"
+
+
+# What grep() does
+grep(pattern = day.of.month.born, # pattern to search for
+     x = DQ.codes)                   # where to search
+
+# storing grep() output
+my.DQ.index <- grep(pattern = day.of.month.born, 
+     x = DQ.codes)  
+```
+
+
+Locating a code to use
+```{r}
+DQ.codes[my.DQ.index]
+```
+
+I am going to use this code
+"DQ140221"
+
+When I enter it into the NCBI website I will drop the quotation marks
+
+DQ140221
+
+
+## Searching Genbank
+
+I searched the NCBI databases for this code (DQ140221) from this website
+
+https://www.ncbi.nlm.nih.gov/
+
+NCBI returned this summary
+
+https://www.ncbi.nlm.nih.gov/search/all/?term=DQ140221
+
+From the NCBI search results I search Genbank, which returned this entry.
+
+https://www.ncbi.nlm.nih.gov/nuccore/DQ140221.1/
+
+* The sequence is from **Pan troglodytes** with no subspecies specified.
+* The sequence is **344 bases long**
+* The authors are **Gonder et al. (unpublished)**
+* NCBI indicates that there are no publications linked to this entry.
+* NCBI indicates there is **1 "popset"** linked to this entry.  **The PopSet is available at https://www.ncbi.nlm.nih.gov/popset/?term=DQ140221**
+
+
+
+## Gonder et al 2007 previously published sequences
+
+The previously published sequences had the following code:
+
+* L35381–L35443 
+* U77186–U77293
+* AF059042–AF059052
+* AF137481–AF137412
+
+I selected the **XX what series? XX** series because **XX What did you select it?XX**.  This series has **XX after you work things up use length() to determine this number XX** codes in it.
+
+I then generate all the codes in the series and selected one that contained the day I was born.
+
+
+### Creating the codes
+
+First, let me prepare some things
+
+```{r}
+## PREP
+
+## The first part of the code: letters
+                      ##
+prefix       <- "DQ"  ##1) Change to your pick, L, U, or AF
+
+## The second part of the code:
+### Numeric
+### start
+                       ##
+suffix.start <- 140188 ##2a) Change to your pick
+                       ## MAKE SURE IT MATCHES THE PREFIX!
+
+### end
+                       ##
+                       ##2b) Change to your pick
+                       ## MAKE SURE IT MATCHES THE PREFIX
+suffix.end   <- 140269
+```
+
+Now I'll re-create the actual codes using seq() and paste()
+```{r}
+## RECREATE CODES
+
+## seq()
+## Use the seq() command to generate the whole range
+### of numeric values
+suffix <- seq(from = suffix.start, 
+              to = suffix.end, 
+              by = 1)
+
+## How many codes?
+              ##3)determine this and add it to the notes above
+
+
+## paste()
+## Use paste with sep = ""
+### 
+DQ.codes <- paste(prefix, 
+                  suffix, 
+                  sep = "")
+
+## check length
+
+
+```
+
+### Selecting a code for demonstration
+
+
+```{r}
+# Day of the month of was born
+## as CHARACTER data
+                       ##4) Change to a number 1 to 31
+day.of.month.born <- "21"
+
+
+# What grep() does
+grep(pattern = day.of.month.born, # pattern to search for
+     x = DQ.codes)                # where to search
+
+# storing grep() output
+my.DQ.index <- grep(pattern = day.of.month.born, 
+     x = DQ.codes)  
+```
+
+
+Locating a code to use
+```{r}
+DQ.codes[my.DQ.index]
+```
+
+I am going to use this code
+""   
+
+When I enter it into the NCBI website I will drop the quotation marks
+
+
+
+
+## Searching Genbank
+
+I searched the NCBI databases for this code (**## YOUR CODE HERE##**) from this website
+
+https://www.ncbi.nlm.nih.gov/
+
+NCBI returned this summary
+
+**## YOUR summary HERE##**
+
+From the NCBI search results I search Genbank, which returned this entry.
+
+**## YOUR genebank entry HERE##**
+
+* The sequence is from **##YOUR SPECIES w/SUBSPECIES if listed##** with no subspecies specified.
+* The sequence is **##YOUR SEQUENCE LENGTH##**
+* The authors are **##YOUR AUTHORS HERE##**
+* NCBI indicates **##NUMBER OF PUBLICATIONS IF ANY LINKED##**.
+* NCBI indicates there is **##NUMBER OF POPSETS IF ANY ##** linked to this entry.  **##LINK TO POPSET##**

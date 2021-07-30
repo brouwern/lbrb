@@ -1,0 +1,12 @@
+# Test webpage insertion
+
+
+A Google spreadsheet (or other google docs / form) can be embedded.
+
+The original link is:
+https://docs.google.com/spreadsheets/d/18dt7cYHAaszV5Iq8Y-7YOEFnv6hIXbD39Vn75-c3fQo/edit?usp=sharing
+
+```{r eval = F}
+knitr::include_url(url ="https://docs.google.com/spreadsheets/d/18dt7cYHAaszV5Iq8Y-7YOEFnv6hIXbD39Vn75-c3fQo/edit?usp=sharing")
+```
+

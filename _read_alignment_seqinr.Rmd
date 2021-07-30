@@ -1,0 +1,23 @@
+# Read MSA file 
+
+## Reading a multiple alignment file into R
+
+To read a sequence alignment into R from a file, you can use the read.alignment() function in the SeqinR package. For example, to read in the multiple sequence alignment of the virus phosphoproteins into R, we type:
+
+```{r, eval = F}
+virusaln  <- read.alignment(file = "phosphoproteins.phy", format = "phylip")
+```
+
+The virusaln variable is a list variable that stores the alignment.
+
+An R list variable can have named elements, and you can access the named elements of a list variable by typing the variable name, followed by “$”, followed by the name of the named element.
+
+The list variable virusaln has named elements “nb”, “nam”, “seq”, and “com”.
+
+In fact, the named element “seq” contains the alignment, which you can view by typing:
+
+```{r, eval = F}
+virusaln$seq
+```
+
+Only the first part of the alignment stored in virusaln$seq is shown here, as it is very long.

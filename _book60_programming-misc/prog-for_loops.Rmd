@@ -1,0 +1,400 @@
+# for() loops in R
+
+```{r  eval = T}
+library(compbio4all)
+```
+
+
+
+## Introduction
+
+There are several way to write for() loops in R.  For this assignment, I asked you to write a loop which printed out each letter of the alphabet. 
+
+There are several ways to write a for loop in R.  I will show several different ways.  Out of habitat I will generally use the style of (for i in 1:length(x)), though this is not an optimal way to do things.  I will discuss this way as well as some more sounds approaches.
+
+## Reminders
+
+R has a built in object with has the data, called LETTERS.
+
+```{r}
+LETTERS
+```
+
+
+The object LETTERS is a vector containing character data.
+
+```{r}
+is(LETTERS)
+```
+
+We we access each element of a vector with its index number. To get "A"
+
+```{r}
+LETTERS[1]
+```
+
+To get "Z"
+```{r}
+LETTERS[26]
+```
+
+If I want, I can access a given letter by assigning its index number to an object.  Say I assign 26 to the letter i
+
+```{r}
+i <- 26
+```
+
+
+I can get Z like this then
+
+```{r}
+
+LETTERS[i]
+
+```
+
+
+
+## For loop 1: The hard-coded for loop (aka, the don't actually do this for loop)
+
+This is a bad way to do a for loop but makes the process totally transparent.  There are 26 letters in the alphabet, so there are 26 elements in the vector LETTERS.  Therefore, what we want R to do - print out a letter from the alphabet - need to be repeated 26 times.  So our for loop needs to repeat the same action 26 times.
+
+We can make an **index** for R like this
+```{r}
+1:26
+```
+
+Similarly, we could do this
+
+```{r}
+c(1:26)
+```
+
+
+The colon in R is used to expand a sequence of numbers.  Its a shortcut for the seq() command.
+
+```{r}
+seq(from = 1, to = 26, by = 1)
+```
+
+Remember that index values can be used to pull out elements from a vectors.  So as noted above if I want to print the letter A, which is stored in the first element of the LETTERS vector, I can do this
+
+```{r}
+LETTERS[1]
+```
+
+If I want, I could store this output in a an object
+
+```{r}
+letter.A <- LETTERS[1]
+letter.A
+```
+
+
+
+What a for loop can do is cycle through each index value, 1 to 26, and put it in between the bracket. It would look like this loop below;note that I added an extra step where I print out the index value.
+
+```{r}
+for(i in 1:26){
+  print(i)                #print the index
+  letter.i <- LETTERS[i]  #get leter i
+  print(letter.i)         #print letter i
+}
+```
+
+
+In this loop I used 1:26 for my index. This is **hard coding** the index values, which is never a good idea.  But for the sake of illustration i makes it totally obvious what we're doing.  
+
+
+As I said above 1:26 is the same as c(1:26), so this loop does the same thing
+
+```{r, eval = F}
+for(i in 1:26){
+  letter.i <- LETTERS[i]  #get leter i
+  print(letter.i)         #print letter i
+}
+```
+
+The colon : is a shortcut for the seq() command; if I wanted to be 100% transparent to someone who didn't know R I could write this:
+```{r, eval = F}
+for(i in seq(from = 1, to = 26, by = 1)){
+  letter.i <- LETTERS[i]  #get leter i
+  print(letter.i)         #print letter i
+}
+```
+
+
+The step of assigning the current letter indexed by i to an object letter.i isn't actually necessary.  I could simplify the code like this by **nesting** the LETTERS[i] statement within the print() statement.  The letter indexed by i therefore gets pulled up and directly **passed** to print().
+
+```{r, eval = F}
+for(i in 1:26){
+  print(LETTERS[i])         #print letter i
+}
+```
+
+Lines and spacing are arbitrary in R.  When a for loop is short you may see people do this to save space.
+
+```{r, eval = F}
+for(i in 1:26){ print(LETTERS[i]) }
+```
+
+Or even this, dropping the curly braces.
+```{r, eval = F}
+for(i in 1:26) print(LETTERS[i])  
+```
+
+Some people value compact code; there's no penalty in any way for using multiple lines so its generally considered best practice to split code over more lines rather than fewer.
+
+
+## For loop 3: the classic for loop
+
+A common way to code for loops is to use a function like length() for vectors or dim() for matrices to determine how many times a loop must repeat its action.  Instead of hard-coding 1:26 to get the values 1, 2, 3,... 26 I can do this:
+
+```{r}
+1:length(LETTERS)
+```
+
+This is useful in more complex situations where you could end up changing how many elements are in LETTERS. For this approach,the for loop looks like this
+
+```{r, eval= F}
+for(i in 1:length(LETTERS)){
+  letter.i <- LETTERS[i]  #get leter i
+  print(letter.i)         #print letter i
+}
+```
+
+In this formulation, R is making an index 1 to 26 based on the length of LETTERS. Its then assigning a value to i each time it goes through the loop. Then it pulls out the appropriate letter based on i.  This is basically the same as the first example, just the values of the index, 1 to 26, is determine by R and not set by hand.
+
+I've written hundreds of loops this way an it this way works just fine.  However, in more complicated code a problem can arise if someone a 0 gets its way into a loop.  See https://jef.works/R-style-guide/#loops for a reference to this.
+
+The code below is optional, but if your curious it displays a behavior which may not be desirable.
+
+```{r}
+bad.index <- NULL
+length(bad.index)
+
+for(i in 1:length(bad.index)){
+  print(bad.index[i])
+}
+```
+
+This problem is most likely to arise when a for loop is embedded in a larger program and vectors like LETTERS get generated by one part of the program and get fed later into the loop.
+
+For this course I will probably continue to use the general format of for(i in 1:length(x)) out of habit.  Hopefully by next year I'll be re-trained to use one of the techniques shown below.
+
+## For loop 3: The Power-user for loop
+
+Probably the cleanest way to do a for loop in R is like this next example. A scientific survey on Twitter indicates that this how the cool kids write their loops.
+
+In this version, R steps through each element of the vector LETTERS and on the fly assigns that element to the object i.  Print then tells R to print the letter to the console.
+
+```{r, eval = F}
+
+for(i in LETTERS){
+  print(i)
+}
+
+```
+
+
+Note that if we leave out print() then we get blank screen. R is basically just reading the numbers to itself.
+
+```{r, eval = F}
+for(i in LETTERS){
+ i
+}
+
+```
+
+
+The use if "i" is arbitrary.  We could just j instead
+
+```{r, eval = F}
+for(j in LETTERS){
+ print(j)
+}
+
+```
+
+
+To remember this format it might be useful to think about it like this: instead of using i or j, use something representative of what the loop is accessing from LETTERS.  In the next version, I'll use letter instead of i.
+
+```{r}
+for(letter in LETTERS){
+  print(letter)
+}
+```
+
+This kind of reads like "for each letter in the vector LETTERS, print the current letter.
+
+This general approach avoids the problem with the first two versions of the loops.  Recall that I made an object called bad.index that was just NULL
+
+```{r}
+bad.index <- NULL
+```
+
+This truly is nothing; it contains no data and has a length of zero.
+```{r}
+is(bad.index)
+class(bad.index)
+length(bad.index)
+```
+
+If I use this in a for loop in the current style I get no output
+```{r}
+for(i in bad.index){
+  print(i)
+}
+```
+
+This is because bad.index has nothing to in it.
+
+
+
+A limitation of this method is that i (or j, or letters) isn't an index, but takes on an assigned value from LETTERS.  So in my old school loop I can do this, which allows me to print 2 consecutive letters.  This is done by done math on the index i.
+```{r}
+for(i in 1:length(LETTERS)){
+ print(LETTERS[c(i,i+1)])
+}
+```
+
+With the other approach, I can't do math on i
+```{r, eval = F}
+for(i in LETTERS){
+  print(i)
+  print(i+1)
+}
+```
+
+There's probably a way around this, but its not apparent to me right now.
+
+## For loop 4: A for loop for all purposes
+
+For the discerning R programming who doesn't like for loop version 3 there is a function called seq_along()
+
+
+seq_along() determines what is a valid index for a given object
+```{r}
+seq_along(LETTERS)
+```
+
+
+If you pass it a null value it can tell
+```{r}
+seq_along(bad.index)
+```
+
+seq_along therefore avoids the bad features of 1:length(x)
+```{r}
+for(i in seq_along(bad.index)){
+ print(bad.index[i])
+}
+```
+
+
+
+A for loop with seq_along(LETTERS) looks like this
+```{r, eval = F}
+for(i in seq_along(LETTERS)){
+ print(LETTERS[i])
+}
+```
+
+You can also do math on the index generated by seq_along)9
+
+
+```{r, eval = F}
+for(i in seq_along(LETTERS)){
+ print(LETTERS[c(i, i+1)])
+}
+```
+
+
+
+## Advanced aside: if(), else and next statements
+
+The following is a more advanced bit of R programming information and can be skipped
+
+Its common to but if() statements within loop to screen for certain conditions.  In the code I've been using which prints out 2 consecutive letters, when I get to i = 26, the code LETTERS[c(i, i+1)] produces LETTERS[c(26, 26+1)] = LETTERS[c(26, 27)].  There is no letter 27 so an NA is thrown.  I could avoid this using an if statement
+
+```{r}
+for(i in seq_along(LETTERS)){
+ if(i+1 > 26){
+   print(LETTERS[c(26,26)])
+ } else
+ print(LETTERS[c(i, i+1)])
+}
+```
+
+Instead of else I could also use next.
+
+```{r}
+for(i in seq_along(LETTERS)){
+ if(i+1 > 26){
+   print(LETTERS[c(26,26)])
+   next
+ } 
+ print(LETTERS[c(i, i+1)])
+}
+```
+
+## On avoiding for loops
+
+The following section is for background.  You will not be expected to write any of the code shown.
+
+In many cases for() loops can be avoided in R.  This is because R is designed to make actions on entire vectors, dataframes, and matrices easy.  R also as a set of functions called apply(), and a package called purr, which allow you to avoid writing for loops directly.  This relates (in part) to the concept of **vectorization** in R.  For a deep dive in to some of these issues see https://www.noamross.net/archives/2014-04-16-vectorization-in-r-why/.
+
+Here's an example.  Let's say I had a DNA sequence stored in a vector, which each base in a seperate slot in the vector.
+
+```{r}
+a.sequence <- c("A","T","C","A","A","A","G","G","G")
+```
+
+What if for some reason I wanted these letters to be lower case. R has a handy function called tolower() which makes upper case tolower case
+
+```{r}
+tolower("A")
+```
+
+In some programming languages, to turn all of these letters to lower case you might have to do this (I've written this out with extra code to make it obvious what I'm doing)
+
+```{r}
+for(i in 1:length(a.sequence)){
+  lowercase.letter.i <- tolower(a.sequence[i]) #make lower case
+  a.sequence[i] <- lowercase.letter.i          #overwrite old entry
+}
+```
+
+In R (and perhaps some other languages) I can do this
+
+```{r}
+a.sequence <- c("A","T","C","A","A","A","G","G","G")
+tolower(a.sequence)
+```
+
+
+This is a somewhat trivial example. Let's say I have a matrix of DNA sequences, with each row a different sequence.
+
+First, I'll make up some data. Don't worry about what this is doing
+```{r}
+dna <- c("A","T","C","G")
+make_seq <- function() sample(x = dna,size = 5,replace = T)
+my.matrix <- rbind(make_seq(),make_seq(),make_seq(),make_seq(),make_seq())
+```
+
+The matrix looks like this
+```{r}
+my.matrix
+```
+
+In some programming languages I'd have to write a loop to change this to lower case.  In R I can use a fancy function called apply() to do it in one step
+
+```{r}
+apply(my.matrix,1,tolower)
+```
+
+
+
+## Challenge
+
+Create a vector that contains the four codes for the DNA bases, A, T, C, G.  Write a for() loop which prints these out.

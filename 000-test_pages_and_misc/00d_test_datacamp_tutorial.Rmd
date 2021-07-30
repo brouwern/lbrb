@@ -1,0 +1,26 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+# Datacamp test
+
+This an example of an embedded Datacamp tutorial.  It will only be rendered in HTML output.
+
+<script src=https://cdn.datacamp.com/datacamp-light-latest.min.js></script>
+
+```{r,  eval=knitr::is_html_output(), echo = F}
+# greedy = F makes it so that only specific chunks are converted
+## to datacamp 
+tutorial::go_interactive(greedy = F)
+```
+
+By default, `tutorial` will convert all R chunks.
+
+```{r tut = TRUE, eval=knitr::is_html_output()}
+a <- 2
+b <- 3
+
+a + b
+```
