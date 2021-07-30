@@ -979,13 +979,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="writing-user-friendly-functions.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r_molec_seq_vs1</span>(<span class="at">units =</span><span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;T&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;G&quot;</span>),</span>
 <span id="cb83-2"><a href="writing-user-friendly-functions.html#cb83-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.25</span>,<span class="fl">0.25</span>,<span class="fl">0.25</span>),</span>
 <span id="cb83-3"><a href="writing-user-friendly-functions.html#cb83-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">length =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;TACAGGTCAC&quot;</code></pre>
+<pre><code>## [1] &quot;GGAAGTCAAC&quot;</code></pre>
 <p>Test with real data, the Robinson and Robinson amino acid frequencies</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="writing-user-friendly-functions.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(robinson_aafreq)</span>
 <span id="cb85-2"><a href="writing-user-friendly-functions.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">r_molec_seq_vs1</span>(<span class="at">units =</span> robinson_aafreq<span class="sc">$</span>aa1,</span>
 <span id="cb85-3"><a href="writing-user-friendly-functions.html#cb85-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">prob =</span> robinson_aafreq<span class="sc">$</span>aa.freq,</span>
 <span id="cb85-4"><a href="writing-user-friendly-functions.html#cb85-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">length =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;SVLTGGFIPN&quot;</code></pre>
+<pre><code>## [1] &quot;VFCSSGKADV&quot;</code></pre>
 </div>
 <div id="version-2" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Version 2</h2>
@@ -1006,7 +1006,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb87-14"><a href="writing-user-friendly-functions.html#cb87-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Now it works even if all we give it is a length</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="writing-user-friendly-functions.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r_molec_seq_vs2</span>(<span class="at">length =</span> <span class="dv">100</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;ACACGAACATCGGCTTCGGTTTGTGAAATGCTATTTGTATCTGCTTGGCCCTGATCAGGGAAACCTTGCGCCCCGCAGCACAGATTTCCATGGAGGTACT&quot;</code></pre>
+<pre><code>## [1] &quot;CCTTACCGTACTTCCCGACGGAGACGTATCAGTTCCTTGTGTGCTTTGGATCGCATGCCTGGTGTGGTTTGCTCATTCAGATACGCCTTGTTGCGAAACT&quot;</code></pre>
 </div>
 <div id="version-3" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Version 3</h2>
@@ -1027,7 +1027,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb90-14"><a href="writing-user-friendly-functions.html#cb90-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>Now it works even if the parentheses are empty</p>
 <div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="writing-user-friendly-functions.html#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r_molec_seq_vs3</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;CCACATCATACCAACCCGTCTCTACGGAGGAACTTGCCGTTAATTGTAACTGGGTCTGTTAACTCAGAATACACGAAAATAGCTGTCATGCGCGGGCCTA&quot;</code></pre>
+<pre><code>## [1] &quot;ACGGTCTGGGAGGGCAATCTGGTTGCCAATAACAGAAGAGTAACTTGTGCCCGGCATATGTGAGCCTCTGATACTATGGTCTAAACCTTTCGCAACCGGC&quot;</code></pre>
 </div>
 <div id="version-4-adding-conditions-and-warnigns" class="section level2" number="6.4">
 <h2><span class="header-section-number">6.4</span> Version 4: Adding conditions and warnigns</h2>
@@ -1056,10 +1056,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="writing-user-friendly-functions.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r_molec_seq_vs4</span>()</span></code></pre></div>
 <pre><code>## Warning in r_molec_seq_vs4(): Note: all parameters set to defaults. Did you want
 ## to change something?</code></pre>
-<pre><code>## [1] &quot;AGGCTGTATTAGAGAGGTGTCAAGTGTATGGACTGGAGCTCGGAAACCGCATGGGCCACGTAGTCTTGTAGCGCCGCCGAGATCAGTCGTAGAGCGTTGT&quot;</code></pre>
+<pre><code>## [1] &quot;TTAATGCCCGAGCCTTCATTACCATTCATGCACCCATGTGATGCCACTTATGAGAGCTAGCATGCAGACGTCTGATAAACAGGAAACTCTGTCAATGACC&quot;</code></pre>
 <p>This doesnt</p>
 <div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="writing-user-friendly-functions.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r_molec_seq_vs4</span>(<span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.3</span>,<span class="fl">0.3</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>))</span></code></pre></div>
-<pre><code>## [1] &quot;AAGCAGACGCTCATGCAATCCGTTACTAGTTTCTAAGGGCTTGAACATTACCCAGATGTAGCTACCTTAAGTGCATGCGACAACATTCCCGACCAGGCCA&quot;</code></pre>
+<pre><code>## [1] &quot;TGGCGCTATGATCTTTGGATAGAACCAAAACGATTTATATATGGGAGTGAAATAGGGTGATAGGTTGAAGATTCTCAAAGGAAATTAGAATAAGTGTAAA&quot;</code></pre>
 </div>
 <div id="version-5" class="section level2" number="6.5">
 <h2><span class="header-section-number">6.5</span> Version 5</h2>
@@ -1092,16 +1092,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="writing-user-friendly-functions.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r_molec_seq_vs5</span>(<span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.3</span>,<span class="fl">0.3</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>), </span>
 <span id="cb100-2"><a href="writing-user-friendly-functions.html#cb100-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">as.string =</span> F,</span>
 <span id="cb100-3"><a href="writing-user-friendly-functions.html#cb100-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">length =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##  [1] &quot;C&quot; &quot;T&quot; &quot;A&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;A&quot;</code></pre>
+<pre><code>##  [1] &quot;A&quot; &quot;A&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;C&quot; &quot;G&quot; &quot;A&quot;</code></pre>
 <p>Return as a string</p>
 <div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="writing-user-friendly-functions.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r_molec_seq_vs5</span>(<span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.3</span>,<span class="fl">0.3</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>), </span>
 <span id="cb102-2"><a href="writing-user-friendly-functions.html#cb102-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">as.string =</span> T,</span>
 <span id="cb102-3"><a href="writing-user-friendly-functions.html#cb102-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">length =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;TATGCTAGTA&quot;</code></pre>
+<pre><code>## [1] &quot;TTAGTACTCC&quot;</code></pre>
 <p>The default is to return a string, so as.string = T is option</p>
 <div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="writing-user-friendly-functions.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r_molec_seq_vs5</span>(<span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.3</span>,<span class="fl">0.3</span>,<span class="fl">0.2</span>,<span class="fl">0.2</span>), </span>
 <span id="cb104-2"><a href="writing-user-friendly-functions.html#cb104-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">length =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;TTGGGCCACG&quot;</code></pre>
+<pre><code>## [1] &quot;GTAACCTGGA&quot;</code></pre>
 
 </div>
 </div>
@@ -1154,7 +1154,7 @@ gitbook.start({
 "link": "https://github.com/brouwern/lbrb/blob/master/_book60_programming-misc/prog_functions_advanced_random_molec_seq.Rmd",
 "text": null
 },
-"download": ["lbrb.pdf", "lbrb.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }

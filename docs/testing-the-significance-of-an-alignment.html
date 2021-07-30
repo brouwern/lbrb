@@ -978,8 +978,8 @@ Pairwise Sequence Alignment
 <p>We can use this function to generate 1000 7-letter amino acid sequences using a multinomial model in which the probabilities of the letters are set equal to their frequencies in “PAWHEAE” (i.e. probabilities 1/7 for P, 2/7 for A, 1/7 for W, 1/7 for H and 2/7 for E), by typing:</p>
 <div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb827-1"><a href="testing-the-significance-of-an-alignment.html#cb827-1" aria-hidden="true" tabindex="-1"></a>randomseqs <span class="ot">&lt;-</span> <span class="fu">make_seqs_multinom_mod</span>(<span class="st">&#39;PAWHEAE&#39;</span>,<span class="dv">1000</span>)</span>
 <span id="cb827-2"><a href="testing-the-significance-of-an-alignment.html#cb827-2" aria-hidden="true" tabindex="-1"></a>randomseqs[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>] <span class="co"># Print out the first 10 random sequences</span></span></code></pre></div>
-<pre><code>##  [1] &quot;EPAHPEH&quot; &quot;EEAWWWH&quot; &quot;WPWHPHA&quot; &quot;AEAWEWH&quot; &quot;PHWWEHE&quot; &quot;AAHAHPH&quot; &quot;EEHPAEE&quot;
-##  [8] &quot;WAWAHAH&quot; &quot;AEEWHEE&quot; &quot;HWPHAWW&quot;</code></pre>
+<pre><code>##  [1] &quot;AEAAAEA&quot; &quot;PEEAHEH&quot; &quot;PAEEWEP&quot; &quot;AHEPAEA&quot; &quot;EAEPEAA&quot; &quot;PHEPHEA&quot; &quot;PEPPHHE&quot;
+##  [8] &quot;APWAAPA&quot; &quot;APPEHAE&quot; &quot;PHAEAAA&quot;</code></pre>
 <p>The 1000 random sequences are stored in a vector <code>randomseqs</code> that has 1000 elements, each of which contains one of the random sequences.</p>
 <p>We can then use the Needleman-Wunsch algorithm to align the sequence “HEAGAWGHEE” to one of the 1000 random sequences generated using the multinomial model with probabilities 1/7 for P, 2/7 for A, 1/7 for W, 1/7 for H and 2/7 for E.</p>
 <p>For example, to align “HEAGAWGHEE” to the first of the 1000 random sequences (“EEHAAAE”), we type:</p>
@@ -991,15 +991,15 @@ Pairwise Sequence Alignment
 <span id="cb830-5"><a href="testing-the-significance-of-an-alignment.html#cb830-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">scoreOnly =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## Global PairwiseAlignmentsSingleSubject (1 of 1)
 ## pattern: HEAGAWGHEE
-## subject: -EP-A-HPEH
-## score: -18</code></pre>
+## subject: AEAAA---EA
+## score: -7</code></pre>
 <p>If we use the <code>pairwiseAlignment()</code> function with the argument <code>scoreOnly=TRUE</code>, it will just give us the score for the alignment:</p>
 <div class="sourceCode" id="cb832"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb832-1"><a href="testing-the-significance-of-an-alignment.html#cb832-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pairwiseAlignment</span>(s4, randomseqs[<span class="dv">1</span>], </span>
 <span id="cb832-2"><a href="testing-the-significance-of-an-alignment.html#cb832-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">substitutionMatrix =</span> <span class="st">&quot;BLOSUM50&quot;</span>,</span>
 <span id="cb832-3"><a href="testing-the-significance-of-an-alignment.html#cb832-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">gapOpening =</span> <span class="sc">-</span><span class="dv">2</span>,</span>
 <span id="cb832-4"><a href="testing-the-significance-of-an-alignment.html#cb832-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">gapExtension =</span> <span class="sc">-</span><span class="dv">8</span>, </span>
 <span id="cb832-5"><a href="testing-the-significance-of-an-alignment.html#cb832-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">scoreOnly =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## [1] -18</code></pre>
+<pre><code>## [1] -7</code></pre>
 <p>If we repeat this 1000 times, that is, for each of the 1000 random sequences in vector randomseqs, we can get a distribution of alignment scores expected for aligning “HEAGAWGHEE” to random sequences of the same length and (approximately the same) amino acid composition as “PAWHEAE”.</p>
 <p>We can then compare the actual score for aligning “PAWHEAE” to “HEAGAWGHEE” (i.e. -5) to the distribution of scores for aligning “HEAGAWGHEE” to the random sequences.</p>
 <p>The code above first uses the <code>double()</code> function to create a numeric vector <code>randomscores</code> for storing real numbers (i.e. not integers), with 1000 elements. This will be used to store the alignment scores for 1000 alignments between “HEAGAWGHEE” and the 1000 different random sequences generated using the multinomial model.</p>
@@ -1020,7 +1020,7 @@ Pairwise Sequence Alignment
 <p>We can see from the histogram that quite a lot of the random sequences seem to have higher alignment scores than -5 when aligned to “HEAGAWGHEE” (where -5 is the alignment score for “PAWHEAE” and “HEAGAWGHEE”).</p>
 <p>We can use the vector randomscores of scores for 1000 alignments of random sequences to “HEAGAWGHEE” to calculate the probability of getting a score as large as the real alignment score for “PAWHEAE” and “HEAGAWGHEE” (i.e. -5) by chance.</p>
 <div class="sourceCode" id="cb836"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb836-1"><a href="testing-the-significance-of-an-alignment.html#cb836-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(randomscores <span class="sc">&gt;=</span> <span class="sc">-</span><span class="dv">5</span>)</span></code></pre></div>
-<pre><code>## [1] 290</code></pre>
+<pre><code>## [1] 308</code></pre>
 <p>We see that 266 of the 1000 alignments of random sequences to “HEAGAWGHEE” had alignment scores that were equal to or greater than -5. Thus, we can estimate that the probability of getting a score as large as the real alignment score by chance is (266/1000 =) 0.266. In other words, we can calculate a P-value of 0.266. This probability or P-value is quite high (almost 30%, or 1 in 3), so we can conclude that it is quite probable that we could get an alignment score as high as -5 by chance alone. This indicates that the sequences “HEAGAWGHEE” and “PAWHEAE” are not more similar than any two random sequences, and so they are probably not related sequences.</p>
 <p>Another way of saying this is that the P-value that we calculated is high (0.266), and as a result we conclude that the alignment score for the sequences “HEAGAWGHEE” and “PAWHEAE” is not statistically significant. Generally, if the P-value that we calculate for an alignment of two sequences is &gt;0.05, we conclude that the alignment score is not statistically significant, and that the sequences are probably not related. On the other hand, if the P-value is less than or equal to 0.05, we conclude that the alignment score is “statistically significant”, and the sequences are very probably related (homologous).</p>
 </div>
@@ -1121,7 +1121,7 @@ gitbook.start({
 "link": "https://github.com/brouwern/lbrb/blob/master/004-pairwise_alignment/22-test_alignment_sig_pvalue-AC07-03.Rmd",
 "text": null
 },
-"download": ["lbrb.pdf", "lbrb.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }

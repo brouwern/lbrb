@@ -961,10 +961,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] &quot;A&quot;</code></pre>
 <p>Select 10 letters, with replacement (replace = T), so that the same letter can occur more than once</p>
 <div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="simulating-random-amino-acid-sequences.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> my.letters, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> T)</span></code></pre></div>
-<pre><code>##  [1] &quot;D&quot; &quot;C&quot; &quot;D&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;C&quot; &quot;B&quot; &quot;A&quot;</code></pre>
+<pre><code>##  [1] &quot;A&quot; &quot;A&quot; &quot;C&quot; &quot;B&quot; &quot;D&quot; &quot;D&quot; &quot;D&quot; &quot;B&quot; &quot;D&quot; &quot;C&quot;</code></pre>
 <p>Select 100 letters</p>
 <div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="simulating-random-amino-acid-sequences.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> my.letters, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> T)</span></code></pre></div>
-<pre><code>##  [1] &quot;C&quot; &quot;A&quot; &quot;B&quot; &quot;B&quot; &quot;C&quot; &quot;B&quot; &quot;C&quot; &quot;C&quot; &quot;D&quot; &quot;A&quot;</code></pre>
+<pre><code>##  [1] &quot;A&quot; &quot;B&quot; &quot;D&quot; &quot;C&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;B&quot; &quot;D&quot; &quot;C&quot;</code></pre>
 </div>
 <div id="select-random-letters-from-the-whole-alphabet" class="section level2" number="15.2">
 <h2><span class="header-section-number">15.2</span> Select random letters from the whole alphabet</h2>
@@ -974,7 +974,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [20] &quot;T&quot; &quot;U&quot; &quot;V&quot; &quot;W&quot; &quot;X&quot; &quot;Y&quot; &quot;Z&quot;</code></pre>
 <p>Select 10 letters from whole alphabet</p>
 <div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="simulating-random-amino-acid-sequences.html#cb414-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> my.letters, <span class="at">size =</span> <span class="dv">10</span>, <span class="at">replace =</span> T)</span></code></pre></div>
-<pre><code>##  [1] &quot;D&quot; &quot;A&quot; &quot;A&quot; &quot;D&quot; &quot;C&quot; &quot;C&quot; &quot;B&quot; &quot;A&quot; &quot;D&quot; &quot;A&quot;</code></pre>
+<pre><code>##  [1] &quot;C&quot; &quot;B&quot; &quot;C&quot; &quot;C&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;C&quot; &quot;C&quot; &quot;D&quot;</code></pre>
 </div>
 <div id="select-random-amino-acids-to-build-polypeptide" class="section level2" number="15.3">
 <h2><span class="header-section-number">15.3</span> Select random amino acids to build polypeptide</h2>
@@ -982,7 +982,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="simulating-random-amino-acid-sequences.html#cb416-1" aria-hidden="true" tabindex="-1"></a>all.aas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>,<span class="st">&quot;E&quot;</span>,<span class="st">&quot;F&quot;</span>,<span class="st">&quot;G&quot;</span>,<span class="st">&quot;H&quot;</span>,<span class="st">&quot;I&quot;</span>,<span class="st">&quot;K&quot;</span>,<span class="st">&quot;L&quot;</span>,<span class="st">&quot;M&quot;</span>,<span class="st">&quot;N&quot;</span>,<span class="st">&quot;P&quot;</span>,<span class="st">&quot;Q&quot;</span>,<span class="st">&quot;R&quot;</span>,<span class="st">&quot;S&quot;</span>,<span class="st">&quot;T&quot;</span>,<span class="st">&quot;V&quot;</span>,<span class="st">&quot;W&quot;</span>,<span class="st">&quot;Y&quot;</span>)</span></code></pre></div>
 <p>Randomly select an amino acid</p>
 <div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="simulating-random-amino-acid-sequences.html#cb417-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> all.aas, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">replace =</span> T)</span></code></pre></div>
-<pre><code>## [1] &quot;L&quot;</code></pre>
+<pre><code>## [1] &quot;N&quot;</code></pre>
 <p>Make a vector of 200 amino acids</p>
 <div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="simulating-random-amino-acid-sequences.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(<span class="at">x =</span> all.aas, <span class="at">size =</span> <span class="dv">200</span>, <span class="at">replace =</span> T)</span></code></pre></div>
 <p>I may want to represent the size of the fake polypeptide with an object</p>
@@ -993,7 +993,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb421-2"><a href="simulating-random-amino-acid-sequences.html#cb421-2" aria-hidden="true" tabindex="-1"></a>my.pp <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> all.aas, <span class="at">size =</span> my.polypep.size, <span class="at">replace =</span> T)</span></code></pre></div>
 <p>I can make a single character string with not spaces using paste</p>
 <div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="simulating-random-amino-acid-sequences.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="at">x =</span> my.pp,<span class="at">sep =</span> <span class="st">&quot;&quot;</span>, <span class="at">collapse =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;PIASFEWAFGMQPVIGYRVLHQRFWEGCNDGNAPYHSPDWGCNHFFWLNKAQEVGQDDSAFGCTPKPCNMMALAWKINRPEAYYKMQPVKQCQGLTGPQSTVCNAFGGEFNFSCYTRPACDCSNTRFNKSYYQDIMGWLKKACHVIWITGYWSFLNCYHHKPIHQCWRSLQEQNSPNIWLVLKPDNPWSRENKNQCNWTS&quot;</code></pre>
+<pre><code>## [1] &quot;KIWIHDCISPSFRQPVPACPGQVPHCMSGCSECFKRWEWKFFEFESTNNAAQNILEYELAPWIWKSLITEWCKMFVALSYYRPAACASTWTGHDHQMDWYKQAMANANPARWNFEEQSTQMPSLSSAPDVNMCLLISFLPVNDDLVREAHVHWDKKCTNCHMGTGKIGDQLPNIRMCPVYLVGVAVEHMLLGYGQTKWVN&quot;</code></pre>
 
 </div>
 </div>
@@ -1046,7 +1046,7 @@ gitbook.start({
 "link": "https://github.com/brouwern/lbrb/blob/master/_book60_programming-misc/prog-simulate_random_aa_seqs.Rmd",
 "text": null
 },
-"download": ["lbrb.pdf", "lbrb.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }

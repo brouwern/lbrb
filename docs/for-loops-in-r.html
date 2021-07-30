@@ -1322,19 +1322,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The matrix looks like this</p>
 <div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="for-loops-in-r.html#cb360-1" aria-hidden="true" tabindex="-1"></a>my.matrix</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
-## [1,] &quot;C&quot;  &quot;T&quot;  &quot;T&quot;  &quot;C&quot;  &quot;G&quot; 
-## [2,] &quot;G&quot;  &quot;C&quot;  &quot;C&quot;  &quot;C&quot;  &quot;T&quot; 
-## [3,] &quot;G&quot;  &quot;G&quot;  &quot;G&quot;  &quot;T&quot;  &quot;A&quot; 
-## [4,] &quot;G&quot;  &quot;T&quot;  &quot;C&quot;  &quot;T&quot;  &quot;T&quot; 
-## [5,] &quot;A&quot;  &quot;T&quot;  &quot;C&quot;  &quot;A&quot;  &quot;G&quot;</code></pre>
+## [1,] &quot;A&quot;  &quot;G&quot;  &quot;T&quot;  &quot;C&quot;  &quot;T&quot; 
+## [2,] &quot;T&quot;  &quot;G&quot;  &quot;G&quot;  &quot;A&quot;  &quot;A&quot; 
+## [3,] &quot;G&quot;  &quot;G&quot;  &quot;G&quot;  &quot;G&quot;  &quot;T&quot; 
+## [4,] &quot;A&quot;  &quot;C&quot;  &quot;T&quot;  &quot;G&quot;  &quot;A&quot; 
+## [5,] &quot;T&quot;  &quot;C&quot;  &quot;G&quot;  &quot;C&quot;  &quot;T&quot;</code></pre>
 <p>In some programming languages I’d have to write a loop to change this to lower case. In R I can use a fancy function called apply() to do it in one step</p>
 <div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="for-loops-in-r.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">apply</span>(my.matrix,<span class="dv">1</span>,tolower)</span></code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
-## [1,] &quot;c&quot;  &quot;g&quot;  &quot;g&quot;  &quot;g&quot;  &quot;a&quot; 
-## [2,] &quot;t&quot;  &quot;c&quot;  &quot;g&quot;  &quot;t&quot;  &quot;t&quot; 
-## [3,] &quot;t&quot;  &quot;c&quot;  &quot;g&quot;  &quot;c&quot;  &quot;c&quot; 
-## [4,] &quot;c&quot;  &quot;c&quot;  &quot;t&quot;  &quot;t&quot;  &quot;a&quot; 
-## [5,] &quot;g&quot;  &quot;t&quot;  &quot;a&quot;  &quot;t&quot;  &quot;g&quot;</code></pre>
+## [1,] &quot;a&quot;  &quot;t&quot;  &quot;g&quot;  &quot;a&quot;  &quot;t&quot; 
+## [2,] &quot;g&quot;  &quot;g&quot;  &quot;g&quot;  &quot;c&quot;  &quot;c&quot; 
+## [3,] &quot;t&quot;  &quot;g&quot;  &quot;g&quot;  &quot;t&quot;  &quot;g&quot; 
+## [4,] &quot;c&quot;  &quot;a&quot;  &quot;g&quot;  &quot;g&quot;  &quot;c&quot; 
+## [5,] &quot;t&quot;  &quot;a&quot;  &quot;t&quot;  &quot;a&quot;  &quot;t&quot;</code></pre>
 </div>
 <div id="challenge-1" class="section level2" number="12.9">
 <h2><span class="header-section-number">12.9</span> Challenge</h2>
@@ -1391,7 +1391,7 @@ gitbook.start({
 "link": "https://github.com/brouwern/lbrb/blob/master/_book60_programming-misc/prog-for_loops.Rmd",
 "text": null
 },
-"download": ["lbrb.pdf", "lbrb.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }

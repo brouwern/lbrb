@@ -975,24 +975,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1261-2"><a href="hidden-markov-models.html#cb1261-2" aria-hidden="true" tabindex="-1"></a>       seqlength,</span>
 <span id="cb1261-3"><a href="hidden-markov-models.html#cb1261-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">rep=</span><span class="cn">TRUE</span>,</span>
 <span id="cb1261-4"><a href="hidden-markov-models.html#cb1261-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">prob=</span>probabilities1) </span></code></pre></div>
-<pre><code>##  [1] &quot;C&quot; &quot;A&quot; &quot;A&quot; &quot;A&quot; &quot;C&quot; &quot;T&quot; &quot;T&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;T&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot;
-## [20] &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;C&quot; &quot;T&quot; &quot;C&quot;</code></pre>
+<pre><code>##  [1] &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot;
+## [20] &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot;</code></pre>
 <p>If you look at the help page for the function, you will find that its inputs are the vector to sample from (nucleotides here), the size of the sample (seqlength here), and a vector of probabilities for obtaining the elements of the vector being sampled (probabilities1 here). If we use the sample() function to generate a sequence again, it will create a different sequence using the same multinomial model:</p>
 <div class="sourceCode" id="cb1263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1263-1"><a href="hidden-markov-models.html#cb1263-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate another sequence</span></span>
 <span id="cb1263-2"><a href="hidden-markov-models.html#cb1263-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(nucleotides, </span>
 <span id="cb1263-3"><a href="hidden-markov-models.html#cb1263-3" aria-hidden="true" tabindex="-1"></a>       seqlength, </span>
 <span id="cb1263-4"><a href="hidden-markov-models.html#cb1263-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">rep=</span><span class="cn">TRUE</span>, </span>
 <span id="cb1263-5"><a href="hidden-markov-models.html#cb1263-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">prob=</span>probabilities1) </span></code></pre></div>
-<pre><code>##  [1] &quot;A&quot; &quot;C&quot; &quot;C&quot; &quot;T&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;T&quot; &quot;A&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;A&quot;
-## [20] &quot;C&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;T&quot; &quot;C&quot; &quot;C&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot;</code></pre>
+<pre><code>##  [1] &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;A&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot;
+## [20] &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;C&quot; &quot;T&quot; &quot;T&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot;</code></pre>
 <p>In the same way, we can generate a sequence using a different multinomial model, where pA=0.1, pC=0.41, pG=0.39, and pT=0.1:</p>
 <div class="sourceCode" id="cb1265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1265-1"><a href="hidden-markov-models.html#cb1265-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the values of the probabilities for the new model</span></span>
 <span id="cb1265-2"><a href="hidden-markov-models.html#cb1265-2" aria-hidden="true" tabindex="-1"></a>probabilities2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.41</span>, <span class="fl">0.39</span>, <span class="fl">0.1</span>) </span>
 <span id="cb1265-3"><a href="hidden-markov-models.html#cb1265-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1265-4"><a href="hidden-markov-models.html#cb1265-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a sequence</span></span>
 <span id="cb1265-5"><a href="hidden-markov-models.html#cb1265-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(nucleotides, seqlength, <span class="at">rep=</span><span class="cn">TRUE</span>, <span class="at">prob=</span>probabilities2) </span></code></pre></div>
-<pre><code>##  [1] &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot;
-## [20] &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;T&quot;</code></pre>
+<pre><code>##  [1] &quot;A&quot; &quot;G&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;C&quot; &quot;T&quot; &quot;T&quot; &quot;C&quot; &quot;C&quot;
+## [20] &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot; &quot;G&quot;</code></pre>
 <p>As you would expect, the sequences generated using this second multinomial model have a higher fraction of Cs and Gs compared to the sequences generated using the first multinomial model above. This is because pC and GT are higher for this second model than for the first model (pC=0.41 and GT=0.39 in the second model, versus pC=0.3 and GT=0.3 in the first model). That is, in the second multinomial model we are using a roulette wheel that has large slices labeled “C” and “G”, while in the first multinomial model we were using a roulette wheel with relatively smaller slices labeled “C” and “G” (SEE THE PICTURE BELOW).</p>
 </div>
 <div id="a-markov-model-of-dna-sequence-evolution" class="section level2" number="60.3">
@@ -1044,8 +1044,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb1275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1275-1"><a href="hidden-markov-models.html#cb1275-1" aria-hidden="true" tabindex="-1"></a>myinitialprobs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>, <span class="fl">0.25</span>)</span>
 <span id="cb1275-2"><a href="hidden-markov-models.html#cb1275-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1275-3"><a href="hidden-markov-models.html#cb1275-3" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_markov_seq</span>(mytransitionmatrix, myinitialprobs, <span class="dv">30</span>)</span></code></pre></div>
-<pre><code>##  [1] &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;A&quot; &quot;T&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot; &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;C&quot; &quot;A&quot; &quot;G&quot; &quot;T&quot; &quot;A&quot;
-## [20] &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot;</code></pre>
+<pre><code>##  [1] &quot;T&quot; &quot;A&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;C&quot; &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;G&quot; &quot;T&quot; &quot;A&quot; &quot;A&quot; &quot;G&quot; &quot;G&quot; &quot;C&quot; &quot;C&quot; &quot;C&quot;
+## [20] &quot;A&quot; &quot;T&quot; &quot;T&quot; &quot;C&quot; &quot;C&quot; &quot;G&quot; &quot;A&quot; &quot;A&quot; &quot;T&quot; &quot;G&quot; &quot;G&quot;</code></pre>
 <p>As you can see, there are many “A”s after “T”s in the sequence. This is because pTA has a high value (0.5) in the Markov transition matrix mytransitionmatrix. Similarly, there are few “A”s or “T”s after “C”s, which is because pCA and pCT have low values (0.1) in this transition matrix.</p>
 </div>
 <div id="a-hidden-markov-model-of-dna-sequence-evolution" class="section level2" number="60.6">
@@ -1113,36 +1113,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1285-3"><a href="hidden-markov-models.html#cb1285-3" aria-hidden="true" tabindex="-1"></a><span class="fu">generate_hmm_seq</span>(thetransitionmatrix, </span>
 <span id="cb1285-4"><a href="hidden-markov-models.html#cb1285-4" aria-hidden="true" tabindex="-1"></a>                 theemissionmatrix, </span>
 <span id="cb1285-5"><a href="hidden-markov-models.html#cb1285-5" aria-hidden="true" tabindex="-1"></a>                 theinitialprobs, <span class="dv">30</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;Position 1 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 2 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 3 , State AT-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 4 , State GC-rich , Nucleotide =  A&quot;
-## [1] &quot;Position 5 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 6 , State AT-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 7 , State AT-rich , Nucleotide =  A&quot;
-## [1] &quot;Position 8 , State AT-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 9 , State AT-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 10 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 11 , State GC-rich , Nucleotide =  A&quot;
-## [1] &quot;Position 12 , State GC-rich , Nucleotide =  T&quot;
+<pre><code>## [1] &quot;Position 1 , State GC-rich , Nucleotide =  G&quot;
+## [1] &quot;Position 2 , State GC-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 3 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 4 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 5 , State GC-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 6 , State AT-rich , Nucleotide =  G&quot;
+## [1] &quot;Position 7 , State GC-rich , Nucleotide =  G&quot;
+## [1] &quot;Position 8 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 9 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 10 , State AT-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 11 , State GC-rich , Nucleotide =  G&quot;
+## [1] &quot;Position 12 , State GC-rich , Nucleotide =  C&quot;
 ## [1] &quot;Position 13 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 14 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 15 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 16 , State AT-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 17 , State GC-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 18 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 19 , State GC-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 20 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 14 , State AT-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 15 , State AT-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 16 , State AT-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 17 , State GC-rich , Nucleotide =  G&quot;
+## [1] &quot;Position 18 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 19 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 20 , State GC-rich , Nucleotide =  T&quot;
 ## [1] &quot;Position 21 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 22 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 23 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 24 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 25 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 26 , State GC-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 27 , State GC-rich , Nucleotide =  C&quot;
-## [1] &quot;Position 28 , State GC-rich , Nucleotide =  G&quot;
-## [1] &quot;Position 29 , State AT-rich , Nucleotide =  T&quot;
-## [1] &quot;Position 30 , State AT-rich , Nucleotide =  T&quot;</code></pre>
+## [1] &quot;Position 22 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 23 , State GC-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 24 , State AT-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 25 , State AT-rich , Nucleotide =  A&quot;
+## [1] &quot;Position 26 , State AT-rich , Nucleotide =  T&quot;
+## [1] &quot;Position 27 , State AT-rich , Nucleotide =  T&quot;
+## [1] &quot;Position 28 , State GC-rich , Nucleotide =  C&quot;
+## [1] &quot;Position 29 , State GC-rich , Nucleotide =  T&quot;
+## [1] &quot;Position 30 , State GC-rich , Nucleotide =  G&quot;</code></pre>
 <p>As you can see, the nucleotides generated by the GC-rich state are mostly but not all “G”s and “C”s (because of the high values of pG and pC for the GC-rich state in the HMM emission matrix), while the nucleotides generated by the AT-rich state are mostly but not all “A”s and “T”s (because of the high values of pT and pA for the AT-rics state in the HMM emission matrix).</p>
 <p>Furthermore, there tends to be runs of nucleotides that are either all in the GC-rich state or all in the AT-rich state, as the transition matrix specifies that the probabilities of switching from the AT-rich to GC-rich state (probability 0.3), or GC-rich to AT-rich state (probability 0.1) are relatively low.</p>
 </div>
@@ -1242,7 +1242,7 @@ gitbook.start({
 "link": "https://github.com/brouwern/lbrb/blob/master/011-sequence_evolution/40-HMM_sequence_evolution.Rmd",
 "text": null
 },
-"download": ["lbrb.pdf", "lbrb.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }

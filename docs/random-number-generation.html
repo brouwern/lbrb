@@ -960,24 +960,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The way that random numbers are generated in practice uses algorithms that produce random-looking numbers and random-behaving sets up numbers. However, these algorithms are actually deterministic based on a given numberic input. Normally when we generate a random number in R, R grabs a constantly value to use as the input.</p>
 <p>The sys.time() function can be used to tell us the time</p>
 <div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="random-number-generation.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;2021-07-30 10:28:14 EDT&quot;</code></pre>
+<pre><code>## [1] &quot;2021-07-30 10:43:23 EDT&quot;</code></pre>
 <p>R can keep track of very small scales of time; here, I set to measure seconds to 3 decimal places (1000s of sectons)</p>
 <div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="random-number-generation.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits.secs =</span> <span class="dv">3</span>)</span>
 <span id="cb366-2"><a href="random-number-generation.html#cb366-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;2021-07-30 10:28:14.712 EDT&quot;</code></pre>
+<pre><code>## [1] &quot;2021-07-30 10:43:23.201 EDT&quot;</code></pre>
 <div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="random-number-generation.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;2021-07-30 10:28:14.713 EDT&quot;</code></pre>
+<pre><code>## [1] &quot;2021-07-30 10:43:23.202 EDT&quot;</code></pre>
 <p>Its a little more complicated than this, but basically R uses a constantly changing baseline as a starting point for random number generation.</p>
 <p>Normally, when we generate random numbers this means that every time we call a random number generation function we get a different results.</p>
 <p>For example, runif() generates a random value from 0 to 1. Run this 4 times and you get four values.</p>
 <div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="random-number-generation.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## [1] 0.6156088</code></pre>
+<pre><code>## [1] 0.7334134</code></pre>
 <div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb372-1"><a href="random-number-generation.html#cb372-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## [1] 0.6481998</code></pre>
+<pre><code>## [1] 0.09995964</code></pre>
 <div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="random-number-generation.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## [1] 0.5374346</code></pre>
+<pre><code>## [1] 0.7213866</code></pre>
 <div class="sourceCode" id="cb376"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb376-1"><a href="random-number-generation.html#cb376-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>)</span></code></pre></div>
-<pre><code>## [1] 0.53116</code></pre>
+<pre><code>## [1] 0.4182577</code></pre>
 <p>Prior to generating a random number we can fix the starting point of the random number generator, called the <strong>seed</strong>. R will use the same input (seed) each time it runs its random number generator, and so the same output will be given. Every time you run this, you should get 0.5074782.</p>
 <div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="random-number-generation.html#cb378-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
 <span id="cb378-2"><a href="random-number-generation.html#cb378-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>)</span></code></pre></div>
@@ -1027,7 +1027,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>From the set.seed help file:
 “Initially, there is no seed; a new one is created from the current time and the process ID when one is required. Hence different sessions will give different simulation results, by default.”</p>
 <div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="random-number-generation.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;2021-07-30 10:28:14.767 EDT&quot;</code></pre>
+<pre><code>## [1] &quot;2021-07-30 10:43:23.260 EDT&quot;</code></pre>
 <div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="random-number-generation.html#cb396-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="fu">Sys.time</span>())</span></code></pre></div>
 <p>R’s sample() function actually had some problems
 <a href="https://arxiv.org/abs/1809.06520" class="uri">https://arxiv.org/abs/1809.06520</a></p>
@@ -1083,7 +1083,7 @@ gitbook.start({
 "link": "https://github.com/brouwern/lbrb/blob/master/_book60_programming-misc/prog-random_number_generation-moved-to-combio4all.Rmd",
 "text": null
 },
-"download": ["lbrb.pdf", "lbrb.epub"],
+"download": null,
 "toc": {
 "collapse": "subsection"
 }
