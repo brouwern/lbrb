@@ -1,4 +1,4 @@
-# Nucleic Acids
+# Nucleic Acids {#nucleic-acids-review}
 
 **Authors**: OpenStax / Libretext  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
 
@@ -41,26 +41,11 @@ base, a pentose (five-carbon) sugar, and a phosphate group (Figure
 3.5.1). Each nitrogenous base in a nucleotide is attached to a sugar
 molecule, which is attached to one or more phosphate groups.
 
-```{r, echo = F}
+```{r, echo = F, fig.cap="A nucleotide is made up of three components: a nitrogenous base, a pentose sugar, and one or more phosphate groups. Carbon residues in the pentose are numbered 1′ through 5′ (the prime distinguishes these residues from those in the base, which are numbered without using a prime notation). The base is attached to the 1′ position of the ribose, and the phosphate is attached to the 5′ position. When a polynucleotide is formed, the 5′ phosphate of the incoming nucleotide attaches to the 3′ hydroxyl group at the end of the growing chain. Two types of pentose are found in nucleotides, deoxyribose (found in DNA) and ribose (found in RNA). Deoxyribose is similar in structure to ribose, but it has an H instead of an OH at the 2′ position. Bases can be divided into two categories: purines and pyrimidines. Purines have a double ring structure, and pyrimidines have a single ring."}
+
 knitr::include_graphics(here::here("./images/image5.jpeg"))
 ```
 
-
-
-Figure 3.5.1 : A nucleotide is made up of three components: a
-nitrogenous base, a pentose sugar, and one or more phosphate groups.
-Carbon residues in the pentose are numbered 1′ through 5′ (the prime
-distinguishes these residues from those in the base, which are
-numbered without using a prime notation). The base is attached to the
-1′ position of the ribose, and the phosphate is attached to the 5′
-position. When a polynucleotide is formed, the 5′ phosphate of the
-incoming nucleotide attaches to the 3′ hydroxyl group at the end of
-the growing chain. Two types of pentose are found in nucleotides,
-deoxyribose (found in DNA) and ribose (found in RNA). Deoxyribose is
-similar in structure to ribose, but it has an H instead of an OH at
-the 2′ position. Bases can be divided into two categories: purines and
-pyrimidines. Purines have a double ring structure, and pyrimidines
-have a single ring.
 
 The nitrogenous bases, important components of nucleotides, are
 organic molecules and are so named because they contain carbon and

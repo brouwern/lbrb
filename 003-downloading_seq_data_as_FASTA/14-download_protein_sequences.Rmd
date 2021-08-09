@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Downloading protein sequences in *R*
+# Downloading protein sequences in *R* {#download-protein-seqs-R}
 
 **By**: Avril Coghlan.  
 

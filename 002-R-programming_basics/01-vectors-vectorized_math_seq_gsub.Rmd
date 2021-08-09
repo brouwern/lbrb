@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# A primer for working with vecotrs
+# A primer for working with vectors {#vectors-in-R}
 
 **By**: Avril Coghlan  
 

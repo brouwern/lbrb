@@ -1,4 +1,4 @@
-# Installing the RStudio IDE
+# Installing the RStudio IDE {$installRStudio}
 
 **By:** Nathan Brouwer
 

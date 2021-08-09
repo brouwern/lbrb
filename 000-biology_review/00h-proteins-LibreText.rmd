@@ -1,4 +1,4 @@
-# Proteins
+# Proteins {#proteins-review}
 
 **Authors**: OpenStax / LibreText.  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
 
@@ -93,6 +93,7 @@ After **protein synthesis (translation)**, most proteins are modified. These are
 ## Evolution Connection:
 
 ---------------
+
 **The Evolutionary Significance of Cytochrome**: Cytochrome c is an
 important component of the electron transport chain, a part of
 cellular respiration, and it is normally found in the cellular
@@ -115,6 +116,7 @@ protein sequences, no sequence difference was found. When human and
 rhesus monkey sequences were compared, the single difference found was
 in one amino acid. In another comparison, human to yeast sequencing
 shows a difference in the 44th position.
+
 ---------------
 
 ## Protein Structure

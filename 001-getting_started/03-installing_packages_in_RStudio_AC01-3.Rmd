@@ -1,4 +1,4 @@
-# Installing *R* packages
+# Installing *R* packages {#installing-packages}
 
 **By**: Avril Coghlan.  
 

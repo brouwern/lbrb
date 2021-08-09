@@ -3,7 +3,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# A Brief introduction to R
+# A Brief introduction to R {#basic-R}
 
 **By**: Avril Coghlan.  
 
@@ -142,7 +142,7 @@ mylist <- list(name="Charles Darwin",
                myvector)
 ```
 
-We can then print out the contents of the list mylist by typing its name:
+We can then print out the contents of the list `mylist` by typing its name:
 
 ```{r}
 mylist
@@ -267,7 +267,7 @@ In *R*, you can get help about a particular function by using the `help()` funct
 help("log10")
 ```
  
-When you use the `help()` function, a box or web pag will show up in one of the panes of RStudio with information about the function that you asked for help with.  You can also use the `?` next to the function like this
+When you use the `help()` function, a box or web page will show up in one of the panes of RStudio with information about the function that you asked for help with.  You can also use the `?` next to the function like this
 
 ```{r, eval = F}
 ?log10

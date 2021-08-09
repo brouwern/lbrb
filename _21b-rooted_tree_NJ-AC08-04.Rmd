@@ -4,7 +4,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Rooted neighbor-joining phylogenetic trees
+# Rooted neighbor-joining phylogenetic trees {#rooted-NJ-trees}
 
 ```{r eval = T, message = F, warning = F}
 library(compbio4all)

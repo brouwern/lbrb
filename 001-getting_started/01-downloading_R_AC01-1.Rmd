@@ -1,4 +1,4 @@
-# Downloading R
+# Downloading R {#downloadR}
 
 **By**: Avril Coghlan  
 
