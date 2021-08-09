@@ -205,7 +205,7 @@ Another more in-depth (but very accesssible) book on phylogenetics is Molecular 
 
 For more in-depth information and more examples on using the SeqinR package for sequence analysis, look at the SeqinR documentation, http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng.
 
-For more in-depth information and more examples on the Ape package for phylogenetic analysis, look at the Ape documentation, ape.mpl.ird.fr/.
+For more in-depth information and more examples on the Ape package for phylogenetic analysis, look at the ape documentation, ape.mpl.ird.fr/.
 
 If you are using the Ape package for a phylogenetic analysis project, it would be worthwhile to obtain a copy of the book Analysis of Phylogenetics and Evolution with R by Emmanuel Paradis, published by Springer, which has many nice examples of using R for phylogenetic analyses.
 
@@ -214,6 +214,7 @@ For a more in-depth introduction to R, a good online tutorial is available on th
 There is another nice (slightly more in-depth) tutorial to R available on the “Introduction to R” website, cran.r-project.org/doc/manuals/R-intro.html.
 
 ##  Exercises
+
 Answer the following questions, using the R package. For each question, please record your answer, and what you typed into R to get this answer.
 
 Model answers to the exercises are given in Answers to the exercises on Multiple Alignment and Phylogenetic Trees.

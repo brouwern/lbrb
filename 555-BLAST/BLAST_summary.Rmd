@@ -11,7 +11,7 @@ I have discovered that there are many minor but annoying inconsistencies in how 
 
 In a few cases I have not provided every detail, which I usually note.  I also occasionally use my own analogy or terminology which I think provides a useful description.
 
-In the `combio4all package I have written code that simulates some steps of the BLAST algorithm.  This code is meant to emulate or evoke the process of BLAST and is NOT written as the actual program is.  For example, as discussed below, BLAST's actual searching of databases involves computational tool called a **deterministic finite-state automata (DFSA)** (Zvelebil & Baum 2008).  This is a rather complicated sub-program, buts it general behavior can be evoked using a simple regular expression or `for()` loop.  (I'd like to write code for a DFSA but have yet to find R or Python examples).
+In the `combio4all` package I have written code that simulates some steps of the BLAST algorithm.  This code is meant to emulate or evoke the process of BLAST and is NOT written as the actual program is.  For example, as discussed below, BLAST's actual searching of databases involves computational tool called a **deterministic finite-state automata (DFSA)** (Zvelebil & Baum 2008).  This is a rather complicated sub-program, buts its general behavior can be evoked using a simple **regular expression** or `for()` loop.  
 
 ## BLAST Overview
 
@@ -19,12 +19,12 @@ In the `combio4all package I have written code that simulates some steps of the 
 
 BLASTing is a common activity by molecular biologists, bioinformaticians, computational biologists, and phylogenists.  Some general reasons to do a BLAST
 
-* Find conserved sequences (homologs)
+* Find **conserved sequences** (**homologs**)
 * Find conserved regions within a gene which may be important to protein function
-* Determine how similar a gene in a model species (mice, Drosophila) is to humans
+* Determine how similar a gene in a model species (mice, *Drosophila*) is to humans
 * Scan a new genome sequence for conserved genes
 * Ex: BLASTing sequence of newly discovered mouse gene (shroom) showed Hildebrand & Soriano (1999) that this gene wasn't just a mouse gene - it occurred in Humans AND mice
-* Subsequent BLASTing of shroom indicates that shroom occurs in almost all multicellular organisms!
+    + Subsequent BLASTing of shroom indicates that shroom occurs in almost all multicellular organisms!
 
 
 

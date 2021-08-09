@@ -15,34 +15,34 @@ description: "An entry-level text for bioinformatics and computational biology"
 
 Welcome to *A Little Book of R for Bioinformatics 2.0*!.
 
-This book is based on the original [*A Little Book of R for Bioinformatics*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/) by Dr. Avril Coghlan (Hereafter "ALBRB 1.0").  Dr. Coghlan's book was one of the first and most thorough introductions to using R for bioinformatics, and was generously published under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  In addition to describing how to do bioinformatics in R, Coghlan provided numerous functions to facilitate important tasks, practice questions, and references to further reading. 
+This book is based on the original [*A Little Book of R for Bioinformatics*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/) by Dr. Avril Coghlan (Hereafter "ALBRB 1.0").  Dr. Coghlan's book was one of the first and most thorough introductions to using *R* for bioinformatics and computational biology, and was generously published under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  In addition to describing how to do bioinformatics in R, Coghlan provided numerous functions to facilitate important tasks, practice questions, and references to further reading. 
 
-[ALBRB 1.0](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/) was extremely useful to me when I was learning bioinformatics and computational biology.  In this version of the book, which I'll refer to as ALBRB 2.0, I have adapted Dr. Coghlan's original book to suit my own teaching needs.  
-
+[ALBRB 1.0](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/) was extremely useful to me when I was learning bioinformatics and computational biology.  In this version of the book, which I'll refer to as **ALBRB 2.0**, I have adapted Dr. Coghlan's original book to suit my own teaching needs, updated it with current packages now available in R, added background materials from other open-access sources, and added in my original  materials.
 
 Below I've outlined the general types of changes I've made to the original book.  I have tried to link back to the original content that these updates are derived from and note how changes were made.  Any errors or inconsistencies should be ascribed to me, not Dr. Coghlan.  If you have any feedback, please email me at brouwern@gmail.com
 
-Nathan Brouwer, June 2021
+~Nathan Brouwer, June 2021
 
 
 **Changes implemented in ALBRB 2.0 by Nathan Brouwer**
 
-1. Converted the entire book to RMarkdown and published it via bookdown.
+1. Converted the entire book to RMarkdown and published it via `bookdown`.
 1. Added instructions for using RStudio and RStudio Cloud.
-1. Updated instructions to reflect any changes in software, including changes to how the bioinformatics  repository Bioconductor now works.
+1. Updated instructions to reflect any changes in software, including changes to how the bioinformatics repository `Bioconductor` now works.
 1. Split up chapters into smaller units.
 1. Reorganized the order of some material.
-1. Added links to the book I am developing, *Computational Biology for All*.
-1. Moved most functions and datasets to my teaching package [compbio4all](https://github.com/brouwern/compbio4all).
-1. Functions names changed from camelCase to underscore_format
-1. Functions re-written so as not to use Bioconductor to reduce/eliminate dependency of compbio4all on Bioconductor
+1. Added biological background information by integrating information from the Open Access textbook [LibreText General Biology](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)) 
+1. Added links to the books I am developing, *Get R Done!* and *Computational Biology for All*.
+1. Moved functions written by Coghlan and datasets to my teaching package [compbio4all](https://github.com/brouwern/compbio4all).
+1. Functions names changed from camelCase to snake_case
+1. Functions re-written so as not to use Bioconductor to reduce/eliminate dependency of `compbio4all` on `Bioconductor`.
 1. Changed some plotting to ggplot2 or ggpubr.
 1. Added additional subheadings
 1. Added vocab and function lists to the beginning of many chapters
 1. At times replaced non-biological examples with biological ones.
-1. Change from British to American English (Sorry!Couldn't help myself.)
+1. Change from British to American English (Sorry!  Couldn't help myself - the spellchecker made me do it!)
 1. Provided additional links to external resources.
-1. Added use or `rentrez` for querying NCBI databases
+1. Added use of `rentrez` for querying NCBI databases
 
 <!-- rentrez replaces what? Seqinr?-->
 
@@ -227,9 +227,9 @@ editor_options:
 # An example of a plotly graph
 
 The normal version of the graph looks like this.
-```{r echo = F, message = F, waring = F}
-library(plotly)
-library(ggplot2)
+```{r echo = F, message = F, warning = F}
+# library(plotly)
+# library(ggplot2)
 library(cowplot)
 
 data(lynx)
@@ -238,9 +238,9 @@ lynx.df <- as.data.frame(lynx)
 lynx.df$time <-1:nrow(lynx.df)
 names(lynx.df) <- c("N", "time")
 p <- ggplot2::ggplot(data = lynx.df, 
-                     aes(x=time, y=N)) +
-    geom_point()    + 
-    geom_line()
+                     ggplot2::aes(x=time, y=N)) +
+    ggplot2::geom_point()    + 
+    ggplot2::geom_line()
 
 p
 ```
@@ -248,8 +248,6 @@ p
 
 The plotly version looks like this
 ```{r, warnings = F, message = F,  eval=knitr::is_html_output()}
-
-
 fig <- plotly::ggplotly(p)
 
 fig
@@ -300,9 +298,9 @@ knitr::include_url("https://bio.libretexts.org/@api/deki/files/2180/Figure_45_00
 
 # Nucleic Acids
 
-**Authors**: OpenStax Biology team.  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
+**Authors**: OpenStax / Libretext  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
 
-This chapter was adapted from [LibreText General Biology](), Chapter 3, Section 3.5: [Nucleic Acids](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.5%3A_Nucleic_Acids).  The LibreText book is based on  [OpenStax Biology 2nd edition](https://openstax.org/details/books/biology-2e), Chapter 3, Section 3.5: [Nucleic Acids](https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids).  A full list of authors is found under the **Contributors and Attributions** section at the end of this document. 
+This chapter was adapted from [LibreText General Biology](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)), Chapter 3, Section 3.5: [Nucleic Acids](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.5%3A_Nucleic_Acids).  The LibreText book is based on  [OpenStax Biology 2nd edition](https://openstax.org/details/books/biology-2e), Chapter 3, Section 3.5: [Nucleic Acids](https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids).  A full list of authors is found under the **Contributors and Attributions** section at the end of this document. 
 
 
 >Nucleic acids are the most important macromolecules for the continuity
@@ -590,6 +588,406 @@ Original content by OpenStax (CC BY 4.0; Download for free at
 
 <!--chapter:end:000-test_pages_and_misc/00g-review-nucleic_acids-LibreText.Rmd-->
 
+# Proteins
+
+**Authors**: OpenStax / LibreText.  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
+
+This chapter was adapted from [LibreText General Biology](), Chapter 3, Section 3.4: [Proteins](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.4%3A_Proteins).  The LibreText book is based on  [OpenStax Biology 2nd edition](https://openstax.org/details/books/biology-2e), Chapter 3, Section 3.4: [Nucleic Acids](https://openstax.org/books/biology-2e/pages/3-4-proteins).  A full list of authors is found under the **Contributors and Attributions** section at the end of this document. 
+
+### Skills to develop:
+
+1. Describe the functions proteins perform in the cell and in tissues
+1. Discuss the relationship between amino acids and proteins
+1. Explain the four levels of protein organization
+1. Describe the ways in which protein shape and function are linked
+
+Proteins are one of the most abundant organic molecules in living systems and have the most diverse range of functions of all **macromolecules**. Proteins may be structural, regulatory, contractile, or protective; they may serve in transport, storage, or membranes; or they may be toxins or enzymes. Each cell in a living system may contain thousands of proteins, each with a unique function. Their structures, like their functions, vary greatly. They are all, however, **polymers** of **amino acids**, arranged in a linear sequence.
+
+## Types and Functions of Proteins
+
+**Enzymes**, which are produced by living cells, are **catalysts** in biochemical reactions (like digestion) and are usually complex or conjugated proteins. Each enzyme is specific for the substrate (a reactant that binds to an enzyme) it acts on. The enzyme may help in breakdown, rearrangement, or synthesis reactions. Enzymes that break down their substrates are called **catabolic enzymes**, enzymes that build more complex molecules from their substrates are called **anabolic enzymes**, and enzymes that affect the rate of reaction are called **catalytic enzymes**. 
+<!-- TODO: is this terminology standard?  -->
+It should be noted that all enzymes increase the rate of reaction and, therefore, are considered to be organic catalysts. An example of an enzyme is salivary amylase, which
+hydrolyzes its substrate amylose, a component of starch.
+
+**Hormones** are chemical-signaling molecules, usually small proteins or steroids, secreted by endocrine cells that act to control or regulate specific physiological processes, including growth, development, metabolism, and reproduction. For example, insulin is a **protein hormone** that helps to regulate the blood glucose level. 
+
+<!-- TODO: Fix table -->
+<!-- The primary types and functions of proteins are listed in Table 3.4.1. -->
+
+<!-- **Table** 3.4.1***:*** Protein Types and Functions -->
+
+<!-- Digestive Enzymes Amylase, lipase, pepsin, trypsin Help in digestion -->
+<!-- of food by catabolizing -->
+
+<!-- nutrients into monomeric units -->
+
+<!-- Structural Actin, tubulin, keratin Construct different structures, -->
+<!-- like the cytoskeleton -->
+
+<!-- Defense Immunoglobulins Protect the body from foreign pathogens -->
+
+<!-- Storage Legume storage proteins, egg white (albumin) Provide -->
+<!-- nourishment in early development of -->
+
+<!-- the embryo and the seedling -->
+
+Proteins have different shapes and molecular weights; some proteins are **globular** in shape whereas others are fibrous. For example, hemoglobin is a globular protein, but collagen, found in our skin, is a fibrous protein. Protein shape is critical to its function, and this shape is maintained by many different types of chemical bonds. Changes in temperature, pH, and exposure to chemicals may lead to permanent changes in the shape of the protein, leading to loss of function, known as **denaturation**. All proteins are made up of different arrangements of the same 20 types of **amino acids**.
+
+<!-- shoutout to non-cannonical AAs? -->
+
+## Amino Acids
+
+Amino acids are the **monomers** that make up proteins. Each amino acid has the same fundamental structure, which consists of a central carbon atom, also known as the alpha (*α*) carbon, bonded to an amino group (NH~2~), a carboxyl group (COOH), and to a hydrogen atom. Every amino acid also has another atom or group of atoms bonded to the central atom known as the R group (Figure 3.4.1).
+
+```{r, echo = F, fig.cap="Amino acids have a central asymmetric carbon to which an amino group, a carboxyl group, a hydrogen atom, and a side chain (R group) are attached."}
+knitr::include_graphics(here::here("./images/protimage1.jpeg"))
+```
+
+The name "amino acid" is derived from the fact that they contain both an amino group and carboxyl-acid-group in their basic structure. For each amino acid, the R group (or side chain) is different (Figure 3.4.2).
+<!-- As mentioned, there are 20 amino acids present in proteins. Ten of these are considered essential amino acids in humans because the human body cannot produce them and they are obtained from the diet.  Just as some fatty acids are essential to a diet, some amino acids are necessary as well. They are
+known as essential amino acids, and in humans they include isoleucine, leucine, and cysteine. Essential amino acids refer to those necessary for construction of proteins in the body, although not produced by the body; which amino acids are essential varies from organism to organism.-->
+
+
+
+```{r, echo = F, fig.cap="There are 20 common amino acids commonly found in proteins, each with a different R group (variant group) that determines its chemical nature."}
+knitr::include_graphics(here::here("./images/protimage2.jpeg"))
+```
+
+<!-- TODO:awk transition -->
+Which categories of amino acid would you expect to find on the surface
+of a soluble protein, and which would you expect to find in the
+interior? What distribution of amino acids would you expect to find in
+a protein embedded in a lipid bilayer?
+
+The chemical nature of the side chain determines the nature of the amino acid (that is, whether it is **acidic**, **basic**, **polar**, or **nonpolar**). For example, the amino acid glycine has a hydrogen atom as the R group. Amino acids such as valine, methionine, and alanine are nonpolar or hydrophobic, while amino acids such as serine, threonine, and cysteine are polar and have hydrophilic side chains. The side chains of lysine and arginine are positively charged, and therefore these amino acids are also known as basic amino acids. Proline has an R group that is linked to the amino group, forming a ring-like structure. Proline is an exception to the standard structure of an animo acid since its amino group is not separate from the side chain 
+<!-- (Figure 3.4.2). -->
+
+Amino acids are represented by a single upper case letter or a three-letter abbreviation. For example, valine is known by the letter V or the three-letter code val. 
+
+The sequence and the number of amino acids ultimately determine a protein's shape, size, and function. Each amino acid is attached to another amino acid by a covalent bond, known as a **peptide bond**, which is formed by a dehydration reaction. The carboxyl group of one amino acid and the amino group of the incoming amino acid combine, releasing a molecule of water. The resulting bond is the peptide bond 
+<!-- (Figure 3.4.3). -->
+
+```{r, echo = F, fig.cap="Peptide bond formation is a dehydration synthesis reaction. The carboxyl group of one amino acid is linked to the amino group of the incoming amino acid. In the process, a molecule of water is released."}
+knitr::include_graphics(here::here("./images/protimage3.jpeg"))
+```
+
+The products formed by such linkages are called **peptides**. As more amino acids join to this growing chain, the resulting chain is known as a **polypeptide**. Each polypeptide has a free amino group at one end. This end is called the **N-terminal**, or the amino terminal, and the other end has a free carboxyl group, also known as the C- or carboxyl
+terminal.  The terms polypeptide and protein are sometimes used interchangeably, a polypeptide is technically a polymer of amino acids, whereas the term protein is more formally used for a polypeptide or polypeptides that have combined together, often have bound non-peptide prosthetic groups, have a distinct shape, and have a unique function.
+<!-- is this a standard definition? -->
+
+
+
+After **protein synthesis (translation)**, most proteins are modified. These are known as **post-translational modifications**. They may undergo **cleavage**, **phosphorylation** (addition of a phosphate group), or may require the addition of other chemical groups. Only after these modifications is the protein completely functional.
+
+## Evolution Connection:
+
+---------------
+**The Evolutionary Significance of Cytochrome**: Cytochrome c is an
+important component of the electron transport chain, a part of
+cellular respiration, and it is normally found in the cellular
+organelle, the mitochondrion. This protein has a heme prosthetic
+group, and the central ion of the heme gets alternately reduced and
+oxidized during electron transfer. Because this essential protein's
+role in producing cellular energy is crucial, it has changed very
+little over millions of years. Protein sequencing has shown that there
+is a considerable amount of cytochrome c amino acid sequence **homology**
+among different species; in other words, evolutionary kinship can be
+assessed by measuring the similarities or differences among various
+species' DNA or protein sequences.
+
+Scientists have determined that human cytochrome c contains 104 amino
+acids. For each cytochrome c molecule from different organisms that
+has been sequenced to date, 37 of these amino acids appear in the same
+position in all samples of cytochrome c. This indicates that there may
+have been a **common ancestor**. On comparing the human and chimpanzee
+protein sequences, no sequence difference was found. When human and
+rhesus monkey sequences were compared, the single difference found was
+in one amino acid. In another comparison, human to yeast sequencing
+shows a difference in the 44th position.
+---------------
+
+## Protein Structure
+
+The shape of a protein is critical to its function. For example, an enzyme can bind to a specific substrate at a site known as the **active site**. If this active site is altered because of local changes or changes in overall protein structure, the enzyme may be unable to bind to the substrate. To understand how the protein gets its final shape or conformation, we need to understand the four levels of protein structure: primary, secondary, tertiary, and quaternary.
+
+### Primary Structure
+
+The unique sequence of amino acids in a polypeptide chain is its
+primary structure. For example, the pancreatic hormone insulin has two
+polypeptide chains, A and B, and they are linked together by disulfide
+bonds. The N terminal amino acid of the A chain is glycine, whereas
+the C terminal amino acid is asparagine (Figure 3.4.4). The sequences
+of amino acids in the A and B chains are unique to insulin.
+
+
+```{r, echo = F, fig.cap="Bovine serum insulin is a protein hormone made of two peptide chains, A (21 amino acids long) and B (30 amino acids long). In each chain, primary structure is indicated by three-letter abbreviations that represent the names of the amino acids in the order they are present. The amino acid cysteine (cys) has a sulfhydryl (SH) group as a side chain. Two sulfhydryl groups can react in the presence of oxygen to form a disulfide (S-S) bond. Two disulfide bonds connect the A and B chains together, and a third helps the A chain fold into the correct shape. Note that all disulfide bonds are the same length, but are drawn different sizes for clarity."}
+knitr::include_graphics(here::here("./images/protimage4.jpeg"))
+```
+
+The unique sequence for every protein is ultimately determined by the
+gene encoding the protein. A change in nucleotide sequence of the
+gene's coding region may lead to a different amino acid being added to
+the growing polypeptide chain, causing a change in protein structure
+and function. In sickle cell anemia, the hemoglobin *β* chain (a small
+portion of which is shown in Figure 3.4.5) has a single amino acid
+substitution, causing a change in protein structure and function.
+Specifically, the amino acid glutamic acid is substituted by valine in
+the beta chain. What is most remarkable to consider is that a
+hemoglobin molecule is made up of two alpha chains and two beta chains
+that each consist of about 150 amino acids. The molecule, therefore,
+has about 600 amino acids. The structural difference between a normal
+hemoglobin molecule and a sickle cell molecule---which dramatically
+decreases life expectancy---is a single amino acid of the 600. What is
+even more remarkable is that those 600 amino acids are encoded by
+three nucleotides each, and the mutation is caused by a single base
+change (point mutation), 1 in 1800 bases.
+
+
+```{r, echo = F, fig.cap="The beta chain of hemoglobin is 147 residues in length, yet a single amino acid substitution leads to sickle cell anemia. In normal hemoglobin, the amino acid at position seven is glutamate. In sickle cell hemoglobin, this glutamate is replaced by a valine."}
+knitr::include_graphics(here::here("./images/protimage5.jpeg"))
+```
+
+
+
+Because of this change of one amino acid in the chain, hemoglobin
+molecules form long fibers that distort the biconcave, or disc-shaped,
+red blood cells and assume a crescent or "sickle" shape, which clogs
+arteries (Figure 3.4.6). This can lead to myriad serious health
+problems such as breathlessness, dizziness, headaches, and abdominal
+pain for those affected by this disease.
+
+```{r, echo = F, fig.cap="In this blood smear, visualized at 535x magnification using bright field microscopy, sickle cells are crescent shaped, while normal cells are disc-shaped. (credit: modification of work by Ed Uthman; scale-bar data from Matt Russell)"}
+knitr::include_graphics(here::here("./images/protimage6.jpeg"))
+```
+
+### Secondary Structure
+
+The local folding of the polypeptide in some regions gives rise to the
+secondary structure of the protein. The most common are the *α*-helix
+and *β*-pleated sheet structures (Figure 3.4.7). Both structures are
+the *α*-helix structure---the helix held in shape by hydrogen bonds.
+The hydrogen bonds form between the oxygen atom in the carbonyl group
+in one amino acid and another amino acid that is four amino acids
+farther along the chain.
+
+```{r, echo = F, fig.cap="The α-helix and β-pleated sheet are secondary structures of proteins that form because of hydrogen bonding between carbonyl and amino groups in the peptide backbone. Certain amino acids have a propensity to form an α-helix, while others have a propensity to form a β-pleated sheet."}
+knitr::include_graphics(here::here("./images/protimage7.jpeg"))
+```
+
+Every helical turn in an alpha helix has 3.6 amino acid residues. The
+R groups (the variant groups) of the polypeptide protrude out from the
+*α*-helix chain. In the *β*-pleated sheet, the "pleats" are formed by
+hydrogen bonding between atoms on the backbone of the polypeptide
+chain. The R groups are attached to the carbons and extend above and
+below the folds of the pleat. The pleated segments align parallel or
+antiparallel to each other, and hydrogen bonds form between the
+partially positive nitrogen atom in the amino group and the partially
+negative oxygen atom in the carbonyl group of the peptide backbone.
+The *α*-helix and *β*-pleated sheet structures are found in most
+globular and fibrous proteins and they play an important structural
+role.
+
+### Tertiary Structure
+
+The unique three-dimensional structure of a polypeptide is its
+tertiary structure (Figure 3.4.8). This structure is in part due to
+chemical interactions at work on the polypeptide chain. Primarily, the
+interactions among R groups creates the complex three- dimensional
+tertiary structure of a protein. The nature of the R groups found in
+the amino acids involved can counteract the formation of the hydrogen
+bonds described for standard secondary structures. For example, R
+groups with like charges are repelled by each other and those with
+unlike charges are attracted to each other (ionic bonds). When protein
+folding takes place, the hydrophobic R groups of nonpolar amino acids
+lay in the interior of the protein, whereas the hydrophilic R groups
+lay on the outside. The former types of interactions are also known as
+hydrophobic interactions. Interaction between cysteine side chains
+forms disulfide linkages in the presence of oxygen, the only covalent
+bond forming during protein folding.
+
+```{r, echo = F, fig.cap="The tertiary structure of proteins is determined by a variety of chemical interactions. These include hydrophobic interactions, ionic bonding, hydrogen bonding and disulfide linkages."}
+knitr::include_graphics(here::here("./images/protimage8.jpeg"))
+```
+
+All of these interactions, weak and strong, determine the final
+three-dimensional shape of the protein. When a protein loses its
+three-dimensional shape, it may no longer be functional.
+
+### Quaternary Structure
+
+In nature, some proteins are formed from several polypeptides, also
+known as subunits, and the interaction of these subunits forms the
+quaternary structure. Weak interactions between the subunits help to
+stabilize the overall structure. For example, insulin (a globular
+protein) has a combination of hydrogen bonds and disulfide bonds that
+cause it to be mostly clumped into a ball shape. Insulin starts out as
+a single polypeptide and loses some internal sequences in the presence
+of post-translational modification after the formation of the
+disulfide linkages that hold the remaining chains together. Silk (a
+fibrous protein), however, has a *β*-pleated sheet structure that is
+the result of hydrogen bonding between different chains.
+
+The four levels of protein structure (primary, secondary, tertiary,
+and quaternary) are illustrated in Figure 3.4.9.
+
+```{r, echo = F, fig.cap="The four levels of protein structure can be observed in these illustrations. (credit: modification of work by National Human Genome Research Institute)"}
+knitr::include_graphics(here::here("./images/protimage9.jpeg"))
+```
+
+
+## Denaturation and Protein Folding
+
+Each protein has its own unique sequence and shape that are held
+together by chemical interactions. If the protein is subject to
+changes in temperature, pH, or exposure to chemicals, the protein
+structure may change, losing its shape without losing its primary
+sequence in what is known as denaturation. Denaturation is often
+reversible because the primary structure of the polypeptide is
+conserved in the process if the denaturing agent is removed, allowing
+the protein to resume its function. Sometimes denaturation is
+irreversible, leading to loss of function. One example of irreversible
+protein denaturation is when an egg is fried. The albumin protein in
+the liquid egg white is denatured when placed in a hot pan. Not all
+proteins are denatured at high temperatures; for instance, bacteria
+that survive in hot springs have proteins that function at
+temperatures close to boiling. The stomach is also very acidic, has a
+low pH, and denatures proteins as part of the digestion process;
+however, the digestive enzymes of the stomach retain their activity
+under these conditions.
+
+Protein folding is critical to its function. It was originally thought
+that the proteins themselves were responsible for the folding process.
+Only recently was it found that often they receive assistance in the
+folding process from protein helpers known as chaperones (or
+chaperonins) that associate with the target protein during the folding
+process. They act by preventing aggregation of polypeptides that make
+up the complete protein structure, and they disassociate from the
+protein once the target protein is folded.
+
+## Summary
+
+Proteins are a class of macromolecules that perform a diverse range of
+functions for the cell. They help in metabolism by providing
+structural support and by acting as enzymes, carriers, or hormones.
+The building blocks of proteins (monomers) are amino acids. Each amino
+acid has a central carbon that is linked to an amino group, a carboxyl
+group, a hydrogen atom, and an
+
+R group or side chain. There are 20 commonly occurring amino acids,
+each of which differs in the R group. Each amino acid is linked to its
+neighbors by a peptide bond. A long chain of amino acids is known as a
+polypeptide.
+
+Proteins are organized at four levels: primary, secondary, tertiary,
+and (optional) quaternary. The primary structure is the unique
+sequence of amino acids. The local folding of the polypeptide to form
+structures such as the *α* helix and *β*-pleated sheet constitutes the
+secondary structure. The overall three-dimensional structure is the
+tertiary structure. When two or more polypeptides combine to form the
+complete protein structure, the configuration is known as the
+quaternary structure of a protein. Protein shape and function are
+intricately linked; any change in shape caused by changes in
+temperature or pH may lead to protein denaturation and a loss in
+function.
+
+## Art Connections
+
+* Which categories of amino acid would you expect to find on
+the surface of a soluble protein, and which would you expect to find
+in the interior? What distribution of amino acids would you expect to
+find in a protein embedded in a lipid bilayer?
+
+* Polar and charged amino acid residues (the remainder after
+peptide bond formation) are more likely to be found on the surface of
+soluble proteins where they can interact with water, and nonpolar
+(e.g., amino acid side chains) are more likely to be found in the
+interior where they are sequestered from water. In membrane proteins,
+nonpolar and hydrophobic amino acid side chains associate with the
+hydrophobic tails of phospholipids, while polar and charged amino acid
+side chains interact with the polar head groups or with the aqueous
+solution. However, there are exceptions. Sometimes, positively and
+negatively charged amino acid side chains interact with one another in
+the interior of a protein, and polar or charged amino acid side chains
+that interact with a ligand can be found in the ligand binding pocket.
+
+## Review Questions
+
+The monomers that make up proteins are called
+1. nucleotides
+1. disaccharides
+1. amino acids
+1. chaperones
+
+Answer: C
+
+The *α* helix and the *β*-pleated sheet are part of which protein
+structure?
+
+1. primary
+1. secondary
+1. tertiary
+1. quaternary 
+
+Answer: B
+
+## Free Response
+
+**Explain what happens if even one amino acid is substituted for another
+in a polypeptide chain. Provide a specific example.**
+
+A change in gene sequence can lead to a different amino acid being
+added to a polypeptide chain instead of the normal one. This causes a
+change in protein structure and function. For example, in sickle cell
+anemia, the hemoglobin *β* chain has a single amino acid
+substitution---the amino acid glutamic acid in position six is
+substituted by valine. Because of this change, hemoglobin molecules
+form aggregates, and the disc-shaped red blood cells assume a crescent
+shape, which results in serious health problems.
+
+**Describe the differences in the four protein structures.**
+
+The sequence and number of amino acids in a polypeptide chain is its
+primary structure. The local folding of the polypeptide in some
+regions is the secondary structure of the protein. The
+three-dimensional structure of a polypeptide is known as its tertiary
+structure, created in part by chemical interactions such as hydrogen
+bonds between polar side chains, van der Waals interactions, disulfide
+linkages, and hydrophobic interactions. Some proteins are formed from
+multiple polypeptides, also known as subunits, and the interaction of
+these subunits forms the quaternary structure.
+
+## Glossary
+
+**alpha-helix structure (*α*-helix)**: type of secondary structure of proteins formed by folding of the polypeptide into a helix shape with hydrogen bonds stabilizing the
+structure  
+**amino acid**: monomer of a protein; has a central carbon or alpha carbon to which an
+amino group, a carboxyl group, a hydrogen, and an R group or side
+chain is attached; the R group is different for all 20 amino acids  
+**beta-pleated sheet (*β*-pleated)**:  secondary structure found in proteins in which "pleats" are formed by hydrogen bonding between atoms on the backbone of the polypeptide chain  
+**chaperone**: (also, chaperonin) protein that helps nascent protein in the folding process **denaturation**: loss of shape in a protein as a result of changes in temperature, pH, or exposure to chemicals  
+**enzyme**: catalyst in a biochemical reaction that is usually a complex or conjugated protein  
+**hormone**: chemical signaling molecule, usually protein or steroid, secreted by endocrine cells that act to control or regulate specific physiological processes
+**peptide bond**: bond formed between two amino acids by a dehydration reaction  
+**polypeptide**: long chain of amino acids linked by peptide bonds   
+**primary structure**: linear sequence of amino acids in a protein  
+**protein**: biological macromolecule composed of one or more chains of amino acids  
+**quaternary structure**: association of discrete polypeptide subunits in a protein  
+**secondary structure**: regular structure formed by proteins by intramolecular hydrogen bonding between the oxygen atom of one amino acid residue and the hydrogen attached to the nitrogen atom of another amino acid residue 
+**tertiary structure**: three-dimensional conformation of a protein, including interactions between secondary structural elements; formed from interactions between amino acid side chains  
+
+## Contributors and Attributions
+
+Connie Rye (East Mississippi Community College), Robert Wise
+(University of Wisconsin, Oshkosh), Vladimir Jurukovski (Suffolk
+County Community College), Jean DeSaix (University of North Carolina
+at Chapel Hill), Jung Choi (Georgia Institute of Technology), Yael
+Avissar (Rhode Island College) among other contributing authors.
+Original content by OpenStax (CC BY 4.0; Download for free at
+[http://cnx.org/contents/185cbf87-c72\...f21b5eabd\@9.87](http://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd%409.87)).
+
+<!--chapter:end:000-test_pages_and_misc/00h-proteins.rmd-->
+
 # Downloading R
 
 **By**: Avril Coghlan  
@@ -733,6 +1131,8 @@ library(ggplot2) # note: NO " "
 ```
 
 
+
+<!-- Installing packages from github -->
 
 <!--chapter:end:001-getting_started/03-installing_packages_in_RStudio_AC01-3.Rmd-->
 
@@ -1213,93 +1613,14 @@ There is another nice (slightly more in-depth) tutorial to R available on the �
 ```
 
 
-<!--chapter:end:001-getting_started/05-brief_intro_to_R_AC01-5.Rmd-->
-
-# Programming in R: for loops
-
-**By**: Avril Coghlan  
-
-**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
-
-## Preface
-
-This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  The text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
-
-
-## Vocab
-
-* for loop
-* curly brackets
-
-## Functions
-
-* `for()`
-* `print()`
-
-
-## Basic for loops in in R
-
-In *R*, just as in programming languages such as **Python**, it is possible to write a **for loop** to carry out the same command several times. For example, say we have a pressing need to calculate the square the square of each number between 1 and 4.  We could write for lines of code like this to do it:
-
-```{r}
-1^2
-2^2
-3^2
-4^2
-```
-
-If we know how to write a for loop, we could do the same think like this: 
-
-```{r}
-for (i in 1:4) { 
-  print (i*i) 
-  }
-```
-
-In the for loop above, the variable `i` is a counter or **index** for the number of cycles through the loop. In the first cycle through the loop, the value of `i` is 1, and so `i * i` = 1 is printed out. In the second cycle through the loop, the value of `i` is 2, and so `i * i` = 4 is printed out. In the third cycle through the loop, the value of `i` is 3, and so `i * i` = 9 is printed out. The loop continues until the value of `i` is 4. 
-
-Note that the commands that are to be carried out at each cycle of the for loop must be enclosed within **curly brackets** (“{” and “}”).
-
-You may be thinking "*ok, so it took four lines of code to do 1^2^ through 4^2^ each on their own, and three lines to do it wit the loop; what's the big deal?*".  What if you need to do 1 through 100 squared for some reason?  Now the for loop is a lot less work.
-
-You can also give a for loop a vector of numbers containing the values that you want the counter `i` to take in subsequent cycles. For example, you can make a vector  containing the numbers 1, 2, 3, and 4, and write a for loop to print out the square of each number in vector avector:
-
-```{r, echo = F}
-# vector with valuea to square
-avector <- c(1, 2, 3, 4)
-
-# for() loop to do the squaring
- for (i in avector) { 
-   print (i*i) 
-   }
-```
-
-The results should be the same as before.
-
-
-## Challenge: complicated vectors of values
-
-Here's a more complex example.  If you don't understand it don't worry, its not something you'd probably do in practice.
-
-Challenge: How can we use a for loop to print out the square of every second number between, say, 1 and 10? The answer is to use the seq() function with "by = 2" to tell the for loop to take every second number between 1 and 10:
-
-```{r}
-for (i in seq(1, 10, by = 2)) { 
-  print (i*i) 
-  }
-```
-
-In the first cycle of this loop, the value of i is 1, and so i * i = 1 is printed out. In the second cycle through the loop, the value of i is 3, and so i * i = 9 is printed out. The loop continues until the value of i is 9. In the fifth cycle through the loop, the value of i is 9, and so i * i = 81 is printed out.
-
-
-<!--chapter:end:002-R-programming_basics/07-programming_in_R-forloops_AC04-02.Rmd-->
+<!--chapter:end:001-getting_started/05-brief_intro_to_R-vector_list_fnxns_arguements_objects_indices.Rmd-->
 
 ---
 output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Mini tutorial: Vectors in R
+# A primer for working with vecotrs
 
 **By**: Avril Coghlan  
 
@@ -1316,6 +1637,7 @@ This is a modification of part of["DNA Sequence Statistics (2)"](https://a-littl
 
 * base R
 * scalar, vector, matrix
+* vectorized operation
 * regular expressions
 
 # Functions
@@ -1360,9 +1682,7 @@ Vectors can serve as the input for mathematical operations. When this is done *R
 Let's make a vector of numbers:
 
 ```{r}
-
 myvector <- c(30,16,303,99,11,111)
-
 ```
 
 What happens when we multiply `myvector` by 10?
@@ -1381,8 +1701,7 @@ R has taken each of the 6 values, 30 through 111, of `myvector` and multiplied e
 111*10   # last value of myvector
 ```
 
-
-The normal order of operations rules apply to vectors as they do to operations we're more used to.   So multiplying `myvector` by 10 is the same whether you put he 10 before or after vector.  That is `myvector\*10` is the same as `10\*myvector`.
+ The normal order of operations rules apply to vectors as they do to operations we're more used to.   So multiplying `myvector` by 10 is the same whether you put he 10 before or after vector.  That is `myvector\*10` is the same as `10\*myvector`.
 
 ```{r}
 myvector*10
@@ -1405,6 +1724,7 @@ So, what R did was
 111-30   # last value of myvector
 ```
 
+Again, `myvector-30` is vectorized operation.
 
 You can also square a vector
 
@@ -1421,14 +1741,14 @@ Which is the same as
 111^2   # last value of myvector
 ```
 
-Also you can take the square root of a vector...
+Also you can take the square root of a vector using the functions `sqrt()`...
 
 ```{r}
 sqrt(myvector)
 ```
 
 
-...and take the log of a vector...
+...and take the log of a vector with `log()`...
 
 ```{r}
 
@@ -1436,12 +1756,14 @@ log(myvector)
 
 ```
 
-...and just about any other mathematical operation.  Here we are working on a separate vector object; all of these rules apply to a column in a matrix or a dataframe.  This attribution of R is called **vectorization**.
+...and just about any other mathematical operation.  Here we are working on a separate vector object; all of these rules apply to a column in a matrix or a dataframe.  
+
+This attribute of R is called **vectorization**.  When you run the code `myvector*10` or `log(myvector)` you are doing a **vectorized** operation - its like normal math with special vector-based super power to get more done faster than you normally could.
 
 
 ## Functions on vectors
 
-We can use functions on vectors. Typically these use the vectors as an input and all the numbers are processed into an output.  Call the `mean()` function  on the vector we made called `myvector`.
+As we just saw, we can use functions on vectors.  Typically these use the vectors as an input and all the numbers are processed into an output.  Call the `mean()` function  on the vector we made called `myvector`.
 ```{r}
 mean(myvector)
 ```
@@ -1603,7 +1925,7 @@ Regular expressions are a deep subject in computing.  You can find some more inf
 
 
 
-<!--chapter:end:002-R-programming_basics/08-vectors-AC04-01.Rmd-->
+<!--chapter:end:002-R-programming_basics/01-vectors-vectorized_math_seq_gsub.Rmd-->
 
 ---
 output: html_document
@@ -1626,21 +1948,22 @@ This is a modification of part of["DNA Sequence Statistics (2)"](https://a-littl
 
 ## Plotting numeric data
 
-R allows the production of a variety of plots, including **scatterplots**, **histograms**, **piecharts**, and **boxplots**.  Usually we make plots from dataframes with 2 or more columns, but we can also make them from two separate vectors.  This flexibility is useful, but also can cause some confusion.   
+R allows the production of a variety of plots, including **scatterplots**, **histograms**, **piecharts**, and **boxplots**.  Usually we make plots from **dataframes** with 2 or more columns, but we can also make them from two separate vectors.  This flexibility is useful, but also can cause some confusion.   
 
-For example, if you have two equal-length vectors of numbers `numeric.vect1` and `numeric.vect1`, you can plot a scatterplot of the values in `myvector1` against the values in `myvector2` using the **base R** `plot() `function. 
+For example, if you have two equal-length vectors of numbers `numeric.vect1` and `numeric.vect1`, you can plot a [**scatterplot**](https://en.wikipedia.org/wiki/Scatter_plot) of the values in `myvector1` against the values in `myvector2` using the **base R** `plot() `function. 
 
 First, let's make up some data in put it in vectors:
 
 ```{r}
-numeric.vect1 <- c(10, 15, 22, 35, 43)
-numeric.vect2 <- c(3, 3.2, 3.9, 4.1, 5.2)
+numeric.vect1 <- c(10, 15,  22,  35,  43)
+numeric.vect2 <- c(3,  3.2, 3.9, 4.1, 5.2)
 ```
 
 Not plot with the base R `plot()` function:
 ```{r}
 plot(numeric.vect1, numeric.vect2)
 ```
+
 Note that there is a comma between the two vector names.  When building plots from dataframes you usually see a tilde (~), but when you have two vectors you can use just a comma.  
 
 Also note the order of the vectors within the `plot()` command and which axes they appear on.  The first vector is `numeric.vect1` and it appears on the horizontal x-axis.
@@ -1693,67 +2016,7 @@ plot(numeric.vect2 ~ numeric.vect1, data = df)
 Base R has lots of plotting functions; additionally, people have written packages to implement new plotting capabilities. The package `ggplot2` is currently the most popular plotting package, and `ggpubr` is a package which makes `ggplot2` easier to use.  For quick plots we'll use base R functions, and when we get to more important things we'll use ggplot2 and ggpubr.
 
 
-<!--chapter:end:002-R-programming_basics/09-vectors-plotting-AC04-01.Rmd-->
-
-# Programming in R: functions
-
-**By**: Avril Coghlan  
-
-**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
-
-## Preface
-
-This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  The text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
-
-
-## Vocab
-
-* function
-* curly brackets
-
-## Functions
-
-* `function()`
-
-## Functions in R
-
-We have been using **built-in functions** such as mean(), length(), print(), plot(), etc. We can also create our own functions in R to do calculations that you want to carry out very often on different input data sets. For example, we can create a function to calculate the value of 20 plus the square of some input number:
-
-```{r}
-myfunction <- function(x) { 
-  output <- (20 + (x*x)) 
-  return(output)
-  }
-```
-
-This function will calculate the square of a number (x), and then add 20 to that value.  It stores this in a temporary object called output. The return() statement returns the calculated value. Once you have typed in this function, the function is then available for use. For example, we can use the function for different input numbers (e.g.. 10, 25):
-
-
-```{r}
-myfunction(10)
-myfunction(25)
-```
-
- 
- 
-You can view the code that makes up a function by typing its name (without any parentheses). For example, we can try this by typing “myfunction”:
-
-```{r}
-myfunction
-```
- 
-
-## Comments in R
-
-When you are typing R, if you want to, you can write comments by writing the comment text after the “#” sign. This can be useful if you want to write some R commands that other people need to read and understand. R will ignore the comments when it is executing the commands. For example, you may want to write a comment to explain what the function log10() does:
-
-```{r}
-x <- 100
-log10(x) # Finds the log to the base 10 of variable x.
-```
-
-
-<!--chapter:end:002-R-programming_basics/10-programming_in_R-functions-AC04-02.Rmd-->
+<!--chapter:end:002-R-programming_basics/02-vectors_plotting-c_plot.Rmd-->
 
 # Intro to R objects
 
@@ -1766,11 +2029,6 @@ log10(x) # Finds the log to the base 10 of variable x.
 * length()
 * dim()
 * is()
-* str()
-* dim()
-* list()
-
-
 
 
 ## R Objects
@@ -1931,7 +2189,7 @@ We can...
 * save the output of a model / test to an object
 * access part of lists for plotting instead of copying stuff
 
-<!--chapter:end:002-R-programming_basics/11-R_objects_n_at.Rmd-->
+<!--chapter:end:002-R-programming_basics/03-R_objects_n_at-length_dim_is.Rmd-->
 
 ---
 output: html_document
@@ -2883,7 +3141,7 @@ editor_options:
 
 ## Preliminaries
 
-```{r}
+```{r, message = F, warning = F}
 library(compbio4all)
 ```
 
@@ -3059,9 +3317,8 @@ editor_options:
 <!-- is compbio4all needed? -->
 <!-- have on gone over biodoncdutor and biostrings? -->
 
-```{r}
+```{r, message = F, warning = F}
 library(compbio4all)
-
 library(Biostrings)
 ```
 
@@ -3326,7 +3583,7 @@ editor_options:
 <!-- is compbio4all needed? -->
 <!-- have on gone over biodoncdutor and biostrings? -->
 
-```{r}
+```{r, message = F, warning = F}
 library(compbio4all)
 library(Biostrings)
 ```
@@ -3413,7 +3670,7 @@ editor_options:
 
 ### Packages
 
-```{r}
+```{r, message = F, warning = F}
 library(compbio4all)
 library(Biostrings)
 ```
@@ -4121,7 +4378,7 @@ editor_options:
 
 ### Packages
 
-```{r}
+```{r, message = F, warning = F}
 library(Biostrings)
 data(BLOSUM62)
 ```
@@ -4406,7 +4663,7 @@ In this exercise we will practice manipulating matrices and vector by exploring 
 ## Load packages
 
 Load basic packages
-```{r}
+```{r, message = F, warning = F}
 library(flextable)
 library(webshot)
 
@@ -8333,7 +8590,7 @@ I have discovered that there are many minor but annoying inconsistencies in how 
 
 In a few cases I have not provided every detail, which I usually note.  I also occasionally use my own analogy or terminology which I think provides a useful description.
 
-In the `combio4all package I have written code that simulates some steps of the BLAST algorithm.  This code is meant to emulate or evoke the process of BLAST and is NOT written as the actual program is.  For example, as discussed below, BLAST's actual searching of databases involves computational tool called a **deterministic finite-state automata (DFSA)** (Zvelebil & Baum 2008).  This is a rather complicated sub-program, buts it general behavior can be evoked using a simple regular expression or `for()` loop.  (I'd like to write code for a DFSA but have yet to find R or Python examples).
+In the `combio4all` package I have written code that simulates some steps of the BLAST algorithm.  This code is meant to emulate or evoke the process of BLAST and is NOT written as the actual program is.  For example, as discussed below, BLAST's actual searching of databases involves computational tool called a **deterministic finite-state automata (DFSA)** (Zvelebil & Baum 2008).  This is a rather complicated sub-program, buts its general behavior can be evoked using a simple **regular expression** or `for()` loop.  
 
 ## BLAST Overview
 
@@ -8341,12 +8598,12 @@ In the `combio4all package I have written code that simulates some steps of the 
 
 BLASTing is a common activity by molecular biologists, bioinformaticians, computational biologists, and phylogenists.  Some general reasons to do a BLAST
 
-* Find conserved sequences (homologs)
+* Find **conserved sequences** (**homologs**)
 * Find conserved regions within a gene which may be important to protein function
-* Determine how similar a gene in a model species (mice, Drosophila) is to humans
+* Determine how similar a gene in a model species (mice, *Drosophila*) is to humans
 * Scan a new genome sequence for conserved genes
 * Ex: BLASTing sequence of newly discovered mouse gene (shroom) showed Hildebrand & Soriano (1999) that this gene wasn't just a mouse gene - it occurred in Humans AND mice
-* Subsequent BLASTing of shroom indicates that shroom occurs in almost all multicellular organisms!
+    + Subsequent BLASTing of shroom indicates that shroom occurs in almost all multicellular organisms!
 
 
 
@@ -11923,37 +12180,102 @@ points(y.unrooted ~ n.taxa, type = "b", col = 3, lty = 2)
 
 <!--chapter:end:666-treethinking/tree-think-number_of_phylogenetic_trees.Rmd-->
 
+# Writing functions
+
+**By**: Avril Coghlan  
+
+**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+## Preface
+
+This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  The text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
+
+
+## Vocab
+
+* function
+* curly brackets
+
+## Functions
+
+* `function()`
+
+## Functions in R
+
+We have been using **built-in functions** such as mean(), length(), print(), plot(), etc. We can also create our own functions in R to do calculations that you want to carry out very often on different input data sets. For example, we can create a function to calculate the value of 20 plus the square of some input number:
+
+```{r}
+myfunction <- function(x) { 
+  output <- (20 + (x*x)) 
+  return(output)
+  }
+```
+
+This function will calculate the square of a number (x), and then add 20 to that value.  It stores this in a temporary object called output. The return() statement returns the calculated value. Once you have typed in this function, the function is then available for use. For example, we can use the function for different input numbers (e.g.. 10, 25):
+
+
+```{r}
+myfunction(10)
+myfunction(25)
+```
+
+ 
+ 
+You can view the code that makes up a function by typing its name (without any parentheses). For example, we can try this by typing “myfunction”:
+
+```{r}
+myfunction
+```
+ 
+
+## Comments in R
+
+When you are typing R, if you want to, you can write comments by writing the comment text after the “#” sign. This can be useful if you want to write some R commands that other people need to read and understand. R will ignore the comments when it is executing the commands. For example, you may want to write a comment to explain what the function log10() does:
+
+```{r}
+x <- 100
+log10(x) # Finds the log to the base 10 of variable x.
+```
+
+
+<!--chapter:end:888-programming-misc/10a-writing_functions-AC04-02.Rmd-->
+
 # Writing functions - practice problems
+
+<!-- TODO: find key! -->
 
 **By**: Nathan Brouwer
 
-## Introduction
+## Introduction {-}
 
-Writing functions can be a hard skill to master.  Here are some practice problems.  A key is available.
+Writing functions can be a hard skill to master.  Here are some practice problems to help you build your skill and intution with them. The key is at the end.
 
-## Part 1: Pure practice
 
-### Practice Function 1: Hello world!
+## Pure practice
 
-Write a function that takes no arguement, and every time you run it says "Hello world!"  Call the function hello_world()
+First, we'll work on some functions that don't really do anything useful.
+
+### Hello world!
+
+Write a function that takes no argument, and every time you run it says "Hello world!"  Call the function `hello_world()`
 
 ### Practice Function 2: Hello _______ !
 
-Write a function that takes a word as an argument, and every time you run it says "Hello _____ ", where the blank is filled by the argument.  Try making the function with and without a default.  Call the function hello().
+Write a function that takes a word as an **argument**, and every time you run it says "Hello _____ ", where the blank is filled by the argument.  Try making the function with and without a default.  Call the function `hello()`.
 
-**Advanced (for fun)**: Include in the function a test to see if what was passed to the arguement is a string and return the message "no valid string was entered" if something other than a string was entered.
+**Advanced (for fun)**: Include in the function a **logical test** to see if what was passed to the argument is a string and return the message "no valid string was entered" if something other than a string was entered.
 
 
 ## Practice Function 3: Make you own natural log function
 
-R uses log() for natural and log10() for the base 10 log.  It would be easier for non-R peole to read code if there was a function with "e" in its name to indicate when the natural log is being used.  Write a function that takes a number as an argument and returns the natural log.  Call the function log_e
+R uses `log()` for the natural log and `log10()` for the base-10 log.  It would be easier for non-R people to read code if there was a function with "e" in its name to indicate when the natural log is being used.  Write a function that takes a number as an argument and returns the natural log.  Call the function `log_e`
 
-**Advanced (for fun)**: make a function called my_log() that has an arguement "type" to specify the type of log you want.
+**Advanced (for fun)**: make a function called `my_log()` that has an argument "type" to specify the type of log you want.
 
 
 ## Practice Function 4: Make function that converts DNA directly to RNA 
 
-The gsub() function can be used to replace characters in a string.  For example
+The `gsub()` function can be used to replace characters in a string using **regular expressions.  For example
 
 ```{r}
 str <- "ATCG"
@@ -11970,18 +12292,180 @@ str <- "AAAA"
 gsub("T","U",str)
 ```
 
-Create a function called dna_to_rna that takes a character string as an arguement and turns T to U.
+Create a function called `dna_to_rna()` that takes a character string as an argument and turns T to U.
+
+## Key
+
+### Practice Function 1: Hello world!
+
+Write a function that takes no arguement, and every time you run it says "Hello world!"  Call the function hello_world()
+
+```{r}
+#best
+hello_world <- function(){
+  return("Hello world")
+  }
+hello_world()
+
+
+# these work too
+hello_world <- function(){
+  print("Hello world")
+  }
+hello_world()
+
+
+
+hello_world <- function(){
+  cat("Hello world")
+  }
+hello_world()
+```
+
+
+### Practice Function 2: Hello _______ !
+
+Write a function that takes a word as an argument, and every time you run it says "Hello _____ ", where the blank is filled by the argument.  Try making the function with and without a default.  Call the function hello().
+
+```{r}
+hello <- function(x){
+  hello.x <- paste("Hello ",x)
+  return(hello.x)}
+hello("mom")
+
+hello <- function(x){
+  print("Hello")
+  print(x)
+  }
+hello("mom")
+```
 
 
 
 
-<!--chapter:end:888-programming-misc/prog_assignment-function_practice.Rmd-->
+## Practice Function 3: Make you own natural log function
 
+R uses log() for natural and log10() for the base 10 log.  It would be easier for non-R peole to read code if there was a function with "e" in its name to indicate when the natural log is being used.  Write a function that takes a number as an argument and returns the natural log.  Call the function log_e
+
+```{r}
+log_e <- function(x){
+  log(x)
+}
+
+log_e(10)
+log(10)
+```
+
+
+
+
+
+<!--chapter:end:888-programming-misc/10b-function_practice.Rmd-->
+
+# Simulating random amino acid sequences
+
+**By**: Nathan Brouwer
+
+## Selecting random letters from a vector
+
+Make a vector with some letters
+```{r}
+my.letters <- c("A","B","C","D")
+```
+
+Use sample() to select one random letter
+
+```{r}
+sample(x = my.letters, size = 1, replace = T)
+```
+
+Select 10 letters, with replacement (replace = T), so that the same letter can occur more than once
+
+```{r}
+sample(x = my.letters, size = 10, replace = T)
+```
+
+Select 100 letters
+```{r}
+sample(x = my.letters, size = 10, replace = T)
+```
+
+
+## Select random letters from the whole alphabet
+
+The object LETTERS has the whole alphabet
+
+```{r}
+LETTERS
+```
+
+
+Select 10 letters from whole alphabet
+```{r}
+sample(x = my.letters, size = 10, replace = T)
+```
+
+
+## Select random amino acids to build polypeptide
+
+Make a vector of all letters that represent and amino acid
+```{r}
+all.aas <- c("A","C","D","E","F","G","H","I","K","L","M","N","P","Q","R","S","T","V","W","Y")
+```
+
+
+Randomly select an amino acid
+
+```{r}
+sample(x = all.aas, size = 1, replace = T)
+```
+
+Make a vector of 200 amino acids
+```{r, eval = F}
+sample(x = all.aas, size = 200, replace = T)
+```
+
+
+I may want to represent the size of the fake polypeptide with an object
+```{r, eval = F}
+my.polypep.size <- 200
+sample(x = all.aas, size = my.polypep.size, replace = T)
+```
+
+I can save this an object
+```{r}
+my.polypep.size <- 200
+my.pp <- sample(x = all.aas, size = my.polypep.size, replace = T)
+```
+
+I can make a single character string with not spaces using paste
+
+```{r}
+paste(x = my.pp,sep = "", collapse = "")
+```
+
+
+```{r}
+
+```
+
+
+<!--chapter:end:888-programming-misc/10c-function_simulationg_rando_ass_seqs.Rmd-->
+
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Writing user-friendly functions
 
 **By**: Nathan Brouwer
 
-A function to simulate a random sequence
+**NOTE**: This is only an outline of a chapter
+
+## Introduction {-}
+
+The goal of this chapter to to learn how to write a function to simulate a random sequence of proteins.  We'll start with a function that does bare minimum, and build in additional features to make it easier to use.
 
 ## Version 1
 
@@ -12009,11 +12493,12 @@ r_molec_seq_vs1 <- function(units,
 ```
 
 
-Test the function.  There's no defaults so it
-```{r, eval = F}
-r_molec_seq_vs1()
+Test the function.  There's no defaults so it returns and error.
+```{r, eval = T, error = T}
+r_molec_seq_vs1() 
 ```
 
+Now provide the function some information.
 ```{r}
 r_molec_seq_vs1(units =c("A","T","C","G"),
                 prob = c(0.25,0.25,0.25,0.25),
@@ -12024,6 +12509,7 @@ r_molec_seq_vs1(units =c("A","T","C","G"),
 
 Test with real data, the Robinson and Robinson amino acid frequencies
 ```{r}
+library(compbio4all)
 data(robinson_aafreq)
 r_molec_seq_vs1(units = robinson_aafreq$aa1,
                 prob = robinson_aafreq$aa.freq,
@@ -12183,78 +12669,88 @@ r_molec_seq_vs5(prob = c(0.3,0.3,0.2,0.2),
 ```
 
 
-<!--chapter:end:888-programming-misc/prog_functions_advanced_random_molec_seq.Rmd-->
+<!--chapter:end:888-programming-misc/10c-writing_user_friendly_functions.Rmd-->
 
-# Function practice exercises
+# Programming in R: for loops
 
-**By**: Nathan Brouwer
+**By**: Avril Coghlan  
 
-## Part 1: Pure practice
+**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
-### Practice Function 1: Hello world!
+## Preface
 
-Write a function that takes no arguement, and every time you run it says "Hello world!"  Call the function hello_world()
-
-```{r}
-#best
-hello_world <- function(){
-  return("Hello world")
-  }
-hello_world()
+This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  The text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
 
 
-# these work too
-hello_world <- function(){
-  print("Hello world")
-  }
-hello_world()
+## Vocab
+
+* for loop
+* curly brackets
+
+## Functions
+
+* `for()`
+* `print()`
 
 
+## Basic for loops in in R
 
-hello_world <- function(){
-  cat("Hello world")
-  }
-hello_world()
-```
-
-
-### Practice Function 2: Hello _______ !
-
-Write a function that takes a word as an argument, and every time you run it says "Hello _____ ", where the blank is filled by the argument.  Try making the function with and without a default.  Call the function hello().
+In *R*, just as in programming languages such as **Python**, it is possible to write a **for loop** to carry out the same command several times. For example, say we have a pressing need to calculate the square the square of each number between 1 and 4.  We could write for lines of code like this to do it:
 
 ```{r}
-hello <- function(x){
-  hello.x <- paste("Hello ",x)
-  return(hello.x)}
-hello("mom")
-
-hello <- function(x){
-  print("Hello")
-  print(x)
-  }
-hello("mom")
+1^2
+2^2
+3^2
+4^2
 ```
 
-
-
-
-## Practice Function 3: Make you own natural log function
-
-R uses log() for natural and log10() for the base 10 log.  It would be easier for non-R peole to read code if there was a function with "e" in its name to indicate when the natural log is being used.  Write a function that takes a number as an argument and returns the natural log.  Call the function log_e
+If we know how to write a for loop, we could do the same think like this: 
 
 ```{r}
-log_e <- function(x){
-  log(x)
-}
-
-log_e(10)
-log(10)
+for (i in 1:4) { 
+  print (i*i) 
+  }
 ```
 
+In the for loop above, the variable `i` is a counter or **index** for the number of cycles through the loop. In the first cycle through the loop, the value of `i` is 1, and so `i * i` = 1 is printed out. In the second cycle through the loop, the value of `i` is 2, and so `i * i` = 4 is printed out. In the third cycle through the loop, the value of `i` is 3, and so `i * i` = 9 is printed out. The loop continues until the value of `i` is 4. 
 
-<!--chapter:end:888-programming-misc/prog-assignment-function_practice_key.Rmd-->
+Note that the commands that are to be carried out at each cycle of the for loop must be enclosed within **curly brackets** (“{” and “}”).
 
-# for() loops in R
+You may be thinking "*ok, so it took four lines of code to do 1^2^ through 4^2^ each on their own, and three lines to do it wit the loop; what's the big deal?*".  What if you need to do 1 through 100 squared for some reason?  Now the for loop is a lot less work.
+
+You can also give a for loop a vector of numbers containing the values that you want the counter `i` to take in subsequent cycles. For example, you can make a vector  containing the numbers 1, 2, 3, and 4, and write a for loop to print out the square of each number in vector avector:
+
+```{r, echo = F}
+# vector with valuea to square
+avector <- c(1, 2, 3, 4)
+
+# for() loop to do the squaring
+ for (i in avector) { 
+   print (i*i) 
+   }
+```
+
+The results should be the same as before.
+
+
+## Challenge: complicated vectors of values
+
+Here's a more complex example.  If you don't understand it don't worry, its not something you'd probably do in practice.
+
+Challenge: How can we use a for loop to print out the square of every second number between, say, 1 and 10? The answer is to use the seq() function with "by = 2" to tell the for loop to take every second number between 1 and 10:
+
+```{r}
+for (i in seq(1, 10, by = 2)) { 
+  print (i*i) 
+  }
+```
+
+In the first cycle of this loop, the value of i is 1, and so i * i = 1 is printed out. In the second cycle through the loop, the value of i is 3, and so i * i = 9 is printed out. The loop continues until the value of i is 9. In the fifth cycle through the loop, the value of i is 9, and so i * i = 81 is printed out.
+
+
+<!--chapter:end:888-programming-misc/20-forloops_AC04-02.Rmd-->
+
+# More on for() loops in R
 
 **By**: Nathan Brouwer
 
@@ -12652,7 +13148,7 @@ apply(my.matrix,1,tolower)
 
 Create a vector that contains the four codes for the DNA bases, A, T, C, G.  Write a for() loop which prints these out.
 
-<!--chapter:end:888-programming-misc/prog-for_loops.Rmd-->
+<!--chapter:end:888-programming-misc/21_more_on_four_loops.Rmd-->
 
 # Random number generation
 
@@ -12777,194 +13273,7 @@ https://arxiv.org/abs/1809.06520
 ```
 
 
-<!--chapter:end:888-programming-misc/prog-random_number_generation-moved-to-combio4all.Rmd-->
-
-# Randomization practice question
-
-**By**: Nathan Brouwer
-
-
-## Practice question:
-
-I have six groups in my class Neural Defects.  For homework they are reading a paper with six figures.  I want to randomly assign a figure to each group and make sure each figure is only used once, and that every figure is used.  How can I do this in R? 
-
-1. Store what you are randomizing in a vector called "figures"
-2. Write the code to do the randomization
-3. Store the output in a vector called "rand.figures"
-4. Use an appropriate command to check that the results the proper size
-5. Use an appropriate command to check that the result is the proper data structure
-
-
-
-## Your answer:
-
-Write the code needed to do this below.
-
-```{r}
-# your answer: replace the NAs with your code
-
-# object to hold figure names
-figures <- NA
-
-
-# object to to randomization
-rand.figures <- NA
-
-
-# check size of object
-
-
-
-# check data structure
-
-
-
-
-
-```
-
-
-## Hint 0
-
-* This will require something that we normally don't do when we generate random sequences of letters.
-
-
-## Hint 1:
-
-* To do this you'll want to use the sample() command.  
-For information about sample() call up the help file using ?sample
-
-```{r, eval = F}
-
-?sample
-
-```
-
-
-
-## Hint 2 (follow up to Hint 0)
-
-* sample() can **"sample with replacement"**, which is what we normally do for generating random sequences of letters
-* OR it can **sample "without replacement"** which is actually what I want to do to make sure every figure is used once and only once
-
-## Hint 3:
-
-A key arguement in sample() is replace = ...
-
-## Answer
-
-```{r}
-# your answer: replace the NAs with your code
-
-## All of these will work the same
-figures <- c(1,2,3,4,5,6)
-figures <- c("1","2","3","4","5","6")
-figures <- c("one","two","three","four","five","six")
-
-rand.figures <- sample(figures,size = 6, replace = FALSE)
-
-# check size
-length(rand.figures)
-
-# check data structure
-is(rand.figures)
-
-
-```
-
-Note: when you are sampling **WITH** replacement you could do this with the runinf() command.  However, this won't work when sampling without replacement.  (We'll, if you really wanted to you could make it work, but it would require a loop and would be inefficient.  If you want a challenge, you could try to figure this out using a while() loop instead of a for() loop)
-
-<!--chapter:end:888-programming-misc/prog-sample_question_randomization.Rmd-->
-
-# Simulating random amino acid sequences
-
-**By**: Nathan Brouwer
-
-## Selecting random letters from a vector
-
-Make a vector with some letters
-```{r}
-my.letters <- c("A","B","C","D")
-```
-
-Use sample() to select one random letter
-
-```{r}
-sample(x = my.letters, size = 1, replace = T)
-```
-
-Select 10 letters, with replacement (replace = T), so that the same letter can occur more than once
-
-```{r}
-sample(x = my.letters, size = 10, replace = T)
-```
-
-Select 100 letters
-```{r}
-sample(x = my.letters, size = 10, replace = T)
-```
-
-
-## Select random letters from the whole alphabet
-
-The object LETTERS has the whole alphabet
-
-```{r}
-LETTERS
-```
-
-
-Select 10 letters from whole alphabet
-```{r}
-sample(x = my.letters, size = 10, replace = T)
-```
-
-
-## Select random amino acids to build polypeptide
-
-Make a vector of all letters that represent and amino acid
-```{r}
-all.aas <- c("A","C","D","E","F","G","H","I","K","L","M","N","P","Q","R","S","T","V","W","Y")
-```
-
-
-Randomly select an amino acid
-
-```{r}
-sample(x = all.aas, size = 1, replace = T)
-```
-
-Make a vector of 200 amino acids
-```{r, eval = F}
-sample(x = all.aas, size = 200, replace = T)
-```
-
-
-I may want to represent the size of the fake polypeptide with an object
-```{r, eval = F}
-my.polypep.size <- 200
-sample(x = all.aas, size = my.polypep.size, replace = T)
-```
-
-I can save this an object
-```{r}
-my.polypep.size <- 200
-my.pp <- sample(x = all.aas, size = my.polypep.size, replace = T)
-```
-
-I can make a single character string with not spaces using paste
-
-```{r}
-paste(x = my.pp,sep = "", collapse = "")
-```
-
-
-```{r}
-
-```
-
-
-<!--chapter:end:888-programming-misc/prog-simulate_random_aa_seqs.Rmd-->
+<!--chapter:end:888-programming-misc/30-random_number_generation.Rmd-->
 
 # Logarithms in R
 

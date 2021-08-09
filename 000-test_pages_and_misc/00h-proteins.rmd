@@ -181,7 +181,7 @@ The hydrogen bonds form between the oxygen atom in the carbonyl group
 in one amino acid and another amino acid that is four amino acids
 farther along the chain.
 
-```{r, echo = F, fig.cap="The α-helix and β-pleated sheet are secondary structures of proteins that form because of hydrogen bonding between carbonyl and amino groups in the peptide backbone. Certain amino acids have a propensity to form an α-helix, while others have a propensity to form a β-pleated sheet.}
+```{r, echo = F, fig.cap="The α-helix and β-pleated sheet are secondary structures of proteins that form because of hydrogen bonding between carbonyl and amino groups in the peptide backbone. Certain amino acids have a propensity to form an α-helix, while others have a propensity to form a β-pleated sheet."}
 knitr::include_graphics(here::here("./images/protimage7.jpeg"))
 ```
 
@@ -216,7 +216,7 @@ hydrophobic interactions. Interaction between cysteine side chains
 forms disulfide linkages in the presence of oxygen, the only covalent
 bond forming during protein folding.
 
-```{r, echo = F, fig.cap="The tertiary structure of proteins is determined by a variety of chemical interactions. These include hydrophobic interactions, ionic bonding, hydrogen bonding and disulfide linkages.}
+```{r, echo = F, fig.cap="The tertiary structure of proteins is determined by a variety of chemical interactions. These include hydrophobic interactions, ionic bonding, hydrogen bonding and disulfide linkages."}
 knitr::include_graphics(here::here("./images/protimage8.jpeg"))
 ```
 
