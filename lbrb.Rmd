@@ -8,7 +8,7 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 description: "An entry-level text for bioinformatics and computational biology"
-#geometry: margin=1in
+geometry: margin=1in
 ---
 
 # Preface to version 2.0 {-}
@@ -57,246 +57,7 @@ knitr::write_bib(c(
 
 <!--chapter:end:index.Rmd-->
 
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-# How to review this book
-
-
-## File format
-
-These lessons are written in RStudio using RMarkdown.  Each .RMd file is a mix of test, written in plain format, and **code chunks**, which look like this
-
-```{r}
-
-
-```
-
-Code chunks start with there apostrophes and {r}, like this: \`\`\`{r}.  They end with three apostrophes\`\`\`.  They will appear gray when opened up in RStudio but be white in the normal R code editor or other text editor.
-
-## What can you do?
-
-* Read and fix typos : )
-* Add comments within the file
-* Email me general comments about the files (structure, topics, confusing parts etc)
-
-## Adding comments
-
-
-You're welcome to add comments anywhere to the files, do the exercises and type up the key, propose you own exercises, etc.
-
-### HTML-tagged comments 
-
-The easiest way is to type a comment into the normal text part of the .Rmd file and then surround it with an html comment tag.  A comment saying "A comment" will therefore look like this:
-
-<!-- A comment -->
-
-In RStudio you can type up a comment, highlight it then hit Shift+Control+C on a PC or Shift+Command+C on a mac.
-
-### Code chunk comments
-
-Another way to add a comment is to make a RMarkdown code chunk thne type up your comments in it by commenting out each line, like the one below.  Key to doing this is to put eval = F, echo = F in the braces after the r.  eval = F, echo = F tells RStudio to leave that alone when the .Rmd file gets rendered into and web page or PDF.
-
-```{r eval = F, echo = F}
-# line 1 of comment
-# line 2 of comment
-# line 3 of comment.
-```
-
-In RStudio you can add code chunks with a shortcut key.  On a Mac the shortcut is OPTION + COMMAND + I.
-
-
-### Keys to exercise
-
-Some files will have exercises at the end.  I don't always include the key, and you're welcome to try the exercise and type up a key (or fix any errors in mine).  As for code chunk comments include  eval = F, echo = F in the braces so the key won't appear when rendered.    So a problem and its key would look something like this
-
-
-### Problem - fix this code
-
-```{r, eval = F}
-print(correct answer)
-```
-
-
-```{r eval = F, echo = F}
-# KEY
-print("correct answer") #quotes missing
-```
-
-
-<!--chapter:end:000-test_pages_and_misc/00a-how_to_review_this_book.Rmd-->
-
-# Test audio link
-
-Here is an example of an audio link  embedded in a bookdown book.
-
-The link is here:
-https://www.genome.gov/sites/default/files/tg/en/narration/single_nucleotide_polymorphisms_snps.mp3
-
-In HTML bookdown renders it like this:
-
-```{r eval=knitr::is_html_output(), echo=FALSE}
-knitr::include_url("https://www.genome.gov/sites/default/files/tg/en/narration/single_nucleotide_polymorphisms_snps.mp3",
-                   height = "100px")
-```
-
-(In PDF there is a way to render just a screen shot and link, I think).
-
-<!--chapter:end:000-test_pages_and_misc/00b_test_audio_link.Rmd-->
-
-# Test shiny app
-
-Here is an example of a Shiny app (treesiftr) embedded in a bookdown book.
-
-The direct link is [here](https://wrightaprilm.shinyapps.io/treesiftr_app/):
-https://wrightaprilm.shinyapps.io/treesiftr_app/
-
-It may take a few seconds for the app to appear (its a fairly big one I think)
-
-```{r  eval=knitr::is_html_output(), echo=FALSE}
-knitr::include_app(url = "https://wrightaprilm.shinyapps.io/treesiftr_app/")
-```
-
-
-<!--chapter:end:000-test_pages_and_misc/00b_test_shiny_app.Rmd-->
-
-# Test YouTube vidoe
-
-Here is an example of a YouTube video  embedded in a bookdown book.
-
-**THIS FUNCTIONALITY CURRENTLY ISN"T WORKING BUT WAS PREVIOUSLY**
-
-The [original link](https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be) is: [https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be](https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be)
-```{r eval=knitr::is_html_output(), echo=FALSE}
-knitr::include_url("https://www.youtube.com/watch?v=zNzZ1PfUDNk&feature=youtu.be")
-```
-
-<!--chapter:end:000-test_pages_and_misc/00b_test_youtube.Rmd-->
-
-# Test google doc insertion
-
-
-A Google spreadsheet (or other google docs / form) can be embedded.
-
-The original link is:
-https://docs.google.com/spreadsheets/d/18dt7cYHAaszV5Iq8Y-7YOEFnv6hIXbD39Vn75-c3fQo/edit?usp=sharing
-
-```{r eval = T}
-knitr::include_url(url ="https://docs.google.com/spreadsheets/d/18dt7cYHAaszV5Iq8Y-7YOEFnv6hIXbD39Vn75-c3fQo/edit?usp=sharing")
-```
-
-
-<!--chapter:end:000-test_pages_and_misc/00c_test_google_spreadsheet.Rmd-->
-
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-
-# Datacamp test
-
-This an example of an embedded Datacamp tutorial.  It will only be rendered in HTML output.
-
-<script src=https://cdn.datacamp.com/datacamp-light-latest.min.js></script>
-
-```{r,  eval=knitr::is_html_output(), echo = F}
-# greedy = F makes it so that only specific chunks are converted
-## to datacamp 
-tutorial::go_interactive(greedy = F)
-```
-
-By default, `tutorial` will convert all R chunks.
-
-```{r tut = TRUE, eval=knitr::is_html_output()}
-a <- 2
-b <- 3
-
-a + b
-```
-
-<!--chapter:end:000-test_pages_and_misc/00d_test_datacamp_tutorial.Rmd-->
-
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-# An example of a plotly graph
-
-The normal version of the graph looks like this.
-```{r echo = F, message = F, warning = F}
-# library(plotly)
-# library(ggplot2)
-library(cowplot)
-
-data(lynx)
-
-lynx.df <- as.data.frame(lynx)
-lynx.df$time <-1:nrow(lynx.df)
-names(lynx.df) <- c("N", "time")
-p <- ggplot2::ggplot(data = lynx.df, 
-                     ggplot2::aes(x=time, y=N)) +
-    ggplot2::geom_point()    + 
-    ggplot2::geom_line()
-
-p
-```
-
-
-The plotly version looks like this
-```{r, warnings = F, message = F,  eval=knitr::is_html_output()}
-fig <- plotly::ggplotly(p)
-
-fig
-```
-
-
-<!--chapter:end:000-test_pages_and_misc/00e_plotly.Rmd-->
-
-# Directly embedding of a libretext page
-
-This is a libretext page directly called from bookdown and embedded in HTML
-
-```{r, echo = F, eval=knitr::is_html_output()}
-knitr::include_url("https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/8%3A_Ecology/45%3A_Population_and_Community_Ecology/45.0%3A_Prelude_to_Population_and_Community_Ecology")
-```
-
-<!--chapter:end:000-test_pages_and_misc/00f_libretext_embedded_page.Rmd-->
-
-# Libretext image
-
-
-I've mocked up the content from a libretext page below.  The main goal is to show how the image from this page doesn't need to be saved as a file, but can be pulled from librtext. 
-
-The original page is:
-
-[https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/8%3A_Ecology/45%3A_Population_and_Community_Ecology/45.0%3A_Prelude_to_Population_and_Community_Ecology](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/8%3A_Ecology/45%3A_Population_and_Community_Ecology/45.0%3A_Prelude_to_Population_and_Community_Ecology)
-
-## 45.0: Prelude to Population and Community Ecology
-
-Imagine sailing down a river in a small motorboat on a weekend afternoon; the water is smooth and you are enjoying the warm sunshine and cool breeze when suddenly you are hit in the head by a 20-pound silver carp. This is a risk now on many rivers and canal systems in Illinois and Missouri because of the presence of Asian carp.
-
-```{r, echo = F, out.width="50%", fig.cap="Figure  45.0.1 : Asian carp jump out of the water in response to electrofishing. The Asian carp in the inset photograph were harvested from the Little Calumet River in Illinois in May, 2010, using rotenone, a toxin often used as an insecticide, in an effort to learn more about the population of the species. (credit main image: modification of work by USGS; credit inset: modification of work by Lt. David French, USCG)"}
-knitr::include_url("https://bio.libretexts.org/@api/deki/files/2180/Figure_45_00_01.jpg?revision=1")
-```
-
-This fish—actually a group of species including the silver, black, grass, and big head carp—has been farmed and eaten in China for over 1000 years. It is one of the most important aquaculture food resources worldwide. In the United States, however, Asian carp is considered a dangerous invasive species that disrupts community structure and composition to the point of threatening native species.
-
-## Note
-
-the code to put the image in is
-
-```{r, echo = T, eval = F,fig.cap="Figure  45.0.1 : Asian carp jump out of the water in response to electrofishing. The Asian carp in the inset photograph were harvested from the Little Calumet River in Illinois in May, 2010, using rotenone, a toxin often used as an insecticide, in an effort to learn more about the population of the species. (credit main image: modification of work by USGS; credit inset: modification of work by Lt. David French, USCG)"}
-knitr::include_url("https://bio.libretexts.org/@api/deki/files/2180/Figure_45_00_01.jpg?revision=1")
-```
-
-
-<!--chapter:end:000-test_pages_and_misc/00f_libretext_image_called_from_libretext.Rmd-->
-
-# Nucleic Acids
+# Nucleic Acids {#nucleic-acids-review}
 
 **Authors**: OpenStax / Libretext  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
 
@@ -339,26 +100,11 @@ base, a pentose (five-carbon) sugar, and a phosphate group (Figure
 3.5.1). Each nitrogenous base in a nucleotide is attached to a sugar
 molecule, which is attached to one or more phosphate groups.
 
-```{r, echo = F}
+```{r, echo = F, fig.cap="A nucleotide is made up of three components: a nitrogenous base, a pentose sugar, and one or more phosphate groups. Carbon residues in the pentose are numbered 1′ through 5′ (the prime distinguishes these residues from those in the base, which are numbered without using a prime notation). The base is attached to the 1′ position of the ribose, and the phosphate is attached to the 5′ position. When a polynucleotide is formed, the 5′ phosphate of the incoming nucleotide attaches to the 3′ hydroxyl group at the end of the growing chain. Two types of pentose are found in nucleotides, deoxyribose (found in DNA) and ribose (found in RNA). Deoxyribose is similar in structure to ribose, but it has an H instead of an OH at the 2′ position. Bases can be divided into two categories: purines and pyrimidines. Purines have a double ring structure, and pyrimidines have a single ring."}
+
 knitr::include_graphics(here::here("./images/image5.jpeg"))
 ```
 
-
-
-Figure 3.5.1 : A nucleotide is made up of three components: a
-nitrogenous base, a pentose sugar, and one or more phosphate groups.
-Carbon residues in the pentose are numbered 1′ through 5′ (the prime
-distinguishes these residues from those in the base, which are
-numbered without using a prime notation). The base is attached to the
-1′ position of the ribose, and the phosphate is attached to the 5′
-position. When a polynucleotide is formed, the 5′ phosphate of the
-incoming nucleotide attaches to the 3′ hydroxyl group at the end of
-the growing chain. Two types of pentose are found in nucleotides,
-deoxyribose (found in DNA) and ribose (found in RNA). Deoxyribose is
-similar in structure to ribose, but it has an H instead of an OH at
-the 2′ position. Bases can be divided into two categories: purines and
-pyrimidines. Purines have a double ring structure, and pyrimidines
-have a single ring.
 
 The nitrogenous bases, important components of nucleotides, are
 organic molecules and are so named because they contain carbon and
@@ -586,9 +332,9 @@ Avissar (Rhode Island College) among other contributing authors.
 Original content by OpenStax (CC BY 4.0; Download for free at
 [http://cnx.org/contents/185cbf87-c72\...f21b5eabd\@9.87](http://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd%409.87)).
 
-<!--chapter:end:000-test_pages_and_misc/00g-review-nucleic_acids-LibreText.Rmd-->
+<!--chapter:end:000-biology_review/00g-review-nucleic_acids-LibreText.Rmd-->
 
-# Proteins
+# Proteins {#proteins-review}
 
 **Authors**: OpenStax / LibreText.  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
 
@@ -650,7 +396,7 @@ known as essential amino acids, and in humans they include isoleucine, leucine, 
 
 
 
-```{r, echo = F, fig.cap="There are 20 common amino acids commonly found in proteins, each with a different R group (variant group) that determines its chemical nature."}
+```{r, echo = F,  out.width = '60%', fig.cap="There are 20 common amino acids commonly found in proteins, each with a different R group (variant group) that determines its chemical nature."}
 knitr::include_graphics(here::here("./images/protimage2.jpeg"))
 ```
 
@@ -683,6 +429,7 @@ After **protein synthesis (translation)**, most proteins are modified. These are
 ## Evolution Connection:
 
 ---------------
+
 **The Evolutionary Significance of Cytochrome**: Cytochrome c is an
 important component of the electron transport chain, a part of
 cellular respiration, and it is normally found in the cellular
@@ -705,6 +452,7 @@ protein sequences, no sequence difference was found. When human and
 rhesus monkey sequences were compared, the single difference found was
 in one amino acid. In another comparison, human to yeast sequencing
 shows a difference in the 44th position.
+
 ---------------
 
 ## Protein Structure
@@ -721,7 +469,7 @@ the C terminal amino acid is asparagine (Figure 3.4.4). The sequences
 of amino acids in the A and B chains are unique to insulin.
 
 
-```{r, echo = F, fig.cap="Bovine serum insulin is a protein hormone made of two peptide chains, A (21 amino acids long) and B (30 amino acids long). In each chain, primary structure is indicated by three-letter abbreviations that represent the names of the amino acids in the order they are present. The amino acid cysteine (cys) has a sulfhydryl (SH) group as a side chain. Two sulfhydryl groups can react in the presence of oxygen to form a disulfide (S-S) bond. Two disulfide bonds connect the A and B chains together, and a third helps the A chain fold into the correct shape. Note that all disulfide bonds are the same length, but are drawn different sizes for clarity."}
+```{r, echo = F,out.width = '40%', fig.cap="Bovine serum insulin is a protein hormone made of two peptide chains, A (21 amino acids long) and B (30 amino acids long). In each chain, primary structure is indicated by three-letter abbreviations that represent the names of the amino acids in the order they are present. The amino acid cysteine (cys) has a sulfhydryl (SH) group as a side chain. Two sulfhydryl groups can react in the presence of oxygen to form a disulfide (S-S) bond. Two disulfide bonds connect the A and B chains together, and a third helps the A chain fold into the correct shape. Note that all disulfide bonds are the same length, but are drawn different sizes for clarity."}
 knitr::include_graphics(here::here("./images/protimage4.jpeg"))
 ```
 
@@ -744,7 +492,7 @@ three nucleotides each, and the mutation is caused by a single base
 change (point mutation), 1 in 1800 bases.
 
 
-```{r, echo = F, fig.cap="The beta chain of hemoglobin is 147 residues in length, yet a single amino acid substitution leads to sickle cell anemia. In normal hemoglobin, the amino acid at position seven is glutamate. In sickle cell hemoglobin, this glutamate is replaced by a valine."}
+```{r, echo = F,out.width = '40%', fig.cap="The beta chain of hemoglobin is 147 residues in length, yet a single amino acid substitution leads to sickle cell anemia. In normal hemoglobin, the amino acid at position seven is glutamate. In sickle cell hemoglobin, this glutamate is replaced by a valine."}
 knitr::include_graphics(here::here("./images/protimage5.jpeg"))
 ```
 
@@ -757,7 +505,7 @@ arteries (Figure 3.4.6). This can lead to myriad serious health
 problems such as breathlessness, dizziness, headaches, and abdominal
 pain for those affected by this disease.
 
-```{r, echo = F, fig.cap="In this blood smear, visualized at 535x magnification using bright field microscopy, sickle cells are crescent shaped, while normal cells are disc-shaped. (credit: modification of work by Ed Uthman; scale-bar data from Matt Russell)"}
+```{r, echo = F, out.width = '60%',fig.cap="In this blood smear, visualized at 535x magnification using bright field microscopy, sickle cells are crescent shaped, while normal cells are disc-shaped. (credit: modification of work by Ed Uthman; scale-bar data from Matt Russell)"}
 knitr::include_graphics(here::here("./images/protimage6.jpeg"))
 ```
 
@@ -771,7 +519,7 @@ The hydrogen bonds form between the oxygen atom in the carbonyl group
 in one amino acid and another amino acid that is four amino acids
 farther along the chain.
 
-```{r, echo = F, fig.cap="The α-helix and β-pleated sheet are secondary structures of proteins that form because of hydrogen bonding between carbonyl and amino groups in the peptide backbone. Certain amino acids have a propensity to form an α-helix, while others have a propensity to form a β-pleated sheet."}
+```{r, echo = F,out.width = '40%', fig.cap="The α-helix and β-pleated sheet are secondary structures of proteins that form because of hydrogen bonding between carbonyl and amino groups in the peptide backbone. Certain amino acids have a propensity to form an α-helix, while others have a propensity to form a β-pleated sheet."}
 knitr::include_graphics(here::here("./images/protimage7.jpeg"))
 ```
 
@@ -806,7 +554,7 @@ hydrophobic interactions. Interaction between cysteine side chains
 forms disulfide linkages in the presence of oxygen, the only covalent
 bond forming during protein folding.
 
-```{r, echo = F, fig.cap="The tertiary structure of proteins is determined by a variety of chemical interactions. These include hydrophobic interactions, ionic bonding, hydrogen bonding and disulfide linkages."}
+```{r, echo = F,out.width = '40%', fig.cap="The tertiary structure of proteins is determined by a variety of chemical interactions. These include hydrophobic interactions, ionic bonding, hydrogen bonding and disulfide linkages."}
 knitr::include_graphics(here::here("./images/protimage8.jpeg"))
 ```
 
@@ -986,9 +734,9 @@ Avissar (Rhode Island College) among other contributing authors.
 Original content by OpenStax (CC BY 4.0; Download for free at
 [http://cnx.org/contents/185cbf87-c72\...f21b5eabd\@9.87](http://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd%409.87)).
 
-<!--chapter:end:000-test_pages_and_misc/00h-proteins.rmd-->
+<!--chapter:end:000-biology_review/00h-proteins-LibreText.rmd-->
 
-# Downloading R
+# Downloading R {#downloadR}
 
 **By**: Avril Coghlan  
 
@@ -1058,7 +806,7 @@ Say "Hi" to *R* and take a quick look at how it looks.  Now say "Goodbye", becau
 
 <!--chapter:end:001-getting_started/01-downloading_R_AC01-1.Rmd-->
 
-# Installing the RStudio IDE
+# Installing the RStudio IDE {$installRStudio}
 
 **By:** Nathan Brouwer
 
@@ -1083,7 +831,7 @@ RStudio and RStudio cloud work almost identically, so anything you read about RS
 
 <!--chapter:end:001-getting_started/02-installing_RStudio_AC01-2.Rmd-->
 
-# Installing *R* packages
+# Installing *R* packages {#installing-packages}
 
 **By**: Avril Coghlan.  
 
@@ -1141,7 +889,26 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Installing Bioconductor
+# Installing Bioconductor {#installing-bioconductor}
+
+```{r, echo = F}
+# save the built-in output hook
+hook_output <- knitr::knit_hooks$get("output")
+
+# set a new output hook to truncate text output
+knitr::knit_hooks$set(output = function(x, options) {
+  if (!is.null(n <- options$out.lines)) {
+    x <- xfun::split_lines(x)
+    if (length(x) > n) {
+      # truncate the output
+      x <- c(head(x, n), "....\n")
+    }
+    x <- paste(x, collapse = "\n")
+  }
+  hook_output(x, options)
+})
+```
+
 
 **By**: Avril Coghlan.  
 
@@ -1188,36 +955,31 @@ Below I discuss the series of prompts I had to deal with while re-installing Bio
 
 ### Updating other packages when downloading a package
 
-When I re-installed `Biostrings` while writing this I was given a HUGE blog of red test that contained this:
+When I re-installed `Biostrings` while writing this I was given a HUGE blog of red test that contained something like what's shown below (this only aout 1/3 of the actual output!):
 ```{r, eval = F}
-'getOption("repos")' replaces Bioconductor standard repositories, see '?repositories' for
-details
+'getOption("repos")' replaces Bioconductor standard repositories, 
+see '?repositories' for details
 
 replacement repositories:
     CRAN: https://cran.rstudio.com/
 
 Bioconductor version 3.11 (BiocManager 1.30.16), R 4.0.5 (2021-03-31)
-Old packages: 'ade4', 'ape', 'aster', 'bayestestR', 'bio3d', 'bitops', 'blogdown',
-  'bookdown', 'brio', 'broom', 'broom.mixed', 'broomExtra', 'bslib', 'cachem', 'callr',
-  'car', 'circlize', 'class', 'cli', 'cluster', 'colorspace', 'corrplot', 'cpp11', 'curl',
-  'devtools', 'DHARMa', 'doBy', 'dplyr', 'DT', 'e1071', 'ellipsis', 'emmeans', 'emojifont',
-  'extRemes', 'fansi', 'flextable', 'forecast', 'formatR', 'gap', 'gargle', 'gert', 'GGally',
-  'ggfortify', 'ggplot2', 'ggsignif', 'ggVennDiagram', 'gh', 'glmmTMB', 'googledrive',
-  'gtools', 'haven', 'highr', 'hms', 'htmlTable', 'httpuv', 'huxtable', 'jquerylib',
-  'KernSmooth', 'knitr', 'later', 'lattice', 'lme4', 'magick', 'manipulateWidget', 'MASS',
-  'Matrix', 'matrixcalc', 'matrixStats', 'mgcv', 'mime', 'multcomp', 'mvtnorm', 'nnet',
-  'openssl', 'openxlsx', 'parameters', 'pBrackets', 'pdftools', 'phangorn', 'phytools',
-  'pillar', 'plotly', 'processx', 'proxy', 'qgam', 'quantreg', 'ragg', 'Rcpp',
-  'RcppArmadillo', 'remotes', 'rgl', 'rio', 'rJava', 'rlang', 'rmarkdown', 'robustbase',
-  'rsconnect', 'rversions', 'sandwich', 'sass', 'segmented', 'seqinr', 'seqmagick', 'servr',
-  'sf', 'shape', 'spatial', 'statmod', 'stringi', 'systemfonts', 'testthat', 'textshaping',
-  'tibble', 'tidyselect', 'tidytree', 'tinytex', 'tufte', 'UniprotR', 'units', 'vctrs',
-  'viridis', 'viridisLite', 'withr', 'xfun', 'zip'
+Old packages: 'ade4', 'ape', 'aster', 'bayestestR', 
+  'bio3d', 'bitops', 'blogdown',
+  'bookdown', 'brio', 'broom', 'broom.mixed', 
+  'broomExtra', 'bslib', 'cachem', 'callr',
+  'car', 'circlize', 'class', 'cli', 'cluster', 
+  'colorspace', 'corrplot', 'cpp11', 'curl',
+  'devtools', 'DHARMa', 'doBy', 'dplyr', 'DT', 
+  'e1071', 'ellipsis', 'emmeans', 'emojifont',
+  'extRemes', 'fansi', 'flextable', 'forecast', 
+  'formatR', 'gap', 'gargle', 'gert', 'GGally'
 ```
 
-Hidden at the bottom was a prompt: "Update all/some/none? [a/s/n]:"
+Hidden at the bottom was a prompt: 
+`"Update all/some/none? [a/s/n]:"`
 
-Its a little vague, but what it wants me to do is type in a, s or n  and press enter to tell it what to do.  I almost always chose "a", though this may take a while to update everything.
+Its a little vague, but what it wants me to do is type in `a`, `s` or `n`  and press enter to tell it what to do.  I almost always chose `a`, though this may take a while to update everything.
 
 ### Packages "from source"
 
@@ -1231,7 +993,7 @@ After the prompt about packages from source, R proceeded to download a lot of up
 
 <!-- TODO: add example of angry red text -->
 
-```{r echo = F}
+```{r echo = F,out.width = '40%'}
 knitr::include_graphics("images/angry_red_text_download_biostrings.png")
 ```
 
@@ -1246,7 +1008,7 @@ library(Biostrings)
 
 As you might expect, there's more red text scrolling up my screen!
 
-```{r echo = F}
+```{r echo = F,out.width = '40%',}
 knitr::include_graphics("images/angry_red_text_library_biostrings.png")
 ```
 
@@ -1267,7 +1029,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# A Brief introduction to R
+# A Brief introduction to R {#basic-R}
 
 **By**: Avril Coghlan.  
 
@@ -1406,7 +1168,7 @@ mylist <- list(name="Charles Darwin",
                myvector)
 ```
 
-We can then print out the contents of the list mylist by typing its name:
+We can then print out the contents of the list `mylist` by typing its name:
 
 ```{r}
 mylist
@@ -1531,7 +1293,7 @@ In *R*, you can get help about a particular function by using the `help()` funct
 help("log10")
 ```
  
-When you use the `help()` function, a box or web pag will show up in one of the panes of RStudio with information about the function that you asked for help with.  You can also use the `?` next to the function like this
+When you use the `help()` function, a box or web page will show up in one of the panes of RStudio with information about the function that you asked for help with.  You can also use the `?` next to the function like this
 
 ```{r, eval = F}
 ?log10
@@ -1620,7 +1382,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# A primer for working with vecotrs
+# A primer for working with vectors {#vectors-in-R}
 
 **By**: Avril Coghlan  
 
@@ -1932,7 +1694,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Plotting vectors in base R
+# Plotting vectors in base R {#plotting-vectors}
 
 **By**: Avril Coghlan  
 
@@ -2018,7 +1780,7 @@ Base R has lots of plotting functions; additionally, people have written package
 
 <!--chapter:end:002-R-programming_basics/02-vectors_plotting-c_plot.Rmd-->
 
-# Intro to R objects
+# Intro to R objects {#R-objects}
 
 **By**: Nathan Brouwer
 
@@ -2037,19 +1799,19 @@ Base R has lots of plotting functions; additionally, people have written package
 * We'll do a simple data analysis with a t.test and then look at properties of R objects
 * There are several types of objects: **vectors, matrices, lists, dataframes**
 * R objects can hold numbers, text, or both
-* A typical dataframe has columns of **numeric data** and colmns of text that represent **factor variables** (aka "**categoical variables**")
+* A typical dataframe has columns of **numeric data** and columns of text that represent **factor variables** (aka "**categorical variables**")
 
 
 
 ## Differences between objects
 
-Different objects are used and show up in differnt contexts.
+Different objects are used and show up in different contexts.
 
 * Most practical stats work in R is done with **dataframes** .  
 * A dataframe is kind of like a spreadsheet, loaded into R.
 * For the sake of simplicity, we often load data in as a **vector**.  This just makes things smoother when we are starting out.
 * **vectors** pop up in many places, usually in a support role until you start doing more programming.
-* **matrices** are occassionaly used for applied stats stuff but show up more for programming.  A matrix is like a stripped-down dataframe.
+* **matrices** are occasionally used for applied stats stuff but show up more for programming.  A matrix is like a stripped-down dataframe.
 * **lists** show up everywhere, but you often don't know it; many R functions make lists
 * Understanding **lists** will help you efficiently work with stats output and make plots.
 
@@ -2060,7 +1822,7 @@ Different objects are used and show up in differnt contexts.
 
 We'll use the following data to explore R objects.
 
-Motulsky 2nd Ed, Chapter 30, page 220, Table 30.1.  Maximal relaxaction of muscle strips of old and young rat bladders stimualted w/ high concentrations of nonrepinephrine (Frazier et al 2006).  Response variable is %E.max
+Motulsky 2nd Ed, Chapter 30, page 220, Table 30.1.  Maximal relaxation of muscle strips of old and young rat bladders stimulated w/ high concentrations of nonrepinephrine (Frazier et al 2006).  Response variable is %E.max
 
 ```{r, echo = F}
 
@@ -2078,7 +1840,7 @@ young.E.max <- c(45.5,55.0, 60.7, 61.5, 61.1, 65.5,42.9,37.5)
 
 The code above has made two objects.  We can use several commands to learn about these objects.
 
-* is(): what an object is, ie, vector, matrix, list, dataframe
+* is(): what an object is, i.e., vector, matrix, list, dataframe
 * length():how long an object is; only works with vectors and lists, not dataframes!
 * dim(): how long AND how wide and object is; doesn't work with vectors, only dataframes and matrices :(
 
@@ -2112,7 +1874,7 @@ And used `is()`
 is(cat.variables)
 ```
 
-It tells us we have a vector, containing chracter data.  Not sure why it feels the need to tell us all the other stuff...
+It tells us we have a vector, containing character data.  Not sure why it feels the need to tell us all the other stuff...
 
 
 ### length()
@@ -2124,7 +1886,7 @@ length(old.E.max)
 
 
 
-Note that `dim()`, for dimension, doens't work with vectors!
+Note that `dim()`, for dimension, doesn't work with vectors!
 
 ```{r}
 dim(old.E.max)
@@ -2152,7 +1914,7 @@ str(old.E.max)
 * We typically use `c()` to gather together things like numbers, as we did to make our objects above. 
 * note: this is *lower case* "c"! 
 * Uppercase is something else
-* For me, R's font makes it hard sometiems to tell the difference between "c" and "C"
+* For me, R's font makes it hard sometimes to tell the difference between "c" and "C"
 * If code isn't working, one problem might be a "C" instead of a "c"
 
 Use `c()` to combine two objects
@@ -2163,7 +1925,7 @@ old.plus.new <- c(old.E.max, young.E.max)
 
 
 
-Look at the legnth
+Look at the length
 
 ```{r}
 length(old.plus.new)
@@ -2185,7 +1947,7 @@ We can...
 
 * learn about objects using length(), is(), str()
 * access parts of list using $ (and also brackets)
-* access parts of vetors using square brackets [ ]
+* access parts of vectors using square brackets [ ]
 * save the output of a model / test to an object
 * access part of lists for plotting instead of copying stuff
 
@@ -2196,7 +1958,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# FASTA Files
+# Introducing FASTA Files {#introducing-FASTA}
 
 <!-- TODO: Add images / examples -->
 
@@ -2331,7 +2093,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Downloading DNA sequences as FASTA files in R
+# Downloading DNA sequences as FASTA files in R {#download-FASTA-inR}
 
 This is a modification of ["DNA Sequence Statistics"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  Most of the text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license.  
 
@@ -2467,14 +2229,14 @@ Note that because the NCBI Sequence Database, the EMBL Sequence Database, and DD
 You can retrieve sequence data from NCBI directly from *R* using the `rentrez` package.  The DEN-1 Dengue virus genome sequence has NCBI accession NC_001477. To retrieve a sequence with a particular NCBI accession, you can use the function `entrez_fetch()` from the `rentrez` package.  Note that to be specific where the function comes from I write it as `package::function()`.  
 
 <!-- QUESTION: How many arguments does entrez_fetch take in this call? -->
-```{r, eval = T}
+```{r, eval = F}
 dengueseq_fasta <- rentrez::entrez_fetch(db = "nucleotide", 
                           id = "NC_001477", 
                           rettype = "fasta")
 ```
 
 ```{r, echo = F}
-#data(dengueseq_fasta)
+data(dengueseq_fasta)
 ```
 
 
@@ -3036,7 +2798,7 @@ output: html_document
 editor_options: 
   chunk_output_type: console
 ---
-# Downloading protein sequences in *R*
+# Downloading protein sequences in *R* {#download-protein-seqs-R}
 
 **By**: Avril Coghlan.  
 
@@ -3845,10 +3607,6 @@ cbind(hShrm3_vec, mShrm3_vec)
 
 
 Save that to an object called shrm
-
-```{r, echo = T}
-cbind(hShrm3_vec, mShrm3_vec)
-```
 
 
 ```{r, echo = T}
@@ -4692,13 +4450,13 @@ BLOSUM62
 
 
 The function `tri_print()` will print just the lower triangle, with all the other values left empty. (This might be a bit slow)
-```{r}
+```{r, out.width = '40%',}
 tri_print(BLOSUM62, as.image = T)
 ```
 
 
 We can also look at the upper triangle.
-```{r}
+```{r, out.width = '40%',}
 tri_print(BLOSUM62,triangle = "upper", as.image = T)
 ```
 
@@ -5337,7 +5095,7 @@ BLOSUM62[i , i]
 
 If I hadn't defined the vector `i`, I could write
 
-```{r}
+```{r, echo = F}
 BLOSUM62[c(1:20) ,c(1:20)  ]
 ```
 
@@ -5916,7 +5674,7 @@ BLOSUM62
 
 
 The function `tri_print()` will print just the lower triangle, with all the other values left empty. (This might be a bit slow)
-```{r}
+```{r, out.width = '40%',}
 tri_print(BLOSUM62, as.image = T)
 ```
 
@@ -5973,7 +5731,7 @@ We'll be working with sequences without any ambiguities.  In the following secti
 
 We can visualize the BLOSUM matrix by first drawing all 20 amino acids in a circle.
 
-```{r, echo = F}
+```{r, echo = F, message = F, warning = F}
 # install.packages("igraph")
 library(Biostrings)
 library(igraph)
@@ -8847,7 +8605,7 @@ runif(n = 10, min = 0.5, max = 6.5)
 ```
 
 
-runif() allows for non-integers, so we can make this like a real dice using round()
+`runif()` allows for non-integers, so we can make this like a real dice using `round()`
 ```{r}
 round(runif(n = 1, min = 0.50000000, max = 6.50000000))
 ```
@@ -8861,7 +8619,7 @@ round(runif(n = 50, min = 0.5, max = 6.5))
 
 If we had 10000 people in our class:
 
-```{r}
+```{r, echo = F, eval = F}
 round(runif(n = 10000, min = 0.5, max = 6.5))
 ```
 
@@ -12757,7 +12515,7 @@ In the first cycle of this loop, the value of i is 1, and so i * i = 1 is printe
 
 ## Introduction
 
-There are several way to write for() loops in R.  For this assignment, I asked you to write a loop which printed out each letter of the alphabet. 
+There are several way to write `for()` loops in R.  For this assignment, I asked you to write a loop which printed out each letter of the alphabet. 
 
 There are several ways to write a for loop in R.  I will show several different ways.  Out of habitat I will generally use the style of (for i in 1:length(x)), though this is not an optimal way to do things.  I will discuss this way as well as some more sounds approaches.
 
@@ -12804,7 +12562,7 @@ LETTERS[i]
 
 
 
-## For loop 1: The hard-coded for loop (aka, the don't actually do this for loop)
+## For loop 1: The hard-coded for loop (don't actually do this!)
 
 This is a bad way to do a for loop but makes the process totally transparent.  There are 26 letters in the alphabet, so there are 26 elements in the vector LETTERS.  Therefore, what we want R to do - print out a letter from the alphabet - need to be repeated 26 times.  So our for loop needs to repeat the same action 26 times.
 
@@ -12841,10 +12599,18 @@ letter.A
 
 
 
-What a for loop can do is cycle through each index value, 1 to 26, and put it in between the bracket. It would look like this loop below;note that I added an extra step where I print out the index value.
+What a for loop can do is cycle through each index value, 1 to 26, and put it in between the bracket. It would look like this loop below; note that I added an extra step where I print out the index value, and the output is truncated.
 
-```{r}
+```{r, eval = F}
 for(i in 1:26){
+  print(i)                #print the index
+  letter.i <- LETTERS[i]  #get leter i
+  print(letter.i)         #print letter i
+}
+```
+
+```{r, echo = F}
+for(i in 1:10){
   print(i)                #print the index
   letter.i <- LETTERS[i]  #get leter i
   print(letter.i)         #print letter i
@@ -12863,6 +12629,9 @@ for(i in 1:26){
   print(letter.i)         #print letter i
 }
 ```
+
+
+
 
 The colon : is a shortcut for the seq() command; if I wanted to be 100% transparent to someone who didn't know R I could write this:
 ```{r, eval = F}
@@ -12968,7 +12737,7 @@ for(j in LETTERS){
 
 To remember this format it might be useful to think about it like this: instead of using i or j, use something representative of what the loop is accessing from LETTERS.  In the next version, I'll use letter instead of i.
 
-```{r}
+```{r, eval = F}
 for(letter in LETTERS){
   print(letter)
 }
@@ -12990,7 +12759,7 @@ length(bad.index)
 ```
 
 If I use this in a for loop in the current style I get no output
-```{r}
+```{r, eval = F}
 for(i in bad.index){
   print(i)
 }
@@ -13001,7 +12770,7 @@ This is because bad.index has nothing to in it.
 
 
 A limitation of this method is that i (or j, or letters) isn't an index, but takes on an assigned value from LETTERS.  So in my old school loop I can do this, which allows me to print 2 consecutive letters.  This is done by done math on the index i.
-```{r}
+```{r, eval = F}
 for(i in 1:length(LETTERS)){
  print(LETTERS[c(i,i+1)])
 }
@@ -13022,7 +12791,7 @@ There's probably a way around this, but its not apparent to me right now.
 For the discerning R programming who doesn't like for loop version 3 there is a function called seq_along()
 
 
-seq_along() determines what is a valid index for a given object
+`seq_along()` determines what is a valid index for a given object
 ```{r}
 seq_along(LETTERS)
 ```
@@ -13034,7 +12803,7 @@ seq_along(bad.index)
 ```
 
 seq_along therefore avoids the bad features of 1:length(x)
-```{r}
+```{r, eval = F}
 for(i in seq_along(bad.index)){
  print(bad.index[i])
 }
@@ -13066,7 +12835,7 @@ The following is a more advanced bit of R programming information and can be ski
 
 Its common to but if() statements within loop to screen for certain conditions.  In the code I've been using which prints out 2 consecutive letters, when I get to i = 26, the code LETTERS[c(i, i+1)] produces LETTERS[c(26, 26+1)] = LETTERS[c(26, 27)].  There is no letter 27 so an NA is thrown.  I could avoid this using an if statement
 
-```{r}
+```{r, eval = F}
 for(i in seq_along(LETTERS)){
  if(i+1 > 26){
    print(LETTERS[c(26,26)])
@@ -13077,7 +12846,7 @@ for(i in seq_along(LETTERS)){
 
 Instead of else I could also use next.
 
-```{r}
+```{r, eval = F}
 for(i in seq_along(LETTERS)){
  if(i+1 > 26){
    print(LETTERS[c(26,26)])
@@ -13107,7 +12876,7 @@ tolower("A")
 
 In some programming languages, to turn all of these letters to lower case you might have to do this (I've written this out with extra code to make it obvious what I'm doing)
 
-```{r}
+```{r, eval = F}
 for(i in 1:length(a.sequence)){
   lowercase.letter.i <- tolower(a.sequence[i]) #make lower case
   a.sequence[i] <- lowercase.letter.i          #overwrite old entry

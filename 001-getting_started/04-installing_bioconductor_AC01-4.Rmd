@@ -5,6 +5,25 @@ editor_options:
 ---
 # Installing Bioconductor {#installing-bioconductor}
 
+```{r, echo = F}
+# save the built-in output hook
+hook_output <- knitr::knit_hooks$get("output")
+
+# set a new output hook to truncate text output
+knitr::knit_hooks$set(output = function(x, options) {
+  if (!is.null(n <- options$out.lines)) {
+    x <- xfun::split_lines(x)
+    if (length(x) > n) {
+      # truncate the output
+      x <- c(head(x, n), "....\n")
+    }
+    x <- paste(x, collapse = "\n")
+  }
+  hook_output(x, options)
+})
+```
+
+
 **By**: Avril Coghlan.  
 
 **Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/), including details on install Bioconductor and common prompts and error messages that appear during installation. 
@@ -50,36 +69,31 @@ Below I discuss the series of prompts I had to deal with while re-installing Bio
 
 ### Updating other packages when downloading a package
 
-When I re-installed `Biostrings` while writing this I was given a HUGE blog of red test that contained this:
+When I re-installed `Biostrings` while writing this I was given a HUGE blog of red test that contained something like what's shown below (this only aout 1/3 of the actual output!):
 ```{r, eval = F}
-'getOption("repos")' replaces Bioconductor standard repositories, see '?repositories' for
-details
+'getOption("repos")' replaces Bioconductor standard repositories, 
+see '?repositories' for details
 
 replacement repositories:
     CRAN: https://cran.rstudio.com/
 
 Bioconductor version 3.11 (BiocManager 1.30.16), R 4.0.5 (2021-03-31)
-Old packages: 'ade4', 'ape', 'aster', 'bayestestR', 'bio3d', 'bitops', 'blogdown',
-  'bookdown', 'brio', 'broom', 'broom.mixed', 'broomExtra', 'bslib', 'cachem', 'callr',
-  'car', 'circlize', 'class', 'cli', 'cluster', 'colorspace', 'corrplot', 'cpp11', 'curl',
-  'devtools', 'DHARMa', 'doBy', 'dplyr', 'DT', 'e1071', 'ellipsis', 'emmeans', 'emojifont',
-  'extRemes', 'fansi', 'flextable', 'forecast', 'formatR', 'gap', 'gargle', 'gert', 'GGally',
-  'ggfortify', 'ggplot2', 'ggsignif', 'ggVennDiagram', 'gh', 'glmmTMB', 'googledrive',
-  'gtools', 'haven', 'highr', 'hms', 'htmlTable', 'httpuv', 'huxtable', 'jquerylib',
-  'KernSmooth', 'knitr', 'later', 'lattice', 'lme4', 'magick', 'manipulateWidget', 'MASS',
-  'Matrix', 'matrixcalc', 'matrixStats', 'mgcv', 'mime', 'multcomp', 'mvtnorm', 'nnet',
-  'openssl', 'openxlsx', 'parameters', 'pBrackets', 'pdftools', 'phangorn', 'phytools',
-  'pillar', 'plotly', 'processx', 'proxy', 'qgam', 'quantreg', 'ragg', 'Rcpp',
-  'RcppArmadillo', 'remotes', 'rgl', 'rio', 'rJava', 'rlang', 'rmarkdown', 'robustbase',
-  'rsconnect', 'rversions', 'sandwich', 'sass', 'segmented', 'seqinr', 'seqmagick', 'servr',
-  'sf', 'shape', 'spatial', 'statmod', 'stringi', 'systemfonts', 'testthat', 'textshaping',
-  'tibble', 'tidyselect', 'tidytree', 'tinytex', 'tufte', 'UniprotR', 'units', 'vctrs',
-  'viridis', 'viridisLite', 'withr', 'xfun', 'zip'
+Old packages: 'ade4', 'ape', 'aster', 'bayestestR', 
+  'bio3d', 'bitops', 'blogdown',
+  'bookdown', 'brio', 'broom', 'broom.mixed', 
+  'broomExtra', 'bslib', 'cachem', 'callr',
+  'car', 'circlize', 'class', 'cli', 'cluster', 
+  'colorspace', 'corrplot', 'cpp11', 'curl',
+  'devtools', 'DHARMa', 'doBy', 'dplyr', 'DT', 
+  'e1071', 'ellipsis', 'emmeans', 'emojifont',
+  'extRemes', 'fansi', 'flextable', 'forecast', 
+  'formatR', 'gap', 'gargle', 'gert', 'GGally'
 ```
 
-Hidden at the bottom was a prompt: "Update all/some/none? [a/s/n]:"
+Hidden at the bottom was a prompt: 
+`"Update all/some/none? [a/s/n]:"`
 
-Its a little vague, but what it wants me to do is type in a, s or n  and press enter to tell it what to do.  I almost always chose "a", though this may take a while to update everything.
+Its a little vague, but what it wants me to do is type in `a`, `s` or `n`  and press enter to tell it what to do.  I almost always chose `a`, though this may take a while to update everything.
 
 ### Packages "from source"
 
@@ -93,7 +107,7 @@ After the prompt about packages from source, R proceeded to download a lot of up
 
 <!-- TODO: add example of angry red text -->
 
-```{r echo = F}
+```{r echo = F,out.width = '40%'}
 knitr::include_graphics("images/angry_red_text_download_biostrings.png")
 ```
 
@@ -108,7 +122,7 @@ library(Biostrings)
 
 As you might expect, there's more red text scrolling up my screen!
 
-```{r echo = F}
+```{r echo = F,out.width = '40%',}
 knitr::include_graphics("images/angry_red_text_library_biostrings.png")
 ```
 

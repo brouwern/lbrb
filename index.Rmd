@@ -8,7 +8,7 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 description: "An entry-level text for bioinformatics and computational biology"
-#geometry: margin=1in
+geometry: margin=1in
 ---
 
 # Preface to version 2.0 {-}

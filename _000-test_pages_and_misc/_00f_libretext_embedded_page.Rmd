@@ -1,7 +1,0 @@
-# Directly embedding of a libretext page
-
-This is a libretext page directly called from bookdown and embedded in HTML
-
-```{r, echo = F, eval=knitr::is_html_output()}
-knitr::include_url("https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/8%3A_Ecology/45%3A_Population_and_Community_Ecology/45.0%3A_Prelude_to_Population_and_Community_Ecology")
-```
