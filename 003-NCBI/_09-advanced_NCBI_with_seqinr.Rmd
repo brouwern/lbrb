@@ -1,0 +1,346 @@
+# Sequence Databases
+
+```{r, eval = F}
+library(compbio4all)
+```
+
+**By**: Avril Coghlan.  
+
+**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+
+## Querying the NCBI Database via R
+
+Instead of carrying out searches of the NCBI database on the NCBI website, you can carry out searches directly from R by using the SeqinR R package.
+
+It is possible to use the SeqinR R package to retrieve sequences from these databases. The SeqinR package was written by the group that created the ACNUC database in Lyon, France (http://pbil.univ-lyon1.fr/databases/acnuc/acnuc.html). The ACNUC database is a database that contains most of the data from the NCBI Sequence Database, as well as data from other sequence databases such as UniProt and Ensembl.
+
+An advantage of the ACNUC database is that it brings together data from various different sources, and makes it easy to search, for example, by using the SeqinR R package.
+
+As will be explained below, the ACNUC database is organized into various different ACNUC (sub)-databases, which contain different parts of the NCBI database, and when you want to search the NCBI database via R, you will need to specify which ACNUC sub-database the NCBI data that you want to query is stored in.
+
+To obtain a full list of the ACNUC sub-databases that you can access using SeqinR, you can use the “choosebank()” function from SeqinR:
+
+```{r, eval = F}
+library("seqinr") # Load the SeqinR R package
+choosebank()      # List all the sub-databases in ACNUC
+
+```
+
+  
+Alas, the ACNUC sub-databases do not have a one-to-one correspondence with the NCBI sub-databases (the NCBI Protein database, NCBI EST database, NCBI Genome database, etc.)!
+
+Three of the most important sub-databases in ACNUC which can be searched from R are:
+
+1. **genbank**: this contains DNA and RNA sequences from the NCBI Sequence Database, except for certain classes of sequences (e.g. draft genome sequence data from genome sequencing projects)
+1. **refseq**: this contains DNA and RNA sequences from Refseq, the curated part of the NCBI Sequence Database
+1. **refseqViruses**: this contains DNA, RNA and proteins sequences from viruses from RefSeq
+
+You can find more information about what each of these ACNUC databases contains by looking at the ACNUC website.
+
+You can carry out complex queries using the “query()” function from the SeqinR package. If you look at the help page for the query() function (by typing “help(query)”, you will see that it allows you to specify criteria that you require the sequences to fulfill.
+
+For example, to search for a sequence with a particular NCBI accession, you can use the “AC=” argument in “query()”. The “query()” function will then search for sequences in the NCBI Sequence Database that match your criteria.
+
+Just as you can use “AC=” to specify an accession in a search, you can specify that you want to find sequences whose NCBI records contain a certain keywords by using “K=” as an argument (input) to the “query()” function. Likewise you can limit a search to either DNA or mRNA sequences by using the “M=” argument for the “query()” function. Here are some more possible arguments you can use in the “query()” function:
+
+Argument	Example	Restricts your search to sequences:
+1. “AC=”	“AC=NC_001477”	With a particular accession number
+1. “SP=”	“SP=Chlamydia”	From a particular organism or taxon
+1. “M=”	“M=mRNA”	Of a specific type (e.g. mRNA)
+1. “J=”	“J=Nature”	Described in a paper published in a particular journal
+1. “R=”	“R=Nature/460/352”	Described in a paper in a particular journal, volume and start-page
+1. “AU=”	“AU=Smith”	Described in a paper, or submitted to NCBI, by a particular author
+The full list of possible arguments for the “query()” function are given on its help page. Here are some examples using the query function:
+
+Input to the query() function	Searches for sequences:
+1. “AC=NC_001477”	With accession number NC_001477
+1. “R=Nature/460/352”	Published in Nature 460:352-358
+1. “SP=Chlamydia trachomatis”	From the bacterium Chlamydia trachomatis
+1. “AU=Berriman”	Published in a paper, or submitted to NCBI, by someone called Berriman
+1. K=flagellin OR K=fibrinogen”	Which have the keyword ‘flagellin’ or ‘fibrinogen’
+1. “SP=Mycobacterium leprae AND K=dnaA”	Which are from M. leprae, and have the keyword “dnaA”
+1. “SP=Homo sapiens AND K=colon cancer”	Which are from human, and have the keyword “colon cancer”
+1. “SP=Homo sapiens AND K=malaria”	Which are from human, and have the keyword “malaria”
+1. “SP=Homo sapiens AND M=mrna”	Which are mRNA sequences from human
+1. “SP=Bacteria”	Which are sequences from Bacteria
+
+As explained above, the ACNUC database contains the NCBI sequence data organized into several sub-databases, and you can view the list of those sub-databases by using the “choosebank()” function from the SeqinR package. When you want to use “query()” to carry out a particular sub-database (e.g. “genbank”, which contains DNA and RNA sequences from the NCBI Sequence Database), you need to first specify the database that you want to search by using the “choosebank()” function, for example:
+
+```{r, eval = F}
+choosebank("genbank") # Specify that we want to search the 'genbank' ACNUC sub-database
+```
+
+Likewise, to specify that we want to search the ‘refseq’ ACNUC sub-database, which contains sequences from the NCBI RefSeq database, we would type:
+
+```{r eval = F}
+choosebank("refseq") # Specify that we want to search the 'refseq' ACNUC sub-database
+```
+
+Once you have specified which ACNUC sub-database you want to search, you can carry out a search of that sub-database by using the “query()” function. You need to pass the “query()” function both a name for your query (which you can make up), and the query itself (which will be in the format of the examples in the table above). For example, if we want to search for RefSeq sequences from Bacteria, we might decide to call our query “RefSeqBact”, and we would call the “query()” function as follows:
+
+```{r eval = F}
+query("RefSeqBact", "SP=Bacteria")
+```
+
+As explained below, the results of the search are stored in a list variable called “RefSeqBact”, and can be retrieved from that list variable. The last thing to do once you have completed your search is to close the connection to the ACNUC sub-database that you were searching, by typing:
+
+```{r eval = F}
+closebank()
+```
+
+Thus, there are three steps involved in carrying out a query using SeqinR: first use “choosebank()” to select the ACNUC sub-database to search, secondly use “query()” to query the database, and thirdly use “closebank()” to close the connection to the ACNUC sub-database.
+
+Another example could be to search for mRNA sequences from the parasitic worm Schistosoma mansoni in the NCBI Nucleotide database. The appropriate ACNUC sub-database to search is the “genbank” ACNUC sub-database. We may decide to call our search “SchistosomamRNA”. Therefore, to carry out the search, we type in R:
+
+```{r, eval = F}
+choosebank("genbank")
+query("SchistosomamRNA", "SP=Schistosoma mansoni AND M=mrna")
+closebank()
+```
+
+Example: finding the sequence for the DEN-1 Dengue virus genome
+Another example could be to search for the DEN-1 Dengue virus genome sequence, which has accession NC_001477. This is a viral genome sequence, and so should be in the ACNUC sub-database “refSeqViruses”. Thus to search for this sequence, calling our search “Dengue1”, we type in R:
+
+```{r, eval = F}
+choosebank("refseqViruses")
+query("Dengue1", "AC=NC_001477")
+```
+
+
+The result of the search is now stored in the list variable Dengue1. Remember that a list is an R object that is like a vector, but can contain elements that are numeric and/or contain characters. In this case, the list Dengue1 contains information on the NCBI records that match the query (i.e.. information on the NCBI record for accession NC_001477).
+
+If you look at the help page for “query()”, the details of the arguments are given under the heading “Arguments”, and the details of the results (outputs) are given under the heading “Value”. If you read this now, you will see that it tells us that the result of the “query()” function is a list with six different named elements, named “call”, “name”, “nelem”, “typelist”, “req”, and “socket”. The content of each of these six named elements is explained, for example, the “nelem” element contains the number of sequences that match the query, and the “req” element contains their accession numbers.
+
+In our example, the list object Dengue1 is an output of the “query()” function, and so has each of these six named elements, as we can find out by using the “attributes()” function, and looking at the named elements listed under the heading “$names”:
+
+
+```{r, eval = F}
+attributes(Dengue1)
+```
+
+
+As explained in the brief introduction to R, we can retrieve the value for each of the named elements in the list Dengue1 by using “$”, followed by the element’s name, for example, to get the value of the element named “nelem” in the list Dengue1, we type:
+
+```{r, eval = F}
+Dengue1$nelem
+```
+
+This tells us that there was one sequence in the ‘refseqViruses’ ACNUC database that matched the query. This is what we would expect, as there should only be one sequence corresponding to accession NC_001477.
+
+To obtain the accession numbers of the sequence found, we can type:
+
+```{r, eval = F}
+Dengue1$req
+```
+
+As expected, the accession number of the matching sequence is NC_001477.
+
+When you type “attributes(Dengue1)” you can see that there are two headings, “\$names”, and “\$class”. As explained above, the named elements of the list variable Dengue1 are listed under the heading “\$names”. In fact, the headings “\$names” and “\$class” are two attributes of the list variable Dengue1. We can retrieve the values of the attributes of a variable using the “attr()” function. For example, to retrieve the value of the attribute “\$names” of Dengue1, we type:
+
+```{r, eval = F}
+attr(Dengue1, "names")
+```
+
+This gives us the value of the attribute “\$names”, which contains the the names of the named elements of the list variable Dengue1. Similarly, we can retrieve the value of the a attribute “\$class” of Dengue1, we type:
+
+```{r, eval = F}
+attr(Dengue1, "class")
+```
+
+This tells us that the value of the attribute “$class” is “qaw”.
+
+The final step in retrieving a genomic DNA sequence is to use the “getSequence()” function to tell R to retrieve the sequence data. The command below uses “getSequence()” to retrieve the sequence data for the DEN-1 Dengue virus genome, and puts the sequence into a variable dengueseq:
+
+```{r, eval = F}
+ dengueseq <- getSequence(Dengue1$req[[1]])
+```
+
+Note that the input to the getSequence() command is Dengue1$req[[1]], which contains the name of the NCBI record that the list Dengue1 contains information about.
+
+Once you have retrieved a sequence, you can then print it out. The variable dengueseq is a vector containing the nucleotide sequence. Each element of the vector contains one nucleotide of the sequence. Therefore, we can print out the first 50 nucleotides of the DEN-1 Dengue genome sequence by typing:
+
+```{r, eval = F}
+dengueseq[1:50]
+```
+
+Note that dengueseq[1:50] refers to the elements of the vector dengueseq with indices from 1-50. These elements contain the first 50 nucleotides of the DEN-1 Dengue virus genome sequence.
+
+As well as retrieving the DNA (or RNA or protein) sequence itself, SeqinR can also retrieve all the annotations for the sequence, for example, information on when the sequence was sequenced, who sequenced it, what organism is it from, what paper was it described in, what genes were identified in the sequence, and so on.
+
+Once you have retrieved a sequence using SeqinR, you can retrieved its annotations by using the “getAnnot()” function. For example, to view the annotations for the DEN-1 Dengue virus genome sequence, we type:
+
+```{r, eval =- F}
+annots <- getAnnot(Dengue1$req[[1]])
+```
+
+This stores the annotations information from the NCBI record for the DEN-1 Dengue virus sequence in a vector variable annots, with one line of the NCBI record in each element of the vector. Therefore, we can print out the first 20 lines of the NCBI record by typing:
+
+```{r, eval = F}
+annots[1:20]
+```
+
+
+The line with “ORGANISM” in the left column is the organism field, and usually contains the Latin name for the organism (“Dengue virus 1” here). The line with “AUTHORS” in the left column is the authors field, and contain the names of authors that wrote papers to describe the sequence and/or the names of the people who submitted the sequence to the NCBI Database.
+
+When you have finished your running your query and getting the corresponding sequences and annotations, close the connection to the ACNUC sub-database:
+
+```{r, eval = F}
+closebank()
+```
+
+Example: finding the sequences published in Nature 460:352-358
+We described above how to search for the sequences published in Nature 460:352-358, using the NCBI website. A second method is to use the SeqinR R package to search the ACNUC databases (which contain the NCBI sequence data) from R.
+
+If you look at the help page the “query()” function, you see that you can query for sequences published in a particular paper using R=refcode, specifying the reference as refcode such as in jcode/volume/page (e.g., JMB/13/5432 or R=Nature/396/133). For the paper Nature 460:352-358, we would need to use the refcode ‘R=Nature/460/352’.
+
+First we need to specify which of the ACNUC databases we want to search. For example, to specify that we want to search the “genbank” ACNUC database, which contains DNA and RNA sequences from the NCBI Nucleotide database, we type:
+
+```{r, eval = F}
+choosebank("genbank") # Specify that we want to search the 'genbank' ACNUC sub-database
+```
+
+We can then search the ‘genbank’ database for sequences that match a specific set of criteria by using the “query()” function. For example, to search for sequences that were published in Nature 460:352-358, we type:
+
+```{r eval = F}
+query('naturepaper', 'R=Nature/460/352')
+```
+
+The line above tells R that we want to store the results of the query in an R list variable called naturepaper. To get the value of the element named “nelem” in the list naturepaper, we type:
+
+```{r, eval = F}
+naturepaper$nelem
+```
+
+
+This tells us that there were 19022 sequences in the ‘genbank’ ACNUC database that matched the query. The ‘genbank’ ACNUC database contains DNA or RNA sequences from the NCBI Nucleotide database. Why don’t we get the same number of sequences as found by carrying out the search on the NCBI website (where we found 50890 hits to the NCBI Nucleotide database)? The reason is that the ACNUC ‘genbank’ database does not contain all the sequences in the NCBI Nucleotide database, for example, it does not contain sequences that are in RefSeq or many short DNA sequences from sequencing projects.
+
+To obtain the accession numbers of the first five of the 19022 sequences, we can type:
+
+```{r, eval = F}
+accessions <- naturepaper$req
+accessions[1:5]
+```
+
+
+This tells us that the NCBI accessions of the first five sequences (of the 19022 DNA or RNA sequences found that were published in Nature 460:352-358) are FN357292, FN357293, FN357294, FN357295, and FN357296.
+```{r}
+
+```
+
+To retrieve these first five sequences, and print out the first 10 nucleotide bases of each sequence, we use the getSequence() command, typing:
+
+```{r, eval = F}
+for (i in 1:5)
+  {
+     seqi <- getSequence(naturepaper$req[[i]])
+     print(seqi[1:10])
+  }
+```
+
+
+Note that the input to the getSequence() command is Dengue1$req[[i]], which contains the name of i th NCBI record that the list naturepaper contains information about.
+
+Once we have carried out our queries and retrieved the sequences, the final step is to close the connection to the ACNUC sub-database that we searched (“genbank” here):
+
+```{r, eval = F}
+closebank()
+```
+
+Saving sequence data in a FASTA-format file
+Once you have retrieved a sequence, or set of sequences from the NCBI Database, using SeqinR, it is convenient to save the sequences in a file in FASTA format. This can be done using the “write.fasta()” function in the SeqinR package, which was introduced in Chapter 1.
+
+If you look at the help page for the “write.fasta()” function, you will see that as input it takes a list of vectors, where each vector contains one DNA, RNA or protein sequence.
+
+For example, if you retrieve the sequences of human tRNAs from the NCBI Database by querying the ACNUC “genbank” sub-database, you can save the sequences in a FASTA format file called “humantRNAs.fasta” by typing:
+
+```{r, eval = F}
+choosebank("genbank")                             # select the ACNUC sub-database to be searched
+query("humtRNAs", "SP=homo sapiens AND M=TRNA")   # specify the query
+myseqs <- getSequence(humtRNAs)                   # get the sequences
+mynames <- getName(humtRNAs)                      # get the names of the sequences
+write.fasta(myseqs, mynames, file.out="humantRNAs.fasta")
+closebank()
+```
+
+In the above code, we get the sequences of the human tRNAs using the function “getSequence()” from the SeqinR package. We also use a function “getName()” from the SeqinR package to get the sequences’ names. Then we use the “write.fasta()” function to write the sequences to a FASTA file “humantRNAs.fasta”. The “write.fasta()” takes as arguments: the list myseqs containing the sequences, the list mynames containing the names of the sequences, and the name of the output file (“humantRNAs.fasta” here).
+
+Finding the genome sequence for a particular species
+Microbial genomes are generally smaller than eukaryotic genomes (Escherichia coli has about 5 million base pair in its genome, while the human genome is about 3 billion base pairs). Because they are considerably less expensive to sequence, many microbial genome sequencing projects have been completed.
+
+If you don’t know the accession number for a genome sequence (e.g. for Mycobacterium leprae, the bacterium that causes leprosy), how can you find it out?
+
+The easiest way to do this is to look at the NCBI Genome website, which lists all fully sequenced genomes and gives the accession numbers for the corresponding DNA sequences.
+
+If you didn’t know the accession number for the Mycobacterium leprae genome, you could find it on the NCBI Genome website by following these steps:
+
+Go to the NCBI Genome website (http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome)
+On the homepage of the NCBI Genome website, it gives links to the major subdivisions of the Genome database, which include Eukaryota, Prokaryota (Bacteria and Archaea), and Viruses. Click on ‘Prokaryota’, since Mycobacterium leprae is a bacterium. This will bring up a list of all fully sequenced bacterial genomes, with the corresponding accession numbers. Note that more than one genome (from various strains) may have been sequenced for a particular species.
+Use ‘Find’ in the ‘Edit’ menu of your web browser to search for ‘Mycobacterium leprae’ on the webpage. You should find that the genomes of several different M. leprae strains have been sequenced. One of these is M. leprae TN, which has accession number NC_002677.
+The list of sequenced genomes on the NCBI Genomes website is not a definitive list; that is, some sequenced genomes may be missing from this list. If you want to find out whether a particular genome has been sequenced, but you don’t find it NCBI Genomes website’s list, you should search for it by following these steps:
+
+Go to the NCBI website (www.ncbi.nlm.nih.gov).
+Select ‘Genome’ from the drop-down list above the search box.
+Type the name of the species you are interested in in the search box (e.g. “Mycobacterium leprae”[ORGN]). Press ‘Search’.
+
+Note that you could also have found the *Mycobacterium leprae* genome sequence by searching the NCBI Nucleotide database, as the NCBI Genome database is just a subset of the NCBI Nucleotide database.
+
+## How many genomes have been sequenced, or are being sequenced now?
+
+On the NCBI Genome website (http://www.ncbi.nlm.nih.gov/sites/entrez?db=Genome), the front page gives a link to a list of all sequenced genomes in the groups Eukaryota, Prokaryota (Bacteria and Archaea) and Viruses. If you click on one of these links (e.g. Prokaryota), at the top of the page it will give the number of sequenced genomes in that group (e.g. number of sequenced prokaryotic genomes). For example, in this screenshot (from January 2011), we see that there were 1409 complete prokaryotic genomes (94 archaeal, 1315 bacterial):
+
+image1
+
+Another useful website that lists genome sequencing projects is the Genomes OnLine Database (GOLD), which lists genomes that have been completely sequenced, or are currently being sequenced. To find the number of complete or ongoing bacterial sequencing projects, follow these steps:
+
+Go to the GOLD website (http://genomesonline.org/).
+Click on the yellow ‘Enter GOLD’ button in the center of the webpage. On the subsequent page, it will give the number of ongoing bacterial, archaeal and eukaryotic genome sequencing projects.
+
+Click on the ‘Bacterial Ongoing’ link to see the list of ongoing bacterial genome sequencing projects. By default, just the first 100 projects are listed, and the rest are listed on subsequent pages. In one of the columns of the page, this gives the university or institute that the genome was sequenced in. Other columns give the taxonomic information for the organism, and links to the sequence data.
+
+Find the number of published genome sequencing projects. Go back one page, to the page with the ‘Bacterial Ongoing’ link. You will see that this page also lists the number of complete published genomes. To see a list of these genomes, click on ‘Complete Published’. This will bring up a page that gives the number of published genomes at the top of the page. In one column of the page, this gives the university or institute that the genome was sequenced in.
+
+As explained above, it is possible to identify genome sequence data in the NCBI Genome database. The GOLD database also gives some information about ongoing genome projects. Often, the GOLD database lists some ongoing projects that are not yet present in the NCBI Genome Database, because the sequence data has not yet been submitted to the NCBI Database. If you are interested in finding out how many genomes have been sequenced or are currently being sequenced for a particular species (e.g. Mycobacterium leprae), it is a good idea to look at both the NCBI Genome database and at GOLD.
+
+## Summary
+
+In this chapter, you have learned how to retrieve sequences from the NCBI Sequence database, as well as to find out how many genomes have been sequenced or are currently being sequenced for a particular species.
+
+## Links and Further Reading
+
+There is detailed information on how to search the NCBI database on the NCBI Help website at http://www.ncbi.nlm.nih.gov/bookshelf/br.fcgi?book=helpentrez?part=EntrezHelp.
+
+There is more information about the GOLD database in the paper describing GOLD by Liolios et al, which is available at http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2808860/?tool=pubmed.
+
+For more in-depth information and more examples on using the SeqinR package for sequence analysis, look at the SeqinR documentation, http://pbil.univ-lyon1.fr/software/seqinr/doc.php?lang=eng.
+
+There is also a very nice chapter on “Analyzing Sequences”, which includes examples of using SeqinR for sequence analysis, in the book Applied statistics for bioinformatics using R by Krijnen (available online at cran.r-project.org/doc/contrib/Krijnen-IntroBioInfStatistics.pdf).
+
+## Acknowledgements
+
+
+## Exercises
+Answer the following questions. For each question, please record your answer, and what you did/typed to get this answer.
+
+Model answers to the exercises are given in Answers to the exercises on Sequence Databases.
+
+1. What information about the rabies virus sequence (NCBI accession NC_001542) can you obtain from its annotations in the NCBI Sequence Database?
+What does it say in the DEFINITION and ORGANISM fields of its NCBI record? Note: rabies virus is the virus responsible for rabies, which is classified by the WHO as a neglected tropical disease.
+1. How many nucleotide sequences are there from the bacterium Chlamydia trachomatis in the NCBI Sequence Database?
+Note: the bacterium *Chlamydia trachomatis* is responsible for causing trachoma, which is classified by the WHO as a neglected tropical disease.
+1. How many nucleotide sequences are there from the bacterium *Chlamydia trachomatis* in the RefSeq part of the NCBI Sequence Database?
+1. How many nucleotide sequences were submitted to NCBI by Matthew Berriman?
+1. How many nucleotide sequences from nematode worms are there in the RefSeq Database?
+Note that several parasitic nematode worms cause neglected tropical diseases, including *Brugia malayi* and *Wucheria bancrofti*, which cause lymphatic filariasis; *Loa loa*, which causes subcutaneous filariasis; Onchocerca volvulus, which causes onchocerciasis; and *Necator americanus*, which causes soil-transmitted helminthiasis.
+1. How many nucleotide sequences for collagen genes from nematode worms are there in the NCBI Database?
+1. How many mRNA sequences for collagen genes from nematode worms are there in the NCBI Database?
+1. How many protein sequences for collagen proteins from nematode worms are there in the NCBI database?
+1. What is the accession number for the *Trypanosoma cruzi* genome in NCBI?
+Do you see genome sequences for more than one strain of *Trypanosoma cruzi*? Note that the *Trypanosoma cruzi* causes Chagas disease, which is classified as a neglected tropical disease by the WHO.
+1. How many fully sequenced nematode worm species are represented in the NCBI Genome database?
+
+
+```{r}
+
+```
+
