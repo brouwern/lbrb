@@ -265,10 +265,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html"><i class="fa fa-check"></i><b>12</b> NCBI: The National Center for Biotechnology Information</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#genbank-sequence-database"><i class="fa fa-check"></i><b>12.1</b> GenBank sequence database</a></li>
-<li class="chapter" data-level="12.2" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#pubmed-and-pubmed-central-article-database"><i class="fa fa-check"></i><b>12.2</b> PubMed and PubMed Central article database</a></li>
-<li class="chapter" data-level="12.3" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#entrez"><i class="fa fa-check"></i><b>12.3</b> Entrez</a></li>
-<li class="chapter" data-level="12.4" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#blast"><i class="fa fa-check"></i><b>12.4</b> BLAST</a></li>
+<li class="chapter" data-level="12.1" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#key-concepts"><i class="fa fa-check"></i><b>12.1</b> Key concepts</a></li>
+<li class="chapter" data-level="12.2" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#ncbi"><i class="fa fa-check"></i><b>12.2</b> NCBI</a></li>
+<li class="chapter" data-level="12.3" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#genbank-sequence-database"><i class="fa fa-check"></i><b>12.3</b> GenBank sequence database</a></li>
+<li class="chapter" data-level="12.4" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#pubmed-and-pubmed-central-article-database"><i class="fa fa-check"></i><b>12.4</b> PubMed and PubMed Central article database</a></li>
+<li class="chapter" data-level="12.5" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#entrez"><i class="fa fa-check"></i><b>12.5</b> Entrez</a></li>
+<li class="chapter" data-level="12.6" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#blast"><i class="fa fa-check"></i><b>12.6</b> BLAST</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html"><i class="fa fa-check"></i><b>13</b> Introduction to biological sequences databases</a>
 <ul>
@@ -394,34 +396,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- This is also currently in blaststats -->
 <p>Logging splits up multiplication into addition. So, log(m*n) is the same as log(m) + log(n)</p>
 <p>You can check this</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="logarithms-in-r.html#cb230-1" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="dv">10</span></span>
-<span id="cb230-2"><a href="logarithms-in-r.html#cb230-2" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">11</span></span>
-<span id="cb230-3"><a href="logarithms-in-r.html#cb230-3" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(m<span class="sc">*</span>n)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="logarithms-in-r.html#cb232-1" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span><span class="dv">10</span></span>
+<span id="cb232-2"><a href="logarithms-in-r.html#cb232-2" aria-hidden="true" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="dv">11</span></span>
+<span id="cb232-3"><a href="logarithms-in-r.html#cb232-3" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(m<span class="sc">*</span>n)</span></code></pre></div>
 <pre><code>## [1] 4.70048</code></pre>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="logarithms-in-r.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(m)<span class="sc">+</span><span class="fu">log</span>(n)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="logarithms-in-r.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(m)<span class="sc">+</span><span class="fu">log</span>(n)</span></code></pre></div>
 <pre><code>## [1] 4.70048</code></pre>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="logarithms-in-r.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(m<span class="sc">*</span>n) <span class="sc">==</span> <span class="fu">log</span>(m)<span class="sc">+</span><span class="fu">log</span>(n)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="logarithms-in-r.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(m<span class="sc">*</span>n) <span class="sc">==</span> <span class="fu">log</span>(m)<span class="sc">+</span><span class="fu">log</span>(n)</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Exponentiation undos logs</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="logarithms-in-r.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">log</span>(m<span class="sc">*</span>n))</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="logarithms-in-r.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">log</span>(m<span class="sc">*</span>n))</span></code></pre></div>
 <pre><code>## [1] 110</code></pre>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="logarithms-in-r.html#cb238-1" aria-hidden="true" tabindex="-1"></a>m<span class="sc">*</span>n</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="logarithms-in-r.html#cb240-1" aria-hidden="true" tabindex="-1"></a>m<span class="sc">*</span>n</span></code></pre></div>
 <pre><code>## [1] 110</code></pre>
 <p>The key equation in BLAST’s E values is</p>
 <p>u = ln(K<em>m</em>n)/lambda</p>
 <p>This can be changed to</p>
 <p>[ln(K) + ln(mn)]/lambda</p>
 <p>We can check this</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="logarithms-in-r.html#cb240-1" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb240-2"><a href="logarithms-in-r.html#cb240-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb240-3"><a href="logarithms-in-r.html#cb240-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">11</span></span>
-<span id="cb240-4"><a href="logarithms-in-r.html#cb240-4" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">110</span></span>
-<span id="cb240-5"><a href="logarithms-in-r.html#cb240-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb240-6"><a href="logarithms-in-r.html#cb240-6" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(K<span class="sc">*</span>m<span class="sc">*</span>n)<span class="sc">/</span>lambda</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="logarithms-in-r.html#cb242-1" aria-hidden="true" tabindex="-1"></a>K <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb242-2"><a href="logarithms-in-r.html#cb242-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb242-3"><a href="logarithms-in-r.html#cb242-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">11</span></span>
+<span id="cb242-4"><a href="logarithms-in-r.html#cb242-4" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">110</span></span>
+<span id="cb242-5"><a href="logarithms-in-r.html#cb242-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb242-6"><a href="logarithms-in-r.html#cb242-6" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(K<span class="sc">*</span>m<span class="sc">*</span>n)<span class="sc">/</span>lambda</span></code></pre></div>
 <pre><code>## [1] 0.04273164</code></pre>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="logarithms-in-r.html#cb242-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">log</span>(K) <span class="sc">+</span> <span class="fu">log</span>(m<span class="sc">*</span>n))<span class="sc">/</span>lambda</span></code></pre></div>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="logarithms-in-r.html#cb244-1" aria-hidden="true" tabindex="-1"></a>(<span class="fu">log</span>(K) <span class="sc">+</span> <span class="fu">log</span>(m<span class="sc">*</span>n))<span class="sc">/</span>lambda</span></code></pre></div>
 <pre><code>## [1] 0.04273164</code></pre>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="logarithms-in-r.html#cb244-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(K<span class="sc">*</span>m<span class="sc">*</span>n)<span class="sc">/</span>lambda <span class="sc">==</span> (<span class="fu">log</span>(K) <span class="sc">+</span> <span class="fu">log</span>(m<span class="sc">*</span>n))<span class="sc">/</span>lambda</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="logarithms-in-r.html#cb246-1" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(K<span class="sc">*</span>m<span class="sc">*</span>n)<span class="sc">/</span>lambda <span class="sc">==</span> (<span class="fu">log</span>(K) <span class="sc">+</span> <span class="fu">log</span>(m<span class="sc">*</span>n))<span class="sc">/</span>lambda</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 
 </div>

@@ -1957,6 +1957,15 @@ Original content by OpenStax (CC BY 4.0; Download for free at
 
 **NOTE:** The following material was partially adapted by N. Brouwer from [Wikipedia](https://en.wikipedia.org/wiki/National_Center_for_Biotechnology_Information).  See the underlying .Rmd file for information on specific paragraphs from Wikipedia.
 
+## Key concepts
+
+* NCBI
+* Rentrez
+* accession numbers
+* BLAST
+
+## NCBI
+
 <!-- This paragraph is from Wikipedia -->
 The **National Center for Biotechnology Information (NCBI)** is part of the United States National Library of Medicine (NLM), a branch of the National Institutes of Health (NIH). It was founded in 1988 and is approved and funded by the government of the United States.  The NCBI houses a series of **databases** relevant to the basic and applied life sciences and is an important resource for **bioinformatics** tools and services. Major databases include **GenBank** for DNA sequences and **PubMed**, a **bibliographic** database for biomedical literature.  All these databases are available online through the **Entrez** search engine. 
 <!-- end paragraph  from Wikipedia -->
@@ -1967,7 +1976,7 @@ In this chapter we'll briefly discuss the major databases, following up with spe
 
 The GenBank sequence database is an open access collection of  publicly available DNA and protein sequences.  If you've work with sequence data, you'll work with GenBank.  GenBank is the actual database, and it  can be searched several ways.  For example, you can search for a sequence by its ID number (**accession number**) if you know it, or do a **BLAST search** using an actual sequence to look for similar sequences.
 
-A key component of GenBank are the **GeneBank Records**, which are annotated summaries of sequences in the databases.  For example, below is shown record for a gene [pallysin](https://www.ncbi.nlm.nih.gov/protein/AAC65720) from syphilis  In addition to the actual A, T, C, and Gs of the sequences, the record provides **metadata**, such as the scientific name of the organism (*Treponema pallidum*), who did the sequencing, the name of the paper where the sequence was published, and important features of the gene.  
+A key component of GenBank are the **GeneBank Records**, which are annotated summaries of sequences in the databases.  For example, below is shown record for a gene [pallysin](https://www.ncbi.nlm.nih.gov/protein/AAC65720) https://www.ncbi.nlm.nih.gov/protein/AAC65720 from syphilis  In addition to the actual A, T, C, and Gs of the sequences, the record provides **metadata**, such as the scientific name of the organism (*Treponema pallidum*), who did the sequencing, the name of the paper where the sequence was published, and important features of the gene.  
 <!-- Accession number for Tp0751 is AAC65720.1 -->
 
 A key feature of PubMed records is that they are **hyperlinked** to other NCBI databases.  For example, you can click link under the name of the paper which reported the sequence of the gene and it will take you to the PubMed record for that paper (see below).  You can also click the "Run BLAST" link and you can search the database for similar sequences.  This protein coded for by this particular gene has had its structured solved using x-ray crystallography, and you can see these results under "Protein 3D Structure."  In a later chapter we'll get to know these records in further detail.
@@ -1984,21 +1993,19 @@ knitr::include_graphics("images/genbank_record.png")
 
 ## Entrez
 
-https://en.wikipedia.org/wiki/Entrez
+<!-- https://en.wikipedia.org/wiki/Entrez -->
+<!-- This paragraph is from Wikipedia -->
+Entrez is a  search engine and web portal that allows users to search many discrete health sciences databases of the NCBI website.  The name "Entrez" (a greeting meaning "Come in" in French) was chosen to reflect the spirit of welcoming the public to search the content available from NCBI.
 
 <!-- This paragraph is from Wikipedia -->
-"Entrez is a federated search engine and web portal that allows users to search many discrete health sciences databases of the NCBI website.  The name "Entrez" (a greeting meaning "Come in" in French) was chosen to reflect the spirit of welcoming the public to search the content available from NCBI."
-
-<!-- This paragraph is from Wikipedia -->
-"Entrez Global Query is an integrated search and retrieval system that provides access to all databases simultaneously with a single query  and user interface. Entrez can efficiently retrieve related sequences, structures, and references. The Entrez system can provide views of gene and protein sequences and chromosome maps. Some textbooks are also available online through the Entrez system."
+Entrez Global Query is an integrated search and retrieval system that provides access to all databases simultaneously with a single query  and user interface. Entrez can efficiently retrieve related sequences, structures, and references. The Entrez system can provide views of gene and protein sequences and chromosome maps. Some textbooks are also available online through the Entrez system.
 
 
 ## BLAST
 
-https://en.wikipedia.org/wiki/BLAST_(biotechnology)
-
+<!-- https://en.wikipedia.org/wiki/BLAST_(biotechnology) -->
 <!-- This paragraph is from Wikipedia -->
-"BLAST (basic local alignment search tool)is an algorithm and program for comparing primary biological sequence information, such as the amino-acid sequences of proteins or the nucleotides of DNA and/or RNA sequences. A BLAST search enables a researcher to compare a subject protein or nucleotide sequence (called a query) with a library or database of sequences, and identify database sequences that resemble the query sequence above a certain threshold. For example, following the discovery of a previously unknown gene in the mouse, a scientist will typically perform a BLAST search of the human genome to see if humans carry a similar gene; BLAST will identify sequences in the human genome that resemble the mouse gene based on similarity of sequence."
+BLAST (Basic Local Alignment Search Tool) is an algorithm and program for comparing primary biological sequence information, such as the amino-acid sequences of proteins or the nucleotides of DNA and/or RNA sequences. A BLAST search enables a researcher to compare a subject protein or nucleotide sequence (called a query) with a library or database of sequences, and identify database sequences that resemble the query sequence above a certain threshold. For example, following the discovery of a previously unknown gene in the mouse, a scientist will typically perform a BLAST search of the human genome to see if humans carry a similar gene; BLAST will identify sequences in the human genome that resemble the mouse gene based on similarity of sequence.
 
 
 
@@ -2037,7 +2044,7 @@ library(compbio4all)
 
 ## Introduction
 
-**NCBI** is the National Center for Biotechnology Information.  The [NCBI Webiste](www.ncbi.nlm.nih.gov/) is the entry point to a large number of databases giving access to **biological sequences** (DNA, RNA, protein) and biology-related publications.
+**NCBI** is the National Center for Biotechnology Information.  The [NCBI Webiste](https://www.ncbi.nlm.nih.gov/) www.ncbi.nlm.nih.gov/ is the entry point to a large number of databases giving access to **biological sequences** (DNA, RNA, protein) and biology-related publications.
 
 When scientists sequence DNA, RNA and proteins they typically publish their data via databases with the NCBI.  Each is given a unique identification number known as an **accession number**.  For example, each time a unique human genome sequence is produced it is uploaded to the relevant databases, assigned a unique **accession**, and a website created to access it.  Sequence are also cross-referenced to related papers, so you can start with a sequence and find out what scientific paper it was used in, or start with a paper and see if any sequences are associated with it.
 
@@ -2053,7 +2060,7 @@ In this chapter we'll typically refer generically to "NCBI data" and "NCBI datab
 
 Almost published biological sequences are available online, as it is a requirement of every scientific journal that any published DNA or RNA or protein sequence must be deposited in a public database. The main resources for storing and distributing sequence data are three large databases: 
 
-1. USA: **[NCBI database](www.ncbi.nlm.nih.gov/)** (www.ncbi.nlm.nih.gov/)
+1. USA: **[NCBI database](https://www.ncbi.nlm.nih.gov/)** (www.ncbi.nlm.nih.gov/)
 1. Europe: **European Molecular Biology Laboratory (EMBL)** database (https://www.ebi.ac.uk/ena)
 1. Japan: **DNA Database of Japan (DDBJ)** database (www.ddbj.nig.ac.jp/). 
 These databases collect all publicly available DNA, RNA and protein sequence data and make it available for free. They exchange data nightly, so contain essentially the same data.  The redundancy among the databases allows them to serve different communities (e.g. native languages), provide different additional services such as tutorials, and assure that the world's scientists have their data backed up in different physical locations -- a key component of good data management!
@@ -2093,7 +2100,7 @@ As mentioned above, for each sequence the NCBI database stores some extra inform
 
 To view the GenBank entry for the DEN-1 Dengue virus, follow these steps:
 
-1. Go to the [NCBI website](www.ncbi.nlm.nih.gov) (www.ncbi.nlm.nih.gov).
+1. Go to the [NCBI website](https://www.ncbi.nlm.nih.gov) (www.ncbi.nlm.nih.gov).
 1. Search for the accession number NC_001477.
 1. Since we searched for a particular accession we are only returned a single main result which is titled "NUCLEOTIDE SEQUENCE: Dengue virus 1, complete genome."
 1. Click on "Dengue virus 1, complete genome" to go to the GenBank entry.
@@ -2273,7 +2280,7 @@ The following chapter was originally written by Avril Coghlan.  It provides brie
 
 ## Retrieving genome sequence data via the NCBI website
 
-You can easily retrieve DNA or protein sequence data by hand from the [NCBI](www.ncbi.nlm.nih.gov) Sequence Database via its website www.ncbi.nlm.nih.gov.
+You can easily retrieve DNA or protein sequence data by hand from the [NCBI](https://www.ncbi.nlm.nih.gov/) Sequence Database via its website www.ncbi.nlm.nih.gov.
 
 Dengue DEN-1 DNA is a viral DNA sequence and its NCBI **accession number** is NC_001477. To retrieve the DNA sequence for the Dengue DEN-1 virus from NCBI, go to the NCBI website, type “NC_001477” in the Search box at the top of the webpage, and press the “Search” button beside the Search box.
 
@@ -2320,7 +2327,7 @@ In a previous vignette you learned how to retrieve sequences from the NCBI datab
 
 As mentioned previously, a subsection of the NCBI database called **RefSeq** consists of high quality DNA and protein sequence data. Furthermore, the NCBI entries for the RefSeq sequences have been **manually curated**, which means that expert biologists employed by NCBI have added additional information to the NCBI entries for those sequences, such as details of scientific papers that describe the sequences.
 
-Another extremely important manually curated database is [**UniProt**](www.uniprot.org), which focuses on protein sequences. UniProt aims to contains manually curated information on all known protein sequences. While many of the protein sequences in UniProt are also present in RefSeq, the amount and quality of manually curated information in UniProt is much higher than that in RefSeq.
+Another extremely important manually curated database is [UniProt](https://www.uniprot.org/) www.uniprot.org, which focuses on protein sequences. UniProt aims to contains manually curated information on all known protein sequences. While many of the protein sequences in UniProt are also present in RefSeq, the amount and quality of manually curated information in UniProt is much higher than that in RefSeq.
 
 For each protein in UniProt, the UniProt curators read all the scientific papers that they can find about that protein, and add information from those papers to the protein’s UniProt entry. For example, for a human protein, the UniProt entry for the protein usually includes information about the biological function of the protein, in what human tissues it is expressed, whether it interacts with other human proteins, and much more. All this information has been manually gathered by the UniProt curators from scientific papers, and the papers in which the found the information are always listed in the UniProt entry for the protein.
 
@@ -2340,7 +2347,7 @@ This tells us that *Mycobacterium* is a species of bacteria, which belongs to a 
 
 Back up at the top under "organism" is says "Status", which tells us the **annotation score** is 2 out of 5, that it is a "Protein inferred from homology", which means what we know about it is derived from bioinformatics and computational tools, not lab work.  
 
-Beside the heading “Function”, it says that the function of this protein is that it “Removes the pyruvyl group from chorismate to provide 4-hydroxybenzoate (4HB)”.   This tells us this protein is an enzyme (a protein that increases the rate of a specific biochemical reaction), and tells us what is the particular biochemical reaction that this enzyme is involved in.  At the end of this info it says "By similarity", which again indicates that what we know about this protein comes from bioinformatics, not lab work.
+Beside the heading “Function”, it says that the function of this protein is that it “Removes the pyruvyl group from chorismate to provide 4-hydroxybenzoate (4HB)”.  This tells us this protein is an enzyme (a protein that increases the rate of a specific biochemical reaction), and tells us what is the particular biochemical reaction that this enzyme is involved in.  At the end of this info it says "By similarity", which again indicates that what we know about this protein comes from bioinformatics, not lab work.
 
 ### Protein sequence and size
 
@@ -2386,6 +2393,13 @@ We can confirm
 str(lepraeseq)
 ```
 
+```{r eval = F}
+ # 'SeqFastadna' chr [1:210] "m" "t" "n" "r" "t" "l" "s" "r" "e" "e" "i" ...
+ # - attr(*, "name")= chr "sp|Q9CD83|PHBS_MYCLE"
+ # - attr(*, "Annot")= chr ">sp|Q9CD83|PHBS_MYCLE Chorismate pyruvate-lyase 
+ # OS=Mycobacterium leprae (strain TN) OX=272631 GN=ML0133 PE=3 SV=1"
+```
+
 
 For the other sequence
 
@@ -2397,6 +2411,16 @@ file.2 <- system.file("./extdata/A0PQ23.fasta", package = "compbio4all")
 # load fasta
 ulcerans <- read.fasta(file = file.2)
 ulceransseq <- ulcerans[[1]]
+
+str(ulceransseq)[[1]]
+```
+
+
+```{r}
+ # 'SeqFastadna' chr [1:212] "m" "l" "a" "v" "l" "p" "e" "k" "r" "e" "m" ...
+ # - attr(*, "name")= chr "tr|A0PQ23|A0PQ23_MYCUA"
+ # - attr(*, "Annot")= chr ">tr|A0PQ23|A0PQ23_MYCUA Chorismate pyruvate-lyase 
+# OS=Mycobacterium ulcerans (strain Agy99) OX=362242 GN=MUL_2003 PE=4 SV=1"
 ```
 
 

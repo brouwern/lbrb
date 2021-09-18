@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.4.7)  18 SEP 2021 00:33
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.4.7)  18 SEP 2021 01:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1123,23 +1123,33 @@ t;!
 ]
 Chapter 12.
 
-Underfull \hbox (badness 10000) in paragraph at lines 2355--2356
+Underfull \hbox (badness 2376) in paragraph at lines 2373--2374
+[]\TU/lmr/m/n/10 A key component of GenBank are the \TU/lmr/bx/n/10 GeneBank Re
+cords\TU/lmr/m/n/10 , which are annotated summaries
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2373--2374
 
  []
 
+[65]
 File: images/genbank_record.png Graphic file (type bmp)
 <images/genbank_record.png>
 
-Overfull \hbox (338.73183pt too wide) in paragraph at lines 2359--2360
+Overfull \hbox (338.73183pt too wide) in paragraph at lines 2377--2378
 [][] 
  []
 
-[65] [66] [67] [68
 
-]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[66] [67] [68]
 Chapter 13.
-[69] [70] [71] [72] [73]
-Underfull \hbox (badness 1540) in paragraph at lines 2642--2642
+[69
+
+] [70] [71] [72] [73]
+Underfull \hbox (badness 1540) in paragraph at lines 2656--2656
 []\TU/lmr/bx/n/14.4 Example: finding the sequences published in Nature
  []
 
@@ -1151,14 +1161,14 @@ Chapter 14.
 Chapter 15.
 [77
 
-] [78] [79] [80
-
-]
+] [78] [79] [80]
 Chapter 16.
 
 Underfull \vbox (badness 1838) has occurred while \output is active []
 
-[81] [82] [83] [84]
+[81
+
+] [82] [83] [84]
 Chapter 17.
 [85
 
@@ -1167,43 +1177,43 @@ Chapter 17.
 ]
 Chapter 18.
 [87] [88]
-Underfull \hbox (badness 10000) in paragraph at lines 3221--3223
+Underfull \hbox (badness 10000) in paragraph at lines 3251--3253
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 3236--3238
+Underfull \hbox (badness 10000) in paragraph at lines 3266--3268
 
  []
 
 [89] [90] [91]
-Overfull \hbox (11526.3668pt too wide) in paragraph at lines 3428--3429
+Overfull \hbox (11526.3668pt too wide) in paragraph at lines 3458--3459
 [][] 
  []
 
 [92] [93] [94]
-Underfull \hbox (badness 1824) in paragraph at lines 3601--3602
+Underfull \hbox (badness 1824) in paragraph at lines 3631--3632
 []\TU/lmr/m/n/10 We’ll download all of the sequences again, this time using a f
 unction from [][][][] called
  []
 
 [95] [96]
-File: lbrb_files/figure-latex/unnamed-chunk-157-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-157-1.pdf>
+File: lbrb_files/figure-latex/unnamed-chunk-159-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-159-1.pdf>
 [97] [98]
-File: lbrb_files/figure-latex/unnamed-chunk-164-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-164-1.pdf>
-File: lbrb_files/figure-latex/unnamed-chunk-165-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-165-1.pdf>
+File: lbrb_files/figure-latex/unnamed-chunk-166-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-166-1.pdf>
+File: lbrb_files/figure-latex/unnamed-chunk-167-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-167-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [99]
-File: lbrb_files/figure-latex/unnamed-chunk-166-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-166-1.pdf>
+File: lbrb_files/figure-latex/unnamed-chunk-168-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-168-1.pdf>
 [100]
-File: lbrb_files/figure-latex/unnamed-chunk-167-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-167-1.pdf>
+File: lbrb_files/figure-latex/unnamed-chunk-169-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-169-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1218,28 +1228,28 @@ Chapter 19.
 ] [109] [110] [111
 
 ] [112] [113]
-Overfull \hbox (0.29388pt too wide) in paragraph at lines 4345--4346
+Overfull \hbox (0.29388pt too wide) in paragraph at lines 4375--4376
 \TU/lmr/m/n/10 Often when you do an internet search for an R topic you’ll see r
 esults from the website www.stackoverflow.com,
  []
 
 [114]
 No file lbrb.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4471.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4501.
 [115]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 4471.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 4501.
 (./lbrb.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 4471.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 4471.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 4501.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 4501.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 21959 strings out of 479418
- 399232 string characters out of 5884586
- 1153437 words of memory out of 5000000
- 39130 multiletter control sequences out of 15000+600000
+ 21963 strings out of 479418
+ 399266 string characters out of 5884586
+ 1153513 words of memory out of 5000000
+ 39134 multiletter control sequences out of 15000+600000
  538853 words of font info for 85 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,7n,118p,4018b,1724s stack positions out of 5000i,500n,10000p,200000b,80000s

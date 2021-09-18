@@ -10,7 +10,7 @@ The following chapter was originally written by Avril Coghlan.  It provides brie
 
 ## Retrieving genome sequence data via the NCBI website
 
-You can easily retrieve DNA or protein sequence data by hand from the [NCBI](www.ncbi.nlm.nih.gov) Sequence Database via its website www.ncbi.nlm.nih.gov.
+You can easily retrieve DNA or protein sequence data by hand from the [NCBI](https://www.ncbi.nlm.nih.gov/) Sequence Database via its website www.ncbi.nlm.nih.gov.
 
 Dengue DEN-1 DNA is a viral DNA sequence and its NCBI **accession number** is NC_001477. To retrieve the DNA sequence for the Dengue DEN-1 virus from NCBI, go to the NCBI website, type “NC_001477” in the Search box at the top of the webpage, and press the “Search” button beside the Search box.
 

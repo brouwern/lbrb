@@ -265,10 +265,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html"><i class="fa fa-check"></i><b>12</b> NCBI: The National Center for Biotechnology Information</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#genbank-sequence-database"><i class="fa fa-check"></i><b>12.1</b> GenBank sequence database</a></li>
-<li class="chapter" data-level="12.2" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#pubmed-and-pubmed-central-article-database"><i class="fa fa-check"></i><b>12.2</b> PubMed and PubMed Central article database</a></li>
-<li class="chapter" data-level="12.3" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#entrez"><i class="fa fa-check"></i><b>12.3</b> Entrez</a></li>
-<li class="chapter" data-level="12.4" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#blast"><i class="fa fa-check"></i><b>12.4</b> BLAST</a></li>
+<li class="chapter" data-level="12.1" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#key-concepts"><i class="fa fa-check"></i><b>12.1</b> Key concepts</a></li>
+<li class="chapter" data-level="12.2" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#ncbi"><i class="fa fa-check"></i><b>12.2</b> NCBI</a></li>
+<li class="chapter" data-level="12.3" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#genbank-sequence-database"><i class="fa fa-check"></i><b>12.3</b> GenBank sequence database</a></li>
+<li class="chapter" data-level="12.4" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#pubmed-and-pubmed-central-article-database"><i class="fa fa-check"></i><b>12.4</b> PubMed and PubMed Central article database</a></li>
+<li class="chapter" data-level="12.5" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#entrez"><i class="fa fa-check"></i><b>12.5</b> Entrez</a></li>
+<li class="chapter" data-level="12.6" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#blast"><i class="fa fa-check"></i><b>12.6</b> BLAST</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html"><i class="fa fa-check"></i><b>13</b> Introduction to biological sequences databases</a>
 <ul>
@@ -414,7 +416,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="introduction" class="section level2" number="13.2">
 <h2><span class="header-section-number">13.2</span> Introduction</h2>
-<p><strong>NCBI</strong> is the National Center for Biotechnology Information. The <a href="www.ncbi.nlm.nih.gov/">NCBI Webiste</a> is the entry point to a large number of databases giving access to <strong>biological sequences</strong> (DNA, RNA, protein) and biology-related publications.</p>
+<p><strong>NCBI</strong> is the National Center for Biotechnology Information. The <a href="https://www.ncbi.nlm.nih.gov/">NCBI Webiste</a> www.ncbi.nlm.nih.gov/ is the entry point to a large number of databases giving access to <strong>biological sequences</strong> (DNA, RNA, protein) and biology-related publications.</p>
 <p>When scientists sequence DNA, RNA and proteins they typically publish their data via databases with the NCBI. Each is given a unique identification number known as an <strong>accession number</strong>. For example, each time a unique human genome sequence is produced it is uploaded to the relevant databases, assigned a unique <strong>accession</strong>, and a website created to access it. Sequence are also cross-referenced to related papers, so you can start with a sequence and find out what scientific paper it was used in, or start with a paper and see if any sequences are associated with it.</p>
 <p>This chapter provides an introduction to the general search features of the NCBI databases via the interface on the website, including how to locate sequences using accession numbers and other search parameters, such as specific authors or papers. Subsequent chapters will introduce advanced search features, and how to carry out searches using R commands.</p>
 <p>One consequence of the explosion of biological sequences used in publications is that the system of databases has become fairly complex. There are databases for different types of data, different types of molecules, data from individual experiments showing <strong>genetic variation</strong> and also the <strong>consensus sequence</strong> for a given molecule. Luckily, if you know the accession number of the sequence you are looking for – which will be our starting point throughout this book – its fairly straight forward. There are numerous other books on bioinformatics and genomics that provide all details if you need to do more complex searches.</p>
@@ -424,7 +426,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">13.3</span> Biological sequence databases</h2>
 <p>Almost published biological sequences are available online, as it is a requirement of every scientific journal that any published DNA or RNA or protein sequence must be deposited in a public database. The main resources for storing and distributing sequence data are three large databases:</p>
 <ol style="list-style-type: decimal">
-<li>USA: <strong><a href="www.ncbi.nlm.nih.gov/">NCBI database</a></strong> (www.ncbi.nlm.nih.gov/)</li>
+<li>USA: <strong><a href="https://www.ncbi.nlm.nih.gov/">NCBI database</a></strong> (www.ncbi.nlm.nih.gov/)</li>
 <li>Europe: <strong>European Molecular Biology Laboratory (EMBL)</strong> database (<a href="https://www.ebi.ac.uk/ena" class="uri">https://www.ebi.ac.uk/ena</a>)</li>
 <li>Japan: <strong>DNA Database of Japan (DDBJ)</strong> database (www.ddbj.nig.ac.jp/).
 These databases collect all publicly available DNA, RNA and protein sequence data and make it available for free. They exchange data nightly, so contain essentially the same data. The redundancy among the databases allows them to serve different communities (e.g. native languages), provide different additional services such as tutorials, and assure that the world’s scientists have their data backed up in different physical locations – a key component of good data management!</li>
@@ -456,7 +458,7 @@ These databases collect all publicly available DNA, RNA and protein sequence dat
 <p>As mentioned above, for each sequence the NCBI database stores some extra information such as the species that it came from, publications describing the sequence, etc. This information is stored in the GenBank entry (aka GenBank Record) for the sequence. The GenBank entry for a sequence can be viewed by searching the NCBI database for the accession number for that sequence.</p>
 <p>To view the GenBank entry for the DEN-1 Dengue virus, follow these steps:</p>
 <ol style="list-style-type: decimal">
-<li>Go to the <a href="www.ncbi.nlm.nih.gov">NCBI website</a> (www.ncbi.nlm.nih.gov).</li>
+<li>Go to the <a href="https://www.ncbi.nlm.nih.gov">NCBI website</a> (www.ncbi.nlm.nih.gov).</li>
 <li>Search for the accession number NC_001477.</li>
 <li>Since we searched for a particular accession we are only returned a single main result which is titled “NUCLEOTIDE SEQUENCE: Dengue virus 1, complete genome.”</li>
 <li>Click on “Dengue virus 1, complete genome” to go to the GenBank entry.</li>

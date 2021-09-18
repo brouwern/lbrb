@@ -31,7 +31,7 @@ library(compbio4all)
 
 ## Introduction
 
-**NCBI** is the National Center for Biotechnology Information.  The [NCBI Webiste](www.ncbi.nlm.nih.gov/) is the entry point to a large number of databases giving access to **biological sequences** (DNA, RNA, protein) and biology-related publications.
+**NCBI** is the National Center for Biotechnology Information.  The [NCBI Webiste](https://www.ncbi.nlm.nih.gov/) www.ncbi.nlm.nih.gov/ is the entry point to a large number of databases giving access to **biological sequences** (DNA, RNA, protein) and biology-related publications.
 
 When scientists sequence DNA, RNA and proteins they typically publish their data via databases with the NCBI.  Each is given a unique identification number known as an **accession number**.  For example, each time a unique human genome sequence is produced it is uploaded to the relevant databases, assigned a unique **accession**, and a website created to access it.  Sequence are also cross-referenced to related papers, so you can start with a sequence and find out what scientific paper it was used in, or start with a paper and see if any sequences are associated with it.
 
@@ -47,7 +47,7 @@ In this chapter we'll typically refer generically to "NCBI data" and "NCBI datab
 
 Almost published biological sequences are available online, as it is a requirement of every scientific journal that any published DNA or RNA or protein sequence must be deposited in a public database. The main resources for storing and distributing sequence data are three large databases: 
 
-1. USA: **[NCBI database](www.ncbi.nlm.nih.gov/)** (www.ncbi.nlm.nih.gov/)
+1. USA: **[NCBI database](https://www.ncbi.nlm.nih.gov/)** (www.ncbi.nlm.nih.gov/)
 1. Europe: **European Molecular Biology Laboratory (EMBL)** database (https://www.ebi.ac.uk/ena)
 1. Japan: **DNA Database of Japan (DDBJ)** database (www.ddbj.nig.ac.jp/). 
 These databases collect all publicly available DNA, RNA and protein sequence data and make it available for free. They exchange data nightly, so contain essentially the same data.  The redundancy among the databases allows them to serve different communities (e.g. native languages), provide different additional services such as tutorials, and assure that the world's scientists have their data backed up in different physical locations -- a key component of good data management!
@@ -87,7 +87,7 @@ As mentioned above, for each sequence the NCBI database stores some extra inform
 
 To view the GenBank entry for the DEN-1 Dengue virus, follow these steps:
 
-1. Go to the [NCBI website](www.ncbi.nlm.nih.gov) (www.ncbi.nlm.nih.gov).
+1. Go to the [NCBI website](https://www.ncbi.nlm.nih.gov) (www.ncbi.nlm.nih.gov).
 1. Search for the accession number NC_001477.
 1. Since we searched for a particular accession we are only returned a single main result which is titled "NUCLEOTIDE SEQUENCE: Dengue virus 1, complete genome."
 1. Click on "Dengue virus 1, complete genome" to go to the GenBank entry.

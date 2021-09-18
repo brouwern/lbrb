@@ -265,10 +265,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html"><i class="fa fa-check"></i><b>12</b> NCBI: The National Center for Biotechnology Information</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#genbank-sequence-database"><i class="fa fa-check"></i><b>12.1</b> GenBank sequence database</a></li>
-<li class="chapter" data-level="12.2" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#pubmed-and-pubmed-central-article-database"><i class="fa fa-check"></i><b>12.2</b> PubMed and PubMed Central article database</a></li>
-<li class="chapter" data-level="12.3" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#entrez"><i class="fa fa-check"></i><b>12.3</b> Entrez</a></li>
-<li class="chapter" data-level="12.4" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#blast"><i class="fa fa-check"></i><b>12.4</b> BLAST</a></li>
+<li class="chapter" data-level="12.1" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#key-concepts"><i class="fa fa-check"></i><b>12.1</b> Key concepts</a></li>
+<li class="chapter" data-level="12.2" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#ncbi"><i class="fa fa-check"></i><b>12.2</b> NCBI</a></li>
+<li class="chapter" data-level="12.3" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#genbank-sequence-database"><i class="fa fa-check"></i><b>12.3</b> GenBank sequence database</a></li>
+<li class="chapter" data-level="12.4" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#pubmed-and-pubmed-central-article-database"><i class="fa fa-check"></i><b>12.4</b> PubMed and PubMed Central article database</a></li>
+<li class="chapter" data-level="12.5" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#entrez"><i class="fa fa-check"></i><b>12.5</b> Entrez</a></li>
+<li class="chapter" data-level="12.6" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#blast"><i class="fa fa-check"></i><b>12.6</b> BLAST</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html"><i class="fa fa-check"></i><b>13</b> Introduction to biological sequences databases</a>
 <ul>
@@ -408,11 +410,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="example-fasta-file" class="section level2" number="16.1">
 <h2><span class="header-section-number">16.1</span> Example FASTA file</h2>
 <p>Here is an example of the contents of a FASTA file. (If your are viewing this chapter in the form of the source .Rmd file, the <code>cat()</code> function is included just to print out the content properly and is not part of the FASTA format).</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="introducingFASTA.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;&gt;gi|186681228|ref|YP_001864424.1| phycoerythrobilin:ferredoxin oxidoreductase</span></span>
-<span id="cb159-2"><a href="introducingFASTA.html#cb159-2" aria-hidden="true" tabindex="-1"></a><span class="st">MNSERSDVTLYQPFLDYAIAYMRSRLDLEPYPIPTGFESNSAVVGKGKNQEEVVTTSYAFQTAKLRQIRA</span></span>
-<span id="cb159-3"><a href="introducingFASTA.html#cb159-3" aria-hidden="true" tabindex="-1"></a><span class="st">AHVQGGNSLQVLNFVIFPHLNYDLPFFGADLVTLPGGHLIALDMQPLFRDDSAYQAKYTEPILPIFHAHQ</span></span>
-<span id="cb159-4"><a href="introducingFASTA.html#cb159-4" aria-hidden="true" tabindex="-1"></a><span class="st">QHLSWGGDFPEEAQPFFSPAFLWTRPQETAVVETQVFAAFKDYLKAYLDFVEQAEAVTDSQNLVAIKQAQ</span></span>
-<span id="cb159-5"><a href="introducingFASTA.html#cb159-5" aria-hidden="true" tabindex="-1"></a><span class="st">LRYLRYRAEKDPARGMFKRFYGAEWTEEYIHGFLFDLERKLTVVK&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="introducingFASTA.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;&gt;gi|186681228|ref|YP_001864424.1| phycoerythrobilin:ferredoxin oxidoreductase</span></span>
+<span id="cb161-2"><a href="introducingFASTA.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="st">MNSERSDVTLYQPFLDYAIAYMRSRLDLEPYPIPTGFESNSAVVGKGKNQEEVVTTSYAFQTAKLRQIRA</span></span>
+<span id="cb161-3"><a href="introducingFASTA.html#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="st">AHVQGGNSLQVLNFVIFPHLNYDLPFFGADLVTLPGGHLIALDMQPLFRDDSAYQAKYTEPILPIFHAHQ</span></span>
+<span id="cb161-4"><a href="introducingFASTA.html#cb161-4" aria-hidden="true" tabindex="-1"></a><span class="st">QHLSWGGDFPEEAQPFFSPAFLWTRPQETAVVETQVFAAFKDYLKAYLDFVEQAEAVTDSQNLVAIKQAQ</span></span>
+<span id="cb161-5"><a href="introducingFASTA.html#cb161-5" aria-hidden="true" tabindex="-1"></a><span class="st">LRYLRYRAEKDPARGMFKRFYGAEWTEEYIHGFLFDLERKLTVVK&quot;</span>)</span></code></pre></div>
 <pre><code>## &gt;gi|186681228|ref|YP_001864424.1| phycoerythrobilin:ferredoxin oxidoreductase
 ## MNSERSDVTLYQPFLDYAIAYMRSRLDLEPYPIPTGFESNSAVVGKGKNQEEVVTTSYAFQTAKLRQIRA
 ## AHVQGGNSLQVLNFVIFPHLNYDLPFFGADLVTLPGGHLIALDMQPLFRDDSAYQAKYTEPILPIFHAHQ
@@ -422,23 +424,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="multiple-sequences-in-a-single-fasta-file" class="section level2" number="16.2">
 <h2><span class="header-section-number">16.2</span> Multiple sequences in a single FASTA file</h2>
 <p>Multiple sequences can be stored in a single FASTA file, each on separated by a line and have its own headline.</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="introducingFASTA.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;&gt;LCBO - Prolactin precursor - Bovine</span></span>
-<span id="cb161-2"><a href="introducingFASTA.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="st">MDSKGSSQKGSRLLLLLVVSNLLLCQGVVSTPVCPNGPGNCQVSLRDLFDRAVMVSHYIHDLSS</span></span>
-<span id="cb161-3"><a href="introducingFASTA.html#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="st">EMFNEFDKRYAQGKGFITMALNSCHTSSLPTPEDKEQAQQTHHEVLMSLILGLLRSWNDPLYHL</span></span>
-<span id="cb161-4"><a href="introducingFASTA.html#cb161-4" aria-hidden="true" tabindex="-1"></a><span class="st">VTEVRGMKGAPDAILSRAIEIEEENKRLLEGMEMIFGQVIPGAKETEPYPVWSGLPSLQTKDED</span></span>
-<span id="cb161-5"><a href="introducingFASTA.html#cb161-5" aria-hidden="true" tabindex="-1"></a><span class="st">ARYSAFYNLLHCLRRDSSKIDTYLKLLNCRIIYNNNC*</span></span>
-<span id="cb161-6"><a href="introducingFASTA.html#cb161-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb161-7"><a href="introducingFASTA.html#cb161-7" aria-hidden="true" tabindex="-1"></a><span class="st">&gt;MCHU - Calmodulin - Human, rabbit, bovine, rat, and chicken</span></span>
-<span id="cb161-8"><a href="introducingFASTA.html#cb161-8" aria-hidden="true" tabindex="-1"></a><span class="st">MADQLTEEQIAEFKEAFSLFDKDGDGTITTKELGTVMRSLGQNPTEAELQDMINEVDADGNGTID</span></span>
-<span id="cb161-9"><a href="introducingFASTA.html#cb161-9" aria-hidden="true" tabindex="-1"></a><span class="st">FPEFLTMMARKMKDTDSEEEIREAFRVFDKDGNGYISAAELRHVMTNLGEKLTDEEVDEMIREA</span></span>
-<span id="cb161-10"><a href="introducingFASTA.html#cb161-10" aria-hidden="true" tabindex="-1"></a><span class="st">DIDGDGQVNYEEFVQMMTAK*</span></span>
-<span id="cb161-11"><a href="introducingFASTA.html#cb161-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb161-12"><a href="introducingFASTA.html#cb161-12" aria-hidden="true" tabindex="-1"></a><span class="st">&gt;gi|5524211|gb|AAD44166.1| cytochrome b [Elephas maximus maximus]</span></span>
-<span id="cb161-13"><a href="introducingFASTA.html#cb161-13" aria-hidden="true" tabindex="-1"></a><span class="st">LCLYTHIGRNIYYGSYLYSETWNTGIMLLLITMATAFMGYVLPWGQMSFWGATVITNLFSAIPYIGTNLV</span></span>
-<span id="cb161-14"><a href="introducingFASTA.html#cb161-14" aria-hidden="true" tabindex="-1"></a><span class="st">EWIWGGFSVDKATLNRFFAFHFILPFTMVALAGVHLTFLHETGSNNPLGLTSDSDKIPFHPYYTIKDFLG</span></span>
-<span id="cb161-15"><a href="introducingFASTA.html#cb161-15" aria-hidden="true" tabindex="-1"></a><span class="st">LLILILLLLLLALLSPDMLGDPDNHMPADPLNTPLHIKPEWYFLFAYAILRSVPNKLGGVLALFLSIVIL</span></span>
-<span id="cb161-16"><a href="introducingFASTA.html#cb161-16" aria-hidden="true" tabindex="-1"></a><span class="st">GLMPFLHTSKHRSMMLRPLSQALFWTLTMDLLTLTWIGSQPVEYPYTIIGQMASILYFSIILAFLPIAGX</span></span>
-<span id="cb161-17"><a href="introducingFASTA.html#cb161-17" aria-hidden="true" tabindex="-1"></a><span class="st">IENY&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="introducingFASTA.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;&gt;LCBO - Prolactin precursor - Bovine</span></span>
+<span id="cb163-2"><a href="introducingFASTA.html#cb163-2" aria-hidden="true" tabindex="-1"></a><span class="st">MDSKGSSQKGSRLLLLLVVSNLLLCQGVVSTPVCPNGPGNCQVSLRDLFDRAVMVSHYIHDLSS</span></span>
+<span id="cb163-3"><a href="introducingFASTA.html#cb163-3" aria-hidden="true" tabindex="-1"></a><span class="st">EMFNEFDKRYAQGKGFITMALNSCHTSSLPTPEDKEQAQQTHHEVLMSLILGLLRSWNDPLYHL</span></span>
+<span id="cb163-4"><a href="introducingFASTA.html#cb163-4" aria-hidden="true" tabindex="-1"></a><span class="st">VTEVRGMKGAPDAILSRAIEIEEENKRLLEGMEMIFGQVIPGAKETEPYPVWSGLPSLQTKDED</span></span>
+<span id="cb163-5"><a href="introducingFASTA.html#cb163-5" aria-hidden="true" tabindex="-1"></a><span class="st">ARYSAFYNLLHCLRRDSSKIDTYLKLLNCRIIYNNNC*</span></span>
+<span id="cb163-6"><a href="introducingFASTA.html#cb163-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-7"><a href="introducingFASTA.html#cb163-7" aria-hidden="true" tabindex="-1"></a><span class="st">&gt;MCHU - Calmodulin - Human, rabbit, bovine, rat, and chicken</span></span>
+<span id="cb163-8"><a href="introducingFASTA.html#cb163-8" aria-hidden="true" tabindex="-1"></a><span class="st">MADQLTEEQIAEFKEAFSLFDKDGDGTITTKELGTVMRSLGQNPTEAELQDMINEVDADGNGTID</span></span>
+<span id="cb163-9"><a href="introducingFASTA.html#cb163-9" aria-hidden="true" tabindex="-1"></a><span class="st">FPEFLTMMARKMKDTDSEEEIREAFRVFDKDGNGYISAAELRHVMTNLGEKLTDEEVDEMIREA</span></span>
+<span id="cb163-10"><a href="introducingFASTA.html#cb163-10" aria-hidden="true" tabindex="-1"></a><span class="st">DIDGDGQVNYEEFVQMMTAK*</span></span>
+<span id="cb163-11"><a href="introducingFASTA.html#cb163-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb163-12"><a href="introducingFASTA.html#cb163-12" aria-hidden="true" tabindex="-1"></a><span class="st">&gt;gi|5524211|gb|AAD44166.1| cytochrome b [Elephas maximus maximus]</span></span>
+<span id="cb163-13"><a href="introducingFASTA.html#cb163-13" aria-hidden="true" tabindex="-1"></a><span class="st">LCLYTHIGRNIYYGSYLYSETWNTGIMLLLITMATAFMGYVLPWGQMSFWGATVITNLFSAIPYIGTNLV</span></span>
+<span id="cb163-14"><a href="introducingFASTA.html#cb163-14" aria-hidden="true" tabindex="-1"></a><span class="st">EWIWGGFSVDKATLNRFFAFHFILPFTMVALAGVHLTFLHETGSNNPLGLTSDSDKIPFHPYYTIKDFLG</span></span>
+<span id="cb163-15"><a href="introducingFASTA.html#cb163-15" aria-hidden="true" tabindex="-1"></a><span class="st">LLILILLLLLLALLSPDMLGDPDNHMPADPLNTPLHIKPEWYFLFAYAILRSVPNKLGGVLALFLSIVIL</span></span>
+<span id="cb163-16"><a href="introducingFASTA.html#cb163-16" aria-hidden="true" tabindex="-1"></a><span class="st">GLMPFLHTSKHRSMMLRPLSQALFWTLTMDLLTLTWIGSQPVEYPYTIIGQMASILYFSIILAFLPIAGX</span></span>
+<span id="cb163-17"><a href="introducingFASTA.html#cb163-17" aria-hidden="true" tabindex="-1"></a><span class="st">IENY&quot;</span>)</span></code></pre></div>
 <pre><code>## &gt;LCBO - Prolactin precursor - Bovine
 ## MDSKGSSQKGSRLLLLLVVSNLLLCQGVVSTPVCPNGPGNCQVSLRDLFDRAVMVSHYIHDLSS
 ## EMFNEFDKRYAQGKGFITMALNSCHTSSLPTPEDKEQAQQTHHEVLMSLILGLLRSWNDPLYHL
@@ -467,18 +469,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Each spaces added to the beginning and end of sequences that vary in length are indicated by <code>~</code></li>
 </ol>
 <p>In the sample FASTA file below, the <code>example1</code> sequence has a gap of 8 near its beginning. The <code>example2</code> sequence has numerous <code>~</code> indicating that this sequence is missing data from its beginning that are present in the other sequences. The <code>example3</code> sequence has numerous <code>~</code> at its end, indicating that this sequence is shorter than the others.</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="introducingFASTA.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;&gt;example1 </span></span>
-<span id="cb163-2"><a href="introducingFASTA.html#cb163-2" aria-hidden="true" tabindex="-1"></a><span class="st">MKALWALLLVPLLTGCLA........EGELEVTDQLPGQSDQP.WEQALNRFWDYLRWVQ</span></span>
-<span id="cb163-3"><a href="introducingFASTA.html#cb163-3" aria-hidden="true" tabindex="-1"></a><span class="st">GNQARDRLEEVREQMEEVRSKMEEQTQQIRLQAEIFQARIKGWFEPLVEDMQRQWANLME</span></span>
-<span id="cb163-4"><a href="introducingFASTA.html#cb163-4" aria-hidden="true" tabindex="-1"></a><span class="st">KIQASVATNSIASTTVPLENQ</span></span>
-<span id="cb163-5"><a href="introducingFASTA.html#cb163-5" aria-hidden="true" tabindex="-1"></a><span class="st">&gt;example2 </span></span>
-<span id="cb163-6"><a href="introducingFASTA.html#cb163-6" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~KVQQELEPEAGWQTGQP.WEAALARFWDYLRWVQ</span></span>
-<span id="cb163-7"><a href="introducingFASTA.html#cb163-7" aria-hidden="true" tabindex="-1"></a><span class="st">SSRARGHLEEMREQIQEVRVKMEEQADQIRQKAEAFQARLKSWFEPLLEDMQRQWDGLVE</span></span>
-<span id="cb163-8"><a href="introducingFASTA.html#cb163-8" aria-hidden="true" tabindex="-1"></a><span class="st">KVQAAVAT.IPTSKPVEEP~~</span></span>
-<span id="cb163-9"><a href="introducingFASTA.html#cb163-9" aria-hidden="true" tabindex="-1"></a><span class="st">&gt;example3 </span></span>
-<span id="cb163-10"><a href="introducingFASTA.html#cb163-10" aria-hidden="true" tabindex="-1"></a><span class="st">MRSLVVFFALAVLTGCQARSLFQAD..............APQPRWEEMVDRFWQYVSELN</span></span>
-<span id="cb163-11"><a href="introducingFASTA.html#cb163-11" aria-hidden="true" tabindex="-1"></a><span class="st">AGALKEKLEETAENL...RTSLEGRVDELTSLLAPYSQKIREQLQEVMDKIKEATAALPT</span></span>
-<span id="cb163-12"><a href="introducingFASTA.html#cb163-12" aria-hidden="true" tabindex="-1"></a><span class="st">QA~~~~~~~~~~~~~~~~~~~&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="introducingFASTA.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;&gt;example1 </span></span>
+<span id="cb165-2"><a href="introducingFASTA.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="st">MKALWALLLVPLLTGCLA........EGELEVTDQLPGQSDQP.WEQALNRFWDYLRWVQ</span></span>
+<span id="cb165-3"><a href="introducingFASTA.html#cb165-3" aria-hidden="true" tabindex="-1"></a><span class="st">GNQARDRLEEVREQMEEVRSKMEEQTQQIRLQAEIFQARIKGWFEPLVEDMQRQWANLME</span></span>
+<span id="cb165-4"><a href="introducingFASTA.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="st">KIQASVATNSIASTTVPLENQ</span></span>
+<span id="cb165-5"><a href="introducingFASTA.html#cb165-5" aria-hidden="true" tabindex="-1"></a><span class="st">&gt;example2 </span></span>
+<span id="cb165-6"><a href="introducingFASTA.html#cb165-6" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~KVQQELEPEAGWQTGQP.WEAALARFWDYLRWVQ</span></span>
+<span id="cb165-7"><a href="introducingFASTA.html#cb165-7" aria-hidden="true" tabindex="-1"></a><span class="st">SSRARGHLEEMREQIQEVRVKMEEQADQIRQKAEAFQARLKSWFEPLLEDMQRQWDGLVE</span></span>
+<span id="cb165-8"><a href="introducingFASTA.html#cb165-8" aria-hidden="true" tabindex="-1"></a><span class="st">KVQAAVAT.IPTSKPVEEP~~</span></span>
+<span id="cb165-9"><a href="introducingFASTA.html#cb165-9" aria-hidden="true" tabindex="-1"></a><span class="st">&gt;example3 </span></span>
+<span id="cb165-10"><a href="introducingFASTA.html#cb165-10" aria-hidden="true" tabindex="-1"></a><span class="st">MRSLVVFFALAVLTGCQARSLFQAD..............APQPRWEEMVDRFWQYVSELN</span></span>
+<span id="cb165-11"><a href="introducingFASTA.html#cb165-11" aria-hidden="true" tabindex="-1"></a><span class="st">AGALKEKLEETAENL...RTSLEGRVDELTSLLAPYSQKIREQLQEVMDKIKEATAALPT</span></span>
+<span id="cb165-12"><a href="introducingFASTA.html#cb165-12" aria-hidden="true" tabindex="-1"></a><span class="st">QA~~~~~~~~~~~~~~~~~~~&quot;</span>)</span></code></pre></div>
 <pre><code>## &gt;example1 
 ## MKALWALLLVPLLTGCLA........EGELEVTDQLPGQSDQP.WEQALNRFWDYLRWVQ
 ## GNQARDRLEEVREQMEEVRSKMEEQTQQIRLQAEIFQARIKGWFEPLVEDMQRQWANLME
@@ -505,16 +507,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Line 4 encodes the <strong>quality values</strong> for the sequence in Line 2 of the file, and must contain the same number of symbols as letters in the sequence.</li>
 </ul>
 <p>A FASTQ file containing a single sequence might look like this:”</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="introducingFASTA.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;@SEQ_ID</span></span>
-<span id="cb165-2"><a href="introducingFASTA.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="st">GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT</span></span>
-<span id="cb165-3"><a href="introducingFASTA.html#cb165-3" aria-hidden="true" tabindex="-1"></a><span class="st">+</span></span>
-<span id="cb165-4"><a href="introducingFASTA.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="st">!&#39;&#39;*((((***+))%%%++)(%%%%).1***-+*&#39;&#39;))**55CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="introducingFASTA.html#cb167-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;@SEQ_ID</span></span>
+<span id="cb167-2"><a href="introducingFASTA.html#cb167-2" aria-hidden="true" tabindex="-1"></a><span class="st">GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT</span></span>
+<span id="cb167-3"><a href="introducingFASTA.html#cb167-3" aria-hidden="true" tabindex="-1"></a><span class="st">+</span></span>
+<span id="cb167-4"><a href="introducingFASTA.html#cb167-4" aria-hidden="true" tabindex="-1"></a><span class="st">!&#39;&#39;*((((***+))%%%++)(%%%%).1***-+*&#39;&#39;))**55CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65&quot;</span>)</span></code></pre></div>
 <pre><code>## @SEQ_ID
 ## GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
 ## +
 ## !&#39;&#39;*((((***+))%%%++)(%%%%).1***-+*&#39;&#39;))**55CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65</code></pre>
 <p>Here are the quality value characters in left-to-right increasing order of quality (ASCII):”</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="introducingFASTA.html#cb167-1" aria-hidden="true" tabindex="-1"></a> <span class="sc">!</span><span class="st">&quot;#$%&amp;&#39;()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~</span></span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="introducingFASTA.html#cb169-1" aria-hidden="true" tabindex="-1"></a> <span class="sc">!</span><span class="st">&quot;#$%&amp;&#39;()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~</span></span></code></pre></div>
 <p>FASTQ files typically do not include line breaks and do not wrap around when they reach the width of a normal page or file.</p>
 
 </div>

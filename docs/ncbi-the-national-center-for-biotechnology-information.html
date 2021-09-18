@@ -265,10 +265,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="12" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html"><i class="fa fa-check"></i><b>12</b> NCBI: The National Center for Biotechnology Information</a>
 <ul>
-<li class="chapter" data-level="12.1" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#genbank-sequence-database"><i class="fa fa-check"></i><b>12.1</b> GenBank sequence database</a></li>
-<li class="chapter" data-level="12.2" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#pubmed-and-pubmed-central-article-database"><i class="fa fa-check"></i><b>12.2</b> PubMed and PubMed Central article database</a></li>
-<li class="chapter" data-level="12.3" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#entrez"><i class="fa fa-check"></i><b>12.3</b> Entrez</a></li>
-<li class="chapter" data-level="12.4" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#blast"><i class="fa fa-check"></i><b>12.4</b> BLAST</a></li>
+<li class="chapter" data-level="12.1" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#key-concepts"><i class="fa fa-check"></i><b>12.1</b> Key concepts</a></li>
+<li class="chapter" data-level="12.2" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#ncbi"><i class="fa fa-check"></i><b>12.2</b> NCBI</a></li>
+<li class="chapter" data-level="12.3" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#genbank-sequence-database"><i class="fa fa-check"></i><b>12.3</b> GenBank sequence database</a></li>
+<li class="chapter" data-level="12.4" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#pubmed-and-pubmed-central-article-database"><i class="fa fa-check"></i><b>12.4</b> PubMed and PubMed Central article database</a></li>
+<li class="chapter" data-level="12.5" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#entrez"><i class="fa fa-check"></i><b>12.5</b> Entrez</a></li>
+<li class="chapter" data-level="12.6" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#blast"><i class="fa fa-check"></i><b>12.6</b> BLAST</a></li>
 </ul></li>
 <li class="chapter" data-level="13" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html"><i class="fa fa-check"></i><b>13</b> Introduction to biological sequences databases</a>
 <ul>
@@ -391,35 +393,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ncbi-the-national-center-for-biotechnology-information" class="section level1" number="12">
 <h1><span class="header-section-number">Chapter 12</span> NCBI: The National Center for Biotechnology Information</h1>
 <p><strong>NOTE:</strong> The following material was partially adapted by N. Brouwer from <a href="https://en.wikipedia.org/wiki/National_Center_for_Biotechnology_Information">Wikipedia</a>. See the underlying .Rmd file for information on specific paragraphs from Wikipedia.</p>
+<div id="key-concepts" class="section level2" number="12.1">
+<h2><span class="header-section-number">12.1</span> Key concepts</h2>
+<ul>
+<li>NCBI</li>
+<li>Rentrez</li>
+<li>accession numbers</li>
+<li>BLAST</li>
+</ul>
+</div>
+<div id="ncbi" class="section level2" number="12.2">
+<h2><span class="header-section-number">12.2</span> NCBI</h2>
 <!-- This paragraph is from Wikipedia -->
 <p>The <strong>National Center for Biotechnology Information (NCBI)</strong> is part of the United States National Library of Medicine (NLM), a branch of the National Institutes of Health (NIH). It was founded in 1988 and is approved and funded by the government of the United States. The NCBI houses a series of <strong>databases</strong> relevant to the basic and applied life sciences and is an important resource for <strong>bioinformatics</strong> tools and services. Major databases include <strong>GenBank</strong> for DNA sequences and <strong>PubMed</strong>, a <strong>bibliographic</strong> database for biomedical literature. All these databases are available online through the <strong>Entrez</strong> search engine.
 <!-- end paragraph  from Wikipedia --></p>
 <p>In this chapter we’ll briefly discuss the major databases, following up with specific details in subsequent chapters. One thing to note is that in practice people do no always adhere to the specific names of databases and other tools. For example, someone may say “I searched NCBI for sequences.” It would be more accurate to say “I used Entrez to search GenBank for sequences.” For in-depth details on all the features see <a href="https://academic.oup.com/nar/article/41/D1/D8/1067646">Database resources of the National Center for Biotechnology Information</a></p>
-<div id="genbank-sequence-database" class="section level2" number="12.1">
-<h2><span class="header-section-number">12.1</span> GenBank sequence database</h2>
+</div>
+<div id="genbank-sequence-database" class="section level2" number="12.3">
+<h2><span class="header-section-number">12.3</span> GenBank sequence database</h2>
 <p>The GenBank sequence database is an open access collection of publicly available DNA and protein sequences. If you’ve work with sequence data, you’ll work with GenBank. GenBank is the actual database, and it can be searched several ways. For example, you can search for a sequence by its ID number (<strong>accession number</strong>) if you know it, or do a <strong>BLAST search</strong> using an actual sequence to look for similar sequences.</p>
-<p>A key component of GenBank are the <strong>GeneBank Records</strong>, which are annotated summaries of sequences in the databases. For example, below is shown record for a gene <a href="https://www.ncbi.nlm.nih.gov/protein/AAC65720">pallysin</a> from syphilis In addition to the actual A, T, C, and Gs of the sequences, the record provides <strong>metadata</strong>, such as the scientific name of the organism (<em>Treponema pallidum</em>), who did the sequencing, the name of the paper where the sequence was published, and important features of the gene.<br />
+<p>A key component of GenBank are the <strong>GeneBank Records</strong>, which are annotated summaries of sequences in the databases. For example, below is shown record for a gene <a href="https://www.ncbi.nlm.nih.gov/protein/AAC65720">pallysin</a> <a href="https://www.ncbi.nlm.nih.gov/protein/AAC65720" class="uri">https://www.ncbi.nlm.nih.gov/protein/AAC65720</a> from syphilis In addition to the actual A, T, C, and Gs of the sequences, the record provides <strong>metadata</strong>, such as the scientific name of the organism (<em>Treponema pallidum</em>), who did the sequencing, the name of the paper where the sequence was published, and important features of the gene.<br />
 <!-- Accession number for Tp0751 is AAC65720.1 --></p>
 <p>A key feature of PubMed records is that they are <strong>hyperlinked</strong> to other NCBI databases. For example, you can click link under the name of the paper which reported the sequence of the gene and it will take you to the PubMed record for that paper (see below). You can also click the “Run BLAST” link and you can search the database for similar sequences. This protein coded for by this particular gene has had its structured solved using x-ray crystallography, and you can see these results under “Protein 3D Structure.” In a later chapter we’ll get to know these records in further detail.</p>
 <p><img src="images/genbank_record.png" width="972" /></p>
 </div>
-<div id="pubmed-and-pubmed-central-article-database" class="section level2" number="12.2">
-<h2><span class="header-section-number">12.2</span> PubMed and PubMed Central article database</h2>
+<div id="pubmed-and-pubmed-central-article-database" class="section level2" number="12.4">
+<h2><span class="header-section-number">12.4</span> PubMed and PubMed Central article database</h2>
 <p><strong>PubMed</strong> and <strong>PubMed Central (PMC)</strong> are databases of scientific articles related to data contained in NCBI databases. PubMed contains basic bibliographic information, the abstract, relevant links to sequences, and to the websites of the actual publishers of the papers. If the text of an article is open-access, PMC should have a copy of it. Articles in PMC contain relevant hyperlinks, such as to any sequences that are mentioned. For example, the image below show where the sequence of Tp0751 is mentioned in a paper and linked to the GenBank record we looked at above.</p>
 </div>
-<div id="entrez" class="section level2" number="12.3">
-<h2><span class="header-section-number">12.3</span> Entrez</h2>
-<p><a href="https://en.wikipedia.org/wiki/Entrez" class="uri">https://en.wikipedia.org/wiki/Entrez</a></p>
+<div id="entrez" class="section level2" number="12.5">
+<h2><span class="header-section-number">12.5</span> Entrez</h2>
+<!-- https://en.wikipedia.org/wiki/Entrez -->
 <!-- This paragraph is from Wikipedia -->
-<p>“Entrez is a federated search engine and web portal that allows users to search many discrete health sciences databases of the NCBI website. The name”Entrez” (a greeting meaning “Come in” in French) was chosen to reflect the spirit of welcoming the public to search the content available from NCBI.”</p>
+<p>Entrez is a search engine and web portal that allows users to search many discrete health sciences databases of the NCBI website. The name “Entrez” (a greeting meaning “Come in” in French) was chosen to reflect the spirit of welcoming the public to search the content available from NCBI.</p>
 <!-- This paragraph is from Wikipedia -->
-<p>“Entrez Global Query is an integrated search and retrieval system that provides access to all databases simultaneously with a single query and user interface. Entrez can efficiently retrieve related sequences, structures, and references. The Entrez system can provide views of gene and protein sequences and chromosome maps. Some textbooks are also available online through the Entrez system.”</p>
+<p>Entrez Global Query is an integrated search and retrieval system that provides access to all databases simultaneously with a single query and user interface. Entrez can efficiently retrieve related sequences, structures, and references. The Entrez system can provide views of gene and protein sequences and chromosome maps. Some textbooks are also available online through the Entrez system.</p>
 </div>
-<div id="blast" class="section level2" number="12.4">
-<h2><span class="header-section-number">12.4</span> BLAST</h2>
-<p><a href="https://en.wikipedia.org/wiki/BLAST_(biotechnology)" class="uri">https://en.wikipedia.org/wiki/BLAST_(biotechnology)</a></p>
+<div id="blast" class="section level2" number="12.6">
+<h2><span class="header-section-number">12.6</span> BLAST</h2>
+<!-- https://en.wikipedia.org/wiki/BLAST_(biotechnology) -->
 <!-- This paragraph is from Wikipedia -->
-<p>“BLAST (basic local alignment search tool)is an algorithm and program for comparing primary biological sequence information, such as the amino-acid sequences of proteins or the nucleotides of DNA and/or RNA sequences. A BLAST search enables a researcher to compare a subject protein or nucleotide sequence (called a query) with a library or database of sequences, and identify database sequences that resemble the query sequence above a certain threshold. For example, following the discovery of a previously unknown gene in the mouse, a scientist will typically perform a BLAST search of the human genome to see if humans carry a similar gene; BLAST will identify sequences in the human genome that resemble the mouse gene based on similarity of sequence.”</p>
+<p>BLAST (Basic Local Alignment Search Tool) is an algorithm and program for comparing primary biological sequence information, such as the amino-acid sequences of proteins or the nucleotides of DNA and/or RNA sequences. A BLAST search enables a researcher to compare a subject protein or nucleotide sequence (called a query) with a library or database of sequences, and identify database sequences that resemble the query sequence above a certain threshold. For example, following the discovery of a previously unknown gene in the mouse, a scientist will typically perform a BLAST search of the human genome to see if humans carry a similar gene; BLAST will identify sequences in the human genome that resemble the mouse gene based on similarity of sequence.</p>
 
 </div>
 </div>
