@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 15 Downloading sequences from UniProt by hand | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Chapter 16 Introducing FASTA Files | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 15 Downloading sequences from UniProt by hand | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Chapter 16 Introducing FASTA Files | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 15 Downloading sequences from UniProt by hand | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Chapter 16 Introducing FASTA Files | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="downloading-ncbi-sequence-data-by-hand.html"/>
-<link rel="next" href="introducingFASTA.html"/>
+<link rel="prev" href="downloading-sequences-from-uniprot-by-hand.html"/>
+<link rel="next" href="a-complete-bioinformatics-workflow-in-r.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -388,79 +388,134 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="downloading-sequences-from-uniprot-by-hand" class="section level1" number="15">
-<h1><span class="header-section-number">Chapter 15</span> Downloading sequences from UniProt by hand</h1>
-<p><strong>By</strong>: Avril Coghlan.</p>
-<p><strong>Adapted, edited and expanded</strong>: Nathan Brouwer under the Creative Commons 3.0 Attribution License <a href="https://creativecommons.org/licenses/by/3.0/">(CC BY 3.0)</a>.</p>
-<!-- TODO / NOTES: -->
-<!-- The original online version has images, though they are somewhat outdated. -->
-<div id="vocab-1" class="section level2" number="15.1">
-<h2><span class="header-section-number">15.1</span> Vocab</h2>
+<div id="introducingFASTA" class="section level1" number="16">
+<h1><span class="header-section-number">Chapter 16</span> Introducing FASTA Files</h1>
+<!-- TODO: Add images / examples -->
+<p>Adapted from <a href="https://en.wikipedia.org/wiki/FASTA_format">Wikipedia</a>: <a href="https://en.wikipedia.org/wiki/FASTA_format" class="uri">https://en.wikipedia.org/wiki/FASTA_format</a></p>
+<!-- begin wikipedia -->
+<p>In bioinformatics, the FASTA format is a text-based format for representing either nucleotide sequences or amino acid (protein) sequences, in which nucleotides or amino acids are represented using single-letter codes. The format allows for sequence names and comments to precede the sequences. The format originates from the FASTA alignment software, but has now become a near universal standard in the field of bioinformatics.</p>
+<p>The simplicity of FASTA format makes it easy to manipulate and parse sequences using text-processing tools and scripting languages like the R programming language and Python.</p>
+<p>The first line in a FASTA file starts with a “&gt;” (greater-than) symbol and holds summary information about the sequence, often starting with a unique accession number and followed by information like the name of the gene, the type of sequence, and the organism it is from.</p>
+<p>On the next is the sequence itself in a standard one-letter character string. Anything other than a valid character is be ignored (including spaces, tabs, asterisks, etc…).</p>
+<p>A multiple sequence FASTA format can be obtained by concatenating several single sequence FASTA files in a common file (also known as multi-FASTA format).</p>
+<p>Following the header line, the actual sequence is represented. Sequences may be protein sequences or nucleic acid sequences, and they can contain gaps or alignment characters. Sequences are expected to be represented in the standard amino acid and nucleic acid codes. Lower-case letters are accepted and are mapped into upper-case; a single hyphen or dash can be used to represent a gap character; and in amino acid sequences, U and * are acceptable letters.</p>
+<p>FASTQ format is a form of FASTA format extended to indicate information related to sequencing. It is created by the Sanger Centre in Cambridge.</p>
+<p>Bioconductor.org’s Biostrings package can be used to read and manipulate FASTA files in R</p>
+<!-- end wikipedia -->
+<blockquote>
+<p>“FASTA format is a text-based format for representing either nucleotide sequences or peptide sequences, in which base pairs or amino acids are represented using single-letter codes. A sequence in FASTA format begins with a single-line description, followed by lines of sequence data. The description line is distinguished from the sequence data by a greater-than (”&gt;“) symbol in the first column. It is recommended that all lines of text be shorter than 80 characters in length.” (<a href="https://zhanglab.dcmb.med.umich.edu/FASTA/" class="uri">https://zhanglab.dcmb.med.umich.edu/FASTA/</a>)</p>
+</blockquote>
+<div id="example-fasta-file" class="section level2" number="16.1">
+<h2><span class="header-section-number">16.1</span> Example FASTA file</h2>
+<p>Here is an example of the contents of a FASTA file. (If your are viewing this chapter in the form of the source .Rmd file, the <code>cat()</code> function is included just to print out the content properly and is not part of the FASTA format).</p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="introducingFASTA.html#cb159-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;&gt;gi|186681228|ref|YP_001864424.1| phycoerythrobilin:ferredoxin oxidoreductase</span></span>
+<span id="cb159-2"><a href="introducingFASTA.html#cb159-2" aria-hidden="true" tabindex="-1"></a><span class="st">MNSERSDVTLYQPFLDYAIAYMRSRLDLEPYPIPTGFESNSAVVGKGKNQEEVVTTSYAFQTAKLRQIRA</span></span>
+<span id="cb159-3"><a href="introducingFASTA.html#cb159-3" aria-hidden="true" tabindex="-1"></a><span class="st">AHVQGGNSLQVLNFVIFPHLNYDLPFFGADLVTLPGGHLIALDMQPLFRDDSAYQAKYTEPILPIFHAHQ</span></span>
+<span id="cb159-4"><a href="introducingFASTA.html#cb159-4" aria-hidden="true" tabindex="-1"></a><span class="st">QHLSWGGDFPEEAQPFFSPAFLWTRPQETAVVETQVFAAFKDYLKAYLDFVEQAEAVTDSQNLVAIKQAQ</span></span>
+<span id="cb159-5"><a href="introducingFASTA.html#cb159-5" aria-hidden="true" tabindex="-1"></a><span class="st">LRYLRYRAEKDPARGMFKRFYGAEWTEEYIHGFLFDLERKLTVVK&quot;</span>)</span></code></pre></div>
+<pre><code>## &gt;gi|186681228|ref|YP_001864424.1| phycoerythrobilin:ferredoxin oxidoreductase
+## MNSERSDVTLYQPFLDYAIAYMRSRLDLEPYPIPTGFESNSAVVGKGKNQEEVVTTSYAFQTAKLRQIRA
+## AHVQGGNSLQVLNFVIFPHLNYDLPFFGADLVTLPGGHLIALDMQPLFRDDSAYQAKYTEPILPIFHAHQ
+## QHLSWGGDFPEEAQPFFSPAFLWTRPQETAVVETQVFAAFKDYLKAYLDFVEQAEAVTDSQNLVAIKQAQ
+## LRYLRYRAEKDPARGMFKRFYGAEWTEEYIHGFLFDLERKLTVVK</code></pre>
+</div>
+<div id="multiple-sequences-in-a-single-fasta-file" class="section level2" number="16.2">
+<h2><span class="header-section-number">16.2</span> Multiple sequences in a single FASTA file</h2>
+<p>Multiple sequences can be stored in a single FASTA file, each on separated by a line and have its own headline.</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="introducingFASTA.html#cb161-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;&gt;LCBO - Prolactin precursor - Bovine</span></span>
+<span id="cb161-2"><a href="introducingFASTA.html#cb161-2" aria-hidden="true" tabindex="-1"></a><span class="st">MDSKGSSQKGSRLLLLLVVSNLLLCQGVVSTPVCPNGPGNCQVSLRDLFDRAVMVSHYIHDLSS</span></span>
+<span id="cb161-3"><a href="introducingFASTA.html#cb161-3" aria-hidden="true" tabindex="-1"></a><span class="st">EMFNEFDKRYAQGKGFITMALNSCHTSSLPTPEDKEQAQQTHHEVLMSLILGLLRSWNDPLYHL</span></span>
+<span id="cb161-4"><a href="introducingFASTA.html#cb161-4" aria-hidden="true" tabindex="-1"></a><span class="st">VTEVRGMKGAPDAILSRAIEIEEENKRLLEGMEMIFGQVIPGAKETEPYPVWSGLPSLQTKDED</span></span>
+<span id="cb161-5"><a href="introducingFASTA.html#cb161-5" aria-hidden="true" tabindex="-1"></a><span class="st">ARYSAFYNLLHCLRRDSSKIDTYLKLLNCRIIYNNNC*</span></span>
+<span id="cb161-6"><a href="introducingFASTA.html#cb161-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-7"><a href="introducingFASTA.html#cb161-7" aria-hidden="true" tabindex="-1"></a><span class="st">&gt;MCHU - Calmodulin - Human, rabbit, bovine, rat, and chicken</span></span>
+<span id="cb161-8"><a href="introducingFASTA.html#cb161-8" aria-hidden="true" tabindex="-1"></a><span class="st">MADQLTEEQIAEFKEAFSLFDKDGDGTITTKELGTVMRSLGQNPTEAELQDMINEVDADGNGTID</span></span>
+<span id="cb161-9"><a href="introducingFASTA.html#cb161-9" aria-hidden="true" tabindex="-1"></a><span class="st">FPEFLTMMARKMKDTDSEEEIREAFRVFDKDGNGYISAAELRHVMTNLGEKLTDEEVDEMIREA</span></span>
+<span id="cb161-10"><a href="introducingFASTA.html#cb161-10" aria-hidden="true" tabindex="-1"></a><span class="st">DIDGDGQVNYEEFVQMMTAK*</span></span>
+<span id="cb161-11"><a href="introducingFASTA.html#cb161-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb161-12"><a href="introducingFASTA.html#cb161-12" aria-hidden="true" tabindex="-1"></a><span class="st">&gt;gi|5524211|gb|AAD44166.1| cytochrome b [Elephas maximus maximus]</span></span>
+<span id="cb161-13"><a href="introducingFASTA.html#cb161-13" aria-hidden="true" tabindex="-1"></a><span class="st">LCLYTHIGRNIYYGSYLYSETWNTGIMLLLITMATAFMGYVLPWGQMSFWGATVITNLFSAIPYIGTNLV</span></span>
+<span id="cb161-14"><a href="introducingFASTA.html#cb161-14" aria-hidden="true" tabindex="-1"></a><span class="st">EWIWGGFSVDKATLNRFFAFHFILPFTMVALAGVHLTFLHETGSNNPLGLTSDSDKIPFHPYYTIKDFLG</span></span>
+<span id="cb161-15"><a href="introducingFASTA.html#cb161-15" aria-hidden="true" tabindex="-1"></a><span class="st">LLILILLLLLLALLSPDMLGDPDNHMPADPLNTPLHIKPEWYFLFAYAILRSVPNKLGGVLALFLSIVIL</span></span>
+<span id="cb161-16"><a href="introducingFASTA.html#cb161-16" aria-hidden="true" tabindex="-1"></a><span class="st">GLMPFLHTSKHRSMMLRPLSQALFWTLTMDLLTLTWIGSQPVEYPYTIIGQMASILYFSIILAFLPIAGX</span></span>
+<span id="cb161-17"><a href="introducingFASTA.html#cb161-17" aria-hidden="true" tabindex="-1"></a><span class="st">IENY&quot;</span>)</span></code></pre></div>
+<pre><code>## &gt;LCBO - Prolactin precursor - Bovine
+## MDSKGSSQKGSRLLLLLVVSNLLLCQGVVSTPVCPNGPGNCQVSLRDLFDRAVMVSHYIHDLSS
+## EMFNEFDKRYAQGKGFITMALNSCHTSSLPTPEDKEQAQQTHHEVLMSLILGLLRSWNDPLYHL
+## VTEVRGMKGAPDAILSRAIEIEEENKRLLEGMEMIFGQVIPGAKETEPYPVWSGLPSLQTKDED
+## ARYSAFYNLLHCLRRDSSKIDTYLKLLNCRIIYNNNC*
+## 
+## &gt;MCHU - Calmodulin - Human, rabbit, bovine, rat, and chicken
+## MADQLTEEQIAEFKEAFSLFDKDGDGTITTKELGTVMRSLGQNPTEAELQDMINEVDADGNGTID
+## FPEFLTMMARKMKDTDSEEEIREAFRVFDKDGNGYISAAELRHVMTNLGEKLTDEEVDEMIREA
+## DIDGDGQVNYEEFVQMMTAK*
+## 
+## &gt;gi|5524211|gb|AAD44166.1| cytochrome b [Elephas maximus maximus]
+## LCLYTHIGRNIYYGSYLYSETWNTGIMLLLITMATAFMGYVLPWGQMSFWGATVITNLFSAIPYIGTNLV
+## EWIWGGFSVDKATLNRFFAFHFILPFTMVALAGVHLTFLHETGSNNPLGLTSDSDKIPFHPYYTIKDFLG
+## LLILILLLLLLALLSPDMLGDPDNHMPADPLNTPLHIKPEWYFLFAYAILRSVPNKLGGVLALFLSIVIL
+## GLMPFLHTSKHRSMMLRPLSQALFWTLTMDLLTLTWIGSQPVEYPYTIIGQMASILYFSIILAFLPIAGX
+## IENY</code></pre>
+<!-- TODO: newline character, multiple entries per a single file, need for processing, etc.  Move info from chapter to here. -->
+</div>
+<div id="multiple-sequence-alignments-can-be-stored-in-fasta-format" class="section level2" number="16.3">
+<h2><span class="header-section-number">16.3</span> Multiple sequence alignments can be stored in FASTA format</h2>
+<p><strong>Aligned FASTA format</strong> can be used to store the output of <strong>Multiple Sequence Alignment (MSA)</strong>. This format contains</p>
+<ol style="list-style-type: decimal">
+<li>Multiple entries, each with their own header line</li>
+<li><strong>Gaps</strong> inserted to align sequences are indicated by <code>.</code></li>
+<li>Each spaces added to the beginning and end of sequences that vary in length are indicated by <code>~</code></li>
+</ol>
+<p>In the sample FASTA file below, the <code>example1</code> sequence has a gap of 8 near its beginning. The <code>example2</code> sequence has numerous <code>~</code> indicating that this sequence is missing data from its beginning that are present in the other sequences. The <code>example3</code> sequence has numerous <code>~</code> at its end, indicating that this sequence is shorter than the others.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="introducingFASTA.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;&gt;example1 </span></span>
+<span id="cb163-2"><a href="introducingFASTA.html#cb163-2" aria-hidden="true" tabindex="-1"></a><span class="st">MKALWALLLVPLLTGCLA........EGELEVTDQLPGQSDQP.WEQALNRFWDYLRWVQ</span></span>
+<span id="cb163-3"><a href="introducingFASTA.html#cb163-3" aria-hidden="true" tabindex="-1"></a><span class="st">GNQARDRLEEVREQMEEVRSKMEEQTQQIRLQAEIFQARIKGWFEPLVEDMQRQWANLME</span></span>
+<span id="cb163-4"><a href="introducingFASTA.html#cb163-4" aria-hidden="true" tabindex="-1"></a><span class="st">KIQASVATNSIASTTVPLENQ</span></span>
+<span id="cb163-5"><a href="introducingFASTA.html#cb163-5" aria-hidden="true" tabindex="-1"></a><span class="st">&gt;example2 </span></span>
+<span id="cb163-6"><a href="introducingFASTA.html#cb163-6" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~KVQQELEPEAGWQTGQP.WEAALARFWDYLRWVQ</span></span>
+<span id="cb163-7"><a href="introducingFASTA.html#cb163-7" aria-hidden="true" tabindex="-1"></a><span class="st">SSRARGHLEEMREQIQEVRVKMEEQADQIRQKAEAFQARLKSWFEPLLEDMQRQWDGLVE</span></span>
+<span id="cb163-8"><a href="introducingFASTA.html#cb163-8" aria-hidden="true" tabindex="-1"></a><span class="st">KVQAAVAT.IPTSKPVEEP~~</span></span>
+<span id="cb163-9"><a href="introducingFASTA.html#cb163-9" aria-hidden="true" tabindex="-1"></a><span class="st">&gt;example3 </span></span>
+<span id="cb163-10"><a href="introducingFASTA.html#cb163-10" aria-hidden="true" tabindex="-1"></a><span class="st">MRSLVVFFALAVLTGCQARSLFQAD..............APQPRWEEMVDRFWQYVSELN</span></span>
+<span id="cb163-11"><a href="introducingFASTA.html#cb163-11" aria-hidden="true" tabindex="-1"></a><span class="st">AGALKEKLEETAENL...RTSLEGRVDELTSLLAPYSQKIREQLQEVMDKIKEATAALPT</span></span>
+<span id="cb163-12"><a href="introducingFASTA.html#cb163-12" aria-hidden="true" tabindex="-1"></a><span class="st">QA~~~~~~~~~~~~~~~~~~~&quot;</span>)</span></code></pre></div>
+<pre><code>## &gt;example1 
+## MKALWALLLVPLLTGCLA........EGELEVTDQLPGQSDQP.WEQALNRFWDYLRWVQ
+## GNQARDRLEEVREQMEEVRSKMEEQTQQIRLQAEIFQARIKGWFEPLVEDMQRQWANLME
+## KIQASVATNSIASTTVPLENQ
+## &gt;example2 
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~KVQQELEPEAGWQTGQP.WEAALARFWDYLRWVQ
+## SSRARGHLEEMREQIQEVRVKMEEQADQIRQKAEAFQARLKSWFEPLLEDMQRQWDGLVE
+## KVQAAVAT.IPTSKPVEEP~~
+## &gt;example3 
+## MRSLVVFFALAVLTGCQARSLFQAD..............APQPRWEEMVDRFWQYVSELN
+## AGALKEKLEETAENL...RTSLEGRVDELTSLLAPYSQKIREQLQEVMDKIKEATAALPT
+## QA~~~~~~~~~~~~~~~~~~~</code></pre>
+</div>
+<div id="fastq-format" class="section level2" number="16.4">
+<h2><span class="header-section-number">16.4</span> FASTQ Format</h2>
+<p>Adapted from <a href="https://en.wikipedia.org/wiki/FASTQ_format">Wikipedia</a>: <a href="https://en.wikipedia.org/wiki/FASTQ_format" class="uri">https://en.wikipedia.org/wiki/FASTQ_format</a></p>
+<p>FASTQ format is a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores. Both the sequence letter and quality score are each encoded with a single ASCII character for brevity.</p>
+<p>It was originally developed at the Wellcome Trust Sanger Institute to bundle a FASTA formatted sequence and its quality data, but has recently become the de facto standard for storing the output of high-throughput sequencing instruments such as the Illumina Genome Analyzer.</p>
+<p>A FASTQ file normally uses four lines per sequence.</p>
 <ul>
-<li>RefSeq</li>
-<li>manual curation</li>
-<li>UniProt</li>
-<li>accession</li>
+<li>Line 1 begins with a <code>@</code> character and is followed by a sequence identifier and an optional description (like a FASTA title line).</li>
+<li>Line 2 is the raw sequence letters.</li>
+<li>Line 3 begins with a <code>+</code> character and is optionally followed by the same sequence identifier (and any description) again.</li>
+<li>Line 4 encodes the <strong>quality values</strong> for the sequence in Line 2 of the file, and must contain the same number of symbols as letters in the sequence.</li>
 </ul>
-</div>
-<div id="downloading-protein-data-from-uniprot" class="section level2" number="15.2">
-<h2><span class="header-section-number">15.2</span> Downloading Protein data from UniProt</h2>
-<p>In a previous vignette you learned how to retrieve sequences from the NCBI database. The NCBI database is a key database in bioinformatics because it contains essentially all DNA sequences ever sequenced.</p>
-<p>As mentioned previously, a subsection of the NCBI database called <strong>RefSeq</strong> consists of high quality DNA and protein sequence data. Furthermore, the NCBI entries for the RefSeq sequences have been <strong>manually curated</strong>, which means that expert biologists employed by NCBI have added additional information to the NCBI entries for those sequences, such as details of scientific papers that describe the sequences.</p>
-<p>Another extremely important manually curated database is <a href="www.uniprot.org"><strong>UniProt</strong></a>, which focuses on protein sequences. UniProt aims to contains manually curated information on all known protein sequences. While many of the protein sequences in UniProt are also present in RefSeq, the amount and quality of manually curated information in UniProt is much higher than that in RefSeq.</p>
-<p>For each protein in UniProt, the UniProt curators read all the scientific papers that they can find about that protein, and add information from those papers to the protein’s UniProt entry. For example, for a human protein, the UniProt entry for the protein usually includes information about the biological function of the protein, in what human tissues it is expressed, whether it interacts with other human proteins, and much more. All this information has been manually gathered by the UniProt curators from scientific papers, and the papers in which the found the information are always listed in the UniProt entry for the protein.</p>
-<p>Just like NCBI, UniProt also assigns an <strong>accession</strong> to each sequence in the UniProt database. Although the same protein sequence may appear in both the NCBI database and the UniProt database, it will have <em>different</em> NCBI and UniProt accessions. However, there is usually a link on the NCBI entry for the protein sequence to the UniProt entry, and vice versa.</p>
-</div>
-<div id="viewing-the-uniprot-webpage-for-a-protein-sequence" class="section level2" number="15.3">
-<h2><span class="header-section-number">15.3</span> Viewing the UniProt webpage for a protein sequence</h2>
-<p>If you are given the UniProt accession for a protein, to find the UniProt entry for the protein, you first need to go the UniProt website, www.uniprot.org. At the top of the UniProt website, you will see a search box, and you can type the accession of the protein that you are looking for in this search box, and then click on the “Search” button to search for it.</p>
-<p>For example, if you want to find the sequence for the chorismate lyase protein from <em>Mycobacterium leprae</em> (the bacterium which causes leprosy), which has UniProt accession Q9CD83, you would type just “Q9CD83” in the search box and press “Search”. The UniProt entry for UniProt accession Q9CD83 will then appear in your web browser.</p>
-<p>Beside the heading “Organism” you can see the organism is given as <em>Mycobacterium leprae</em>. If you scroll down you’ll find a section <strong>Names and Taxonomy</strong> and beside the heading “Taxonomic lineage”, you can see “Bacteria - Actinobacteria - Actinobacteridae - Actinomycetales - Corynebacterineae - Mycobacteriaceae- Mycobacterium”.</p>
-<p>This tells us that <em>Mycobacterium</em> is a species of bacteria, which belongs to a group of related bacteria called the Mycobacteriaceae, which itself belongs to a larger group of related bacteria called the Corynebacterineae, which itself belongs to an even larger group of related bacteria called the Actinomycetales, which itself belongs to the Actinobacteridae, which itself belongs to a huge group of bacteria called the Actinobacteria.</p>
-<div id="protein-function" class="section level3" number="15.3.1">
-<h3><span class="header-section-number">15.3.1</span> Protein function</h3>
-<p>Back up at the top under “organism” is says “Status”, which tells us the <strong>annotation score</strong> is 2 out of 5, that it is a “Protein inferred from homology”, which means what we know about it is derived from bioinformatics and computational tools, not lab work.</p>
-<p>Beside the heading “Function”, it says that the function of this protein is that it “Removes the pyruvyl group from chorismate to provide 4-hydroxybenzoate (4HB)”. This tells us this protein is an enzyme (a protein that increases the rate of a specific biochemical reaction), and tells us what is the particular biochemical reaction that this enzyme is involved in. At the end of this info it says “By similarity”, which again indicates that what we know about this protein comes from bioinformatics, not lab work.</p>
-</div>
-<div id="protein-sequence-and-size" class="section level3" number="15.3.2">
-<h3><span class="header-section-number">15.3.2</span> Protein sequence and size</h3>
-<p>Under <strong>Sequence</strong> we see that the sequence length is 210 amino acids long (210 letters long) and has a mass of 24,045 daltons. We can access the sequence as a FASTA file from here if we want and also carry out a BLAST search from a link on the right.</p>
-</div>
-<div id="other-information" class="section level3" number="15.3.3">
-<h3><span class="header-section-number">15.3.3</span> Other information</h3>
-<p>Further down the UniProt page for this protein, you will see a lot more information, as well as many links to webpages in other biological databases, such as NCBI. The huge amount of information about proteins in UniProt means that if you want to find out about a particular protein, the UniProt page for that protein is a great place to start.</p>
-</div>
-</div>
-<div id="retrieving-a-uniprot-protein-sequence-via-the-uniprot-website" class="section level2" number="15.4">
-<h2><span class="header-section-number">15.4</span> Retrieving a UniProt protein sequence via the UniProt website</h2>
-<p>There are a couple different ways to retrieve the sequence. At the top of the page is a tab that say “Format” which brings you to a page with th FASTA file. You can copy and paste the sequence from here if you want. To save it as a file, go to the “File” menu of your web browser, choose “Save page as”, and save the file. Remember to give the file a sensible name (eg. “Q9CD83.fasta” for accession Q9CD83), and in a place that you will remember (eg. in the “My Documents” folder).</p>
-<p>For example, you can retrieve the protein sequences for the chorismate lyase protein from <em>Mycobacterium leprae</em> (which has UniProt accession Q9CD83) and for the chorismate lyase protein from <em>Mycobacterium ulcerans</em> (UniProt accession A0PQ23), and save them as FASTA-format files (eg. “Q9CD83.fasta” and “A0PQ23.fasta”, as described above.</p>
-<p>You can also put the UniProt information into an online <strong>Basket</strong>. If you do this for both Q9CD83 and A0PQ23 you can think click on <strong>Basket</strong>, select both entries, and carry out a pairwise alignment by clicking on <strong>Align</strong>.</p>
-<p><em>Mycobacterium leprae</em> is the bacterium which causes leprosy, while <em>Mycobacterium ulcerans</em> is a related bacterium which causes Buruli ulcer, both of which are classified by the WHO as neglected tropical diseases. The <em>M. leprae</em> and <em>M. ulcerans</em> chorismate lyase proteins are an example of a pair of <strong>homologous</strong> (related) proteins in two related species of bacteria.</p>
-<p>If you downloaded the protein sequences for UniProt accessions Q9CD83 and A0PQ23 and saved them as FASTA-format files (eg. “Q9CD83.fasta” and “A0PQ23.fasta”), you could read them into R using the read.fasta() function in the SeqinR R package (as detailed in another Vignette) or a similar function from another package.</p>
-<p>Note that the read.fasta() function normally expects that you have put your FASTA-format files in the the <strong>working directory</strong> of R. For convenience so you can explore these sequences they have been saved in a special folder in the <em>compbio4all</em> package and can be accessed like this for the Leprosy sequence</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="downloading-sequences-from-uniprot-by-hand.html#cb156-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load compbio4all</span></span>
-<span id="cb156-2"><a href="downloading-sequences-from-uniprot-by-hand.html#cb156-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all)</span>
-<span id="cb156-3"><a href="downloading-sequences-from-uniprot-by-hand.html#cb156-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb156-4"><a href="downloading-sequences-from-uniprot-by-hand.html#cb156-4" aria-hidden="true" tabindex="-1"></a><span class="co"># locate the file within the package using system.file()</span></span>
-<span id="cb156-5"><a href="downloading-sequences-from-uniprot-by-hand.html#cb156-5" aria-hidden="true" tabindex="-1"></a>file<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;./extdata/Q9CD83.fasta&quot;</span>,<span class="at">package =</span> <span class="st">&quot;compbio4all&quot;</span>)</span>
-<span id="cb156-6"><a href="downloading-sequences-from-uniprot-by-hand.html#cb156-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb156-7"><a href="downloading-sequences-from-uniprot-by-hand.html#cb156-7" aria-hidden="true" tabindex="-1"></a><span class="co"># load seqinr</span></span>
-<span id="cb156-8"><a href="downloading-sequences-from-uniprot-by-hand.html#cb156-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;seqinr&quot;</span>)</span>
-<span id="cb156-9"><a href="downloading-sequences-from-uniprot-by-hand.html#cb156-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb156-10"><a href="downloading-sequences-from-uniprot-by-hand.html#cb156-10" aria-hidden="true" tabindex="-1"></a><span class="co"># load fasta</span></span>
-<span id="cb156-11"><a href="downloading-sequences-from-uniprot-by-hand.html#cb156-11" aria-hidden="true" tabindex="-1"></a>leprae <span class="ot">&lt;-</span> <span class="fu">read.fasta</span>(<span class="at">file =</span> file<span class="fl">.1</span>)</span>
-<span id="cb156-12"><a href="downloading-sequences-from-uniprot-by-hand.html#cb156-12" aria-hidden="true" tabindex="-1"></a>lepraeseq <span class="ot">&lt;-</span> leprae[[<span class="dv">1</span>]]</span></code></pre></div>
-<p>We can confirm</p>
-<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="downloading-sequences-from-uniprot-by-hand.html#cb157-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(lepraeseq)</span></code></pre></div>
-<p>For the other sequence</p>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="downloading-sequences-from-uniprot-by-hand.html#cb158-1" aria-hidden="true" tabindex="-1"></a><span class="co"># locate the file within the package using system.file()</span></span>
-<span id="cb158-2"><a href="downloading-sequences-from-uniprot-by-hand.html#cb158-2" aria-hidden="true" tabindex="-1"></a>file<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;./extdata/A0PQ23.fasta&quot;</span>, <span class="at">package =</span> <span class="st">&quot;compbio4all&quot;</span>)</span>
-<span id="cb158-3"><a href="downloading-sequences-from-uniprot-by-hand.html#cb158-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb158-4"><a href="downloading-sequences-from-uniprot-by-hand.html#cb158-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb158-5"><a href="downloading-sequences-from-uniprot-by-hand.html#cb158-5" aria-hidden="true" tabindex="-1"></a><span class="co"># load fasta</span></span>
-<span id="cb158-6"><a href="downloading-sequences-from-uniprot-by-hand.html#cb158-6" aria-hidden="true" tabindex="-1"></a>ulcerans <span class="ot">&lt;-</span> <span class="fu">read.fasta</span>(<span class="at">file =</span> file<span class="fl">.2</span>)</span>
-<span id="cb158-7"><a href="downloading-sequences-from-uniprot-by-hand.html#cb158-7" aria-hidden="true" tabindex="-1"></a>ulceransseq <span class="ot">&lt;-</span> ulcerans[[<span class="dv">1</span>]]</span></code></pre></div>
+<p>A FASTQ file containing a single sequence might look like this:”</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="introducingFASTA.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;@SEQ_ID</span></span>
+<span id="cb165-2"><a href="introducingFASTA.html#cb165-2" aria-hidden="true" tabindex="-1"></a><span class="st">GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT</span></span>
+<span id="cb165-3"><a href="introducingFASTA.html#cb165-3" aria-hidden="true" tabindex="-1"></a><span class="st">+</span></span>
+<span id="cb165-4"><a href="introducingFASTA.html#cb165-4" aria-hidden="true" tabindex="-1"></a><span class="st">!&#39;&#39;*((((***+))%%%++)(%%%%).1***-+*&#39;&#39;))**55CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65&quot;</span>)</span></code></pre></div>
+<pre><code>## @SEQ_ID
+## GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
+## +
+## !&#39;&#39;*((((***+))%%%++)(%%%%).1***-+*&#39;&#39;))**55CCF&gt;&gt;&gt;&gt;&gt;&gt;CCCCCCC65</code></pre>
+<p>Here are the quality value characters in left-to-right increasing order of quality (ASCII):”</p>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="introducingFASTA.html#cb167-1" aria-hidden="true" tabindex="-1"></a> <span class="sc">!</span><span class="st">&quot;#$%&amp;&#39;()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~</span></span></code></pre></div>
+<p>FASTQ files typically do not include line breaks and do not wrap around when they reach the width of a normal page or file.</p>
 
 </div>
 </div>
@@ -469,8 +524,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="downloading-ncbi-sequence-data-by-hand.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="introducingFASTA.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="downloading-sequences-from-uniprot-by-hand.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-complete-bioinformatics-workflow-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -502,7 +557,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/brouwern/lbrb/edit/master/004-NCBI/04-uniprot_by_GUI-AC07-01.Rmd",
+"link": "https://github.com/brouwern/lbrb/edit/master/004-NCBI/05-FASTA_files.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -510,7 +565,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/brouwern/lbrb/blob/master/004-NCBI/04-uniprot_by_GUI-AC07-01.Rmd",
+"link": "https://github.com/brouwern/lbrb/blob/master/004-NCBI/05-FASTA_files.Rmd",
 "text": null
 },
 "download": ["lbrb.pdf"],

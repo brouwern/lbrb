@@ -698,685 +698,6 @@ There is another nice (slightly more in-depth) tutorial to R available on the �
 
 <!--chapter:end:001-getting_started/05-brief_intro_to_R-vector_list_fnxns_arguements_objects_indices.Rmd-->
 
-# Nucleic Acids {#nucleic-acids-review}
-
-**Authors**: OpenStax / Libretext  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
-
-This chapter was adapted from [LibreText General Biology](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)), Chapter 3, Section 3.5: [Nucleic Acids](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.5%3A_Nucleic_Acids).  The LibreText book is based on  [OpenStax Biology 2nd edition](https://openstax.org/details/books/biology-2e), Chapter 3, Section 3.5: [Nucleic Acids](https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids).  A full list of authors is found under the **Contributors and Attributions** section at the end of this document. 
-
-
->Nucleic acids are the most important macromolecules for the continuity
-of life. They carry the genetic blueprint of a cell and carry
-instructions for the functioning of the cell.
-
-## DNA and RNA
-
-The two main types of nucleic acids are deoxyribonucleic acid (DNA) 
-and ribonucleic acid (RNA). DNA is the genetic material found in all
-living organisms, ranging from single-celled bacteria to multicellular
-mammals. It is found in the nucleus of eukaryotes and in the
-organelles, chloroplasts, and mitochondria. In prokaryotes, the DNA is
-not enclosed in a membranous envelope.
-
-The entire genetic content of a cell is known as its genome, and the
-study of genomes is genomics. In eukaryotic cells but not in
-prokaryotes, DNA forms a complex with histone proteins to form
-chromatin, the substance of eukaryotic chromosomes. A chromosome may
-contain tens of thousands of genes. Many genes contain the information
-to make protein products; other genes code for RNA products. DNA
-controls all of the cellular activities by turning the genes "on" or
-"off."
-
-The other type of nucleic acid, RNA, is mostly involved in protein
-synthesis. The DNA molecules never leave the nucleus but instead use
-an intermediary to communicate with the rest of the cell. This
-intermediary is the messenger RNA (mRNA). Other types of RNA---like
-rRNA, tRNA, and microRNA---are involved in protein synthesis and its
-regulation.
-
-DNA and RNA are made up of monomers known as nucleotides. The
-nucleotides combine with each other to form a polynucleotide, DNA or
-RNA. Each nucleotide is made up of three components: a nitrogenous
-base, a pentose (five-carbon) sugar, and a phosphate group (Figure
-3.5.1). Each nitrogenous base in a nucleotide is attached to a sugar
-molecule, which is attached to one or more phosphate groups.
-
-```{r, echo = F, fig.cap="A nucleotide is made up of three components: a nitrogenous base, a pentose sugar, and one or more phosphate groups. Carbon residues in the pentose are numbered 1′ through 5′ (the prime distinguishes these residues from those in the base, which are numbered without using a prime notation). The base is attached to the 1′ position of the ribose, and the phosphate is attached to the 5′ position. When a polynucleotide is formed, the 5′ phosphate of the incoming nucleotide attaches to the 3′ hydroxyl group at the end of the growing chain. Two types of pentose are found in nucleotides, deoxyribose (found in DNA) and ribose (found in RNA). Deoxyribose is similar in structure to ribose, but it has an H instead of an OH at the 2′ position. Bases can be divided into two categories: purines and pyrimidines. Purines have a double ring structure, and pyrimidines have a single ring."}
-
-knitr::include_graphics(here::here("./images/image5.jpeg"))
-```
-
-
-The nitrogenous bases, important components of nucleotides, are
-organic molecules and are so named because they contain carbon and
-nitrogen. They are bases because they contain an amino group that has
-the potential of binding an extra hydrogen, and thus, decreases the
-hydrogen ion concentration in its environment, making it more basic.
-Each nucleotide in DNA contains one of four possible nitrogenous
-bases: adenine (A), guanine (G) cytosine (C), and thymine (T).
-
-Adenine and guanine are classified as purines. The primary structure
-of a purine is two carbon-nitrogen rings. Cytosine, thymine, and
-uracil are classified as pyrimidines which have a single
-carbon-nitrogen ring as their primary structure (Figure 3.5.1). Each
-of these basic carbon-nitrogen rings has different functional groups
-attached to it. In molecular biology shorthand, the nitrogenous bases are simply known by their symbols A, T, G, C, and U. DNA contains A, T, G, and C whereas RNA contains A, U, G, and
-C.
-
-The pentose sugar in DNA is deoxyribose, and in RNA, the sugar is
-ribose (Figure 3.5.1). The difference between the sugars is the
-presence of the hydroxyl group on the second carbon of the ribose and
-hydrogen on the second carbon of the deoxyribose. The carbon atoms of
-the sugar molecule are numbered as 1′, 2′, 3′, 4′, and 5′ (1′ is read
-as "one prime"). The phosphate residue is attached to the hydroxyl
-group of the 5′ carbon of one sugar and the hydroxyl group of the 3′
-carbon of the sugar of the next nucleotide, which forms a 5′--3′
-phosphodiester linkage. The phosphodiester linkage is not formed by
-simple dehydration reaction like the other linkages connecting
-monomers in macromolecules: its formation involves the removal of two
-phosphate groups. A polynucleotide may have thousands of such
-phosphodiester linkages.
-
-## DNA Double-Helix Structure
-
-DNA has a double-helix structure (Figure 3.5.2). The sugar and
-phosphate lie on the outside of the helix, forming the backbone of the
-DNA. The nitrogenous bases are stacked in the interior, like the steps
-of a staircase, in pairs; the pairs are bound to each other by
-hydrogen bonds. Every base pair in the double helix is separated from
-the next base pair by 0.34 nm. The two strands of the helix run in
-opposite directions, meaning that the 5′ carbon end of one strand will
-face the 3′ carbon end of its matching strand. (This is referred to as
-antiparallel orientation and is important to DNA replication and in
-many nucleic acid interactions.)
-
-```{r, echo = F, fig.cap="Figure 3.5.2 : Native DNA is an antiparallel double helix. The phosphate backbone (indicated by the curvy lines) is on the outside, and the bases are on the inside. Each base from one strand interacts via hydrogen bonding with a base from the opposing strand. (credit: Jerome Walker/Dennis Myts)"}
-knitr::include_graphics(here::here("./images/image6.jpeg"))
-```
-
-
-
-
-Only certain types of base pairing are allowed. For example, a certain
-purine can only pair with a certain pyrimidine. This means A can pair
-with T, and G can pair with C, as shown in Figure 3.5.3. This is known
-as the base complementary rule. In other words, the DNA strands are
-complementary to each other. If the sequence of one strand is
-AATTGGCC, the complementary strand would have the sequence TTAACCGG.
-During DNA replication, each strand is copied, resulting in a daughter
-DNA double helix containing one parental DNA strand and a newly
-synthesized strand.
-
-Art Connection
-```{r, echo = F}
-knitr::include_graphics(here::here("./images/image7.jpeg"))
-```
-
-
-Figure 3.5.3 : In a double stranded DNA molecule, the two strands run
-antiparallel to one another so that one strand runs 5′ to 3′ and the
-other 3′ to 5′. The phosphate backbone is located on the outside, and
-the bases are in the middle. Adenine forms hydrogen bonds (or base
-pairs) with thymine, and guanine base pairs with cytosine.
-
-A mutation occurs, and cytosine is replaced with adenine. What impact
-do you think this will have on the DNA structure?
-
-## RNA
-
-Ribonucleic acid, or RNA, is mainly involved in the process of protein
-synthesis under the direction of DNA. RNA is usually single-stranded
-and is made of ribonucleotides that are linked by phosphodiester
-bonds. A ribonucleotide in the RNA chain contains ribose (the pentose
-sugar), one of the four nitrogenous bases (A, U, G, and C), and the
-phosphate group.
-
-There are four major types of RNA: messenger RNA (mRNA), ribosomal RNA
-(rRNA), transfer RNA (tRNA), and microRNA (miRNA). The first, mRNA,
-carries the message from DNA, which controls all of the cellular
-activities in a cell. If a cell requires a certain protein to be
-synthesized, the gene for this product is turned "on" and the
-messenger RNA is synthesized in the nucleus. The RNA base sequence is
-complementary to the coding sequence of the DNA from which it has been
-copied. However, in RNA, the base T is absent and U is present
-instead. If the DNA strand has a sequence AATTGCGC, the sequence of
-the complementary RNA is UUAACGCG. In the cytoplasm, the mRNA
-interacts with ribosomes and other cellular machinery (Figure 3.5.4).
-
-```{r, echo = F}
-knitr::include_graphics(here::here("./images/image8.jpeg"))
-```
-
-
-
-Figure 3.5.4 : A ribosome has two parts: a large subunit and a small
-subunit. The mRNA sits in between the two subunits. A tRNA molecule
-recognizes a codon on the mRNA, binds to it by complementary base
-pairing, and adds the correct amino acid to the growing peptide chain.
-
-The mRNA is read in sets of three bases known as codons. Each codon
-codes for a single amino acid. In this way, the mRNA is read and the
-protein product is made. Ribosomal RNA (rRNA) is a major constituent
-of ribosomes on which the mRNA binds. The rRNA ensures the proper
-alignment of the mRNA and the ribosomes; the rRNA of the ribosome also
-has an enzymatic activity (peptidyl transferase) and catalyzes the
-formation of the peptide bonds between two aligned amino acids.
-Transfer RNA (tRNA) is one of the smallest of the four types of RNA,
-usually 70--90 nucleotides long. It carries the correct amino acid to
-the site of protein synthesis. It is the base pairing between the tRNA
-and mRNA that allows for the correct amino acid to be inserted in the
-polypeptide chain. microRNAs are the smallest RNA molecules and their
-role involves the regulation of gene expression by interfering with
-the expression of certain mRNA messages. Table 3.5.1 below summarizes
-features of DNA and RNA.
-
-***Table*** 3.5.1 ***:** Features of DNA and RNA.
-
-+---------------------+------------------------+-----------------------+
-|                     | Features of DNA and    |                       |
-|                     | RNA                    |                       |
-+=====================+========================+=======================+
-|                     | DNA                    | RNA                 |
-+---------------------+------------------------+-----------------------+
-| Function            | Carries genetic        | Involved in protein |
-|                     | information            | synthesis           |
-+---------------------+------------------------+-----------------------+
-| Location            | Remains in the nucleus | Leaves the nucleus  |
-+---------------------+------------------------+-----------------------+
-| Structure           | Double helix           | Usually             |
-|                     |                        | single-stranded     |
-+---------------------+------------------------+-----------------------+
-| Sugar               | Deoxyribose            | Ribose              |
-+---------------------+------------------------+-----------------------+
-| Pyrimidines         | Cytosine, thymine      | Cytosine, uracil    |
-+---------------------+------------------------+-----------------------+
-| Purines             | Adenine, guanine       | Adenine, guanine    |
-+---------------------+------------------------+-----------------------+
-
-Even though the RNA is single stranded, most RNA types show extensive
-intramolecular base pairing between complementary sequences, creating
-a predictable three-dimensional structure essential for their
-function.
-
-As you have learned, information flow in an organism takes place from
-DNA to RNA to protein. DNA dictates the structure of mRNA in a process
-known as transcription, and RNA dictates the structure of protein in a
-process known as translation. This is known as the Central Dogma of
-Life, which holds true for all organisms; however, exceptions to the
-rule occur in connection with viral infections.
-
-*Link to Learning*
-```{r, echo = F, out.width="10%"}
-knitr::include_graphics(here::here("./images/image9.png"))
-```
-
-
-
-
-* To learn more about DNA, explore the Howard Hughes Medical Institute
-BioInteractive animations on the topic of DNA.*
-
-## Summary
-
-Nucleic acids are molecules made up of nucleotides that direct
-cellular activities such as cell division and protein synthesis. Each
-nucleotide is made up of a pentose sugar, a nitrogenous base, and a
-phosphate group. There are two types of nucleic acids: DNA and RNA.
-DNA carries the genetic blueprint of the cell and is passed on from
-parents to offspring (in the form of chromosomes). It has a
-double-helical structure with the two strands running in opposite
-directions, connected by hydrogen bonds, and complementary to each
-other. RNA is single-stranded and is made of a pentose sugar (ribose),
-a nitrogenous base, and a phosphate group. RNA is involved in protein
-synthesis and its regulation. Messenger RNA (mRNA) is copied from the
-DNA, is exported from the nucleus to the cytoplasm, and contains
-information for the construction of proteins. Ribosomal RNA (rRNA) is
-a part of the ribosomes at the site of protein synthesis, whereas
-transfer RNA (tRNA) carries the amino acid to the site of protein
-synthesis. microRNA regulates the use of mRNA for protein synthesis.
-
-Art Connections
-
-## Analysis Questions
-
-Free Response
-
-## Glossary
-
-**deoxyribonucleic acid (DNA)**: double-helical molecule that carries the hereditary information of the cell  
-**messenger RNA (mRNA)**: DNA that carries information from DNA to ribosomes during protein synthesis   
-**nucleic acid**: biological macromolecule that carries the genetic blueprint of a cell
-and carries instructions for the functioning of the cell  
-**nucleotide**: monomer of nucleic acids; contains a pentose sugar, one or more phosphate groups, and a nitrogenous base  
-**phosphodiester**: linkage covalent chemical bond that holds together the polynucleotide
-chains with a phosphate group linking two pentose sugars of neighboring nucleotides  
-**polynucleotide**: long chain of nucleotides  
-**purine**: type of nitrogenous base in DNA and RNA; adenine and guanine are   
-**purines, pyrimidine**: type of nitrogenous base in DNA and RNA; cytosine, thymine, and uracil
-are pyrimidines  
-**ribonucleic acid (RNA)**: single-stranded, often internally base paired, molecule that is
-involved in protein synthesis  
-**ribosomal RNA (rRNA)**: RNA that ensures the proper alignment of the mRNA and the ribosomes
-during protein synthesis and catalyzes the formation of the peptide linkage  
-**transcription**: process through which messenger RNA forms on a template of DNA  
-**transfer RNA (tRNA)**: RNA that carries activated amino acids to the site of protein
-synthesis on the ribosome  
-**translation**: process through which RNA directs the formation of protein  
-
-## Contributors and Attributions
-
-Connie Rye (East Mississippi Community College), Robert Wise
-(University of Wisconsin, Oshkosh), Vladimir Jurukovski (Suffolk
-County Community College), Jean DeSaix (University of North Carolina
-at Chapel Hill), Jung Choi (Georgia Institute of Technology), Yael
-Avissar (Rhode Island College) among other contributing authors.
-Original content by OpenStax (CC BY 4.0; Download for free at
-[http://cnx.org/contents/185cbf87-c72\...f21b5eabd\@9.87](http://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd%409.87)).
-
-<!--chapter:end:002-biology_review/00g-review-nucleic_acids-LibreText.Rmd-->
-
-# Proteins {#proteins-review}
-
-**Authors**: OpenStax / LibreText.  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
-
-This chapter was adapted from [LibreText General Biology](), Chapter 3, Section 3.4: [Proteins](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.4%3A_Proteins).  The LibreText book is based on  [OpenStax Biology 2nd edition](https://openstax.org/details/books/biology-2e), Chapter 3, Section 3.4: [Nucleic Acids](https://openstax.org/books/biology-2e/pages/3-4-proteins).  A full list of authors is found under the **Contributors and Attributions** section at the end of this document. 
-
-### Skills to develop:
-
-1. Describe the functions proteins perform in the cell and in tissues
-1. Discuss the relationship between amino acids and proteins
-1. Explain the four levels of protein organization
-1. Describe the ways in which protein shape and function are linked
-
-Proteins are one of the most abundant organic molecules in living systems and have the most diverse range of functions of all **macromolecules**. Proteins may be structural, regulatory, contractile, or protective; they may serve in transport, storage, or membranes; or they may be toxins or enzymes. Each cell in a living system may contain thousands of proteins, each with a unique function. Their structures, like their functions, vary greatly. They are all, however, **polymers** of **amino acids**, arranged in a linear sequence.
-
-## Types and Functions of Proteins
-
-**Enzymes**, which are produced by living cells, are **catalysts** in biochemical reactions (like digestion) and are usually complex or conjugated proteins. Each enzyme is specific for the substrate (a reactant that binds to an enzyme) it acts on. The enzyme may help in breakdown, rearrangement, or synthesis reactions. Enzymes that break down their substrates are called **catabolic enzymes**, enzymes that build more complex molecules from their substrates are called **anabolic enzymes**, and enzymes that affect the rate of reaction are called **catalytic enzymes**. 
-<!-- TODO: is this terminology standard?  -->
-It should be noted that all enzymes increase the rate of reaction and, therefore, are considered to be organic catalysts. An example of an enzyme is salivary amylase, which
-hydrolyzes its substrate amylose, a component of starch.
-
-**Hormones** are chemical-signaling molecules, usually small proteins or steroids, secreted by endocrine cells that act to control or regulate specific physiological processes, including growth, development, metabolism, and reproduction. For example, insulin is a **protein hormone** that helps to regulate the blood glucose level. 
-
-<!-- TODO: Fix table -->
-<!-- The primary types and functions of proteins are listed in Table 3.4.1. -->
-
-<!-- **Table** 3.4.1***:*** Protein Types and Functions -->
-
-<!-- Digestive Enzymes Amylase, lipase, pepsin, trypsin Help in digestion -->
-<!-- of food by catabolizing -->
-
-<!-- nutrients into monomeric units -->
-
-<!-- Structural Actin, tubulin, keratin Construct different structures, -->
-<!-- like the cytoskeleton -->
-
-<!-- Defense Immunoglobulins Protect the body from foreign pathogens -->
-
-<!-- Storage Legume storage proteins, egg white (albumin) Provide -->
-<!-- nourishment in early development of -->
-
-<!-- the embryo and the seedling -->
-
-Proteins have different shapes and molecular weights; some proteins are **globular** in shape whereas others are fibrous. For example, hemoglobin is a globular protein, but collagen, found in our skin, is a fibrous protein. Protein shape is critical to its function, and this shape is maintained by many different types of chemical bonds. Changes in temperature, pH, and exposure to chemicals may lead to permanent changes in the shape of the protein, leading to loss of function, known as **denaturation**. All proteins are made up of different arrangements of the same 20 types of **amino acids**.
-
-<!-- shoutout to non-canonical AAs? -->
-
-## Amino Acids
-
-Amino acids are the **monomers** that make up proteins. Each amino acid has the same fundamental structure, which consists of a central carbon atom, also known as the alpha (*α*) carbon, bonded to an amino group (NH~2~), a carboxyl group (COOH), and to a hydrogen atom. Every amino acid also has another atom or group of atoms bonded to the central atom known as the R group (Figure 3.4.1).
-
-```{r, echo = F, fig.cap="Amino acids have a central asymmetric carbon to which an amino group, a carboxyl group, a hydrogen atom, and a side chain (R group) are attached."}
-knitr::include_graphics(here::here("./images/protimage1.jpeg"))
-```
-
-The name "amino acid" is derived from the fact that they contain both an amino group and carboxyl-acid-group in their basic structure. For each amino acid, the R group (or side chain) is different (Figure 3.4.2).
-<!-- As mentioned, there are 20 amino acids present in proteins. Ten of these are considered essential amino acids in humans because the human body cannot produce them and they are obtained from the diet.  Just as some fatty acids are essential to a diet, some amino acids are necessary as well. They are
-known as essential amino acids, and in humans they include isoleucine, leucine, and cysteine. Essential amino acids refer to those necessary for construction of proteins in the body, although not produced by the body; which amino acids are essential varies from organism to organism.-->
-
-
-
-```{r, echo = F,  out.width = '60%', fig.cap="There are 20 common amino acids commonly found in proteins, each with a different R group (variant group) that determines its chemical nature."}
-knitr::include_graphics(here::here("./images/protimage2.jpeg"))
-```
-
-<!-- TODO:awk transition -->
-Which categories of amino acid would you expect to find on the surface
-of a soluble protein, and which would you expect to find in the
-interior? What distribution of amino acids would you expect to find in
-a protein embedded in a lipid bilayer?
-
-The chemical nature of the side chain determines the nature of the amino acid (that is, whether it is **acidic**, **basic**, **polar**, or **nonpolar**). For example, the amino acid glycine has a hydrogen atom as the R group. Amino acids such as valine, methionine, and alanine are nonpolar or hydrophobic, while amino acids such as serine, threonine, and cysteine are polar and have hydrophilic side chains. The side chains of lysine and arginine are positively charged, and therefore these amino acids are also known as basic amino acids. Proline has an R group that is linked to the amino group, forming a ring-like structure. Proline is an exception to the standard structure of an amino acid since its amino group is not separate from the side chain 
-<!-- (Figure 3.4.2). -->
-
-Amino acids are represented by a single upper case letter or a three-letter abbreviation. For example, valine is known by the letter V or the three-letter code val. 
-
-The sequence and the number of amino acids ultimately determine a protein's shape, size, and function. Each amino acid is attached to another amino acid by a covalent bond, known as a **peptide bond**, which is formed by a dehydration reaction. The carboxyl group of one amino acid and the amino group of the incoming amino acid combine, releasing a molecule of water. The resulting bond is the peptide bond 
-<!-- (Figure 3.4.3). -->
-
-```{r, echo = F, fig.cap="Peptide bond formation is a dehydration synthesis reaction. The carboxyl group of one amino acid is linked to the amino group of the incoming amino acid. In the process, a molecule of water is released."}
-knitr::include_graphics(here::here("./images/protimage3.jpeg"))
-```
-
-The products formed by such linkages are called **peptides**. As more amino acids join to this growing chain, the resulting chain is known as a **polypeptide**. Each polypeptide has a free amino group at one end. This end is called the **N-terminal**, or the amino terminal, and the other end has a free carboxyl group, also known as the C- or carboxyl
-terminal.  The terms polypeptide and protein are sometimes used interchangeably, a polypeptide is technically a polymer of amino acids, whereas the term protein is more formally used for a polypeptide or  that have combined together, often have bound non-peptide prosthetic groups, have a distinct shape, and have a unique function.
-<!-- is this a standard definition? -->
-
-
-
-After **protein synthesis (translation)**, most proteins are modified. These are known as **post-translational modifications**. They may undergo **cleavage**, **phosphorylation** (addition of a phosphate group), or may require the addition of other chemical groups. Only after these modifications is the protein completely functional.
-
-## Evolution Connection:
-
----------------
-
-**The Evolutionary Significance of Cytochrome**: Cytochrome c is an
-important component of the electron transport chain, a part of
-cellular respiration, and it is normally found in the cellular
-organelle, the mitochondrion. This protein has a heme prosthetic
-group, and the central ion of the heme gets alternately reduced and
-oxidized during electron transfer. Because this essential protein's
-role in producing cellular energy is crucial, it has changed very
-little over millions of years. Protein sequencing has shown that there
-is a considerable amount of cytochrome c amino acid sequence **homology**
-among different species; in other words, evolutionary kinship can be
-assessed by measuring the similarities or differences among various
-species' DNA or protein sequences.
-
-Scientists have determined that human cytochrome c contains 104 amino
-acids. For each cytochrome c molecule from different organisms that
-has been sequenced to date, 37 of these amino acids appear in the same
-position in all samples of cytochrome c. This indicates that there may
-have been a **common ancestor**. On comparing the human and chimpanzee
-protein sequences, no sequence difference was found. When human and
-rhesus monkey sequences were compared, the single difference found was
-in one amino acid. In another comparison, human to yeast sequencing
-shows a difference in the 44th position.
-
----------------
-
-## Protein Structure
-
-The shape of a protein is critical to its function. For example, an enzyme can bind to a specific substrate at a site known as the **active site**. If this active site is altered because of local changes or changes in overall protein structure, the enzyme may be unable to bind to the substrate. To understand how the protein gets its final shape or conformation, we need to understand the four levels of protein structure: primary, secondary, tertiary, and quaternary.
-
-### Primary Structure
-
-The unique sequence of amino acids in a polypeptide chain is its
-primary structure. For example, the pancreatic hormone insulin has two
-polypeptide chains, A and B, and they are linked together by disulfide
-bonds. The N terminal amino acid of the A chain is glycine, whereas
-the C terminal amino acid is asparagine (Figure 3.4.4). The sequences
-of amino acids in the A and B chains are unique to insulin.
-
-
-```{r, echo = F,out.width = '40%', fig.cap="Bovine serum insulin is a protein hormone made of two peptide chains, A (21 amino acids long) and B (30 amino acids long). In each chain, primary structure is indicated by three-letter abbreviations that represent the names of the amino acids in the order they are present. The amino acid cysteine (cys) has a sulfhydryl (SH) group as a side chain. Two sulfhydryl groups can react in the presence of oxygen to form a disulfide (S-S) bond. Two disulfide bonds connect the A and B chains together, and a third helps the A chain fold into the correct shape. Note that all disulfide bonds are the same length, but are drawn different sizes for clarity."}
-knitr::include_graphics(here::here("./images/protimage4.jpeg"))
-```
-
-The unique sequence for every protein is ultimately determined by the
-gene encoding the protein. A change in nucleotide sequence of the
-gene's coding region may lead to a different amino acid being added to
-the growing polypeptide chain, causing a change in protein structure
-and function. In sickle cell anemia, the hemoglobin *beta* chain (a small
-portion of which is shown in Figure 3.4.5) has a single amino acid
-substitution, causing a change in protein structure and function.
-Specifically, the amino acid glutamic acid is substituted by valine in
-the beta chain. What is most remarkable to consider is that a
-hemoglobin molecule is made up of two alpha chains and two beta chains
-that each consist of about 150 amino acids. The molecule, therefore,
-has about 600 amino acids. The structural difference between a normal
-hemoglobin molecule and a sickle cell molecule---which dramatically
-decreases life expectancy---is a single amino acid of the 600. What is
-even more remarkable is that those 600 amino acids are encoded by
-three nucleotides each, and the mutation is caused by a single base
-change (point mutation), 1 in 1800 bases.
-
-
-```{r, echo = F,out.width = '40%', fig.cap="The beta chain of hemoglobin is 147 residues in length, yet a single amino acid substitution leads to sickle cell anemia. In normal hemoglobin, the amino acid at position seven is glutamate. In sickle cell hemoglobin, this glutamate is replaced by a valine."}
-knitr::include_graphics(here::here("./images/protimage5.jpeg"))
-```
-
-
-
-Because of this change of one amino acid in the chain, hemoglobin
-molecules form long fibers that distort the biconcave, or disc-shaped,
-red blood cells and assume a crescent or "sickle" shape, which clogs
-arteries (Figure 3.4.6). This can lead to myriad serious health
-problems such as breathlessness, dizziness, headaches, and abdominal
-pain for those affected by this disease.
-
-```{r, echo = F, out.width = '60%',fig.cap="In this blood smear, visualized at 535x magnification using bright field microscopy, sickle cells are crescent shaped, while normal cells are disc-shaped. (credit: modification of work by Ed Uthman; scale-bar data from Matt Russell)"}
-knitr::include_graphics(here::here("./images/protimage6.jpeg"))
-```
-
-### Secondary Structure
-
-The local folding of the polypeptide in some regions gives rise to the
-secondary structure of the protein. The most common are the *α*-helix
-and *beta*-pleated sheet structures (Figure 3.4.7). Both structures are
-the *α*-helix structure---the helix held in shape by hydrogen bonds.
-The hydrogen bonds form between the oxygen atom in the carbonyl group
-in one amino acid and another amino acid that is four amino acids
-farther along the chain.
-
-```{r, echo = F,out.width = '40%', fig.cap="The α-helix and β-pleated sheet are secondary structures of proteins that form because of hydrogen bonding between carbonyl and amino groups in the peptide backbone. Certain amino acids have a propensity to form an α-helix, while others have a propensity to form a β-pleated sheet."}
-knitr::include_graphics(here::here("./images/protimage7.jpeg"))
-```
-
-Every helical turn in an alpha helix has 3.6 amino acid residues. The
-R groups (the variant groups) of the polypeptide protrude out from the
-*α*-helix chain. In the *beta*-pleated sheet, the "pleats" are formed by
-hydrogen bonding between atoms on the backbone of the polypeptide
-chain. The R groups are attached to the carbons and extend above and
-below the folds of the pleat. The pleated segments align parallel or
-antiparallel to each other, and hydrogen bonds form between the
-partially positive nitrogen atom in the amino group and the partially
-negative oxygen atom in the carbonyl group of the peptide backbone.
-The *α*-helix and *beta*-pleated sheet structures are found in most
-globular and fibrous proteins and they play an important structural
-role.
-
-### Tertiary Structure
-
-The unique three-dimensional structure of a polypeptide is its
-tertiary structure (Figure 3.4.8). This structure is in part due to
-chemical interactions at work on the polypeptide chain. Primarily, the
-interactions among R groups creates the complex three- dimensional
-tertiary structure of a protein. The nature of the R groups found in
-the amino acids involved can counteract the formation of the hydrogen
-bonds described for standard secondary structures. For example, R
-groups with like charges are repelled by each other and those with
-unlike charges are attracted to each other (ionic bonds). When protein
-folding takes place, the hydrophobic R groups of nonpolar amino acids
-lay in the interior of the protein, whereas the hydrophilic R groups
-lay on the outside. The former types of interactions are also known as
-hydrophobic interactions. Interaction between cysteine side chains
-forms disulfide linkages in the presence of oxygen, the only covalent
-bond forming during protein folding.
-
-```{r, echo = F,out.width = '40%', fig.cap="The tertiary structure of proteins is determined by a variety of chemical interactions. These include hydrophobic interactions, ionic bonding, hydrogen bonding and disulfide linkages."}
-knitr::include_graphics(here::here("./images/protimage8.jpeg"))
-```
-
-All of these interactions, weak and strong, determine the final
-three-dimensional shape of the protein. When a protein loses its
-three-dimensional shape, it may no longer be functional.
-
-### Quaternary Structure
-
-In nature, some proteins are formed from several polypeptides, also
-known as subunits, and the interaction of these subunits forms the
-quaternary structure. Weak interactions between the subunits help to
-stabilize the overall structure. For example, insulin (a globular
-protein) has a combination of hydrogen bonds and disulfide bonds that
-cause it to be mostly clumped into a ball shape. Insulin starts out as
-a single polypeptide and loses some internal sequences in the presence
-of post-translational modification after the formation of the
-disulfide linkages that hold the remaining chains together. Silk (a
-fibrous protein), however, has a *beta*-pleated sheet structure that is
-the result of hydrogen bonding between different chains.
-
-The four levels of protein structure (primary, secondary, tertiary,
-and quaternary) are illustrated in Figure 3.4.9.
-
-```{r, echo = F, fig.cap="The four levels of protein structure can be observed in these illustrations. (credit: modification of work by National Human Genome Research Institute)"}
-knitr::include_graphics(here::here("./images/protimage9.jpeg"))
-```
-
-
-## Denaturation and Protein Folding
-
-Each protein has its own unique sequence and shape that are held
-together by chemical interactions. If the protein is subject to
-changes in temperature, pH, or exposure to chemicals, the protein
-structure may change, losing its shape without losing its primary
-sequence in what is known as denaturation. Denaturation is often
-reversible because the primary structure of the polypeptide is
-conserved in the process if the denaturing agent is removed, allowing
-the protein to resume its function. Sometimes denaturation is
-irreversible, leading to loss of function. One example of irreversible
-protein denaturation is when an egg is fried. The albumin protein in
-the liquid egg white is denatured when placed in a hot pan. Not all
-proteins are denatured at high temperatures; for instance, bacteria
-that survive in hot springs have proteins that function at
-temperatures close to boiling. The stomach is also very acidic, has a
-low pH, and denatures proteins as part of the digestion process;
-however, the digestive enzymes of the stomach retain their activity
-under these conditions.
-
-Protein folding is critical to its function. It was originally thought
-that the proteins themselves were responsible for the folding process.
-Only recently was it found that often they receive assistance in the
-folding process from protein helpers known as chaperones (or
-chaperonins) that associate with the target protein during the folding
-process. They act by preventing aggregation of polypeptides that make
-up the complete protein structure, and they disassociate from the
-protein once the target protein is folded.
-
-## Summary
-
-Proteins are a class of macromolecules that perform a diverse range of
-functions for the cell. They help in metabolism by providing
-structural support and by acting as enzymes, carriers, or hormones.
-The building blocks of proteins (monomers) are amino acids. Each amino
-acid has a central carbon that is linked to an amino group, a carboxyl
-group, a hydrogen atom, and an
-
-R group or side chain. There are 20 commonly occurring amino acids,
-each of which differs in the R group. Each amino acid is linked to its
-neighbors by a peptide bond. A long chain of amino acids is known as a
-polypeptide.
-
-Proteins are organized at four levels: primary, secondary, tertiary,
-and (optional) quaternary. The primary structure is the unique
-sequence of amino acids. The local folding of the polypeptide to form
-structures such as the *α* helix and *beta*-pleated sheet constitutes the
-secondary structure. The overall three-dimensional structure is the
-tertiary structure. When two or more polypeptides combine to form the
-complete protein structure, the configuration is known as the
-quaternary structure of a protein. Protein shape and function are
-intricately linked; any change in shape caused by changes in
-temperature or pH may lead to protein denaturation and a loss in
-function.
-
-## Art Connections
-
-* Which categories of amino acid would you expect to find on
-the surface of a soluble protein, and which would you expect to find
-in the interior? What distribution of amino acids would you expect to
-find in a protein embedded in a lipid bilayer?
-
-* Polar and charged amino acid residues (the remainder after
-peptide bond formation) are more likely to be found on the surface of
-soluble proteins where they can interact with water, and nonpolar
-(e.g., amino acid side chains) are more likely to be found in the
-interior where they are sequestered from water. In membrane proteins,
-nonpolar and hydrophobic amino acid side chains associate with the
-hydrophobic tails of phospholipids, while polar and charged amino acid
-side chains interact with the polar head groups or with the aqueous
-solution. However, there are exceptions. Sometimes, positively and
-negatively charged amino acid side chains interact with one another in
-the interior of a protein, and polar or charged amino acid side chains
-that interact with a ligand can be found in the ligand binding pocket.
-
-## Review Questions
-
-The monomers that make up proteins are called
-1. nucleotides
-1. disaccharides
-1. amino acids
-1. chaperones
-
-Answer: C
-
-The *α* helix and the *beta*-pleated sheet are part of which protein
-structure?
-
-1. primary
-1. secondary
-1. tertiary
-1. quaternary 
-
-Answer: B
-
-## Free Response
-
-**Explain what happens if even one amino acid is substituted for another
-in a polypeptide chain. Provide a specific example.**
-
-A change in gene sequence can lead to a different amino acid being
-added to a polypeptide chain instead of the normal one. This causes a
-change in protein structure and function. For example, in sickle cell
-anemia, the hemoglobin *beta* chain has a single amino acid
-substitution---the amino acid glutamic acid in position six is
-substituted by valine. Because of this change, hemoglobin molecules
-form aggregates, and the disc-shaped red blood cells assume a crescent
-shape, which results in serious health problems.
-
-**Describe the differences in the four protein structures.**
-
-The sequence and number of amino acids in a polypeptide chain is its
-primary structure. The local folding of the polypeptide in some
-regions is the secondary structure of the protein. The
-three-dimensional structure of a polypeptide is known as its tertiary
-structure, created in part by chemical interactions such as hydrogen
-bonds between polar side chains, van der Waals interactions, disulfide
-linkages, and hydrophobic interactions. Some proteins are formed from
-multiple polypeptides, also known as subunits, and the interaction of
-these subunits forms the quaternary structure.
-
-## Glossary
-
-**alpha-helix structure (*α*-helix)**: type of secondary structure of proteins formed by folding of the polypeptide into a helix shape with hydrogen bonds stabilizing the
-structure  
-**amino acid**: monomer of a protein; has a central carbon or alpha carbon to which an
-amino group, a carboxyl group, a hydrogen, and an R group or side
-chain is attached; the R group is different for all 20 amino acids  
-**beta-pleated sheet (*beta*-pleated)**:  secondary structure found in proteins in which "pleats" are formed by hydrogen bonding between atoms on the backbone of the polypeptide chain  
-**chaperone**: (also, chaperonin) protein that helps nascent protein in the folding process **denaturation**: loss of shape in a protein as a result of changes in temperature, pH, or exposure to chemicals  
-**enzyme**: catalyst in a biochemical reaction that is usually a complex or conjugated protein  
-**hormone**: chemical signaling molecule, usually protein or steroid, secreted by endocrine cells that act to control or regulate specific physiological processes
-**peptide bond**: bond formed between two amino acids by a dehydration reaction  
-**polypeptide**: long chain of amino acids linked by peptide bonds   
-**primary structure**: linear sequence of amino acids in a protein  
-**protein**: biological macromolecule composed of one or more chains of amino acids  
-**quaternary structure**: association of discrete polypeptide subunits in a protein  
-**secondary structure**: regular structure formed by proteins by intramolecular hydrogen bonding between the oxygen atom of one amino acid residue and the hydrogen attached to the nitrogen atom of another amino acid residue 
-**tertiary structure**: three-dimensional conformation of a protein, including interactions between secondary structural elements; formed from interactions between amino acid side chains  
-
-## Contributors and Attributions
-
-Connie Rye (East Mississippi Community College), Robert Wise
-(University of Wisconsin, Oshkosh), Vladimir Jurukovski (Suffolk
-County Community College), Jean DeSaix (University of North Carolina
-at Chapel Hill), Jung Choi (Georgia Institute of Technology), Yael
-Avissar (Rhode Island College) among other contributing authors.
-Original content by OpenStax (CC BY 4.0; Download for free at
-[http://cnx.org/contents/185cbf87-c72\...f21b5eabd\@9.87](http://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd%409.87)).
-
-<!--chapter:end:002-biology_review/00h-proteins-LibreText.rmd-->
-
 ---
 output: html_document
 editor_options: 
@@ -1953,6 +1274,685 @@ We can...
 
 <!--chapter:end:002-R-programming_basics/03-R_objects_n_at-length_dim_is.Rmd-->
 
+# Nucleic Acids {#nucleic-acids-review}
+
+**Authors**: OpenStax / Libretext  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
+
+This chapter was adapted from [LibreText General Biology](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)), Chapter 3, Section 3.5: [Nucleic Acids](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.5%3A_Nucleic_Acids).  The LibreText book is based on  [OpenStax Biology 2nd edition](https://openstax.org/details/books/biology-2e), Chapter 3, Section 3.5: [Nucleic Acids](https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids).  A full list of authors is found under the **Contributors and Attributions** section at the end of this document. 
+
+
+>Nucleic acids are the most important macromolecules for the continuity
+of life. They carry the genetic blueprint of a cell and carry
+instructions for the functioning of the cell.
+
+## DNA and RNA
+
+The two main types of nucleic acids are deoxyribonucleic acid (DNA) 
+and ribonucleic acid (RNA). DNA is the genetic material found in all
+living organisms, ranging from single-celled bacteria to multicellular
+mammals. It is found in the nucleus of eukaryotes and in the
+organelles, chloroplasts, and mitochondria. In prokaryotes, the DNA is
+not enclosed in a membranous envelope.
+
+The entire genetic content of a cell is known as its genome, and the
+study of genomes is genomics. In eukaryotic cells but not in
+prokaryotes, DNA forms a complex with histone proteins to form
+chromatin, the substance of eukaryotic chromosomes. A chromosome may
+contain tens of thousands of genes. Many genes contain the information
+to make protein products; other genes code for RNA products. DNA
+controls all of the cellular activities by turning the genes "on" or
+"off."
+
+The other type of nucleic acid, RNA, is mostly involved in protein
+synthesis. The DNA molecules never leave the nucleus but instead use
+an intermediary to communicate with the rest of the cell. This
+intermediary is the messenger RNA (mRNA). Other types of RNA---like
+rRNA, tRNA, and microRNA---are involved in protein synthesis and its
+regulation.
+
+DNA and RNA are made up of monomers known as nucleotides. The
+nucleotides combine with each other to form a polynucleotide, DNA or
+RNA. Each nucleotide is made up of three components: a nitrogenous
+base, a pentose (five-carbon) sugar, and a phosphate group (Figure
+3.5.1). Each nitrogenous base in a nucleotide is attached to a sugar
+molecule, which is attached to one or more phosphate groups.
+
+```{r, echo = F, fig.cap="A nucleotide is made up of three components: a nitrogenous base, a pentose sugar, and one or more phosphate groups. Carbon residues in the pentose are numbered 1′ through 5′ (the prime distinguishes these residues from those in the base, which are numbered without using a prime notation). The base is attached to the 1′ position of the ribose, and the phosphate is attached to the 5′ position. When a polynucleotide is formed, the 5′ phosphate of the incoming nucleotide attaches to the 3′ hydroxyl group at the end of the growing chain. Two types of pentose are found in nucleotides, deoxyribose (found in DNA) and ribose (found in RNA). Deoxyribose is similar in structure to ribose, but it has an H instead of an OH at the 2′ position. Bases can be divided into two categories: purines and pyrimidines. Purines have a double ring structure, and pyrimidines have a single ring."}
+
+knitr::include_graphics(here::here("./images/image5.jpeg"))
+```
+
+
+The nitrogenous bases, important components of nucleotides, are
+organic molecules and are so named because they contain carbon and
+nitrogen. They are bases because they contain an amino group that has
+the potential of binding an extra hydrogen, and thus, decreases the
+hydrogen ion concentration in its environment, making it more basic.
+Each nucleotide in DNA contains one of four possible nitrogenous
+bases: adenine (A), guanine (G) cytosine (C), and thymine (T).
+
+Adenine and guanine are classified as purines. The primary structure
+of a purine is two carbon-nitrogen rings. Cytosine, thymine, and
+uracil are classified as pyrimidines which have a single
+carbon-nitrogen ring as their primary structure (Figure 3.5.1). Each
+of these basic carbon-nitrogen rings has different functional groups
+attached to it. In molecular biology shorthand, the nitrogenous bases are simply known by their symbols A, T, G, C, and U. DNA contains A, T, G, and C whereas RNA contains A, U, G, and
+C.
+
+The pentose sugar in DNA is deoxyribose, and in RNA, the sugar is
+ribose (Figure 3.5.1). The difference between the sugars is the
+presence of the hydroxyl group on the second carbon of the ribose and
+hydrogen on the second carbon of the deoxyribose. The carbon atoms of
+the sugar molecule are numbered as 1′, 2′, 3′, 4′, and 5′ (1′ is read
+as "one prime"). The phosphate residue is attached to the hydroxyl
+group of the 5′ carbon of one sugar and the hydroxyl group of the 3′
+carbon of the sugar of the next nucleotide, which forms a 5′--3′
+phosphodiester linkage. The phosphodiester linkage is not formed by
+simple dehydration reaction like the other linkages connecting
+monomers in macromolecules: its formation involves the removal of two
+phosphate groups. A polynucleotide may have thousands of such
+phosphodiester linkages.
+
+## DNA Double-Helix Structure
+
+DNA has a double-helix structure (Figure 3.5.2). The sugar and
+phosphate lie on the outside of the helix, forming the backbone of the
+DNA. The nitrogenous bases are stacked in the interior, like the steps
+of a staircase, in pairs; the pairs are bound to each other by
+hydrogen bonds. Every base pair in the double helix is separated from
+the next base pair by 0.34 nm. The two strands of the helix run in
+opposite directions, meaning that the 5′ carbon end of one strand will
+face the 3′ carbon end of its matching strand. (This is referred to as
+antiparallel orientation and is important to DNA replication and in
+many nucleic acid interactions.)
+
+```{r, echo = F, fig.cap="Figure 3.5.2 : Native DNA is an antiparallel double helix. The phosphate backbone (indicated by the curvy lines) is on the outside, and the bases are on the inside. Each base from one strand interacts via hydrogen bonding with a base from the opposing strand. (credit: Jerome Walker/Dennis Myts)"}
+knitr::include_graphics(here::here("./images/image6.jpeg"))
+```
+
+
+
+
+Only certain types of base pairing are allowed. For example, a certain
+purine can only pair with a certain pyrimidine. This means A can pair
+with T, and G can pair with C, as shown in Figure 3.5.3. This is known
+as the base complementary rule. In other words, the DNA strands are
+complementary to each other. If the sequence of one strand is
+AATTGGCC, the complementary strand would have the sequence TTAACCGG.
+During DNA replication, each strand is copied, resulting in a daughter
+DNA double helix containing one parental DNA strand and a newly
+synthesized strand.
+
+Art Connection
+```{r, echo = F}
+knitr::include_graphics(here::here("./images/image7.jpeg"))
+```
+
+
+Figure 3.5.3 : In a double stranded DNA molecule, the two strands run
+antiparallel to one another so that one strand runs 5′ to 3′ and the
+other 3′ to 5′. The phosphate backbone is located on the outside, and
+the bases are in the middle. Adenine forms hydrogen bonds (or base
+pairs) with thymine, and guanine base pairs with cytosine.
+
+A mutation occurs, and cytosine is replaced with adenine. What impact
+do you think this will have on the DNA structure?
+
+## RNA
+
+Ribonucleic acid, or RNA, is mainly involved in the process of protein
+synthesis under the direction of DNA. RNA is usually single-stranded
+and is made of ribonucleotides that are linked by phosphodiester
+bonds. A ribonucleotide in the RNA chain contains ribose (the pentose
+sugar), one of the four nitrogenous bases (A, U, G, and C), and the
+phosphate group.
+
+There are four major types of RNA: messenger RNA (mRNA), ribosomal RNA
+(rRNA), transfer RNA (tRNA), and microRNA (miRNA). The first, mRNA,
+carries the message from DNA, which controls all of the cellular
+activities in a cell. If a cell requires a certain protein to be
+synthesized, the gene for this product is turned "on" and the
+messenger RNA is synthesized in the nucleus. The RNA base sequence is
+complementary to the coding sequence of the DNA from which it has been
+copied. However, in RNA, the base T is absent and U is present
+instead. If the DNA strand has a sequence AATTGCGC, the sequence of
+the complementary RNA is UUAACGCG. In the cytoplasm, the mRNA
+interacts with ribosomes and other cellular machinery (Figure 3.5.4).
+
+```{r, echo = F}
+knitr::include_graphics(here::here("./images/image8.jpeg"))
+```
+
+
+
+Figure 3.5.4 : A ribosome has two parts: a large subunit and a small
+subunit. The mRNA sits in between the two subunits. A tRNA molecule
+recognizes a codon on the mRNA, binds to it by complementary base
+pairing, and adds the correct amino acid to the growing peptide chain.
+
+The mRNA is read in sets of three bases known as codons. Each codon
+codes for a single amino acid. In this way, the mRNA is read and the
+protein product is made. Ribosomal RNA (rRNA) is a major constituent
+of ribosomes on which the mRNA binds. The rRNA ensures the proper
+alignment of the mRNA and the ribosomes; the rRNA of the ribosome also
+has an enzymatic activity (peptidyl transferase) and catalyzes the
+formation of the peptide bonds between two aligned amino acids.
+Transfer RNA (tRNA) is one of the smallest of the four types of RNA,
+usually 70--90 nucleotides long. It carries the correct amino acid to
+the site of protein synthesis. It is the base pairing between the tRNA
+and mRNA that allows for the correct amino acid to be inserted in the
+polypeptide chain. microRNAs are the smallest RNA molecules and their
+role involves the regulation of gene expression by interfering with
+the expression of certain mRNA messages. Table 3.5.1 below summarizes
+features of DNA and RNA.
+
+***Table*** 3.5.1 ***:** Features of DNA and RNA.
+
++---------------------+------------------------+-----------------------+
+|                     | Features of DNA and    |                       |
+|                     | RNA                    |                       |
++=====================+========================+=======================+
+|                     | DNA                    | RNA                 |
++---------------------+------------------------+-----------------------+
+| Function            | Carries genetic        | Involved in protein |
+|                     | information            | synthesis           |
++---------------------+------------------------+-----------------------+
+| Location            | Remains in the nucleus | Leaves the nucleus  |
++---------------------+------------------------+-----------------------+
+| Structure           | Double helix           | Usually             |
+|                     |                        | single-stranded     |
++---------------------+------------------------+-----------------------+
+| Sugar               | Deoxyribose            | Ribose              |
++---------------------+------------------------+-----------------------+
+| Pyrimidines         | Cytosine, thymine      | Cytosine, uracil    |
++---------------------+------------------------+-----------------------+
+| Purines             | Adenine, guanine       | Adenine, guanine    |
++---------------------+------------------------+-----------------------+
+
+Even though the RNA is single stranded, most RNA types show extensive
+intramolecular base pairing between complementary sequences, creating
+a predictable three-dimensional structure essential for their
+function.
+
+As you have learned, information flow in an organism takes place from
+DNA to RNA to protein. DNA dictates the structure of mRNA in a process
+known as transcription, and RNA dictates the structure of protein in a
+process known as translation. This is known as the Central Dogma of
+Life, which holds true for all organisms; however, exceptions to the
+rule occur in connection with viral infections.
+
+*Link to Learning*
+```{r, echo = F, out.width="10%"}
+knitr::include_graphics(here::here("./images/image9.png"))
+```
+
+
+
+
+* To learn more about DNA, explore the Howard Hughes Medical Institute
+BioInteractive animations on the topic of DNA.*
+
+## Summary
+
+Nucleic acids are molecules made up of nucleotides that direct
+cellular activities such as cell division and protein synthesis. Each
+nucleotide is made up of a pentose sugar, a nitrogenous base, and a
+phosphate group. There are two types of nucleic acids: DNA and RNA.
+DNA carries the genetic blueprint of the cell and is passed on from
+parents to offspring (in the form of chromosomes). It has a
+double-helical structure with the two strands running in opposite
+directions, connected by hydrogen bonds, and complementary to each
+other. RNA is single-stranded and is made of a pentose sugar (ribose),
+a nitrogenous base, and a phosphate group. RNA is involved in protein
+synthesis and its regulation. Messenger RNA (mRNA) is copied from the
+DNA, is exported from the nucleus to the cytoplasm, and contains
+information for the construction of proteins. Ribosomal RNA (rRNA) is
+a part of the ribosomes at the site of protein synthesis, whereas
+transfer RNA (tRNA) carries the amino acid to the site of protein
+synthesis. microRNA regulates the use of mRNA for protein synthesis.
+
+Art Connections
+
+## Analysis Questions
+
+Free Response
+
+## Glossary
+
+**deoxyribonucleic acid (DNA)**: double-helical molecule that carries the hereditary information of the cell  
+**messenger RNA (mRNA)**: DNA that carries information from DNA to ribosomes during protein synthesis   
+**nucleic acid**: biological macromolecule that carries the genetic blueprint of a cell
+and carries instructions for the functioning of the cell  
+**nucleotide**: monomer of nucleic acids; contains a pentose sugar, one or more phosphate groups, and a nitrogenous base  
+**phosphodiester**: linkage covalent chemical bond that holds together the polynucleotide
+chains with a phosphate group linking two pentose sugars of neighboring nucleotides  
+**polynucleotide**: long chain of nucleotides  
+**purine**: type of nitrogenous base in DNA and RNA; adenine and guanine are   
+**purines, pyrimidine**: type of nitrogenous base in DNA and RNA; cytosine, thymine, and uracil
+are pyrimidines  
+**ribonucleic acid (RNA)**: single-stranded, often internally base paired, molecule that is
+involved in protein synthesis  
+**ribosomal RNA (rRNA)**: RNA that ensures the proper alignment of the mRNA and the ribosomes
+during protein synthesis and catalyzes the formation of the peptide linkage  
+**transcription**: process through which messenger RNA forms on a template of DNA  
+**transfer RNA (tRNA)**: RNA that carries activated amino acids to the site of protein
+synthesis on the ribosome  
+**translation**: process through which RNA directs the formation of protein  
+
+## Contributors and Attributions
+
+Connie Rye (East Mississippi Community College), Robert Wise
+(University of Wisconsin, Oshkosh), Vladimir Jurukovski (Suffolk
+County Community College), Jean DeSaix (University of North Carolina
+at Chapel Hill), Jung Choi (Georgia Institute of Technology), Yael
+Avissar (Rhode Island College) among other contributing authors.
+Original content by OpenStax (CC BY 4.0; Download for free at
+[http://cnx.org/contents/185cbf87-c72\...f21b5eabd\@9.87](http://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd%409.87)).
+
+<!--chapter:end:003-biology_review/00g-review-nucleic_acids-LibreText.Rmd-->
+
+# Proteins {#proteins-review}
+
+**Authors**: OpenStax / LibreText.  Formatted in RMarkdown by Nathan Brouwer under the  Creative Commons Attribution License 4.0 license.
+
+This chapter was adapted from [LibreText General Biology](), Chapter 3, Section 3.4: [Proteins](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)/1%3A_The_Chemistry_of_Life/3%3A_Biological_Macromolecules/3.4%3A_Proteins).  The LibreText book is based on  [OpenStax Biology 2nd edition](https://openstax.org/details/books/biology-2e), Chapter 3, Section 3.4: [Nucleic Acids](https://openstax.org/books/biology-2e/pages/3-4-proteins).  A full list of authors is found under the **Contributors and Attributions** section at the end of this document. 
+
+### Skills to develop:
+
+1. Describe the functions proteins perform in the cell and in tissues
+1. Discuss the relationship between amino acids and proteins
+1. Explain the four levels of protein organization
+1. Describe the ways in which protein shape and function are linked
+
+Proteins are one of the most abundant organic molecules in living systems and have the most diverse range of functions of all **macromolecules**. Proteins may be structural, regulatory, contractile, or protective; they may serve in transport, storage, or membranes; or they may be toxins or enzymes. Each cell in a living system may contain thousands of proteins, each with a unique function. Their structures, like their functions, vary greatly. They are all, however, **polymers** of **amino acids**, arranged in a linear sequence.
+
+## Types and Functions of Proteins
+
+**Enzymes**, which are produced by living cells, are **catalysts** in biochemical reactions (like digestion) and are usually complex or conjugated proteins. Each enzyme is specific for the substrate (a reactant that binds to an enzyme) it acts on. The enzyme may help in breakdown, rearrangement, or synthesis reactions. Enzymes that break down their substrates are called **catabolic enzymes**, enzymes that build more complex molecules from their substrates are called **anabolic enzymes**, and enzymes that affect the rate of reaction are called **catalytic enzymes**. 
+<!-- TODO: is this terminology standard?  -->
+It should be noted that all enzymes increase the rate of reaction and, therefore, are considered to be organic catalysts. An example of an enzyme is salivary amylase, which
+hydrolyzes its substrate amylose, a component of starch.
+
+**Hormones** are chemical-signaling molecules, usually small proteins or steroids, secreted by endocrine cells that act to control or regulate specific physiological processes, including growth, development, metabolism, and reproduction. For example, insulin is a **protein hormone** that helps to regulate the blood glucose level. 
+
+<!-- TODO: Fix table -->
+<!-- The primary types and functions of proteins are listed in Table 3.4.1. -->
+
+<!-- **Table** 3.4.1***:*** Protein Types and Functions -->
+
+<!-- Digestive Enzymes Amylase, lipase, pepsin, trypsin Help in digestion -->
+<!-- of food by catabolizing -->
+
+<!-- nutrients into monomeric units -->
+
+<!-- Structural Actin, tubulin, keratin Construct different structures, -->
+<!-- like the cytoskeleton -->
+
+<!-- Defense Immunoglobulins Protect the body from foreign pathogens -->
+
+<!-- Storage Legume storage proteins, egg white (albumin) Provide -->
+<!-- nourishment in early development of -->
+
+<!-- the embryo and the seedling -->
+
+Proteins have different shapes and molecular weights; some proteins are **globular** in shape whereas others are fibrous. For example, hemoglobin is a globular protein, but collagen, found in our skin, is a fibrous protein. Protein shape is critical to its function, and this shape is maintained by many different types of chemical bonds. Changes in temperature, pH, and exposure to chemicals may lead to permanent changes in the shape of the protein, leading to loss of function, known as **denaturation**. All proteins are made up of different arrangements of the same 20 types of **amino acids**.
+
+<!-- shoutout to non-canonical AAs? -->
+
+## Amino Acids
+
+Amino acids are the **monomers** that make up proteins. Each amino acid has the same fundamental structure, which consists of a central carbon atom, also known as the alpha (*α*) carbon, bonded to an amino group (NH~2~), a carboxyl group (COOH), and to a hydrogen atom. Every amino acid also has another atom or group of atoms bonded to the central atom known as the R group (Figure 3.4.1).
+
+```{r, echo = F, fig.cap="Amino acids have a central asymmetric carbon to which an amino group, a carboxyl group, a hydrogen atom, and a side chain (R group) are attached."}
+knitr::include_graphics(here::here("./images/protimage1.jpeg"))
+```
+
+The name "amino acid" is derived from the fact that they contain both an amino group and carboxyl-acid-group in their basic structure. For each amino acid, the R group (or side chain) is different (Figure 3.4.2).
+<!-- As mentioned, there are 20 amino acids present in proteins. Ten of these are considered essential amino acids in humans because the human body cannot produce them and they are obtained from the diet.  Just as some fatty acids are essential to a diet, some amino acids are necessary as well. They are
+known as essential amino acids, and in humans they include isoleucine, leucine, and cysteine. Essential amino acids refer to those necessary for construction of proteins in the body, although not produced by the body; which amino acids are essential varies from organism to organism.-->
+
+
+
+```{r, echo = F,  out.width = '60%', fig.cap="There are 20 common amino acids commonly found in proteins, each with a different R group (variant group) that determines its chemical nature."}
+knitr::include_graphics(here::here("./images/protimage2.jpeg"))
+```
+
+<!-- TODO:awk transition -->
+Which categories of amino acid would you expect to find on the surface
+of a soluble protein, and which would you expect to find in the
+interior? What distribution of amino acids would you expect to find in
+a protein embedded in a lipid bilayer?
+
+The chemical nature of the side chain determines the nature of the amino acid (that is, whether it is **acidic**, **basic**, **polar**, or **nonpolar**). For example, the amino acid glycine has a hydrogen atom as the R group. Amino acids such as valine, methionine, and alanine are nonpolar or hydrophobic, while amino acids such as serine, threonine, and cysteine are polar and have hydrophilic side chains. The side chains of lysine and arginine are positively charged, and therefore these amino acids are also known as basic amino acids. Proline has an R group that is linked to the amino group, forming a ring-like structure. Proline is an exception to the standard structure of an amino acid since its amino group is not separate from the side chain 
+<!-- (Figure 3.4.2). -->
+
+Amino acids are represented by a single upper case letter or a three-letter abbreviation. For example, valine is known by the letter V or the three-letter code val. 
+
+The sequence and the number of amino acids ultimately determine a protein's shape, size, and function. Each amino acid is attached to another amino acid by a covalent bond, known as a **peptide bond**, which is formed by a dehydration reaction. The carboxyl group of one amino acid and the amino group of the incoming amino acid combine, releasing a molecule of water. The resulting bond is the peptide bond 
+<!-- (Figure 3.4.3). -->
+
+```{r, echo = F, fig.cap="Peptide bond formation is a dehydration synthesis reaction. The carboxyl group of one amino acid is linked to the amino group of the incoming amino acid. In the process, a molecule of water is released."}
+knitr::include_graphics(here::here("./images/protimage3.jpeg"))
+```
+
+The products formed by such linkages are called **peptides**. As more amino acids join to this growing chain, the resulting chain is known as a **polypeptide**. Each polypeptide has a free amino group at one end. This end is called the **N-terminal**, or the amino terminal, and the other end has a free carboxyl group, also known as the C- or carboxyl
+terminal.  The terms polypeptide and protein are sometimes used interchangeably, a polypeptide is technically a polymer of amino acids, whereas the term protein is more formally used for a polypeptide or  that have combined together, often have bound non-peptide prosthetic groups, have a distinct shape, and have a unique function.
+<!-- is this a standard definition? -->
+
+
+
+After **protein synthesis (translation)**, most proteins are modified. These are known as **post-translational modifications**. They may undergo **cleavage**, **phosphorylation** (addition of a phosphate group), or may require the addition of other chemical groups. Only after these modifications is the protein completely functional.
+
+## Evolution Connection:
+
+---------------
+
+**The Evolutionary Significance of Cytochrome**: Cytochrome c is an
+important component of the electron transport chain, a part of
+cellular respiration, and it is normally found in the cellular
+organelle, the mitochondrion. This protein has a heme prosthetic
+group, and the central ion of the heme gets alternately reduced and
+oxidized during electron transfer. Because this essential protein's
+role in producing cellular energy is crucial, it has changed very
+little over millions of years. Protein sequencing has shown that there
+is a considerable amount of cytochrome c amino acid sequence **homology**
+among different species; in other words, evolutionary kinship can be
+assessed by measuring the similarities or differences among various
+species' DNA or protein sequences.
+
+Scientists have determined that human cytochrome c contains 104 amino
+acids. For each cytochrome c molecule from different organisms that
+has been sequenced to date, 37 of these amino acids appear in the same
+position in all samples of cytochrome c. This indicates that there may
+have been a **common ancestor**. On comparing the human and chimpanzee
+protein sequences, no sequence difference was found. When human and
+rhesus monkey sequences were compared, the single difference found was
+in one amino acid. In another comparison, human to yeast sequencing
+shows a difference in the 44th position.
+
+---------------
+
+## Protein Structure
+
+The shape of a protein is critical to its function. For example, an enzyme can bind to a specific substrate at a site known as the **active site**. If this active site is altered because of local changes or changes in overall protein structure, the enzyme may be unable to bind to the substrate. To understand how the protein gets its final shape or conformation, we need to understand the four levels of protein structure: primary, secondary, tertiary, and quaternary.
+
+### Primary Structure
+
+The unique sequence of amino acids in a polypeptide chain is its
+primary structure. For example, the pancreatic hormone insulin has two
+polypeptide chains, A and B, and they are linked together by disulfide
+bonds. The N terminal amino acid of the A chain is glycine, whereas
+the C terminal amino acid is asparagine (Figure 3.4.4). The sequences
+of amino acids in the A and B chains are unique to insulin.
+
+
+```{r, echo = F,out.width = '40%', fig.cap="Bovine serum insulin is a protein hormone made of two peptide chains, A (21 amino acids long) and B (30 amino acids long). In each chain, primary structure is indicated by three-letter abbreviations that represent the names of the amino acids in the order they are present. The amino acid cysteine (cys) has a sulfhydryl (SH) group as a side chain. Two sulfhydryl groups can react in the presence of oxygen to form a disulfide (S-S) bond. Two disulfide bonds connect the A and B chains together, and a third helps the A chain fold into the correct shape. Note that all disulfide bonds are the same length, but are drawn different sizes for clarity."}
+knitr::include_graphics(here::here("./images/protimage4.jpeg"))
+```
+
+The unique sequence for every protein is ultimately determined by the
+gene encoding the protein. A change in nucleotide sequence of the
+gene's coding region may lead to a different amino acid being added to
+the growing polypeptide chain, causing a change in protein structure
+and function. In sickle cell anemia, the hemoglobin *beta* chain (a small
+portion of which is shown in Figure 3.4.5) has a single amino acid
+substitution, causing a change in protein structure and function.
+Specifically, the amino acid glutamic acid is substituted by valine in
+the beta chain. What is most remarkable to consider is that a
+hemoglobin molecule is made up of two alpha chains and two beta chains
+that each consist of about 150 amino acids. The molecule, therefore,
+has about 600 amino acids. The structural difference between a normal
+hemoglobin molecule and a sickle cell molecule---which dramatically
+decreases life expectancy---is a single amino acid of the 600. What is
+even more remarkable is that those 600 amino acids are encoded by
+three nucleotides each, and the mutation is caused by a single base
+change (point mutation), 1 in 1800 bases.
+
+
+```{r, echo = F,out.width = '40%', fig.cap="The beta chain of hemoglobin is 147 residues in length, yet a single amino acid substitution leads to sickle cell anemia. In normal hemoglobin, the amino acid at position seven is glutamate. In sickle cell hemoglobin, this glutamate is replaced by a valine."}
+knitr::include_graphics(here::here("./images/protimage5.jpeg"))
+```
+
+
+
+Because of this change of one amino acid in the chain, hemoglobin
+molecules form long fibers that distort the biconcave, or disc-shaped,
+red blood cells and assume a crescent or "sickle" shape, which clogs
+arteries (Figure 3.4.6). This can lead to myriad serious health
+problems such as breathlessness, dizziness, headaches, and abdominal
+pain for those affected by this disease.
+
+```{r, echo = F, out.width = '60%',fig.cap="In this blood smear, visualized at 535x magnification using bright field microscopy, sickle cells are crescent shaped, while normal cells are disc-shaped. (credit: modification of work by Ed Uthman; scale-bar data from Matt Russell)"}
+knitr::include_graphics(here::here("./images/protimage6.jpeg"))
+```
+
+### Secondary Structure
+
+The local folding of the polypeptide in some regions gives rise to the
+secondary structure of the protein. The most common are the *α*-helix
+and *beta*-pleated sheet structures (Figure 3.4.7). Both structures are
+the *α*-helix structure---the helix held in shape by hydrogen bonds.
+The hydrogen bonds form between the oxygen atom in the carbonyl group
+in one amino acid and another amino acid that is four amino acids
+farther along the chain.
+
+```{r, echo = F,out.width = '40%', fig.cap="The α-helix and β-pleated sheet are secondary structures of proteins that form because of hydrogen bonding between carbonyl and amino groups in the peptide backbone. Certain amino acids have a propensity to form an α-helix, while others have a propensity to form a β-pleated sheet."}
+knitr::include_graphics(here::here("./images/protimage7.jpeg"))
+```
+
+Every helical turn in an alpha helix has 3.6 amino acid residues. The
+R groups (the variant groups) of the polypeptide protrude out from the
+*α*-helix chain. In the *beta*-pleated sheet, the "pleats" are formed by
+hydrogen bonding between atoms on the backbone of the polypeptide
+chain. The R groups are attached to the carbons and extend above and
+below the folds of the pleat. The pleated segments align parallel or
+antiparallel to each other, and hydrogen bonds form between the
+partially positive nitrogen atom in the amino group and the partially
+negative oxygen atom in the carbonyl group of the peptide backbone.
+The *α*-helix and *beta*-pleated sheet structures are found in most
+globular and fibrous proteins and they play an important structural
+role.
+
+### Tertiary Structure
+
+The unique three-dimensional structure of a polypeptide is its
+tertiary structure (Figure 3.4.8). This structure is in part due to
+chemical interactions at work on the polypeptide chain. Primarily, the
+interactions among R groups creates the complex three- dimensional
+tertiary structure of a protein. The nature of the R groups found in
+the amino acids involved can counteract the formation of the hydrogen
+bonds described for standard secondary structures. For example, R
+groups with like charges are repelled by each other and those with
+unlike charges are attracted to each other (ionic bonds). When protein
+folding takes place, the hydrophobic R groups of nonpolar amino acids
+lay in the interior of the protein, whereas the hydrophilic R groups
+lay on the outside. The former types of interactions are also known as
+hydrophobic interactions. Interaction between cysteine side chains
+forms disulfide linkages in the presence of oxygen, the only covalent
+bond forming during protein folding.
+
+```{r, echo = F,out.width = '40%', fig.cap="The tertiary structure of proteins is determined by a variety of chemical interactions. These include hydrophobic interactions, ionic bonding, hydrogen bonding and disulfide linkages."}
+knitr::include_graphics(here::here("./images/protimage8.jpeg"))
+```
+
+All of these interactions, weak and strong, determine the final
+three-dimensional shape of the protein. When a protein loses its
+three-dimensional shape, it may no longer be functional.
+
+### Quaternary Structure
+
+In nature, some proteins are formed from several polypeptides, also
+known as subunits, and the interaction of these subunits forms the
+quaternary structure. Weak interactions between the subunits help to
+stabilize the overall structure. For example, insulin (a globular
+protein) has a combination of hydrogen bonds and disulfide bonds that
+cause it to be mostly clumped into a ball shape. Insulin starts out as
+a single polypeptide and loses some internal sequences in the presence
+of post-translational modification after the formation of the
+disulfide linkages that hold the remaining chains together. Silk (a
+fibrous protein), however, has a *beta*-pleated sheet structure that is
+the result of hydrogen bonding between different chains.
+
+The four levels of protein structure (primary, secondary, tertiary,
+and quaternary) are illustrated in Figure 3.4.9.
+
+```{r, echo = F, fig.cap="The four levels of protein structure can be observed in these illustrations. (credit: modification of work by National Human Genome Research Institute)"}
+knitr::include_graphics(here::here("./images/protimage9.jpeg"))
+```
+
+
+## Denaturation and Protein Folding
+
+Each protein has its own unique sequence and shape that are held
+together by chemical interactions. If the protein is subject to
+changes in temperature, pH, or exposure to chemicals, the protein
+structure may change, losing its shape without losing its primary
+sequence in what is known as denaturation. Denaturation is often
+reversible because the primary structure of the polypeptide is
+conserved in the process if the denaturing agent is removed, allowing
+the protein to resume its function. Sometimes denaturation is
+irreversible, leading to loss of function. One example of irreversible
+protein denaturation is when an egg is fried. The albumin protein in
+the liquid egg white is denatured when placed in a hot pan. Not all
+proteins are denatured at high temperatures; for instance, bacteria
+that survive in hot springs have proteins that function at
+temperatures close to boiling. The stomach is also very acidic, has a
+low pH, and denatures proteins as part of the digestion process;
+however, the digestive enzymes of the stomach retain their activity
+under these conditions.
+
+Protein folding is critical to its function. It was originally thought
+that the proteins themselves were responsible for the folding process.
+Only recently was it found that often they receive assistance in the
+folding process from protein helpers known as chaperones (or
+chaperonins) that associate with the target protein during the folding
+process. They act by preventing aggregation of polypeptides that make
+up the complete protein structure, and they disassociate from the
+protein once the target protein is folded.
+
+## Summary
+
+Proteins are a class of macromolecules that perform a diverse range of
+functions for the cell. They help in metabolism by providing
+structural support and by acting as enzymes, carriers, or hormones.
+The building blocks of proteins (monomers) are amino acids. Each amino
+acid has a central carbon that is linked to an amino group, a carboxyl
+group, a hydrogen atom, and an
+
+R group or side chain. There are 20 commonly occurring amino acids,
+each of which differs in the R group. Each amino acid is linked to its
+neighbors by a peptide bond. A long chain of amino acids is known as a
+polypeptide.
+
+Proteins are organized at four levels: primary, secondary, tertiary,
+and (optional) quaternary. The primary structure is the unique
+sequence of amino acids. The local folding of the polypeptide to form
+structures such as the *α* helix and *beta*-pleated sheet constitutes the
+secondary structure. The overall three-dimensional structure is the
+tertiary structure. When two or more polypeptides combine to form the
+complete protein structure, the configuration is known as the
+quaternary structure of a protein. Protein shape and function are
+intricately linked; any change in shape caused by changes in
+temperature or pH may lead to protein denaturation and a loss in
+function.
+
+## Art Connections
+
+* Which categories of amino acid would you expect to find on
+the surface of a soluble protein, and which would you expect to find
+in the interior? What distribution of amino acids would you expect to
+find in a protein embedded in a lipid bilayer?
+
+* Polar and charged amino acid residues (the remainder after
+peptide bond formation) are more likely to be found on the surface of
+soluble proteins where they can interact with water, and nonpolar
+(e.g., amino acid side chains) are more likely to be found in the
+interior where they are sequestered from water. In membrane proteins,
+nonpolar and hydrophobic amino acid side chains associate with the
+hydrophobic tails of phospholipids, while polar and charged amino acid
+side chains interact with the polar head groups or with the aqueous
+solution. However, there are exceptions. Sometimes, positively and
+negatively charged amino acid side chains interact with one another in
+the interior of a protein, and polar or charged amino acid side chains
+that interact with a ligand can be found in the ligand binding pocket.
+
+## Review Questions
+
+The monomers that make up proteins are called
+1. nucleotides
+1. disaccharides
+1. amino acids
+1. chaperones
+
+Answer: C
+
+The *α* helix and the *beta*-pleated sheet are part of which protein
+structure?
+
+1. primary
+1. secondary
+1. tertiary
+1. quaternary 
+
+Answer: B
+
+## Free Response
+
+**Explain what happens if even one amino acid is substituted for another
+in a polypeptide chain. Provide a specific example.**
+
+A change in gene sequence can lead to a different amino acid being
+added to a polypeptide chain instead of the normal one. This causes a
+change in protein structure and function. For example, in sickle cell
+anemia, the hemoglobin *beta* chain has a single amino acid
+substitution---the amino acid glutamic acid in position six is
+substituted by valine. Because of this change, hemoglobin molecules
+form aggregates, and the disc-shaped red blood cells assume a crescent
+shape, which results in serious health problems.
+
+**Describe the differences in the four protein structures.**
+
+The sequence and number of amino acids in a polypeptide chain is its
+primary structure. The local folding of the polypeptide in some
+regions is the secondary structure of the protein. The
+three-dimensional structure of a polypeptide is known as its tertiary
+structure, created in part by chemical interactions such as hydrogen
+bonds between polar side chains, van der Waals interactions, disulfide
+linkages, and hydrophobic interactions. Some proteins are formed from
+multiple polypeptides, also known as subunits, and the interaction of
+these subunits forms the quaternary structure.
+
+## Glossary
+
+**alpha-helix structure (*α*-helix)**: type of secondary structure of proteins formed by folding of the polypeptide into a helix shape with hydrogen bonds stabilizing the
+structure  
+**amino acid**: monomer of a protein; has a central carbon or alpha carbon to which an
+amino group, a carboxyl group, a hydrogen, and an R group or side
+chain is attached; the R group is different for all 20 amino acids  
+**beta-pleated sheet (*beta*-pleated)**:  secondary structure found in proteins in which "pleats" are formed by hydrogen bonding between atoms on the backbone of the polypeptide chain  
+**chaperone**: (also, chaperonin) protein that helps nascent protein in the folding process **denaturation**: loss of shape in a protein as a result of changes in temperature, pH, or exposure to chemicals  
+**enzyme**: catalyst in a biochemical reaction that is usually a complex or conjugated protein  
+**hormone**: chemical signaling molecule, usually protein or steroid, secreted by endocrine cells that act to control or regulate specific physiological processes
+**peptide bond**: bond formed between two amino acids by a dehydration reaction  
+**polypeptide**: long chain of amino acids linked by peptide bonds   
+**primary structure**: linear sequence of amino acids in a protein  
+**protein**: biological macromolecule composed of one or more chains of amino acids  
+**quaternary structure**: association of discrete polypeptide subunits in a protein  
+**secondary structure**: regular structure formed by proteins by intramolecular hydrogen bonding between the oxygen atom of one amino acid residue and the hydrogen attached to the nitrogen atom of another amino acid residue 
+**tertiary structure**: three-dimensional conformation of a protein, including interactions between secondary structural elements; formed from interactions between amino acid side chains  
+
+## Contributors and Attributions
+
+Connie Rye (East Mississippi Community College), Robert Wise
+(University of Wisconsin, Oshkosh), Vladimir Jurukovski (Suffolk
+County Community College), Jean DeSaix (University of North Carolina
+at Chapel Hill), Jung Choi (Georgia Institute of Technology), Yael
+Avissar (Rhode Island College) among other contributing authors.
+Original content by OpenStax (CC BY 4.0; Download for free at
+[http://cnx.org/contents/185cbf87-c72\...f21b5eabd\@9.87](http://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd%409.87)).
+
+<!--chapter:end:003-biology_review/00h-proteins-LibreText.rmd-->
+
 # NCBI: The National Center for Biotechnology Information
 
 **NOTE:** The following material was partially adapted by N. Brouwer from [Wikipedia](https://en.wikipedia.org/wiki/National_Center_for_Biotechnology_Information).  See the underlying .Rmd file for information on specific paragraphs from Wikipedia.
@@ -2002,7 +2002,7 @@ https://en.wikipedia.org/wiki/BLAST_(biotechnology)
 
 
 
-<!--chapter:end:003-NCBI/01-NCBI_overview.Rmd-->
+<!--chapter:end:004-NCBI/01-NCBI_overview.Rmd-->
 
 # Introduction to biological sequences databases
 
@@ -2107,9 +2107,9 @@ To view the GenBank entry for the DEN-1 Dengue virus, follow these steps:
 The GenBank entry for an accession contains a LOT of information about the sequence, such as papers describing it, features in the sequence, etc. The **DEFINITION** field gives a short description for the sequence. The **ORGANISM** field in the NCBI entry identifies the species that the sequence came from. The **REFERENCE** field contains scientific publications describing the sequence. The **FEATURES** field contains information about the location of features of interest inside the sequence, such as regulatory sequences or genes that lie inside the sequence. The **ORIGIN** field gives the sequence itself.
 
 
-# ```{r, echo = F, eval = F}
-# knitr::include_graphics(here::here("images/NCBI_accesssion_NC_001477_genbank.png"))
-# ```
+<!-- # ```{r, echo = F, eval = F} -->
+<!-- # knitr::include_graphics(here::here("images/NCBI_accesssion_NC_001477_genbank.png")) -->
+<!-- # ``` -->
 
 
 
@@ -2259,7 +2259,7 @@ Note: *Schistmosoma mansoni* is a parasitic worm that is responsible for causing
 ```
 
 
-<!--chapter:end:003-NCBI/02-NCBI_genebank_fasta.Rmd-->
+<!--chapter:end:004-NCBI/02-NCBI_genebank_fasta.Rmd-->
 
 # Downloading NCBI sequence data by hand
 
@@ -2294,7 +2294,7 @@ After you click on **Send to** you can pick several options. and then choose “
 
 You can now open the FASTA file containing the DEN-1 Dengue virus genome sequence using a text editor like Notepad, WordPad, Notepad++, or even RStudio on your computer.  To find a text editor on your computer search for "text" from the start menu (Windows) and usually one will come up. (Opening the file in a word processor like word isn't recommended).
 
-<!--chapter:end:003-NCBI/03-NCBI_seqdata_by_GUI1.Rmd-->
+<!--chapter:end:004-NCBI/03-NCBI_seqdata_by_GUI1.Rmd-->
 
 # Downloading sequences from UniProt by hand
 
@@ -2403,41 +2403,34 @@ ulceransseq <- ulcerans[[1]]
 
 
 
-<!--chapter:end:003-NCBI/04-uniprot_by_GUI-AC07-01.Rmd-->
+<!--chapter:end:004-NCBI/04-uniprot_by_GUI-AC07-01.Rmd-->
 
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-# Introducing FASTA Files {#introducing-FASTA}
+# Introducing FASTA Files {#introducingFASTA}
 
 <!-- TODO: Add images / examples -->
 
 Adapted from [Wikipedia](https://en.wikipedia.org/wiki/FASTA_format): https://en.wikipedia.org/wiki/FASTA_format
 
 <!-- begin wikipedia -->
-"In bioinformatics, the FASTA format is a text-based format for representing either nucleotide sequences or amino acid (protein) sequences, in which nucleotides or amino acids are represented using single-letter codes. The format allows for sequence names and comments to precede the sequences. The format originates from the FASTA alignment software, but has now become a near universal standard in the field of bioinformatics.
+In bioinformatics, the FASTA format is a text-based format for representing either nucleotide sequences or amino acid (protein) sequences, in which nucleotides or amino acids are represented using single-letter codes. The format allows for sequence names and comments to precede the sequences. The format originates from the FASTA alignment software, but has now become a near universal standard in the field of bioinformatics.
 
-"The simplicity of FASTA format makes it easy to manipulate and parse sequences using text-processing tools and scripting languages like the R programming language and Python.
+The simplicity of FASTA format makes it easy to manipulate and parse sequences using text-processing tools and scripting languages like the R programming language and Python.
 
-"The first line in a FASTA file starts with a ">" (greater-than) symbol and holds summary information about the sequence, often starting with a unique accession number and followed by information like the name of the gene, the type of sequence, and the organism it is from.
+The first line in a FASTA file starts with a ">" (greater-than) symbol and holds summary information about the sequence, often starting with a unique accession number and followed by information like the name of the gene, the type of sequence, and the organism it is from.
 
-"On the  next is the  sequence itself in a standard one-letter character string. Anything other than a valid character is be ignored (including spaces, tabs, asterisks, etc...).
+On the  next is the  sequence itself in a standard one-letter character string. Anything other than a valid character is be ignored (including spaces, tabs, asterisks, etc...).
 
-"A multiple sequence FASTA format can be obtained by concatenating several single sequence FASTA files in a common file (also known as multi-FASTA format). 
+A multiple sequence FASTA format can be obtained by concatenating several single sequence FASTA files in a common file (also known as multi-FASTA format). 
 
-"Following the header line, the actual sequence is represented. Sequences may be protein sequences or nucleic acid sequences, and they can contain gaps or alignment characters. Sequences are expected to be represented in the standard amino acid and nucleic acid codes.  Lower-case letters are accepted and are mapped into upper-case; a single hyphen or dash can be used to represent a gap character; and in amino acid sequences, U and * are acceptable letters.
+Following the header line, the actual sequence is represented. Sequences may be protein sequences or nucleic acid sequences, and they can contain gaps or alignment characters. Sequences are expected to be represented in the standard amino acid and nucleic acid codes.  Lower-case letters are accepted and are mapped into upper-case; a single hyphen or dash can be used to represent a gap character; and in amino acid sequences, U and * are acceptable letters.
 
-"FASTQ format is a form of FASTA format extended to indicate information related to sequencing. It is created by the Sanger Centre in Cambridge.
+FASTQ format is a form of FASTA format extended to indicate information related to sequencing. It is created by the Sanger Centre in Cambridge.
 
-"Bioconductor.org's Biostrings package can be used to read and manipulate FASTA files in R
+Bioconductor.org's Biostrings package can be used to read and manipulate FASTA files in R
 
 <!-- end wikipedia -->
 
-from  https://zhanglab.dcmb.med.umich.edu/FASTA/
-
-"FASTA format is a text-based format for representing either nucleotide sequences or peptide sequences, in which base pairs or amino acids are represented using single-letter codes. A sequence in FASTA format begins with a single-line description, followed by lines of sequence data. The description line is distinguished from the sequence data by a greater-than (">") symbol in the first column. It is recommended that all lines of text be shorter than 80 characters in length."
+>"FASTA format is a text-based format for representing either nucleotide sequences or peptide sequences, in which base pairs or amino acids are represented using single-letter codes. A sequence in FASTA format begins with a single-line description, followed by lines of sequence data. The description line is distinguished from the sequence data by a greater-than (">") symbol in the first column. It is recommended that all lines of text be shorter than 80 characters in length." (https://zhanglab.dcmb.med.umich.edu/FASTA/)
 
 ## Example FASTA file
 
@@ -2509,18 +2502,18 @@ QA~~~~~~~~~~~~~~~~~~~")
 
 Adapted from [Wikipedia](https://en.wikipedia.org/wiki/FASTQ_format): https://en.wikipedia.org/wiki/FASTQ_format
 
-"FASTQ format is a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores. Both the sequence letter and quality score are each encoded with a single ASCII character for brevity.
+FASTQ format is a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores. Both the sequence letter and quality score are each encoded with a single ASCII character for brevity.
 
-"It was originally developed at the Wellcome Trust Sanger Institute to bundle a FASTA formatted sequence and its quality data, but has recently become the de facto standard for storing the output of high-throughput sequencing instruments such as the Illumina Genome Analyzer.
+It was originally developed at the Wellcome Trust Sanger Institute to bundle a FASTA formatted sequence and its quality data, but has recently become the de facto standard for storing the output of high-throughput sequencing instruments such as the Illumina Genome Analyzer.
 
-"A FASTQ file normally uses four lines per sequence.
+A FASTQ file normally uses four lines per sequence.
 
 * Line 1 begins with a `@` character and is followed by a sequence identifier and an optional description (like a FASTA title line).
 * Line 2 is the raw sequence letters.
 * Line 3 begins with a `+` character and is optionally followed by the same sequence identifier (and any description) again.
 * Line 4 encodes the **quality values** for the sequence in Line 2 of the file, and must contain the same number of symbols as letters in the sequence.
 
-"A FASTQ file containing a single sequence might look like this:"
+A FASTQ file containing a single sequence might look like this:"
 
 ```{r eval = T}
 cat("@SEQ_ID
@@ -2530,7 +2523,7 @@ GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
 ```
 
 
-"Here are the quality value characters in left-to-right increasing order of quality (ASCII):"
+Here are the quality value characters in left-to-right increasing order of quality (ASCII):"
 
 ```{r eval = F}
  !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
@@ -2538,801 +2531,7 @@ GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
 
 FASTQ files typically do not include line breaks and do not wrap around when they reach the width of a normal page or file.
 
-<!--chapter:end:004-downloading_seq_data_as_FASTA/11a-FASTA_files.Rmd-->
-
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-# Downloading DNA sequences as FASTA files in R {#download-FASTA-inR}
-
-This is a modification of ["DNA Sequence Statistics"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  Most of the text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license.  
-
-<!-- how much is sequinr actually useD? -->
-
-
-**NOTE**: There is some reduncnacy in this current draft that needs to be eliminated.
-
-
-### Functions
-
-* library()
-* help()
-* length
-* table
-* seqinr::GC()
-* seqinr::count()
-* seqinr::write.fasta()
-
-### Software/websites
-
-* www.ncbi.nlm.nih.gov
-* Text editors (e.g. Notepad++, TextWrangler)
-
-### R vocabulary
-
-* list
-* library
-* package
-* CRAN
-* wrapper
-
-
-### File types
-
-* FASTA
-
-### Bioinformatics vocabulary
-
-* accession, accession number
-* NCBI
-* NCBI Sequence Database
-* EMBL Sequence Database
-* FASTA file
-
-### Organisms and Sequence accessions
-
-* Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. 
-
-The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are NC_001477, NC_001474, NC_001475 and NC_002640, respectively.
-
-According to Wikipedia
-
-> "Dengue virus (DENV) is the cause of dengue fever. It is a mosquito-borne, single positive-stranded RNA virus ... Five serotypes of the virus have been found, all of which can cause the full spectrum of disease. Nevertheless, scientists' understanding of dengue virus may be simplistic, as rather than distinct ... groups, a continuum appears to exist." https://en.wikipedia.org/wiki/Dengue_virus
-
-### Preliminaries
-
-```{r}
-library(rentrez)
-library(compbio4all) 
-```
-
-
-
-## DNA Sequence Statistics: Part 1
-
-### Using R for Bioinformatics
-
-The chapter will guide you through the process of using R to carry out simple analyses that are common in bioinformatics and computational biology.  In particular, the focus is on computational analysis of biological sequence data such as genome sequences and protein sequences. The programming approaches, however, are broadly generalizable to statistics and data science.
-
-The tutorials assume that the reader has some basic knowledge of biology, but not necessarily of bioinformatics. The focus is to explain simple bioinformatics analysis, and to explain how to carry out these analyses using *R*.
-
-
-### R packages for bioinformatics: Bioconductor and SeqinR
-
-Many authors have written *R* packages for performing a wide variety of analyses. These do not come with the standard *R* installation, but must be installed and loaded as “add-ons”.  
-
-<!-- old Loading the dayoff package will automatically load most of the packages we need. -->
-<!-- have these as dependencies of combio4all? -->
-
-Bioinformaticians have written numerous specialized packages for *R*. In this tutorial, you will learn to use some of the function in the [`SeqinR`](https://cran.r-project.org/web/packages/seqinr/index.html) package to to carry out simple analyses of DNA sequences.  (`SeqinR` can retrieve sequences from a DNA sequence database, but this has largely been replaced by the functions in the package `rentrez`)
-
-Many well-known bioinformatics packages for *R* are in the Bioconductor set of *R* packages (www.bioconductor.org), which contains  packages with many *R* functions for analyzing biological data sets such as microarray data.  The [`SeqinR`](https://cran.r-project.org/web/packages/seqinr/index.html) package is from CRAN, which contains R functions for obtaining sequences from DNA and protein sequence databases, and for analyzing DNA and protein sequences.  
-
-<!-- SequinR will automatically load when you load dayoff.   For instructions on how to install an R package on your own see [How to install an R package](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html). -->
-
-We will also use functions from the `rentrez` and `ape` packages. 
-
-<!-- Both of these also are loaded automatically by the dayoff package. -->
-<!-- ape still used?. -->
-
-Remember that you can ask for more information about a particular *R* command by using the `help()` function. For example, to ask for more information about the `library()`, you can type:
-
-```{r, eval = F}
-help("library")
-```
-
-You can also do this
-```{r, eval = F}
-?library
-```
-
-
-### FASTA file format
-
-The FASTA format is a simple and widely used format for storing biological (e.g. DNA or protein) sequences. It was first used by the [FASTA program](https://en.wikipedia.org/wiki/FASTA) for sequence alignment in the 1980s and has been adopted as standard by many other programs. 
-
-FASTA files begin with a single-line description starting with a greater-than sign `>` character, followed on the next line by the sequences. Here is an example of a FASTA file.  (If you're looking at the source script for this lesson you'll see the `cat()` command, which is just a text display function used format the text when you run the code).
-
-```{r, eval = T, echo = F}
-cat(">A06852 183 residues MPRLFSYLLGVWLLLSQLPREIPGQSTNDFIKACGRELVRLWVEICGSVSWGRTALSLEEPQLETGPPAETMPSSITKDAEILKMMLEFVPNLPQELKATLSERQPSLRELQQSASKDSNLNFEEFKKIILNRQNEAEDKSLLELKNLGLDKHSRKKRLFRMTLSEKCCQVGCIRKDIARLC")
-```
-
-
-### The NCBI sequence database
-
-The US [National Centre for Biotechnology Information (NCBI)](www.ncbi.nlm.nih.gov) maintains the **NCBI Sequence Database**, a huge database of all the DNA and protein sequence data that has been collected. There are also similar databases in Europe, the [European Molecular Biology Laboratory (EMBL) Sequence Database](www.ebi.ac.uk/embl), and Japan, the [DNA Data Bank of Japan (DDBJ)](www.ddbj.nig.ac.jp). These three databases exchange data every night, so at any one point in time, they contain almost identical data.
-
-Each sequence in the NCBI Sequence Database is stored in a separate **record**, and is assigned a unique identifier that can be used to refer to that record. The identifier is known as an **accession**, and consists of a mixture of numbers and letters. 
-
-For example, Dengue virus causes Dengue fever, which is classified as a **neglected tropical disease** by the World Health Organization (WHO), is classified by any one of four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are 
-
-* NC_001477
-* NC_001474
-* NC_001475  
-* NC_002640
-
-Note that because the NCBI Sequence Database, the EMBL Sequence Database, and DDBJ exchange data every night, the DEN-1 (and DEN-2, DEN-3, DEN-4) Dengue virus sequence are present in all three databases, but they  have different accessions in each database, as they each use their own numbering systems for referring to their own sequence records.
-
-
-### Retrieving genome sequence data using rentrez
-
-You can retrieve sequence data from NCBI directly from *R* using the `rentrez` package.  The DEN-1 Dengue virus genome sequence has NCBI accession NC_001477. To retrieve a sequence with a particular NCBI accession, you can use the function `entrez_fetch()` from the `rentrez` package.  Note that to be specific where the function comes from I write it as `package::function()`.  
-
-<!-- QUESTION: How many arguments does entrez_fetch take in this call? -->
-```{r, eval = F}
-dengueseq_fasta <- rentrez::entrez_fetch(db = "nucleotide", 
-                          id = "NC_001477", 
-                          rettype = "fasta")
-```
-
-```{r, echo = F}
-data(dengueseq_fasta)
-```
-
-
-Note that the "_" in the name is just an arbitrary way to separate two words.  Another common format would be `dengueseq.fasta`. Some people like `dengueseqFasta`, called **camel case** because the capital letter makes a hump in the middle of the word.  Underscores are becoming most common and are favored by developers associated with RStudio and the **tidyverse** of packages that many data scientists use.  I switch between "." and "_" as separators, usually favoring "_" for function names and "." for objects; I personally find camel case harder to read and to type.
-
-Ok, so what exactly have we done when we made `dengueseq_fasta`?  We have an R object `dengueseq_fasta` which has the sequence linked to the accession number "NC_001477."  So where is the sequence, and what is it?
-
-First, what is it?
-```{r}
-is(dengueseq_fasta)
-class(dengueseq_fasta)
-```
-
-How big is it?  Try the `dim()` and `length()` commands and see which one works.  Do you know why one works and the other doesn't?
-<!-- question:l which one works -->
-```{r}
-dim(dengueseq_fasta)
-length(dengueseq_fasta)
-```
-
-The size of the object is 1.  Why is this?  This is the genomics sequence of a virus, so you'd expect it to be fairly large.  We'll use another function below to explore that issue.  Think about this first: how many pieces of unique information are in the `dengueseq` object?  In what sense is there only _one_ piece of information?
-
-
-If we want to actually see the sequence we can type just type `dengueseq_fasta` and press enter.  This will print the WHOLE genomic sequence out but it will probably run of your screen.  
-```{r eval = F}
-dengueseq_fasta
-```
-
-This is a whole genome sequence, but its stored as single entry in a vector, so the `length()` command just tells us how many entries there are in the vector, which is just one!  What this means is that the entire genomic sequence is stored in a single entry of the vector `dengueseq_fasta`.  (If you're not following along with this, no worries - its not essential to actually working with the data)
-
-If we want to actually know how long the sequence is, we need to use the function `nchar()`.
-```{r}
-nchar(dengueseq_fasta)
-```
-
-The sequence is 10935 bases long.  All of these bases are stored as a single **character string** with no spaces in a single entry of our `dengueseq_fasta` vector.  This isn't actually a useful format for us, so below were' going to convert it to something more useful.
-
-If we want to see just part of the sequence we can use the `strtrim()` function.  Before you run the code below, predict what the 100 means.
-
-```{r, echo = T}
-strtrim(dengueseq_fasta, 100)
-```
-
-
-
-Note that at the end of the  name is a slash followed by an n, which indicates to the computer that this is a **newline**; this is read by text editor, but is ignored by R in this context.
-```{r, echo = T}
-strtrim(dengueseq_fasta, 45)
-```
-
-After the `\\n` begins the sequence, which will continue on for a LOOOOOONG way.  Let's just print a little bit.
-```{r, echo = T}
-strtrim(dengueseq_fasta, 52)
-```
-
-Let's print some more.  Do you notice anything beside A, T, C and G in the sequence?
-```{r}
-strtrim(dengueseq_fasta, 200)
-```
-
-Again, there are the `\\n`  newline characters, which tell text editors and wordprocessors how to display the file.
-
-Now that we a sense of what we're looking at let's explore the `dengueseq_fasta` a bit more.
-
-We can find out more information about what it is using the `class() `command.  
-```{r}
-class(dengueseq_fasta)
-```
-As noted before, this is character data.
-
-
-Many things in R are vectors so we can ask *R *`is.vector()`
-```{r}
-is.vector(dengueseq_fasta)
-```
-
-Yup, that's true.
-
-Ok, let's see what else.  A handy though often verbose command is `is()`, which tells us what an object, well, what it is:
-
-```{r}
-is(dengueseq_fasta)
-```
-
-There is a lot here but if you scan for some key words you will see "character" and "vector" at the top.  The other stuff you can ignore.  The first two things, though, tell us the dengueseq_fasta is a **vector** of the class **character**: that is, a **character vector**.
-
-Another handy function is `str()`, which gives us a peak at the context and structure of an *R* object.  This is most useful when you are working in the R console or with dataframes, but is a useful function to run on all *R* objects.  How does this output differ from other ways we've displayed dengueseq_fasta?
-```{r}
-str(dengueseq_fasta)
-```
-
-We know it contains character data - how many characters?  `nchar()` for "number of characters" answers that:
-```{r}
-nchar(dengueseq_fasta)
-```
-
-## OPTIONAL: Saving FASTA files
-
-We can save our data as .fasta file for safe keeping.  The `write()` function will save the data we downloaded as a plain text file.  
-
-```{r, eval = F}
-write(dengueseq_fasta, 
-      file="dengueseq.fasta")
-```
-
-If you do this, you'll need to figure out where *R* is saving things, which requires and understanding *R's* **file system**, which can take some getting used to, especially if you're new to programming.  As a start, you can see where *R* saves things by using the `getwd()` command, which tells you where on your harddrive R currently is using as its home base for files.
-
-```{r}
-getwd()
-```
-
-
-## Next steps
-
-On their own, FASTA files in R are not directly useful.  In the next lesson we'll process our `dengueseq_fasta` file so that we can use it in analyses.
-
-<!--chapter:end:004-downloading_seq_data_as_FASTA/11b-download_FASTA_in_R.Rmd-->
-
-# Downloading DNA sequences as FASTA files in R
-
-This is a modification of ["DNA Sequence Statistics"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  Most of the text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license.  
-
-<!-- how much is sequinr actually useD? -->
-
-<!-- download stringr -->
-
-## Preliminaries
-
-We'll need the `dengueseq_fasta` FASTA data object, which is in the `compbio4all` package.  We'll also use the `stringr` package for cleaning up the FASTA data, which can be downloaded with `install.packages("stringr")`
-
-```{r}
-# compbio4all, which has dengueseq_fasta
-library(compbio4all)
-data(dengueseq_fasta)
-
-# stringr, for data cleaning
-library(stringr)
-```
-
-
-## Convert FASTA sequence to an R variable
-
-We can't actually do much with the contents of the `dengueseq_fasta` we downloaded with the `rentrez` package except read them.  If we want do address some biological questions with the data we need is to convert it into a data structure *R* can work with. 
-
-There are several things we need to remove: 
-
-1. The **meta data** line `>NC_001477.1 Dengue virus 1, complete genome` (metadata is "data" about data, such as where it came from, what it is, who made it, etc.).
-1. All the `\n` that show up in the file (these are the **line breaks**).
-1. Put each nucleotide of the sequence into its own spot in a vector.
-
-There are functions that can do this automatically, but 
-
-1. I haven't found one I like, and 
-1. walking through this will help you understand the types of operations you can do on text data.
-
-The first two steps involve removing things from the existing **character string** that contains the sequence.  The third step will split the single continuous character string like "AGTTGTTAGTCTACGT..." into a **character vector** like `c("A","G","T","T","G","T","T","A","G","T","C","T","A","C","G","T"...)`, where each element of the vector is a single character a stored in a separate slot in the vector.
-
-
-### Removing unwanted characters
-
-The second item is the easiest to take care of.   *R* and many programming languages have tools called **regular expressions** that allow you to manipulate text.  R has a function called `gsub()` which allows you to substitute or delete character data from a string.  First I'll remove all those `\n` values.
-
-The regular expression function `gsub()` takes three arguments:
-1. `pattern = ...`.  This is what we need it to find so we can replace it.
-1. `replacement = ...`.  The replacement.
-1. `x = ...`.  A character string or vector where `gsub()` will do its work.
-
-<!-- TODO: check that this is rendering correcting with the number of slashes -->
-
-We need to get rid of the `\n` so that we are left with only A, T and G, which are the actually information of the sequence.  We want `\n` completely removed, so the replacement will be `""`, which is as set of quotation marks with nothing in the middle, which means "delete the target pattern and put nothing in its place."
-
-One thing that is tricky about regular expressions is that many characters have special meaning to the functions, such as slashes, dollar signs, and brackets.  So, if you want to find and replace one of these specially designated characters you need to put a slash in front of them.  So when we set the pattern, instead of setting the pattern to a slash before an n `\n`, we have to give it two slashes `\\n`.  
-
-Here is the regular expression to delete the newline character \\n.
-```{r}
- # note: we want to find all the \n, but need to set the pattern as \\n
-dengueseq_vector <- gsub(pattern = "\\n",  
-                         replacement = "", 
-                         x = dengueseq_fasta)
-```
-
-We can use `strtrim()` to see if it worked
-
-```{r}
-strtrim(dengueseq_vector, 80)
-```
-
-Now for the metadata header.  This is a bit complex, but the following code is going to take all the that occurs before the beginning of the sequence ("AGTTGTTAGTC") and delete it.
-
-First, I'll define what I want to get rid of in an *R* object. This will make the **call** to `gsub()` a little cleaner to read 
-```{r}
-seq.header <- ">NC_001477.1 Dengue virus 1, complete genome"
-```
-
-
-Now I'll get rid of the header with  with `gsub()`.
-```{r}
-dengueseq_vector <- gsub(pattern = seq.header, # object defined above
-                         replacement = "", 
-                         x = dengueseq_vector)
-```
-
-
-See if it worked:
-```{r}
-strtrim(dengueseq_vector, 80)
-```
-
-### Spliting unbroken strings in character vectors
-
-Now the more complex part.  We need to split up a continuous, unbroken string of letters into a vector where each letter is on its own. This can be done with the `str_split()` function ("string split") from the `stringr` package.  The notation `stringr::str_split()` mean "use the `str_split` function from from the `stringr` package."  More specifically, it temporarily loads the `stringr` package and gives R access to just the `str_split` function.  These allows you to call a single function without loading the whole library.
-
-There are several arguments to `str_split`, and I've tacked a `[[1]]` on to the end.  
-
-First, run the command
-
-```{r}
-dengueseq_vector_split <- stringr::str_split(dengueseq_vector,
-                                       pattern = "",
-                                       simplify = FALSE)[[1]]
-```
-
-Look at the output with str()
-```{r}
-str(dengueseq_vector_split)
-```
-
-
-We can explore what the different arguments do by modifying them.  Change `pattern = "" to pattern = "A"`.  Can you figure out what happened?
-```{r}
-# re-run the command with "pattern  = "A"
-dengueseq_vector_split2 <- stringr::str_split(dengueseq_vector,
-                                       pattern = "A",
-                                       simplify = FALSE)[[1]]
-str(dengueseq_vector_split2)
-```
-
-And try it with `pattern = "" to pattern = "G"`.
-```{r}
-# re-run the command with "pattern  = "G"
-dengueseq_vector_split3 <- stringr::str_split(dengueseq_vector,
-                                       pattern = "G",
-                                       simplify = FALSE)[[1]]
-str(dengueseq_vector_split3)
-```
-
-
-Run this code to compare the two ways we just used `str_split` (don't worry what it does). Does this help you see what's up?
-```{r}
-options(str = strOptions(vec.len = 10))
-str(list(dengueseq_vector_split[1:20],
-     dengueseq_vector_split2[1:10], 
-     dengueseq_vector_split3[1:10]))
-```
-
-
-So, what does the `pattern = ... ` argument do?  For more info open up the help file for `str_split` by calling `?str_split`.
-
-Something cool which we will explore in the next exercise is that we can do summaries on vectors of nucleotides, like this:
-```{r}
-table(dengueseq_vector_split)
-```
-
-
-
-
-
-
-<!--chapter:end:004-downloading_seq_data_as_FASTA/12-clean_FASTA_in_R-AC03-01.Rmd-->
-
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-# DNA descriptive statics - Part 1
-
-**By**: Avril Coghlan  
-
-**Adapted, edited and expanded**: Nathan Brouwer (brouwern@gmail.com) under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
-
-## Preface
-
-This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  The text and code were originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
-
-## Writing TODO:
-
-* Add biology introduction
-* Work on flow
-* organize intial sections (intro, vocab, preliminaries)
-
-
-## Introduction
-
-<!-- Check the current status of the biology of this section -->
-<!-- ### Note on the biology in this section -->
-
-<!-- Some of the biology in this tutorial appears to be out of date.  Specifically, research on the biological basis of unusual frequencies of DNA "words" does not appear to be much current interest in bioinformatics and genomics.  (In contrast, methylation of bases within certain DNA words is being worked on.)  The examples are still good for practicing R skills. -->
-
-
-## Vocabulary
-
-* GC content
-* DNA words
-* scatterplots, histograms, piecharts, and boxplots
-
-
-## Functions
-* `seqinr::GC()`
-* `seqinr::count()`
-
-
-## Preliminaries
-
-```{r}
-library(compbio4all)
-library(seqinr)
-```
-
-
-
-
-## Converting DNA from FASTA format
-
-In a previous exercise we downloaded and examined DNA sequence in the FASTA format. The sequence we worked with is also stored as a data file within the `compbio4all` pa package and can be brought into memory using the `data()` command.
-
-```{r}
-data("dengueseq_fasta")
-```
-
-We can look at this data object with the `str()` command
-
-```{r}
-str(dengueseq_fasta)
-```
-
-This isn't in a format we can work with directly so we'll use the function fasta_cleaner() to set it up.
-
-```{r}
-header. <- ">NC_001477.1 Dengue virus 1, complete genome"
-dengueseq_vector <- compbio4all::fasta_cleaner(dengueseq_fasta)
-```
-
-
-Now check it out.
-```{r}
-str(dengueseq_vector)
-```
-
-What we have here is each base of the sequence in a seperate slot of our vector.
-
-The first four bases are "AGTT"
-
-We can see the first one like this
-```{r}
-dengueseq_vector[1]
-```
-
-The second one like this
-```{r}
-dengueseq_vector[2]
-```
-
-The first and second like this
-```{r}
-dengueseq_vector[1:2]
-```
-
-and all four like this
-```{r}
-dengueseq_vector[1:4]
-```
-
-
-## Length of a DNA sequence
-
-Once you have retrieved a DNA sequence, we can obtain some simple statistics to describe that sequence, such as the sequence’s total length in nucleotides. In the above example, we retrieved the DEN-1 Dengue virus genome sequence, and stored it in the vector variable dengueseq_vector To obtain the length of the genome sequence, we would use the length() function, typing:
-
-
-```{r}
-length(dengueseq_vector)
-```
-
-
-The length() function will give you back the length of the sequence stored in variable dengueseq_vector, in nucleotides. The length() function actually gives the number of **elements** (slots) in the input vector that you passed to it, which in this case in the number of elements in the vector dengueseq_vector. Since each element of the vector dengueseq_vector contains one nucleotide of the DEN-1 Dengue virus sequence, the result for the DEN-1 Dengue virus genome tells us the length of its genome sequence (ie. 10735 nucleotides long).
-
-### Base composition of a DNA sequence
-
-An obvious first analysis of any DNA sequence is to count the number of occurrences of the four different nucleotides (“A”, “C”, “G”, and “T”) in the sequence. This can be done using the the table() function. For example, to find the number of As, Cs, Gs, and Ts in the DEN-1 Dengue virus sequence (which you have put into vector variable dengueseq_vector, using the commands above), you would type:
-
-
-```{r}
-table(dengueseq_vector)
-```
-
-
-This means that the DEN-1 Dengue virus genome sequence has 3426 As occurring throughout the genome, 2240 Cs, and so forth.
-
-### GC Content of DNA
-
-One of the most fundamental properties of a genome sequence is its **GC content**, the fraction of the sequence that consists of Gs and Cs, ie. the %(G+C).
-
-The GC content can be calculated as the percentage of the bases in the genome that are Gs or Cs. That is, GC content = (number of Gs + number of Cs)*100/(genome length). For example, if the genome is 100 bp, and 20 bases are Gs and 21 bases are Cs, then the GC content is (20 + 21)*100/100 = 41%.
-
-You can easily calculate the GC content based on the number of As, Gs, Cs, and Ts in the genome sequence. For example, for the DEN-1 Dengue virus genome sequence, we know from using the table() function above that the genome contains 3426 As, 2240 Cs, 2770 Gs and 2299 Ts. Therefore, we can calculate the GC content using the command:
-
-```{r}
-(2240+2770)*100/(3426+2240+2770+2299)
-```
-
-
-Alternatively, if you are feeling lazy, you can use the GC() function in the SeqinR package, which gives the fraction of bases in the sequence that are Gs or Cs.
-
-```{r}
-seqinr::GC(dengueseq_vector)
-```
-
-The result above means that the fraction of bases in the DEN-1 Dengue virus genome that are Gs or Cs is 0.4666977. To convert the fraction to a percentage, we have to multiply by 100, so the GC content as a percentage is 46.66977%.
-
-### DNA words
-
-As well as the frequency of each of the individual nucleotides (“A”, “G”, “T”, “C”) in a DNA sequence, it is also interesting to know the frequency of longer **DNA words**, also referred to as **genomic words**. The individual nucleotides are DNA words that are 1 nucleotide long, but we may also want to find out the frequency of DNA words that are 2 nucleotides long (ie. “AA”, “AG”, “AC”, “AT”, “CA”, “CG”, “CC”, “CT”, “GA”, “GG”, “GC”, “GT”, “TA”, “TG”, “TC”, and “TT”), 3 nucleotides long (eg. “AAA”, “AAT”, “ACG”, etc.), 4 nucleotides long, etc.
-
-To find the number of occurrences of DNA words of a particular length, we can use the count() function from the R SeqinR package. 
-
-
-The count() function only works with lower-case letters, so first we have to use the tolower() function to convert our upper class genome to lower case
-
-```{r}
-dengueseq_vector <-tolower(dengueseq_vector)
-```
-
-Now we can look for words. For example, to find the number of occurrences of DNA words that are 1 nucleotide long in the sequence dengueseq_vector, we type:
-
-
-```{r}
-seqinr::count(dengueseq_vector, 1)
-```
-
-
-As expected, this gives us the number of occurrences of the individual nucleotides. To find the number of occurrences of DNA words that are 2 nucleotides long, we type:
-
-```{r}
-seqinr::count(dengueseq_vector, 2)
-```
-
-
-Note that by default the count() function includes all overlapping DNA words in a sequence. Therefore, for example, the sequence “ATG” is considered to contain two words that are two nucleotides long: “AT” and “TG”.
-
-If you type help(‘count’), you will see that the result (output) of the function count() is a table object. This means that you can use double square brackets to extract the values of elements from the table. For example, to extract the value of the third element (the number of Gs in the DEN-1 Dengue virus sequence), you can type:
-
-```{r}
-denguetable_2 <- seqinr::count(dengueseq_vector,2)
-denguetable_2[[3]]
-```
-
-The command above extracts the third element of the table produced by count(dengueseq_vector,1), which we have stored in the table variable denguetable.
-
-Alternatively, you can find the value of the element of the table in column “g” by typing:
-
-
-```{r}
-denguetable_2[["aa"]]
-```
-
-
-Once you have table you can make a basic plot
-```{r}
-barplot(denguetable_2)
-```
-
-We can sort by the number of words using the sort() command
-
-```{r}
-sort(denguetable_2)
-```
-
-
-Let's save over the original object
-```{r}
-denguetable_2 <- sort(denguetable_2)
-```
-
-
-```{r}
-barplot(denguetable_2)
-```
-
-R will automatically try to optimize the appearance of the labels on the graph so you may not see all of them; no worries.
-
-
-R can also make pie charts.  Piecharts only really work when there are a few items being plots, like the four bases.
-```{r}
-denguetable_1 <- seqinr::count(dengueseq_vector,1)
-```
-
-Make a piechart with pie()
-```{r}
-pie(denguetable_1)
-```
-
-
-
-
-
-### Summary
-
-In this practical, have learned to use the following R functions:
-
-length() for finding the length of a vector or list
-table() for printing out a table of the number of occurrences of each type of item in a vector or list.
-These functions belong to the standard installation of R.
-
-You have also learnt the following R functions that belong to the SeqinR package:
-
-GC() for calculating the GC content for a DNA sequence
-count() for calculating the number of occurrences of DNA words of a particular length in a DNA sequence
-
-
-## Acknowledgements
-
-This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  Almost all of text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
-
-In "A little book..." Coghlan noted: "Many of the ideas for the examples and exercises for this chapter were inspired by the Matlab case studies on Haemophilus influenzae (www.computational-genomics.net/case_studies/haemophilus_demo.html) and Bacteriophage lambda (http://www.computational-genomics.net/case_studies/lambdaphage_demo.html) from the website that accompanies the book Introduction to Computational Genomics: a case studies approach by Cristianini and Hahn (Cambridge University Press; www.computational-genomics.net/book/)."
-
-### License
-
-The content in this book is licensed under a Creative Commons Attribution 3.0 License.
-
-https://creativecommons.org/licenses/by/3.0/us/
-
-### Exercises
-
-Answer the following questions, using the R package. For each question, please record your answer, and what you typed into R to get this answer.
-
-Model answers to the exercises are given in Answers to the exercises on DNA Sequence Statistics (1).
-
-1. What are the last twenty nucleotides of the Dengue virus genome sequence?
-1. What is the length in nucleotides of the genome sequence for the bacterium Mycobacterium leprae strain TN (accession NC_002677)?
-Note: Mycobacterium leprae is a bacterium that is responsible for causing leprosy, which is classified by the WHO as a neglected tropical disease. As the genome sequence is a DNA sequence, if you are retrieving its sequence via the NCBI website, you will need to look for it in the NCBI Nucleotide database.
-1. How many of each of the four nucleotides A, C, T and G, and any other symbols, are there in the Mycobacterium leprae TN genome sequence?
-Note: other symbols apart from the four nucleotides A/C/T/G may appear in a sequence. They correspond to positions in the sequence that are are not clearly one base or another and they are due, for example, to sequencing uncertainties. or example, the symbol ‘N’ means ‘aNy base’, while ‘R’ means ‘A or G’ (puRine). There is a table of symbols at www.bioinformatics.org/sms/iupac.html.
-1. What is the GC content of the *Mycobacterium leprae TN* genome sequence, when (i) all non-A/C/T/G nucleotides are included, (ii) non-A/C/T/G nucleotides are discarded?
-Hint: look at the help page for the GC() function to find out how it deals with non-A/C/T/G nucleotides.
-1. How many of each of the four nucleotides A, C, T and G are there in the complement of the Mycobacterium leprae TN genome sequence?  *Hint*: you will first need to search for a function to calculate the complement of a sequence. Once you have found out what function to use, remember to use the help() function to find out what are the arguments (inputs) and results (outputs) of that function. How does the function deal with symbols other than the four nucleotides A, C, T and G? Are the numbers of As, Cs, Ts, and Gs in the complementary sequence what you would expect?
-1. How many occurrences of the DNA words CC, CG and GC occur in the Mycobacterium leprae TN genome sequence?
-1. How many occurrences of the DNA words CC, CG and GC occur in the (i) first 1000 and (ii) last 1000 nucleotides of the Mycobacterium leprae TN genome sequence?
-1.How can you check that the subsequence that you have looked at is 1000 nucleotides long?
-
-```{r}
-
-```
-
-
-<!--chapter:end:004-downloading_seq_data_as_FASTA/13-DNA_sequence_descriptive_stats-AC03-02.Rmd-->
-
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-# Downloading protein sequences in *R* {#download-protein-seqs-R}
-
-**By**: Avril Coghlan.  
-
-**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
-
-
-<!-- Add gsub walk through -->
-
-## Preliminaries
-
-```{r}
-library(compbio4all)
-```
-
-
-## Retrieving a UniProt protein sequence using rentrez
-
-We can use `entrez_fetch()` to download protein sequences.
-
-For example to retrieve the protein sequences for UniProt accessions Q9CD83 and A0PQ23, we type in R:
-
-
-```{r}
-# sequence 1: Q9CD83
-leprae_fasta <- rentrez::entrez_fetch(db = "protein",
-                        id = "Q9CD83",
-                         rettype = "fasta")
-# sequence 2: OIN17619.1
-ulcerans_fasta <- rentrez::entrez_fetch(db = "protein",
-                         id = "OIN17619.1",
-                         rettype = "fasta")
-```
-
-
-Display the contents of the `lepraeseq` FASTA file.
-```{r}
-leprae_fasta
-```
-
-<!-- When did I introduce FASTA cleaner? -->
-<!-- Are these data files in compbio4all? -->
-
-Let's clean these up to remove the header and new line characters usin the function `fasta_cleaner()`.
-```{r}
-leprae_vector   <- fasta_cleaner(leprae_fasta)
-ulcerans_vector <- fasta_cleaner(ulcerans_fasta)
-```
-
-Examine the output using `length()`, `class()`, and `head()`:
-
-```{r, eval = F}
-length(leprae_vector)
-class(leprae_vector)
-head(leprae_vector, 20)
-```
-
-<!--chapter:end:004-downloading_seq_data_as_FASTA/14-download_protein_sequences.Rmd-->
-
-# Changes to database entries
-
-Sometimes databases entries not linked or database entries get removed.  When revising this chapter I had to update three of the accession numbers because the UniProt accessions in the original version weren't working for me.
-
-For example the original UniProt entry included in the chapter
-[E3M2K8](https://www.uniprot.org/uniprot/E3M2K8) does not currently link directly to the NCBI entry for this same protein.  Instead, I had to use the NCBI accession XP_003109757.1.  I'm not sure why this is.
-
-Two accession numbers in the original version of this chapter appear to have been removed from UniProt because they were preliminary and perhaps did not meet the quality standards for UniProt.  While the NCBI Gene and Protein are meant to be a record of *all* sequence, NCBI RefSeq and UniProt are carefully curated to contain information that is consistent, accurate, and represents biological reality.  
-
-Searching the UniProt data base for two accessions in the original version of this chapter,
-[E1FUV2](https://www.uniprot.org/uniprot/E1FUV2) (*Loa loa*) and
-[A8NSK3](https://www.uniprot.org/uniprot/A8NSK3)(*Brugia malayi*), both yielded the result: 
->"This entry is obsolete... this entry was deleted.  The protein sequence for this entry is available in UniParc. For previous versions of this entry, please look at its history."
-
-Looking at the history for the *Loa loa* version of the protein we can see it was listed as "unreviewed" prior to it being pulled and has the note "The sequence shown here is derived from an ... whole genome shotgun (WGS) entry which i preliminary data."  (https://www.uniprot.org/uniprot/E1FUV2.txt?version=9).  Once they got around to reviewing in, the curators at UniProt must have decided that it didn't meet the standards for inclusion in the database.  The information about the sequence in other databases, however, was not deleted, just the entry in UniProt.
-
-Most proteins are not experimentally studied in a lab, let alone their structure determined or their expression levels assessed.  They are therefore predicted to be real based on their similarity to proteins that have been studied in model organisms.  
-
-To track down these sequences, I used BLAST. BLASTing the well-studied model organism *C. elegans* version of the protein against the *Loa loa* genome resulted in a hypothetical protein [LOAG_18175](https://blast.ncbi.nlm.nih.gov/Blast.cgi#alnHdr_XP_020305433) a 93% query coverage with C. elegans and 44% identity.  The accession number for this predicted protein in NCBI is [XP_020305433.1](https://blast.ncbi.nlm.nih.gov/Blast.cgi#alnHdr_XP_020305433).  I similarly tracked down the accession for the *Brugia malayi* version of the protein.
-
-<!-- Turn this into an assignment. -->
-<!-- BLASTing the *C. elegans* version of the protein against the *Brugia malayi* genome resulted in a two high-ranked results.  I'll just consider the first because they are just different alternatively spliced versions of the same protein (consider, though how this could impact phylogenetic inference. The highest-ranked results was [BMA-SPN-4, isoform a] which also has  93% query coverage with *C. elegans* and 44% identity.  The accession number for this  protein in NCBI is [CRZ25068.1](https://www.ncbi.nlm.nih.gov/protein/CRZ25068.1?report=genbank&log$=protalign&blast_rank=1&RID=FXV3B98S016).  The other splice variant accession number CRZ25069.1 had almost the exact same results but was 9 amino acids longer.  The occurrence of two splice variants of this protein may have resulted in it being pulled from UniProt. -->
-
-<!--chapter:end:004-downloading_seq_data_as_FASTA/15-changes_to_database.Rmd-->
+<!--chapter:end:004-NCBI/05-FASTA_files.Rmd-->
 
 # A complete bioinformatics workflow in R
 

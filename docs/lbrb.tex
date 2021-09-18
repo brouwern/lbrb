@@ -85,7 +85,7 @@
 
 \title{A Little Book of R for Bioinformatics 2.0}
 \author{Avirl Coghlan, with contributions by Nathan L. Brouwer}
-\date{2021-09-17}
+\date{2021-09-18}
 
 \begin{document}
 \maketitle
@@ -897,682 +897,6 @@ There is another nice (slightly more in-depth) tutorial to R available on the ``
 
 \href{https://learningstatisticswithr.com/book/introR.html}{Chapter 3} of Danielle Navarro's book is an excellent intro to the basics of R.
 
-\hypertarget{nucleic-acids-review}{%
-\chapter{Nucleic Acids}\label{nucleic-acids-review}}
-
-\textbf{Authors}: OpenStax / Libretext Formatted in RMarkdown by Nathan Brouwer under the Creative Commons Attribution License 4.0 license.
-
-This chapter was adapted from \href{https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book\%3A_General_Biology_(OpenStax)}{LibreText General Biology}, Chapter 3, Section 3.5: \href{https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book\%3A_General_Biology_(OpenStax)/1\%3A_The_Chemistry_of_Life/3\%3A_Biological_Macromolecules/3.5\%3A_Nucleic_Acids}{Nucleic Acids}. The LibreText book is based on \href{https://openstax.org/details/books/biology-2e}{OpenStax Biology 2nd edition}, Chapter 3, Section 3.5: \href{https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids}{Nucleic Acids}. A full list of authors is found under the \textbf{Contributors and Attributions} section at the end of this document.
-
-\begin{quote}
-Nucleic acids are the most important macromolecules for the continuity
-of life. They carry the genetic blueprint of a cell and carry
-instructions for the functioning of the cell.
-\end{quote}
-
-\hypertarget{dna-and-rna}{%
-\section{DNA and RNA}\label{dna-and-rna}}
-
-The two main types of nucleic acids are deoxyribonucleic acid (DNA)
-and ribonucleic acid (RNA). DNA is the genetic material found in all
-living organisms, ranging from single-celled bacteria to multicellular
-mammals. It is found in the nucleus of eukaryotes and in the
-organelles, chloroplasts, and mitochondria. In prokaryotes, the DNA is
-not enclosed in a membranous envelope.
-
-The entire genetic content of a cell is known as its genome, and the
-study of genomes is genomics. In eukaryotic cells but not in
-prokaryotes, DNA forms a complex with histone proteins to form
-chromatin, the substance of eukaryotic chromosomes. A chromosome may
-contain tens of thousands of genes. Many genes contain the information
-to make protein products; other genes code for RNA products. DNA
-controls all of the cellular activities by turning the genes ``on'' or
-``off.''
-
-The other type of nucleic acid, RNA, is mostly involved in protein
-synthesis. The DNA molecules never leave the nucleus but instead use
-an intermediary to communicate with the rest of the cell. This
-intermediary is the messenger RNA (mRNA). Other types of RNA---like
-rRNA, tRNA, and microRNA---are involved in protein synthesis and its
-regulation.
-
-DNA and RNA are made up of monomers known as nucleotides. The
-nucleotides combine with each other to form a polynucleotide, DNA or
-RNA. Each nucleotide is made up of three components: a nitrogenous
-base, a pentose (five-carbon) sugar, and a phosphate group (Figure
-3.5.1). Each nitrogenous base in a nucleotide is attached to a sugar
-molecule, which is attached to one or more phosphate groups.
-
-\begin{figure}
-\includegraphics[width=14.9in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/image5} \caption{A nucleotide is made up of three components: a nitrogenous base, a pentose sugar, and one or more phosphate groups. Carbon residues in the pentose are numbered 1′ through 5′ (the prime distinguishes these residues from those in the base, which are numbered without using a prime notation). The base is attached to the 1′ position of the ribose, and the phosphate is attached to the 5′ position. When a polynucleotide is formed, the 5′ phosphate of the incoming nucleotide attaches to the 3′ hydroxyl group at the end of the growing chain. Two types of pentose are found in nucleotides, deoxyribose (found in DNA) and ribose (found in RNA). Deoxyribose is similar in structure to ribose, but it has an H instead of an OH at the 2′ position. Bases can be divided into two categories: purines and pyrimidines. Purines have a double ring structure, and pyrimidines have a single ring.}\label{fig:unnamed-chunk-49}
-\end{figure}
-
-The nitrogenous bases, important components of nucleotides, are
-organic molecules and are so named because they contain carbon and
-nitrogen. They are bases because they contain an amino group that has
-the potential of binding an extra hydrogen, and thus, decreases the
-hydrogen ion concentration in its environment, making it more basic.
-Each nucleotide in DNA contains one of four possible nitrogenous
-bases: adenine (A), guanine (G) cytosine (C), and thymine (T).
-
-Adenine and guanine are classified as purines. The primary structure
-of a purine is two carbon-nitrogen rings. Cytosine, thymine, and
-uracil are classified as pyrimidines which have a single
-carbon-nitrogen ring as their primary structure (Figure 3.5.1). Each
-of these basic carbon-nitrogen rings has different functional groups
-attached to it. In molecular biology shorthand, the nitrogenous bases are simply known by their symbols A, T, G, C, and U. DNA contains A, T, G, and C whereas RNA contains A, U, G, and
-C.
-
-The pentose sugar in DNA is deoxyribose, and in RNA, the sugar is
-ribose (Figure 3.5.1). The difference between the sugars is the
-presence of the hydroxyl group on the second carbon of the ribose and
-hydrogen on the second carbon of the deoxyribose. The carbon atoms of
-the sugar molecule are numbered as 1′, 2′, 3′, 4′, and 5′ (1′ is read
-as ``one prime''). The phosphate residue is attached to the hydroxyl
-group of the 5′ carbon of one sugar and the hydroxyl group of the 3′
-carbon of the sugar of the next nucleotide, which forms a 5′--3′
-phosphodiester linkage. The phosphodiester linkage is not formed by
-simple dehydration reaction like the other linkages connecting
-monomers in macromolecules: its formation involves the removal of two
-phosphate groups. A polynucleotide may have thousands of such
-phosphodiester linkages.
-
-\hypertarget{dna-double-helix-structure}{%
-\section{DNA Double-Helix Structure}\label{dna-double-helix-structure}}
-
-DNA has a double-helix structure (Figure 3.5.2). The sugar and
-phosphate lie on the outside of the helix, forming the backbone of the
-DNA. The nitrogenous bases are stacked in the interior, like the steps
-of a staircase, in pairs; the pairs are bound to each other by
-hydrogen bonds. Every base pair in the double helix is separated from
-the next base pair by 0.34 nm. The two strands of the helix run in
-opposite directions, meaning that the 5′ carbon end of one strand will
-face the 3′ carbon end of its matching strand. (This is referred to as
-antiparallel orientation and is important to DNA replication and in
-many nucleic acid interactions.)
-
-\begin{figure}
-\includegraphics[width=7.56in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/image6} \caption{Figure 3.5.2 : Native DNA is an antiparallel double helix. The phosphate backbone (indicated by the curvy lines) is on the outside, and the bases are on the inside. Each base from one strand interacts via hydrogen bonding with a base from the opposing strand. (credit: Jerome Walker/Dennis Myts)}\label{fig:unnamed-chunk-50}
-\end{figure}
-
-Only certain types of base pairing are allowed. For example, a certain
-purine can only pair with a certain pyrimidine. This means A can pair
-with T, and G can pair with C, as shown in Figure 3.5.3. This is known
-as the base complementary rule. In other words, the DNA strands are
-complementary to each other. If the sequence of one strand is
-AATTGGCC, the complementary strand would have the sequence TTAACCGG.
-During DNA replication, each strand is copied, resulting in a daughter
-DNA double helix containing one parental DNA strand and a newly
-synthesized strand.
-
-Art Connection
-
-\includegraphics[width=6.5in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/image7}
-
-Figure 3.5.3 : In a double stranded DNA molecule, the two strands run
-antiparallel to one another so that one strand runs 5′ to 3′ and the
-other 3′ to 5′. The phosphate backbone is located on the outside, and
-the bases are in the middle. Adenine forms hydrogen bonds (or base
-pairs) with thymine, and guanine base pairs with cytosine.
-
-A mutation occurs, and cytosine is replaced with adenine. What impact
-do you think this will have on the DNA structure?
-
-\hypertarget{rna}{%
-\section{RNA}\label{rna}}
-
-Ribonucleic acid, or RNA, is mainly involved in the process of protein
-synthesis under the direction of DNA. RNA is usually single-stranded
-and is made of ribonucleotides that are linked by phosphodiester
-bonds. A ribonucleotide in the RNA chain contains ribose (the pentose
-sugar), one of the four nitrogenous bases (A, U, G, and C), and the
-phosphate group.
-
-There are four major types of RNA: messenger RNA (mRNA), ribosomal RNA
-(rRNA), transfer RNA (tRNA), and microRNA (miRNA). The first, mRNA,
-carries the message from DNA, which controls all of the cellular
-activities in a cell. If a cell requires a certain protein to be
-synthesized, the gene for this product is turned ``on'' and the
-messenger RNA is synthesized in the nucleus. The RNA base sequence is
-complementary to the coding sequence of the DNA from which it has been
-copied. However, in RNA, the base T is absent and U is present
-instead. If the DNA strand has a sequence AATTGCGC, the sequence of
-the complementary RNA is UUAACGCG. In the cytoplasm, the mRNA
-interacts with ribosomes and other cellular machinery (Figure 3.5.4).
-
-\includegraphics[width=7.1in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/image8}
-
-Figure 3.5.4 : A ribosome has two parts: a large subunit and a small
-subunit. The mRNA sits in between the two subunits. A tRNA molecule
-recognizes a codon on the mRNA, binds to it by complementary base
-pairing, and adds the correct amino acid to the growing peptide chain.
-
-The mRNA is read in sets of three bases known as codons. Each codon
-codes for a single amino acid. In this way, the mRNA is read and the
-protein product is made. Ribosomal RNA (rRNA) is a major constituent
-of ribosomes on which the mRNA binds. The rRNA ensures the proper
-alignment of the mRNA and the ribosomes; the rRNA of the ribosome also
-has an enzymatic activity (peptidyl transferase) and catalyzes the
-formation of the peptide bonds between two aligned amino acids.
-Transfer RNA (tRNA) is one of the smallest of the four types of RNA,
-usually 70--90 nucleotides long. It carries the correct amino acid to
-the site of protein synthesis. It is the base pairing between the tRNA
-and mRNA that allows for the correct amino acid to be inserted in the
-polypeptide chain. microRNAs are the smallest RNA molecules and their
-role involves the regulation of gene expression by interfering with
-the expression of certain mRNA messages. Table 3.5.1 below summarizes
-features of DNA and RNA.
-
-\textbf{\emph{Table}} 3.5.1 *\textbf{:} Features of DNA and RNA.
-
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.31}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.35}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.35}}@{}}
-\toprule
-\begin{minipage}[b]{\linewidth}\raggedright
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Features of DNA and
-RNA
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-\end{minipage} \\
-\midrule
-\endhead
-& DNA & RNA \\
-Function & Carries genetic
-information & Involved in protein
-synthesis \\
-Location & Remains in the nucleus & Leaves the nucleus \\
-Structure & Double helix & Usually
-single-stranded \\
-Sugar & Deoxyribose & Ribose \\
-Pyrimidines & Cytosine, thymine & Cytosine, uracil \\
-Purines & Adenine, guanine & Adenine, guanine \\
-\bottomrule
-\end{longtable}
-
-Even though the RNA is single stranded, most RNA types show extensive
-intramolecular base pairing between complementary sequences, creating
-a predictable three-dimensional structure essential for their
-function.
-
-As you have learned, information flow in an organism takes place from
-DNA to RNA to protein. DNA dictates the structure of mRNA in a process
-known as transcription, and RNA dictates the structure of protein in a
-process known as translation. This is known as the Central Dogma of
-Life, which holds true for all organisms; however, exceptions to the
-rule occur in connection with viral infections.
-
-\emph{Link to Learning}
-
-\includegraphics[width=0.1\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/image9}
-
-\begin{itemize}
-\tightlist
-\item
-  To learn more about DNA, explore the Howard Hughes Medical Institute
-  BioInteractive animations on the topic of DNA.*
-\end{itemize}
-
-\hypertarget{summary}{%
-\section{Summary}\label{summary}}
-
-Nucleic acids are molecules made up of nucleotides that direct
-cellular activities such as cell division and protein synthesis. Each
-nucleotide is made up of a pentose sugar, a nitrogenous base, and a
-phosphate group. There are two types of nucleic acids: DNA and RNA.
-DNA carries the genetic blueprint of the cell and is passed on from
-parents to offspring (in the form of chromosomes). It has a
-double-helical structure with the two strands running in opposite
-directions, connected by hydrogen bonds, and complementary to each
-other. RNA is single-stranded and is made of a pentose sugar (ribose),
-a nitrogenous base, and a phosphate group. RNA is involved in protein
-synthesis and its regulation. Messenger RNA (mRNA) is copied from the
-DNA, is exported from the nucleus to the cytoplasm, and contains
-information for the construction of proteins. Ribosomal RNA (rRNA) is
-a part of the ribosomes at the site of protein synthesis, whereas
-transfer RNA (tRNA) carries the amino acid to the site of protein
-synthesis. microRNA regulates the use of mRNA for protein synthesis.
-
-Art Connections
-
-\hypertarget{analysis-questions}{%
-\section{Analysis Questions}\label{analysis-questions}}
-
-Free Response
-
-\hypertarget{glossary}{%
-\section{Glossary}\label{glossary}}
-
-\textbf{deoxyribonucleic acid (DNA)}: double-helical molecule that carries the hereditary information of the cell\\
-\textbf{messenger RNA (mRNA)}: DNA that carries information from DNA to ribosomes during protein synthesis\\
-\textbf{nucleic acid}: biological macromolecule that carries the genetic blueprint of a cell
-and carries instructions for the functioning of the cell\\
-\textbf{nucleotide}: monomer of nucleic acids; contains a pentose sugar, one or more phosphate groups, and a nitrogenous base\\
-\textbf{phosphodiester}: linkage covalent chemical bond that holds together the polynucleotide
-chains with a phosphate group linking two pentose sugars of neighboring nucleotides\\
-\textbf{polynucleotide}: long chain of nucleotides\\
-\textbf{purine}: type of nitrogenous base in DNA and RNA; adenine and guanine are\\
-\textbf{purines, pyrimidine}: type of nitrogenous base in DNA and RNA; cytosine, thymine, and uracil
-are pyrimidines\\
-\textbf{ribonucleic acid (RNA)}: single-stranded, often internally base paired, molecule that is
-involved in protein synthesis\\
-\textbf{ribosomal RNA (rRNA)}: RNA that ensures the proper alignment of the mRNA and the ribosomes
-during protein synthesis and catalyzes the formation of the peptide linkage\\
-\textbf{transcription}: process through which messenger RNA forms on a template of DNA\\
-\textbf{transfer RNA (tRNA)}: RNA that carries activated amino acids to the site of protein
-synthesis on the ribosome\\
-\textbf{translation}: process through which RNA directs the formation of protein
-
-\hypertarget{contributors-and-attributions}{%
-\section{Contributors and Attributions}\label{contributors-and-attributions}}
-
-Connie Rye (East Mississippi Community College), Robert Wise
-(University of Wisconsin, Oshkosh), Vladimir Jurukovski (Suffolk
-County Community College), Jean DeSaix (University of North Carolina
-at Chapel Hill), Jung Choi (Georgia Institute of Technology), Yael
-Avissar (Rhode Island College) among other contributing authors.
-Original content by OpenStax (CC BY 4.0; Download for free at
-\href{http://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd\%409.87}{http://cnx.org/contents/185cbf87-c72...f21b5eabd@9.87}).
-
-\hypertarget{proteins-review}{%
-\chapter{Proteins}\label{proteins-review}}
-
-\textbf{Authors}: OpenStax / LibreText. Formatted in RMarkdown by Nathan Brouwer under the Creative Commons Attribution License 4.0 license.
-
-This chapter was adapted from \href{}{LibreText General Biology}, Chapter 3, Section 3.4: \href{https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book\%3A_General_Biology_(OpenStax)/1\%3A_The_Chemistry_of_Life/3\%3A_Biological_Macromolecules/3.4\%3A_Proteins}{Proteins}. The LibreText book is based on \href{https://openstax.org/details/books/biology-2e}{OpenStax Biology 2nd edition}, Chapter 3, Section 3.4: \href{https://openstax.org/books/biology-2e/pages/3-4-proteins}{Nucleic Acids}. A full list of authors is found under the \textbf{Contributors and Attributions} section at the end of this document.
-
-\hypertarget{skills-to-develop}{%
-\subsection{Skills to develop:}\label{skills-to-develop}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Describe the functions proteins perform in the cell and in tissues
-\item
-  Discuss the relationship between amino acids and proteins
-\item
-  Explain the four levels of protein organization
-\item
-  Describe the ways in which protein shape and function are linked
-\end{enumerate}
-
-Proteins are one of the most abundant organic molecules in living systems and have the most diverse range of functions of all \textbf{macromolecules}. Proteins may be structural, regulatory, contractile, or protective; they may serve in transport, storage, or membranes; or they may be toxins or enzymes. Each cell in a living system may contain thousands of proteins, each with a unique function. Their structures, like their functions, vary greatly. They are all, however, \textbf{polymers} of \textbf{amino acids}, arranged in a linear sequence.
-
-\hypertarget{types-and-functions-of-proteins}{%
-\section{Types and Functions of Proteins}\label{types-and-functions-of-proteins}}
-
-\textbf{Enzymes}, which are produced by living cells, are \textbf{catalysts} in biochemical reactions (like digestion) and are usually complex or conjugated proteins. Each enzyme is specific for the substrate (a reactant that binds to an enzyme) it acts on. The enzyme may help in breakdown, rearrangement, or synthesis reactions. Enzymes that break down their substrates are called \textbf{catabolic enzymes}, enzymes that build more complex molecules from their substrates are called \textbf{anabolic enzymes}, and enzymes that affect the rate of reaction are called \textbf{catalytic enzymes}.
-It should be noted that all enzymes increase the rate of reaction and, therefore, are considered to be organic catalysts. An example of an enzyme is salivary amylase, which
-hydrolyzes its substrate amylose, a component of starch.
-
-\textbf{Hormones} are chemical-signaling molecules, usually small proteins or steroids, secreted by endocrine cells that act to control or regulate specific physiological processes, including growth, development, metabolism, and reproduction. For example, insulin is a \textbf{protein hormone} that helps to regulate the blood glucose level.
-
-Proteins have different shapes and molecular weights; some proteins are \textbf{globular} in shape whereas others are fibrous. For example, hemoglobin is a globular protein, but collagen, found in our skin, is a fibrous protein. Protein shape is critical to its function, and this shape is maintained by many different types of chemical bonds. Changes in temperature, pH, and exposure to chemicals may lead to permanent changes in the shape of the protein, leading to loss of function, known as \textbf{denaturation}. All proteins are made up of different arrangements of the same 20 types of \textbf{amino acids}.
-
-\hypertarget{amino-acids}{%
-\section{Amino Acids}\label{amino-acids}}
-
-Amino acids are the \textbf{monomers} that make up proteins. Each amino acid has the same fundamental structure, which consists of a central carbon atom, also known as the alpha (\emph{α}) carbon, bonded to an amino group (NH\textsubscript{2}), a carboxyl group (COOH), and to a hydrogen atom. Every amino acid also has another atom or group of atoms bonded to the central atom known as the R group (Figure 3.4.1).
-
-\begin{figure}
-\includegraphics[width=7.15in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage1} \caption{Amino acids have a central asymmetric carbon to which an amino group, a carboxyl group, a hydrogen atom, and a side chain (R group) are attached.}\label{fig:unnamed-chunk-54}
-\end{figure}
-
-The name ``amino acid'' is derived from the fact that they contain both an amino group and carboxyl-acid-group in their basic structure. For each amino acid, the R group (or side chain) is different (Figure 3.4.2).
-
-\begin{figure}
-\includegraphics[width=0.6\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage2} \caption{There are 20 common amino acids commonly found in proteins, each with a different R group (variant group) that determines its chemical nature.}\label{fig:unnamed-chunk-55}
-\end{figure}
-
-Which categories of amino acid would you expect to find on the surface
-of a soluble protein, and which would you expect to find in the
-interior? What distribution of amino acids would you expect to find in
-a protein embedded in a lipid bilayer?
-
-The chemical nature of the side chain determines the nature of the amino acid (that is, whether it is \textbf{acidic}, \textbf{basic}, \textbf{polar}, or \textbf{nonpolar}). For example, the amino acid glycine has a hydrogen atom as the R group. Amino acids such as valine, methionine, and alanine are nonpolar or hydrophobic, while amino acids such as serine, threonine, and cysteine are polar and have hydrophilic side chains. The side chains of lysine and arginine are positively charged, and therefore these amino acids are also known as basic amino acids. Proline has an R group that is linked to the amino group, forming a ring-like structure. Proline is an exception to the standard structure of an amino acid since its amino group is not separate from the side chain
-
-Amino acids are represented by a single upper case letter or a three-letter abbreviation. For example, valine is known by the letter V or the three-letter code val.
-
-The sequence and the number of amino acids ultimately determine a protein's shape, size, and function. Each amino acid is attached to another amino acid by a covalent bond, known as a \textbf{peptide bond}, which is formed by a dehydration reaction. The carboxyl group of one amino acid and the amino group of the incoming amino acid combine, releasing a molecule of water. The resulting bond is the peptide bond
-
-\begin{figure}
-\includegraphics[width=5.83in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage3} \caption{Peptide bond formation is a dehydration synthesis reaction. The carboxyl group of one amino acid is linked to the amino group of the incoming amino acid. In the process, a molecule of water is released.}\label{fig:unnamed-chunk-56}
-\end{figure}
-
-The products formed by such linkages are called \textbf{peptides}. As more amino acids join to this growing chain, the resulting chain is known as a \textbf{polypeptide}. Each polypeptide has a free amino group at one end. This end is called the \textbf{N-terminal}, or the amino terminal, and the other end has a free carboxyl group, also known as the C- or carboxyl
-terminal. The terms polypeptide and protein are sometimes used interchangeably, a polypeptide is technically a polymer of amino acids, whereas the term protein is more formally used for a polypeptide or that have combined together, often have bound non-peptide prosthetic groups, have a distinct shape, and have a unique function.
-
-After \textbf{protein synthesis (translation)}, most proteins are modified. These are known as \textbf{post-translational modifications}. They may undergo \textbf{cleavage}, \textbf{phosphorylation} (addition of a phosphate group), or may require the addition of other chemical groups. Only after these modifications is the protein completely functional.
-
-\hypertarget{evolution-connection}{%
-\section{Evolution Connection:}\label{evolution-connection}}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\textbf{The Evolutionary Significance of Cytochrome}: Cytochrome c is an
-important component of the electron transport chain, a part of
-cellular respiration, and it is normally found in the cellular
-organelle, the mitochondrion. This protein has a heme prosthetic
-group, and the central ion of the heme gets alternately reduced and
-oxidized during electron transfer. Because this essential protein's
-role in producing cellular energy is crucial, it has changed very
-little over millions of years. Protein sequencing has shown that there
-is a considerable amount of cytochrome c amino acid sequence \textbf{homology}
-among different species; in other words, evolutionary kinship can be
-assessed by measuring the similarities or differences among various
-species' DNA or protein sequences.
-
-Scientists have determined that human cytochrome c contains 104 amino
-acids. For each cytochrome c molecule from different organisms that
-has been sequenced to date, 37 of these amino acids appear in the same
-position in all samples of cytochrome c.~This indicates that there may
-have been a \textbf{common ancestor}. On comparing the human and chimpanzee
-protein sequences, no sequence difference was found. When human and
-rhesus monkey sequences were compared, the single difference found was
-in one amino acid. In another comparison, human to yeast sequencing
-shows a difference in the 44th position.
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\hypertarget{protein-structure}{%
-\section{Protein Structure}\label{protein-structure}}
-
-The shape of a protein is critical to its function. For example, an enzyme can bind to a specific substrate at a site known as the \textbf{active site}. If this active site is altered because of local changes or changes in overall protein structure, the enzyme may be unable to bind to the substrate. To understand how the protein gets its final shape or conformation, we need to understand the four levels of protein structure: primary, secondary, tertiary, and quaternary.
-
-\hypertarget{primary-structure}{%
-\subsection{Primary Structure}\label{primary-structure}}
-
-The unique sequence of amino acids in a polypeptide chain is its
-primary structure. For example, the pancreatic hormone insulin has two
-polypeptide chains, A and B, and they are linked together by disulfide
-bonds. The N terminal amino acid of the A chain is glycine, whereas
-the C terminal amino acid is asparagine (Figure 3.4.4). The sequences
-of amino acids in the A and B chains are unique to insulin.
-
-\begin{figure}
-\includegraphics[width=0.4\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage4} \caption{Bovine serum insulin is a protein hormone made of two peptide chains, A (21 amino acids long) and B (30 amino acids long). In each chain, primary structure is indicated by three-letter abbreviations that represent the names of the amino acids in the order they are present. The amino acid cysteine (cys) has a sulfhydryl (SH) group as a side chain. Two sulfhydryl groups can react in the presence of oxygen to form a disulfide (S-S) bond. Two disulfide bonds connect the A and B chains together, and a third helps the A chain fold into the correct shape. Note that all disulfide bonds are the same length, but are drawn different sizes for clarity.}\label{fig:unnamed-chunk-57}
-\end{figure}
-
-The unique sequence for every protein is ultimately determined by the
-gene encoding the protein. A change in nucleotide sequence of the
-gene's coding region may lead to a different amino acid being added to
-the growing polypeptide chain, causing a change in protein structure
-and function. In sickle cell anemia, the hemoglobin \emph{beta} chain (a small
-portion of which is shown in Figure 3.4.5) has a single amino acid
-substitution, causing a change in protein structure and function.
-Specifically, the amino acid glutamic acid is substituted by valine in
-the beta chain. What is most remarkable to consider is that a
-hemoglobin molecule is made up of two alpha chains and two beta chains
-that each consist of about 150 amino acids. The molecule, therefore,
-has about 600 amino acids. The structural difference between a normal
-hemoglobin molecule and a sickle cell molecule---which dramatically
-decreases life expectancy---is a single amino acid of the 600. What is
-even more remarkable is that those 600 amino acids are encoded by
-three nucleotides each, and the mutation is caused by a single base
-change (point mutation), 1 in 1800 bases.
-
-\begin{figure}
-\includegraphics[width=0.4\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage5} \caption{The beta chain of hemoglobin is 147 residues in length, yet a single amino acid substitution leads to sickle cell anemia. In normal hemoglobin, the amino acid at position seven is glutamate. In sickle cell hemoglobin, this glutamate is replaced by a valine.}\label{fig:unnamed-chunk-58}
-\end{figure}
-
-Because of this change of one amino acid in the chain, hemoglobin
-molecules form long fibers that distort the biconcave, or disc-shaped,
-red blood cells and assume a crescent or ``sickle'' shape, which clogs
-arteries (Figure 3.4.6). This can lead to myriad serious health
-problems such as breathlessness, dizziness, headaches, and abdominal
-pain for those affected by this disease.
-
-\begin{figure}
-\includegraphics[width=0.6\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage6} \caption{In this blood smear, visualized at 535x magnification using bright field microscopy, sickle cells are crescent shaped, while normal cells are disc-shaped. (credit: modification of work by Ed Uthman; scale-bar data from Matt Russell)}\label{fig:unnamed-chunk-59}
-\end{figure}
-
-\hypertarget{secondary-structure}{%
-\subsection{Secondary Structure}\label{secondary-structure}}
-
-The local folding of the polypeptide in some regions gives rise to the
-secondary structure of the protein. The most common are the \emph{α}-helix
-and \emph{beta}-pleated sheet structures (Figure 3.4.7). Both structures are
-the \emph{α}-helix structure---the helix held in shape by hydrogen bonds.
-The hydrogen bonds form between the oxygen atom in the carbonyl group
-in one amino acid and another amino acid that is four amino acids
-farther along the chain.
-
-\begin{figure}
-\includegraphics[width=0.4\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage7} \caption{The α-helix and β-pleated sheet are secondary structures of proteins that form because of hydrogen bonding between carbonyl and amino groups in the peptide backbone. Certain amino acids have a propensity to form an α-helix, while others have a propensity to form a β-pleated sheet.}\label{fig:unnamed-chunk-60}
-\end{figure}
-
-Every helical turn in an alpha helix has 3.6 amino acid residues. The
-R groups (the variant groups) of the polypeptide protrude out from the
-\emph{α}-helix chain. In the \emph{beta}-pleated sheet, the ``pleats'' are formed by
-hydrogen bonding between atoms on the backbone of the polypeptide
-chain. The R groups are attached to the carbons and extend above and
-below the folds of the pleat. The pleated segments align parallel or
-antiparallel to each other, and hydrogen bonds form between the
-partially positive nitrogen atom in the amino group and the partially
-negative oxygen atom in the carbonyl group of the peptide backbone.
-The \emph{α}-helix and \emph{beta}-pleated sheet structures are found in most
-globular and fibrous proteins and they play an important structural
-role.
-
-\hypertarget{tertiary-structure}{%
-\subsection{Tertiary Structure}\label{tertiary-structure}}
-
-The unique three-dimensional structure of a polypeptide is its
-tertiary structure (Figure 3.4.8). This structure is in part due to
-chemical interactions at work on the polypeptide chain. Primarily, the
-interactions among R groups creates the complex three- dimensional
-tertiary structure of a protein. The nature of the R groups found in
-the amino acids involved can counteract the formation of the hydrogen
-bonds described for standard secondary structures. For example, R
-groups with like charges are repelled by each other and those with
-unlike charges are attracted to each other (ionic bonds). When protein
-folding takes place, the hydrophobic R groups of nonpolar amino acids
-lay in the interior of the protein, whereas the hydrophilic R groups
-lay on the outside. The former types of interactions are also known as
-hydrophobic interactions. Interaction between cysteine side chains
-forms disulfide linkages in the presence of oxygen, the only covalent
-bond forming during protein folding.
-
-\begin{figure}
-\includegraphics[width=0.4\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage8} \caption{The tertiary structure of proteins is determined by a variety of chemical interactions. These include hydrophobic interactions, ionic bonding, hydrogen bonding and disulfide linkages.}\label{fig:unnamed-chunk-61}
-\end{figure}
-
-All of these interactions, weak and strong, determine the final
-three-dimensional shape of the protein. When a protein loses its
-three-dimensional shape, it may no longer be functional.
-
-\hypertarget{quaternary-structure}{%
-\subsection{Quaternary Structure}\label{quaternary-structure}}
-
-In nature, some proteins are formed from several polypeptides, also
-known as subunits, and the interaction of these subunits forms the
-quaternary structure. Weak interactions between the subunits help to
-stabilize the overall structure. For example, insulin (a globular
-protein) has a combination of hydrogen bonds and disulfide bonds that
-cause it to be mostly clumped into a ball shape. Insulin starts out as
-a single polypeptide and loses some internal sequences in the presence
-of post-translational modification after the formation of the
-disulfide linkages that hold the remaining chains together. Silk (a
-fibrous protein), however, has a \emph{beta}-pleated sheet structure that is
-the result of hydrogen bonding between different chains.
-
-The four levels of protein structure (primary, secondary, tertiary,
-and quaternary) are illustrated in Figure 3.4.9.
-
-\begin{figure}
-\includegraphics[width=11.07in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage9} \caption{The four levels of protein structure can be observed in these illustrations. (credit: modification of work by National Human Genome Research Institute)}\label{fig:unnamed-chunk-62}
-\end{figure}
-
-\hypertarget{denaturation-and-protein-folding}{%
-\section{Denaturation and Protein Folding}\label{denaturation-and-protein-folding}}
-
-Each protein has its own unique sequence and shape that are held
-together by chemical interactions. If the protein is subject to
-changes in temperature, pH, or exposure to chemicals, the protein
-structure may change, losing its shape without losing its primary
-sequence in what is known as denaturation. Denaturation is often
-reversible because the primary structure of the polypeptide is
-conserved in the process if the denaturing agent is removed, allowing
-the protein to resume its function. Sometimes denaturation is
-irreversible, leading to loss of function. One example of irreversible
-protein denaturation is when an egg is fried. The albumin protein in
-the liquid egg white is denatured when placed in a hot pan. Not all
-proteins are denatured at high temperatures; for instance, bacteria
-that survive in hot springs have proteins that function at
-temperatures close to boiling. The stomach is also very acidic, has a
-low pH, and denatures proteins as part of the digestion process;
-however, the digestive enzymes of the stomach retain their activity
-under these conditions.
-
-Protein folding is critical to its function. It was originally thought
-that the proteins themselves were responsible for the folding process.
-Only recently was it found that often they receive assistance in the
-folding process from protein helpers known as chaperones (or
-chaperonins) that associate with the target protein during the folding
-process. They act by preventing aggregation of polypeptides that make
-up the complete protein structure, and they disassociate from the
-protein once the target protein is folded.
-
-\hypertarget{summary-1}{%
-\section{Summary}\label{summary-1}}
-
-Proteins are a class of macromolecules that perform a diverse range of
-functions for the cell. They help in metabolism by providing
-structural support and by acting as enzymes, carriers, or hormones.
-The building blocks of proteins (monomers) are amino acids. Each amino
-acid has a central carbon that is linked to an amino group, a carboxyl
-group, a hydrogen atom, and an
-
-R group or side chain. There are 20 commonly occurring amino acids,
-each of which differs in the R group. Each amino acid is linked to its
-neighbors by a peptide bond. A long chain of amino acids is known as a
-polypeptide.
-
-Proteins are organized at four levels: primary, secondary, tertiary,
-and (optional) quaternary. The primary structure is the unique
-sequence of amino acids. The local folding of the polypeptide to form
-structures such as the \emph{α} helix and \emph{beta}-pleated sheet constitutes the
-secondary structure. The overall three-dimensional structure is the
-tertiary structure. When two or more polypeptides combine to form the
-complete protein structure, the configuration is known as the
-quaternary structure of a protein. Protein shape and function are
-intricately linked; any change in shape caused by changes in
-temperature or pH may lead to protein denaturation and a loss in
-function.
-
-\hypertarget{art-connections}{%
-\section{Art Connections}\label{art-connections}}
-
-\begin{itemize}
-\item
-  Which categories of amino acid would you expect to find on
-  the surface of a soluble protein, and which would you expect to find
-  in the interior? What distribution of amino acids would you expect to
-  find in a protein embedded in a lipid bilayer?
-\item
-  Polar and charged amino acid residues (the remainder after
-  peptide bond formation) are more likely to be found on the surface of
-  soluble proteins where they can interact with water, and nonpolar
-  (e.g., amino acid side chains) are more likely to be found in the
-  interior where they are sequestered from water. In membrane proteins,
-  nonpolar and hydrophobic amino acid side chains associate with the
-  hydrophobic tails of phospholipids, while polar and charged amino acid
-  side chains interact with the polar head groups or with the aqueous
-  solution. However, there are exceptions. Sometimes, positively and
-  negatively charged amino acid side chains interact with one another in
-  the interior of a protein, and polar or charged amino acid side chains
-  that interact with a ligand can be found in the ligand binding pocket.
-\end{itemize}
-
-\hypertarget{review-questions}{%
-\section{Review Questions}\label{review-questions}}
-
-The monomers that make up proteins are called
-1. nucleotides
-1. disaccharides
-1. amino acids
-1. chaperones
-
-Answer: C
-
-The \emph{α} helix and the \emph{beta}-pleated sheet are part of which protein
-structure?
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  primary
-\item
-  secondary
-\item
-  tertiary
-\item
-  quaternary
-\end{enumerate}
-
-Answer: B
-
-\hypertarget{free-response}{%
-\section{Free Response}\label{free-response}}
-
-\textbf{Explain what happens if even one amino acid is substituted for another
-in a polypeptide chain. Provide a specific example.}
-
-A change in gene sequence can lead to a different amino acid being
-added to a polypeptide chain instead of the normal one. This causes a
-change in protein structure and function. For example, in sickle cell
-anemia, the hemoglobin \emph{beta} chain has a single amino acid
-substitution---the amino acid glutamic acid in position six is
-substituted by valine. Because of this change, hemoglobin molecules
-form aggregates, and the disc-shaped red blood cells assume a crescent
-shape, which results in serious health problems.
-
-\textbf{Describe the differences in the four protein structures.}
-
-The sequence and number of amino acids in a polypeptide chain is its
-primary structure. The local folding of the polypeptide in some
-regions is the secondary structure of the protein. The
-three-dimensional structure of a polypeptide is known as its tertiary
-structure, created in part by chemical interactions such as hydrogen
-bonds between polar side chains, van der Waals interactions, disulfide
-linkages, and hydrophobic interactions. Some proteins are formed from
-multiple polypeptides, also known as subunits, and the interaction of
-these subunits forms the quaternary structure.
-
-\hypertarget{glossary-1}{%
-\section{Glossary}\label{glossary-1}}
-
-\textbf{alpha-helix structure (\emph{α}-helix)}: type of secondary structure of proteins formed by folding of the polypeptide into a helix shape with hydrogen bonds stabilizing the
-structure\\
-\textbf{amino acid}: monomer of a protein; has a central carbon or alpha carbon to which an
-amino group, a carboxyl group, a hydrogen, and an R group or side
-chain is attached; the R group is different for all 20 amino acids\\
-\textbf{beta-pleated sheet (\emph{beta}-pleated)}: secondary structure found in proteins in which ``pleats'' are formed by hydrogen bonding between atoms on the backbone of the polypeptide chain\\
-\textbf{chaperone}: (also, chaperonin) protein that helps nascent protein in the folding process \textbf{denaturation}: loss of shape in a protein as a result of changes in temperature, pH, or exposure to chemicals\\
-\textbf{enzyme}: catalyst in a biochemical reaction that is usually a complex or conjugated protein\\
-\textbf{hormone}: chemical signaling molecule, usually protein or steroid, secreted by endocrine cells that act to control or regulate specific physiological processes
-\textbf{peptide bond}: bond formed between two amino acids by a dehydration reaction\\
-\textbf{polypeptide}: long chain of amino acids linked by peptide bonds\\
-\textbf{primary structure}: linear sequence of amino acids in a protein\\
-\textbf{protein}: biological macromolecule composed of one or more chains of amino acids\\
-\textbf{quaternary structure}: association of discrete polypeptide subunits in a protein\\
-\textbf{secondary structure}: regular structure formed by proteins by intramolecular hydrogen bonding between the oxygen atom of one amino acid residue and the hydrogen attached to the nitrogen atom of another amino acid residue
-\textbf{tertiary structure}: three-dimensional conformation of a protein, including interactions between secondary structural elements; formed from interactions between amino acid side chains
-
-\hypertarget{contributors-and-attributions-1}{%
-\section{Contributors and Attributions}\label{contributors-and-attributions-1}}
-
-Connie Rye (East Mississippi Community College), Robert Wise
-(University of Wisconsin, Oshkosh), Vladimir Jurukovski (Suffolk
-County Community College), Jean DeSaix (University of North Carolina
-at Chapel Hill), Jung Choi (Georgia Institute of Technology), Yael
-Avissar (Rhode Island College) among other contributing authors.
-Original content by OpenStax (CC BY 4.0; Download for free at
-\href{http://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd\%409.87}{http://cnx.org/contents/185cbf87-c72...f21b5eabd@9.87}).
-
 \hypertarget{vectors-in-R}{%
 \chapter{A primer for working with vectors}\label{vectors-in-R}}
 
@@ -2038,7 +1362,7 @@ Not plot with the base R \passthrough{\lstinline!plot()!} function:
 plot(numeric.vect1, numeric.vect2)
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-98-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-84-1.pdf}
 
 Note that there is a comma between the two vector names. When building plots from dataframes you usually see a tilde (\textasciitilde), but when you have two vectors you can use just a comma.
 
@@ -2053,7 +1377,7 @@ plot(numeric.vect1,   # note again the comma, not a ~
      ylab="vector2")
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-99-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-85-1.pdf}
 
 We can store character data in vectors so if we want we could do this to set up our labels:
 
@@ -2070,7 +1394,7 @@ plot(numeric.vect1,
      ylab=mylabels[2])
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-101-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-87-1.pdf}
 
 If we want we can use a tilde to make our plot like this:
 
@@ -2078,7 +1402,7 @@ If we want we can use a tilde to make our plot like this:
 plot(numeric.vect2 ~ numeric.vect1)
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-102-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-88-1.pdf}
 
 Note that now, \passthrough{\lstinline!numeric.vect2!} is on the left and \passthrough{\lstinline!numeric.vect1!} is on the right. This flexibility can be tricky to keep track of.
 
@@ -2094,7 +1418,7 @@ Then we plot it like this, referencing the dataframe \passthrough{\lstinline!df!
 plot(numeric.vect2 ~ numeric.vect1, data = df)
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-104-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-90-1.pdf}
 
 \hypertarget{other-plotting-packages}{%
 \section{Other plotting packages}\label{other-plotting-packages}}
@@ -2338,6 +1662,682 @@ We can\ldots{}
   access part of lists for plotting instead of copying stuff
 \end{itemize}
 
+\hypertarget{nucleic-acids-review}{%
+\chapter{Nucleic Acids}\label{nucleic-acids-review}}
+
+\textbf{Authors}: OpenStax / Libretext Formatted in RMarkdown by Nathan Brouwer under the Creative Commons Attribution License 4.0 license.
+
+This chapter was adapted from \href{https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book\%3A_General_Biology_(OpenStax)}{LibreText General Biology}, Chapter 3, Section 3.5: \href{https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book\%3A_General_Biology_(OpenStax)/1\%3A_The_Chemistry_of_Life/3\%3A_Biological_Macromolecules/3.5\%3A_Nucleic_Acids}{Nucleic Acids}. The LibreText book is based on \href{https://openstax.org/details/books/biology-2e}{OpenStax Biology 2nd edition}, Chapter 3, Section 3.5: \href{https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids}{Nucleic Acids}. A full list of authors is found under the \textbf{Contributors and Attributions} section at the end of this document.
+
+\begin{quote}
+Nucleic acids are the most important macromolecules for the continuity
+of life. They carry the genetic blueprint of a cell and carry
+instructions for the functioning of the cell.
+\end{quote}
+
+\hypertarget{dna-and-rna}{%
+\section{DNA and RNA}\label{dna-and-rna}}
+
+The two main types of nucleic acids are deoxyribonucleic acid (DNA)
+and ribonucleic acid (RNA). DNA is the genetic material found in all
+living organisms, ranging from single-celled bacteria to multicellular
+mammals. It is found in the nucleus of eukaryotes and in the
+organelles, chloroplasts, and mitochondria. In prokaryotes, the DNA is
+not enclosed in a membranous envelope.
+
+The entire genetic content of a cell is known as its genome, and the
+study of genomes is genomics. In eukaryotic cells but not in
+prokaryotes, DNA forms a complex with histone proteins to form
+chromatin, the substance of eukaryotic chromosomes. A chromosome may
+contain tens of thousands of genes. Many genes contain the information
+to make protein products; other genes code for RNA products. DNA
+controls all of the cellular activities by turning the genes ``on'' or
+``off.''
+
+The other type of nucleic acid, RNA, is mostly involved in protein
+synthesis. The DNA molecules never leave the nucleus but instead use
+an intermediary to communicate with the rest of the cell. This
+intermediary is the messenger RNA (mRNA). Other types of RNA---like
+rRNA, tRNA, and microRNA---are involved in protein synthesis and its
+regulation.
+
+DNA and RNA are made up of monomers known as nucleotides. The
+nucleotides combine with each other to form a polynucleotide, DNA or
+RNA. Each nucleotide is made up of three components: a nitrogenous
+base, a pentose (five-carbon) sugar, and a phosphate group (Figure
+3.5.1). Each nitrogenous base in a nucleotide is attached to a sugar
+molecule, which is attached to one or more phosphate groups.
+
+\begin{figure}
+\includegraphics[width=14.9in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/image5} \caption{A nucleotide is made up of three components: a nitrogenous base, a pentose sugar, and one or more phosphate groups. Carbon residues in the pentose are numbered 1′ through 5′ (the prime distinguishes these residues from those in the base, which are numbered without using a prime notation). The base is attached to the 1′ position of the ribose, and the phosphate is attached to the 5′ position. When a polynucleotide is formed, the 5′ phosphate of the incoming nucleotide attaches to the 3′ hydroxyl group at the end of the growing chain. Two types of pentose are found in nucleotides, deoxyribose (found in DNA) and ribose (found in RNA). Deoxyribose is similar in structure to ribose, but it has an H instead of an OH at the 2′ position. Bases can be divided into two categories: purines and pyrimidines. Purines have a double ring structure, and pyrimidines have a single ring.}\label{fig:unnamed-chunk-101}
+\end{figure}
+
+The nitrogenous bases, important components of nucleotides, are
+organic molecules and are so named because they contain carbon and
+nitrogen. They are bases because they contain an amino group that has
+the potential of binding an extra hydrogen, and thus, decreases the
+hydrogen ion concentration in its environment, making it more basic.
+Each nucleotide in DNA contains one of four possible nitrogenous
+bases: adenine (A), guanine (G) cytosine (C), and thymine (T).
+
+Adenine and guanine are classified as purines. The primary structure
+of a purine is two carbon-nitrogen rings. Cytosine, thymine, and
+uracil are classified as pyrimidines which have a single
+carbon-nitrogen ring as their primary structure (Figure 3.5.1). Each
+of these basic carbon-nitrogen rings has different functional groups
+attached to it. In molecular biology shorthand, the nitrogenous bases are simply known by their symbols A, T, G, C, and U. DNA contains A, T, G, and C whereas RNA contains A, U, G, and
+C.
+
+The pentose sugar in DNA is deoxyribose, and in RNA, the sugar is
+ribose (Figure 3.5.1). The difference between the sugars is the
+presence of the hydroxyl group on the second carbon of the ribose and
+hydrogen on the second carbon of the deoxyribose. The carbon atoms of
+the sugar molecule are numbered as 1′, 2′, 3′, 4′, and 5′ (1′ is read
+as ``one prime''). The phosphate residue is attached to the hydroxyl
+group of the 5′ carbon of one sugar and the hydroxyl group of the 3′
+carbon of the sugar of the next nucleotide, which forms a 5′--3′
+phosphodiester linkage. The phosphodiester linkage is not formed by
+simple dehydration reaction like the other linkages connecting
+monomers in macromolecules: its formation involves the removal of two
+phosphate groups. A polynucleotide may have thousands of such
+phosphodiester linkages.
+
+\hypertarget{dna-double-helix-structure}{%
+\section{DNA Double-Helix Structure}\label{dna-double-helix-structure}}
+
+DNA has a double-helix structure (Figure 3.5.2). The sugar and
+phosphate lie on the outside of the helix, forming the backbone of the
+DNA. The nitrogenous bases are stacked in the interior, like the steps
+of a staircase, in pairs; the pairs are bound to each other by
+hydrogen bonds. Every base pair in the double helix is separated from
+the next base pair by 0.34 nm. The two strands of the helix run in
+opposite directions, meaning that the 5′ carbon end of one strand will
+face the 3′ carbon end of its matching strand. (This is referred to as
+antiparallel orientation and is important to DNA replication and in
+many nucleic acid interactions.)
+
+\begin{figure}
+\includegraphics[width=7.56in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/image6} \caption{Figure 3.5.2 : Native DNA is an antiparallel double helix. The phosphate backbone (indicated by the curvy lines) is on the outside, and the bases are on the inside. Each base from one strand interacts via hydrogen bonding with a base from the opposing strand. (credit: Jerome Walker/Dennis Myts)}\label{fig:unnamed-chunk-102}
+\end{figure}
+
+Only certain types of base pairing are allowed. For example, a certain
+purine can only pair with a certain pyrimidine. This means A can pair
+with T, and G can pair with C, as shown in Figure 3.5.3. This is known
+as the base complementary rule. In other words, the DNA strands are
+complementary to each other. If the sequence of one strand is
+AATTGGCC, the complementary strand would have the sequence TTAACCGG.
+During DNA replication, each strand is copied, resulting in a daughter
+DNA double helix containing one parental DNA strand and a newly
+synthesized strand.
+
+Art Connection
+
+\includegraphics[width=6.5in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/image7}
+
+Figure 3.5.3 : In a double stranded DNA molecule, the two strands run
+antiparallel to one another so that one strand runs 5′ to 3′ and the
+other 3′ to 5′. The phosphate backbone is located on the outside, and
+the bases are in the middle. Adenine forms hydrogen bonds (or base
+pairs) with thymine, and guanine base pairs with cytosine.
+
+A mutation occurs, and cytosine is replaced with adenine. What impact
+do you think this will have on the DNA structure?
+
+\hypertarget{rna}{%
+\section{RNA}\label{rna}}
+
+Ribonucleic acid, or RNA, is mainly involved in the process of protein
+synthesis under the direction of DNA. RNA is usually single-stranded
+and is made of ribonucleotides that are linked by phosphodiester
+bonds. A ribonucleotide in the RNA chain contains ribose (the pentose
+sugar), one of the four nitrogenous bases (A, U, G, and C), and the
+phosphate group.
+
+There are four major types of RNA: messenger RNA (mRNA), ribosomal RNA
+(rRNA), transfer RNA (tRNA), and microRNA (miRNA). The first, mRNA,
+carries the message from DNA, which controls all of the cellular
+activities in a cell. If a cell requires a certain protein to be
+synthesized, the gene for this product is turned ``on'' and the
+messenger RNA is synthesized in the nucleus. The RNA base sequence is
+complementary to the coding sequence of the DNA from which it has been
+copied. However, in RNA, the base T is absent and U is present
+instead. If the DNA strand has a sequence AATTGCGC, the sequence of
+the complementary RNA is UUAACGCG. In the cytoplasm, the mRNA
+interacts with ribosomes and other cellular machinery (Figure 3.5.4).
+
+\includegraphics[width=7.1in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/image8}
+
+Figure 3.5.4 : A ribosome has two parts: a large subunit and a small
+subunit. The mRNA sits in between the two subunits. A tRNA molecule
+recognizes a codon on the mRNA, binds to it by complementary base
+pairing, and adds the correct amino acid to the growing peptide chain.
+
+The mRNA is read in sets of three bases known as codons. Each codon
+codes for a single amino acid. In this way, the mRNA is read and the
+protein product is made. Ribosomal RNA (rRNA) is a major constituent
+of ribosomes on which the mRNA binds. The rRNA ensures the proper
+alignment of the mRNA and the ribosomes; the rRNA of the ribosome also
+has an enzymatic activity (peptidyl transferase) and catalyzes the
+formation of the peptide bonds between two aligned amino acids.
+Transfer RNA (tRNA) is one of the smallest of the four types of RNA,
+usually 70--90 nucleotides long. It carries the correct amino acid to
+the site of protein synthesis. It is the base pairing between the tRNA
+and mRNA that allows for the correct amino acid to be inserted in the
+polypeptide chain. microRNAs are the smallest RNA molecules and their
+role involves the regulation of gene expression by interfering with
+the expression of certain mRNA messages. Table 3.5.1 below summarizes
+features of DNA and RNA.
+
+\textbf{\emph{Table}} 3.5.1 *\textbf{:} Features of DNA and RNA.
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.31}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.35}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.35}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Features of DNA and
+RNA
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\end{minipage} \\
+\midrule
+\endhead
+& DNA & RNA \\
+Function & Carries genetic
+information & Involved in protein
+synthesis \\
+Location & Remains in the nucleus & Leaves the nucleus \\
+Structure & Double helix & Usually
+single-stranded \\
+Sugar & Deoxyribose & Ribose \\
+Pyrimidines & Cytosine, thymine & Cytosine, uracil \\
+Purines & Adenine, guanine & Adenine, guanine \\
+\bottomrule
+\end{longtable}
+
+Even though the RNA is single stranded, most RNA types show extensive
+intramolecular base pairing between complementary sequences, creating
+a predictable three-dimensional structure essential for their
+function.
+
+As you have learned, information flow in an organism takes place from
+DNA to RNA to protein. DNA dictates the structure of mRNA in a process
+known as transcription, and RNA dictates the structure of protein in a
+process known as translation. This is known as the Central Dogma of
+Life, which holds true for all organisms; however, exceptions to the
+rule occur in connection with viral infections.
+
+\emph{Link to Learning}
+
+\includegraphics[width=0.1\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/image9}
+
+\begin{itemize}
+\tightlist
+\item
+  To learn more about DNA, explore the Howard Hughes Medical Institute
+  BioInteractive animations on the topic of DNA.*
+\end{itemize}
+
+\hypertarget{summary}{%
+\section{Summary}\label{summary}}
+
+Nucleic acids are molecules made up of nucleotides that direct
+cellular activities such as cell division and protein synthesis. Each
+nucleotide is made up of a pentose sugar, a nitrogenous base, and a
+phosphate group. There are two types of nucleic acids: DNA and RNA.
+DNA carries the genetic blueprint of the cell and is passed on from
+parents to offspring (in the form of chromosomes). It has a
+double-helical structure with the two strands running in opposite
+directions, connected by hydrogen bonds, and complementary to each
+other. RNA is single-stranded and is made of a pentose sugar (ribose),
+a nitrogenous base, and a phosphate group. RNA is involved in protein
+synthesis and its regulation. Messenger RNA (mRNA) is copied from the
+DNA, is exported from the nucleus to the cytoplasm, and contains
+information for the construction of proteins. Ribosomal RNA (rRNA) is
+a part of the ribosomes at the site of protein synthesis, whereas
+transfer RNA (tRNA) carries the amino acid to the site of protein
+synthesis. microRNA regulates the use of mRNA for protein synthesis.
+
+Art Connections
+
+\hypertarget{analysis-questions}{%
+\section{Analysis Questions}\label{analysis-questions}}
+
+Free Response
+
+\hypertarget{glossary}{%
+\section{Glossary}\label{glossary}}
+
+\textbf{deoxyribonucleic acid (DNA)}: double-helical molecule that carries the hereditary information of the cell\\
+\textbf{messenger RNA (mRNA)}: DNA that carries information from DNA to ribosomes during protein synthesis\\
+\textbf{nucleic acid}: biological macromolecule that carries the genetic blueprint of a cell
+and carries instructions for the functioning of the cell\\
+\textbf{nucleotide}: monomer of nucleic acids; contains a pentose sugar, one or more phosphate groups, and a nitrogenous base\\
+\textbf{phosphodiester}: linkage covalent chemical bond that holds together the polynucleotide
+chains with a phosphate group linking two pentose sugars of neighboring nucleotides\\
+\textbf{polynucleotide}: long chain of nucleotides\\
+\textbf{purine}: type of nitrogenous base in DNA and RNA; adenine and guanine are\\
+\textbf{purines, pyrimidine}: type of nitrogenous base in DNA and RNA; cytosine, thymine, and uracil
+are pyrimidines\\
+\textbf{ribonucleic acid (RNA)}: single-stranded, often internally base paired, molecule that is
+involved in protein synthesis\\
+\textbf{ribosomal RNA (rRNA)}: RNA that ensures the proper alignment of the mRNA and the ribosomes
+during protein synthesis and catalyzes the formation of the peptide linkage\\
+\textbf{transcription}: process through which messenger RNA forms on a template of DNA\\
+\textbf{transfer RNA (tRNA)}: RNA that carries activated amino acids to the site of protein
+synthesis on the ribosome\\
+\textbf{translation}: process through which RNA directs the formation of protein
+
+\hypertarget{contributors-and-attributions}{%
+\section{Contributors and Attributions}\label{contributors-and-attributions}}
+
+Connie Rye (East Mississippi Community College), Robert Wise
+(University of Wisconsin, Oshkosh), Vladimir Jurukovski (Suffolk
+County Community College), Jean DeSaix (University of North Carolina
+at Chapel Hill), Jung Choi (Georgia Institute of Technology), Yael
+Avissar (Rhode Island College) among other contributing authors.
+Original content by OpenStax (CC BY 4.0; Download for free at
+\href{http://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd\%409.87}{http://cnx.org/contents/185cbf87-c72...f21b5eabd@9.87}).
+
+\hypertarget{proteins-review}{%
+\chapter{Proteins}\label{proteins-review}}
+
+\textbf{Authors}: OpenStax / LibreText. Formatted in RMarkdown by Nathan Brouwer under the Creative Commons Attribution License 4.0 license.
+
+This chapter was adapted from \href{}{LibreText General Biology}, Chapter 3, Section 3.4: \href{https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book\%3A_General_Biology_(OpenStax)/1\%3A_The_Chemistry_of_Life/3\%3A_Biological_Macromolecules/3.4\%3A_Proteins}{Proteins}. The LibreText book is based on \href{https://openstax.org/details/books/biology-2e}{OpenStax Biology 2nd edition}, Chapter 3, Section 3.4: \href{https://openstax.org/books/biology-2e/pages/3-4-proteins}{Nucleic Acids}. A full list of authors is found under the \textbf{Contributors and Attributions} section at the end of this document.
+
+\hypertarget{skills-to-develop}{%
+\subsection{Skills to develop:}\label{skills-to-develop}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Describe the functions proteins perform in the cell and in tissues
+\item
+  Discuss the relationship between amino acids and proteins
+\item
+  Explain the four levels of protein organization
+\item
+  Describe the ways in which protein shape and function are linked
+\end{enumerate}
+
+Proteins are one of the most abundant organic molecules in living systems and have the most diverse range of functions of all \textbf{macromolecules}. Proteins may be structural, regulatory, contractile, or protective; they may serve in transport, storage, or membranes; or they may be toxins or enzymes. Each cell in a living system may contain thousands of proteins, each with a unique function. Their structures, like their functions, vary greatly. They are all, however, \textbf{polymers} of \textbf{amino acids}, arranged in a linear sequence.
+
+\hypertarget{types-and-functions-of-proteins}{%
+\section{Types and Functions of Proteins}\label{types-and-functions-of-proteins}}
+
+\textbf{Enzymes}, which are produced by living cells, are \textbf{catalysts} in biochemical reactions (like digestion) and are usually complex or conjugated proteins. Each enzyme is specific for the substrate (a reactant that binds to an enzyme) it acts on. The enzyme may help in breakdown, rearrangement, or synthesis reactions. Enzymes that break down their substrates are called \textbf{catabolic enzymes}, enzymes that build more complex molecules from their substrates are called \textbf{anabolic enzymes}, and enzymes that affect the rate of reaction are called \textbf{catalytic enzymes}.
+It should be noted that all enzymes increase the rate of reaction and, therefore, are considered to be organic catalysts. An example of an enzyme is salivary amylase, which
+hydrolyzes its substrate amylose, a component of starch.
+
+\textbf{Hormones} are chemical-signaling molecules, usually small proteins or steroids, secreted by endocrine cells that act to control or regulate specific physiological processes, including growth, development, metabolism, and reproduction. For example, insulin is a \textbf{protein hormone} that helps to regulate the blood glucose level.
+
+Proteins have different shapes and molecular weights; some proteins are \textbf{globular} in shape whereas others are fibrous. For example, hemoglobin is a globular protein, but collagen, found in our skin, is a fibrous protein. Protein shape is critical to its function, and this shape is maintained by many different types of chemical bonds. Changes in temperature, pH, and exposure to chemicals may lead to permanent changes in the shape of the protein, leading to loss of function, known as \textbf{denaturation}. All proteins are made up of different arrangements of the same 20 types of \textbf{amino acids}.
+
+\hypertarget{amino-acids}{%
+\section{Amino Acids}\label{amino-acids}}
+
+Amino acids are the \textbf{monomers} that make up proteins. Each amino acid has the same fundamental structure, which consists of a central carbon atom, also known as the alpha (\emph{α}) carbon, bonded to an amino group (NH\textsubscript{2}), a carboxyl group (COOH), and to a hydrogen atom. Every amino acid also has another atom or group of atoms bonded to the central atom known as the R group (Figure 3.4.1).
+
+\begin{figure}
+\includegraphics[width=7.15in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage1} \caption{Amino acids have a central asymmetric carbon to which an amino group, a carboxyl group, a hydrogen atom, and a side chain (R group) are attached.}\label{fig:unnamed-chunk-106}
+\end{figure}
+
+The name ``amino acid'' is derived from the fact that they contain both an amino group and carboxyl-acid-group in their basic structure. For each amino acid, the R group (or side chain) is different (Figure 3.4.2).
+
+\begin{figure}
+\includegraphics[width=0.6\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage2} \caption{There are 20 common amino acids commonly found in proteins, each with a different R group (variant group) that determines its chemical nature.}\label{fig:unnamed-chunk-107}
+\end{figure}
+
+Which categories of amino acid would you expect to find on the surface
+of a soluble protein, and which would you expect to find in the
+interior? What distribution of amino acids would you expect to find in
+a protein embedded in a lipid bilayer?
+
+The chemical nature of the side chain determines the nature of the amino acid (that is, whether it is \textbf{acidic}, \textbf{basic}, \textbf{polar}, or \textbf{nonpolar}). For example, the amino acid glycine has a hydrogen atom as the R group. Amino acids such as valine, methionine, and alanine are nonpolar or hydrophobic, while amino acids such as serine, threonine, and cysteine are polar and have hydrophilic side chains. The side chains of lysine and arginine are positively charged, and therefore these amino acids are also known as basic amino acids. Proline has an R group that is linked to the amino group, forming a ring-like structure. Proline is an exception to the standard structure of an amino acid since its amino group is not separate from the side chain
+
+Amino acids are represented by a single upper case letter or a three-letter abbreviation. For example, valine is known by the letter V or the three-letter code val.
+
+The sequence and the number of amino acids ultimately determine a protein's shape, size, and function. Each amino acid is attached to another amino acid by a covalent bond, known as a \textbf{peptide bond}, which is formed by a dehydration reaction. The carboxyl group of one amino acid and the amino group of the incoming amino acid combine, releasing a molecule of water. The resulting bond is the peptide bond
+
+\begin{figure}
+\includegraphics[width=5.83in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage3} \caption{Peptide bond formation is a dehydration synthesis reaction. The carboxyl group of one amino acid is linked to the amino group of the incoming amino acid. In the process, a molecule of water is released.}\label{fig:unnamed-chunk-108}
+\end{figure}
+
+The products formed by such linkages are called \textbf{peptides}. As more amino acids join to this growing chain, the resulting chain is known as a \textbf{polypeptide}. Each polypeptide has a free amino group at one end. This end is called the \textbf{N-terminal}, or the amino terminal, and the other end has a free carboxyl group, also known as the C- or carboxyl
+terminal. The terms polypeptide and protein are sometimes used interchangeably, a polypeptide is technically a polymer of amino acids, whereas the term protein is more formally used for a polypeptide or that have combined together, often have bound non-peptide prosthetic groups, have a distinct shape, and have a unique function.
+
+After \textbf{protein synthesis (translation)}, most proteins are modified. These are known as \textbf{post-translational modifications}. They may undergo \textbf{cleavage}, \textbf{phosphorylation} (addition of a phosphate group), or may require the addition of other chemical groups. Only after these modifications is the protein completely functional.
+
+\hypertarget{evolution-connection}{%
+\section{Evolution Connection:}\label{evolution-connection}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{The Evolutionary Significance of Cytochrome}: Cytochrome c is an
+important component of the electron transport chain, a part of
+cellular respiration, and it is normally found in the cellular
+organelle, the mitochondrion. This protein has a heme prosthetic
+group, and the central ion of the heme gets alternately reduced and
+oxidized during electron transfer. Because this essential protein's
+role in producing cellular energy is crucial, it has changed very
+little over millions of years. Protein sequencing has shown that there
+is a considerable amount of cytochrome c amino acid sequence \textbf{homology}
+among different species; in other words, evolutionary kinship can be
+assessed by measuring the similarities or differences among various
+species' DNA or protein sequences.
+
+Scientists have determined that human cytochrome c contains 104 amino
+acids. For each cytochrome c molecule from different organisms that
+has been sequenced to date, 37 of these amino acids appear in the same
+position in all samples of cytochrome c.~This indicates that there may
+have been a \textbf{common ancestor}. On comparing the human and chimpanzee
+protein sequences, no sequence difference was found. When human and
+rhesus monkey sequences were compared, the single difference found was
+in one amino acid. In another comparison, human to yeast sequencing
+shows a difference in the 44th position.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{protein-structure}{%
+\section{Protein Structure}\label{protein-structure}}
+
+The shape of a protein is critical to its function. For example, an enzyme can bind to a specific substrate at a site known as the \textbf{active site}. If this active site is altered because of local changes or changes in overall protein structure, the enzyme may be unable to bind to the substrate. To understand how the protein gets its final shape or conformation, we need to understand the four levels of protein structure: primary, secondary, tertiary, and quaternary.
+
+\hypertarget{primary-structure}{%
+\subsection{Primary Structure}\label{primary-structure}}
+
+The unique sequence of amino acids in a polypeptide chain is its
+primary structure. For example, the pancreatic hormone insulin has two
+polypeptide chains, A and B, and they are linked together by disulfide
+bonds. The N terminal amino acid of the A chain is glycine, whereas
+the C terminal amino acid is asparagine (Figure 3.4.4). The sequences
+of amino acids in the A and B chains are unique to insulin.
+
+\begin{figure}
+\includegraphics[width=0.4\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage4} \caption{Bovine serum insulin is a protein hormone made of two peptide chains, A (21 amino acids long) and B (30 amino acids long). In each chain, primary structure is indicated by three-letter abbreviations that represent the names of the amino acids in the order they are present. The amino acid cysteine (cys) has a sulfhydryl (SH) group as a side chain. Two sulfhydryl groups can react in the presence of oxygen to form a disulfide (S-S) bond. Two disulfide bonds connect the A and B chains together, and a third helps the A chain fold into the correct shape. Note that all disulfide bonds are the same length, but are drawn different sizes for clarity.}\label{fig:unnamed-chunk-109}
+\end{figure}
+
+The unique sequence for every protein is ultimately determined by the
+gene encoding the protein. A change in nucleotide sequence of the
+gene's coding region may lead to a different amino acid being added to
+the growing polypeptide chain, causing a change in protein structure
+and function. In sickle cell anemia, the hemoglobin \emph{beta} chain (a small
+portion of which is shown in Figure 3.4.5) has a single amino acid
+substitution, causing a change in protein structure and function.
+Specifically, the amino acid glutamic acid is substituted by valine in
+the beta chain. What is most remarkable to consider is that a
+hemoglobin molecule is made up of two alpha chains and two beta chains
+that each consist of about 150 amino acids. The molecule, therefore,
+has about 600 amino acids. The structural difference between a normal
+hemoglobin molecule and a sickle cell molecule---which dramatically
+decreases life expectancy---is a single amino acid of the 600. What is
+even more remarkable is that those 600 amino acids are encoded by
+three nucleotides each, and the mutation is caused by a single base
+change (point mutation), 1 in 1800 bases.
+
+\begin{figure}
+\includegraphics[width=0.4\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage5} \caption{The beta chain of hemoglobin is 147 residues in length, yet a single amino acid substitution leads to sickle cell anemia. In normal hemoglobin, the amino acid at position seven is glutamate. In sickle cell hemoglobin, this glutamate is replaced by a valine.}\label{fig:unnamed-chunk-110}
+\end{figure}
+
+Because of this change of one amino acid in the chain, hemoglobin
+molecules form long fibers that distort the biconcave, or disc-shaped,
+red blood cells and assume a crescent or ``sickle'' shape, which clogs
+arteries (Figure 3.4.6). This can lead to myriad serious health
+problems such as breathlessness, dizziness, headaches, and abdominal
+pain for those affected by this disease.
+
+\begin{figure}
+\includegraphics[width=0.6\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage6} \caption{In this blood smear, visualized at 535x magnification using bright field microscopy, sickle cells are crescent shaped, while normal cells are disc-shaped. (credit: modification of work by Ed Uthman; scale-bar data from Matt Russell)}\label{fig:unnamed-chunk-111}
+\end{figure}
+
+\hypertarget{secondary-structure}{%
+\subsection{Secondary Structure}\label{secondary-structure}}
+
+The local folding of the polypeptide in some regions gives rise to the
+secondary structure of the protein. The most common are the \emph{α}-helix
+and \emph{beta}-pleated sheet structures (Figure 3.4.7). Both structures are
+the \emph{α}-helix structure---the helix held in shape by hydrogen bonds.
+The hydrogen bonds form between the oxygen atom in the carbonyl group
+in one amino acid and another amino acid that is four amino acids
+farther along the chain.
+
+\begin{figure}
+\includegraphics[width=0.4\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage7} \caption{The α-helix and β-pleated sheet are secondary structures of proteins that form because of hydrogen bonding between carbonyl and amino groups in the peptide backbone. Certain amino acids have a propensity to form an α-helix, while others have a propensity to form a β-pleated sheet.}\label{fig:unnamed-chunk-112}
+\end{figure}
+
+Every helical turn in an alpha helix has 3.6 amino acid residues. The
+R groups (the variant groups) of the polypeptide protrude out from the
+\emph{α}-helix chain. In the \emph{beta}-pleated sheet, the ``pleats'' are formed by
+hydrogen bonding between atoms on the backbone of the polypeptide
+chain. The R groups are attached to the carbons and extend above and
+below the folds of the pleat. The pleated segments align parallel or
+antiparallel to each other, and hydrogen bonds form between the
+partially positive nitrogen atom in the amino group and the partially
+negative oxygen atom in the carbonyl group of the peptide backbone.
+The \emph{α}-helix and \emph{beta}-pleated sheet structures are found in most
+globular and fibrous proteins and they play an important structural
+role.
+
+\hypertarget{tertiary-structure}{%
+\subsection{Tertiary Structure}\label{tertiary-structure}}
+
+The unique three-dimensional structure of a polypeptide is its
+tertiary structure (Figure 3.4.8). This structure is in part due to
+chemical interactions at work on the polypeptide chain. Primarily, the
+interactions among R groups creates the complex three- dimensional
+tertiary structure of a protein. The nature of the R groups found in
+the amino acids involved can counteract the formation of the hydrogen
+bonds described for standard secondary structures. For example, R
+groups with like charges are repelled by each other and those with
+unlike charges are attracted to each other (ionic bonds). When protein
+folding takes place, the hydrophobic R groups of nonpolar amino acids
+lay in the interior of the protein, whereas the hydrophilic R groups
+lay on the outside. The former types of interactions are also known as
+hydrophobic interactions. Interaction between cysteine side chains
+forms disulfide linkages in the presence of oxygen, the only covalent
+bond forming during protein folding.
+
+\begin{figure}
+\includegraphics[width=0.4\linewidth]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage8} \caption{The tertiary structure of proteins is determined by a variety of chemical interactions. These include hydrophobic interactions, ionic bonding, hydrogen bonding and disulfide linkages.}\label{fig:unnamed-chunk-113}
+\end{figure}
+
+All of these interactions, weak and strong, determine the final
+three-dimensional shape of the protein. When a protein loses its
+three-dimensional shape, it may no longer be functional.
+
+\hypertarget{quaternary-structure}{%
+\subsection{Quaternary Structure}\label{quaternary-structure}}
+
+In nature, some proteins are formed from several polypeptides, also
+known as subunits, and the interaction of these subunits forms the
+quaternary structure. Weak interactions between the subunits help to
+stabilize the overall structure. For example, insulin (a globular
+protein) has a combination of hydrogen bonds and disulfide bonds that
+cause it to be mostly clumped into a ball shape. Insulin starts out as
+a single polypeptide and loses some internal sequences in the presence
+of post-translational modification after the formation of the
+disulfide linkages that hold the remaining chains together. Silk (a
+fibrous protein), however, has a \emph{beta}-pleated sheet structure that is
+the result of hydrogen bonding between different chains.
+
+The four levels of protein structure (primary, secondary, tertiary,
+and quaternary) are illustrated in Figure 3.4.9.
+
+\begin{figure}
+\includegraphics[width=11.07in]{/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images/protimage9} \caption{The four levels of protein structure can be observed in these illustrations. (credit: modification of work by National Human Genome Research Institute)}\label{fig:unnamed-chunk-114}
+\end{figure}
+
+\hypertarget{denaturation-and-protein-folding}{%
+\section{Denaturation and Protein Folding}\label{denaturation-and-protein-folding}}
+
+Each protein has its own unique sequence and shape that are held
+together by chemical interactions. If the protein is subject to
+changes in temperature, pH, or exposure to chemicals, the protein
+structure may change, losing its shape without losing its primary
+sequence in what is known as denaturation. Denaturation is often
+reversible because the primary structure of the polypeptide is
+conserved in the process if the denaturing agent is removed, allowing
+the protein to resume its function. Sometimes denaturation is
+irreversible, leading to loss of function. One example of irreversible
+protein denaturation is when an egg is fried. The albumin protein in
+the liquid egg white is denatured when placed in a hot pan. Not all
+proteins are denatured at high temperatures; for instance, bacteria
+that survive in hot springs have proteins that function at
+temperatures close to boiling. The stomach is also very acidic, has a
+low pH, and denatures proteins as part of the digestion process;
+however, the digestive enzymes of the stomach retain their activity
+under these conditions.
+
+Protein folding is critical to its function. It was originally thought
+that the proteins themselves were responsible for the folding process.
+Only recently was it found that often they receive assistance in the
+folding process from protein helpers known as chaperones (or
+chaperonins) that associate with the target protein during the folding
+process. They act by preventing aggregation of polypeptides that make
+up the complete protein structure, and they disassociate from the
+protein once the target protein is folded.
+
+\hypertarget{summary-1}{%
+\section{Summary}\label{summary-1}}
+
+Proteins are a class of macromolecules that perform a diverse range of
+functions for the cell. They help in metabolism by providing
+structural support and by acting as enzymes, carriers, or hormones.
+The building blocks of proteins (monomers) are amino acids. Each amino
+acid has a central carbon that is linked to an amino group, a carboxyl
+group, a hydrogen atom, and an
+
+R group or side chain. There are 20 commonly occurring amino acids,
+each of which differs in the R group. Each amino acid is linked to its
+neighbors by a peptide bond. A long chain of amino acids is known as a
+polypeptide.
+
+Proteins are organized at four levels: primary, secondary, tertiary,
+and (optional) quaternary. The primary structure is the unique
+sequence of amino acids. The local folding of the polypeptide to form
+structures such as the \emph{α} helix and \emph{beta}-pleated sheet constitutes the
+secondary structure. The overall three-dimensional structure is the
+tertiary structure. When two or more polypeptides combine to form the
+complete protein structure, the configuration is known as the
+quaternary structure of a protein. Protein shape and function are
+intricately linked; any change in shape caused by changes in
+temperature or pH may lead to protein denaturation and a loss in
+function.
+
+\hypertarget{art-connections}{%
+\section{Art Connections}\label{art-connections}}
+
+\begin{itemize}
+\item
+  Which categories of amino acid would you expect to find on
+  the surface of a soluble protein, and which would you expect to find
+  in the interior? What distribution of amino acids would you expect to
+  find in a protein embedded in a lipid bilayer?
+\item
+  Polar and charged amino acid residues (the remainder after
+  peptide bond formation) are more likely to be found on the surface of
+  soluble proteins where they can interact with water, and nonpolar
+  (e.g., amino acid side chains) are more likely to be found in the
+  interior where they are sequestered from water. In membrane proteins,
+  nonpolar and hydrophobic amino acid side chains associate with the
+  hydrophobic tails of phospholipids, while polar and charged amino acid
+  side chains interact with the polar head groups or with the aqueous
+  solution. However, there are exceptions. Sometimes, positively and
+  negatively charged amino acid side chains interact with one another in
+  the interior of a protein, and polar or charged amino acid side chains
+  that interact with a ligand can be found in the ligand binding pocket.
+\end{itemize}
+
+\hypertarget{review-questions}{%
+\section{Review Questions}\label{review-questions}}
+
+The monomers that make up proteins are called
+1. nucleotides
+1. disaccharides
+1. amino acids
+1. chaperones
+
+Answer: C
+
+The \emph{α} helix and the \emph{beta}-pleated sheet are part of which protein
+structure?
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  primary
+\item
+  secondary
+\item
+  tertiary
+\item
+  quaternary
+\end{enumerate}
+
+Answer: B
+
+\hypertarget{free-response}{%
+\section{Free Response}\label{free-response}}
+
+\textbf{Explain what happens if even one amino acid is substituted for another
+in a polypeptide chain. Provide a specific example.}
+
+A change in gene sequence can lead to a different amino acid being
+added to a polypeptide chain instead of the normal one. This causes a
+change in protein structure and function. For example, in sickle cell
+anemia, the hemoglobin \emph{beta} chain has a single amino acid
+substitution---the amino acid glutamic acid in position six is
+substituted by valine. Because of this change, hemoglobin molecules
+form aggregates, and the disc-shaped red blood cells assume a crescent
+shape, which results in serious health problems.
+
+\textbf{Describe the differences in the four protein structures.}
+
+The sequence and number of amino acids in a polypeptide chain is its
+primary structure. The local folding of the polypeptide in some
+regions is the secondary structure of the protein. The
+three-dimensional structure of a polypeptide is known as its tertiary
+structure, created in part by chemical interactions such as hydrogen
+bonds between polar side chains, van der Waals interactions, disulfide
+linkages, and hydrophobic interactions. Some proteins are formed from
+multiple polypeptides, also known as subunits, and the interaction of
+these subunits forms the quaternary structure.
+
+\hypertarget{glossary-1}{%
+\section{Glossary}\label{glossary-1}}
+
+\textbf{alpha-helix structure (\emph{α}-helix)}: type of secondary structure of proteins formed by folding of the polypeptide into a helix shape with hydrogen bonds stabilizing the
+structure\\
+\textbf{amino acid}: monomer of a protein; has a central carbon or alpha carbon to which an
+amino group, a carboxyl group, a hydrogen, and an R group or side
+chain is attached; the R group is different for all 20 amino acids\\
+\textbf{beta-pleated sheet (\emph{beta}-pleated)}: secondary structure found in proteins in which ``pleats'' are formed by hydrogen bonding between atoms on the backbone of the polypeptide chain\\
+\textbf{chaperone}: (also, chaperonin) protein that helps nascent protein in the folding process \textbf{denaturation}: loss of shape in a protein as a result of changes in temperature, pH, or exposure to chemicals\\
+\textbf{enzyme}: catalyst in a biochemical reaction that is usually a complex or conjugated protein\\
+\textbf{hormone}: chemical signaling molecule, usually protein or steroid, secreted by endocrine cells that act to control or regulate specific physiological processes
+\textbf{peptide bond}: bond formed between two amino acids by a dehydration reaction\\
+\textbf{polypeptide}: long chain of amino acids linked by peptide bonds\\
+\textbf{primary structure}: linear sequence of amino acids in a protein\\
+\textbf{protein}: biological macromolecule composed of one or more chains of amino acids\\
+\textbf{quaternary structure}: association of discrete polypeptide subunits in a protein\\
+\textbf{secondary structure}: regular structure formed by proteins by intramolecular hydrogen bonding between the oxygen atom of one amino acid residue and the hydrogen attached to the nitrogen atom of another amino acid residue
+\textbf{tertiary structure}: three-dimensional conformation of a protein, including interactions between secondary structural elements; formed from interactions between amino acid side chains
+
+\hypertarget{contributors-and-attributions-1}{%
+\section{Contributors and Attributions}\label{contributors-and-attributions-1}}
+
+Connie Rye (East Mississippi Community College), Robert Wise
+(University of Wisconsin, Oshkosh), Vladimir Jurukovski (Suffolk
+County Community College), Jean DeSaix (University of North Carolina
+at Chapel Hill), Jung Choi (Georgia Institute of Technology), Yael
+Avissar (Rhode Island College) among other contributing authors.
+Original content by OpenStax (CC BY 4.0; Download for free at
+\href{http://cnx.org/contents/185cbf87-c72e-48f5-b51e-f14f21b5eabd\%409.87}{http://cnx.org/contents/185cbf87-c72...f21b5eabd@9.87}).
+
 \hypertarget{ncbi-the-national-center-for-biotechnology-information}{%
 \chapter{NCBI: The National Center for Biotechnology Information}\label{ncbi-the-national-center-for-biotechnology-information}}
 
@@ -2494,9 +2494,6 @@ To view the GenBank entry for the DEN-1 Dengue virus, follow these steps:
 \end{enumerate}
 
 The GenBank entry for an accession contains a LOT of information about the sequence, such as papers describing it, features in the sequence, etc. The \textbf{DEFINITION} field gives a short description for the sequence. The \textbf{ORGANISM} field in the NCBI entry identifies the species that the sequence came from. The \textbf{REFERENCE} field contains scientific publications describing the sequence. The \textbf{FEATURES} field contains information about the location of features of interest inside the sequence, such as regulatory sequences or genes that lie inside the sequence. The \textbf{ORIGIN} field gives the sequence itself.
-
-\hypertarget{r-echo-f-eval-f-knitrinclude_graphicsherehereimagesncbi_accesssion_nc_001477_genbank.png}{%
-\chapter{\texorpdfstring{\texttt{\{r,\ echo\ =\ F,\ eval\ =\ F\}\ \#\ knitr::include\_graphics(here::here("images/NCBI\_accesssion\_NC\_001477\_genbank.png"))\ \#}}{\{r, echo = F, eval = F\} \# knitr::include\_graphics(here::here("images/NCBI\_accesssion\_NC\_001477\_genbank.png")) \#}}\label{r-echo-f-eval-f-knitrinclude_graphicsherehereimagesncbi_accesssion_nc_001477_genbank.png}}
 
 \hypertarget{the-fasta-file-format}{%
 \section{The FASTA file format}\label{the-fasta-file-format}}
@@ -2806,30 +2803,30 @@ ulcerans <- read.fasta(file = file.2)
 ulceransseq <- ulcerans[[1]]
 \end{lstlisting}
 
-\hypertarget{introducing-FASTA}{%
-\chapter{Introducing FASTA Files}\label{introducing-FASTA}}
+\hypertarget{introducingFASTA}{%
+\chapter{Introducing FASTA Files}\label{introducingFASTA}}
 
 Adapted from \href{https://en.wikipedia.org/wiki/FASTA_format}{Wikipedia}: \url{https://en.wikipedia.org/wiki/FASTA_format}
 
-``In bioinformatics, the FASTA format is a text-based format for representing either nucleotide sequences or amino acid (protein) sequences, in which nucleotides or amino acids are represented using single-letter codes. The format allows for sequence names and comments to precede the sequences. The format originates from the FASTA alignment software, but has now become a near universal standard in the field of bioinformatics.
+In bioinformatics, the FASTA format is a text-based format for representing either nucleotide sequences or amino acid (protein) sequences, in which nucleotides or amino acids are represented using single-letter codes. The format allows for sequence names and comments to precede the sequences. The format originates from the FASTA alignment software, but has now become a near universal standard in the field of bioinformatics.
 
-``The simplicity of FASTA format makes it easy to manipulate and parse sequences using text-processing tools and scripting languages like the R programming language and Python.
+The simplicity of FASTA format makes it easy to manipulate and parse sequences using text-processing tools and scripting languages like the R programming language and Python.
 
-``The first line in a FASTA file starts with a''\textgreater'' (greater-than) symbol and holds summary information about the sequence, often starting with a unique accession number and followed by information like the name of the gene, the type of sequence, and the organism it is from.
+The first line in a FASTA file starts with a ``\textgreater{}'' (greater-than) symbol and holds summary information about the sequence, often starting with a unique accession number and followed by information like the name of the gene, the type of sequence, and the organism it is from.
 
-``On the next is the sequence itself in a standard one-letter character string. Anything other than a valid character is be ignored (including spaces, tabs, asterisks, etc\ldots).
+On the next is the sequence itself in a standard one-letter character string. Anything other than a valid character is be ignored (including spaces, tabs, asterisks, etc\ldots).
 
-``A multiple sequence FASTA format can be obtained by concatenating several single sequence FASTA files in a common file (also known as multi-FASTA format).
+A multiple sequence FASTA format can be obtained by concatenating several single sequence FASTA files in a common file (also known as multi-FASTA format).
 
-``Following the header line, the actual sequence is represented. Sequences may be protein sequences or nucleic acid sequences, and they can contain gaps or alignment characters. Sequences are expected to be represented in the standard amino acid and nucleic acid codes. Lower-case letters are accepted and are mapped into upper-case; a single hyphen or dash can be used to represent a gap character; and in amino acid sequences, U and * are acceptable letters.
+Following the header line, the actual sequence is represented. Sequences may be protein sequences or nucleic acid sequences, and they can contain gaps or alignment characters. Sequences are expected to be represented in the standard amino acid and nucleic acid codes. Lower-case letters are accepted and are mapped into upper-case; a single hyphen or dash can be used to represent a gap character; and in amino acid sequences, U and * are acceptable letters.
 
-``FASTQ format is a form of FASTA format extended to indicate information related to sequencing. It is created by the Sanger Centre in Cambridge.
+FASTQ format is a form of FASTA format extended to indicate information related to sequencing. It is created by the Sanger Centre in Cambridge.
 
-``Bioconductor.org's Biostrings package can be used to read and manipulate FASTA files in R
+Bioconductor.org's Biostrings package can be used to read and manipulate FASTA files in R
 
-from \url{https://zhanglab.dcmb.med.umich.edu/FASTA/}
-
-``FASTA format is a text-based format for representing either nucleotide sequences or peptide sequences, in which base pairs or amino acids are represented using single-letter codes. A sequence in FASTA format begins with a single-line description, followed by lines of sequence data. The description line is distinguished from the sequence data by a greater-than (''\textgreater{}``) symbol in the first column. It is recommended that all lines of text be shorter than 80 characters in length.''
+\begin{quote}
+``FASTA format is a text-based format for representing either nucleotide sequences or peptide sequences, in which base pairs or amino acids are represented using single-letter codes. A sequence in FASTA format begins with a single-line description, followed by lines of sequence data. The description line is distinguished from the sequence data by a greater-than (''\textgreater{}``) symbol in the first column. It is recommended that all lines of text be shorter than 80 characters in length.'' (\url{https://zhanglab.dcmb.med.umich.edu/FASTA/})
+\end{quote}
 
 \hypertarget{example-fasta-file}{%
 \section{Example FASTA file}\label{example-fasta-file}}
@@ -2950,11 +2947,11 @@ QA~~~~~~~~~~~~~~~~~~~")
 
 Adapted from \href{https://en.wikipedia.org/wiki/FASTQ_format}{Wikipedia}: \url{https://en.wikipedia.org/wiki/FASTQ_format}
 
-``FASTQ format is a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores. Both the sequence letter and quality score are each encoded with a single ASCII character for brevity.
+FASTQ format is a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores. Both the sequence letter and quality score are each encoded with a single ASCII character for brevity.
 
-``It was originally developed at the Wellcome Trust Sanger Institute to bundle a FASTA formatted sequence and its quality data, but has recently become the de facto standard for storing the output of high-throughput sequencing instruments such as the Illumina Genome Analyzer.
+It was originally developed at the Wellcome Trust Sanger Institute to bundle a FASTA formatted sequence and its quality data, but has recently become the de facto standard for storing the output of high-throughput sequencing instruments such as the Illumina Genome Analyzer.
 
-``A FASTQ file normally uses four lines per sequence.
+A FASTQ file normally uses four lines per sequence.
 
 \begin{itemize}
 \tightlist
@@ -2968,7 +2965,7 @@ Adapted from \href{https://en.wikipedia.org/wiki/FASTQ_format}{Wikipedia}: \url{
   Line 4 encodes the \textbf{quality values} for the sequence in Line 2 of the file, and must contain the same number of symbols as letters in the sequence.
 \end{itemize}
 
-``A FASTQ file containing a single sequence might look like this:''
+A FASTQ file containing a single sequence might look like this:''
 
 \begin{lstlisting}[language=R]
 cat("@SEQ_ID
@@ -2984,1026 +2981,13 @@ GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
 ## !''*((((***+))%%%++)(%%%%).1***-+*''))**55CCF>>>>>>CCCCCCC65
 \end{lstlisting}
 
-``Here are the quality value characters in left-to-right increasing order of quality (ASCII):''
+Here are the quality value characters in left-to-right increasing order of quality (ASCII):''
 
 \begin{lstlisting}[language=R]
  !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
 \end{lstlisting}
 
 FASTQ files typically do not include line breaks and do not wrap around when they reach the width of a normal page or file.
-
-\hypertarget{download-FASTA-inR}{%
-\chapter{Downloading DNA sequences as FASTA files in R}\label{download-FASTA-inR}}
-
-This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. Most of the text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
-
-\textbf{NOTE}: There is some reduncnacy in this current draft that needs to be eliminated.
-
-\hypertarget{functions-1}{%
-\subsection{Functions}\label{functions-1}}
-
-\begin{itemize}
-\tightlist
-\item
-  library()
-\item
-  help()
-\item
-  length
-\item
-  table
-\item
-  seqinr::GC()
-\item
-  seqinr::count()
-\item
-  seqinr::write.fasta()
-\end{itemize}
-
-\hypertarget{softwarewebsites}{%
-\subsection{Software/websites}\label{softwarewebsites}}
-
-\begin{itemize}
-\tightlist
-\item
-  www.ncbi.nlm.nih.gov
-\item
-  Text editors (e.g.~Notepad++, TextWrangler)
-\end{itemize}
-
-\hypertarget{r-vocabulary}{%
-\subsection{R vocabulary}\label{r-vocabulary}}
-
-\begin{itemize}
-\tightlist
-\item
-  list
-\item
-  library
-\item
-  package
-\item
-  CRAN
-\item
-  wrapper
-\end{itemize}
-
-\hypertarget{file-types}{%
-\subsection{File types}\label{file-types}}
-
-\begin{itemize}
-\tightlist
-\item
-  FASTA
-\end{itemize}
-
-\hypertarget{bioinformatics-vocabulary}{%
-\subsection{Bioinformatics vocabulary}\label{bioinformatics-vocabulary}}
-
-\begin{itemize}
-\tightlist
-\item
-  accession, accession number
-\item
-  NCBI
-\item
-  NCBI Sequence Database
-\item
-  EMBL Sequence Database
-\item
-  FASTA file
-\end{itemize}
-
-\hypertarget{organisms-and-sequence-accessions}{%
-\subsection{Organisms and Sequence accessions}\label{organisms-and-sequence-accessions}}
-
-\begin{itemize}
-\tightlist
-\item
-  Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4.
-\end{itemize}
-
-The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are NC\_001477, NC\_001474, NC\_001475 and NC\_002640, respectively.
-
-According to Wikipedia
-
-\begin{quote}
-``Dengue virus (DENV) is the cause of dengue fever. It is a mosquito-borne, single positive-stranded RNA virus \ldots{} Five serotypes of the virus have been found, all of which can cause the full spectrum of disease. Nevertheless, scientists' understanding of dengue virus may be simplistic, as rather than distinct \ldots{} groups, a continuum appears to exist.'' \url{https://en.wikipedia.org/wiki/Dengue_virus}
-\end{quote}
-
-\hypertarget{preliminaries}{%
-\subsection{Preliminaries}\label{preliminaries}}
-
-\begin{lstlisting}[language=R]
-library(rentrez)
-library(compbio4all) 
-\end{lstlisting}
-
-\hypertarget{dna-sequence-statistics-part-1}{%
-\section{DNA Sequence Statistics: Part 1}\label{dna-sequence-statistics-part-1}}
-
-\hypertarget{using-r-for-bioinformatics}{%
-\subsection{Using R for Bioinformatics}\label{using-r-for-bioinformatics}}
-
-The chapter will guide you through the process of using R to carry out simple analyses that are common in bioinformatics and computational biology. In particular, the focus is on computational analysis of biological sequence data such as genome sequences and protein sequences. The programming approaches, however, are broadly generalizable to statistics and data science.
-
-The tutorials assume that the reader has some basic knowledge of biology, but not necessarily of bioinformatics. The focus is to explain simple bioinformatics analysis, and to explain how to carry out these analyses using \emph{R}.
-
-\hypertarget{r-packages-for-bioinformatics-bioconductor-and-seqinr}{%
-\subsection{R packages for bioinformatics: Bioconductor and SeqinR}\label{r-packages-for-bioinformatics-bioconductor-and-seqinr}}
-
-Many authors have written \emph{R} packages for performing a wide variety of analyses. These do not come with the standard \emph{R} installation, but must be installed and loaded as ``add-ons''.
-
-Bioinformaticians have written numerous specialized packages for \emph{R}. In this tutorial, you will learn to use some of the function in the \href{https://cran.r-project.org/web/packages/seqinr/index.html}{\passthrough{\lstinline!SeqinR!}} package to to carry out simple analyses of DNA sequences. (\passthrough{\lstinline!SeqinR!} can retrieve sequences from a DNA sequence database, but this has largely been replaced by the functions in the package \passthrough{\lstinline!rentrez!})
-
-Many well-known bioinformatics packages for \emph{R} are in the Bioconductor set of \emph{R} packages (www.bioconductor.org), which contains packages with many \emph{R} functions for analyzing biological data sets such as microarray data. The \href{https://cran.r-project.org/web/packages/seqinr/index.html}{\passthrough{\lstinline!SeqinR!}} package is from CRAN, which contains R functions for obtaining sequences from DNA and protein sequence databases, and for analyzing DNA and protein sequences.
-
-We will also use functions from the \passthrough{\lstinline!rentrez!} and \passthrough{\lstinline!ape!} packages.
-
-Remember that you can ask for more information about a particular \emph{R} command by using the \passthrough{\lstinline!help()!} function. For example, to ask for more information about the \passthrough{\lstinline!library()!}, you can type:
-
-\begin{lstlisting}[language=R]
-help("library")
-\end{lstlisting}
-
-You can also do this
-
-\begin{lstlisting}[language=R]
-?library
-\end{lstlisting}
-
-\hypertarget{fasta-file-format}{%
-\subsection{FASTA file format}\label{fasta-file-format}}
-
-The FASTA format is a simple and widely used format for storing biological (e.g.~DNA or protein) sequences. It was first used by the \href{https://en.wikipedia.org/wiki/FASTA}{FASTA program} for sequence alignment in the 1980s and has been adopted as standard by many other programs.
-
-FASTA files begin with a single-line description starting with a greater-than sign \passthrough{\lstinline!>!} character, followed on the next line by the sequences. Here is an example of a FASTA file. (If you're looking at the source script for this lesson you'll see the \passthrough{\lstinline!cat()!} command, which is just a text display function used format the text when you run the code).
-
-\begin{lstlisting}
-## >A06852 183 residues MPRLFSYLLGVWLLLSQLPREIPGQSTNDFIKACGRELVRLWVEICGSVSWGRTALSLEEPQLETGPPAETMPSSITKDAEILKMMLEFVPNLPQELKATLSERQPSLRELQQSASKDSNLNFEEFKKIILNRQNEAEDKSLLELKNLGLDKHSRKKRLFRMTLSEKCCQVGCIRKDIARLC
-\end{lstlisting}
-
-\hypertarget{the-ncbi-sequence-database-1}{%
-\subsection{The NCBI sequence database}\label{the-ncbi-sequence-database-1}}
-
-The US \href{www.ncbi.nlm.nih.gov}{National Centre for Biotechnology Information (NCBI)} maintains the \textbf{NCBI Sequence Database}, a huge database of all the DNA and protein sequence data that has been collected. There are also similar databases in Europe, the \href{www.ebi.ac.uk/embl}{European Molecular Biology Laboratory (EMBL) Sequence Database}, and Japan, the \href{www.ddbj.nig.ac.jp}{DNA Data Bank of Japan (DDBJ)}. These three databases exchange data every night, so at any one point in time, they contain almost identical data.
-
-Each sequence in the NCBI Sequence Database is stored in a separate \textbf{record}, and is assigned a unique identifier that can be used to refer to that record. The identifier is known as an \textbf{accession}, and consists of a mixture of numbers and letters.
-
-For example, Dengue virus causes Dengue fever, which is classified as a \textbf{neglected tropical disease} by the World Health Organization (WHO), is classified by any one of four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are
-
-\begin{itemize}
-\tightlist
-\item
-  NC\_001477
-\item
-  NC\_001474
-\item
-  NC\_001475\\
-\item
-  NC\_002640
-\end{itemize}
-
-Note that because the NCBI Sequence Database, the EMBL Sequence Database, and DDBJ exchange data every night, the DEN-1 (and DEN-2, DEN-3, DEN-4) Dengue virus sequence are present in all three databases, but they have different accessions in each database, as they each use their own numbering systems for referring to their own sequence records.
-
-\hypertarget{retrieving-genome-sequence-data-using-rentrez}{%
-\subsection{Retrieving genome sequence data using rentrez}\label{retrieving-genome-sequence-data-using-rentrez}}
-
-You can retrieve sequence data from NCBI directly from \emph{R} using the \passthrough{\lstinline!rentrez!} package. The DEN-1 Dengue virus genome sequence has NCBI accession NC\_001477. To retrieve a sequence with a particular NCBI accession, you can use the function \passthrough{\lstinline!entrez\_fetch()!} from the \passthrough{\lstinline!rentrez!} package. Note that to be specific where the function comes from I write it as \passthrough{\lstinline!package::function()!}.
-
-\begin{lstlisting}[language=R]
-dengueseq_fasta <- rentrez::entrez_fetch(db = "nucleotide", 
-                          id = "NC_001477", 
-                          rettype = "fasta")
-\end{lstlisting}
-
-Note that the ``\emph{'' in the name is just an arbitrary way to separate two words. Another common format would be \passthrough{\lstinline!dengueseq.fasta!}. Some people like \passthrough{\lstinline!dengueseqFasta!}, called \textbf{camel case} because the capital letter makes a hump in the middle of the word. Underscores are becoming most common and are favored by developers associated with RStudio and the \textbf{tidyverse} of packages that many data scientists use. I switch between ''.'' and ''}'' as separators, usually favoring ``\_'' for function names and ``.'' for objects; I personally find camel case harder to read and to type.
-
-Ok, so what exactly have we done when we made \passthrough{\lstinline!dengueseq\_fasta!}? We have an R object \passthrough{\lstinline!dengueseq\_fasta!} which has the sequence linked to the accession number ``NC\_001477.'' So where is the sequence, and what is it?
-
-First, what is it?
-
-\begin{lstlisting}[language=R]
-is(dengueseq_fasta)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] "character"           "vector"              "data.frameRowLabels"
-## [4] "SuperClassMethod"
-\end{lstlisting}
-
-\begin{lstlisting}[language=R]
-class(dengueseq_fasta)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] "character"
-\end{lstlisting}
-
-How big is it? Try the \passthrough{\lstinline!dim()!} and \passthrough{\lstinline!length()!} commands and see which one works. Do you know why one works and the other doesn't?
-
-\begin{lstlisting}[language=R]
-dim(dengueseq_fasta)
-\end{lstlisting}
-
-\begin{lstlisting}
-## NULL
-\end{lstlisting}
-
-\begin{lstlisting}[language=R]
-length(dengueseq_fasta)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] 1
-\end{lstlisting}
-
-The size of the object is 1. Why is this? This is the genomics sequence of a virus, so you'd expect it to be fairly large. We'll use another function below to explore that issue. Think about this first: how many pieces of unique information are in the \passthrough{\lstinline!dengueseq!} object? In what sense is there only \emph{one} piece of information?
-
-If we want to actually see the sequence we can type just type \passthrough{\lstinline!dengueseq\_fasta!} and press enter. This will print the WHOLE genomic sequence out but it will probably run of your screen.
-
-\begin{lstlisting}[language=R]
-dengueseq_fasta
-\end{lstlisting}
-
-This is a whole genome sequence, but its stored as single entry in a vector, so the \passthrough{\lstinline!length()!} command just tells us how many entries there are in the vector, which is just one! What this means is that the entire genomic sequence is stored in a single entry of the vector \passthrough{\lstinline!dengueseq\_fasta!}. (If you're not following along with this, no worries - its not essential to actually working with the data)
-
-If we want to actually know how long the sequence is, we need to use the function \passthrough{\lstinline!nchar()!}.
-
-\begin{lstlisting}[language=R]
-nchar(dengueseq_fasta)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] 10935
-\end{lstlisting}
-
-The sequence is 10935 bases long. All of these bases are stored as a single \textbf{character string} with no spaces in a single entry of our \passthrough{\lstinline!dengueseq\_fasta!} vector. This isn't actually a useful format for us, so below were' going to convert it to something more useful.
-
-If we want to see just part of the sequence we can use the \passthrough{\lstinline!strtrim()!} function. Before you run the code below, predict what the 100 means.
-
-\begin{lstlisting}[language=R]
-strtrim(dengueseq_fasta, 100)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAAC"
-\end{lstlisting}
-
-Note that at the end of the name is a slash followed by an n, which indicates to the computer that this is a \textbf{newline}; this is read by text editor, but is ignored by R in this context.
-
-\begin{lstlisting}[language=R]
-strtrim(dengueseq_fasta, 45)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] ">NC_001477.1 Dengue virus 1, complete genome\nA"
-\end{lstlisting}
-
-After the \passthrough{\lstinline!\\\\n!} begins the sequence, which will continue on for a LOOOOOONG way. Let's just print a little bit.
-
-\begin{lstlisting}[language=R]
-strtrim(dengueseq_fasta, 52)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTA"
-\end{lstlisting}
-
-Let's print some more. Do you notice anything beside A, T, C and G in the sequence?
-
-\begin{lstlisting}[language=R]
-strtrim(dengueseq_fasta, 200)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTAACAGT\nTTTTTATTAGAGAGCAGATCTCTGATGAACAACCAACGGAAAAAGACGGGTCGACCGTCTTTCAATATGC\nTGAAACGCGCGAGAAA"
-\end{lstlisting}
-
-Again, there are the \passthrough{\lstinline!\\\\n!} newline characters, which tell text editors and wordprocessors how to display the file.
-
-Now that we a sense of what we're looking at let's explore the \passthrough{\lstinline!dengueseq\_fasta!} a bit more.
-
-We can find out more information about what it is using the \passthrough{\lstinline!class()!}command.
-
-\begin{lstlisting}[language=R]
-class(dengueseq_fasta)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] "character"
-\end{lstlisting}
-
-As noted before, this is character data.
-
-Many things in R are vectors so we can ask \emph{R }\passthrough{\lstinline!is.vector()!}
-
-\begin{lstlisting}[language=R]
-is.vector(dengueseq_fasta)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] TRUE
-\end{lstlisting}
-
-Yup, that's true.
-
-Ok, let's see what else. A handy though often verbose command is \passthrough{\lstinline!is()!}, which tells us what an object, well, what it is:
-
-\begin{lstlisting}[language=R]
-is(dengueseq_fasta)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] "character"           "vector"              "data.frameRowLabels"
-## [4] "SuperClassMethod"
-\end{lstlisting}
-
-There is a lot here but if you scan for some key words you will see ``character'' and ``vector'' at the top. The other stuff you can ignore. The first two things, though, tell us the dengueseq\_fasta is a \textbf{vector} of the class \textbf{character}: that is, a \textbf{character vector}.
-
-Another handy function is \passthrough{\lstinline!str()!}, which gives us a peak at the context and structure of an \emph{R} object. This is most useful when you are working in the R console or with dataframes, but is a useful function to run on all \emph{R} objects. How does this output differ from other ways we've displayed dengueseq\_fasta?
-
-\begin{lstlisting}[language=R]
-str(dengueseq_fasta)
-\end{lstlisting}
-
-\begin{lstlisting}
-##  chr ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTA"| __truncated__
-\end{lstlisting}
-
-We know it contains character data - how many characters? \passthrough{\lstinline!nchar()!} for ``number of characters'' answers that:
-
-\begin{lstlisting}[language=R]
-nchar(dengueseq_fasta)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] 10935
-\end{lstlisting}
-
-\hypertarget{optional-saving-fasta-files}{%
-\section{OPTIONAL: Saving FASTA files}\label{optional-saving-fasta-files}}
-
-We can save our data as .fasta file for safe keeping. The \passthrough{\lstinline!write()!} function will save the data we downloaded as a plain text file.
-
-\begin{lstlisting}[language=R]
-write(dengueseq_fasta, 
-      file="dengueseq.fasta")
-\end{lstlisting}
-
-If you do this, you'll need to figure out where \emph{R} is saving things, which requires and understanding \emph{R's} \textbf{file system}, which can take some getting used to, especially if you're new to programming. As a start, you can see where \emph{R} saves things by using the \passthrough{\lstinline!getwd()!} command, which tells you where on your harddrive R currently is using as its home base for files.
-
-\begin{lstlisting}[language=R]
-getwd()
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] "/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb"
-\end{lstlisting}
-
-\hypertarget{next-steps}{%
-\section{Next steps}\label{next-steps}}
-
-On their own, FASTA files in R are not directly useful. In the next lesson we'll process our \passthrough{\lstinline!dengueseq\_fasta!} file so that we can use it in analyses.
-
-\hypertarget{downloading-dna-sequences-as-fasta-files-in-r}{%
-\chapter{Downloading DNA sequences as FASTA files in R}\label{downloading-dna-sequences-as-fasta-files-in-r}}
-
-This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. Most of the text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
-
-\hypertarget{preliminaries-1}{%
-\section{Preliminaries}\label{preliminaries-1}}
-
-We'll need the \passthrough{\lstinline!dengueseq\_fasta!} FASTA data object, which is in the \passthrough{\lstinline!compbio4all!} package. We'll also use the \passthrough{\lstinline!stringr!} package for cleaning up the FASTA data, which can be downloaded with \passthrough{\lstinline!install.packages("stringr")!}
-
-\begin{lstlisting}[language=R]
-# compbio4all, which has dengueseq_fasta
-library(compbio4all)
-data(dengueseq_fasta)
-
-# stringr, for data cleaning
-library(stringr)
-\end{lstlisting}
-
-\hypertarget{convert-fasta-sequence-to-an-r-variable}{%
-\section{Convert FASTA sequence to an R variable}\label{convert-fasta-sequence-to-an-r-variable}}
-
-We can't actually do much with the contents of the \passthrough{\lstinline!dengueseq\_fasta!} we downloaded with the \passthrough{\lstinline!rentrez!} package except read them. If we want do address some biological questions with the data we need is to convert it into a data structure \emph{R} can work with.
-
-There are several things we need to remove:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  The \textbf{meta data} line \passthrough{\lstinline!>NC\_001477.1 Dengue virus 1, complete genome!} (metadata is ``data'' about data, such as where it came from, what it is, who made it, etc.).
-\item
-  All the \passthrough{\lstinline!\\n!} that show up in the file (these are the \textbf{line breaks}).
-\item
-  Put each nucleotide of the sequence into its own spot in a vector.
-\end{enumerate}
-
-There are functions that can do this automatically, but
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  I haven't found one I like, and
-\item
-  walking through this will help you understand the types of operations you can do on text data.
-\end{enumerate}
-
-The first two steps involve removing things from the existing \textbf{character string} that contains the sequence. The third step will split the single continuous character string like ``AGTTGTTAGTCTACGT\ldots{}'' into a \textbf{character vector} like \passthrough{\lstinline!c("A","G","T","T","G","T","T","A","G","T","C","T","A","C","G","T"...)!}, where each element of the vector is a single character a stored in a separate slot in the vector.
-
-\hypertarget{removing-unwanted-characters}{%
-\subsection{Removing unwanted characters}\label{removing-unwanted-characters}}
-
-The second item is the easiest to take care of. \emph{R} and many programming languages have tools called \textbf{regular expressions} that allow you to manipulate text. R has a function called \passthrough{\lstinline!gsub()!} which allows you to substitute or delete character data from a string. First I'll remove all those \passthrough{\lstinline!\\n!} values.
-
-The regular expression function \passthrough{\lstinline!gsub()!} takes three arguments:
-1. \passthrough{\lstinline!pattern = ...!}. This is what we need it to find so we can replace it.
-1. \passthrough{\lstinline!replacement = ...!}. The replacement.
-1. \passthrough{\lstinline!x = ...!}. A character string or vector where \passthrough{\lstinline!gsub()!} will do its work.
-
-We need to get rid of the \passthrough{\lstinline!\\n!} so that we are left with only A, T and G, which are the actually information of the sequence. We want \passthrough{\lstinline!\\n!} completely removed, so the replacement will be \passthrough{\lstinline!""!}, which is as set of quotation marks with nothing in the middle, which means ``delete the target pattern and put nothing in its place.''
-
-One thing that is tricky about regular expressions is that many characters have special meaning to the functions, such as slashes, dollar signs, and brackets. So, if you want to find and replace one of these specially designated characters you need to put a slash in front of them. So when we set the pattern, instead of setting the pattern to a slash before an n \passthrough{\lstinline!\\n!}, we have to give it two slashes \passthrough{\lstinline!\\\\n!}.
-
-Here is the regular expression to delete the newline character \textbackslash n.
-
-\begin{lstlisting}[language=R]
- # note: we want to find all the \n, but need to set the pattern as \\n
-dengueseq_vector <- gsub(pattern = "\\n",  
-                         replacement = "", 
-                         x = dengueseq_fasta)
-\end{lstlisting}
-
-We can use \passthrough{\lstinline!strtrim()!} to see if it worked
-
-\begin{lstlisting}[language=R]
-strtrim(dengueseq_vector, 80)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] ">NC_001477.1 Dengue virus 1, complete genomeAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTC"
-\end{lstlisting}
-
-Now for the metadata header. This is a bit complex, but the following code is going to take all the that occurs before the beginning of the sequence (``AGTTGTTAGTC'') and delete it.
-
-First, I'll define what I want to get rid of in an \emph{R} object. This will make the \textbf{call} to \passthrough{\lstinline!gsub()!} a little cleaner to read
-
-\begin{lstlisting}[language=R]
-seq.header <- ">NC_001477.1 Dengue virus 1, complete genome"
-\end{lstlisting}
-
-Now I'll get rid of the header with with \passthrough{\lstinline!gsub()!}.
-
-\begin{lstlisting}[language=R]
-dengueseq_vector <- gsub(pattern = seq.header, # object defined above
-                         replacement = "", 
-                         x = dengueseq_vector)
-\end{lstlisting}
-
-See if it worked:
-
-\begin{lstlisting}[language=R]
-strtrim(dengueseq_vector, 80)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] "AGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTAACAGTTTTTTATTAG"
-\end{lstlisting}
-
-\hypertarget{spliting-unbroken-strings-in-character-vectors}{%
-\subsection{Spliting unbroken strings in character vectors}\label{spliting-unbroken-strings-in-character-vectors}}
-
-Now the more complex part. We need to split up a continuous, unbroken string of letters into a vector where each letter is on its own. This can be done with the \passthrough{\lstinline!str\_split()!} function (``string split'') from the \passthrough{\lstinline!stringr!} package. The notation \passthrough{\lstinline!stringr::str\_split()!} mean ``use the \passthrough{\lstinline!str\_split!} function from from the \passthrough{\lstinline!stringr!} package.'' More specifically, it temporarily loads the \passthrough{\lstinline!stringr!} package and gives R access to just the \passthrough{\lstinline!str\_split!} function. These allows you to call a single function without loading the whole library.
-
-There are several arguments to \passthrough{\lstinline!str\_split!}, and I've tacked a \passthrough{\lstinline![[1]]!} on to the end.
-
-First, run the command
-
-\begin{lstlisting}[language=R]
-dengueseq_vector_split <- stringr::str_split(dengueseq_vector,
-                                       pattern = "",
-                                       simplify = FALSE)[[1]]
-\end{lstlisting}
-
-Look at the output with str()
-
-\begin{lstlisting}[language=R]
-str(dengueseq_vector_split)
-\end{lstlisting}
-
-\begin{lstlisting}
-##  chr [1:10735] "A" "G" "T" "T" "G" "T" "T" "A" "G" "T" "C" "T" "A" "C" "G" ...
-\end{lstlisting}
-
-We can explore what the different arguments do by modifying them. Change \passthrough{\lstinline!pattern = "" to pattern = "A"!}. Can you figure out what happened?
-
-\begin{lstlisting}[language=R]
-# re-run the command with "pattern  = "A"
-dengueseq_vector_split2 <- stringr::str_split(dengueseq_vector,
-                                       pattern = "A",
-                                       simplify = FALSE)[[1]]
-str(dengueseq_vector_split2)
-\end{lstlisting}
-
-\begin{lstlisting}
-##  chr [1:3427] "" "GTTGTT" "GTCT" "CGTGG" "CCG" "C" "" "G" "" "C" "GTTTCG" ...
-\end{lstlisting}
-
-And try it with \passthrough{\lstinline!pattern = "" to pattern = "G"!}.
-
-\begin{lstlisting}[language=R]
-# re-run the command with "pattern  = "G"
-dengueseq_vector_split3 <- stringr::str_split(dengueseq_vector,
-                                       pattern = "G",
-                                       simplify = FALSE)[[1]]
-str(dengueseq_vector_split3)
-\end{lstlisting}
-
-\begin{lstlisting}
-##  chr [1:2771] "A" "TT" "TTA" "TCTAC" "T" "" "ACC" "ACAA" "AACA" "TTTC" ...
-\end{lstlisting}
-
-Run this code to compare the two ways we just used \passthrough{\lstinline!str\_split!} (don't worry what it does). Does this help you see what's up?
-
-\begin{lstlisting}[language=R]
-options(str = strOptions(vec.len = 10))
-str(list(dengueseq_vector_split[1:20],
-     dengueseq_vector_split2[1:10], 
-     dengueseq_vector_split3[1:10]))
-\end{lstlisting}
-
-\begin{lstlisting}
-## List of 3
-##  $ : chr [1:20] "A" "G" "T" "T" "G" "T" "T" "A" "G" "T" ...
-##  $ : chr [1:10] "" "GTTGTT" "GTCT" "CGTGG" "CCG" "C" "" "G" "" "C"
-##  $ : chr [1:10] "A" "TT" "TTA" "TCTAC" "T" "" "ACC" "ACAA" "AACA" "TTTC"
-\end{lstlisting}
-
-So, what does the \passthrough{\lstinline!pattern = ...!} argument do? For more info open up the help file for \passthrough{\lstinline!str\_split!} by calling \passthrough{\lstinline!?str\_split!}.
-
-Something cool which we will explore in the next exercise is that we can do summaries on vectors of nucleotides, like this:
-
-\begin{lstlisting}[language=R]
-table(dengueseq_vector_split)
-\end{lstlisting}
-
-\begin{lstlisting}
-## dengueseq_vector_split
-##    A    C    G    T 
-## 3426 2240 2770 2299
-\end{lstlisting}
-
-\hypertarget{dna-descriptive-statics---part-1}{%
-\chapter{DNA descriptive statics - Part 1}\label{dna-descriptive-statics---part-1}}
-
-\textbf{By}: Avril Coghlan
-
-\textbf{Adapted, edited and expanded}: Nathan Brouwer (\href{mailto:brouwern@gmail.com}{\nolinkurl{brouwern@gmail.com}}) under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
-
-\hypertarget{preface-4}{%
-\section{Preface}\label{preface-4}}
-
-This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics (1)''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. The text and code were originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
-
-\hypertarget{writing-todo}{%
-\section{Writing TODO:}\label{writing-todo}}
-
-\begin{itemize}
-\tightlist
-\item
-  Add biology introduction
-\item
-  Work on flow
-\item
-  organize intial sections (intro, vocab, preliminaries)
-\end{itemize}
-
-\hypertarget{introduction-1}{%
-\section{Introduction}\label{introduction-1}}
-
-\hypertarget{vocabulary-1}{%
-\section{Vocabulary}\label{vocabulary-1}}
-
-\begin{itemize}
-\tightlist
-\item
-  GC content
-\item
-  DNA words
-\item
-  scatterplots, histograms, piecharts, and boxplots
-\end{itemize}
-
-\hypertarget{functions-2}{%
-\section{Functions}\label{functions-2}}
-
-\begin{itemize}
-\tightlist
-\item
-  \passthrough{\lstinline!seqinr::GC()!}
-\item
-  \passthrough{\lstinline!seqinr::count()!}
-\end{itemize}
-
-\hypertarget{preliminaries-2}{%
-\section{Preliminaries}\label{preliminaries-2}}
-
-\begin{lstlisting}[language=R]
-library(compbio4all)
-library(seqinr)
-\end{lstlisting}
-
-\hypertarget{converting-dna-from-fasta-format}{%
-\section{Converting DNA from FASTA format}\label{converting-dna-from-fasta-format}}
-
-In a previous exercise we downloaded and examined DNA sequence in the FASTA format. The sequence we worked with is also stored as a data file within the \passthrough{\lstinline!compbio4all!} pa package and can be brought into memory using the \passthrough{\lstinline!data()!} command.
-
-\begin{lstlisting}[language=R]
-data("dengueseq_fasta")
-\end{lstlisting}
-
-We can look at this data object with the \passthrough{\lstinline!str()!} command
-
-\begin{lstlisting}[language=R]
-str(dengueseq_fasta)
-\end{lstlisting}
-
-\begin{lstlisting}
-##  chr ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTA"| __truncated__
-\end{lstlisting}
-
-This isn't in a format we can work with directly so we'll use the function fasta\_cleaner() to set it up.
-
-\begin{lstlisting}[language=R]
-header. <- ">NC_001477.1 Dengue virus 1, complete genome"
-dengueseq_vector <- compbio4all::fasta_cleaner(dengueseq_fasta)
-\end{lstlisting}
-
-Now check it out.
-
-\begin{lstlisting}[language=R]
-str(dengueseq_vector)
-\end{lstlisting}
-
-\begin{lstlisting}
-##  chr [1:10735] "A" "G" "T" "T" "G" "T" "T" "A" "G" "T" "C" "T" "A" "C" "G" ...
-\end{lstlisting}
-
-What we have here is each base of the sequence in a seperate slot of our vector.
-
-The first four bases are ``AGTT''
-
-We can see the first one like this
-
-\begin{lstlisting}[language=R]
-dengueseq_vector[1]
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] "A"
-\end{lstlisting}
-
-The second one like this
-
-\begin{lstlisting}[language=R]
-dengueseq_vector[2]
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] "G"
-\end{lstlisting}
-
-The first and second like this
-
-\begin{lstlisting}[language=R]
-dengueseq_vector[1:2]
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] "A" "G"
-\end{lstlisting}
-
-and all four like this
-
-\begin{lstlisting}[language=R]
-dengueseq_vector[1:4]
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] "A" "G" "T" "T"
-\end{lstlisting}
-
-\hypertarget{length-of-a-dna-sequence}{%
-\section{Length of a DNA sequence}\label{length-of-a-dna-sequence}}
-
-Once you have retrieved a DNA sequence, we can obtain some simple statistics to describe that sequence, such as the sequence's total length in nucleotides. In the above example, we retrieved the DEN-1 Dengue virus genome sequence, and stored it in the vector variable dengueseq\_vector To obtain the length of the genome sequence, we would use the length() function, typing:
-
-\begin{lstlisting}[language=R]
-length(dengueseq_vector)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] 10735
-\end{lstlisting}
-
-The length() function will give you back the length of the sequence stored in variable dengueseq\_vector, in nucleotides. The length() function actually gives the number of \textbf{elements} (slots) in the input vector that you passed to it, which in this case in the number of elements in the vector dengueseq\_vector. Since each element of the vector dengueseq\_vector contains one nucleotide of the DEN-1 Dengue virus sequence, the result for the DEN-1 Dengue virus genome tells us the length of its genome sequence (ie. 10735 nucleotides long).
-
-\hypertarget{base-composition-of-a-dna-sequence}{%
-\subsection{Base composition of a DNA sequence}\label{base-composition-of-a-dna-sequence}}
-
-An obvious first analysis of any DNA sequence is to count the number of occurrences of the four different nucleotides (``A'', ``C'', ``G'', and ``T'') in the sequence. This can be done using the the table() function. For example, to find the number of As, Cs, Gs, and Ts in the DEN-1 Dengue virus sequence (which you have put into vector variable dengueseq\_vector, using the commands above), you would type:
-
-\begin{lstlisting}[language=R]
-table(dengueseq_vector)
-\end{lstlisting}
-
-\begin{lstlisting}
-## dengueseq_vector
-##    A    C    G    T 
-## 3426 2240 2770 2299
-\end{lstlisting}
-
-This means that the DEN-1 Dengue virus genome sequence has 3426 As occurring throughout the genome, 2240 Cs, and so forth.
-
-\hypertarget{gc-content-of-dna}{%
-\subsection{GC Content of DNA}\label{gc-content-of-dna}}
-
-One of the most fundamental properties of a genome sequence is its \textbf{GC content}, the fraction of the sequence that consists of Gs and Cs, ie. the \%(G+C).
-
-The GC content can be calculated as the percentage of the bases in the genome that are Gs or Cs. That is, GC content = (number of Gs + number of Cs)\emph{100/(genome length). For example, if the genome is 100 bp, and 20 bases are Gs and 21 bases are Cs, then the GC content is (20 + 21)}100/100 = 41\%.
-
-You can easily calculate the GC content based on the number of As, Gs, Cs, and Ts in the genome sequence. For example, for the DEN-1 Dengue virus genome sequence, we know from using the table() function above that the genome contains 3426 As, 2240 Cs, 2770 Gs and 2299 Ts. Therefore, we can calculate the GC content using the command:
-
-\begin{lstlisting}[language=R]
-(2240+2770)*100/(3426+2240+2770+2299)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] 46.66977
-\end{lstlisting}
-
-Alternatively, if you are feeling lazy, you can use the GC() function in the SeqinR package, which gives the fraction of bases in the sequence that are Gs or Cs.
-
-\begin{lstlisting}[language=R]
-seqinr::GC(dengueseq_vector)
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] 0.4666977
-\end{lstlisting}
-
-The result above means that the fraction of bases in the DEN-1 Dengue virus genome that are Gs or Cs is 0.4666977. To convert the fraction to a percentage, we have to multiply by 100, so the GC content as a percentage is 46.66977\%.
-
-\hypertarget{dna-words}{%
-\subsection{DNA words}\label{dna-words}}
-
-As well as the frequency of each of the individual nucleotides (``A'', ``G'', ``T'', ``C'') in a DNA sequence, it is also interesting to know the frequency of longer \textbf{DNA words}, also referred to as \textbf{genomic words}. The individual nucleotides are DNA words that are 1 nucleotide long, but we may also want to find out the frequency of DNA words that are 2 nucleotides long (ie. ``AA'', ``AG'', ``AC'', ``AT'', ``CA'', ``CG'', ``CC'', ``CT'', ``GA'', ``GG'', ``GC'', ``GT'', ``TA'', ``TG'', ``TC'', and ``TT''), 3 nucleotides long (eg. ``AAA'', ``AAT'', ``ACG'', etc.), 4 nucleotides long, etc.
-
-To find the number of occurrences of DNA words of a particular length, we can use the count() function from the R SeqinR package.
-
-The count() function only works with lower-case letters, so first we have to use the tolower() function to convert our upper class genome to lower case
-
-\begin{lstlisting}[language=R]
-dengueseq_vector <-tolower(dengueseq_vector)
-\end{lstlisting}
-
-Now we can look for words. For example, to find the number of occurrences of DNA words that are 1 nucleotide long in the sequence dengueseq\_vector, we type:
-
-\begin{lstlisting}[language=R]
-seqinr::count(dengueseq_vector, 1)
-\end{lstlisting}
-
-\begin{lstlisting}
-## 
-##    a    c    g    t 
-## 3426 2240 2770 2299
-\end{lstlisting}
-
-As expected, this gives us the number of occurrences of the individual nucleotides. To find the number of occurrences of DNA words that are 2 nucleotides long, we type:
-
-\begin{lstlisting}[language=R]
-seqinr::count(dengueseq_vector, 2)
-\end{lstlisting}
-
-\begin{lstlisting}
-## 
-##   aa   ac   ag   at   ca   cc   cg   ct   ga   gc   gg   gt   ta   tc   tg   tt 
-## 1108  720  890  708  901  523  261  555  976  500  787  507  440  497  832  529
-\end{lstlisting}
-
-Note that by default the count() function includes all overlapping DNA words in a sequence. Therefore, for example, the sequence ``ATG'' is considered to contain two words that are two nucleotides long: ``AT'' and ``TG''.
-
-If you type help(`count'), you will see that the result (output) of the function count() is a table object. This means that you can use double square brackets to extract the values of elements from the table. For example, to extract the value of the third element (the number of Gs in the DEN-1 Dengue virus sequence), you can type:
-
-\begin{lstlisting}[language=R]
-denguetable_2 <- seqinr::count(dengueseq_vector,2)
-denguetable_2[[3]]
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] 890
-\end{lstlisting}
-
-The command above extracts the third element of the table produced by count(dengueseq\_vector,1), which we have stored in the table variable denguetable.
-
-Alternatively, you can find the value of the element of the table in column ``g'' by typing:
-
-\begin{lstlisting}[language=R]
-denguetable_2[["aa"]]
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] 1108
-\end{lstlisting}
-
-Once you have table you can make a basic plot
-
-\begin{lstlisting}[language=R]
-barplot(denguetable_2)
-\end{lstlisting}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-179-1.pdf}
-
-We can sort by the number of words using the sort() command
-
-\begin{lstlisting}[language=R]
-sort(denguetable_2)
-\end{lstlisting}
-
-\begin{lstlisting}
-## 
-##   cg   ta   tc   gc   gt   cc   tt   ct   at   ac   gg   tg   ag   ca   ga   aa 
-##  261  440  497  500  507  523  529  555  708  720  787  832  890  901  976 1108
-\end{lstlisting}
-
-Let's save over the original object
-
-\begin{lstlisting}[language=R]
-denguetable_2 <- sort(denguetable_2)
-\end{lstlisting}
-
-\begin{lstlisting}[language=R]
-barplot(denguetable_2)
-\end{lstlisting}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-182-1.pdf}
-
-R will automatically try to optimize the appearance of the labels on the graph so you may not see all of them; no worries.
-
-R can also make pie charts. Piecharts only really work when there are a few items being plots, like the four bases.
-
-\begin{lstlisting}[language=R]
-denguetable_1 <- seqinr::count(dengueseq_vector,1)
-\end{lstlisting}
-
-Make a piechart with pie()
-
-\begin{lstlisting}[language=R]
-pie(denguetable_1)
-\end{lstlisting}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-184-1.pdf}
-
-\hypertarget{summary-2}{%
-\subsection{Summary}\label{summary-2}}
-
-In this practical, have learned to use the following R functions:
-
-length() for finding the length of a vector or list
-table() for printing out a table of the number of occurrences of each type of item in a vector or list.
-These functions belong to the standard installation of R.
-
-You have also learnt the following R functions that belong to the SeqinR package:
-
-GC() for calculating the GC content for a DNA sequence
-count() for calculating the number of occurrences of DNA words of a particular length in a DNA sequence
-
-\hypertarget{acknowledgements}{%
-\section{Acknowledgements}\label{acknowledgements}}
-
-This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics (1)''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. Almost all of text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
-
-In ``A little book\ldots{}'' Coghlan noted: ``Many of the ideas for the examples and exercises for this chapter were inspired by the Matlab case studies on Haemophilus influenzae (www.computational-genomics.net/case\_studies/haemophilus\_demo.html) and Bacteriophage lambda (\url{http://www.computational-genomics.net/case_studies/lambdaphage_demo.html}) from the website that accompanies the book Introduction to Computational Genomics: a case studies approach by Cristianini and Hahn (Cambridge University Press; www.computational-genomics.net/book/).''
-
-\hypertarget{license}{%
-\subsection{License}\label{license}}
-
-The content in this book is licensed under a Creative Commons Attribution 3.0 License.
-
-\url{https://creativecommons.org/licenses/by/3.0/us/}
-
-\hypertarget{exercises}{%
-\subsection{Exercises}\label{exercises}}
-
-Answer the following questions, using the R package. For each question, please record your answer, and what you typed into R to get this answer.
-
-Model answers to the exercises are given in Answers to the exercises on DNA Sequence Statistics (1).
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  What are the last twenty nucleotides of the Dengue virus genome sequence?
-\item
-  What is the length in nucleotides of the genome sequence for the bacterium Mycobacterium leprae strain TN (accession NC\_002677)?
-  Note: Mycobacterium leprae is a bacterium that is responsible for causing leprosy, which is classified by the WHO as a neglected tropical disease. As the genome sequence is a DNA sequence, if you are retrieving its sequence via the NCBI website, you will need to look for it in the NCBI Nucleotide database.
-\item
-  How many of each of the four nucleotides A, C, T and G, and any other symbols, are there in the Mycobacterium leprae TN genome sequence?
-  Note: other symbols apart from the four nucleotides A/C/T/G may appear in a sequence. They correspond to positions in the sequence that are are not clearly one base or another and they are due, for example, to sequencing uncertainties. or example, the symbol `N' means `aNy base', while `R' means `A or G' (puRine). There is a table of symbols at www.bioinformatics.org/sms/iupac.html.
-\item
-  What is the GC content of the \emph{Mycobacterium leprae TN} genome sequence, when (i) all non-A/C/T/G nucleotides are included, (ii) non-A/C/T/G nucleotides are discarded?
-  Hint: look at the help page for the GC() function to find out how it deals with non-A/C/T/G nucleotides.
-\item
-  How many of each of the four nucleotides A, C, T and G are there in the complement of the Mycobacterium leprae TN genome sequence? \emph{Hint}: you will first need to search for a function to calculate the complement of a sequence. Once you have found out what function to use, remember to use the help() function to find out what are the arguments (inputs) and results (outputs) of that function. How does the function deal with symbols other than the four nucleotides A, C, T and G? Are the numbers of As, Cs, Ts, and Gs in the complementary sequence what you would expect?
-\item
-  How many occurrences of the DNA words CC, CG and GC occur in the Mycobacterium leprae TN genome sequence?
-\item
-  How many occurrences of the DNA words CC, CG and GC occur in the (i) first 1000 and (ii) last 1000 nucleotides of the Mycobacterium leprae TN genome sequence?
-  1.How can you check that the subsequence that you have looked at is 1000 nucleotides long?
-\end{enumerate}
-
-\hypertarget{download-protein-seqs-R}{%
-\chapter{\texorpdfstring{Downloading protein sequences in \emph{R}}{Downloading protein sequences in R}}\label{download-protein-seqs-R}}
-
-\textbf{By}: Avril Coghlan.
-
-\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
-
-\hypertarget{preliminaries-3}{%
-\section{Preliminaries}\label{preliminaries-3}}
-
-\begin{lstlisting}[language=R]
-library(compbio4all)
-\end{lstlisting}
-
-\hypertarget{retrieving-a-uniprot-protein-sequence-using-rentrez}{%
-\section{Retrieving a UniProt protein sequence using rentrez}\label{retrieving-a-uniprot-protein-sequence-using-rentrez}}
-
-We can use \passthrough{\lstinline!entrez\_fetch()!} to download protein sequences.
-
-For example to retrieve the protein sequences for UniProt accessions Q9CD83 and A0PQ23, we type in R:
-
-\begin{lstlisting}[language=R]
-# sequence 1: Q9CD83
-leprae_fasta <- rentrez::entrez_fetch(db = "protein",
-                        id = "Q9CD83",
-                         rettype = "fasta")
-# sequence 2: OIN17619.1
-ulcerans_fasta <- rentrez::entrez_fetch(db = "protein",
-                         id = "OIN17619.1",
-                         rettype = "fasta")
-\end{lstlisting}
-
-Display the contents of the \passthrough{\lstinline!lepraeseq!} FASTA file.
-
-\begin{lstlisting}[language=R]
-leprae_fasta
-\end{lstlisting}
-
-\begin{lstlisting}
-## [1] ">sp|Q9CD83.1|PHBS_MYCLE RecName: Full=Chorismate pyruvate-lyase; AltName: Full=4-HB synthase; AltName: Full=p-hydroxybenzoic acid synthase\nMTNRTLSREEIRKLDRDLRILVATNGTLTRVLNVVANEEIVVDIINQQLLDVAPKIPELENLKIGRILQR\nDILLKGQKSGILFVAAESLIVIDLLPTAITTYLTKTHHPIGEIMAASRIETYKEDAQVWIGDLPCWLADY\nGYWDLPKRAVGRRYRIIAGGQPVIITTEYFLRSVFQDTPREELDRCQYSNDIDTRSGDRFVLHGRVFKNL\n\n"
-\end{lstlisting}
-
-Let's clean these up to remove the header and new line characters usin the function \passthrough{\lstinline!fasta\_cleaner()!}.
-
-\begin{lstlisting}[language=R]
-leprae_vector   <- fasta_cleaner(leprae_fasta)
-ulcerans_vector <- fasta_cleaner(ulcerans_fasta)
-\end{lstlisting}
-
-Examine the output using \passthrough{\lstinline!length()!}, \passthrough{\lstinline!class()!}, and \passthrough{\lstinline!head()!}:
-
-\begin{lstlisting}[language=R]
-length(leprae_vector)
-class(leprae_vector)
-head(leprae_vector, 20)
-\end{lstlisting}
-
-\hypertarget{changes-to-database-entries}{%
-\chapter{Changes to database entries}\label{changes-to-database-entries}}
-
-Sometimes databases entries not linked or database entries get removed. When revising this chapter I had to update three of the accession numbers because the UniProt accessions in the original version weren't working for me.
-
-For example the original UniProt entry included in the chapter
-\href{https://www.uniprot.org/uniprot/E3M2K8}{E3M2K8} does not currently link directly to the NCBI entry for this same protein. Instead, I had to use the NCBI accession XP\_003109757.1. I'm not sure why this is.
-
-Two accession numbers in the original version of this chapter appear to have been removed from UniProt because they were preliminary and perhaps did not meet the quality standards for UniProt. While the NCBI Gene and Protein are meant to be a record of \emph{all} sequence, NCBI RefSeq and UniProt are carefully curated to contain information that is consistent, accurate, and represents biological reality.
-
-Searching the UniProt data base for two accessions in the original version of this chapter,
-\href{https://www.uniprot.org/uniprot/E1FUV2}{E1FUV2} (\emph{Loa loa}) and
-\href{https://www.uniprot.org/uniprot/A8NSK3}{A8NSK3}(\emph{Brugia malayi}), both yielded the result:
-\textgreater{}``This entry is obsolete\ldots{} this entry was deleted. The protein sequence for this entry is available in UniParc. For previous versions of this entry, please look at its history.''
-
-Looking at the history for the \emph{Loa loa} version of the protein we can see it was listed as ``unreviewed'' prior to it being pulled and has the note ``The sequence shown here is derived from an \ldots{} whole genome shotgun (WGS) entry which i preliminary data.'' (\url{https://www.uniprot.org/uniprot/E1FUV2.txt?version=9}). Once they got around to reviewing in, the curators at UniProt must have decided that it didn't meet the standards for inclusion in the database. The information about the sequence in other databases, however, was not deleted, just the entry in UniProt.
-
-Most proteins are not experimentally studied in a lab, let alone their structure determined or their expression levels assessed. They are therefore predicted to be real based on their similarity to proteins that have been studied in model organisms.
-
-To track down these sequences, I used BLAST. BLASTing the well-studied model organism \emph{C. elegans} version of the protein against the \emph{Loa loa} genome resulted in a hypothetical protein \href{https://blast.ncbi.nlm.nih.gov/Blast.cgi\#alnHdr_XP_020305433}{LOAG\_18175} a 93\% query coverage with C. elegans and 44\% identity. The accession number for this predicted protein in NCBI is \href{https://blast.ncbi.nlm.nih.gov/Blast.cgi\#alnHdr_XP_020305433}{XP\_020305433.1}. I similarly tracked down the accession for the \emph{Brugia malayi} version of the protein.
 
 \hypertarget{a-complete-bioinformatics-workflow-in-r}{%
 \chapter{A complete bioinformatics workflow in R}\label{a-complete-bioinformatics-workflow-in-r}}
@@ -4013,8 +2997,8 @@ To track down these sequences, I used BLAST. BLASTing the well-studied model org
 \hypertarget{worked-example-building-a-phylogeny-in-r}{%
 \chapter{``Worked example: Building a phylogeny in R''}\label{worked-example-building-a-phylogeny-in-r}}
 
-\hypertarget{introduction-2}{%
-\section{Introduction}\label{introduction-2}}
+\hypertarget{introduction-1}{%
+\section{Introduction}\label{introduction-1}}
 
 Phylogenies play an important role in computational biology and bioinformatics. Phylogenetics itself is an obligatly computational field that only began rapid growth when computational power allowed the many algorithms it relies on to be done rapidly. Phylogeneies of species, genes and proteins are used to address many biological issues, including
 
@@ -4419,7 +3403,7 @@ fasta_cleaner
 ## 
 ##   return(fasta_object[[1]])
 ## }
-## <bytecode: 0x7ff16a0e69e0>
+## <bytecode: 0x7fc7a4153520>
 ## <environment: namespace:compbio4all>
 \end{lstlisting}
 
@@ -4756,7 +3740,7 @@ ggmsa::ggmsa(shrooms_align,   # shrooms_align, NOT shrooms_align_seqinr
 ##   grobY.absoluteGrob      ggplot2
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-220-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-157-1.pdf}
 
 \hypertarget{saving-an-msa-as-pdf}{%
 \subsubsection{Saving an MSA as PDF}\label{saving-an-msa-as-pdf}}
@@ -4864,7 +3848,7 @@ plot.phylo (tree, main="Phylogenetic Tree",
 mtext(text = "Shroom family gene tree - unrooted, no branch lengths")
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-227-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-164-1.pdf}
 
 This is an **unrooted tree*. For the sake of plotting we've also ignored the evolutionary distance between the sequences.
 
@@ -4879,7 +3863,7 @@ plot.phylo (tree, main="Phylogenetic Tree",
 mtext(text = "Shroom family gene tree - rooted, no branch lenths")
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-228-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-165-1.pdf}
 
 We can include information about branch length by setting \passthrough{\lstinline!use.edge.length = ...!} to \passthrough{\lstinline!T!}.
 
@@ -4892,7 +3876,7 @@ plot.phylo (tree, main="Phylogenetic Tree",
 mtext(text = "Shroom family gene tree - rooted, with branch lenths")
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-229-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-166-1.pdf}
 
 Some of the branches are now very short, but most are very long, indicating that these genes have been evolving independently for many millions of years.
 
@@ -4946,7 +3930,7 @@ segments(x0 = x2, y0 = 10,
          lwd=2)
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-230-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-167-1.pdf}
 
 \hypertarget{logarithms-in-r}{%
 \chapter{Logarithms in R}\label{logarithms-in-r}}
@@ -5112,8 +4096,8 @@ Both R and RStudio undergo regular updates and you will occasionally have to re-
 \chapter*{Getting started with R itself (or not)}\label{getting-started-with-r-itself-or-not}}
 \addcontentsline{toc}{chapter}{Getting started with R itself (or not)}
 
-\hypertarget{vocabulary-2}{%
-\section*{Vocabulary}\label{vocabulary-2}}
+\hypertarget{vocabulary-1}{%
+\section*{Vocabulary}\label{vocabulary-1}}
 \addcontentsline{toc}{section}{Vocabulary}
 
 \begin{itemize}
@@ -5417,7 +4401,7 @@ date()
 \end{lstlisting}
 
 \begin{lstlisting}
-## [1] "Fri Sep 17 22:24:20 2021"
+## [1] "Sat Sep 18 00:32:06 2021"
 \end{lstlisting}
 
 \textbf{Exponents}

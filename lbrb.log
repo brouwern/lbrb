@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.4.7)  17 SEP 2021 22:25
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.4.7)  18 SEP 2021 00:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -868,22 +868,13 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 6.99925pt on input line 3.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 3.
-[3]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 107.
-
-Overfull \hbox (132.99501pt too wide) in paragraph at lines 107--107
- [] [][]\TU/lmtt/b/n/10 {r, echo = F, eval = F} # knitr::include_graphics(here:
-:here("images/NCBI_accesssion_NC_001477_genbank.png")) 
- []
-
-[4] [5])
+[3] [4])
 \tf@toc=\write3
 \openout3 = `lbrb.toc'.
 
-[6] [7
+[5] [6
 
-] [8
+] [7] [8
 
 ]
 Chapter 1.
@@ -929,12 +920,60 @@ File: images/R_cursor.png Graphic file (type bmp)
 
 ]
 Chapter 6.
+[27] [28
+
+]
+Chapter 7.
+[29] [30] [31] [32] [33] [34]
+Chapter 8.
+File: lbrb_files/figure-latex/unnamed-chunk-84-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-84-1.pdf>
+
+Underfull \vbox (badness 6001) has occurred while \output is active []
+
+[35
+
+]
+File: lbrb_files/figure-latex/unnamed-chunk-85-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-85-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[36]
+File: lbrb_files/figure-latex/unnamed-chunk-87-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-87-1.pdf>
+[37]
+File: lbrb_files/figure-latex/unnamed-chunk-88-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-88-1.pdf>
+File: lbrb_files/figure-latex/unnamed-chunk-90-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-90-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[38] [39] [40
+
+]
+Chapter 9.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1475--1477
+
+ []
+
+[41] [42]
+Underfull \hbox (badness 10000) in paragraph at lines 1590--1592
+
+ []
+
+[43] [44
+
+]
+Chapter 10.
 File: /Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./i
 mages/image5.jpeg Graphic file (type bmp)
 </Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images
 /image5.jpeg>
 
-Overfull \hbox (163.00063pt too wide) in paragraph at lines 947--947
+Overfull \hbox (163.00063pt too wide) in paragraph at lines 1712--1712
 [][] 
  []
 
@@ -953,9 +992,9 @@ Missing character: There is no ′ in font [lmroman10-regular]:mapping=tex-text;
 Missing character: There is no ′ in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no ′ in font [lmroman10-regular]:mapping=tex-text;!
 
-LaTeX Warning: Float too large for page by 120.07683pt on input line 948.
+LaTeX Warning: Float too large for page by 120.07683pt on input line 1713.
 
-[27] [28]
+[45] [46]
 Missing character: There is no ′ in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no ′ in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no ′ in font [lmroman10-regular]:mapping=tex-text;!
@@ -980,35 +1019,35 @@ Missing character: There is no ′ in font [lmroman10-regular]:mapping=tex-text;
 Missing character: There is no ′ in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no ′ in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no ′ in font [lmroman10-regular]:mapping=tex-text;!
-[29] [30]
+[47] [48]
 File: /Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./i
 mages/image8.jpeg Graphic file (type bmp)
 </Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images
 /image8.jpeg>
 
-Overfull \hbox (4.46187pt too wide) in alignment at lines 1071--1080
+Overfull \hbox (4.46187pt too wide) in alignment at lines 1836--1845
  [] [] [] 
  []
 
 
-Overfull \hbox (4.46187pt too wide) in alignment at lines 1080--1092
+Overfull \hbox (4.46187pt too wide) in alignment at lines 1845--1857
  [] [] [] 
  []
 
-[31]
+[49]
 File: /Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./i
 mages/image9.png Graphic file (type bmp)
 </Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images
 /image9.png>
-[32] [33] [34
+[50] [51] [52
 
 ]
-Chapter 7.
+Chapter 11.
 
-Package hyperref Warning: Suppressing link with empty target on input line 1183
+Package hyperref Warning: Suppressing link with empty target on input line 1948
 .
 
-[35]
+[53]
 Missing character: There is no α in font [lmroman10-italic]:mapping=tex-text;!
 File: /Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./i
 mages/protimage1.jpeg Graphic file (type bmp)
@@ -1018,17 +1057,17 @@ File: /Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./i
 mages/protimage2.jpeg Graphic file (type bmp)
 </Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images
 /protimage2.jpeg>
-[36]
+[54]
 File: /Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./i
 mages/protimage3.jpeg Graphic file (type bmp)
 </Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images
 /protimage3.jpeg>
-[37]
+[55]
 File: /Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./i
 mages/protimage4.jpeg Graphic file (type bmp)
 </Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images
 /protimage4.jpeg>
-[38]
+[56]
 File: /Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./i
 mages/protimage5.jpeg Graphic file (type bmp)
 </Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images
@@ -1053,7 +1092,7 @@ Missing character: There is no α in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no β in font [lmroman10-regular]:mapping=tex-text;!
 Missing character: There is no α in font [lmroman10-italic]:mapping=tex-text;!
 Missing character: There is no α in font [lmroman10-italic]:mapping=tex-text;!
-[39] [40]
+[57] [58]
 File: /Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./i
 mages/protimage8.jpeg Graphic file (type bmp)
 </Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images
@@ -1063,71 +1102,23 @@ mages/protimage9.jpeg Graphic file (type bmp)
 </Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb/./images
 /protimage9.jpeg>
 
-Overfull \hbox (24.89624pt too wide) in paragraph at lines 1405--1405
+Overfull \hbox (24.89624pt too wide) in paragraph at lines 2170--2170
 [][] 
  []
 
 
-LaTeX Warning: Float too large for page by 36.50224pt on input line 1406.
+LaTeX Warning: Float too large for page by 36.50224pt on input line 2171.
 
 
 Underfull \vbox (badness 3977) has occurred while \output is active []
 
-[41] [42]
+[59] [60]
 Missing character: There is no α in font [lmroman10-italic]:mapping=tex-text;!
-[43]
+[61]
 Missing character: There is no α in font [lmroman10-italic]:mapping=tex-text;!
 Missing character: There is no α in font [lmroman10-bolditalic]:mapping=tex-tex
 t;!
-[44] [45] [46
-
-]
-Chapter 8.
-[47] [48
-
-]
-Chapter 9.
-[49] [50] [51] [52] [53] [54]
-Chapter 10.
-File: lbrb_files/figure-latex/unnamed-chunk-98-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-98-1.pdf>
-
-Underfull \vbox (badness 6001) has occurred while \output is active []
-
-[55
-
-]
-File: lbrb_files/figure-latex/unnamed-chunk-99-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-99-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[56]
-File: lbrb_files/figure-latex/unnamed-chunk-101-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-101-1.pdf>
-[57]
-File: lbrb_files/figure-latex/unnamed-chunk-102-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-102-1.pdf>
-File: lbrb_files/figure-latex/unnamed-chunk-104-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-104-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[58] [59] [60
-
-]
-Chapter 11.
-
-Underfull \hbox (badness 10000) in paragraph at lines 2151--2153
-
- []
-
-[61] [62]
-Underfull \hbox (badness 10000) in paragraph at lines 2266--2268
-
- []
-
-[63] [64
+[62] [63] [64
 
 ]
 Chapter 12.
@@ -1147,187 +1138,110 @@ Overfull \hbox (338.73183pt too wide) in paragraph at lines 2359--2360
 
 ]
 Chapter 13.
-[69] [70] [71] [72
+[69] [70] [71] [72] [73]
+Underfull \hbox (badness 1540) in paragraph at lines 2642--2642
+[]\TU/lmr/bx/n/14.4 Example: finding the sequences published in Nature
+ []
 
-]
+[74]
 Chapter 14.
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <24.88> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2499.
+[75
 
-Overfull \hbox (614.39122pt too wide) in paragraph at lines 2499--2499
-\TU/lmtt/b/n/24.88 knitr::include_graphics(here::here("images/NCBI_accesssion_N
-C_001477_genbank.png")) 
- []
-
-[73]
-Underfull \vbox (badness 6078) has occurred while \output is active []
-
-
-Overfull \hbox (194.70499pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 74 \TU/lmr/m/sl/10 CHAPTER 14.  \TU/lmtt/m/sl/10 {R, ECHO = F, E
-VAL = F} # KNITR::INCLUDE_GRAPHICS(HERE::HERE("IMAGES/NCBI_ACCESSSION_NC_001477
-_GENBANK.PNG")) #
- []
-
-[74] [75]
-Overfull \hbox (194.70499pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 76 \TU/lmr/m/sl/10 CHAPTER 14.  \TU/lmtt/m/sl/10 {R, ECHO = F, E
-VAL = F} # KNITR::INCLUDE_GRAPHICS(HERE::HERE("IMAGES/NCBI_ACCESSSION_NC_001477
-_GENBANK.PNG")) #
- []
-
-[76]
+] [76]
 Chapter 15.
 [77
 
-] [78]
+] [78] [79] [80
+
+]
 Chapter 16.
-[79
 
-] [80] [81] [82
+Underfull \vbox (badness 1838) has occurred while \output is active []
 
-]
+[81] [82] [83] [84]
 Chapter 17.
+[85
 
-Underfull \vbox (badness 1221) has occurred while \output is active []
+] [86
 
-[83] [84] [85] [86]
+]
 Chapter 18.
-[87
+[87] [88]
+Underfull \hbox (badness 10000) in paragraph at lines 3221--3223
 
-]
-Overfull \hbox (21.75279pt too wide) in paragraph at lines 3119--3120
-[]\TU/lmr/m/n/10 Many well-known bioinformatics packages for \TU/lmr/m/it/10 R 
-\TU/lmr/m/n/10 are in the Bioconductor set of \TU/lmr/m/it/10 R \TU/lmr/m/n/10 
-packages (www.bioconductor.org),
  []
 
-[88]
-Overfull \hbox (642.25609pt too wide) in paragraph at lines 3143--3144
+
+Underfull \hbox (badness 10000) in paragraph at lines 3236--3238
+
+ []
+
+[89] [90] [91]
+Overfull \hbox (11526.3668pt too wide) in paragraph at lines 3428--3429
 [][] 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 3162--3164
-
- []
-
-[89] [90] [91] [92]
-Chapter 19.
-[93
-
-]
-Overfull \hbox (30.24986pt too wide) in paragraph at lines 3475--3476
-[][] 
- []
-
-[94] [95] [96]
-Chapter 20.
-[97
-
-] [98] [99] [100]
-File: lbrb_files/figure-latex/unnamed-chunk-179-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-179-1.pdf>
-File: lbrb_files/figure-latex/unnamed-chunk-182-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-182-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[101]
-File: lbrb_files/figure-latex/unnamed-chunk-184-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-184-1.pdf>
-[102] [103] [104
-
-]
-Chapter 21.
-[105] [106]
-Chapter 22.
-[107
-
-] [108
-
-]
-Chapter 23.
-[109] [110
-
-]
-Chapter 24.
-[111] [112]
-Underfull \hbox (badness 10000) in paragraph at lines 4237--4239
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 4252--4254
-
- []
-
-[113] [114] [115]
-Overfull \hbox (11526.3668pt too wide) in paragraph at lines 4444--4445
-[][] 
- []
-
-[116] [117] [118]
-Underfull \hbox (badness 1824) in paragraph at lines 4617--4618
+[92] [93] [94]
+Underfull \hbox (badness 1824) in paragraph at lines 3601--3602
 []\TU/lmr/m/n/10 We’ll download all of the sequences again, this time using a f
 unction from [][][][] called
  []
 
-[119] [120]
-File: lbrb_files/figure-latex/unnamed-chunk-220-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-220-1.pdf>
-[121] [122]
-File: lbrb_files/figure-latex/unnamed-chunk-227-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-227-1.pdf>
-File: lbrb_files/figure-latex/unnamed-chunk-228-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-228-1.pdf>
+[95] [96]
+File: lbrb_files/figure-latex/unnamed-chunk-157-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-157-1.pdf>
+[97] [98]
+File: lbrb_files/figure-latex/unnamed-chunk-164-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-164-1.pdf>
+File: lbrb_files/figure-latex/unnamed-chunk-165-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-165-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[123]
-File: lbrb_files/figure-latex/unnamed-chunk-229-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-229-1.pdf>
-[124]
-File: lbrb_files/figure-latex/unnamed-chunk-230-1.pdf Graphic file (type pdf)
-<use lbrb_files/figure-latex/unnamed-chunk-230-1.pdf>
+[99]
+File: lbrb_files/figure-latex/unnamed-chunk-166-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-166-1.pdf>
+[100]
+File: lbrb_files/figure-latex/unnamed-chunk-167-1.pdf Graphic file (type pdf)
+<use lbrb_files/figure-latex/unnamed-chunk-167-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[125] [126]
-Chapter 25.
-[127
+[101] [102]
+Chapter 19.
+[103
 
-] [128] [129
+] [104] [105
 
-] [130] [131] [132
+] [106] [107] [108
 
-] [133] [134] [135
+] [109] [110] [111
 
-] [136] [137]
-Overfull \hbox (0.29388pt too wide) in paragraph at lines 5361--5362
+] [112] [113]
+Overfull \hbox (0.29388pt too wide) in paragraph at lines 4345--4346
 \TU/lmr/m/n/10 Often when you do an internet search for an R topic you’ll see r
 esults from the website www.stackoverflow.com,
  []
 
-[138]
+[114]
 No file lbrb.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5487.
-[139]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 5487.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 4471.
+[115]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 4471.
 (./lbrb.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 5487.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 5487.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 4471.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 4471.
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  ) 
 Here is how much of TeX's memory you used:
- 22136 strings out of 479418
- 403192 string characters out of 5884586
- 1155025 words of memory out of 5000000
- 39300 multiletter control sequences out of 15000+600000
- 538877 words of font info for 88 fonts, out of 8000000 for 9000
+ 21959 strings out of 479418
+ 399232 string characters out of 5884586
+ 1153437 words of memory out of 5000000
+ 39130 multiletter control sequences out of 15000+600000
+ 538853 words of font info for 85 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,7n,118p,4018b,1724s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on lbrb.pdf (139 pages).
+Output written on lbrb.pdf (115 pages).

@@ -1,36 +1,29 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
-# Introducing FASTA Files {#introducing-FASTA}
+# Introducing FASTA Files {#introducingFASTA}
 
 <!-- TODO: Add images / examples -->
 
 Adapted from [Wikipedia](https://en.wikipedia.org/wiki/FASTA_format): https://en.wikipedia.org/wiki/FASTA_format
 
 <!-- begin wikipedia -->
-"In bioinformatics, the FASTA format is a text-based format for representing either nucleotide sequences or amino acid (protein) sequences, in which nucleotides or amino acids are represented using single-letter codes. The format allows for sequence names and comments to precede the sequences. The format originates from the FASTA alignment software, but has now become a near universal standard in the field of bioinformatics.
+In bioinformatics, the FASTA format is a text-based format for representing either nucleotide sequences or amino acid (protein) sequences, in which nucleotides or amino acids are represented using single-letter codes. The format allows for sequence names and comments to precede the sequences. The format originates from the FASTA alignment software, but has now become a near universal standard in the field of bioinformatics.
 
-"The simplicity of FASTA format makes it easy to manipulate and parse sequences using text-processing tools and scripting languages like the R programming language and Python.
+The simplicity of FASTA format makes it easy to manipulate and parse sequences using text-processing tools and scripting languages like the R programming language and Python.
 
-"The first line in a FASTA file starts with a ">" (greater-than) symbol and holds summary information about the sequence, often starting with a unique accession number and followed by information like the name of the gene, the type of sequence, and the organism it is from.
+The first line in a FASTA file starts with a ">" (greater-than) symbol and holds summary information about the sequence, often starting with a unique accession number and followed by information like the name of the gene, the type of sequence, and the organism it is from.
 
-"On the  next is the  sequence itself in a standard one-letter character string. Anything other than a valid character is be ignored (including spaces, tabs, asterisks, etc...).
+On the  next is the  sequence itself in a standard one-letter character string. Anything other than a valid character is be ignored (including spaces, tabs, asterisks, etc...).
 
-"A multiple sequence FASTA format can be obtained by concatenating several single sequence FASTA files in a common file (also known as multi-FASTA format). 
+A multiple sequence FASTA format can be obtained by concatenating several single sequence FASTA files in a common file (also known as multi-FASTA format). 
 
-"Following the header line, the actual sequence is represented. Sequences may be protein sequences or nucleic acid sequences, and they can contain gaps or alignment characters. Sequences are expected to be represented in the standard amino acid and nucleic acid codes.  Lower-case letters are accepted and are mapped into upper-case; a single hyphen or dash can be used to represent a gap character; and in amino acid sequences, U and * are acceptable letters.
+Following the header line, the actual sequence is represented. Sequences may be protein sequences or nucleic acid sequences, and they can contain gaps or alignment characters. Sequences are expected to be represented in the standard amino acid and nucleic acid codes.  Lower-case letters are accepted and are mapped into upper-case; a single hyphen or dash can be used to represent a gap character; and in amino acid sequences, U and * are acceptable letters.
 
-"FASTQ format is a form of FASTA format extended to indicate information related to sequencing. It is created by the Sanger Centre in Cambridge.
+FASTQ format is a form of FASTA format extended to indicate information related to sequencing. It is created by the Sanger Centre in Cambridge.
 
-"Bioconductor.org's Biostrings package can be used to read and manipulate FASTA files in R
+Bioconductor.org's Biostrings package can be used to read and manipulate FASTA files in R
 
 <!-- end wikipedia -->
 
-from  https://zhanglab.dcmb.med.umich.edu/FASTA/
-
-"FASTA format is a text-based format for representing either nucleotide sequences or peptide sequences, in which base pairs or amino acids are represented using single-letter codes. A sequence in FASTA format begins with a single-line description, followed by lines of sequence data. The description line is distinguished from the sequence data by a greater-than (">") symbol in the first column. It is recommended that all lines of text be shorter than 80 characters in length."
+>"FASTA format is a text-based format for representing either nucleotide sequences or peptide sequences, in which base pairs or amino acids are represented using single-letter codes. A sequence in FASTA format begins with a single-line description, followed by lines of sequence data. The description line is distinguished from the sequence data by a greater-than (">") symbol in the first column. It is recommended that all lines of text be shorter than 80 characters in length." (https://zhanglab.dcmb.med.umich.edu/FASTA/)
 
 ## Example FASTA file
 
@@ -102,18 +95,18 @@ QA~~~~~~~~~~~~~~~~~~~")
 
 Adapted from [Wikipedia](https://en.wikipedia.org/wiki/FASTQ_format): https://en.wikipedia.org/wiki/FASTQ_format
 
-"FASTQ format is a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores. Both the sequence letter and quality score are each encoded with a single ASCII character for brevity.
+FASTQ format is a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores. Both the sequence letter and quality score are each encoded with a single ASCII character for brevity.
 
-"It was originally developed at the Wellcome Trust Sanger Institute to bundle a FASTA formatted sequence and its quality data, but has recently become the de facto standard for storing the output of high-throughput sequencing instruments such as the Illumina Genome Analyzer.
+It was originally developed at the Wellcome Trust Sanger Institute to bundle a FASTA formatted sequence and its quality data, but has recently become the de facto standard for storing the output of high-throughput sequencing instruments such as the Illumina Genome Analyzer.
 
-"A FASTQ file normally uses four lines per sequence.
+A FASTQ file normally uses four lines per sequence.
 
 * Line 1 begins with a `@` character and is followed by a sequence identifier and an optional description (like a FASTA title line).
 * Line 2 is the raw sequence letters.
 * Line 3 begins with a `+` character and is optionally followed by the same sequence identifier (and any description) again.
 * Line 4 encodes the **quality values** for the sequence in Line 2 of the file, and must contain the same number of symbols as letters in the sequence.
 
-"A FASTQ file containing a single sequence might look like this:"
+A FASTQ file containing a single sequence might look like this:"
 
 ```{r eval = T}
 cat("@SEQ_ID
@@ -123,7 +116,7 @@ GATTTGGGGTTCAAAGCAGTATCGATCAAATAGTAAATCCATTTGTTCAACTCACAGTTT
 ```
 
 
-"Here are the quality value characters in left-to-right increasing order of quality (ASCII):"
+Here are the quality value characters in left-to-right increasing order of quality (ASCII):"
 
 ```{r eval = F}
  !"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~

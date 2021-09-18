@@ -101,9 +101,9 @@ To view the GenBank entry for the DEN-1 Dengue virus, follow these steps:
 The GenBank entry for an accession contains a LOT of information about the sequence, such as papers describing it, features in the sequence, etc. The **DEFINITION** field gives a short description for the sequence. The **ORGANISM** field in the NCBI entry identifies the species that the sequence came from. The **REFERENCE** field contains scientific publications describing the sequence. The **FEATURES** field contains information about the location of features of interest inside the sequence, such as regulatory sequences or genes that lie inside the sequence. The **ORIGIN** field gives the sequence itself.
 
 
-# ```{r, echo = F, eval = F}
-# knitr::include_graphics(here::here("images/NCBI_accesssion_NC_001477_genbank.png"))
-# ```
+<!-- # ```{r, echo = F, eval = F} -->
+<!-- # knitr::include_graphics(here::here("images/NCBI_accesssion_NC_001477_genbank.png")) -->
+<!-- # ``` -->
 
 
 
