@@ -1,0 +1,225 @@
+# Simple for() loop example
+
+## Key functions / terms
+
+* paste()
+* functions to learn about vectors and other objects
+* nchar()
+* vector element
+* bracket notation to access vector elements
+* for() loop
+* curly brackets { }
+* function()
+* class()
+
+Here's a simple "toy" example of using four loops.
+
+Let's say we need look AG different codons and need to vary the first base of a codon.  For example, we want to look AG all the codons that are "XAG", so we want
+
+AAG
+TAG
+CAG
+GAG
+
+We make a vector that holds the first base of the code
+
+```{r}
+#element 1   2   3   4
+x <- c("A","T","C","G")
+```
+
+This is a vector with 4 elements.  We can explore it using the usual functions that tell us about objects (aka variables) in R.
+
+```{r}
+is(x)
+length(x)
+nchar(x)
+dim(x)
+nrow(x)
+ncol(x)
+```
+
+If we need to know what a function does we should always look it up in the help file
+```{r, eval = F}
+?nchar
+```
+
+
+Note that when we call the function nchar() on x we get
+
+```{r}
+nchar(x)
+```
+
+
+This means that each element of x has one character in it.
+
+Compare that result with this.  Let's make a vector with a single codon in it.
+
+```{r}
+#element   1
+y <- c("AGC")
+```
+
+Now nchar() says this
+
+```{r}
+nchar(y)
+```
+
+That is, 3 character (3 letters) in the first and only element of the vectors.
+
+If our vector contained codons, it would look like this
+
+
+```{r}
+y <- c("AAG", "TAG", "CAG", "GAG")
+nchar(y)
+```
+
+That is, four elements in the vector, each element with 3 characters in it.
+
+
+Let's say we are keeping the second and third position of our codon fixed AG "AG" and will vary the first position.  A function that will be handy is paste().
+
+Paste takes things and combines them into a single element of a vector.  So, I can do this with my name
+
+```{r}
+n <- paste("Nathan","Linn","Brouwer")
+```
+
+This gives me a vector of length 1
+```{r}
+length(n)
+```
+
+That contains my name
+```{r}
+n
+```
+
+If I don't want any spaces I can do this
+
+```{r}
+paste("NAGhan","Linn","Brouwer", sep = "")
+```
+
+
+I can use paste() to assembly codons for me
+
+```{r}
+codon1 <- paste("A", "AG", sep = "")
+codon1
+```
+
+I can make all for possible codon that end in "AG" like this
+
+```{r}
+paste("A", "AG", sep = "")
+paste("T", "AG", sep = "")
+paste("C", "AG", sep = "")
+paste("G", "AG", sep = "")
+```
+
+Since I have a vector with the first base I'm varying in it, I can also do this using bracket notation, with x[1], x[2], etc.
+
+```{r}
+paste(x[1], "AG", sep = "")
+paste(x[2], "AG", sep = "")
+paste(x[3], "AG", sep = "")
+paste(x[4], "AG", sep = "")
+```
+
+
+Copying the same line of code multiple times gets the job done but will be prone to errors.  Anytime the same process gets repeated you should consider using for() loops and/or functions.  I can take the four lines of code in the previous chunk and turn it into a four loop like this.
+
+```{r}
+for(i in 1:length(x)){
+  codon <- paste(x[i],"AG", sep = "")
+  print(codon)
+}
+
+```
+
+All for loops start with for(...).  Don't worry about what's in between the parentheses right now.  Then there's a curly bracket {, some code thAG does whAG we want, and a closing curly bracket }.
+
+This is a "toy" example and doesn't accomplish much - my four loop has as many lines of code as the stuff it replaces.  But if I have to do something dozens, hundreds, or thousands of times then its very useful to use for() loops.
+
+Functions also allow you to take a process and consolidated it.  Often, functions contain for loops in them.  For example, I can consolidated the for() loop into a function like this.
+
+First, I define a function called for_loop_function()
+
+```{r}
+for_loop_function <- function(x){
+  for(i in 1:length(x)){
+  codon <- paste(x[i],"AG", sep = "")
+  print(codon)
+      }
+}
+```
+
+All function definitions start with function(...), have a curly bracket {, some code, and end with a }.  Functions often don't have for loops, but in this case it does, so there are two sets of curly brackets, one for the for() loop and one for the function wrapping around it.
+
+So now I can get the results I did before like this
+
+```{r}
+for_loop_function(x)
+```
+
+This is handy if I'm going to modify or reuse the process I'm doing.  Let's say I want to work with RNA instead of DNA.  I'll define a vector like this with U as the second element of the vector instead of T
+
+```{r}
+x1 <- c("A","U" ,"C", "G")
+
+x1[2]
+```
+
+Now I can get my results for RNA
+
+```{r}
+for_loop_function(x1)
+```
+
+
+Note that because everything in R is an object, I can learn about objects containing functions like this
+
+```{r}
+is(for_loop_function)
+```
+
+The first element of the output tells me that this is a function object.,
+
+More succinctly I can use the class() function
+
+```{r}
+class(for_loop_function)
+```
+
+
+Here's an example of another function.  Note the key elements: 
+The function name: entrez_fetch_list
+The assignment operator <-
+The function() function
+The brackets
+
+In this case, there's also a for() loop in this function.
+
+```{r}
+entrez_fetch_list <- function(db, id, rettype, ...){
+
+  #setup list for storing output
+  n.seq <- length(id)
+  list.output <- as.list(rep(NA, n.seq))
+  names(list.output) <- id
+
+  # get output
+  for(i in 1:length(id)){
+    list.output[[i]] <- rentrez::entrez_fetch(db = db,
+                                              id = id[i],
+                                        rettype = rettype)
+  }
+
+  return(list.output)
+}
+```
+

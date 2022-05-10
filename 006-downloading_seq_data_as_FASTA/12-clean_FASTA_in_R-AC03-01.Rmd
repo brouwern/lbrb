@@ -1,4 +1,4 @@
-# Downloading DNA sequences as FASTA files in R
+# Cleaning and preparing FASTA files for analysis in R
 
 This is a modification of ["DNA Sequence Statistics"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  Most of the text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license.  
 
@@ -30,12 +30,14 @@ There are several things we need to remove:
 1. All the `\n` that show up in the file (these are the **line breaks**).
 1. Put each nucleotide of the sequence into its own spot in a vector.
 
-There are functions that can do this automatically, but 
+There are functions in other packages that can do this automatically, but 
 
 1. I haven't found one I like, and 
-1. walking through this will help you understand the types of operations you can do on text data.
+1. Walking through this will help you understand the types of operations you can do on text data.
 
-The first two steps involve removing things from the existing **character string** that contains the sequence.  The third step will split the single continuous character string like "AGTTGTTAGTCTACGT..." into a **character vector** like `c("A","G","T","T","G","T","T","A","G","T","C","T","A","C","G","T"...)`, where each element of the vector is a single character a stored in a separate slot in the vector.
+I have my own FASTA cleaning function in compbio4all, fasta_cleaner(), and the code below breaks down some of the concepts and functions it uses.
+
+The first two steps for cleaning up a FASTAS file involve removing things from the existing **character string** that contains the sequence.  The third step will split the single continuous character string like "AGTTGTTAGTCTACGT..." into a **character vector** like `c("A","G","T","T","G","T","T","A","G","T","C","T","A","C","G","T"...)`, where each element of the vector is a single character a stored in a separate slot in the vector.
 
 
 ### Removing unwanted characters

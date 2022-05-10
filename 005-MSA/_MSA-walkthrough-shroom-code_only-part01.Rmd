@@ -1,0 +1,224 @@
+---
+title: "A bioinformatics workflow"
+author: "Nathan Brouwer"
+date: "9/21/2021"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+# this is the knitr header - don't touch it.
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# A complete bioinformatics workflow in R
+
+
+**By**: Nathan L. Brouwer
+
+# "Worked example: Building a phylogeny in R" 
+
+## Introduction
+
+Describe how phylogeneies can be used in biology
+(readings will be assigned)
+
+
+
+
+### Vocab 
+
+Make a list of at least 10 vocab terms that are important (don't have to define)
+
+
+### Key functions
+
+Make a list of at least 5 key functions
+Put in the format of package::function
+
+## Software Preliminaires
+
+Add the necessary calls to library() to load call packages
+Indicate which packages cam from Bioconducotr, CRAN, and GitHub
+
+
+### Load packages into memory
+
+```{r, message= F, warning=F}
+# github packages
+## download these if necessary
+# devtools::install_github("brouwern/combio4all")
+# devtools::install_github("YuLab-SMU/ggmsa")
+
+
+
+# CRAN packages
+library(rentrez)
+
+
+# Bioconductor packages
+
+
+```
+
+
+
+
+## XXXXXXXXing macromolecular sequences
+
+TODO: Fill in the XXXXXs and write a 1-2 sentence of what is going on here.  
+Add the package that is where entrez_fetch is from using :: notation
+
+
+```{r}
+# Human shroom 3 (H. sapiens)
+hShroom3 <- rentrez::entrez_fetch(db = "protein", 
+                          id = "NP_065910", 
+                          rettype = "fasta")
+```
+
+
+slash n is a new line character
+
+```{r}
+hShroom3
+```
+
+
+TODO:explain what cat() is doing
+
+```{r}
+cat(hShroom3)
+```
+
+
+TODO: explain what this code chunk is doing
+
+```{r}
+# Mouse shroom 3a (M. musculus)
+mShroom3a <- rentrez::entrez_fetch(db = "protein", 
+                          id = "AAF13269", 
+                          rettype = "fasta")
+
+# Human shroom 2 (H. sapiens)
+hShroom2 <- rentrez::entrez_fetch(db = "protein", 
+                          id = "CAA58534", 
+                          rettype = "fasta")
+
+
+# Sea-urchin shroom
+sShroom <- rentrez::entrez_fetch(db = "protein", 
+                          id = "XP_783573", 
+                          rettype = "fasta")
+```
+
+
+
+TODO: Explain what this code chunk is doing 
+```{r}
+nchar(hShroom3)
+nchar(mShroom3a)
+nchar(sShroom)
+nchar(hShroom2)
+```
+
+
+
+## Cleaning / Prepping macromolecular sequences
+
+TODO: Explain what this function does
+
+```{r}
+library(compbio4all)
+fasta_cleaner
+```
+
+
+TODO: explain how to add the function to your R session even if you can't download compbio4all
+
+```{r}
+fasta_cleaner <- function(fasta_object, parse = TRUE){
+
+  fasta_object <- sub("^(>)(.*?)(\\n)(.*)(\\n\\n)","\\4",fasta_object)
+  fasta_object <- gsub("\n", "", fasta_object)
+
+  if(parse == TRUE){
+    fasta_object <- stringr::str_split(fasta_object,
+                                       pattern = "",
+                                       simplify = FALSE)
+  }
+
+  return(fasta_object[[1]])
+}
+
+```
+
+
+
+TODO: briefly explain what this code chunk is doing
+
+```{r}
+hShroom3  <- fasta_cleaner(hShroom3,  parse = F)
+mShroom3a <- fasta_cleaner(mShroom3a, parse = F)
+hShroom2  <- fasta_cleaner(hShroom2,  parse = F)
+sShroom   <- fasta_cleaner(sShroom,   parse = F)
+```
+
+
+
+
+```{r}
+hShroom3
+```
+
+```{r}
+nchar(hShroom3)
+```
+
+## Doing pairwise alignment of sequences
+
+pairwise alignment is the little sibling of msa
+
+TODO: give this a title.  Explain what code below is doing
+
+```{r}
+library(Biostrings)
+# add necessary function
+align.h3.vs.m3a <- Biostrings::pairwiseAlignment(
+                  hShroom3,
+                  mShroom3a)
+```
+
+
+
+TODO: In 1-2 sentence explain what this object shows
+```{r}
+align.h3.vs.m3a
+```
+
+
+# STOPPED HERE on 9/21/21
+
+```{r}
+# This code chunk is just marking the stopping point from
+## 9/21/21
+################################################
+################################################
+################################################
+################################################
+################################################
+################################################
+################################################
+################################################
+################################################
+
+```
+
+
+
+
+NOTE: when we meet next please follow along with the hard copy and don't 
+try to type in the rest of the code.  I will be moving relativley fast
+and the goal is to focus on concepts, not coding details.  I'll release
+the rest of the code after class.

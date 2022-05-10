@@ -1,41 +1,85 @@
+Assignment:
+Your assignment is to use your notes from class - along with help from classmates, UTAs, and me - to turn this script into a fleshed-out description of what is going on.
 
-# Preliminaries
+This is a substantial project - we'll work on it in steps over the rest of the unit. 
 
-## NOTE: only run install.packages() if you have to
+We are currently focused on the overall process and will cover the details over the rest of this unit.  Your answers can be brief.
 
-## Packages
+Delete all the prompts like TODO() as you compete them.  Use RStudio's search function to see if you've missed any - there are a LOT!
 
-### devtools  
+When you've completed everything knit and upload it to RPubs.  A Canvas Assignment will be created where you can
+1) post the link to your RPubs site
+2) post the code
 
-#### devtools
-install.packages("devtools")
-library(devtools)
+The next step after that will be announced later.
 
-#### compbio4all
-devtools::install_github("brouwern/compbio4all")
-library(compbio4all)
 
-#### ggmsa
-devtools::install_github("YuLab-SMU/ggmsa")
-library(ggmsa)
 
-### Bioconductor / BiocManager
-install.packages("BiocManager") 
-library(BiocManager)
 
-#### Biostrings
-BiocManager::install("Biostrings")
-BiocManager::install("msa")
+Add YAML header!!!
+Give it a title
 
-## R bioinformatics software
-install.packages("rentrez")
-library(rentrez)
 
-install.packages("seqinr")
-library(seqinr)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
-install.packages("ape")
-library(ape)
+
+# A complete bioinformatics workflow in R
+
+<!-- TODO: create function to simplify the prepwork -->
+
+**By**: Nathan L. Brouwer
+
+# "Worked example: Building a phylogeny in R" 
+
+## Introduction
+
+Describe how phylogeneies can be used in biology
+(readings will be assigned)
+
+
+
+
+### Vocab 
+
+Make a list of at least 10 vocab terms that are important (don't have to define)
+
+
+### Key functions
+
+Make a list of at least 5 key functions
+Put in the format of package::function
+
+## Software Preliminaires
+
+Add the necessary calls to library() to load call packages
+Indicate which packages cam from Bioconducotr, CRAN, and GitHub
+
+
+### Load packages into memory
+
+```{r, message= F, warning=F}
+# github packages
+
+
+
+# CRAN packages
+
+
+
+# Bioconductor packages
+
+
+```
+
+
+
+
+## XXXXXXXXing macromolecular sequences
+
+TODO: Fill in the XXXXXs and write a 1-2 sentence of what is going on here.  
+Add the package that is where entrez_fetch is from using :: notation
 
 
 ```{r}
@@ -46,12 +90,14 @@ hShroom3 <- entrez_fetch(db = "protein",
 ```
 
 
+TODO:explain what cat() is doing
 
 ```{r}
 cat(hShroom3)
 ```
 
 
+TODO: explain what this code chunk is doing
 
 ```{r}
 # Mouse shroom 3a (M. musculus)
@@ -73,7 +119,7 @@ sShroom <- entrez_fetch(db = "protein",
 
 
 
-
+TODO: Explain what this code chunk is doing 
 ```{r}
 nchar(hShroom3)
 nchar(mShroom3a)
@@ -83,14 +129,37 @@ nchar(hShroom2)
 
 
 
-## XXXXXXXXing macromolecular sequences
+## Prepping macromolecular sequences
 
-
+TODO: Explain what this function does
 
 ```{r}
 fasta_cleaner
 ```
 
+
+TODO: explain how to add the function to your R session even if you can't download compbio4all
+
+```{r}
+fasta_cleaner <- function(fasta_object, parse = TRUE){
+
+  fasta_object <- sub("^(>)(.*?)(\\n)(.*)(\\n\\n)","\\4",fasta_object)
+  fasta_object <- gsub("\n", "", fasta_object)
+
+  if(parse == TRUE){
+    fasta_object <- stringr::str_split(fasta_object,
+                                       pattern = "",
+                                       simplify = FALSE)
+  }
+
+  return(fasta_object[[1]])
+}
+
+```
+
+
+
+TODO: briefly explain what this code chunk is doing
 
 ```{r}
 hShroom3  <- fasta_cleaner(hShroom3,  parse = F)
@@ -109,15 +178,17 @@ hShroom3
 
 ## XXXXXXXXing sequences
 
-
+TODO: give this a title.  Explain what code below is doing
 
 ```{r}
-align.h3.vs.m3a <- Biostrings::pairwiseAlignment(
+# add necessary function
+align.h3.vs.m3a <- Biostrings::           (
                   hShroom3,
                   mShroom3a)
 ```
 
 
+TODO: In 1-2 sentence explain what this object shows
 ```{r}
 align.h3.vs.m3a
 ```
@@ -125,15 +196,16 @@ align.h3.vs.m3a
 
 
 
-
+TODO: explain what this is showing
 ```{r}
-Biostrings::pid(align.h3.vs.m3a)
+# add necessary function
+Biostrings::    (align.h3.vs.m3a)
 ```
 
 
 
 
-
+TODO: briefly explain what is going on here versus the previous code chunk
 ```{r}
 align.h3.vs.h2 <- Biostrings::pairwiseAlignment(
                   hShroom3,
@@ -142,14 +214,14 @@ align.h3.vs.h2 <- Biostrings::pairwiseAlignment(
 
 
 
-
+TODO: explain what is going on here and compare and contrast with previous ouput
 ```{r}
 score(align.h3.vs.h2)
 ```
 
 
 
-
+TODO: briefly explian the difference between the output of score() and pid() (can be very brief - we'll get into the details later)
 ```{r}
 Biostrings::pid(align.h3.vs.h2)
 ```
@@ -160,7 +232,7 @@ Biostrings::pid(align.h3.vs.h2)
 
 ## The shroom family of genes
 
-
+TODO: briefly explain why I have this whole table here
 
 
 
@@ -183,6 +255,8 @@ shroom_table <- c("CAA78718" , "X. laevis Apx" ,         "xShroom1",
 ```
 
 
+
+TODO: write a short sentence explaining what this next code chunk will do, then annotate each line with what was done.
 
 ```{r}
 # convert to XXXXXXXXXC
@@ -208,7 +282,7 @@ shroom_table$spp[grep("purpuratus",shroom_table$name.orig)] <- "sea urchin"
 ```
 
 
-
+TODO: in a brief sentence explain what this is doing
 
 ```{r}
 shroom_table
@@ -217,6 +291,7 @@ shroom_table
 ## XXXXXing multiple sequences 
 
 
+TODO: in a brief sentence explain what the $ allows us to do
 
 ```{r}
 shroom_table$accession
@@ -224,16 +299,17 @@ shroom_table$accession
 
 
 
-
+TODO: briefly explain what this chunk is doing and add the correct function
 ```{r}
-shrooms <- entrez_fetch(db = "protein", 
+# add necessary function
+shrooms <-          (db = "protein", 
                           id = shroom_table$accession, 
                           rettype = "fasta")
 ```
 
 
 
-
+TODO: in a very brief sentence explain what this is doing.
 ```{r, eval = F}
 cat(shrooms)
 ```
@@ -241,7 +317,7 @@ cat(shrooms)
 
 
 
-
+TODO: in a  brief sentence explain what this is doing and if/how its different from the previous code chunks
 ```{r}
 shrooms_list <- entrez_fetch_list(db = "protein", 
                           id = shroom_table$accession, 
@@ -250,13 +326,14 @@ shrooms_list <- entrez_fetch_list(db = "protein",
 
 
 
-
+TODO: briefly explain what I am doing this
 ```{r}
 length(shrooms_list)
 ```
 
 
 
+TODO: briefly explain what I am doing this.  We will get into the details of for() loops in R later in the semester.
 
 ```{r}
 for(i in 1:length(shrooms_list)){
@@ -265,7 +342,7 @@ for(i in 1:length(shrooms_list)){
 ```
 
 
-
+TODO: summarize what is going on in this code chunk, then annotate each line of code with what its doing
 
 ```{r}
 # XXXXXXXXCX
@@ -282,16 +359,18 @@ names(shrooms_vector) <- names(shrooms_list)
 
 
 
-
+TODO: explain what this is doing then add the necessary function.
 ```{r}
-shrooms_vector_ss <- Biostrings::AAStringSet(shrooms_vector)
+# add necessary function
+shrooms_vector_ss <- Biostrings::        (shrooms_vector)
 ```
 
 
 ## MSA
 
 
-
+TODO: briefly summarize what this section of the document will do.  
+Readings will be assigned to explain what MSAs are.
 
 
 
@@ -300,23 +379,24 @@ shrooms_vector_ss <- Biostrings::AAStringSet(shrooms_vector)
 
 
 
-
+TODO: briefly explain what this chunk does, then add the necessary function.
 
 ```{r}
-shrooms_align <- msa(shrooms_vector_ss,
+# add necessary function
+shrooms_align <-      (shrooms_vector_ss,
                      method = "ClustalW")
 ```
 
 
 ### Viewing an MSA
 
-
+TODO: briefly summarize what this section will do.
 
 
 #### Viewing an MSA in R
 
 
-
+TODO: Briefly summarize what output is shown below 
 
 ```{r}
 shrooms_align
@@ -324,29 +404,36 @@ shrooms_align
 
 
 
+TODO: briefly explain what is being done in this chunk.  This is tricky (and annoying) so do your best
+
+
 
 ```{r}
+# WHAT IS THE LINE BELOW DOING? (its tricky - do your best)
 class(shrooms_align) <- "AAMultipleAlignment"
+
+# WHAT IS THE LINE BELOW DOING? This is simpler
 shrooms_align_seqinr <- msaConvert(shrooms_align, type = "seqinr::alignment")
 ```
 
 
 
 
-
+TODO: what is the output this produces
 ```{r, eval = F}
 print_msa(alignment = shrooms_align_seqinr, 
           chunksize = 60)
 ```
 
-#### Displaying an MSA as an R plot
+#### Displaying an MSA XXXXXXXX
 
 
 
-
+TODO: explain this output and how its differnet from the prevoius
 
 ```{r}
-ggmsa::ggmsa(shrooms_align,   # shrooms_align, NOT shrooms_align_seqinr
+## add necessary function
+ggmsa::     (shrooms_align,   # shrooms_align, NOT shrooms_align_seqinr
       start = 2000, 
       end = 2100) 
 ```
@@ -356,7 +443,9 @@ ggmsa::ggmsa(shrooms_align,   # shrooms_align, NOT shrooms_align_seqinr
 #### Saving an MSA as PDF
 
 
-
+TODO: explain what this command is doing.
+Add the package the function is coming from using :: notation
+This may not work for everyone.  If its not working you can comment it out.
 
 
 ```{r, eval = F}
@@ -367,7 +456,7 @@ msaPrettyPrint(shrooms_align,             # alignment
 ```
 
 
-
+TODO: explain what this command is doing
 
 ```{r}
 getwd()
@@ -378,9 +467,11 @@ getwd()
 
 ## Genetic XXXXXXXXX
 
+TODO: give this section a title and briefly explain what is going on below.
 
 ```{r}
-shrooms_dist <- seqinr::dist.alignment(shrooms_align_seqinr, 
+### add necessary function
+shrooms_dist <- seqinr::       (shrooms_align_seqinr, 
                                        matrix = "identity")
 
 
@@ -388,13 +479,16 @@ shrooms_dist <- seqinr::dist.alignment(shrooms_align_seqinr,
 
 
 
+TODO:  briefly explain what is going on below.
 
 ```{r}
-shrooms_dist_rounded <- round(shrooms_dist,
+### add necessary function
+shrooms_dist_rounded <-       (shrooms_dist,
                               digits = 3)
 ```
 
 
+TODO:  briefly explain what is being shown.
 
 ```{r}
 shrooms_dist_rounded
@@ -404,20 +498,21 @@ shrooms_dist_rounded
 
 
 
- 
+TODO: explain what this section is doing
 
 ```{r}
-tree <- nj(shrooms_dist)
+### add necessary function
+tree <-        (shrooms_dist)
 ```
 
 ### Plotting XXXXXX
 
-
+TODO: explain what this section is doing
 
 
 ```{r}
 # plot tree
-plot.phylo (tree, main="Phylogenetic Tree", 
+plot.phylo(tree, main="Phylogenetic Tree", 
             type = "unrooted", 
             use.edge.length = F)
 
@@ -427,11 +522,13 @@ mtext(text = "Shroom family gene tree - unrooted, no branch lengths")
 
 
 
-
+TODO: briefly explain what this section is doing
+How is it different from the previous code chunk?
+(do your best - we'll cover the details later)
 
 ```{r}
 # plot tree
-plot.phylo (tree, main="Phylogenetic Tree", 
+plot.phylo(tree, main="Phylogenetic Tree", 
             use.edge.length = F)
 
 # add label
@@ -440,17 +537,24 @@ mtext(text = "Shroom family gene tree - rooted, no branch lenths")
 
 
 
+TODO: briefly explain what this section is doing
+How is it different from the previous code chunk?
+(do your best - we'll cover the details later)
 
 
 ```{r}
 # plot tree
-plot.phylo (tree, main="Phylogenetic Tree", 
+plot.phylo(tree, main="Phylogenetic Tree", 
             use.edge.length = T)
 
 # add label
 mtext(text = "Shroom family gene tree - rooted, with branch lenths")
 ```
 
+
+TODO: briefly explain what this section is doing
+How is it different from the previous code chunk?
+Focus on what graphical elements (also this code sometimes doesn't make a great plot - I need to update it) 
 
 
 

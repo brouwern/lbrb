@@ -2,7 +2,7 @@
 
 **By**: Avril Coghlan.  
 
-**Adapted, edited and expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+**Adapted, edited & expanded**: Nathan Brouwer under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
 *R* is a programming language, and **packages**  (aka **libraries**) are bundles of software built using *R*.  Most sessions using *R* involve using additional *R*  packages.  This is especially true for bioinformatics and computational biology.
 

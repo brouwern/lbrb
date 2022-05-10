@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 19 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0</title>
+  <title>Page not found | A Little Book of R for Bioinformatics 2.0</title>
   <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 19 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:title" content="Page not found | A Little Book of R for Bioinformatics 2.0" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 19 Downloading DNA sequences as FASTA files in R | A Little Book of R for Bioinformatics 2.0" />
+  <meta name="twitter:title" content="Page not found | A Little Book of R for Bioinformatics 2.0" />
   
   <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="phylogenetic-tree-example-using-neighbor-joining.html"/>
-<link rel="next" href="cleaning-and-preparing-fasta-files-for-analysis-in-r.html"/>
+
+
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -450,240 +450,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="download-FASTA-inR" class="section level1" number="19">
-<h1><span class="header-section-number">Chapter 19</span> Downloading DNA sequences as FASTA files in R</h1>
-<p>This is a modification of <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html">“DNA Sequence Statistics”</a> from Avril Coghlan’s <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html"><em>A little book of R for bioinformatics.</em></a>. Most of the text and code was originally written by Dr. Coghlan and distributed under the <a href="https://creativecommons.org/licenses/by/3.0/us/">Creative Commons 3.0</a> license.</p>
-<p><strong>NOTE</strong>: There is some redundancy in this current draft that needs to be eliminated.</p>
-<div id="functions" class="section level3" number="19.0.1">
-<h3><span class="header-section-number">19.0.1</span> Functions</h3>
-<ul>
-<li>library()</li>
-<li>help()</li>
-<li>cat()</li>
-<li>is()</li>
-<li>class()</li>
-<li>dim()</li>
-<li>length()</li>
-<li>nchar()</li>
-<li>strtrim()</li>
-<li>is.vector()</li>
-<li>table()</li>
-<li>write()</li>
-<li>getwd()</li>
-<li>seqinr::write.fasta()</li>
-</ul>
-</div>
-<div id="softwarewebsites" class="section level3" number="19.0.2">
-<h3><span class="header-section-number">19.0.2</span> Software/websites</h3>
-<ul>
-<li>www.ncbi.nlm.nih.gov</li>
-<li>Text editors (e.g. Notepad++, TextWrangler)</li>
-</ul>
-</div>
-<div id="r-vocabulary" class="section level3" number="19.0.3">
-<h3><span class="header-section-number">19.0.3</span> R vocabulary</h3>
-<ul>
-<li>list</li>
-<li>library</li>
-<li>package</li>
-<li>CRAN</li>
-<li>wrapper</li>
-<li>underscore _</li>
-<li>Camel Case</li>
-</ul>
-</div>
-<div id="file-types" class="section level3" number="19.0.4">
-<h3><span class="header-section-number">19.0.4</span> File types</h3>
-<ul>
-<li>FASTA</li>
-</ul>
-</div>
-<div id="bioinformatics-vocabulary" class="section level3" number="19.0.5">
-<h3><span class="header-section-number">19.0.5</span> Bioinformatics vocabulary</h3>
-<ul>
-<li>accession, accession number</li>
-<li>NCBI</li>
-<li>NCBI Sequence Database</li>
-<li>EMBL Sequence Database</li>
-<li>FASTA file</li>
-<li>RefSeq</li>
-</ul>
-</div>
-<div id="learning-objectives" class="section level2" number="19.1">
-<h2><span class="header-section-number">19.1</span> Learning objectives</h2>
-<p>By the end of this tutorial you will be able to</p>
-<ul>
-<li>Download sequences in FASTA format</li>
-<li>Understand there format and structure</li>
-<li>Do basic of FASTA data is stored in a vector using is(), class(), length() and other functions</li>
-<li>Determine the GC content using GC() and obtain other summary data with count()</li>
-<li>Save FASTA files to your hard drive</li>
-</ul>
-<div id="organisms-and-sequence-accessions" class="section level3" number="19.1.1">
-<h3><span class="header-section-number">19.1.1</span> Organisms and Sequence accessions</h3>
-<ul>
-<li>Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4.</li>
-</ul>
-<p>The NCBI <strong>RefeSeq accessions</strong> for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are NC_001477, NC_001474, NC_001475 and NC_002640, respectively.</p>
-<p>According to Wikipedia</p>
-<blockquote>
-<p>“Dengue virus (DENV) is the cause of dengue fever. It is a mosquito-borne, single positive-stranded RNA virus … Five serotypes of the virus have been found, all of which can cause the full spectrum of disease. Nevertheless, scientists’ understanding of dengue virus may be simplistic, as rather than distinct … groups, a continuum appears to exist.” <a href="https://en.wikipedia.org/wiki/Dengue_virus" class="uri">https://en.wikipedia.org/wiki/Dengue_virus</a></p>
-</blockquote>
-</div>
-<div id="preliminaries" class="section level3" number="19.1.2">
-<h3><span class="header-section-number">19.1.2</span> Preliminaries</h3>
-<p>Note that seqinr the package name is all lower case, though the authors of the package like to spell it “SeqinR”.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="download-FASTA-inR.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rentrez)</span>
-<span id="cb1-2"><a href="download-FASTA-inR.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(seqinr)</span>
-<span id="cb1-3"><a href="download-FASTA-inR.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(compbio4all) </span></code></pre></div>
-</div>
-</div>
-<div id="dna-sequence-statistics-part-1" class="section level2" number="19.2">
-<h2><span class="header-section-number">19.2</span> DNA Sequence Statistics: Part 1</h2>
-<div id="using-r-for-bioinformatics" class="section level3" number="19.2.1">
-<h3><span class="header-section-number">19.2.1</span> Using R for Bioinformatics</h3>
-<p>The chapter will guide you through the process of using R to carry out simple analyses that are common in bioinformatics and computational biology. In particular, the focus is on computational analysis of biological sequence data such as genome sequences and protein sequences. The programming approaches, however, are broadly generalizable to statistics and data science.</p>
-<p>The tutorials assume that the reader has some basic knowledge of biology, but not necessarily of bioinformatics. The focus is to explain simple bioinformatics analysis, and to explain how to carry out these analyses using <em>R</em>.</p>
-</div>
-<div id="r-packages-for-bioinformatics-bioconductor-and-seqinr" class="section level3" number="19.2.2">
-<h3><span class="header-section-number">19.2.2</span> R packages for bioinformatics: Bioconductor and SeqinR</h3>
-<p>Many authors have written <em>R</em> packages for performing a wide variety of analyses. These do not come with the standard <em>R</em> installation, but must be installed and loaded as “add-ons”.</p>
-<!-- have these as dependencies of combio4all? -->
-<p>Bioinformaticians have written numerous specialized packages for <em>R</em>. In this tutorial, you will learn to use some of the function in the <a href="https://cran.r-project.org/web/packages/seqinr/index.html"><code>SeqinR</code></a> package to to carry out simple analyses of DNA sequences. (<code>SeqinR</code> can retrieve sequences from a DNA sequence database, but this has largely been replaced by the functions in the package <code>rentrez</code>)</p>
-<p>Many well-known bioinformatics packages for <em>R</em> are in the Bioconductor set of <em>R</em> packages (www.bioconductor.org), which contains packages with many <em>R</em> functions for analyzing biological data sets such as microarray data. The <a href="https://cran.r-project.org/web/packages/seqinr/index.html"><code>SeqinR</code></a> package is from CRAN, which contains R functions for obtaining sequences from DNA and protein sequence databases, and for analyzing DNA and protein sequences.</p>
-<p>For instructions/review on how to install an R package on your own see <a href="https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html">How to install an R package</a> )</p>
-<p>We will also use functions or data from the <code>rentrez</code> and <code>compbio4all</code> packages.</p>
-<p>Remember that you can ask for more information about a particular <em>R</em> command by using the <code>help()</code> function or <code>?</code> function. For example, to ask for more information about the <code>library()</code>, you can type:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="download-FASTA-inR.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">&quot;library&quot;</span>)</span></code></pre></div>
-<p>You can also do this</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="download-FASTA-inR.html#cb3-1" aria-hidden="true" tabindex="-1"></a>?library</span></code></pre></div>
-</div>
-<div id="fasta-file-format" class="section level3" number="19.2.3">
-<h3><span class="header-section-number">19.2.3</span> FASTA file format</h3>
-<p>The FASTA format is a simple and widely used format for storing biological (e.g. DNA or protein) sequences. It was first used by the <a href="https://en.wikipedia.org/wiki/FASTA">FASTA program</a> for sequence alignment in the 1980s and has been adopted as standard by many other programs.</p>
-<p>FASTA files begin with a single-line description starting with a greater-than sign <code>&gt;</code> character, followed on the next line by the sequences. Here is an example of a FASTA file. (If you’re looking at the source script for this lesson you’ll see the <code>cat()</code> command, which is just a text display function used format the text when you run the code).</p>
-<pre><code>## &gt;A06852 183 residues MPRLFSYLLGVWLLLSQLPREIPGQSTNDFIKACGRELVRLWVEICGSVSWGRTALSLEEPQLETGPPAETMPSSITKDAEILKMMLEFVPNLPQELKATLSERQPSLRELQQSASKDSNLNFEEFKKIILNRQNEAEDKSLLELKNLGLDKHSRKKRLFRMTLSEKCCQVGCIRKDIARLC</code></pre>
-</div>
-<div id="the-ncbi-sequence-database-1" class="section level3" number="19.2.4">
-<h3><span class="header-section-number">19.2.4</span> The NCBI sequence database</h3>
-<p>The US <a href="www.ncbi.nlm.nih.gov">National Centre for Biotechnology Information (NCBI)</a> maintains the <strong>NCBI Sequence Database</strong>, a huge database of all the DNA and protein sequence data that has been collected. There are also similar databases in Europe, the <a href="www.ebi.ac.uk/embl">European Molecular Biology Laboratory (EMBL) Sequence Database</a>, and Japan, the <a href="www.ddbj.nig.ac.jp">DNA Data Bank of Japan (DDBJ)</a>. These three databases exchange data every night, so at any one point in time, they contain almost identical data.</p>
-<p>Each sequence in the NCBI Sequence Database is stored in a separate <strong>record</strong>, and is assigned a unique identifier that can be used to refer to that record. The identifier is known as an <strong>accession</strong>, and consists of a mixture of numbers and letters.</p>
-<p>For example, Dengue virus causes Dengue fever, which is classified as a <strong>neglected tropical disease</strong> by the World Health Organization (WHO), is classified by any one of four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are</p>
-<ul>
-<li>NC_001477</li>
-<li>NC_001474</li>
-<li>NC_001475<br />
-</li>
-<li>NC_002640</li>
-</ul>
-<p>Note that because the NCBI Sequence Database, the EMBL Sequence Database, and DDBJ exchange data every night, the DEN-1 (and DEN-2, DEN-3, DEN-4) Dengue virus sequence are present in all three databases, but they have different accessions in each database, as they each use their own numbering systems for referring to their own sequence records.</p>
-</div>
-<div id="retrieving-genome-sequence-data-using-rentrez" class="section level3" number="19.2.5">
-<h3><span class="header-section-number">19.2.5</span> Retrieving genome sequence data using rentrez</h3>
-<p>You can retrieve sequence data from NCBI directly from <em>R</em> using the <code>rentrez</code> package. The DEN-1 Dengue virus genome sequence has NCBI RefSeq accession NC_001477. To retrieve a sequence with a particular NCBI accession, you can use the function <code>entrez_fetch()</code> from the <code>rentrez</code> package. Note that to be specific where the function comes from I write it as <code>package::function()</code>.</p>
-<!-- QUESTION: How many arguments does entrez_fetch take in this call? -->
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="download-FASTA-inR.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dengueseq_fasta <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> <span class="st">&quot;nucleotide&quot;</span>, </span>
-<span id="cb5-2"><a href="download-FASTA-inR.html#cb5-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">id =</span> <span class="st">&quot;NC_001477&quot;</span>, </span>
-<span id="cb5-3"><a href="download-FASTA-inR.html#cb5-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">rettype =</span> <span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
-<p>Note that the “<em>” in the name is just an arbitrary way to separate two words. Another common format would be <code>dengueseq.fasta</code>. Some people like <code>dengueseqFasta</code>, called <strong>camel case</strong> because the capital letter makes a hump in the middle of the word. Underscores are becoming most common and are favored by developers associated with RStudio and the <strong>tidyverse</strong> of packages that many data scientists use. I switch between ”.” and ”</em>” as separators, usually favoring “_” for function names and “.” for objects; I personally find camel case harder to read and to type.</p>
-<p>Ok, so what exactly have we done when we made <code>dengueseq_fasta</code>? We have an R object <code>dengueseq_fasta</code> which has the sequence linked to the accession number “NC_001477.” So where is the sequence, and what is it?</p>
-<p>First, what is it?</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="download-FASTA-inR.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is</span>(dengueseq_fasta)</span></code></pre></div>
-<pre><code>## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot;
-## [4] &quot;SuperClassMethod&quot;</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="download-FASTA-inR.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dengueseq_fasta)</span></code></pre></div>
-<pre><code>## [1] &quot;character&quot;</code></pre>
-<p>How big is it? Try the <code>dim()</code> and <code>length()</code> commands and see which one works. Do you know why one works and the other doesn’t?</p>
-<!-- Question: which one provide an answer? Why does one work but not the other? Why does the one that works provide the answer that it does? -->
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="download-FASTA-inR.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(dengueseq_fasta)</span></code></pre></div>
-<pre><code>## NULL</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="download-FASTA-inR.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(dengueseq_fasta)</span></code></pre></div>
-<pre><code>## [1] 1</code></pre>
-<p>The size of the object is 1. Why is this? This is the genomic sequence of a virus, so you’d expect it to be fairly large. We’ll use another function below to explore that issue. Think about this first: how many pieces of unique information are in the <code>dengueseq</code> object? In what sense is there only <em>one</em> piece of information?</p>
-<p>If we want to actually see the sequence we can type just type <code>dengueseq_fasta</code> and press enter. This will print the WHOLE genomic sequence out but it will probably run of your screen.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="download-FASTA-inR.html#cb14-1" aria-hidden="true" tabindex="-1"></a>dengueseq_fasta</span></code></pre></div>
-<p>This is a whole genome sequence, but its stored as single entry in a vector, so the <code>length()</code> command just tells us how many entries there are in the vector, which is just one! What this means is that the entire genomic sequence is stored in a single entry of the vector <code>dengueseq_fasta</code>. (If you’re not following along with this, no worries - its not essential to actually working with the data)</p>
-<p>If we want to actually know how long the sequence is, we need to use the function <code>nchar()</code>, which stands for “number of characters”.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="download-FASTA-inR.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(dengueseq_fasta)</span></code></pre></div>
-<pre><code>## [1] 10935</code></pre>
-<p>The sequence is 10935 bases long. All of these bases are stored as a single <strong>character string</strong> with no spaces in a single entry of our <code>dengueseq_fasta</code> vector. This isn’t actually a useful format for us, so below were’ going to convert it to something more useful.</p>
-<p>If we want to see just part of the sequence we can use the <code>strtrim()</code> function. This stands for “String trim”. Before you run the code below, predict what the 100 means.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="download-FASTA-inR.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strtrim</span>(dengueseq_fasta, <span class="dv">100</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;&gt;NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAAC&quot;</code></pre>
-<p>Note that at the end of the name is a slash followed by an n, which indicates to the computer that this is a <strong>newline</strong>; this is read by text editor, but is ignored by R in this context.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="download-FASTA-inR.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strtrim</span>(dengueseq_fasta, <span class="dv">45</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;&gt;NC_001477.1 Dengue virus 1, complete genome\nA&quot;</code></pre>
-<p>After the <code>\\n</code> begins the sequence, which will continue on for a LOOOOOONG way. Let’s just print a little bit.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="download-FASTA-inR.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strtrim</span>(dengueseq_fasta, <span class="dv">52</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;&gt;NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTA&quot;</code></pre>
-<p>Let’s print some more. Do you notice anything beside A, T, C and G in the sequence?</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="download-FASTA-inR.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">strtrim</span>(dengueseq_fasta, <span class="dv">200</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;&gt;NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTAACAGT\nTTTTTATTAGAGAGCAGATCTCTGATGAACAACCAACGGAAAAAGACGGGTCGACCGTCTTTCAATATGC\nTGAAACGCGCGAGAAA&quot;</code></pre>
-<p>Again, there are the <code>\\n</code> newline characters, which tell text editors and word processors how to display the file. (note that if you are reading the raw code for this chapter there will be 2 slashes in front of the n in the previous sentence; this is an RMarkdown thing)</p>
-<p>Now that we a sense of what we’re looking at let’s explore the <code>dengueseq_fasta</code> a bit more.</p>
-<p>We can find out more information about what it is using the <code>class()</code>command.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="download-FASTA-inR.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(dengueseq_fasta)</span></code></pre></div>
-<pre><code>## [1] &quot;character&quot;</code></pre>
-<p>As noted before, this is character data.</p>
-<p>Many things in R are vectors so we can ask <em>R </em><code>is.vector()</code></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="download-FASTA-inR.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.vector</span>(dengueseq_fasta)</span></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
-<p>Yup, that’s true.</p>
-<p>Ok, let’s see what else. A handy though often verbose command is <code>is()</code>, which tells us what an object, well, what it is:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="download-FASTA-inR.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is</span>(dengueseq_fasta)</span></code></pre></div>
-<pre><code>## [1] &quot;character&quot;           &quot;vector&quot;              &quot;data.frameRowLabels&quot;
-## [4] &quot;SuperClassMethod&quot;</code></pre>
-<p>There is a lot here but if you scan for some key words you will see “character” and “vector” at the top. The other stuff you can ignore. The first two things, though, tell us the dengueseq_fasta is a <strong>vector</strong> of the class <strong>character</strong>: that is, a <strong>character vector</strong>.</p>
-<p>Another handy function is <code>str()</code>, which gives us a peak at the context and structure of an <em>R</em> object. This is most useful when you are working in the R console or with dataframes, but is a useful function to run on all <em>R</em> objects. How does this output differ from other ways we’ve displayed dengueseq_fasta?</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="download-FASTA-inR.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(dengueseq_fasta)</span></code></pre></div>
-<pre><code>##  chr &quot;&gt;NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTA&quot;| __truncated__</code></pre>
-<p>We know it contains character data - how many characters? <code>nchar()</code> for “number of characters” answers that:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="download-FASTA-inR.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(dengueseq_fasta)</span></code></pre></div>
-<pre><code>## [1] 10935</code></pre>
-</div>
-</div>
-<div id="saving-fasta-files" class="section level2" number="19.3">
-<h2><span class="header-section-number">19.3</span> Saving FASTA files</h2>
-<p>We can save our data as .fasta file for safe keeping. The <code>write()</code> function will save the data we downloaded as a plain text file.</p>
-<p>If you do this, you’ll need to figure out where <em>R</em> is saving things, which requires and understanding <em>R’s</em> <strong>file system</strong>, which can take some getting used to, especially if you’re new to programming. As a start, you can see where <em>R</em> saves things by using the <code>getwd()</code> command, which tells you where on your hard drive R currently is using as its home base for files.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="download-FASTA-inR.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
-<pre><code>## [1] &quot;/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb&quot;</code></pre>
-<p>You can set the working directory to where a script file is from using these steps in RStudio:</p>
-<ol style="list-style-type: decimal">
-<li>Click on “Session” (in the middle of the menu on the top of the screen)</li>
-<li>Select “Set Working Directory” (in the middle of the drop-down menu)</li>
-<li>Select “To source file location” (2nd option)</li>
-</ol>
-<p>Then, when you things, it will be in that directory.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="download-FASTA-inR.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write</span>(dengueseq_fasta, </span>
-<span id="cb37-2"><a href="download-FASTA-inR.html#cb37-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">file=</span><span class="st">&quot;dengueseq.fasta&quot;</span>)</span></code></pre></div>
-<p>You can see what files are in your directory using list.files()</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="download-FASTA-inR.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>()</span></code></pre></div>
-</div>
-<div id="next-steps" class="section level2" number="19.4">
-<h2><span class="header-section-number">19.4</span> Next steps</h2>
-<p>FASTA files in R typically have to be converted before being used. I made a function called compbio4all::fasta_cleaner() which takes care of this.</p>
-<p>In the optional lesson “Cleaning and preparing FASTA files for analysis in R” I process the <code>dengueseq_fasta</code> object step by step so that we can use it in analyses. If you are interested in how that functions works check out that chapter; otherwise, you can skip it.</p>
-</div>
-<div id="exercises" class="section level2" number="19.5">
-<h2><span class="header-section-number">19.5</span> Exercises</h2>
-<p>Uncomment the code chunk below to download your own sequence of interest. Change the <code>id =</code> to that of your sequence, and change the <code>db =</code> to “protein” if needed. Change the object name to a descriptive name, such as the name of the gene, e.g. <code>shroom.fasta</code>.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="download-FASTA-inR.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># dengueseq.fasta &lt;- rentrez::entrez_fetch(db = &quot;nucleotide&quot;,  # set to &quot;protein&quot; if needed</span></span>
-<span id="cb39-2"><a href="download-FASTA-inR.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                           id = &quot;NC_001477&quot;,                  # change accession</span></span>
-<span id="cb39-3"><a href="download-FASTA-inR.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                           rettype = &quot;fasta&quot;)</span></span></code></pre></div>
-<p>Set your working directory then save the FASTA file to your hard drive using. Be sure to change the name of the object and the file name to be appropriate to your gene.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="download-FASTA-inR.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># write(dengueseq.fasta,        # change object name, e.g.  shroom.fasta</span></span>
-<span id="cb40-2"><a href="download-FASTA-inR.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#       file=&quot;dengueseq.fasta&quot;) # change file name, e.g. shroom.fasta</span></span></code></pre></div>
-
-</div>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="phylogenetic-tree-example-using-neighbor-joining.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="cleaning-and-preparing-fasta-files-for-analysis-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -714,7 +493,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/brouwern/lbrb/edit/master/006-downloading_seq_data_as_FASTA/11b-download_FASTA_in_R.Rmd",
+"link": "https://github.com/brouwern/lbrb/edit/master/%s",
 "text": "Edit"
 },
 "history": {
@@ -722,7 +501,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/brouwern/lbrb/blob/master/006-downloading_seq_data_as_FASTA/11b-download_FASTA_in_R.Rmd",
+"link": "https://github.com/brouwern/lbrb/blob/master/%s",
 "text": null
 },
 "download": ["lbrb.pdf"],

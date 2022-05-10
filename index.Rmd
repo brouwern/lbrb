@@ -1,6 +1,6 @@
 --- 
 title: "A Little Book of R for Bioinformatics 2.0"
-author: "Avirl Coghlan, with contributions by Nathan L. Brouwer"
+author: "Avril Coghlan, with contributions by Nathan L. Brouwer"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -15,7 +15,7 @@ geometry: margin=1in
 
 Welcome to *A Little Book of R for Bioinformatics 2.0*!.
 
-This book is based on the original [*A Little Book of R for Bioinformatics*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/) by Dr. Avril Coghlan (Hereafter "ALBRB 1.0").  Dr. Coghlan's book was one of the first and most thorough introductions to using *R* for bioinformatics and computational biology, and was generously published under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  In addition to describing how to do bioinformatics in R, Coghlan provided numerous functions to facilitate important tasks, practice questions, and references to further reading. 
+This book is based on the original [*A Little Book of R for Bioinformatics*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/) by Dr. Avril Coghlan (Hereafter "ALBRB 1.0").  Dr. Coghlan's book was one of the first and most thorough introductions to using *R* for bioinformatics and computational biology, and was generously published under the Creative Commons 3.0 Attribution License [(CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).  In addition to describing how to do bioinformatics in R, Coghlan provided numerous `R` functions to facilitate important tasks, practice questions, and references to further reading. 
 
 [ALBRB 1.0](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/) was extremely useful to me when I was learning bioinformatics and computational biology.  In this version of the book, which I'll refer to as **ALBRB 2.0**, I have adapted Dr. Coghlan's original book to suit my own teaching needs, updated it with current packages now available in R, added background materials from other open-access sources, and added in my original  materials.
 
@@ -28,7 +28,7 @@ Below I've outlined the general types of changes I've made to the original book.
 
 1. Converted the entire book to RMarkdown and published it via `bookdown`.
 1. Added instructions for using RStudio and RStudio Cloud.
-1. Updated instructions to reflect any changes in software, including changes to how the bioinformatics repository `Bioconductor` now works.
+1. Updated instructions to reflect any changes in software, including changes to how the bioinformatics repository `Bioconductor` works circa 2021.
 1. Split up chapters into smaller units.
 1. Reorganized the order of some material.
 1. Added biological background information by integrating information from the Open Access textbook [LibreText General Biology](https://bio.libretexts.org/Bookshelves/Introductory_and_General_Biology/Book%3A_General_Biology_(OpenStax)) 
@@ -36,7 +36,7 @@ Below I've outlined the general types of changes I've made to the original book.
 1. Moved functions written by Coghlan and datasets to my teaching package [compbio4all](https://github.com/brouwern/compbio4all).
 1. Functions names changed from camelCase to snake_case
 1. Functions re-written so as not to use Bioconductor to reduce/eliminate dependency of `compbio4all` on `Bioconductor`.
-1. Changed some plotting to ggplot2 or ggpubr.
+1. Changed some plotting to `ggplot2` or `ggpubr`.
 1. Added additional subheadings
 1. Added vocab and function lists to the beginning of many chapters
 1. At times replaced non-biological examples with biological ones.

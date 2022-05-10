@@ -40,7 +40,7 @@ Different objects are used and show up in different contexts.
 
 We'll use the following data to explore R objects.
 
-Motulsky 2nd Ed, Chapter 30, page 220, Table 30.1.  Maximal relaxation of muscle strips of old and young rat bladders stimulated w/ high concentrations of nonrepinephrine (Frazier et al 2006).  Response variable is %E.max
+Motulsky 2nd Ed, Chapter 30, page 220, Table 30.1.  Maximal relaxation of muscle strips of old and young rat bladders stimulated with high concentrations of [norepinephrine](https://en.wikipedia.org/wiki/Norepinephrine) (Frazier et al. 2006).  Response variable is % E.max
 
 ```{r, echo = F}
 

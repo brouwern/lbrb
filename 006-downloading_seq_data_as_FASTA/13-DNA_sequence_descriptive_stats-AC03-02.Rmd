@@ -13,11 +13,11 @@ editor_options:
 
 This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  The text and code were originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license. 
 
-## Writing TODO:
 
-* Add biology introduction
-* Work on flow
-* organize intial sections (intro, vocab, preliminaries)
+<!-- DR. B's Writing TODO: -->
+<!-- * Add biology introduction -->
+<!-- * Work on flow -->
+<!-- * organize initial sections (intro, vocab, preliminaries) -->
 
 
 ## Introduction
@@ -25,7 +25,7 @@ This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-
 <!-- Check the current status of the biology of this section -->
 <!-- ### Note on the biology in this section -->
 
-<!-- Some of the biology in this tutorial appears to be out of date.  Specifically, research on the biological basis of unusual frequencies of DNA "words" does not appear to be much current interest in bioinformatics and genomics.  (In contrast, methylation of bases within certain DNA words is being worked on.)  The examples are still good for practicing R skills. -->
+<!-- Some of the biology discussed in this section may be out of data - its a topic where interest has ebbed and flowed.  I think it may be coming back into fashion, but I need to check -->
 
 
 ## Vocabulary
@@ -36,14 +36,22 @@ This is a modification of ["DNA Sequence Statistics (1)"](https://a-little-book-
 
 
 ## Functions
+
 * `seqinr::GC()`
 * `seqinr::count()`
+
+## Learning objectives
+
+By the end of this tutorial you will be able to, among other things
+
+* Determine the GC content using GC() and obtain other summary data with count()
 
 
 ## Preliminaries
 
 ```{r}
 library(compbio4all)
+library(seqinr)
 library(seqinr)
 ```
 

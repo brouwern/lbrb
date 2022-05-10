@@ -69,7 +69,7 @@ Below I discuss the series of prompts I had to deal with while re-installing Bio
 
 ### Updating other packages when downloading a package
 
-When I re-installed `Biostrings` while writing this I was given a HUGE blog of red test that contained something like what's shown below (this only aout 1/3 of the actual output!):
+When I re-installed `Biostrings` while writing this I was given a HUGE blog of red test that contained something like what's shown below (this only about 1/3 of the actual output!):
 ```{r, eval = F}
 'getOption("repos")' replaces Bioconductor standard repositories, 
 see '?repositories' for details

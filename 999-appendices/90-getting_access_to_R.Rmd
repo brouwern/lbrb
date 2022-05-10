@@ -9,7 +9,7 @@ editor_options:
 ### {-}
 
 
-# Appendix 01: Getting access to R {-}
+# Appendix 02: Getting access to R {-}
 
 
 ## Getting Started With R and RStudio

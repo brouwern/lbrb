@@ -1,6 +1,6 @@
 # A complete bioinformatics workflow in R
 
-<!-- TODO: create function to simplify the prepwork -->
+<!-- TODO for Dr. B: create function to simplify the prepwork -->
 
 **By**: Nathan L. Brouwer
 
@@ -13,7 +13,7 @@ Phylogenies play an important role in computational biology and bioinformatics. 
 * Patterns of protein evolution
 * Origin and evolution of phenotypic traits
 * Origin and progression of epidemics
-* Origin of evolution of diseases (eg, zooenoses)
+* Origin of evolution of diseases (e.g., zooenoses)
 * Prediction of protein function from its sequence
 * ... and many more
 
@@ -33,7 +33,7 @@ Once all of these steps have been carried out, the building of a phylogeny invol
 * picking a statistical approach to tree construction
 * evaluating uncertainty in the final tree
 
-In this chapter we will work through many of these steps.  In most cases we will pick the easiest or fastest option; in later chapters we will unpack the various options.  This chapter is written as an interactive R sessions.  You can follow along by opening the .Rmd file of the chapter or typing the appropriate commands into your own script.  I assume that all the necessary packages have been installed and they only need to be loaded into R using the *library()* command.
+In this chapter we will work through many of these steps.  In most cases we will pick the easiest or fastest option; in later chapters we will unpack the various options.  This chapter is written as an interactive R session.  You can follow along by opening the .Rmd file of the chapter or typing the appropriate commands into your own script.  I assume that all the necessary packages have been installed and they only need to be loaded into R using the *library()* command.
 
 
 This lesson walks you through and entire workflow for a bioinformatics, including
@@ -43,16 +43,18 @@ This lesson walks you through and entire workflow for a bioinformatics, includin
 1. obtaining FASTA sequences
 1. cleaning sequences
 1. creating alignments
-1. creating distance a distance matrix
+1. creating a distance matrix
 1. building a phylogenetic tree
 
 We'll examine the Shroom family of genes, which produces Shroom proteins essential for tissue formation in many multicellular eukaryotes, including neural tube formation in vertebrates.  We'll examine shroom in several very different organism, including humans, mice and sea urchins.  There is more than one type of shroom in vertebrates, and we'll also look at two different Shroom genes: shroom 1 and shroom 2.
 
 This lesson draws on skills from previous sections of the book, but is written to act as a independent summary of these activities.  There is therefore review of key aspects of R and bioinformatics throughout it.
 
-## Software Preliminaires
 
 ### Vocab 
+
+## Software Preliminaires
+
 
 * argument
 * function
@@ -104,25 +106,57 @@ You'll also need these packages from Bioconductor:
 
 For installing packages from Bioconductor, see the chapter at the beginning of this book on this process.
 
-Finally, you'll need this package from GitHub
+Finally, you'll need these package from GitHub
 
 1. `compbio4all`
 1. `ggmsa`
 
 
-To install packages from GitHub you can use the code `devtools::install_github("brouwern/combio4all")` and `devtools::install_github("brouwern/ggmsa")`
+To install packages from GitHub you can use the code `devtools::install_github("brouwern/compbio4all")` and `devtools::install_github("YuLab-SMU/ggmsa")`
+
+
+This code chunk downloads most of these packages.  The code has been commented out because it only needs to be run once.  
+```{r}
+# Install needed packages
+
+## CRAN PACKAGES
+# downloaded using install.packages()
+# install.packages("rentrez",dependencies = TRUE)
+# install.packages("devtools")
+# install.packages("ape")
+# install.packages("seqinr")
+
+### BiocManager - CRAN package to download 
+##### Bioconductor packages
+# requires BiocManager
+# install.packages("BiocManager")
+
+## BioConductor packages
+### downloaded with BiocManager::install(), NOT install.packages()
+# BiocManager::install("msa")
+# BiocManager::install("Biostrings")
+
+
+## GitHub packages
+### requires devtools package and its function install_github()
+# library(devtools)
+# devtools::install_github("brouwern/combio4all")
+# devtools::install_github("YuLab-SMU/ggmsa")
+```
 
 ### Load packages into memory
 
 We now need to load up all our bioinformatics and phylogenetics software into R.  This is done with the `library()` command.  
 
-To run this code just clock on the sideways green triangle all the way to the right of the code.
+To run this code just click on the sideways green triangle all the way to the right of the code.
 
 NOTE: You'll likely see some red code appear on your screen.  No worries, totally normal!
+
 
 ```{r, message= F, warning=F}
 # github packages
 library(compbio4all)
+library(ggmsa)
 
 # CRAN packages
 library(rentrez)
@@ -130,7 +164,15 @@ library(seqinr)
 library(ape)
 
 # Bioconductor packages
+## msa
+### The msa package is having problems on some platforms
+### You can skip the msa steps if necessary.  The msa output
+### is used to make a distance matrix and then phylogenetics trees,
+### but I provide code to build the matrix by hand so
+### you can proceed even if msa doesn't work for you.
 library(msa)
+
+## Biostrings
 library(Biostrings)
 ```
 
@@ -170,17 +212,33 @@ Normally we'd have to download these sequences by hand through pointing and clic
 All the code needed is this:
 ```{r}
 # Human shroom 3 (H. sapiens)
-hShroom3 <- entrez_fetch(db = "protein", 
+hShroom3 <- rentrez::entrez_fetch(db = "protein", 
                           id = "NP_065910", 
                           rettype = "fasta")
 ```
 
-The output is in FASTA format; we'll use the `cat()` to do a little formatting for us:
+Note: if you aren't connected to wifi or the server itself is having  problem, then when you run this code you may get an error like this:
+"Quitting from lines 244-259 (23-MSA-walkthrough-shroom.Rmd) 
+Error: HTTP failure: 500
+{"error":"error forwarding request","api-key":"71.182.228.80","type":"ip",
+"status":"ok"}
+Execution halted"
+
+You may have to try again later to knit the code.
+
+The output is in FASTA format.  We can look at the raw output by calling up the object we created.  This will run as single continuous string of characters without line breaks
+
+```{r}
+hShroom3
+```
+
+
+We'll use the `cat()` function to do a little formatting for us; it essentially just enforces the **lines breaks**:
 ```{r}
 cat(hShroom3)
 ```
 
-Note the initial `>`, then the header line of `NP_065910.3 protein Shroom3 [Homo sapiens]`.  After that is the amino acid sequence.  The underlying data also includes the **newline character** `\n` to designate where each line of amino acids stops.
+Note the initial `>`, then the header line of `NP_065910.3 protein Shroom3 [Homo sapiens]`.  After that is the amino acid sequence.  The underlying data also includes the **newline character** `\n` to designate where each line of amino acids stops (that is, the location of line breaks).
 
 
 We can get the rest of the data by just changing the `id = ...` argument:
@@ -202,6 +260,7 @@ sShroom <- entrez_fetch(db = "protein",
                           rettype = "fasta")
 ```
 
+Here, I've pasted the function I used above three times into the code chunk and changed the id = ... statement.  Later in this script will avoid this clunky type of coding by using **for loops**.
 
 I'm going to check about how long each of these sequences is - each should have an at least slightly different length. If any are identical, I might have repeated an accession name or re-used an object name. The function `nchar()` counts of the number of characters in an *R* object.
 ```{r}
@@ -215,7 +274,7 @@ nchar(hShroom2)
 
 ## Prepping macromolecular sequences
 
->"90% of data analysis is data cleaning" (-Just about every data analyst and data scientist on twitter)
+>"90% of data analysis is data cleaning" (-Just about every data analyst and data scientist)
 
 We have our sequences, but the current format isn't directly usable for us yet because there are several things that aren't sequence information
 
@@ -224,14 +283,34 @@ We have our sequences, but the current format isn't directly usable for us yet b
 
 We can remove this non-sequence information using a function I wrote called `fasta_cleaner()`, which is in the `compbio4all` package. The function uses **regular expressions** to remove the info we don't need.
 
-**ASIDE**: If we run the name of the command with out any quotation marks we can see the code:
+If you had trouble downloading the compbio4all package function you can add fasta_cleaner() to your R session directly by running this code:
+
+```{r}
+fasta_cleaner <- function(fasta_object, parse = TRUE){
+
+  fasta_object <- sub("^(>)(.*?)(\\n)(.*)(\\n\\n)","\\4",fasta_object)
+  fasta_object <- gsub("\n", "", fasta_object)
+
+  if(parse == TRUE){
+    fasta_object <- stringr::str_split(fasta_object,
+                                       pattern = "",
+                                       simplify = FALSE)
+  }
+
+  return(fasta_object[[1]])
+}
+
+```
+
+
+If we run the name of the command with out any quotation marks we can see the code:
 ```{r}
 fasta_cleaner
 ```
-**End ASIDE**
 
 
-Now use the function to clean our sequences; we won't worry about what `pare = ...` is for.
+
+Now use the function to clean our sequences; we won't worry about what `parse = ...` is for.
 ```{r}
 hShroom3  <- fasta_cleaner(hShroom3,  parse = F)
 mShroom3a <- fasta_cleaner(mShroom3a, parse = F)
@@ -239,18 +318,20 @@ hShroom2  <- fasta_cleaner(hShroom2,  parse = F)
 sShroom   <- fasta_cleaner(sShroom,   parse = F)
 ```
 
+Again, I want to do something four times, so I've repeated the same line of code four times with the necessary change.  This gets the job done, but there are better ways to do this using for loops.
 
 Now let's take a peek at what our sequences look like:
 ```{r}
 hShroom3
 ```
 
+THe header and slash-n newline characters are gone.  The sequence is now ready for use by our R alignment functions.
 
 ## Aligning sequences
 
-We can do a [**global alignment**](https://tinyurl.com/y4du73zq) of one sequence against another using the `pairwiseAlignment()` function from the **Bioconductor** package `Biostrings` (note that capital "B" in `Biostrings`; most *R* package names are all lower case, but not this one).
+We can do a [**global alignment**](https://tinyurl.com/y4du73zq) of one sequence against another using the `pairwiseAlignment()` function from the **Bioconductor** package `Biostrings` (note that capital "B" in `Biostrings`; most *R* package names are all lower case, but not this one).  Global alignment algorithms identify the best way to line up to sequences so that that optimal number of bases or amino acids are the same and the number of **indels** (insertions/deletions) are minimized.  (Global alignment contrasts with **local alignment**, which works with portions of sequences and is used in database search programs like **BLAST**, the Basic Local Alignment Search Tool used by many biologists).
 
-Let's align human versus mouse shroom:
+Let's align human versus mouse shroom using the global alignment function pairwiseAlignment():
 ```{r}
 align.h3.vs.m3a <- Biostrings::pairwiseAlignment(
                   hShroom3,
@@ -262,15 +343,17 @@ We can peek at the alignment
 align.h3.vs.m3a
 ```
 
-The **score** tells us how closely they are aligned; higher scores mean the sequences are more similar.  Its hard to interpret the number on its own so we can get the **percent sequence identity (PID)** using the `pid()` function.
+The **score** tells us how closely they are aligned; higher scores mean the sequences are more similar.  In general, perfect matches increase scores the most, and indels decrease scores.  
+
+Its hard to interpret scores on their own so we can get the **percent sequence identity (PID)** (aka percent identical, proportion identity, proportion identical) using the `pid()` function.
 
 ```{r}
 Biostrings::pid(align.h3.vs.m3a)
 ```
 
-So, *shroom3* from humans and *shroom3* from mice are ~71% similar (at least using this particular method of alignment, and there are many ways to do this!)
+So, *shroom3* from humans (hShroom3) and *shroom3* from mice (mShroom3) are ~71% similar (at least using this particular method of alignment, and there are many ways to do this!)
 
-What about human shroom 3 and sea-urchin shroom?
+What about human shroom 3 and human shroom 2?  Shroom is a **gene family**, and there are different versions of the gene within a genome.
 
 ```{r}
 align.h3.vs.h2 <- Biostrings::pairwiseAlignment(
@@ -278,57 +361,77 @@ align.h3.vs.h2 <- Biostrings::pairwiseAlignment(
                   hShroom2)
 ```
 
+If you take a look at the alignment you can see there are a lot of indels
+```{r}
+align.h3.vs.h2
+```
 
-First check out the score using `score()`, which accesses it directly without all the other information.
+
+Check out the score itself using `score()`, which accesses it directly without all the other information.
 ```{r}
 score(align.h3.vs.h2)
 ```
+
+Its negative because there are a LOT of indels.
 
 Now the percent sequence alignment with `pid()`:
 ```{r}
 Biostrings::pid(align.h3.vs.h2)
 ```
 
-So Human shroom 3 and Mouse shroom 3 are 71% identical, but Human shroom 3 and human shroom 2 are only 34% similar?  How does it work out evolutionary that a human and mouse gene are more similar than a human and a human gene?  What are the evolutionary relationships among these genes within the shroom gene family?
+So Human shroom 3 and Mouse shroom 3 are 71% identical, but Human shroom 3 and human shroom 2 are only 34% similar?  How does it work out evolutionarily that a human and mouse gene are more similar than a human and a human gene?  What are the evolutionary relationships among these genes within the shroom gene family?
+
+An important note: indels contribute negatively to an alignment score, but aren't used in the most common calculations for PID.
 
 
 ## The shroom family of genes
 
-I've copied a table from a published paper which has accession numbers for 15 different Shroom genes.
+I've copied a table from a published paper which has accession numbers for 15 different Shroom genes.  Some are different types of shroom from the same organism (e.g. shroom 1, 2, 3 and 4 from humans), or they are from different organism (e.g. frogs, mice, bees).
+
 
 ```{r}
 shroom_table <- c("CAA78718" , "X. laevis Apx" ,         "xShroom1",
-            "NP_597713" , "H. sapiens APXL2" ,     "hShroom1",
-            "CAA58534" , "H. sapiens APXL",        "hShroom2",
-            "ABD19518" , "M. musculus Apxl" ,      "mShroom2",
-            "AAF13269" , "M. musculus ShroomL" ,   "mShroom3a",
-            "AAF13270" , "M. musculus ShroomS" ,   "mShroom3b",
-            "NP_065910", "H. sapiens Shroom" ,     "hShroom3",
-            "ABD59319" , "X. laevis Shroom-like",  "xShroom3",
-            "NP_065768", "H. sapiens KIAA1202" ,   "hShroom4a",
-            "AAK95579" , "H. sapiens SHAP-A" ,     "hShroom4b",
-            #"DQ435686" , "M. musculus KIAA1202" ,  "mShroom4",
-            "ABA81834" , "D. melanogaster Shroom", "dmShroom",
-            "EAA12598" , "A. gambiae Shroom",      "agShroom",
-            "XP_392427" , "A. mellifera Shroom" ,  "amShroom",
-            "XP_783573" , "S. purpuratus Shroom" , "spShroom") #sea urchin
+                  "NP_597713" , "H. sapiens APXL2" ,     "hShroom1",
+                  "CAA58534" , "H. sapiens APXL",        "hShroom2",
+                  "ABD19518" , "M. musculus Apxl" ,      "mShroom2",
+                  "AAF13269" , "M. musculus ShroomL" ,   "mShroom3a",
+                  "AAF13270" , "M. musculus ShroomS" ,   "mShroom3b",
+                  "NP_065910", "H. sapiens Shroom" ,     "hShroom3",
+                  "ABD59319" , "X. laevis Shroom-like",  "xShroom3",
+                  "NP_065768", "H. sapiens KIAA1202" ,   "hShroom4a",
+                  "AAK95579" , "H. sapiens SHAP-A" ,     "hShroom4b",
+                 #"DQ435686" , "M. musculus KIAA1202" ,  "mShroom4",
+                  "ABA81834" , "D. melanogaster Shroom", "dmShroom",
+                  "EAA12598" , "A. gambiae Shroom",      "agShroom",
+                  "XP_392427" , "A. mellifera Shroom" ,  "amShroom",
+                  "XP_783573" , "S. purpuratus Shroom" , "spShroom") #sea urchin
+```
+
+What we just made is just one long vector with all the info.
+
+```{r}
+is(shroom_table)
+class(shroom_table)
+length(shroom_table)
 ```
 
 
 I'll do a bit of formatting; you can ignore these details if you want
 ```{r}
-# convert to matrix
+# convert the vector to matrix using matrix()
 shroom_table_matrix <- matrix(shroom_table,
                                   byrow = T,
                                   nrow = 14)
-# convert to dataframe
+
+# convert the matrix to a dataframe using data.frame()
 shroom_table <- data.frame(shroom_table_matrix, 
                      stringsAsFactors = F)
 
-# name columns
+# name columns of dataframe using names() function
 names(shroom_table) <- c("accession", "name.orig","name.new")
 
 # Create simplified species names
+## access species column using $ notation
 shroom_table$spp <- "Homo"
 shroom_table$spp[grep("laevis",shroom_table$name.orig)] <- "Xenopus"
 shroom_table$spp[grep("musculus",shroom_table$name.orig)] <- "Mus"
@@ -340,7 +443,7 @@ shroom_table$spp[grep("purpuratus",shroom_table$name.orig)] <- "sea urchin"
 ```
 
 
-Take a look:
+Take a look at the finished table
 ```{r}
 shroom_table
 ```
@@ -349,12 +452,12 @@ shroom_table
 
 Instead of getting one sequence at a time we can download several by accessing the "accession" column from the table
 
-```{r}
+```{r}?
 shroom_table$accession
 ```
 
 
-We can give this whole set of accessions to `entrez_fetch()`:
+We can give this whole set of accessions to `entrez_fetch()`, which is a **vectorized function** which knows how to handle a vector of inputs.
 ```{r}
 shrooms <- entrez_fetch(db = "protein", 
                           id = shroom_table$accession, 
@@ -366,23 +469,69 @@ We can look at what we got here with `cat()`  (I won't display this because it i
 cat(shrooms)
 ```
 
-The current format of these data is a single, long set of data.  This is a standard way to store, share and transmit FASTA files, but in *R* we'll need a slightly different format. 
+The current format of these data is a single, very long set of data.  This is a standard way to store, share and transmit FASTA files, but in *R* we'll need a slightly different format. 
 
 We'll download all of the sequences again, this time using a function from `compbio4all` called `entrez_fetch_list()` which is a **wrapper** function I wrote to put the output of `entrez_fetch()` into an *R* data format called a **list**.
 
+This function is contained with the combio4all package; however, if you are having trouble with the package you can enter it directly into your R sessions by running the source code of the function.
+
+
+```{r}
+entrez_fetch_list <- function(db, id, rettype, ...){
+
+  #setup list for storing output
+  n.seq <- length(id)
+  list.output <- as.list(rep(NA, n.seq))
+  names(list.output) <- id
+
+  # get output
+  for(i in 1:length(id)){
+    list.output[[i]] <- rentrez::entrez_fetch(db = db,
+                                              id = id[i],
+                                              rettype = rettype)
+  }
+
+
+  return(list.output)
+}
+```
+
+However we get the function, we can use it to download a bunch of FASTA files and store them in an R list.
 ```{r}
 shrooms_list <- entrez_fetch_list(db = "protein", 
                           id = shroom_table$accession, 
                           rettype = "fasta")
 ```
 
-Now we have a list which as 14 **elements**, one for each sequence in our table.
+Now we have an R **list** which as 14 **elements**, one for each sequence in our table.
 
 ```{r}
 length(shrooms_list)
 ```
 
-We now need to clean up each one fo these sequences.  We can do that using a simple `for()` loop:
+Each element of the list contains a FASTA entry for one sequence
+
+```{r}
+shrooms_list[[1]]
+```
+
+We now need to clean up each one of these sequences.  We could do this by running our fasta_cleaner() function on each of the elements of the list like this.
+
+```{r}
+# clean sequence 1 in element 1 of list
+shrooms_list[[1]] <- fasta_cleaner(shrooms_list[[1]], parse = F)
+
+# clean sequence 2 in element 2 of list
+shrooms_list[[2]] <- fasta_cleaner(shrooms_list[[2]], parse = F)
+
+# clean sequence 3 in element 3 of list
+shrooms_list[[3]] <- fasta_cleaner(shrooms_list[[3]], parse = F)
+
+# clean sequence x in element x of list
+## ...
+```
+
+Copying the same line of code 14 time and making the necessary changes takes time and is error prone.  We can do this more easily using a simple `for()` loop:
 
 ```{r}
 for(i in 1:length(shrooms_list)){
@@ -390,22 +539,40 @@ for(i in 1:length(shrooms_list)){
 }
 ```
 
-Second to last  step: we need to take each one of our sequences from our list and put it into a **vector**, in particular a **named vector**
+For loops all start with for(...) and contain the code we want to do repeatedly within curly brackets {...}.  We won't worry about the details of how for() loops work in R, but the upshot is that they allow us to easily repeatedly the same step many times while having making the necessary minor changes.
+
+Now, for the second to last step of data preparation: we need to take each one of our sequences from our list and put it into a **vector**, in particular a **named vector**.
+
+First, we need a vector to store stuff.  We'll make an empty vector that just has NAs in it using the rep() function.
 
 ```{r}
-# make a vector to store output
 shrooms_vector <- rep(NA, length(shrooms_list))
+```
 
+The result looks like this
+
+```{r}
+shrooms_vector
+```
+
+Now we use a for() loop to take each element of shrooms_list and put it into the vector shrooms_vector (the precise details don't matter; what is important is that we are using a for loop so we don't have to repeat the same line of code 14 times)
+
+```{r}
 # run the loop
 for(i in 1:length(shrooms_vector)){
   shrooms_vector[i] <- shrooms_list[[i]]
 }
+```
 
+Now we name the vector.  This is using the names() function.  (The exact details don't matter)
+```{r}
 # name the vector
 names(shrooms_vector) <- names(shrooms_list)
 ```
 
 Now the final step: we need to convert our named vector to a **string set** using `Biostrings::AAStringSet()`.  Note the `_ss` tag at the end of the object we're assigning the output to, which designates this as a string set.
+
+A string set is just a type of data format someone came up with to organize and annotate sequence data.  (All of these steps are annoying, and someday I'll write some functions to simplify all of this).
 
 ```{r}
 shrooms_vector_ss <- Biostrings::AAStringSet(shrooms_vector)
@@ -416,51 +583,91 @@ shrooms_vector_ss <- Biostrings::AAStringSet(shrooms_vector)
 
 We must **align** all of the sequences we downloaded and use that **alignment** to build a **phylogenetic tree**.  This will tell us how the different genes, both within and between species, are likely to be related.  
 
-
+(Note: previously we've explored the similarities between sequences using pairwiseAlignments().  This helped us understand the data, but wasn't actually necessary for making an MSA or phylogenetic tree).
 
 
 ### Building an Multiple Sequence Alignment (MSA)
 
-We'll use the software `msa,` which implements the **ClustalW** multiple sequence alignment algorithm.  Normally we'd have to download the ClustalW program and either point-and-click our way through it or use the **command line***, but these folks wrote up the algorithm in R  so we can do this with a line of R code.  This will take a second or two.
+Multiple sequence alignments (MSA) appear frequently in papers in molecular biology, biochemistry, and molecular evolution.  They are also the basis for almost all phylogenies made with modern software to build phylogenetic trees using macromolecues.  MSA are extensions of global alignment of two sequences.  However, while a function like pairwiseAlignment() tries to come up with the best way to align two sequences, and MSA algorithm tries to come up with the joint alignment that is best across all alignments.  This not only takes longer to do, but can sometimes come up with slight different results than a bunch of individual pairs of alignments.
+
+We'll use the software `msa,` which implements the **ClustalW** multiple sequence alignment algorithm.  Normally we'd have to download the ClustalW program and either point-and-click our way through it or use the **command line***, but these folks wrote up the algorithm in R so we can do this with a line of R code.  This will take a second or two.
+
+NOTE: While based in R, the msa package uses an R package called Rcpp ("R C++") to integrate R with code from the language C++.  There seem to some issues related to this process on some computers.  If you can't get msa to load or msa() to fun, you can comment-out the msa-related code.
+
 ```{r}
 shrooms_align <- msa(shrooms_vector_ss,
                      method = "ClustalW")
 ```
 
+While msa() runs R tells you "use default substitution matrix", which means its using the programs default way of scoring alignments; that is, how to assign values to matches, mismatches, and indels while trying to come up with the best alignment of all the sequences.
+
 
 ### Viewing an MSA
 
-Once we build an MSA we need to visualize it.  
+Once we build an MSA we need to visualize it.  There are several ways to do this, and it can be a bit tricky because gene and proteins are long and most easily viewed left to right.  Often we'll identify a subset of bases to focus on, such as a sequence motif or domain.
 
 #### Viewing an MSA in R
 
-We can look at the output from `msa()`, but its not very helpful
+msa produces a species MSA objects
+```{r}
+class(shrooms_align)
+is(shrooms_align)
+```
+
+
+We can look at the direct output from `msa()`, but its not very helpful - its just a glimpse of part of the alignment.  The "..." in the middle just means "a lot of other stuff in the middle."
 ```{r}
 shrooms_align
 ```
 
 A function called `print_msa()` (Coghlan 2011) which I've put into`combio4all` can give us more informative output by printing out the actual alignment into the R console.  
 
-To use `print_msa()` We need to make a few minor tweaks though first.  These are behind the scenes changes so don't worry about the details right now.  We'll change the name to `shrooms_align_seqinr` to indicate that one of our changes is putting this into a format defined by the bioinformatics package `seqinr`.
+To use `print_msa()` We need to make a few minor tweaks though first to the output of the msa() function.  These are behind the scenes changes so don't worry about the details right now.  We'll change the name to `shrooms_align_seqinr` to indicate that one of our changes is putting this into a format defined by the bioinformatics package `seqinr`.
+
+First, we change **class** of the variable to let our functions know exactly what we're working with.
+
+The output of the class() function can sometimes be a bit complicated; in this case its telling us that the "class" of the shrooms_align object is "MsaAAMultipleAlignment", which is a special purpose type of R object created by the msa() function ("Msa...") for amino acids (..."AA"...) that is a multiple sequence alignment ("...MultipleAlignment")
+```{r}
+class(shrooms_align) 
+```
+
+To make shrooms_align play nice with our other functions it has to just be of the class "AAMultipleAlignment".  (Again, this is annoying, and took my a while to figure out when I was creating this workflow).
+
+You rarely have to change the class of an R object; the usual use of the class() function is to just get an idea of what an object is.  You can also use the class() function to change the class of an object.
+
 ```{r}
 class(shrooms_align) <- "AAMultipleAlignment"
-shrooms_align_seqinr <- msaConvert(shrooms_align, type = "seqinr::alignment")
 ```
 
 
-I won't display the output from `shrooms_align_seqinr` because its very long; we have 14 shroom genes, and shroom happens to be a rather long gene.
-<!-- TODO: set up for displaying only part of the alignment, subsetting it etc. -->
+Now we need to use a function from msa called msaConvert() to make *another* tweak to the object to make it work with functions from the seqinr package.  We'll change the name of our msa object from shrooms_align to shrooms_align_seqinr to reflect this change.  (Another annoying step that took me a while to figure out when I first did this.)
+```{r}
+shrooms_align_seqinr <- msaConvert(shrooms_align, 
+                                   type = "seqinr::alignment")
+```
+
+
+
+I won't display the raw output from `shrooms_align_seqinr` because its very long; we have 14 shroom genes, and shroom happens to be a rather long gene.
+<!-- TODO for Dr. B: set up for displaying only part of the alignment, subsetting it etc. -->
+
+Now that I've done the necessary tweaks let me display the msa.  This will only be really useful if I have a big monitor.
 ```{r, eval = F}
-print_msa(alignment = shrooms_align_seqinr, 
+compbio4all::print_msa(alignment = shrooms_align_seqinr, 
           chunksize = 60)
 ```
 
 #### Displaying an MSA as an R plot
 
+Printing and msa to the R plot window can be useful to make nicer looking figures of parts of an MSA.  I'm going to just show about 100 amino acids near the end of the alignment, where there is the most overlap across all of the sequences.  This is set with the `start = ...` and `end = ...` arguments.
 
-I'm going to just show about 100 amino acids near the end of the alignment, where there is the most overlap across all of the sequences.  This is set with the `start = ...` and `end = ...` arguments.  Note that we're using the `shrooms_align` object.
+Note that we're using the `shrooms_align` object again, but with the class reassigned.
 
-```{r}
+```{r, eval = F}
+# key step - must have class set properly
+class(shrooms_align) <- "AAMultipleAlignment"
+
+# run ggmsa
 ggmsa::ggmsa(shrooms_align,   # shrooms_align, NOT shrooms_align_seqinr
       start = 2000, 
       end = 2100) 
@@ -472,6 +679,18 @@ ggmsa::ggmsa(shrooms_align,   # shrooms_align, NOT shrooms_align_seqinr
 
 We can take a look at the alignment in PDF format if we want.  I this case I'm going to just show about 100 amino acids near the end of the alignment, where there is the most overlap across all of the sequences.  This is set with the `y = c(...)` argument.
 
+In order for this to work you need to have a program called LaTex installed on your computer.  LaTex can occasionally be tricky to install so you can skip this step if necessary.
+
+If you want to try to install LaTex, you can run this code to see if it works
+for you
+
+```{r, eval = F}
+install.packages("tinytex")
+install_tinytex()
+```
+
+
+If you have LaTex working on your computer you can then run this code.  (If this code doesn't work, you can comment it out)
 ```{r, eval = F}
 msaPrettyPrint(shrooms_align,             # alignment
                file = "shroom_msa.pdf",   # file name
@@ -487,60 +706,157 @@ getwd()
 On a Mac you can usually find the file by searching in Finder for the file name, which I set to be "shroom_msa.pdf" using the `file = ...` argument above.
 
 
+## A subset of sequences
 
-## Genetic distance.
+To make things easier we'll move forward with just a subset of sequences:
 
-Next  need to first get an estimate of how similar each sequences is.  The more amino acids that are identical to each other, the more similar.  
+* XP_392427: amShroom (bee shroom)
+* EAA12598: agShroom (mosquito shroom)
+* ABA81834: dmShroom (*Drosophila* shroom)
+* XP_783573: spShroom (sea urchin shroom)
+* CAA78718: xShroom1 (frog shroom)
 
-Instead of similarity, we usually work in terms of *difference* or **genetic distance** (a.k.a. **evolutionary distance**).  This is done with the `dist.alignment()` function.
+
+Our main working object shrooms_vector_ss has the names of our genes listed
 ```{r}
-shrooms_dist <- seqinr::dist.alignment(shrooms_align_seqinr, 
+names(shrooms_vector_ss)
+```
+
+We can select the ones we want to focus on be first making a vector of the names
+```{r}
+names.focal <- c("XP_392427","EAA12598","ABA81834","XP_783573","CAA78718")
+```
+
+We can use this vector and bracket notation to select the what we want from shrooms_vector_ss:
+
+```{r}
+shrooms_vector_ss[names.focal]
+```
+
+Let's assign the subset of sequences to a new object called shrooms_vector_ss_subset.
+```{r}
+shrooms_vector_ss_subset <- shrooms_vector_ss[names.focal]
+```
+
+Let's make another MSA with just this subset.  If msa isn't working for you you can comment this out.
+```{r}
+shrooms_align_subset <- msa(shrooms_vector_ss_subset,
+                     method = "ClustalW")
+```
+
+
+To view it using ggmsa we need to do those annoying conversions again.
+```{r}
+class(shrooms_align_subset) <- "AAMultipleAlignment"
+shrooms_align_subset_seqinr <- msaConvert(shrooms_align_subset, type = "seqinr::alignment")
+```
+
+THen we can plot it
+```{r}
+ggmsa::ggmsa(shrooms_align_subset,   # shrooms_align, NOT shrooms_align_seqinr
+      start = 2030, 
+      end = 2100) 
+```
+
+
+We can save our new smaller MSA like this.
+```{r, eval = F}
+msaPrettyPrint(shrooms_align_subset,             # alignment
+               file = "shroom_msa_subset.pdf",   # file name
+               y=c(2030, 2100),           # range
+               askForOverwrite=FALSE)
+```
+
+
+
+
+## Genetic distances of sequence in subset
+
+While an MSA is a good way to examine a sequence its hard to assess all of the information visually.  A phylogenetic tree allows you to summarize patterns in an MSA.  The fastest way to make phylogenetic trees to is first summarize an MSA using a **genetic distance matrix**.   The more amino acids that are identical to each other, the smaller the genetic distance is between them and the less evolution has occurred.  
+
+We usually work in terms of *difference* or **genetic distance** (a.k.a. **evolutionary distance**), though often we also talk in terms of similarity or identity. 
+
+Calculating genetic distance from an MSA is done using the `seqinr::dist.alignment()` function.
+```{r}
+shrooms_subset_dist <- seqinr::dist.alignment(shrooms_align_subset_seqinr, 
                                        matrix = "identity")
 
 
 ```
 
+This produces a "dist" class object.
+```{r}
+is(shrooms_subset_dist)
+class(shrooms_subset_dist)
+```
+
+If you've been having trouble with the MSA software, the data necessary to build the distance matrix directly in R is in this code chunk (you can ignore the details).
+
+```{r}
+shrooms_subset_dist_alt <- matrix(data = NA,
+                              nrow = 5, 
+                              ncol = 5)
+
+distances <- c(0.8260049, 
+               0.8478722, 0.9000568, 
+               0.9244596, 0.9435187, 0.9372139, 
+               0.9238779, 0.9370038, 0.9323225,0.9413209)
+shrooms_subset_dist_alt[lower.tri(shrooms_subset_dist_alt)] <- distances
+
+seqnames <- c("EAA12598","ABA81834","XP_392427", "XP_783573","CAA78718")
+colnames(shrooms_subset_dist_alt) <- seqnames
+row.names(shrooms_subset_dist_alt)  <- seqnames
+shrooms_subset_dist_alt <- as.dist(shrooms_subset_dist_alt)
+shrooms_subset_dist <- shrooms_subset_dist_alt
+```
+
+
 We've made a matrix using `dist.alignment()`; let's round it off so its easier to look at using the `round()` function.
 ```{r}
-shrooms_dist_rounded <- round(shrooms_dist,
+shrooms_subset_dist_rounded <- round(shrooms_subset_dist,
                               digits = 3)
 ```
 
-Now let's look at it
-```{r}
-shrooms_dist_rounded
+If we want to look at it we can type
+```{r eval = T}
+shrooms_subset_dist_rounded
 ```
 
-## Phylognetic trees (finally!)
+Not that we have 5 sequence, but the matrix is 4 x 4.  This is because redundant information is dropped, including distances from one sequence to itself.  This makes it so that the first column is EAA12598, but the first row is ABA81834.
 
-We got our sequence, built multiple sequence alignment, and calculated the genetic distance between sequences.  Now we are - finally - ready to build a phylogenetic tree.
+
+## Phylognetic trees of subset sequences (finally!)
+
+We got our sequences, built a multiple sequence alignment, and calculated the genetic distance between sequences.  Now we are - finally - ready to build a phylogenetic tree.
 
 First, we let R figure out the structure of the tree.  There are **MANY** ways to build phylogenetic trees.  We'll use a common one used for exploring sequences called **neighbor joining** algorithm via the function `nj()`.  Neighbor joining uses genetic distances to cluster sequences into **clades**.  
 
+nj() is simple function that takes only a single argument, a distance matrix.
 ```{r}
-tree <- nj(shrooms_dist)
+# Note - not using rounded values
+tree_subset <- nj(shrooms_subset_dist)
 ```
 
 ### Plotting phylogenetic trees 
 
-Now we'll make a quick plot of our tree using `plot()` (and add a little label using a function called `mtext()`).
+Now we'll make a quick plot of our tree using `plot()` (and add a little label using an important function called `mtext()`).
 ```{r}
 # plot tree
-plot.phylo (tree, main="Phylogenetic Tree", 
+plot.phylo(tree_subset, main="Phylogenetic Tree", 
             type = "unrooted", 
             use.edge.length = F)
 
 # add label
-mtext(text = "Shroom family gene tree - unrooted, no branch lengths")
+mtext(text = "Shroom family gene tree - UNrooted, no branch lengths")
 ```
 
-This is an **unrooted tree*.  For the sake of plotting we've also ignored the evolutionary distance between the sequences.
+This is an **unrooted tree** with no outgroup defined.  For the sake of plotting we've also ignored the evolutionary distance between the sequences, so the branch lengths don't have meaning.
 
-To make a rooted tree we remove `type = "unrooted`.
+To make a rooted tree we remove `type = "unrooted`.  In the case of neighbor joining, the algorithm tries to figure out the outgroup on its own.
 
 ```{r}
 # plot tree
-plot.phylo (tree, main="Phylogenetic Tree", 
+plot.phylo(tree_subset, main="Phylogenetic Tree", 
             use.edge.length = F)
 
 # add label
@@ -552,69 +868,37 @@ We can include information about branch length by setting `use.edge.length = ...
 
 ```{r}
 # plot tree
-plot.phylo (tree, main="Phylogenetic Tree", 
+plot.phylo(tree_subset, main="Phylogenetic Tree", 
             use.edge.length = T)
 
 # add label
 mtext(text = "Shroom family gene tree - rooted, with branch lenths")
 ```
 
-Some of the branches are now very short, but most are very long, indicating that these genes have been evolving independently for many millions of years.
+Now the length of the branches indicates the evolutionary distance between sequences and correlate to the distances reported in our distance matrix.  The branches are all very long, indicating that these genes have been evolving independently for many millions of years.
 
-Let's make a fancier plot.  Don't worry about all the steps; I've added some more code to add some annotations on the right-hand side to help us see what's going on.
+An important note: the vertical lines on the tree have no meaning, only the horizontal ones.
 
-<!-- TODO: how does this render? -->
-```{r fig.width=6}
-plot(tree, main="Phylogenetic Tree")
-mtext(text = "Shroom family gene tree")
+Because the branch lengths are all so long I find this tree a bit hard to view when its rooted.  Let's make it unrooted again.
+```{r}
+# plot tree
+plot.phylo(tree_subset, main="Phylogenetic Tree", 
+           type = "unrooted",
+            use.edge.length = T)
 
-x <- 0.551
-x2 <- 0.6
-
-# label Shrm 3
-segments(x0 = x, y0 = 1, 
-         x1 = x, y1 = 4,
-         lwd=2)
-text(x = x*1.01, y = 2.5, "Shrm 3",adj = 0)
-
-segments(x0 = x, y0 = 5, 
-         x1 = x, y1 = 6,
-         lwd=2)
-text(x = x*1.01, y = 5.5, "Shrm 2",adj = 0)
-
-segments(x0 = x, y0 = 7, 
-         x1 = x, y1 = 9,
-         lwd=2)
-text(x = x*1.01, y = 8, "Shrm 1",adj = 0)
-
-segments(x0 = x, y0 = 10, 
-         x1 = x, y1 = 13,
-         lwd=2)
-text(x = x*1.01, y = 12, "Shrm ?",adj = 0)
-
-
-segments(x0 = x, y0 = 14, 
-         x1 = x, y1 = 15,
-         lwd=2)
-text(x = x*1.01, y = 14.5, "Shrm 4",adj = 0)
-
-
-segments(x0 = x2, y0 = 1, 
-         x1 = x2, y1 = 6,
-         lwd=2)
-
-segments(x0 = x2, y0 = 7, 
-         x1 = x2, y1 = 9,
-         lwd=2)
-
-segments(x0 = x2, y0 = 10, 
-         x1 = x2, y1 = 15,
-         lwd=2)
-
+# add label
+mtext(text = "Shroom family gene tree - rooted, with branch lenths")
 ```
 
+Now you can see that the ABA and EAA sequences form a clade, and that the distance between them is somewhat smaller than the distance between other sequences.  If we go back to our original distance matrix, we can see that the smallest genetic distance is between ABA and EAA at 0.826.
 
-<!-- Assignment - redo with DNA; how does PID compare -->
-<!-- compare pairwise PID to MSA similarity -->
+```{r}
+shrooms_subset_dist_rounded
+```
 
+We can confirm that this is the minimum using the min() function.
+
+```{r}
+min(shrooms_subset_dist_rounded)
+```
 

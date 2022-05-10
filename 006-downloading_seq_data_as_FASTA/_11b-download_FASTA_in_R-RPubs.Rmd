@@ -1,16 +1,22 @@
 ---
+title: "Untitled"
+author: "Nathan Brouwer"
+date: "9/29/2021"
 output: html_document
-editor_options: 
-  chunk_output_type: console
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # Downloading DNA sequences as FASTA files in R {#download-FASTA-inR}
 
 This is a modification of ["DNA Sequence Statistics"](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html) from Avril Coghlan's [*A little book of R for bioinformatics.*](https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html).  Most of the text and code was originally written by Dr. Coghlan and distributed under the [Creative Commons 3.0](https://creativecommons.org/licenses/by/3.0/us/) license.  
 
-<!-- how much is sequinr actually useD? -->
+<!-- NOTE FOR DR. B how much is sequinr actually useD? -->
 
 
-**NOTE**: There is some reduncnacy in this current draft that needs to be eliminated.
+**NOTE**: There is some redundancy in this current draft that needs to be eliminated.
 
 
 ### Functions
