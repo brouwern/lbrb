@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 19 Simple for() loop example | A Little Book of R for Bioinformatics 2.0</title>
+  <meta name="description" content="An entry-level text for bioinformatics and computational biology" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 19 Simple for() loop example | A Little Book of R for Bioinformatics 2.0" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="An entry-level text for bioinformatics and computational biology" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 19 Simple for() loop example | A Little Book of R for Bioinformatics 2.0" />
+  
+  <meta name="twitter:description" content="An entry-level text for bioinformatics and computational biology" />
+  
+
+<meta name="author" content="Avril Coghlan, with contributions by Nathan L. Brouwer" />
+
+
+<meta name="date" content="2022-05-10" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="worked-example-building-a-phylogeny-in-r.html"/>
+<link rel="next" href="phylogenetic-tree-example-using-neighbor-joining.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Little Book of R for Bioinformatics</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface to version 2.0</a></li>
+<li class="chapter" data-level="1" data-path="downloadR.html"><a href="downloadR.html"><i class="fa fa-check"></i><b>1</b> Downloading R</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="downloadR.html"><a href="downloadR.html#preface"><i class="fa fa-check"></i><b>1.1</b> Preface</a></li>
+<li class="chapter" data-level="1.2" data-path="downloadR.html"><a href="downloadR.html#introduction-to-r"><i class="fa fa-check"></i><b>1.2</b> Introduction to R</a></li>
+<li class="chapter" data-level="1.3" data-path="downloadR.html"><a href="downloadR.html#installing-r"><i class="fa fa-check"></i><b>1.3</b> Installing R</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="downloadR.html"><a href="downloadR.html#installing-r-on-a-windows-pc"><i class="fa fa-check"></i><b>1.3.1</b> Installing <em>R</em> on a Windows PC</a></li>
+<li class="chapter" data-level="1.3.2" data-path="downloadR.html"><a href="downloadR.html#how-to-install-r-on-non-windows-computers-eg.-macintosh-or-linux-computers"><i class="fa fa-check"></i><b>1.3.2</b> How to install <em>R</em> on non-Windows computers (eg. Macintosh or Linux computers)</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="downloadR.html"><a href="downloadR.html#starting-r"><i class="fa fa-check"></i><b>1.4</b> Starting <em>R</em></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="installing-the-rstudio-ide-installrstudio.html"><a href="installing-the-rstudio-ide-installrstudio.html"><i class="fa fa-check"></i><b>2</b> Installing the RStudio IDE {$installRStudio}</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="installing-the-rstudio-ide-installrstudio.html"><a href="installing-the-rstudio-ide-installrstudio.html#getting-to-know-rstudio"><i class="fa fa-check"></i><b>2.1</b> Getting to know RStudio</a></li>
+<li class="chapter" data-level="2.2" data-path="installing-the-rstudio-ide-installrstudio.html"><a href="installing-the-rstudio-ide-installrstudio.html#rstudio-versus-rstudio-cloud"><i class="fa fa-check"></i><b>2.2</b> RStudio versus RStudio Cloud</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="installing-packages.html"><a href="installing-packages.html"><i class="fa fa-check"></i><b>3</b> Installing <em>R</em> packages</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="installing-packages.html"><a href="installing-packages.html#downloading-packages-with-the-rstudio-ide"><i class="fa fa-check"></i><b>3.1</b> Downloading packages with the RStudio IDE</a></li>
+<li class="chapter" data-level="3.2" data-path="installing-packages.html"><a href="installing-packages.html#downloading-packages-with-the-function-install.packages"><i class="fa fa-check"></i><b>3.2</b> Downloading packages with the function <code>install.packages()</code></a></li>
+<li class="chapter" data-level="3.3" data-path="installing-packages.html"><a href="installing-packages.html#using-packages-after-they-are-downloaded"><i class="fa fa-check"></i><b>3.3</b> Using packages after they are downloaded</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html"><i class="fa fa-check"></i><b>4</b> Installing Bioconductor</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#bioconductor"><i class="fa fa-check"></i><b>4.1</b> Bioconductor</a></li>
+<li class="chapter" data-level="4.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#installing-biocmanager"><i class="fa fa-check"></i><b>4.2</b> Installing BiocManager</a></li>
+<li class="chapter" data-level="4.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#the-ins-and-outs-of-package-installation"><i class="fa fa-check"></i><b>4.3</b> The ins and outs of package installation</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#updating-other-packages-when-downloading-a-package"><i class="fa fa-check"></i><b>4.3.1</b> Updating other packages when downloading a package</a></li>
+<li class="chapter" data-level="4.3.2" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#packages-from-source"><i class="fa fa-check"></i><b>4.3.2</b> Packages “from source”</a></li>
+<li class="chapter" data-level="4.3.3" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#more-on-angry-red-text"><i class="fa fa-check"></i><b>4.3.3</b> More on angry red text</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="installing-bioconductor.html"><a href="installing-bioconductor.html#actually-loading-a-package"><i class="fa fa-check"></i><b>4.4</b> Actually loading a package</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="basic-R.html"><a href="basic-R.html"><i class="fa fa-check"></i><b>5</b> A Brief introduction to R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="basic-R.html"><a href="basic-R.html#vocabulary"><i class="fa fa-check"></i><b>5.1</b> Vocabulary</a></li>
+<li class="chapter" data-level="5.2" data-path="basic-R.html"><a href="basic-R.html#r-functions"><i class="fa fa-check"></i><b>5.2</b> R functions</a></li>
+<li class="chapter" data-level="5.3" data-path="basic-R.html"><a href="basic-R.html#interacting-with-r"><i class="fa fa-check"></i><b>5.3</b> Interacting with R</a></li>
+<li class="chapter" data-level="5.4" data-path="basic-R.html"><a href="basic-R.html#variables-in-r"><i class="fa fa-check"></i><b>5.4</b> Variables in R</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="basic-R.html"><a href="basic-R.html#vectors"><i class="fa fa-check"></i><b>5.4.1</b> Vectors</a></li>
+<li class="chapter" data-level="5.4.2" data-path="basic-R.html"><a href="basic-R.html#vector-indexing"><i class="fa fa-check"></i><b>5.4.2</b> Vector indexing</a></li>
+<li class="chapter" data-level="5.4.3" data-path="basic-R.html"><a href="basic-R.html#character-vectors"><i class="fa fa-check"></i><b>5.4.3</b> Character vectors</a></li>
+<li class="chapter" data-level="5.4.4" data-path="basic-R.html"><a href="basic-R.html#lists"><i class="fa fa-check"></i><b>5.4.4</b> Lists</a></li>
+<li class="chapter" data-level="5.4.5" data-path="basic-R.html"><a href="basic-R.html#tables"><i class="fa fa-check"></i><b>5.4.5</b> Tables</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="basic-R.html"><a href="basic-R.html#arguments"><i class="fa fa-check"></i><b>5.5</b> Arguments</a></li>
+<li class="chapter" data-level="5.6" data-path="basic-R.html"><a href="basic-R.html#help-files-with-help-and"><i class="fa fa-check"></i><b>5.6</b> Help files with <code>help()</code> and <code>?</code></a></li>
+<li class="chapter" data-level="5.7" data-path="basic-R.html"><a href="basic-R.html#searching-for-functions-with-help.search-and-rsitesearch"><i class="fa fa-check"></i><b>5.7</b> Searching for functions with <code>help.search()</code> and <code>RSiteSearch()</code></a></li>
+<li class="chapter" data-level="5.8" data-path="basic-R.html"><a href="basic-R.html#more-on-functions"><i class="fa fa-check"></i><b>5.8</b> More on functions</a>
+<ul>
+<li class="chapter" data-level="5.8.1" data-path="basic-R.html"><a href="basic-R.html#writing-your-own-functions"><i class="fa fa-check"></i><b>5.8.1</b> Writing your own functions</a></li>
+</ul></li>
+<li class="chapter" data-level="5.9" data-path="basic-R.html"><a href="basic-R.html#quiting-r"><i class="fa fa-check"></i><b>5.9</b> Quiting R</a></li>
+<li class="chapter" data-level="5.10" data-path="basic-R.html"><a href="basic-R.html#links-and-further-reading"><i class="fa fa-check"></i><b>5.10</b> Links and Further Reading</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="vectors-in-R.html"><a href="vectors-in-R.html"><i class="fa fa-check"></i><b>6</b> A primer for working with vectors</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="vectors-in-R.html"><a href="vectors-in-R.html#preface-1"><i class="fa fa-check"></i><b>6.1</b> Preface</a></li>
+<li class="chapter" data-level="6.2" data-path="vectors-in-R.html"><a href="vectors-in-R.html#vocab"><i class="fa fa-check"></i><b>6.2</b> Vocab</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>7</b> Functions</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="functions.html"><a href="functions.html#vectors-in-r"><i class="fa fa-check"></i><b>7.1</b> Vectors in R</a></li>
+<li class="chapter" data-level="7.2" data-path="functions.html"><a href="functions.html#math-on-vectors"><i class="fa fa-check"></i><b>7.2</b> Math on vectors</a></li>
+<li class="chapter" data-level="7.3" data-path="functions.html"><a href="functions.html#functions-on-vectors"><i class="fa fa-check"></i><b>7.3</b> Functions on vectors</a></li>
+<li class="chapter" data-level="7.4" data-path="functions.html"><a href="functions.html#operations-with-two-vectors"><i class="fa fa-check"></i><b>7.4</b> Operations with two vectors</a></li>
+<li class="chapter" data-level="7.5" data-path="functions.html"><a href="functions.html#subsetting-vectors"><i class="fa fa-check"></i><b>7.5</b> Subsetting vectors</a></li>
+<li class="chapter" data-level="7.6" data-path="functions.html"><a href="functions.html#sequences-of-numbers"><i class="fa fa-check"></i><b>7.6</b> Sequences of numbers</a></li>
+<li class="chapter" data-level="7.7" data-path="functions.html"><a href="functions.html#vectors-can-hold-numeric-or-character-data"><i class="fa fa-check"></i><b>7.7</b> Vectors can hold numeric or character data</a></li>
+<li class="chapter" data-level="7.8" data-path="functions.html"><a href="functions.html#regular-expressions-can-modify-character-data"><i class="fa fa-check"></i><b>7.8</b> Regular expressions can modify character data</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="plotting-vectors.html"><a href="plotting-vectors.html"><i class="fa fa-check"></i><b>8</b> Plotting vectors in base R</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="plotting-vectors.html"><a href="plotting-vectors.html#preface-2"><i class="fa fa-check"></i><b>8.1</b> Preface</a></li>
+<li class="chapter" data-level="8.2" data-path="plotting-vectors.html"><a href="plotting-vectors.html#plotting-numeric-data"><i class="fa fa-check"></i><b>8.2</b> Plotting numeric data</a></li>
+<li class="chapter" data-level="8.3" data-path="plotting-vectors.html"><a href="plotting-vectors.html#other-plotting-packages"><i class="fa fa-check"></i><b>8.3</b> Other plotting packages</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="R-objects.html"><a href="R-objects.html"><i class="fa fa-check"></i><b>9</b> Intro to R objects</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="R-objects.html"><a href="R-objects.html#commands-used"><i class="fa fa-check"></i><b>9.1</b> Commands used</a></li>
+<li class="chapter" data-level="9.2" data-path="R-objects.html"><a href="R-objects.html#r-objects"><i class="fa fa-check"></i><b>9.2</b> R Objects</a></li>
+<li class="chapter" data-level="9.3" data-path="R-objects.html"><a href="R-objects.html#differences-between-objects"><i class="fa fa-check"></i><b>9.3</b> Differences between objects</a></li>
+<li class="chapter" data-level="9.4" data-path="R-objects.html"><a href="R-objects.html#the-data"><i class="fa fa-check"></i><b>9.4</b> The Data</a></li>
+<li class="chapter" data-level="9.5" data-path="R-objects.html"><a href="R-objects.html#the-assignment-operator---makes-object"><i class="fa fa-check"></i><b>9.5</b> The assignment operator “&lt;-” makes object</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="R-objects.html"><a href="R-objects.html#is"><i class="fa fa-check"></i><b>9.5.1</b> is()</a></li>
+<li class="chapter" data-level="9.5.2" data-path="R-objects.html"><a href="R-objects.html#length"><i class="fa fa-check"></i><b>9.5.2</b> length()</a></li>
+<li class="chapter" data-level="9.5.3" data-path="R-objects.html"><a href="R-objects.html#str"><i class="fa fa-check"></i><b>9.5.3</b> str()</a></li>
+<li class="chapter" data-level="9.5.4" data-path="R-objects.html"><a href="R-objects.html#c"><i class="fa fa-check"></i><b>9.5.4</b> c()</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="R-objects.html"><a href="R-objects.html#debrief"><i class="fa fa-check"></i><b>9.6</b> Debrief</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="nucleic-acids-review.html"><a href="nucleic-acids-review.html"><i class="fa fa-check"></i><b>10</b> Nucleic Acids</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="nucleic-acids-review.html"><a href="nucleic-acids-review.html#dna-and-rna"><i class="fa fa-check"></i><b>10.1</b> DNA and RNA</a></li>
+<li class="chapter" data-level="10.2" data-path="nucleic-acids-review.html"><a href="nucleic-acids-review.html#dna-double-helix-structure"><i class="fa fa-check"></i><b>10.2</b> DNA Double-Helix Structure</a></li>
+<li class="chapter" data-level="10.3" data-path="nucleic-acids-review.html"><a href="nucleic-acids-review.html#rna"><i class="fa fa-check"></i><b>10.3</b> RNA</a></li>
+<li class="chapter" data-level="10.4" data-path="nucleic-acids-review.html"><a href="nucleic-acids-review.html#summary"><i class="fa fa-check"></i><b>10.4</b> Summary</a></li>
+<li class="chapter" data-level="10.5" data-path="nucleic-acids-review.html"><a href="nucleic-acids-review.html#analysis-questions"><i class="fa fa-check"></i><b>10.5</b> Analysis Questions</a></li>
+<li class="chapter" data-level="10.6" data-path="nucleic-acids-review.html"><a href="nucleic-acids-review.html#glossary"><i class="fa fa-check"></i><b>10.6</b> Glossary</a></li>
+<li class="chapter" data-level="10.7" data-path="nucleic-acids-review.html"><a href="nucleic-acids-review.html#contributors-and-attributions"><i class="fa fa-check"></i><b>10.7</b> Contributors and Attributions</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="proteins-review.html"><a href="proteins-review.html"><i class="fa fa-check"></i><b>11</b> Proteins</a>
+<ul>
+<li class="chapter" data-level="11.0.1" data-path="proteins-review.html"><a href="proteins-review.html#skills-to-develop"><i class="fa fa-check"></i><b>11.0.1</b> Skills to develop:</a></li>
+<li class="chapter" data-level="11.1" data-path="proteins-review.html"><a href="proteins-review.html#types-and-functions-of-proteins"><i class="fa fa-check"></i><b>11.1</b> Types and Functions of Proteins</a></li>
+<li class="chapter" data-level="11.2" data-path="proteins-review.html"><a href="proteins-review.html#amino-acids"><i class="fa fa-check"></i><b>11.2</b> Amino Acids</a></li>
+<li class="chapter" data-level="11.3" data-path="proteins-review.html"><a href="proteins-review.html#evolution-connection"><i class="fa fa-check"></i><b>11.3</b> Evolution Connection:</a></li>
+<li class="chapter" data-level="11.4" data-path="proteins-review.html"><a href="proteins-review.html#protein-structure"><i class="fa fa-check"></i><b>11.4</b> Protein Structure</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="proteins-review.html"><a href="proteins-review.html#primary-structure"><i class="fa fa-check"></i><b>11.4.1</b> Primary Structure</a></li>
+<li class="chapter" data-level="11.4.2" data-path="proteins-review.html"><a href="proteins-review.html#secondary-structure"><i class="fa fa-check"></i><b>11.4.2</b> Secondary Structure</a></li>
+<li class="chapter" data-level="11.4.3" data-path="proteins-review.html"><a href="proteins-review.html#tertiary-structure"><i class="fa fa-check"></i><b>11.4.3</b> Tertiary Structure</a></li>
+<li class="chapter" data-level="11.4.4" data-path="proteins-review.html"><a href="proteins-review.html#quaternary-structure"><i class="fa fa-check"></i><b>11.4.4</b> Quaternary Structure</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="proteins-review.html"><a href="proteins-review.html#denaturation-and-protein-folding"><i class="fa fa-check"></i><b>11.5</b> Denaturation and Protein Folding</a></li>
+<li class="chapter" data-level="11.6" data-path="proteins-review.html"><a href="proteins-review.html#summary-1"><i class="fa fa-check"></i><b>11.6</b> Summary</a></li>
+<li class="chapter" data-level="11.7" data-path="proteins-review.html"><a href="proteins-review.html#art-connections"><i class="fa fa-check"></i><b>11.7</b> Art Connections</a></li>
+<li class="chapter" data-level="11.8" data-path="proteins-review.html"><a href="proteins-review.html#review-questions"><i class="fa fa-check"></i><b>11.8</b> Review Questions</a></li>
+<li class="chapter" data-level="11.9" data-path="proteins-review.html"><a href="proteins-review.html#free-response"><i class="fa fa-check"></i><b>11.9</b> Free Response</a></li>
+<li class="chapter" data-level="11.10" data-path="proteins-review.html"><a href="proteins-review.html#glossary-1"><i class="fa fa-check"></i><b>11.10</b> Glossary</a></li>
+<li class="chapter" data-level="11.11" data-path="proteins-review.html"><a href="proteins-review.html#contributors-and-attributions-1"><i class="fa fa-check"></i><b>11.11</b> Contributors and Attributions</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html"><i class="fa fa-check"></i><b>12</b> NCBI: The National Center for Biotechnology Information</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#key-concepts"><i class="fa fa-check"></i><b>12.1</b> Key concepts</a></li>
+<li class="chapter" data-level="12.2" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#ncbi"><i class="fa fa-check"></i><b>12.2</b> NCBI</a></li>
+<li class="chapter" data-level="12.3" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#genbank-sequence-database"><i class="fa fa-check"></i><b>12.3</b> GenBank sequence database</a></li>
+<li class="chapter" data-level="12.4" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#pubmed-and-pubmed-central-article-database"><i class="fa fa-check"></i><b>12.4</b> PubMed and PubMed Central article database</a></li>
+<li class="chapter" data-level="12.5" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#entrez"><i class="fa fa-check"></i><b>12.5</b> Entrez</a></li>
+<li class="chapter" data-level="12.6" data-path="ncbi-the-national-center-for-biotechnology-information.html"><a href="ncbi-the-national-center-for-biotechnology-information.html#blast"><i class="fa fa-check"></i><b>12.6</b> BLAST</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html"><i class="fa fa-check"></i><b>13</b> Introduction to biological sequences databases</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#topics"><i class="fa fa-check"></i><b>13.1</b> Topics</a></li>
+<li class="chapter" data-level="13.2" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#introduction"><i class="fa fa-check"></i><b>13.2</b> Introduction</a></li>
+<li class="chapter" data-level="13.3" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#biological-sequence-databases"><i class="fa fa-check"></i><b>13.3</b> Biological sequence databases</a></li>
+<li class="chapter" data-level="13.4" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#the-ncbi-sequence-database"><i class="fa fa-check"></i><b>13.4</b> The NCBI Sequence Database</a></li>
+<li class="chapter" data-level="13.5" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#the-ncbi-sub-databases"><i class="fa fa-check"></i><b>13.5</b> The NCBI Sub-Databases</a></li>
+<li class="chapter" data-level="13.6" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#ncbi-genbank-record-format"><i class="fa fa-check"></i><b>13.6</b> NCBI GenBank Record Format</a></li>
+<li class="chapter" data-level="13.7" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#the-fasta-file-format"><i class="fa fa-check"></i><b>13.7</b> The FASTA file format</a></li>
+<li class="chapter" data-level="13.8" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#refseq"><i class="fa fa-check"></i><b>13.8</b> RefSeq</a></li>
+<li class="chapter" data-level="13.9" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#querying-the-ncbi-database"><i class="fa fa-check"></i><b>13.9</b> Querying the NCBI Database</a></li>
+<li class="chapter" data-level="13.10" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#querying-the-ncbi-database-via-the-ncbi-website-for-reference"><i class="fa fa-check"></i><b>13.10</b> Querying the NCBI Database via the NCBI Website (for reference)</a></li>
+<li class="chapter" data-level="13.11" data-path="introduction-to-biological-sequences-databases.html"><a href="introduction-to-biological-sequences-databases.html#example-finding-the-sequences-published-in-nature-460352-358-for-reference"><i class="fa fa-check"></i><b>13.11</b> Example: finding the sequences published in Nature 460:352-358 (for reference)</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="downloading-ncbi-sequence-data-by-hand.html"><a href="downloading-ncbi-sequence-data-by-hand.html"><i class="fa fa-check"></i><b>14</b> Downloading NCBI sequence data by hand</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="downloading-ncbi-sequence-data-by-hand.html"><a href="downloading-ncbi-sequence-data-by-hand.html#preface-3"><i class="fa fa-check"></i><b>14.1</b> Preface</a></li>
+<li class="chapter" data-level="14.2" data-path="downloading-ncbi-sequence-data-by-hand.html"><a href="downloading-ncbi-sequence-data-by-hand.html#retrieving-genome-sequence-data-via-the-ncbi-website"><i class="fa fa-check"></i><b>14.2</b> Retrieving genome sequence data via the NCBI website</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html"><i class="fa fa-check"></i><b>15</b> Downloading sequences from UniProt by hand</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#vocab-1"><i class="fa fa-check"></i><b>15.1</b> Vocab</a></li>
+<li class="chapter" data-level="15.2" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#downloading-protein-data-from-uniprot"><i class="fa fa-check"></i><b>15.2</b> Downloading Protein data from UniProt</a></li>
+<li class="chapter" data-level="15.3" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#viewing-the-uniprot-webpage-for-a-protein-sequence"><i class="fa fa-check"></i><b>15.3</b> Viewing the UniProt webpage for a protein sequence</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#protein-function"><i class="fa fa-check"></i><b>15.3.1</b> Protein function</a></li>
+<li class="chapter" data-level="15.3.2" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#protein-sequence-and-size"><i class="fa fa-check"></i><b>15.3.2</b> Protein sequence and size</a></li>
+<li class="chapter" data-level="15.3.3" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#other-information"><i class="fa fa-check"></i><b>15.3.3</b> Other information</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="downloading-sequences-from-uniprot-by-hand.html"><a href="downloading-sequences-from-uniprot-by-hand.html#retrieving-a-uniprot-protein-sequence-via-the-uniprot-website"><i class="fa fa-check"></i><b>15.4</b> Retrieving a UniProt protein sequence via the UniProt website</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="introducingFASTA.html"><a href="introducingFASTA.html"><i class="fa fa-check"></i><b>16</b> Introducing FASTA Files</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="introducingFASTA.html"><a href="introducingFASTA.html#example-fasta-file"><i class="fa fa-check"></i><b>16.1</b> Example FASTA file</a></li>
+<li class="chapter" data-level="16.2" data-path="introducingFASTA.html"><a href="introducingFASTA.html#multiple-sequences-in-a-single-fasta-file"><i class="fa fa-check"></i><b>16.2</b> Multiple sequences in a single FASTA file</a></li>
+<li class="chapter" data-level="16.3" data-path="introducingFASTA.html"><a href="introducingFASTA.html#multiple-sequence-alignments-can-be-stored-in-fasta-format"><i class="fa fa-check"></i><b>16.3</b> Multiple sequence alignments can be stored in FASTA format</a></li>
+<li class="chapter" data-level="16.4" data-path="introducingFASTA.html"><a href="introducingFASTA.html#fastq-format"><i class="fa fa-check"></i><b>16.4</b> FASTQ Format</a></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="a-complete-bioinformatics-workflow-in-r.html"><a href="a-complete-bioinformatics-workflow-in-r.html"><i class="fa fa-check"></i><b>17</b> A complete bioinformatics workflow in R</a></li>
+<li class="chapter" data-level="18" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html"><i class="fa fa-check"></i><b>18</b> “Worked example: Building a phylogeny in R”</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#introduction-1"><i class="fa fa-check"></i><b>18.1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#vocab-2"><i class="fa fa-check"></i><b>18.1.1</b> Vocab</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#software-preliminaires"><i class="fa fa-check"></i><b>18.2</b> Software Preliminaires</a>
+<ul>
+<li class="chapter" data-level="18.2.1" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#r-functions-1"><i class="fa fa-check"></i><b>18.2.1</b> R functions</a></li>
+<li class="chapter" data-level="18.2.2" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#download-necessary-packages"><i class="fa fa-check"></i><b>18.2.2</b> Download necessary packages</a></li>
+<li class="chapter" data-level="18.2.3" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#load-packages-into-memory"><i class="fa fa-check"></i><b>18.2.3</b> Load packages into memory</a></li>
+</ul></li>
+<li class="chapter" data-level="18.3" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#downloading-macro-molecular-sequences"><i class="fa fa-check"></i><b>18.3</b> Downloading macro-molecular sequences</a></li>
+<li class="chapter" data-level="18.4" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#prepping-macromolecular-sequences"><i class="fa fa-check"></i><b>18.4</b> Prepping macromolecular sequences</a></li>
+<li class="chapter" data-level="18.5" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#aligning-sequences"><i class="fa fa-check"></i><b>18.5</b> Aligning sequences</a></li>
+<li class="chapter" data-level="18.6" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#the-shroom-family-of-genes"><i class="fa fa-check"></i><b>18.6</b> The shroom family of genes</a></li>
+<li class="chapter" data-level="18.7" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#downloading-multiple-sequences"><i class="fa fa-check"></i><b>18.7</b> Downloading multiple sequences</a></li>
+<li class="chapter" data-level="18.8" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#multiple-sequence-alignment"><i class="fa fa-check"></i><b>18.8</b> Multiple sequence alignment</a>
+<ul>
+<li class="chapter" data-level="18.8.1" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#building-an-multiple-sequence-alignment-msa"><i class="fa fa-check"></i><b>18.8.1</b> Building an Multiple Sequence Alignment (MSA)</a></li>
+<li class="chapter" data-level="18.8.2" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#viewing-an-msa"><i class="fa fa-check"></i><b>18.8.2</b> Viewing an MSA</a></li>
+</ul></li>
+<li class="chapter" data-level="18.9" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#a-subset-of-sequences"><i class="fa fa-check"></i><b>18.9</b> A subset of sequences</a></li>
+<li class="chapter" data-level="18.10" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#genetic-distances-of-sequence-in-subset"><i class="fa fa-check"></i><b>18.10</b> Genetic distances of sequence in subset</a></li>
+<li class="chapter" data-level="18.11" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#phylognetic-trees-of-subset-sequences-finally"><i class="fa fa-check"></i><b>18.11</b> Phylognetic trees of subset sequences (finally!)</a>
+<ul>
+<li class="chapter" data-level="18.11.1" data-path="worked-example-building-a-phylogeny-in-r.html"><a href="worked-example-building-a-phylogeny-in-r.html#plotting-phylogenetic-trees"><i class="fa fa-check"></i><b>18.11.1</b> Plotting phylogenetic trees</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="simple-for-loop-example.html"><a href="simple-for-loop-example.html"><i class="fa fa-check"></i><b>19</b> Simple for() loop example</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="simple-for-loop-example.html"><a href="simple-for-loop-example.html#key-functions-terms"><i class="fa fa-check"></i><b>19.1</b> Key functions / terms</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="phylogenetic-tree-example-using-neighbor-joining.html"><a href="phylogenetic-tree-example-using-neighbor-joining.html"><i class="fa fa-check"></i><b>20</b> Phylogenetic tree example using neighbor joining</a>
+<ul>
+<li class="chapter" data-level="20.1" data-path="phylogenetic-tree-example-using-neighbor-joining.html"><a href="phylogenetic-tree-example-using-neighbor-joining.html#key-vocab-concepts-not-exhaustive"><i class="fa fa-check"></i><b>20.1</b> Key vocab / concepts (not exhaustive)</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html"><i class="fa fa-check"></i><b>21</b> Downloading DNA sequences as FASTA files in R</a>
+<ul>
+<li class="chapter" data-level="21.0.1" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#functions-1"><i class="fa fa-check"></i><b>21.0.1</b> Functions</a></li>
+<li class="chapter" data-level="21.0.2" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#softwarewebsites"><i class="fa fa-check"></i><b>21.0.2</b> Software/websites</a></li>
+<li class="chapter" data-level="21.0.3" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#r-vocabulary"><i class="fa fa-check"></i><b>21.0.3</b> R vocabulary</a></li>
+<li class="chapter" data-level="21.0.4" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#file-types"><i class="fa fa-check"></i><b>21.0.4</b> File types</a></li>
+<li class="chapter" data-level="21.0.5" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#bioinformatics-vocabulary"><i class="fa fa-check"></i><b>21.0.5</b> Bioinformatics vocabulary</a></li>
+<li class="chapter" data-level="21.1" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#learning-objectives"><i class="fa fa-check"></i><b>21.1</b> Learning objectives</a>
+<ul>
+<li class="chapter" data-level="21.1.1" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#organisms-and-sequence-accessions"><i class="fa fa-check"></i><b>21.1.1</b> Organisms and Sequence accessions</a></li>
+<li class="chapter" data-level="21.1.2" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#preliminaries"><i class="fa fa-check"></i><b>21.1.2</b> Preliminaries</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#dna-sequence-statistics-part-1"><i class="fa fa-check"></i><b>21.2</b> DNA Sequence Statistics: Part 1</a>
+<ul>
+<li class="chapter" data-level="21.2.1" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#using-r-for-bioinformatics"><i class="fa fa-check"></i><b>21.2.1</b> Using R for Bioinformatics</a></li>
+<li class="chapter" data-level="21.2.2" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#r-packages-for-bioinformatics-bioconductor-and-seqinr"><i class="fa fa-check"></i><b>21.2.2</b> R packages for bioinformatics: Bioconductor and SeqinR</a></li>
+<li class="chapter" data-level="21.2.3" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#fasta-file-format"><i class="fa fa-check"></i><b>21.2.3</b> FASTA file format</a></li>
+<li class="chapter" data-level="21.2.4" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#the-ncbi-sequence-database-1"><i class="fa fa-check"></i><b>21.2.4</b> The NCBI sequence database</a></li>
+<li class="chapter" data-level="21.2.5" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#retrieving-genome-sequence-data-using-rentrez"><i class="fa fa-check"></i><b>21.2.5</b> Retrieving genome sequence data using rentrez</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#saving-fasta-files"><i class="fa fa-check"></i><b>21.3</b> Saving FASTA files</a></li>
+<li class="chapter" data-level="21.4" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#next-steps"><i class="fa fa-check"></i><b>21.4</b> Next steps</a></li>
+<li class="chapter" data-level="21.5" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#exercises"><i class="fa fa-check"></i><b>21.5</b> Exercises</a></li>
+<li class="chapter" data-level="21.6" data-path="download-FASTA-inR.html"><a href="download-FASTA-inR.html#review-questions-1"><i class="fa fa-check"></i><b>21.6</b> Review questions</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="cleaning-and-preparing-fasta-files-for-analysis-in-r.html"><a href="cleaning-and-preparing-fasta-files-for-analysis-in-r.html"><i class="fa fa-check"></i><b>22</b> Cleaning and preparing FASTA files for analysis in R</a>
+<ul>
+<li class="chapter" data-level="22.1" data-path="cleaning-and-preparing-fasta-files-for-analysis-in-r.html"><a href="cleaning-and-preparing-fasta-files-for-analysis-in-r.html#preliminaries-1"><i class="fa fa-check"></i><b>22.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="22.2" data-path="cleaning-and-preparing-fasta-files-for-analysis-in-r.html"><a href="cleaning-and-preparing-fasta-files-for-analysis-in-r.html#convert-fasta-sequence-to-an-r-variable"><i class="fa fa-check"></i><b>22.2</b> Convert FASTA sequence to an R variable</a>
+<ul>
+<li class="chapter" data-level="22.2.1" data-path="cleaning-and-preparing-fasta-files-for-analysis-in-r.html"><a href="cleaning-and-preparing-fasta-files-for-analysis-in-r.html#removing-unwanted-characters"><i class="fa fa-check"></i><b>22.2.1</b> Removing unwanted characters</a></li>
+<li class="chapter" data-level="22.2.2" data-path="cleaning-and-preparing-fasta-files-for-analysis-in-r.html"><a href="cleaning-and-preparing-fasta-files-for-analysis-in-r.html#spliting-unbroken-strings-in-character-vectors"><i class="fa fa-check"></i><b>22.2.2</b> Spliting unbroken strings in character vectors</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html"><i class="fa fa-check"></i><b>23</b> DNA descriptive statics - Part 1</a>
+<ul>
+<li class="chapter" data-level="23.1" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#preface-4"><i class="fa fa-check"></i><b>23.1</b> Preface</a></li>
+<li class="chapter" data-level="23.2" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#introduction-2"><i class="fa fa-check"></i><b>23.2</b> Introduction</a></li>
+<li class="chapter" data-level="23.3" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#vocabulary-1"><i class="fa fa-check"></i><b>23.3</b> Vocabulary</a></li>
+<li class="chapter" data-level="23.4" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#functions-2"><i class="fa fa-check"></i><b>23.4</b> Functions</a></li>
+<li class="chapter" data-level="23.5" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#learning-objectives-1"><i class="fa fa-check"></i><b>23.5</b> Learning objectives</a></li>
+<li class="chapter" data-level="23.6" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#preliminaries-2"><i class="fa fa-check"></i><b>23.6</b> Preliminaries</a></li>
+<li class="chapter" data-level="23.7" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#converting-dna-from-fasta-format"><i class="fa fa-check"></i><b>23.7</b> Converting DNA from FASTA format</a></li>
+<li class="chapter" data-level="23.8" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#length-of-a-dna-sequence"><i class="fa fa-check"></i><b>23.8</b> Length of a DNA sequence</a>
+<ul>
+<li class="chapter" data-level="23.8.1" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#base-composition-of-a-dna-sequence"><i class="fa fa-check"></i><b>23.8.1</b> Base composition of a DNA sequence</a></li>
+<li class="chapter" data-level="23.8.2" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#gc-content-of-dna"><i class="fa fa-check"></i><b>23.8.2</b> GC Content of DNA</a></li>
+<li class="chapter" data-level="23.8.3" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#dna-words"><i class="fa fa-check"></i><b>23.8.3</b> DNA words</a></li>
+<li class="chapter" data-level="23.8.4" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#summary-2"><i class="fa fa-check"></i><b>23.8.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="23.9" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#acknowledgements"><i class="fa fa-check"></i><b>23.9</b> Acknowledgements</a>
+<ul>
+<li class="chapter" data-level="23.9.1" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#license"><i class="fa fa-check"></i><b>23.9.1</b> License</a></li>
+<li class="chapter" data-level="23.9.2" data-path="dna-descriptive-statics---part-1.html"><a href="dna-descriptive-statics---part-1.html#exercises-1"><i class="fa fa-check"></i><b>23.9.2</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#part-appendices"><i class="fa fa-check"></i>(PART) Appendices</a>
+<ul>
+<li><a href="#section"></a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="appendix-02-getting-access-to-r.html"><a href="appendix-02-getting-access-to-r.html"><i class="fa fa-check"></i>Appendix 02: Getting access to R</a>
+<ul>
+<li class="chapter" data-level="23.10" data-path="appendix-02-getting-access-to-r.html"><a href="appendix-02-getting-access-to-r.html#getting-started-with-r-and-rstudio"><i class="fa fa-check"></i><b>23.10</b> Getting Started With R and RStudio</a>
+<ul>
+<li class="chapter" data-level="23.10.1" data-path="appendix-02-getting-access-to-r.html"><a href="appendix-02-getting-access-to-r.html#rstudio-cloud"><i class="fa fa-check"></i><b>23.10.1</b> RStudio Cloud</a></li>
+<li class="chapter" data-level="23.10.2" data-path="appendix-02-getting-access-to-r.html"><a href="appendix-02-getting-access-to-r.html#getting-r-onto-your-own-computer"><i class="fa fa-check"></i><b>23.10.2</b> Getting R onto your own computer</a></li>
+<li class="chapter" data-level="23.10.3" data-path="appendix-02-getting-access-to-r.html"><a href="appendix-02-getting-access-to-r.html#getting-rstudio-onto-your-computer"><i class="fa fa-check"></i><b>23.10.3</b> Getting RStudio onto your computer</a></li>
+<li class="chapter" data-level="23.10.4" data-path="appendix-02-getting-access-to-r.html"><a href="appendix-02-getting-access-to-r.html#keep-r-and-rstudio-current"><i class="fa fa-check"></i><b>23.10.4</b> Keep R and RStudio current</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html"><i class="fa fa-check"></i>Getting started with R itself (or not)</a>
+<ul>
+<li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#vocabulary-2"><i class="fa fa-check"></i>Vocabulary</a></li>
+<li class="chapter" data-level="" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#r-commands"><i class="fa fa-check"></i>R commands</a></li>
+<li class="chapter" data-level="23.11" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#help"><i class="fa fa-check"></i><b>23.11</b> Help!</a>
+<ul>
+<li class="chapter" data-level="23.11.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-r"><i class="fa fa-check"></i><b>23.11.1</b> Getting “help” from R</a></li>
+<li class="chapter" data-level="23.11.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-the-internet"><i class="fa fa-check"></i><b>23.11.2</b> Getting help from the internet</a></li>
+<li class="chapter" data-level="23.11.3" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-online-forums"><i class="fa fa-check"></i><b>23.11.3</b> Getting help from online forums</a></li>
+<li class="chapter" data-level="23.11.4" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#getting-help-from-twitter"><i class="fa fa-check"></i><b>23.11.4</b> Getting help from twitter</a></li>
+</ul></li>
+<li class="chapter" data-level="23.12" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#other-features-of-rstudio"><i class="fa fa-check"></i><b>23.12</b> Other features of RStudio</a>
+<ul>
+<li class="chapter" data-level="23.12.1" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#ajusting-pane-the-layout"><i class="fa fa-check"></i><b>23.12.1</b> Ajusting pane the layout</a></li>
+<li class="chapter" data-level="23.12.2" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#adjusting-size-of-windows"><i class="fa fa-check"></i><b>23.12.2</b> Adjusting size of windows</a></li>
+</ul></li>
+<li class="chapter" data-level="23.13" data-path="getting-started-with-r-itself-or-not.html"><a href="getting-started-with-r-itself-or-not.html#practice-optional"><i class="fa fa-check"></i><b>23.13</b> Practice (OPTIONAL)</a></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="logarithms-in-r.html"><a href="logarithms-in-r.html"><i class="fa fa-check"></i><b>24</b> Logarithms in R</a></li>
+<li class="divider"></li>
+<li><a href="https://brouwern.github.io/lbrb/" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Little Book of R for Bioinformatics 2.0</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="simple-for-loop-example" class="section level1" number="19">
+<h1><span class="header-section-number">Chapter 19</span> Simple for() loop example</h1>
+<div id="key-functions-terms" class="section level2" number="19.1">
+<h2><span class="header-section-number">19.1</span> Key functions / terms</h2>
+<ul>
+<li>paste()</li>
+<li>functions to learn about vectors and other objects</li>
+<li>nchar()</li>
+<li>vector element</li>
+<li>bracket notation to access vector elements</li>
+<li>for() loop</li>
+<li>curly brackets { }</li>
+<li>function()</li>
+<li>class()</li>
+</ul>
+<p>Here’s a simple “toy” example of using four loops.</p>
+<p>Let’s say we need look AG different codons and need to vary the first base of a codon. For example, we want to look AG all the codons that are “XAG”, so we want</p>
+<p>AAG
+TAG
+CAG
+GAG</p>
+<p>We make a vector that holds the first base of the code</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="simple-for-loop-example.html#cb278-1" aria-hidden="true" tabindex="-1"></a><span class="co">#element 1   2   3   4</span></span>
+<span id="cb278-2"><a href="simple-for-loop-example.html#cb278-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;T&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;G&quot;</span>)</span></code></pre></div>
+<p>This is a vector with 4 elements. We can explore it using the usual functions that tell us about objects (aka variables) in R.</p>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="simple-for-loop-example.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is</span>(x)</span></code></pre></div>
+<pre><code>##  [1] &quot;character&quot;               &quot;vector&quot;                 
+##  [3] &quot;data.frameRowLabels&quot;     &quot;SuperClassMethod&quot;       
+##  [5] &quot;EnumerationValue&quot;        &quot;character_OR_connection&quot;
+##  [7] &quot;character_OR_NULL&quot;       &quot;atomic&quot;                 
+##  [9] &quot;vector_OR_Vector&quot;        &quot;vector_OR_factor&quot;</code></pre>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="simple-for-loop-example.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(x)</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="simple-for-loop-example.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(x)</span></code></pre></div>
+<pre><code>## [1] 1 1 1 1</code></pre>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="simple-for-loop-example.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(x)</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="simple-for-loop-example.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(x)</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="simple-for-loop-example.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(x)</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<p>If we need to know what a function does we should always look it up in the help file</p>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="simple-for-loop-example.html#cb291-1" aria-hidden="true" tabindex="-1"></a>?nchar</span></code></pre></div>
+<p>Note that when we call the function nchar() on x we get</p>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="simple-for-loop-example.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(x)</span></code></pre></div>
+<pre><code>## [1] 1 1 1 1</code></pre>
+<p>This means that each element of x has one character in it.</p>
+<p>Compare that result with this. Let’s make a vector with a single codon in it.</p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="simple-for-loop-example.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="co">#element   1</span></span>
+<span id="cb294-2"><a href="simple-for-loop-example.html#cb294-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AGC&quot;</span>)</span></code></pre></div>
+<p>Now nchar() says this</p>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="simple-for-loop-example.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(y)</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p>That is, 3 character (3 letters) in the first and only element of the vectors.</p>
+<p>If our vector contained codons, it would look like this</p>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="simple-for-loop-example.html#cb297-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;AAG&quot;</span>, <span class="st">&quot;TAG&quot;</span>, <span class="st">&quot;CAG&quot;</span>, <span class="st">&quot;GAG&quot;</span>)</span>
+<span id="cb297-2"><a href="simple-for-loop-example.html#cb297-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nchar</span>(y)</span></code></pre></div>
+<pre><code>## [1] 3 3 3 3</code></pre>
+<p>That is, four elements in the vector, each element with 3 characters in it.</p>
+<p>Let’s say we are keeping the second and third position of our codon fixed AG “AG” and will vary the first position. A function that will be handy is paste().</p>
+<p>Paste takes things and combines them into a single element of a vector. So, I can do this with my name</p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="simple-for-loop-example.html#cb299-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Nathan&quot;</span>,<span class="st">&quot;Linn&quot;</span>,<span class="st">&quot;Brouwer&quot;</span>)</span></code></pre></div>
+<p>This gives me a vector of length 1</p>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="simple-for-loop-example.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(n)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>That contains my name</p>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="simple-for-loop-example.html#cb302-1" aria-hidden="true" tabindex="-1"></a>n</span></code></pre></div>
+<pre><code>## [1] &quot;Nathan Linn Brouwer&quot;</code></pre>
+<p>If I don’t want any spaces I can do this</p>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="simple-for-loop-example.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;NAGhan&quot;</span>,<span class="st">&quot;Linn&quot;</span>,<span class="st">&quot;Brouwer&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;NAGhanLinnBrouwer&quot;</code></pre>
+<p>I can use paste() to assembly codons for me</p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="simple-for-loop-example.html#cb306-1" aria-hidden="true" tabindex="-1"></a>codon1 <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;AG&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb306-2"><a href="simple-for-loop-example.html#cb306-2" aria-hidden="true" tabindex="-1"></a>codon1</span></code></pre></div>
+<pre><code>## [1] &quot;AAG&quot;</code></pre>
+<p>I can make all for possible codon that end in “AG” like this</p>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="simple-for-loop-example.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;AG&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;AAG&quot;</code></pre>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="simple-for-loop-example.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;AG&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;TAG&quot;</code></pre>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="simple-for-loop-example.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;AG&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;CAG&quot;</code></pre>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="simple-for-loop-example.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">&quot;G&quot;</span>, <span class="st">&quot;AG&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;GAG&quot;</code></pre>
+<p>Since I have a vector with the first base I’m varying in it, I can also do this using bracket notation, with x[1], x[2], etc.</p>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="simple-for-loop-example.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(x[<span class="dv">1</span>], <span class="st">&quot;AG&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;AAG&quot;</code></pre>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="simple-for-loop-example.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(x[<span class="dv">2</span>], <span class="st">&quot;AG&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;TAG&quot;</code></pre>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="simple-for-loop-example.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(x[<span class="dv">3</span>], <span class="st">&quot;AG&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;CAG&quot;</code></pre>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="simple-for-loop-example.html#cb322-1" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(x[<span class="dv">4</span>], <span class="st">&quot;AG&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;GAG&quot;</code></pre>
+<p>Copying the same line of code multiple times gets the job done but will be prone to errors. Anytime the same process gets repeated you should consider using for() loops and/or functions. I can take the four lines of code in the previous chunk and turn it into a four loop like this.</p>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="simple-for-loop-example.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(x)){</span>
+<span id="cb324-2"><a href="simple-for-loop-example.html#cb324-2" aria-hidden="true" tabindex="-1"></a>  codon <span class="ot">&lt;-</span> <span class="fu">paste</span>(x[i],<span class="st">&quot;AG&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb324-3"><a href="simple-for-loop-example.html#cb324-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(codon)</span>
+<span id="cb324-4"><a href="simple-for-loop-example.html#cb324-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>## [1] &quot;AAG&quot;
+## [1] &quot;TAG&quot;
+## [1] &quot;CAG&quot;
+## [1] &quot;GAG&quot;</code></pre>
+<p>All for loops start with for(…). Don’t worry about what’s in between the parentheses right now. Then there’s a curly bracket {, some code thAG does whAG we want, and a closing curly bracket }.</p>
+<p>This is a “toy” example and doesn’t accomplish much - my four loop has as many lines of code as the stuff it replaces. But if I have to do something dozens, hundreds, or thousands of times then its very useful to use for() loops.</p>
+<p>Functions also allow you to take a process and consolidated it. Often, functions contain for loops in them. For example, I can consolidated the for() loop into a function like this.</p>
+<p>First, I define a function called for_loop_function()</p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="simple-for-loop-example.html#cb326-1" aria-hidden="true" tabindex="-1"></a>for_loop_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb326-2"><a href="simple-for-loop-example.html#cb326-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(x)){</span>
+<span id="cb326-3"><a href="simple-for-loop-example.html#cb326-3" aria-hidden="true" tabindex="-1"></a>  codon <span class="ot">&lt;-</span> <span class="fu">paste</span>(x[i],<span class="st">&quot;AG&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb326-4"><a href="simple-for-loop-example.html#cb326-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(codon)</span>
+<span id="cb326-5"><a href="simple-for-loop-example.html#cb326-5" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb326-6"><a href="simple-for-loop-example.html#cb326-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>All function definitions start with function(…), have a curly bracket {, some code, and end with a }. Functions often don’t have for loops, but in this case it does, so there are two sets of curly brackets, one for the for() loop and one for the function wrapping around it.</p>
+<p>So now I can get the results I did before like this</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="simple-for-loop-example.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="fu">for_loop_function</span>(x)</span></code></pre></div>
+<pre><code>## [1] &quot;AAG&quot;
+## [1] &quot;TAG&quot;
+## [1] &quot;CAG&quot;
+## [1] &quot;GAG&quot;</code></pre>
+<p>This is handy if I’m going to modify or reuse the process I’m doing. Let’s say I want to work with RNA instead of DNA. I’ll define a vector like this with U as the second element of the vector instead of T</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="simple-for-loop-example.html#cb329-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;U&quot;</span> ,<span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>)</span>
+<span id="cb329-2"><a href="simple-for-loop-example.html#cb329-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb329-3"><a href="simple-for-loop-example.html#cb329-3" aria-hidden="true" tabindex="-1"></a>x1[<span class="dv">2</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;U&quot;</code></pre>
+<p>Now I can get my results for RNA</p>
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="simple-for-loop-example.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="fu">for_loop_function</span>(x1)</span></code></pre></div>
+<pre><code>## [1] &quot;AAG&quot;
+## [1] &quot;UAG&quot;
+## [1] &quot;CAG&quot;
+## [1] &quot;GAG&quot;</code></pre>
+<p>Note that because everything in R is an object, I can learn about objects containing functions like this</p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="simple-for-loop-example.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is</span>(for_loop_function)</span></code></pre></div>
+<pre><code>## [1] &quot;function&quot;               &quot;OptionalFunction&quot;       &quot;PossibleMethod&quot;        
+## [4] &quot;expression_OR_function&quot;</code></pre>
+<p>The first element of the output tells me that this is a function object.,</p>
+<p>More succinctly I can use the class() function</p>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="simple-for-loop-example.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(for_loop_function)</span></code></pre></div>
+<pre><code>## [1] &quot;function&quot;</code></pre>
+<p>Here’s an example of another function. Note the key elements:
+The function name: entrez_fetch_list
+The assignment operator &lt;-
+The function() function
+The brackets</p>
+<p>In this case, there’s also a for() loop in this function.</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="simple-for-loop-example.html#cb337-1" aria-hidden="true" tabindex="-1"></a>entrez_fetch_list <span class="ot">&lt;-</span> <span class="cf">function</span>(db, id, rettype, ...){</span>
+<span id="cb337-2"><a href="simple-for-loop-example.html#cb337-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb337-3"><a href="simple-for-loop-example.html#cb337-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#setup list for storing output</span></span>
+<span id="cb337-4"><a href="simple-for-loop-example.html#cb337-4" aria-hidden="true" tabindex="-1"></a>  n.seq <span class="ot">&lt;-</span> <span class="fu">length</span>(id)</span>
+<span id="cb337-5"><a href="simple-for-loop-example.html#cb337-5" aria-hidden="true" tabindex="-1"></a>  list.output <span class="ot">&lt;-</span> <span class="fu">as.list</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, n.seq))</span>
+<span id="cb337-6"><a href="simple-for-loop-example.html#cb337-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(list.output) <span class="ot">&lt;-</span> id</span>
+<span id="cb337-7"><a href="simple-for-loop-example.html#cb337-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb337-8"><a href="simple-for-loop-example.html#cb337-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># get output</span></span>
+<span id="cb337-9"><a href="simple-for-loop-example.html#cb337-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(id)){</span>
+<span id="cb337-10"><a href="simple-for-loop-example.html#cb337-10" aria-hidden="true" tabindex="-1"></a>    list.output[[i]] <span class="ot">&lt;-</span> rentrez<span class="sc">::</span><span class="fu">entrez_fetch</span>(<span class="at">db =</span> db,</span>
+<span id="cb337-11"><a href="simple-for-loop-example.html#cb337-11" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">id =</span> id[i],</span>
+<span id="cb337-12"><a href="simple-for-loop-example.html#cb337-12" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">rettype =</span> rettype)</span>
+<span id="cb337-13"><a href="simple-for-loop-example.html#cb337-13" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb337-14"><a href="simple-for-loop-example.html#cb337-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb337-15"><a href="simple-for-loop-example.html#cb337-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(list.output)</span>
+<span id="cb337-16"><a href="simple-for-loop-example.html#cb337-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="worked-example-building-a-phylogeny-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="phylogenetic-tree-example-using-neighbor-joining.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/brouwern/lbrb/edit/master/005-MSA/24-forloop_notes_intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/brouwern/lbrb/blob/master/005-MSA/24-forloop_notes_intro.Rmd",
+"text": null
+},
+"download": ["lbrb.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,3 +1,7 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
 # Phylogenetic tree example using neighbor joining
 
 ## Key vocab / concepts (not exhaustive)
@@ -94,7 +98,7 @@ The nj help file also has another example based on data from mice that comes fro
 
 We can learn more about the data using ?woodmouse
 
-```{r}
+```{r, echo = F}
 ?woodmouse
 ```
 
@@ -132,7 +136,7 @@ Note that in this case, the lower triangular portion of the matrix is shown, the
 In order to build the tree we have to turn the DNAbin object into this matrix.  The most transparent way to do this is like this
 
 ```{r}
-mouse_M  <- nj(dist.dna(woodmouse))
+mouse_M  <- dist.dna(woodmouse)
 
 ```
 

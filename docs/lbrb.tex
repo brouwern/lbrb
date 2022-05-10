@@ -37,7 +37,7 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={A Little Book of R for Bioinformatics 2.0},
-  pdfauthor={Avirl Coghlan, with contributions by Nathan L. Brouwer},
+  pdfauthor={Avril Coghlan, with contributions by Nathan L. Brouwer},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -84,8 +84,8 @@
 \bibliographystyle{apalike}
 
 \title{A Little Book of R for Bioinformatics 2.0}
-\author{Avirl Coghlan, with contributions by Nathan L. Brouwer}
-\date{2021-09-18}
+\author{Avril Coghlan, with contributions by Nathan L. Brouwer}
+\date{2022-05-10}
 
 \begin{document}
 \maketitle
@@ -100,7 +100,7 @@
 
 Welcome to \emph{A Little Book of R for Bioinformatics 2.0}!.
 
-This book is based on the original \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/}{\emph{A Little Book of R for Bioinformatics}} by Dr.~Avril Coghlan (Hereafter ``ALBRB 1.0''). Dr.~Coghlan's book was one of the first and most thorough introductions to using \emph{R} for bioinformatics and computational biology, and was generously published under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}. In addition to describing how to do bioinformatics in R, Coghlan provided numerous functions to facilitate important tasks, practice questions, and references to further reading.
+This book is based on the original \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/}{\emph{A Little Book of R for Bioinformatics}} by Dr.~Avril Coghlan (Hereafter ``ALBRB 1.0''). Dr.~Coghlan's book was one of the first and most thorough introductions to using \emph{R} for bioinformatics and computational biology, and was generously published under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}. In addition to describing how to do bioinformatics in R, Coghlan provided numerous \passthrough{\lstinline!R!} functions to facilitate important tasks, practice questions, and references to further reading.
 
 \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/}{ALBRB 1.0} was extremely useful to me when I was learning bioinformatics and computational biology. In this version of the book, which I'll refer to as \textbf{ALBRB 2.0}, I have adapted Dr.~Coghlan's original book to suit my own teaching needs, updated it with current packages now available in R, added background materials from other open-access sources, and added in my original materials.
 
@@ -118,7 +118,7 @@ Below I've outlined the general types of changes I've made to the original book.
 \item
   Added instructions for using RStudio and RStudio Cloud.
 \item
-  Updated instructions to reflect any changes in software, including changes to how the bioinformatics repository \passthrough{\lstinline!Bioconductor!} now works.
+  Updated instructions to reflect any changes in software, including changes to how the bioinformatics repository \passthrough{\lstinline!Bioconductor!} works circa 2021.
 \item
   Split up chapters into smaller units.
 \item
@@ -134,7 +134,7 @@ Below I've outlined the general types of changes I've made to the original book.
 \item
   Functions re-written so as not to use Bioconductor to reduce/eliminate dependency of \passthrough{\lstinline!compbio4all!} on \passthrough{\lstinline!Bioconductor!}.
 \item
-  Changed some plotting to ggplot2 or ggpubr.
+  Changed some plotting to \passthrough{\lstinline!ggplot2!} or \passthrough{\lstinline!ggpubr!}.
 \item
   Added additional subheadings
 \item
@@ -273,7 +273,7 @@ RStudio and RStudio cloud work almost identically, so anything you read about RS
 
 \textbf{By}: Avril Coghlan.
 
-\textbf{Adapted, edited and expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+\textbf{Adapted, edited \& expanded}: Nathan Brouwer under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
 
 \emph{R} is a programming language, and \textbf{packages} (aka \textbf{libraries}) are bundles of software built using \emph{R}. Most sessions using \emph{R} involve using additional \emph{R} packages. This is especially true for bioinformatics and computational biology.
 
@@ -374,7 +374,7 @@ Below I discuss the series of prompts I had to deal with while re-installing Bio
 \hypertarget{updating-other-packages-when-downloading-a-package}{%
 \subsection{Updating other packages when downloading a package}\label{updating-other-packages-when-downloading-a-package}}
 
-When I re-installed \passthrough{\lstinline!Biostrings!} while writing this I was given a HUGE blog of red test that contained something like what's shown below (this only aout 1/3 of the actual output!):
+When I re-installed \passthrough{\lstinline!Biostrings!} while writing this I was given a HUGE blog of red test that contained something like what's shown below (this only about 1/3 of the actual output!):
 
 \begin{lstlisting}[language=R]
 'getOption("repos")' replaces Bioconductor standard repositories, 
@@ -1492,7 +1492,7 @@ Different objects are used and show up in different contexts.
 
 We'll use the following data to explore R objects.
 
-Motulsky 2nd Ed, Chapter 30, page 220, Table 30.1. Maximal relaxation of muscle strips of old and young rat bladders stimulated w/ high concentrations of nonrepinephrine (Frazier et al 2006). Response variable is \%E.max
+Motulsky 2nd Ed, Chapter 30, page 220, Table 30.1. Maximal relaxation of muscle strips of old and young rat bladders stimulated with high concentrations of \href{https://en.wikipedia.org/wiki/Norepinephrine}{norepinephrine} (Frazier et al.~2006). Response variable is \% E.max
 
 \hypertarget{the-assignment-operator---makes-object}{%
 \section{The assignment operator ``\textless-'' makes object}\label{the-assignment-operator---makes-object}}
@@ -2979,7 +2979,7 @@ Adapted from \href{https://en.wikipedia.org/wiki/FASTQ_format}{Wikipedia}: \url{
 
 FASTQ format is a text-based format for storing both a biological sequence (usually nucleotide sequence) and its corresponding quality scores. Both the sequence letter and quality score are each encoded with a single ASCII character for brevity.
 
-It was originally developed at the Wellcome Trust Sanger Institute to bundle a FASTA formatted sequence and its quality data, but has recently become the de facto standard for storing the output of high-throughput sequencing instruments such as the Illumina Genome Analyzer.
+It was originally developed at the Wellcome Trust Sanger Institute to bundle a FASTA formatted sequence and its quality data, but has recently become the \emph{de facto} standard for storing the output of high-throughput sequencing instruments such as the Illumina Genome Analyzer.
 
 A FASTQ file normally uses four lines per sequence.
 
@@ -3041,7 +3041,7 @@ Phylogenies play an important role in computational biology and bioinformatics. 
 \item
   Origin and progression of epidemics
 \item
-  Origin of evolution of diseases (eg, zooenoses)
+  Origin of evolution of diseases (e.g., zooenoses)
 \item
   Prediction of protein function from its sequence
 \item
@@ -3080,9 +3080,9 @@ Once all of these steps have been carried out, the building of a phylogeny invol
   evaluating uncertainty in the final tree
 \end{itemize}
 
-In this chapter we will work through many of these steps. In most cases we will pick the easiest or fastest option; in later chapters we will unpack the various options. This chapter is written as an interactive R sessions. You can follow along by opening the .Rmd file of the chapter or typing the appropriate commands into your own script. I assume that all the necessary packages have been installed and they only need to be loaded into R using the \emph{library()} command.
+In this chapter we will work through many of these steps. In most cases we will pick the easiest or fastest option; in later chapters we will unpack the various options. This chapter is written as an interactive R session. You can follow along by opening the .Rmd file of the chapter or typing the appropriate commands into your own script. I assume that all the necessary packages have been installed and they only need to be loaded into R using the \emph{library()} command.
 
-This lesson walks you through and entire workflow for a bioinformatics, including
+This lesson walks you through and entire workflow for a bioinformatics project, including
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3094,7 +3094,7 @@ This lesson walks you through and entire workflow for a bioinformatics, includin
 \item
   creating alignments
 \item
-  creating distance a distance matrix
+  creating a distance matrix
 \item
   building a phylogenetic tree
 \end{enumerate}
@@ -3103,11 +3103,11 @@ We'll examine the Shroom family of genes, which produces Shroom proteins essenti
 
 This lesson draws on skills from previous sections of the book, but is written to act as a independent summary of these activities. There is therefore review of key aspects of R and bioinformatics throughout it.
 
-\hypertarget{software-preliminaires}{%
-\section{Software Preliminaires}\label{software-preliminaires}}
-
 \hypertarget{vocab-2}{%
 \subsection{Vocab}\label{vocab-2}}
+
+\hypertarget{software-preliminaires}{%
+\section{Software Preliminaires}\label{software-preliminaires}}
 
 \begin{itemize}
 \tightlist
@@ -3201,7 +3201,7 @@ You'll also need these packages from Bioconductor:
 
 For installing packages from Bioconductor, see the chapter at the beginning of this book on this process.
 
-Finally, you'll need this package from GitHub
+Finally, you'll need these package from GitHub
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3212,20 +3212,51 @@ Finally, you'll need this package from GitHub
   \passthrough{\lstinline!ggmsa!}
 \end{enumerate}
 
-To install packages from GitHub you can use the code \passthrough{\lstinline!devtools::install\_github("brouwern/combio4all")!} and \passthrough{\lstinline!devtools::install\_github("brouwern/ggmsa")!}
+To install packages from GitHub you can use the code \passthrough{\lstinline!devtools::install\_github("brouwern/compbio4all")!} and \passthrough{\lstinline!devtools::install\_github("YuLab-SMU/ggmsa")!}
+
+This code chunk downloads most of these packages. The code has been commented out because it only needs to be run once.
+
+\begin{lstlisting}[language=R]
+# Install needed packages
+
+## CRAN PACKAGES
+# downloaded using install.packages()
+# install.packages("rentrez",dependencies = TRUE)
+# install.packages("devtools")
+# install.packages("ape")
+# install.packages("seqinr")
+
+### BiocManager - CRAN package to download 
+##### Bioconductor packages
+# requires BiocManager
+# install.packages("BiocManager")
+
+## BioConductor packages
+### downloaded with BiocManager::install(), NOT install.packages()
+# BiocManager::install("msa")
+# BiocManager::install("Biostrings")
+
+
+## GitHub packages
+### requires devtools package and its function install_github()
+# library(devtools)
+# devtools::install_github("brouwern/combio4all")
+# devtools::install_github("YuLab-SMU/ggmsa")
+\end{lstlisting}
 
 \hypertarget{load-packages-into-memory}{%
 \subsection{Load packages into memory}\label{load-packages-into-memory}}
 
 We now need to load up all our bioinformatics and phylogenetics software into R. This is done with the \passthrough{\lstinline!library()!} command.
 
-To run this code just clock on the sideways green triangle all the way to the right of the code.
+To run this code just click on the sideways green triangle all the way to the right of the code.
 
 NOTE: You'll likely see some red code appear on your screen. No worries, totally normal!
 
 \begin{lstlisting}[language=R]
 # github packages
 library(compbio4all)
+library(ggmsa)
 
 # CRAN packages
 library(rentrez)
@@ -3233,7 +3264,15 @@ library(seqinr)
 library(ape)
 
 # Bioconductor packages
+## msa
+### The msa package is having problems on some platforms
+### You can skip the msa steps if necessary.  The msa output
+### is used to make a distance matrix and then phylogenetics trees,
+### but I provide code to build the matrix by hand so
+### you can proceed even if msa doesn't work for you.
 library(msa)
+
+## Biostrings
 library(Biostrings)
 \end{lstlisting}
 
@@ -3293,12 +3332,31 @@ All the code needed is this:
 
 \begin{lstlisting}[language=R]
 # Human shroom 3 (H. sapiens)
-hShroom3 <- entrez_fetch(db = "protein", 
+hShroom3 <- rentrez::entrez_fetch(db = "protein", 
                           id = "NP_065910", 
                           rettype = "fasta")
 \end{lstlisting}
 
-The output is in FASTA format; we'll use the \passthrough{\lstinline!cat()!} to do a little formatting for us:
+Note: if you aren't connected to wifi or the server itself is having problem, then when you run this code you may get an error like this:
+``Quitting from lines 244-259 (23-MSA-walkthrough-shroom.Rmd)
+Error: HTTP failure: 500
+\{''error'':``error forwarding request'',``api-key'':``71.182.228.80'',``type'':``ip'',
+``status'':``ok''\}
+Execution halted''
+
+You may have to try again later to knit the code.
+
+The output is in FASTA format. We can look at the raw output by calling up the object we created. This will run as single continuous string of characters without line breaks
+
+\begin{lstlisting}[language=R]
+hShroom3
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] ">NP_065910.3 protein Shroom3 [Homo sapiens]\nMMRTTEDFHKPSATLNSNTATKGRYIYLEAFLEGGAPWGFTLKGGLEHGEPLIISKVEEGGKADTLSSKL\nQAGDEVVHINEVTLSSSRKEAVSLVKGSYKTLRLVVRRDVCTDPGHADTGASNFVSPEHLTSGPQHRKAA\nWSGGVKLRLKHRRSEPAGRPHSWHTTKSGEKQPDASMMQISQGMIGPPWHQSYHSSSSTSDLSNYDHAYL\nRRSPDQCSSQGSMESLEPSGAYPPCHLSPAKSTGSIDQLSHFHNKRDSAYSSFSTSSSILEYPHPGISGR\nERSGSMDNTSARGGLLEGMRQADIRYVKTVYDTRRGVSAEYEVNSSALLLQGREARASANGQGYDKWSNI\nPRGKGVPPPSWSQQCPSSLETATDNLPPKVGAPLPPARSDSYAAFRHRERPSSWSSLDQKRLCRPQANSL\nGSLKSPFIEEQLHTVLEKSPENSPPVKPKHNYTQKAQPGQPLLPTSIYPVPSLEPHFAQVPQPSVSSNGM\nLYPALAKESGYIAPQGACNKMATIDENGNQNGSGRPGFAFCQPLEHDLLSPVEKKPEATAKYVPSKVHFC\nSVPENEEDASLKRHLTPPQGNSPHSNERKSTHSNKPSSHPHSLKCPQAQAWQAGEDKRSSRLSEPWEGDF\nQEDHNANLWRRLEREGLGQSLSGNFGKTKSAFSSLQNIPESLRRHSSLELGRGTQEGYPGGRPTCAVNTK\nAEDPGRKAAPDLGSHLDRQVSYPRPEGRTGASASFNSTDPSPEEPPAPSHPHTSSLGRRGPGPGSASALQ\nGFQYGKPHCSVLEKVSKFEQREQGSQRPSVGGSGFGHNYRPHRTVSTSSTSGNDFEETKAHIRFSESAEP\nLGNGEQHFKNGELKLEEASRQPCGQQLSGGASDSGRGPQRPDARLLRSQSTFQLSSEPEREPEWRDRPGS\nPESPLLDAPFSRAYRNSIKDAQSRVLGATSFRRRDLELGAPVASRSWRPRPSSAHVGLRSPEASASASPH\nTPRERHSVTPAEGDLARPVPPAARRGARRRLTPEQKKRSYSEPEKMNEVGIVEEAEPAPLGPQRNGMRFP\nESSVADRRRLFERDGKACSTLSLSGPELKQFQQSALADYIQRKTGKRPTSAAGCSLQEPGPLRERAQSAY\nLQPGPAALEGSGLASASSLSSLREPSLQPRREATLLPATVAETQQAPRDRSSSFAGGRRLGERRRGDLLS\nGANGGTRGTQRGDETPREPSSWGARAGKSMSAEDLLERSDVLAGPVHVRSRSSPATADKRQDVLLGQDSG\nFGLVKDPCYLAGPGSRSLSCSERGQEEMLPLFHHLTPRWGGSGCKAIGDSSVPSECPGTLDHQRQASRTP\nCPRPPLAGTQGLVTDTRAAPLTPIGTPLPSAIPSGYCSQDGQTGRQPLPPYTPAMMHRSNGHTLTQPPGP\nRGCEGDGPEHGVEEGTRKRVSLPQWPPPSRAKWAHAAREDSLPEESSAPDFANLKHYQKQQSLPSLCSTS\nDPDTPLGAPSTPGRISLRISESVLRDSPPPHEDYEDEVFVRDPHPKATSSPTFEPLPPPPPPPPSQETPV\nYSMDDFPPPPPHTVCEAQLDSEDPEGPRPSFNKLSKVTIARERHMPGAAHVVGSQTLASRLQTSIKGSEA\nESTPPSFMSVHAQLAGSLGGQPAPIQTQSLSHDPVSGTQGLEKKVSPDPQKSSEDIRTEALAKEIVHQDK\nSLADILDPDSRLKTTMDLMEGLFPRDVNLLKENSVKRKAIQRTVSSSGCEGKRNEDKEAVSMLVNCPAYY\nSVSAPKAELLNKIKEMPAEVNEEEEQADVNEKKAELIGSLTHKLETLQEAKGSLLTDIKLNNALGEEVEA\nLISELCKPNEFDKYRMFIGDLDKVVNLLLSLSGRLARVENVLSGLGEDASNEERSSLYEKRKILAGQHED\nARELKENLDRRERVVLGILANYLSEEQLQDYQHFVKMKSTLLIEQRKLDDKIKLGQEQVKCLLESLPSDF\nIPKAGALALPPNLTSEPIPAGGCTFSGIFPTLTSPL\n\n"
+\end{lstlisting}
+
+We'll use the \passthrough{\lstinline!cat()!} function to do a little formatting for us; it essentially just enforces the \textbf{lines breaks}:
 
 \begin{lstlisting}[language=R]
 cat(hShroom3)
@@ -3337,7 +3395,7 @@ cat(hShroom3)
 ## IPKAGALALPPNLTSEPIPAGGCTFSGIFPTLTSPL
 \end{lstlisting}
 
-Note the initial \passthrough{\lstinline!>!}, then the header line of \passthrough{\lstinline!NP\_065910.3 protein Shroom3 [Homo sapiens]!}. After that is the amino acid sequence. The underlying data also includes the \textbf{newline character} \passthrough{\lstinline!\\n!} to designate where each line of amino acids stops.
+Note the initial \passthrough{\lstinline!>!}, then the header line of \passthrough{\lstinline!NP\_065910.3 protein Shroom3 [Homo sapiens]!}. After that is the amino acid sequence. The underlying data also includes the \textbf{newline character} \passthrough{\lstinline!\\n!} to designate where each line of amino acids stops (that is, the location of line breaks).
 
 We can get the rest of the data by just changing the \passthrough{\lstinline!id = ...!} argument:
 
@@ -3358,6 +3416,8 @@ sShroom <- entrez_fetch(db = "protein",
                           id = "XP_783573", 
                           rettype = "fasta")
 \end{lstlisting}
+
+Here, I've pasted the function I used above three times into the code chunk and changed the id = \ldots{} statement. Later in this script will avoid this clunky type of coding by using \textbf{for loops}.
 
 I'm going to check about how long each of these sequences is - each should have an at least slightly different length. If any are identical, I might have repeated an accession name or re-used an object name. The function \passthrough{\lstinline!nchar()!} counts of the number of characters in an \emph{R} object.
 
@@ -3397,7 +3457,7 @@ nchar(hShroom2)
 \section{Prepping macromolecular sequences}\label{prepping-macromolecular-sequences}}
 
 \begin{quote}
-``90\% of data analysis is data cleaning'' (-Just about every data analyst and data scientist on twitter)
+``90\% of data analysis is data cleaning'' (-Just about every data analyst and data scientist)
 \end{quote}
 
 We have our sequences, but the current format isn't directly usable for us yet because there are several things that aren't sequence information
@@ -3413,7 +3473,25 @@ We have our sequences, but the current format isn't directly usable for us yet b
 
 We can remove this non-sequence information using a function I wrote called \passthrough{\lstinline!fasta\_cleaner()!}, which is in the \passthrough{\lstinline!compbio4all!} package. The function uses \textbf{regular expressions} to remove the info we don't need.
 
-\textbf{ASIDE}: If we run the name of the command with out any quotation marks we can see the code:
+If you had trouble downloading the compbio4all package function you can add fasta\_cleaner() to your R session directly by running this code:
+
+\begin{lstlisting}[language=R]
+fasta_cleaner <- function(fasta_object, parse = TRUE){
+
+  fasta_object <- sub("^(>)(.*?)(\\n)(.*)(\\n\\n)","\\4",fasta_object)
+  fasta_object <- gsub("\n", "", fasta_object)
+
+  if(parse == TRUE){
+    fasta_object <- stringr::str_split(fasta_object,
+                                       pattern = "",
+                                       simplify = FALSE)
+  }
+
+  return(fasta_object[[1]])
+}
+\end{lstlisting}
+
+If we run the name of the command with out any quotation marks we can see the code:
 
 \begin{lstlisting}[language=R]
 fasta_cleaner
@@ -3433,13 +3511,9 @@ fasta_cleaner
 ## 
 ##   return(fasta_object[[1]])
 ## }
-## <bytecode: 0x7ff01bac6b40>
-## <environment: namespace:compbio4all>
 \end{lstlisting}
 
-\textbf{End ASIDE}
-
-Now use the function to clean our sequences; we won't worry about what \passthrough{\lstinline!pare = ...!} is for.
+Now use the function to clean our sequences; we won't worry about what \passthrough{\lstinline!parse = ...!} is for.
 
 \begin{lstlisting}[language=R]
 hShroom3  <- fasta_cleaner(hShroom3,  parse = F)
@@ -3447,6 +3521,8 @@ mShroom3a <- fasta_cleaner(mShroom3a, parse = F)
 hShroom2  <- fasta_cleaner(hShroom2,  parse = F)
 sShroom   <- fasta_cleaner(sShroom,   parse = F)
 \end{lstlisting}
+
+Again, I want to do something four times, so I've repeated the same line of code four times with the necessary change. This gets the job done, but there are better ways to do this using for loops.
 
 Now let's take a peek at what our sequences look like:
 
@@ -3458,12 +3534,14 @@ hShroom3
 ## [1] "MMRTTEDFHKPSATLNSNTATKGRYIYLEAFLEGGAPWGFTLKGGLEHGEPLIISKVEEGGKADTLSSKLQAGDEVVHINEVTLSSSRKEAVSLVKGSYKTLRLVVRRDVCTDPGHADTGASNFVSPEHLTSGPQHRKAAWSGGVKLRLKHRRSEPAGRPHSWHTTKSGEKQPDASMMQISQGMIGPPWHQSYHSSSSTSDLSNYDHAYLRRSPDQCSSQGSMESLEPSGAYPPCHLSPAKSTGSIDQLSHFHNKRDSAYSSFSTSSSILEYPHPGISGRERSGSMDNTSARGGLLEGMRQADIRYVKTVYDTRRGVSAEYEVNSSALLLQGREARASANGQGYDKWSNIPRGKGVPPPSWSQQCPSSLETATDNLPPKVGAPLPPARSDSYAAFRHRERPSSWSSLDQKRLCRPQANSLGSLKSPFIEEQLHTVLEKSPENSPPVKPKHNYTQKAQPGQPLLPTSIYPVPSLEPHFAQVPQPSVSSNGMLYPALAKESGYIAPQGACNKMATIDENGNQNGSGRPGFAFCQPLEHDLLSPVEKKPEATAKYVPSKVHFCSVPENEEDASLKRHLTPPQGNSPHSNERKSTHSNKPSSHPHSLKCPQAQAWQAGEDKRSSRLSEPWEGDFQEDHNANLWRRLEREGLGQSLSGNFGKTKSAFSSLQNIPESLRRHSSLELGRGTQEGYPGGRPTCAVNTKAEDPGRKAAPDLGSHLDRQVSYPRPEGRTGASASFNSTDPSPEEPPAPSHPHTSSLGRRGPGPGSASALQGFQYGKPHCSVLEKVSKFEQREQGSQRPSVGGSGFGHNYRPHRTVSTSSTSGNDFEETKAHIRFSESAEPLGNGEQHFKNGELKLEEASRQPCGQQLSGGASDSGRGPQRPDARLLRSQSTFQLSSEPEREPEWRDRPGSPESPLLDAPFSRAYRNSIKDAQSRVLGATSFRRRDLELGAPVASRSWRPRPSSAHVGLRSPEASASASPHTPRERHSVTPAEGDLARPVPPAARRGARRRLTPEQKKRSYSEPEKMNEVGIVEEAEPAPLGPQRNGMRFPESSVADRRRLFERDGKACSTLSLSGPELKQFQQSALADYIQRKTGKRPTSAAGCSLQEPGPLRERAQSAYLQPGPAALEGSGLASASSLSSLREPSLQPRREATLLPATVAETQQAPRDRSSSFAGGRRLGERRRGDLLSGANGGTRGTQRGDETPREPSSWGARAGKSMSAEDLLERSDVLAGPVHVRSRSSPATADKRQDVLLGQDSGFGLVKDPCYLAGPGSRSLSCSERGQEEMLPLFHHLTPRWGGSGCKAIGDSSVPSECPGTLDHQRQASRTPCPRPPLAGTQGLVTDTRAAPLTPIGTPLPSAIPSGYCSQDGQTGRQPLPPYTPAMMHRSNGHTLTQPPGPRGCEGDGPEHGVEEGTRKRVSLPQWPPPSRAKWAHAAREDSLPEESSAPDFANLKHYQKQQSLPSLCSTSDPDTPLGAPSTPGRISLRISESVLRDSPPPHEDYEDEVFVRDPHPKATSSPTFEPLPPPPPPPPSQETPVYSMDDFPPPPPHTVCEAQLDSEDPEGPRPSFNKLSKVTIARERHMPGAAHVVGSQTLASRLQTSIKGSEAESTPPSFMSVHAQLAGSLGGQPAPIQTQSLSHDPVSGTQGLEKKVSPDPQKSSEDIRTEALAKEIVHQDKSLADILDPDSRLKTTMDLMEGLFPRDVNLLKENSVKRKAIQRTVSSSGCEGKRNEDKEAVSMLVNCPAYYSVSAPKAELLNKIKEMPAEVNEEEEQADVNEKKAELIGSLTHKLETLQEAKGSLLTDIKLNNALGEEVEALISELCKPNEFDKYRMFIGDLDKVVNLLLSLSGRLARVENVLSGLGEDASNEERSSLYEKRKILAGQHEDARELKENLDRRERVVLGILANYLSEEQLQDYQHFVKMKSTLLIEQRKLDDKIKLGQEQVKCLLESLPSDFIPKAGALALPPNLTSEPIPAGGCTFSGIFPTLTSPL"
 \end{lstlisting}
 
+THe header and slash-n newline characters are gone. The sequence is now ready for use by our R alignment functions.
+
 \hypertarget{aligning-sequences}{%
 \section{Aligning sequences}\label{aligning-sequences}}
 
-We can do a \href{https://tinyurl.com/y4du73zq}{\textbf{global alignment}} of one sequence against another using the \passthrough{\lstinline!pairwiseAlignment()!} function from the \textbf{Bioconductor} package \passthrough{\lstinline!Biostrings!} (note that capital ``B'' in \passthrough{\lstinline!Biostrings!}; most \emph{R} package names are all lower case, but not this one).
+We can do a \href{https://tinyurl.com/y4du73zq}{\textbf{global alignment}} of one sequence against another using the \passthrough{\lstinline!pairwiseAlignment()!} function from the \textbf{Bioconductor} package \passthrough{\lstinline!Biostrings!} (note that capital ``B'' in \passthrough{\lstinline!Biostrings!}; most \emph{R} package names are all lower case, but not this one). Global alignment algorithms identify the best way to line up to sequences so that that optimal number of bases or amino acids are the same and the number of \textbf{indels} (insertions/deletions) are minimized. (Global alignment contrasts with \textbf{local alignment}, which works with portions of sequences and is used in database search programs like \textbf{BLAST}, the Basic Local Alignment Search Tool used by many biologists).
 
-Let's align human versus mouse shroom:
+Let's align human versus mouse shroom using the global alignment function pairwiseAlignment():
 
 \begin{lstlisting}[language=R]
 align.h3.vs.m3a <- Biostrings::pairwiseAlignment(
@@ -3484,7 +3562,9 @@ align.h3.vs.m3a
 ## score: 2189.934
 \end{lstlisting}
 
-The \textbf{score} tells us how closely they are aligned; higher scores mean the sequences are more similar. Its hard to interpret the number on its own so we can get the \textbf{percent sequence identity (PID)} using the \passthrough{\lstinline!pid()!} function.
+The \textbf{score} tells us how closely they are aligned; higher scores mean the sequences are more similar. In general, perfect matches increase scores the most, and indels decrease scores.
+
+Its hard to interpret scores on their own so we can get the \textbf{percent sequence identity (PID)} (aka percent identical, proportion identity, proportion identical) using the \passthrough{\lstinline!pid()!} function.
 
 \begin{lstlisting}[language=R]
 Biostrings::pid(align.h3.vs.m3a)
@@ -3494,9 +3574,9 @@ Biostrings::pid(align.h3.vs.m3a)
 ## [1] 70.56511
 \end{lstlisting}
 
-So, \emph{shroom3} from humans and \emph{shroom3} from mice are \textasciitilde71\% similar (at least using this particular method of alignment, and there are many ways to do this!)
+So, \emph{shroom3} from humans (hShroom3) and \emph{shroom3} from mice (mShroom3) are \textasciitilde71\% similar (at least using this particular method of alignment, and there are many ways to do this!)
 
-What about human shroom 3 and sea-urchin shroom?
+What about human shroom 3 and human shroom 2? Shroom is a \textbf{gene family}, and there are different versions of the gene within a genome.
 
 \begin{lstlisting}[language=R]
 align.h3.vs.h2 <- Biostrings::pairwiseAlignment(
@@ -3504,7 +3584,20 @@ align.h3.vs.h2 <- Biostrings::pairwiseAlignment(
                   hShroom2)
 \end{lstlisting}
 
-First check out the score using \passthrough{\lstinline!score()!}, which accesses it directly without all the other information.
+If you take a look at the alignment you can see there are a lot of indels
+
+\begin{lstlisting}[language=R]
+align.h3.vs.h2
+\end{lstlisting}
+
+\begin{lstlisting}
+## Global PairwiseAlignmentsSingleSubject (1 of 1)
+## pattern: MMRTTEDFHKPSATLNSNT--ATKGRYIYLEAFL...KAGALALPPNLTSEPIPAGGCTFSGIFPTLTSPL
+## subject: MEGA-EPRARPERLAEAETRAADGGRLV--EVQL...----------------PERGK-------------
+## score: -5673.853
+\end{lstlisting}
+
+Check out the score itself using \passthrough{\lstinline!score()!}, which accesses it directly without all the other information.
 
 \begin{lstlisting}[language=R]
 score(align.h3.vs.h2)
@@ -3513,6 +3606,8 @@ score(align.h3.vs.h2)
 \begin{lstlisting}
 ## [1] -5673.853
 \end{lstlisting}
+
+Its negative because there are a LOT of indels.
 
 Now the percent sequence alignment with \passthrough{\lstinline!pid()!}:
 
@@ -3524,46 +3619,80 @@ Biostrings::pid(align.h3.vs.h2)
 ## [1] 33.83277
 \end{lstlisting}
 
-So Human shroom 3 and Mouse shroom 3 are 71\% identical, but Human shroom 3 and human shroom 2 are only 34\% similar? How does it work out evolutionary that a human and mouse gene are more similar than a human and a human gene? What are the evolutionary relationships among these genes within the shroom gene family?
+So Human shroom 3 and Mouse shroom 3 are 71\% identical, but Human shroom 3 and human shroom 2 are only 34\% similar? How does it work out evolutionarily that a human and mouse gene are more similar than a human and a human gene? What are the evolutionary relationships among these genes within the shroom gene family?
+
+An important note: indels contribute negatively to an alignment score, but aren't used in the most common calculations for PID.
 
 \hypertarget{the-shroom-family-of-genes}{%
 \section{The shroom family of genes}\label{the-shroom-family-of-genes}}
 
-I've copied a table from a published paper which has accession numbers for 15 different Shroom genes.
+I've copied a table from a published paper which has accession numbers for 15 different Shroom genes. Some are different types of shroom from the same organism (e.g.~shroom 1, 2, 3 and 4 from humans), or they are from different organism (e.g.~frogs, mice, bees).
 
 \begin{lstlisting}[language=R]
 shroom_table <- c("CAA78718" , "X. laevis Apx" ,         "xShroom1",
-            "NP_597713" , "H. sapiens APXL2" ,     "hShroom1",
-            "CAA58534" , "H. sapiens APXL",        "hShroom2",
-            "ABD19518" , "M. musculus Apxl" ,      "mShroom2",
-            "AAF13269" , "M. musculus ShroomL" ,   "mShroom3a",
-            "AAF13270" , "M. musculus ShroomS" ,   "mShroom3b",
-            "NP_065910", "H. sapiens Shroom" ,     "hShroom3",
-            "ABD59319" , "X. laevis Shroom-like",  "xShroom3",
-            "NP_065768", "H. sapiens KIAA1202" ,   "hShroom4a",
-            "AAK95579" , "H. sapiens SHAP-A" ,     "hShroom4b",
-            #"DQ435686" , "M. musculus KIAA1202" ,  "mShroom4",
-            "ABA81834" , "D. melanogaster Shroom", "dmShroom",
-            "EAA12598" , "A. gambiae Shroom",      "agShroom",
-            "XP_392427" , "A. mellifera Shroom" ,  "amShroom",
-            "XP_783573" , "S. purpuratus Shroom" , "spShroom") #sea urchin
+                  "NP_597713" , "H. sapiens APXL2" ,     "hShroom1",
+                  "CAA58534" , "H. sapiens APXL",        "hShroom2",
+                  "ABD19518" , "M. musculus Apxl" ,      "mShroom2",
+                  "AAF13269" , "M. musculus ShroomL" ,   "mShroom3a",
+                  "AAF13270" , "M. musculus ShroomS" ,   "mShroom3b",
+                  "NP_065910", "H. sapiens Shroom" ,     "hShroom3",
+                  "ABD59319" , "X. laevis Shroom-like",  "xShroom3",
+                  "NP_065768", "H. sapiens KIAA1202" ,   "hShroom4a",
+                  "AAK95579" , "H. sapiens SHAP-A" ,     "hShroom4b",
+                 #"DQ435686" , "M. musculus KIAA1202" ,  "mShroom4",
+                  "ABA81834" , "D. melanogaster Shroom", "dmShroom",
+                  "EAA12598" , "A. gambiae Shroom",      "agShroom",
+                  "XP_392427" , "A. mellifera Shroom" ,  "amShroom",
+                  "XP_783573" , "S. purpuratus Shroom" , "spShroom") #sea urchin
+\end{lstlisting}
+
+What we just made is just one long vector with all the info.
+
+\begin{lstlisting}[language=R]
+is(shroom_table)
+\end{lstlisting}
+
+\begin{lstlisting}
+##  [1] "character"               "vector"                 
+##  [3] "data.frameRowLabels"     "SuperClassMethod"       
+##  [5] "EnumerationValue"        "character_OR_connection"
+##  [7] "character_OR_NULL"       "atomic"                 
+##  [9] "vector_OR_Vector"        "vector_OR_factor"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+class(shroom_table)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "character"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+length(shroom_table)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 42
 \end{lstlisting}
 
 I'll do a bit of formatting; you can ignore these details if you want
 
 \begin{lstlisting}[language=R]
-# convert to matrix
+# convert the vector to matrix using matrix()
 shroom_table_matrix <- matrix(shroom_table,
                                   byrow = T,
                                   nrow = 14)
-# convert to dataframe
+
+# convert the matrix to a dataframe using data.frame()
 shroom_table <- data.frame(shroom_table_matrix, 
                      stringsAsFactors = F)
 
-# name columns
+# name columns of dataframe using names() function
 names(shroom_table) <- c("accession", "name.orig","name.new")
 
 # Create simplified species names
+## access species column using $ notation
 shroom_table$spp <- "Homo"
 shroom_table$spp[grep("laevis",shroom_table$name.orig)] <- "Xenopus"
 shroom_table$spp[grep("musculus",shroom_table$name.orig)] <- "Mus"
@@ -3573,7 +3702,7 @@ shroom_table$spp[grep("mellifera",shroom_table$name.orig)] <- "bee"
 shroom_table$spp[grep("purpuratus",shroom_table$name.orig)] <- "sea urchin"
 \end{lstlisting}
 
-Take a look:
+Take a look at the finished table
 
 \begin{lstlisting}[language=R]
 shroom_table
@@ -3602,17 +3731,11 @@ shroom_table
 
 Instead of getting one sequence at a time we can download several by accessing the ``accession'' column from the table
 
-\begin{lstlisting}[language=R]
+\begin{lstlisting}
 shroom_table$accession
 \end{lstlisting}
 
-\begin{lstlisting}
-##  [1] "CAA78718"  "NP_597713" "CAA58534"  "ABD19518"  "AAF13269"  "AAF13270" 
-##  [7] "NP_065910" "ABD59319"  "NP_065768" "AAK95579"  "ABA81834"  "EAA12598" 
-## [13] "XP_392427" "XP_783573"
-\end{lstlisting}
-
-We can give this whole set of accessions to \passthrough{\lstinline!entrez\_fetch()!}:
+We can give this whole set of accessions to \passthrough{\lstinline!entrez\_fetch()!}, which is a \textbf{vectorized function} which knows how to handle a vector of inputs.
 
 \begin{lstlisting}[language=R]
 shrooms <- entrez_fetch(db = "protein", 
@@ -3626,9 +3749,33 @@ We can look at what we got here with \passthrough{\lstinline!cat()!} (I won't di
 cat(shrooms)
 \end{lstlisting}
 
-The current format of these data is a single, long set of data. This is a standard way to store, share and transmit FASTA files, but in \emph{R} we'll need a slightly different format.
+The current format of these data is a single, very long set of data. This is a standard way to store, share and transmit FASTA files, but in \emph{R} we'll need a slightly different format.
 
 We'll download all of the sequences again, this time using a function from \passthrough{\lstinline!compbio4all!} called \passthrough{\lstinline!entrez\_fetch\_list()!} which is a \textbf{wrapper} function I wrote to put the output of \passthrough{\lstinline!entrez\_fetch()!} into an \emph{R} data format called a \textbf{list}.
+
+This function is contained with the combio4all package; however, if you are having trouble with the package you can enter it directly into your R sessions by running the source code of the function.
+
+\begin{lstlisting}[language=R]
+entrez_fetch_list <- function(db, id, rettype, ...){
+
+  #setup list for storing output
+  n.seq <- length(id)
+  list.output <- as.list(rep(NA, n.seq))
+  names(list.output) <- id
+
+  # get output
+  for(i in 1:length(id)){
+    list.output[[i]] <- rentrez::entrez_fetch(db = db,
+                                              id = id[i],
+                                              rettype = rettype)
+  }
+
+
+  return(list.output)
+}
+\end{lstlisting}
+
+However we get the function, we can use it to download a bunch of FASTA files and store them in an R list.
 
 \begin{lstlisting}[language=R]
 shrooms_list <- entrez_fetch_list(db = "protein", 
@@ -3636,7 +3783,7 @@ shrooms_list <- entrez_fetch_list(db = "protein",
                           rettype = "fasta")
 \end{lstlisting}
 
-Now we have a list which as 14 \textbf{elements}, one for each sequence in our table.
+Now we have an R \textbf{list} which as 14 \textbf{elements}, one for each sequence in our table.
 
 \begin{lstlisting}[language=R]
 length(shrooms_list)
@@ -3646,7 +3793,33 @@ length(shrooms_list)
 ## [1] 14
 \end{lstlisting}
 
-We now need to clean up each one fo these sequences. We can do that using a simple \passthrough{\lstinline!for()!} loop:
+Each element of the list contains a FASTA entry for one sequence
+
+\begin{lstlisting}[language=R]
+shrooms_list[[1]]
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] ">CAA78718.1 apical protein [Xenopus laevis]\nMSAFGNTIERWNIKSTGVIAGLGHSERISPVRSMTTLVDSAYSSFSGSSYVPEYQNSFQHDGCHYNDEQL\nSYMDSEYVRAIYNPSLLDKDGVYNDIVSEHGSSKVALSGRSSSSLCSDNTTSVHRTSPAKLDNYVTNLDS\nEKNIYGDPINMKHKQNRPNHKAYGLQRNSPTGINSLQEKENQLYNPSNFMEIKDNYFGRSLDVLQADGDI\nMTQDSYTQNALYFPQNQPDQYRNTQYPGANRMSKEQFKVNDVQKSNEENTERDGPYLTKDGQFVQGQYAS\nDVRTSFKNIRRSLKKSASGKIVAHDSQGSCWIMKPGKDTPSFNSEGTITDMDYDNREQWDIRKSRLSTRA\nSQSLYYESNEDVSGPPLKAMNSKNEVDQTLSFQKDATVKSIPLLSQQLQQEKCKSHPLSDLNCEKITKAS\nTPMLYHLAGGRHSAFIAPVHNTNPAQQEKLKLESKTLERMNNISVLQLSEPRPDNHKLPKNKSLTQLADL\nHDSVEGGNSGNLNSSAEESLMNDYIEKLKVAQKKVLRETSFKRKDLQMSLPCRFKLNPPKRPTIDHFRSY\nSSSSANEESAYLQTKNSADSSYKKDDTEKVAVTRIGGRKRITKEQKKLCYSEPEKLDHLGIQKSNFAWKE\nEPTFANRREMSDSDISANRIKYLESKERTNSSSNLSKTELKQIQHNALVQYMERKTNQRPNSNPQVQMER\nTSLGLPNYNEWSIYSSETSSSDASQKYLRRRSAGASSSYDATVTWNDRFGKTSPLGRSAAEKTAGVQRKT\nFSDQRTLDGSQEHLEGSSPSLSQKTSKSTHNEQVSYVNMEFLPSSHSKNHMYNDRLTVPGDGTSAESGRM\nFVSKSRGKSMEEIGTTDIVKLAELSHSSDQLYHIKGPVISSRLENTRTTAASHQDRLLASTQIETGNLPR\nQTHQESVVGPCRSDLANLGQEAHSWPLRASDVSPGTDNPCSSSPSAEVQPGAPEPLHCLQTEDEVFTPAS\nTARNEEPNSTAFSYLLSTGKPVSQGEATALSFTFLPEQDRLEHPIVSETTPSSESDENVSDAAAEKETTT\nTQLPETSNVNKPLGFTVDNQEVEGDGEPMQPEFIDSSKQLELSSLPSSQVNIMQTAEPYLGDKNIGNEQK\nTEDLEQKSKNPEEDDLPKVKLKSPEDEILEELVKEIVAKDKSLLNCLQPVSVRESAMDLMKSLFPMDVTA\nAEKSRTRGLLGKDKGETLKKNNSDLESSSKLPSKITGMLQKRPDGESLDDITLKKMELLSKIGSKLEDLC\nEQREFLLSDISKNTTNGNNMQTMVKELCKPNEFERYMMFIGDLEKVVSLLFSLSTRLTRVENSLSKVDEN\nTDAEEMQSLKERHNLLSSQREDAKDLKANLDRREQVVTGILVKYLNEEQLQDYKHFVRLKTSLLIEQKNL\nEEKIKVYEEQFESIHNSLPP\n\n"
+\end{lstlisting}
+
+We now need to clean up each one of these sequences. We could do this by running our fasta\_cleaner() function on each of the elements of the list like this.
+
+\begin{lstlisting}[language=R]
+# clean sequence 1 in element 1 of list
+shrooms_list[[1]] <- fasta_cleaner(shrooms_list[[1]], parse = F)
+
+# clean sequence 2 in element 2 of list
+shrooms_list[[2]] <- fasta_cleaner(shrooms_list[[2]], parse = F)
+
+# clean sequence 3 in element 3 of list
+shrooms_list[[3]] <- fasta_cleaner(shrooms_list[[3]], parse = F)
+
+# clean sequence x in element x of list
+## ...
+\end{lstlisting}
+
+Copying the same line of code 14 time and making the necessary changes takes time and is error prone. We can do this more easily using a simple \passthrough{\lstinline!for()!} loop:
 
 \begin{lstlisting}[language=R]
 for(i in 1:length(shrooms_list)){
@@ -3654,22 +3827,45 @@ for(i in 1:length(shrooms_list)){
 }
 \end{lstlisting}
 
-Second to last step: we need to take each one of our sequences from our list and put it into a \textbf{vector}, in particular a \textbf{named vector}
+For loops all start with for(\ldots) and contain the code we want to do repeatedly within curly brackets \{\ldots\}. We won't worry about the details of how for() loops work in R, but the upshot is that they allow us to easily repeatedly the same step many times while having making the necessary minor changes.
+
+Now, for the second to last step of data preparation: we need to take each one of our sequences from our list and put it into a \textbf{vector}, in particular a \textbf{named vector}.
+
+First, we need a vector to store stuff. We'll make an empty vector that just has NAs in it using the rep() function.
 
 \begin{lstlisting}[language=R]
-# make a vector to store output
 shrooms_vector <- rep(NA, length(shrooms_list))
+\end{lstlisting}
 
+The result looks like this
+
+\begin{lstlisting}[language=R]
+shrooms_vector
+\end{lstlisting}
+
+\begin{lstlisting}
+##  [1] NA NA NA NA NA NA NA NA NA NA NA NA NA NA
+\end{lstlisting}
+
+Now we use a for() loop to take each element of shrooms\_list and put it into the vector shrooms\_vector (the precise details don't matter; what is important is that we are using a for loop so we don't have to repeat the same line of code 14 times)
+
+\begin{lstlisting}[language=R]
 # run the loop
 for(i in 1:length(shrooms_vector)){
   shrooms_vector[i] <- shrooms_list[[i]]
 }
+\end{lstlisting}
 
+Now we name the vector. This is using the names() function. (The exact details don't matter)
+
+\begin{lstlisting}[language=R]
 # name the vector
 names(shrooms_vector) <- names(shrooms_list)
 \end{lstlisting}
 
 Now the final step: we need to convert our named vector to a \textbf{string set} using \passthrough{\lstinline!Biostrings::AAStringSet()!}. Note the \passthrough{\lstinline!\_ss!} tag at the end of the object we're assigning the output to, which designates this as a string set.
+
+A string set is just a type of data format someone came up with to organize and annotate sequence data. (All of these steps are annoying, and someday I'll write some functions to simplify all of this).
 
 \begin{lstlisting}[language=R]
 shrooms_vector_ss <- Biostrings::AAStringSet(shrooms_vector)
@@ -3680,10 +3876,16 @@ shrooms_vector_ss <- Biostrings::AAStringSet(shrooms_vector)
 
 We must \textbf{align} all of the sequences we downloaded and use that \textbf{alignment} to build a \textbf{phylogenetic tree}. This will tell us how the different genes, both within and between species, are likely to be related.
 
+(Note: previously we've explored the similarities between sequences using pairwiseAlignments(). This helped us understand the data, but wasn't actually necessary for making an MSA or phylogenetic tree).
+
 \hypertarget{building-an-multiple-sequence-alignment-msa}{%
 \subsection{Building an Multiple Sequence Alignment (MSA)}\label{building-an-multiple-sequence-alignment-msa}}
 
+Multiple sequence alignments (MSA) appear frequently in papers in molecular biology, biochemistry, and molecular evolution. They are also the basis for almost all phylogenies made with modern software to build phylogenetic trees using macromolecues. MSA are extensions of global alignment of two sequences. However, while a function like pairwiseAlignment() tries to come up with the best way to align two sequences, and MSA algorithm tries to come up with the joint alignment that is best across all alignments. This not only takes longer to do, but can sometimes come up with slight different results than a bunch of individual pairs of alignments.
+
 We'll use the software \passthrough{\lstinline!msa,!} which implements the \textbf{ClustalW} multiple sequence alignment algorithm. Normally we'd have to download the ClustalW program and either point-and-click our way through it or use the \textbf{command line}*, but these folks wrote up the algorithm in R so we can do this with a line of R code. This will take a second or two.
+
+NOTE: While based in R, the msa package uses an R package called Rcpp (``R C++'') to integrate R with code from the language C++. There seem to some issues related to this process on some computers. If you can't get msa to load or msa() to fun, you can comment-out the msa-related code.
 
 \begin{lstlisting}[language=R]
 shrooms_align <- msa(shrooms_vector_ss,
@@ -3694,15 +3896,38 @@ shrooms_align <- msa(shrooms_vector_ss,
 ## use default substitution matrix
 \end{lstlisting}
 
+While msa() runs R tells you ``use default substitution matrix'', which means its using the programs default way of scoring alignments; that is, how to assign values to matches, mismatches, and indels while trying to come up with the best alignment of all the sequences.
+
 \hypertarget{viewing-an-msa}{%
 \subsection{Viewing an MSA}\label{viewing-an-msa}}
 
-Once we build an MSA we need to visualize it.
+Once we build an MSA we need to visualize it. There are several ways to do this, and it can be a bit tricky because gene and proteins are long and most easily viewed left to right. Often we'll identify a subset of bases to focus on, such as a sequence motif or domain.
 
 \hypertarget{viewing-an-msa-in-r}{%
 \subsubsection{Viewing an MSA in R}\label{viewing-an-msa-in-r}}
 
-We can look at the output from \passthrough{\lstinline!msa()!}, but its not very helpful
+msa produces a species MSA objects
+
+\begin{lstlisting}[language=R]
+class(shrooms_align)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "MsaAAMultipleAlignment"
+## attr(,"package")
+## [1] "msa"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+is(shrooms_align)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "MsaAAMultipleAlignment" "AAMultipleAlignment"    "MsaMetaData"           
+## [4] "MultipleAlignment"
+\end{lstlisting}
+
+We can look at the direct output from \passthrough{\lstinline!msa()!}, but its not very helpful - its just a glimpse of part of the alignment. The ``\ldots{}'' in the middle just means ``a lot of other stuff in the middle.''
 
 \begin{lstlisting}[language=R]
 shrooms_align
@@ -3735,47 +3960,79 @@ shrooms_align
 
 A function called \passthrough{\lstinline!print\_msa()!} (Coghlan 2011) which I've put into\passthrough{\lstinline!combio4all!} can give us more informative output by printing out the actual alignment into the R console.
 
-To use \passthrough{\lstinline!print\_msa()!} We need to make a few minor tweaks though first. These are behind the scenes changes so don't worry about the details right now. We'll change the name to \passthrough{\lstinline!shrooms\_align\_seqinr!} to indicate that one of our changes is putting this into a format defined by the bioinformatics package \passthrough{\lstinline!seqinr!}.
+To use \passthrough{\lstinline!print\_msa()!} We need to make a few minor tweaks though first to the output of the msa() function. These are behind the scenes changes so don't worry about the details right now. We'll change the name to \passthrough{\lstinline!shrooms\_align\_seqinr!} to indicate that one of our changes is putting this into a format defined by the bioinformatics package \passthrough{\lstinline!seqinr!}.
+
+First, we change \textbf{class} of the variable to let our functions know exactly what we're working with.
+
+The output of the class() function can sometimes be a bit complicated; in this case its telling us that the ``class'' of the shrooms\_align object is ``MsaAAMultipleAlignment'', which is a special purpose type of R object created by the msa() function (``Msa\ldots{}'') for amino acids (\ldots{}``AA''\ldots) that is a multiple sequence alignment (``\ldots MultipleAlignment'')
+
+\begin{lstlisting}[language=R]
+class(shrooms_align) 
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "MsaAAMultipleAlignment"
+## attr(,"package")
+## [1] "msa"
+\end{lstlisting}
+
+To make shrooms\_align play nice with our other functions it has to just be of the class ``AAMultipleAlignment''. (Again, this is annoying, and took my a while to figure out when I was creating this workflow).
+
+You rarely have to change the class of an R object; the usual use of the class() function is to just get an idea of what an object is. You can also use the class() function to change the class of an object.
 
 \begin{lstlisting}[language=R]
 class(shrooms_align) <- "AAMultipleAlignment"
-shrooms_align_seqinr <- msaConvert(shrooms_align, type = "seqinr::alignment")
 \end{lstlisting}
 
-I won't display the output from \passthrough{\lstinline!shrooms\_align\_seqinr!} because its very long; we have 14 shroom genes, and shroom happens to be a rather long gene.
+Now we need to use a function from msa called msaConvert() to make \emph{another} tweak to the object to make it work with functions from the seqinr package. We'll change the name of our msa object from shrooms\_align to shrooms\_align\_seqinr to reflect this change. (Another annoying step that took me a while to figure out when I first did this.)
 
 \begin{lstlisting}[language=R]
-print_msa(alignment = shrooms_align_seqinr, 
+shrooms_align_seqinr <- msaConvert(shrooms_align, 
+                                   type = "seqinr::alignment")
+\end{lstlisting}
+
+I won't display the raw output from \passthrough{\lstinline!shrooms\_align\_seqinr!} because its very long; we have 14 shroom genes, and shroom happens to be a rather long gene.
+
+Now that I've done the necessary tweaks let me display the msa. This will only be really useful if I have a big monitor.
+
+\begin{lstlisting}[language=R]
+compbio4all::print_msa(alignment = shrooms_align_seqinr, 
           chunksize = 60)
 \end{lstlisting}
 
 \hypertarget{displaying-an-msa-as-an-r-plot}{%
 \subsubsection{Displaying an MSA as an R plot}\label{displaying-an-msa-as-an-r-plot}}
 
-I'm going to just show about 100 amino acids near the end of the alignment, where there is the most overlap across all of the sequences. This is set with the \passthrough{\lstinline!start = ...!} and \passthrough{\lstinline!end = ...!} arguments. Note that we're using the \passthrough{\lstinline!shrooms\_align!} object.
+Printing and msa to the R plot window can be useful to make nicer looking figures of parts of an MSA. I'm going to just show about 100 amino acids near the end of the alignment, where there is the most overlap across all of the sequences. This is set with the \passthrough{\lstinline!start = ...!} and \passthrough{\lstinline!end = ...!} arguments.
+
+Note that we're using the \passthrough{\lstinline!shrooms\_align!} object again, but with the class reassigned.
 
 \begin{lstlisting}[language=R]
+# key step - must have class set properly
+class(shrooms_align) <- "AAMultipleAlignment"
+
+# run ggmsa
 ggmsa::ggmsa(shrooms_align,   # shrooms_align, NOT shrooms_align_seqinr
       start = 2000, 
       end = 2100) 
 \end{lstlisting}
 
-\begin{lstlisting}
-## Registered S3 methods overwritten by 'ggalt':
-##   method                  from   
-##   grid.draw.absoluteGrob  ggplot2
-##   grobHeight.absoluteGrob ggplot2
-##   grobWidth.absoluteGrob  ggplot2
-##   grobX.absoluteGrob      ggplot2
-##   grobY.absoluteGrob      ggplot2
-\end{lstlisting}
-
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-159-1.pdf}
-
 \hypertarget{saving-an-msa-as-pdf}{%
 \subsubsection{Saving an MSA as PDF}\label{saving-an-msa-as-pdf}}
 
 We can take a look at the alignment in PDF format if we want. I this case I'm going to just show about 100 amino acids near the end of the alignment, where there is the most overlap across all of the sequences. This is set with the \passthrough{\lstinline!y = c(...)!} argument.
+
+In order for this to work you need to have a program called LaTex installed on your computer. LaTex can occasionally be tricky to install so you can skip this step if necessary.
+
+If you want to try to install LaTex, you can run this code to see if it works
+for you
+
+\begin{lstlisting}[language=R]
+install.packages("tinytex")
+install_tinytex()
+\end{lstlisting}
+
+If you have LaTex working on your computer you can then run this code. (If this code doesn't work, you can comment it out)
 
 \begin{lstlisting}[language=R]
 msaPrettyPrint(shrooms_align,             # alignment
@@ -3796,263 +4053,1952 @@ getwd()
 
 On a Mac you can usually find the file by searching in Finder for the file name, which I set to be ``shroom\_msa.pdf'' using the \passthrough{\lstinline!file = ...!} argument above.
 
-\hypertarget{genetic-distance.}{%
-\section{Genetic distance.}\label{genetic-distance.}}
+\hypertarget{a-subset-of-sequences}{%
+\section{A subset of sequences}\label{a-subset-of-sequences}}
 
-Next need to first get an estimate of how similar each sequences is. The more amino acids that are identical to each other, the more similar.
+To make things easier we'll move forward with just a subset of sequences:
 
-Instead of similarity, we usually work in terms of \emph{difference} or \textbf{genetic distance} (a.k.a. \textbf{evolutionary distance}). This is done with the \passthrough{\lstinline!dist.alignment()!} function.
+\begin{itemize}
+\tightlist
+\item
+  XP\_392427: amShroom (bee shroom)
+\item
+  EAA12598: agShroom (mosquito shroom)
+\item
+  ABA81834: dmShroom (\emph{Drosophila} shroom)
+\item
+  XP\_783573: spShroom (sea urchin shroom)
+\item
+  CAA78718: xShroom1 (frog shroom)
+\end{itemize}
+
+Our main working object shrooms\_vector\_ss has the names of our genes listed
 
 \begin{lstlisting}[language=R]
-shrooms_dist <- seqinr::dist.alignment(shrooms_align_seqinr, 
+names(shrooms_vector_ss)
+\end{lstlisting}
+
+\begin{lstlisting}
+##  [1] "CAA78718"  "NP_597713" "CAA58534"  "ABD19518"  "AAF13269"  "AAF13270" 
+##  [7] "NP_065910" "ABD59319"  "NP_065768" "AAK95579"  "ABA81834"  "EAA12598" 
+## [13] "XP_392427" "XP_783573"
+\end{lstlisting}
+
+We can select the ones we want to focus on be first making a vector of the names
+
+\begin{lstlisting}[language=R]
+names.focal <- c("XP_392427","EAA12598","ABA81834","XP_783573","CAA78718")
+\end{lstlisting}
+
+We can use this vector and bracket notation to select the what we want from shrooms\_vector\_ss:
+
+\begin{lstlisting}[language=R]
+shrooms_vector_ss[names.focal]
+\end{lstlisting}
+
+\begin{lstlisting}
+## AAStringSet object of length 5:
+##     width seq                                               names               
+## [1]  2126 MTELQPSPPGYRVQDEAPGPPSC...GREIQDKVKLGEEQLAALREAID XP_392427
+## [2]   674 IPFSSSPKNRSNSKASYLPRQPR...ADKIKLGEEQLAALKDTLVQSEC EAA12598
+## [3]  1576 MKMRNHKENGNGSEMGESTKSLA...AVRIKGSEEQLSSLSDALVQSDC ABA81834
+## [4]  1661 MMKDAMYPTTTSTTSSSVNPLPK...TSSSSNGIGGPEQLNSNATSSYC XP_783573
+## [5]  1420 MSAFGNTIERWNIKSTGVIAGLG...KNLEEKIKVYEEQFESIHNSLPP CAA78718
+\end{lstlisting}
+
+Let's assign the subset of sequences to a new object called shrooms\_vector\_ss\_subset.
+
+\begin{lstlisting}[language=R]
+shrooms_vector_ss_subset <- shrooms_vector_ss[names.focal]
+\end{lstlisting}
+
+Let's make another MSA with just this subset. If msa isn't working for you you can comment this out.
+
+\begin{lstlisting}[language=R]
+shrooms_align_subset <- msa(shrooms_vector_ss_subset,
+                     method = "ClustalW")
+\end{lstlisting}
+
+\begin{lstlisting}
+## use default substitution matrix
+\end{lstlisting}
+
+To view it using ggmsa we need to do those annoying conversions again.
+
+\begin{lstlisting}[language=R]
+class(shrooms_align_subset) <- "AAMultipleAlignment"
+shrooms_align_subset_seqinr <- msaConvert(shrooms_align_subset, type = "seqinr::alignment")
+\end{lstlisting}
+
+THen we can plot it
+
+\begin{lstlisting}[language=R]
+ggmsa::ggmsa(shrooms_align_subset,   # shrooms_align, NOT shrooms_align_seqinr
+      start = 2030, 
+      end = 2100) 
+\end{lstlisting}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-182-1.pdf}
+
+We can save our new smaller MSA like this.
+
+\begin{lstlisting}[language=R]
+msaPrettyPrint(shrooms_align_subset,             # alignment
+               file = "shroom_msa_subset.pdf",   # file name
+               y=c(2030, 2100),           # range
+               askForOverwrite=FALSE)
+\end{lstlisting}
+
+\hypertarget{genetic-distances-of-sequence-in-subset}{%
+\section{Genetic distances of sequence in subset}\label{genetic-distances-of-sequence-in-subset}}
+
+While an MSA is a good way to examine a sequence its hard to assess all of the information visually. A phylogenetic tree allows you to summarize patterns in an MSA. The fastest way to make phylogenetic trees to is first summarize an MSA using a \textbf{genetic distance matrix}. The more amino acids that are identical to each other, the smaller the genetic distance is between them and the less evolution has occurred.
+
+We usually work in terms of \emph{difference} or \textbf{genetic distance} (a.k.a. \textbf{evolutionary distance}), though often we also talk in terms of similarity or identity.
+
+Calculating genetic distance from an MSA is done using the \passthrough{\lstinline!seqinr::dist.alignment()!} function.
+
+\begin{lstlisting}[language=R]
+shrooms_subset_dist <- seqinr::dist.alignment(shrooms_align_subset_seqinr, 
                                        matrix = "identity")
+\end{lstlisting}
+
+This produces a ``dist'' class object.
+
+\begin{lstlisting}[language=R]
+is(shrooms_subset_dist)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "dist"     "oldClass"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+class(shrooms_subset_dist)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "dist"
+\end{lstlisting}
+
+If you've been having trouble with the MSA software, the data necessary to build the distance matrix directly in R is in this code chunk (you can ignore the details).
+
+\begin{lstlisting}[language=R]
+shrooms_subset_dist_alt <- matrix(data = NA,
+                              nrow = 5, 
+                              ncol = 5)
+
+distances <- c(0.8260049, 
+               0.8478722, 0.9000568, 
+               0.9244596, 0.9435187, 0.9372139, 
+               0.9238779, 0.9370038, 0.9323225,0.9413209)
+shrooms_subset_dist_alt[lower.tri(shrooms_subset_dist_alt)] <- distances
+
+seqnames <- c("EAA12598","ABA81834","XP_392427", "XP_783573","CAA78718")
+colnames(shrooms_subset_dist_alt) <- seqnames
+row.names(shrooms_subset_dist_alt)  <- seqnames
+shrooms_subset_dist_alt <- as.dist(shrooms_subset_dist_alt)
+shrooms_subset_dist <- shrooms_subset_dist_alt
 \end{lstlisting}
 
 We've made a matrix using \passthrough{\lstinline!dist.alignment()!}; let's round it off so its easier to look at using the \passthrough{\lstinline!round()!} function.
 
 \begin{lstlisting}[language=R]
-shrooms_dist_rounded <- round(shrooms_dist,
+shrooms_subset_dist_rounded <- round(shrooms_subset_dist,
                               digits = 3)
 \end{lstlisting}
 
-Now let's look at it
+If we want to look at it we can type
 
 \begin{lstlisting}[language=R]
-shrooms_dist_rounded
+shrooms_subset_dist_rounded
 \end{lstlisting}
 
 \begin{lstlisting}
-##           NP_065768 AAK95579 AAF13269 AAF13270 NP_065910 ABD59319 CAA58534
-## AAK95579      0.000                                                       
-## AAF13269      0.884    0.917                                              
-## AAF13270      0.897    0.917    0.000                                     
-## NP_065910     0.878    0.912    0.533    0.536                            
-## ABD59319      0.893    0.921    0.783    0.783     0.782                  
-## CAA58534      0.872    0.908    0.838    0.849     0.840    0.864         
-## ABD19518      0.866    0.912    0.834    0.846     0.838    0.855    0.548
-## NP_597713     0.916    0.939    0.903    0.903     0.902    0.904    0.896
-## CAA78718      0.925    0.955    0.896    0.895     0.893    0.893    0.898
-## EAA12598      0.914    0.947    0.899    0.899     0.902    0.897    0.891
-## ABA81834      0.938    0.943    0.935    0.934     0.936    0.940    0.935
-## XP_392427     0.936    0.963    0.935    0.934     0.938    0.941    0.938
-## XP_783573     0.940    0.958    0.942    0.939     0.942    0.935    0.942
-##           ABD19518 NP_597713 CAA78718 EAA12598 ABA81834 XP_392427
-## AAK95579                                                         
-## AAF13269                                                         
-## AAF13270                                                         
-## NP_065910                                                        
-## ABD59319                                                         
-## CAA58534                                                         
-## ABD19518                                                         
-## NP_597713    0.900                                               
-## CAA78718     0.891     0.919                                     
-## EAA12598     0.896     0.920    0.922                            
-## ABA81834     0.935     0.932    0.946    0.882                   
-## XP_392427    0.934     0.927    0.947    0.878    0.923          
-## XP_783573    0.946     0.947    0.941    0.925    0.954     0.943
+##           EAA12598 ABA81834 XP_392427 XP_783573
+## ABA81834     0.826                             
+## XP_392427    0.848    0.944                    
+## XP_783573    0.900    0.937     0.937          
+## CAA78718     0.924    0.924     0.932     0.941
 \end{lstlisting}
 
-\hypertarget{phylognetic-trees-finally}{%
-\section{Phylognetic trees (finally!)}\label{phylognetic-trees-finally}}
+Not that we have 5 sequence, but the matrix is 4 x 4. This is because redundant information is dropped, including distances from one sequence to itself. This makes it so that the first column is EAA12598, but the first row is ABA81834.
 
-We got our sequence, built multiple sequence alignment, and calculated the genetic distance between sequences. Now we are - finally - ready to build a phylogenetic tree.
+\hypertarget{phylognetic-trees-of-subset-sequences-finally}{%
+\section{Phylognetic trees of subset sequences (finally!)}\label{phylognetic-trees-of-subset-sequences-finally}}
+
+We got our sequences, built a multiple sequence alignment, and calculated the genetic distance between sequences. Now we are - finally - ready to build a phylogenetic tree.
 
 First, we let R figure out the structure of the tree. There are \textbf{MANY} ways to build phylogenetic trees. We'll use a common one used for exploring sequences called \textbf{neighbor joining} algorithm via the function \passthrough{\lstinline!nj()!}. Neighbor joining uses genetic distances to cluster sequences into \textbf{clades}.
 
+nj() is simple function that takes only a single argument, a distance matrix.
+
 \begin{lstlisting}[language=R]
-tree <- nj(shrooms_dist)
+# Note - not using rounded values
+tree_subset <- nj(shrooms_subset_dist)
 \end{lstlisting}
 
 \hypertarget{plotting-phylogenetic-trees}{%
 \subsection{Plotting phylogenetic trees}\label{plotting-phylogenetic-trees}}
 
-Now we'll make a quick plot of our tree using \passthrough{\lstinline!plot()!} (and add a little label using a function called \passthrough{\lstinline!mtext()!}).
+Now we'll make a quick plot of our tree using \passthrough{\lstinline!plot()!} (and add a little label using an important function called \passthrough{\lstinline!mtext()!}).
 
 \begin{lstlisting}[language=R]
 # plot tree
-plot.phylo (tree, main="Phylogenetic Tree", 
+plot.phylo(tree_subset, main="Phylogenetic Tree", 
             type = "unrooted", 
             use.edge.length = F)
 
 # add label
-mtext(text = "Shroom family gene tree - unrooted, no branch lengths")
+mtext(text = "Shroom family gene tree - UNrooted, no branch lengths")
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-166-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-190-1.pdf}
 
-This is an **unrooted tree*. For the sake of plotting we've also ignored the evolutionary distance between the sequences.
+This is an \textbf{unrooted tree} with no outgroup defined. For the sake of plotting we've also ignored the evolutionary distance between the sequences, so the branch lengths don't have meaning.
 
-To make a rooted tree we remove \passthrough{\lstinline!type = "unrooted!}.
+To make a rooted tree we remove \passthrough{\lstinline!type = "unrooted!}. In the case of neighbor joining, the algorithm tries to figure out the outgroup on its own.
 
 \begin{lstlisting}[language=R]
 # plot tree
-plot.phylo (tree, main="Phylogenetic Tree", 
+plot.phylo(tree_subset, main="Phylogenetic Tree", 
             use.edge.length = F)
 
 # add label
 mtext(text = "Shroom family gene tree - rooted, no branch lenths")
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-167-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-191-1.pdf}
 
 We can include information about branch length by setting \passthrough{\lstinline!use.edge.length = ...!} to \passthrough{\lstinline!T!}.
 
 \begin{lstlisting}[language=R]
 # plot tree
-plot.phylo (tree, main="Phylogenetic Tree", 
+plot.phylo(tree_subset, main="Phylogenetic Tree", 
             use.edge.length = T)
 
 # add label
 mtext(text = "Shroom family gene tree - rooted, with branch lenths")
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-168-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-192-1.pdf}
 
-Some of the branches are now very short, but most are very long, indicating that these genes have been evolving independently for many millions of years.
+Now the length of the branches indicates the evolutionary distance between sequences and correlate to the distances reported in our distance matrix. The branches are all very long, indicating that these genes have been evolving independently for many millions of years.
 
-Let's make a fancier plot. Don't worry about all the steps; I've added some more code to add some annotations on the right-hand side to help us see what's going on.
+An important note: the vertical lines on the tree have no meaning, only the horizontal ones.
+
+Because the branch lengths are all so long I find this tree a bit hard to view when its rooted. Let's make it unrooted again.
 
 \begin{lstlisting}[language=R]
-plot(tree, main="Phylogenetic Tree")
-mtext(text = "Shroom family gene tree")
+# plot tree
+plot.phylo(tree_subset, main="Phylogenetic Tree", 
+           type = "unrooted",
+            use.edge.length = T)
 
-x <- 0.551
-x2 <- 0.6
-
-# label Shrm 3
-segments(x0 = x, y0 = 1, 
-         x1 = x, y1 = 4,
-         lwd=2)
-text(x = x*1.01, y = 2.5, "Shrm 3",adj = 0)
-
-segments(x0 = x, y0 = 5, 
-         x1 = x, y1 = 6,
-         lwd=2)
-text(x = x*1.01, y = 5.5, "Shrm 2",adj = 0)
-
-segments(x0 = x, y0 = 7, 
-         x1 = x, y1 = 9,
-         lwd=2)
-text(x = x*1.01, y = 8, "Shrm 1",adj = 0)
-
-segments(x0 = x, y0 = 10, 
-         x1 = x, y1 = 13,
-         lwd=2)
-text(x = x*1.01, y = 12, "Shrm ?",adj = 0)
-
-
-segments(x0 = x, y0 = 14, 
-         x1 = x, y1 = 15,
-         lwd=2)
-text(x = x*1.01, y = 14.5, "Shrm 4",adj = 0)
-
-
-segments(x0 = x2, y0 = 1, 
-         x1 = x2, y1 = 6,
-         lwd=2)
-
-segments(x0 = x2, y0 = 7, 
-         x1 = x2, y1 = 9,
-         lwd=2)
-
-segments(x0 = x2, y0 = 10, 
-         x1 = x2, y1 = 15,
-         lwd=2)
+# add label
+mtext(text = "Shroom family gene tree - rooted, with branch lenths")
 \end{lstlisting}
 
-\includegraphics{lbrb_files/figure-latex/unnamed-chunk-169-1.pdf}
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-193-1.pdf}
 
-\hypertarget{logarithms-in-r}{%
-\chapter{Logarithms in R}\label{logarithms-in-r}}
-
-\textbf{By} Nathan Brouwer
-
-Logging splits up multiplication into addition. So, log(m*n) is the same as log(m) + log(n)
-
-You can check this
+Now you can see that the ABA and EAA sequences form a clade, and that the distance between them is somewhat smaller than the distance between other sequences. If we go back to our original distance matrix, we can see that the smallest genetic distance is between ABA and EAA at 0.826.
 
 \begin{lstlisting}[language=R]
-m<-10
-n<-11
-log(m*n)
+shrooms_subset_dist_rounded
 \end{lstlisting}
 
 \begin{lstlisting}
-## [1] 4.70048
+##           EAA12598 ABA81834 XP_392427 XP_783573
+## ABA81834     0.826                             
+## XP_392427    0.848    0.944                    
+## XP_783573    0.900    0.937     0.937          
+## CAA78718     0.924    0.924     0.932     0.941
 \end{lstlisting}
 
+We can confirm that this is the minimum using the min() function.
+
 \begin{lstlisting}[language=R]
-log(m)+log(n)
+min(shrooms_subset_dist_rounded)
 \end{lstlisting}
 
 \begin{lstlisting}
-## [1] 4.70048
+## [1] 0.826
+\end{lstlisting}
+
+\hypertarget{simple-for-loop-example}{%
+\chapter{Simple for() loop example}\label{simple-for-loop-example}}
+
+\hypertarget{key-functions-terms}{%
+\section{Key functions / terms}\label{key-functions-terms}}
+
+\begin{itemize}
+\tightlist
+\item
+  paste()
+\item
+  functions to learn about vectors and other objects
+\item
+  nchar()
+\item
+  vector element
+\item
+  bracket notation to access vector elements
+\item
+  for() loop
+\item
+  curly brackets \{ \}
+\item
+  function()
+\item
+  class()
+\end{itemize}
+
+Here's a simple ``toy'' example of using four loops.
+
+Let's say we need look AG different codons and need to vary the first base of a codon. For example, we want to look AG all the codons that are ``XAG'', so we want
+
+AAG
+TAG
+CAG
+GAG
+
+We make a vector that holds the first base of the code
+
+\begin{lstlisting}[language=R]
+#element 1   2   3   4
+x <- c("A","T","C","G")
+\end{lstlisting}
+
+This is a vector with 4 elements. We can explore it using the usual functions that tell us about objects (aka variables) in R.
+
+\begin{lstlisting}[language=R]
+is(x)
+\end{lstlisting}
+
+\begin{lstlisting}
+##  [1] "character"               "vector"                 
+##  [3] "data.frameRowLabels"     "SuperClassMethod"       
+##  [5] "EnumerationValue"        "character_OR_connection"
+##  [7] "character_OR_NULL"       "atomic"                 
+##  [9] "vector_OR_Vector"        "vector_OR_factor"
 \end{lstlisting}
 
 \begin{lstlisting}[language=R]
-log(m*n) == log(m)+log(n)
+length(x)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 4
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+nchar(x)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 1 1 1 1
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+dim(x)
+\end{lstlisting}
+
+\begin{lstlisting}
+## NULL
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+nrow(x)
+\end{lstlisting}
+
+\begin{lstlisting}
+## NULL
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+ncol(x)
+\end{lstlisting}
+
+\begin{lstlisting}
+## NULL
+\end{lstlisting}
+
+If we need to know what a function does we should always look it up in the help file
+
+\begin{lstlisting}[language=R]
+?nchar
+\end{lstlisting}
+
+Note that when we call the function nchar() on x we get
+
+\begin{lstlisting}[language=R]
+nchar(x)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 1 1 1 1
+\end{lstlisting}
+
+This means that each element of x has one character in it.
+
+Compare that result with this. Let's make a vector with a single codon in it.
+
+\begin{lstlisting}[language=R]
+#element   1
+y <- c("AGC")
+\end{lstlisting}
+
+Now nchar() says this
+
+\begin{lstlisting}[language=R]
+nchar(y)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 3
+\end{lstlisting}
+
+That is, 3 character (3 letters) in the first and only element of the vectors.
+
+If our vector contained codons, it would look like this
+
+\begin{lstlisting}[language=R]
+y <- c("AAG", "TAG", "CAG", "GAG")
+nchar(y)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 3 3 3 3
+\end{lstlisting}
+
+That is, four elements in the vector, each element with 3 characters in it.
+
+Let's say we are keeping the second and third position of our codon fixed AG ``AG'' and will vary the first position. A function that will be handy is paste().
+
+Paste takes things and combines them into a single element of a vector. So, I can do this with my name
+
+\begin{lstlisting}[language=R]
+n <- paste("Nathan","Linn","Brouwer")
+\end{lstlisting}
+
+This gives me a vector of length 1
+
+\begin{lstlisting}[language=R]
+length(n)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 1
+\end{lstlisting}
+
+That contains my name
+
+\begin{lstlisting}[language=R]
+n
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "Nathan Linn Brouwer"
+\end{lstlisting}
+
+If I don't want any spaces I can do this
+
+\begin{lstlisting}[language=R]
+paste("NAGhan","Linn","Brouwer", sep = "")
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "NAGhanLinnBrouwer"
+\end{lstlisting}
+
+I can use paste() to assembly codons for me
+
+\begin{lstlisting}[language=R]
+codon1 <- paste("A", "AG", sep = "")
+codon1
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "AAG"
+\end{lstlisting}
+
+I can make all for possible codon that end in ``AG'' like this
+
+\begin{lstlisting}[language=R]
+paste("A", "AG", sep = "")
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "AAG"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+paste("T", "AG", sep = "")
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "TAG"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+paste("C", "AG", sep = "")
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "CAG"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+paste("G", "AG", sep = "")
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "GAG"
+\end{lstlisting}
+
+Since I have a vector with the first base I'm varying in it, I can also do this using bracket notation, with x{[}1{]}, x{[}2{]}, etc.
+
+\begin{lstlisting}[language=R]
+paste(x[1], "AG", sep = "")
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "AAG"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+paste(x[2], "AG", sep = "")
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "TAG"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+paste(x[3], "AG", sep = "")
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "CAG"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+paste(x[4], "AG", sep = "")
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "GAG"
+\end{lstlisting}
+
+Copying the same line of code multiple times gets the job done but will be prone to errors. Anytime the same process gets repeated you should consider using for() loops and/or functions. I can take the four lines of code in the previous chunk and turn it into a four loop like this.
+
+\begin{lstlisting}[language=R]
+for(i in 1:length(x)){
+  codon <- paste(x[i],"AG", sep = "")
+  print(codon)
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "AAG"
+## [1] "TAG"
+## [1] "CAG"
+## [1] "GAG"
+\end{lstlisting}
+
+All for loops start with for(\ldots). Don't worry about what's in between the parentheses right now. Then there's a curly bracket \{, some code thAG does whAG we want, and a closing curly bracket \}.
+
+This is a ``toy'' example and doesn't accomplish much - my four loop has as many lines of code as the stuff it replaces. But if I have to do something dozens, hundreds, or thousands of times then its very useful to use for() loops.
+
+Functions also allow you to take a process and consolidated it. Often, functions contain for loops in them. For example, I can consolidated the for() loop into a function like this.
+
+First, I define a function called for\_loop\_function()
+
+\begin{lstlisting}[language=R]
+for_loop_function <- function(x){
+  for(i in 1:length(x)){
+  codon <- paste(x[i],"AG", sep = "")
+  print(codon)
+      }
+}
+\end{lstlisting}
+
+All function definitions start with function(\ldots), have a curly bracket \{, some code, and end with a \}. Functions often don't have for loops, but in this case it does, so there are two sets of curly brackets, one for the for() loop and one for the function wrapping around it.
+
+So now I can get the results I did before like this
+
+\begin{lstlisting}[language=R]
+for_loop_function(x)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "AAG"
+## [1] "TAG"
+## [1] "CAG"
+## [1] "GAG"
+\end{lstlisting}
+
+This is handy if I'm going to modify or reuse the process I'm doing. Let's say I want to work with RNA instead of DNA. I'll define a vector like this with U as the second element of the vector instead of T
+
+\begin{lstlisting}[language=R]
+x1 <- c("A","U" ,"C", "G")
+
+x1[2]
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "U"
+\end{lstlisting}
+
+Now I can get my results for RNA
+
+\begin{lstlisting}[language=R]
+for_loop_function(x1)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "AAG"
+## [1] "UAG"
+## [1] "CAG"
+## [1] "GAG"
+\end{lstlisting}
+
+Note that because everything in R is an object, I can learn about objects containing functions like this
+
+\begin{lstlisting}[language=R]
+is(for_loop_function)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "function"               "OptionalFunction"       "PossibleMethod"        
+## [4] "expression_OR_function"
+\end{lstlisting}
+
+The first element of the output tells me that this is a function object.,
+
+More succinctly I can use the class() function
+
+\begin{lstlisting}[language=R]
+class(for_loop_function)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "function"
+\end{lstlisting}
+
+Here's an example of another function. Note the key elements:
+The function name: entrez\_fetch\_list
+The assignment operator \textless-
+The function() function
+The brackets
+
+In this case, there's also a for() loop in this function.
+
+\begin{lstlisting}[language=R]
+entrez_fetch_list <- function(db, id, rettype, ...){
+
+  #setup list for storing output
+  n.seq <- length(id)
+  list.output <- as.list(rep(NA, n.seq))
+  names(list.output) <- id
+
+  # get output
+  for(i in 1:length(id)){
+    list.output[[i]] <- rentrez::entrez_fetch(db = db,
+                                              id = id[i],
+                                        rettype = rettype)
+  }
+
+  return(list.output)
+}
+\end{lstlisting}
+
+\hypertarget{phylogenetic-tree-example-using-neighbor-joining}{%
+\chapter{Phylogenetic tree example using neighbor joining}\label{phylogenetic-tree-example-using-neighbor-joining}}
+
+\hypertarget{key-vocab-concepts-not-exhaustive}{%
+\section{Key vocab / concepts (not exhaustive)}\label{key-vocab-concepts-not-exhaustive}}
+
+neighbor joining, msa, distance matrix, redundancy in distance matrices, diagonal of matrix, upper/lower triangular portion of matrix, symmetric matrix, phylogenetic tree, unrooted tree, branches, branch lengths, nodes
+
+Phylogenetic trees can be built several ways. Almost all methods using macromolecular sequences (DNA, protein, RNA) require first creating a MSA. Some methods then use algorithms that work directly with the MSA. A faster way is to summarize the MSA as a distance matrix by calculating the genetic distance between each pair of sequences in the MSA. This produces a genetic distance matrix. There are several ways to calculate genetic distance, but the simplest is to count the number of bases that are different between two sequences that are of equal length or to use 1-PID.
+
+The ape packages has a popular distance-based tree building method called neighbor joining (nj). This is a common method; for example, it can be used via the BLAST website.
+
+First, download ape from cran if needed. I've commented this out because I have already done this.
+
+\begin{lstlisting}[language=R]
+# install.packages("ape")
+\end{lstlisting}
+
+Now load it into my current R sessions
+
+\begin{lstlisting}[language=R]
+library(ape)
+\end{lstlisting}
+
+I can always learn about an R function be going to the help file. Help files often include at the bottom. These vary in quality, but good ones use simple datasets to illustrate the basic operation of functions in a package.
+
+If you go to the nj help file
+
+\begin{lstlisting}[language=R]
+?nj
+\end{lstlisting}
+
+and scroll to the bottom you'll see a classic example from paper that introduce the nj algorithm, Saitou and Nei (1987).
+
+In this example, we'll make a simple 8 x 8 distance matrix where each value is the number of bases that are different between two sequences.
+
+The data first go in a vector
+
+\begin{lstlisting}[language=R]
+x <- c(7, 8, 11, 13, 16, 13, 17, 5, 8, 10, 13,
+       10, 14, 5, 7, 10, 7, 11, 8, 11, 8, 12,
+       5, 6, 10, 9, 13, 8)
+\end{lstlisting}
+
+Note that even though we're going to make an 8 x 8 matrix, which will have 64 elements, we only have 28 elements in our vector. See if you can predict why this is.
+
+\begin{lstlisting}[language=R]
+length(x)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 28
+\end{lstlisting}
+
+We'll then make an 8 x 8 matrix M using the matrix() function. (Don't worry about the exact arguments being used here)
+
+\begin{lstlisting}[language=R]
+M <- matrix(0, 8, 8)
+M
+\end{lstlisting}
+
+\begin{lstlisting}
+##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8]
+## [1,]    0    0    0    0    0    0    0    0
+## [2,]    0    0    0    0    0    0    0    0
+## [3,]    0    0    0    0    0    0    0    0
+## [4,]    0    0    0    0    0    0    0    0
+## [5,]    0    0    0    0    0    0    0    0
+## [6,]    0    0    0    0    0    0    0    0
+## [7,]    0    0    0    0    0    0    0    0
+## [8,]    0    0    0    0    0    0    0    0
+\end{lstlisting}
+
+Now we'll make the matrix (close eyes and run code)
+
+\begin{lstlisting}[language=R]
+M[lower.tri(M)] <- x
+M <- t(M)
+M[lower.tri(M)] <- x
+dimnames(M) <- list(1:8, 1:8)
+\end{lstlisting}
+
+Now we have an 8 x 8 matrix filled in
+
+\begin{lstlisting}[language=R]
+M
+\end{lstlisting}
+
+\begin{lstlisting}
+##    1  2  3  4  5  6  7  8
+## 1  0  7  8 11 13 16 13 17
+## 2  7  0  5  8 10 13 10 14
+## 3  8  5  0  5  7 10  7 11
+## 4 11  8  5  0  8 11  8 12
+## 5 13 10  7  8  0  5  6 10
+## 6 16 13 10 11  5  0  9 13
+## 7 13 10  7  8  6  9  0  8
+## 8 17 14 11 12 10 13  8  0
+\end{lstlisting}
+
+You can see that the diagonal is all 0, and that the matrix is symmetric. There were only 28 elements in our vector because the same values appear in both the upper triangular portion of the matrix and in the lower triangular portion. So, 28 elements, used in two places, plus 8 zeros for the diagonal:
+
+\begin{lstlisting}[language=R]
+2*28 + 8
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 64
+\end{lstlisting}
+
+In this case the zeros are data: 1 sequences compared to itself has a distance of 0. In many cases, the redundancies of a matrix will be dropped. For example, the diagonal left blank, one of the two triangular portions dropped (doesn't matter which one), and even the first column dropped because its 0.
+
+Now, we can make the actual tree. nj() is a simple function that takes on a single arguments, a distance matrix
+
+\begin{lstlisting}[language=R]
+tr <- ape::nj(M)
+\end{lstlisting}
+
+The plot command visualizes the tree for us
+
+\begin{lstlisting}[language=R]
+plot(tr, type = "u")
+plot(tr, type = "unrooted")
+\end{lstlisting}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-228-1.pdf}
+
+This is an unrooted tree because no outgroup (distantly related comparison group that diverged long ago) was defined. Unrooted trees are common in practice, but usually trees in textbooks are rooted. The lengths of the branches correlate with the number of differences between each pair of sequences. Two branches meet at a node.
+
+The nj help file also has another example based on data from mice that comes from the ape package.
+
+We can learn more about the data using ?woodmouse
+
+This tells us that this is data from the mitochondrial gene cytochrome b, a gene that occurs in all mitochondria and hence all eukaryotes (but not archea or bacteria).
+
+We load these data using the data() command
+
+\begin{lstlisting}[language=R]
+data(woodmouse)
+\end{lstlisting}
+
+We can see what it is using is() and class() and other function
+
+\begin{lstlisting}[language=R]
+is(woodmouse)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "DNAbin"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+class(woodmouse)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "DNAbin"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+dim(woodmouse)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1]  15 965
+\end{lstlisting}
+
+Note that its a specialized data object called ``DNAbin'' and not in a simple matrix format. I can learn about DNAbin objects from their help file. This help file also has some example code at the bottom, but its pretty dense. I was able to fish out a handy function called dist.dna() which let's me better see what's in the woodmouse object.
+
+\begin{lstlisting}[language=R]
+dist.dna(woodmouse)
+\end{lstlisting}
+
+There are 15 samples and the matrix is big. I can make it easier to see by using the round() function wrapped around dist.dna()
+
+\begin{lstlisting}[language=R]
+round(dist.dna(woodmouse), digits = 2)
+\end{lstlisting}
+
+\begin{lstlisting}
+##         No305 No304 No306 No0906S No0908S No0909S No0910S No0912S No0913S
+## No304    0.01                                                            
+## No306    0.01  0.00                                                      
+## No0906S  0.02  0.01  0.01                                                
+## No0908S  0.02  0.01  0.01    0.01                                        
+## No0909S  0.02  0.02  0.01    0.02    0.02                                
+## No0910S  0.02  0.01  0.01    0.01    0.01    0.02                        
+## No0912S  0.01  0.01  0.01    0.01    0.01    0.01    0.01                
+## No0913S  0.02  0.01  0.00    0.01    0.01    0.02    0.01    0.01        
+## No1103S  0.01  0.01  0.01    0.01    0.01    0.01    0.01    0.00    0.01
+## No1007S  0.02  0.02  0.01    0.02    0.02    0.00    0.02    0.01    0.02
+## No1114S  0.02  0.02  0.02    0.02    0.02    0.02    0.02    0.02    0.02
+## No1202S  0.02  0.01  0.01    0.01    0.01    0.02    0.00    0.01    0.01
+## No1206S  0.02  0.01  0.01    0.01    0.01    0.02    0.01    0.01    0.01
+## No1208S  0.02  0.02  0.01    0.02    0.02    0.00    0.02    0.01    0.02
+##         No1103S No1007S No1114S No1202S No1206S
+## No304                                          
+## No306                                          
+## No0906S                                        
+## No0908S                                        
+## No0909S                                        
+## No0910S                                        
+## No0912S                                        
+## No0913S                                        
+## No1103S                                        
+## No1007S    0.01                                
+## No1114S    0.02    0.02                        
+## No1202S    0.01    0.01    0.02                
+## No1206S    0.01    0.02    0.02    0.01        
+## No1208S    0.01    0.00    0.02    0.02    0.02
+\end{lstlisting}
+
+Its still a big matrix, so you may need to move your RStudio panes around a bit to see it all.
+
+Note that in this case, the lower triangular portion of the matrix is shown, the upper part and diagonal is omitted, and the first row is dropped: the first row is No304, while the first column is No305 (followed by column 2, No304).
+
+In order to build the tree we have to turn the DNAbin object into this matrix. The most transparent way to do this is like this
+
+\begin{lstlisting}[language=R]
+mouse_M  <- dist.dna(woodmouse)
+\end{lstlisting}
+
+Then build the tree with nj()
+
+\begin{lstlisting}[language=R]
+trw <- nj(mouse_M)
+\end{lstlisting}
+
+We can do it in a single step, though, if we wrap the nj() function around dist.dna()
+
+\begin{lstlisting}[language=R]
+trw <- nj(dist.dna(woodmouse))
+\end{lstlisting}
+
+We can then visualize it using plot()
+
+\begin{lstlisting}[language=R]
+plot(trw)
+\end{lstlisting}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-237-1.pdf}
+
+\hypertarget{download-FASTA-inR}{%
+\chapter{Downloading DNA sequences as FASTA files in R}\label{download-FASTA-inR}}
+
+This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. Most of the text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
+
+\textbf{NOTE}: There is some redundancy in this current draft that needs to be eliminated.
+
+\hypertarget{functions-1}{%
+\subsection{Functions}\label{functions-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  library()
+\item
+  help()
+\item
+  cat()
+\item
+  is()
+\item
+  class()
+\item
+  dim()
+\item
+  length()
+\item
+  nchar()
+\item
+  strtrim()
+\item
+  is.vector()
+\item
+  table()
+\item
+  write()
+\item
+  getwd()
+\item
+  seqinr::write.fasta()
+\end{itemize}
+
+\hypertarget{softwarewebsites}{%
+\subsection{Software/websites}\label{softwarewebsites}}
+
+\begin{itemize}
+\tightlist
+\item
+  www.ncbi.nlm.nih.gov
+\item
+  Text editors (e.g.~Notepad++, TextWrangler)
+\end{itemize}
+
+\hypertarget{r-vocabulary}{%
+\subsection{R vocabulary}\label{r-vocabulary}}
+
+\begin{itemize}
+\tightlist
+\item
+  list
+\item
+  library
+\item
+  package
+\item
+  CRAN
+\item
+  wrapper
+\item
+  underscore \_
+\item
+  Camel Case
+\end{itemize}
+
+\hypertarget{file-types}{%
+\subsection{File types}\label{file-types}}
+
+\begin{itemize}
+\tightlist
+\item
+  FASTA
+\end{itemize}
+
+\hypertarget{bioinformatics-vocabulary}{%
+\subsection{Bioinformatics vocabulary}\label{bioinformatics-vocabulary}}
+
+\begin{itemize}
+\tightlist
+\item
+  accession, accession number
+\item
+  NCBI
+\item
+  NCBI Sequence Database
+\item
+  EMBL Sequence Database
+\item
+  FASTA file
+\item
+  RefSeq
+\end{itemize}
+
+\hypertarget{learning-objectives}{%
+\section{Learning objectives}\label{learning-objectives}}
+
+By the end of this tutorial you will be able to
+
+\begin{itemize}
+\tightlist
+\item
+  Download sequences in FASTA format
+\item
+  Understand there format and structure
+\item
+  Do basic of FASTA data is stored in a vector using is(), class(), length() and other functions
+\item
+  Determine the GC content using GC() and obtain other summary data with count()
+\item
+  Save FASTA files to your hard drive
+\end{itemize}
+
+\hypertarget{organisms-and-sequence-accessions}{%
+\subsection{Organisms and Sequence accessions}\label{organisms-and-sequence-accessions}}
+
+\begin{itemize}
+\tightlist
+\item
+  Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4.
+\end{itemize}
+
+The NCBI \textbf{RefeSeq accessions} for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are NC\_001477, NC\_001474, NC\_001475 and NC\_002640, respectively.
+
+According to Wikipedia
+
+\begin{quote}
+``Dengue virus (DENV) is the cause of dengue fever. It is a mosquito-borne, single positive-stranded RNA virus \ldots{} Five serotypes of the virus have been found, all of which can cause the full spectrum of disease. Nevertheless, scientists' understanding of dengue virus may be simplistic, as rather than distinct \ldots{} groups, a continuum appears to exist.'' \url{https://en.wikipedia.org/wiki/Dengue_virus}
+\end{quote}
+
+\hypertarget{preliminaries}{%
+\subsection{Preliminaries}\label{preliminaries}}
+
+Note that seqinr the package name is all lower case, though the authors of the package like to spell it ``SeqinR''.
+
+\begin{lstlisting}[language=R]
+library(rentrez)
+library(seqinr)
+library(compbio4all) 
+\end{lstlisting}
+
+\hypertarget{dna-sequence-statistics-part-1}{%
+\section{DNA Sequence Statistics: Part 1}\label{dna-sequence-statistics-part-1}}
+
+\hypertarget{using-r-for-bioinformatics}{%
+\subsection{Using R for Bioinformatics}\label{using-r-for-bioinformatics}}
+
+The chapter will guide you through the process of using R to carry out simple analyses that are common in bioinformatics and computational biology. In particular, the focus is on computational analysis of biological sequence data such as genome sequences and protein sequences. The programming approaches, however, are broadly generalizable to statistics and data science.
+
+The tutorials assume that the reader has some basic knowledge of biology, but not necessarily of bioinformatics. The focus is to explain simple bioinformatics analysis, and to explain how to carry out these analyses using \emph{R}.
+
+\hypertarget{r-packages-for-bioinformatics-bioconductor-and-seqinr}{%
+\subsection{R packages for bioinformatics: Bioconductor and SeqinR}\label{r-packages-for-bioinformatics-bioconductor-and-seqinr}}
+
+Many authors have written \emph{R} packages for performing a wide variety of analyses. These do not come with the standard \emph{R} installation, but must be installed and loaded as ``add-ons''.
+
+Bioinformaticians have written numerous specialized packages for \emph{R}. In this tutorial, you will learn to use some of the function in the \href{https://cran.r-project.org/web/packages/seqinr/index.html}{\passthrough{\lstinline!SeqinR!}} package to to carry out simple analyses of DNA sequences. (\passthrough{\lstinline!SeqinR!} can retrieve sequences from a DNA sequence database, but this has largely been replaced by the functions in the package \passthrough{\lstinline!rentrez!})
+
+Many well-known bioinformatics packages for \emph{R} are in the Bioconductor set of \emph{R} packages (www.bioconductor.org), which contains packages with many \emph{R} functions for analyzing biological data sets such as microarray data. The \href{https://cran.r-project.org/web/packages/seqinr/index.html}{\passthrough{\lstinline!SeqinR!}} package is from CRAN, which contains R functions for obtaining sequences from DNA and protein sequence databases, and for analyzing DNA and protein sequences.
+
+For instructions/review on how to install an R package on your own see \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/installr.html}{How to install an R package} )
+
+We will also use functions or data from the \passthrough{\lstinline!rentrez!} and \passthrough{\lstinline!compbio4all!} packages.
+
+Remember that you can ask for more information about a particular \emph{R} command by using the \passthrough{\lstinline!help()!} function or \passthrough{\lstinline!?!} function. For example, to ask for more information about the \passthrough{\lstinline!library()!}, you can type:
+
+\begin{lstlisting}[language=R]
+help("library")
+\end{lstlisting}
+
+You can also do this
+
+\begin{lstlisting}[language=R]
+?library
+\end{lstlisting}
+
+\hypertarget{fasta-file-format}{%
+\subsection{FASTA file format}\label{fasta-file-format}}
+
+The FASTA format is a simple and widely used format for storing biological (e.g.~DNA or protein) sequences. It was first used by the \href{https://en.wikipedia.org/wiki/FASTA}{FASTA program} for sequence alignment in the 1980s and has been adopted as standard by many other programs.
+
+FASTA files begin with a single-line description starting with a greater-than sign \passthrough{\lstinline!>!} character, followed on the next line by the sequences. Here is an example of a FASTA file. (If you're looking at the source script for this lesson you'll see the \passthrough{\lstinline!cat()!} command, which is just a text display function used format the text when you run the code).
+
+\begin{lstlisting}
+## >A06852 183 residues MPRLFSYLLGVWLLLSQLPREIPGQSTNDFIKACGRELVRLWVEICGSVSWGRTALSLEEPQLETGPPAETMPSSITKDAEILKMMLEFVPNLPQELKATLSERQPSLRELQQSASKDSNLNFEEFKKIILNRQNEAEDKSLLELKNLGLDKHSRKKRLFRMTLSEKCCQVGCIRKDIARLC
+\end{lstlisting}
+
+\hypertarget{the-ncbi-sequence-database-1}{%
+\subsection{The NCBI sequence database}\label{the-ncbi-sequence-database-1}}
+
+The US \href{www.ncbi.nlm.nih.gov}{National Centre for Biotechnology Information (NCBI)} maintains the \textbf{NCBI Sequence Database}, a huge database of all the DNA and protein sequence data that has been collected. There are also similar databases in Europe, the \href{www.ebi.ac.uk/embl}{European Molecular Biology Laboratory (EMBL) Sequence Database}, and Japan, the \href{www.ddbj.nig.ac.jp}{DNA Data Bank of Japan (DDBJ)}. These three databases exchange data every night, so at any one point in time, they contain almost identical data.
+
+Each sequence in the NCBI Sequence Database is stored in a separate \textbf{record}, and is assigned a unique identifier that can be used to refer to that record. The identifier is known as an \textbf{accession}, and consists of a mixture of numbers and letters.
+
+For example, Dengue virus causes Dengue fever, which is classified as a \textbf{neglected tropical disease} by the World Health Organization (WHO), is classified by any one of four types of Dengue virus: DEN-1, DEN-2, DEN-3, and DEN-4. The NCBI accessions for the DNA sequences of the DEN-1, DEN-2, DEN-3, and DEN-4 Dengue viruses are
+
+\begin{itemize}
+\tightlist
+\item
+  NC\_001477
+\item
+  NC\_001474
+\item
+  NC\_001475\\
+\item
+  NC\_002640
+\end{itemize}
+
+Note that because the NCBI Sequence Database, the EMBL Sequence Database, and DDBJ exchange data every night, the DEN-1 (and DEN-2, DEN-3, DEN-4) Dengue virus sequence are present in all three databases, but they have different accessions in each database, as they each use their own numbering systems for referring to their own sequence records.
+
+\hypertarget{retrieving-genome-sequence-data-using-rentrez}{%
+\subsection{Retrieving genome sequence data using rentrez}\label{retrieving-genome-sequence-data-using-rentrez}}
+
+You can retrieve sequence data from NCBI directly from \emph{R} using the \passthrough{\lstinline!rentrez!} package. The DEN-1 Dengue virus genome sequence has NCBI RefSeq accession NC\_001477. To retrieve a sequence with a particular NCBI accession, you can use the function \passthrough{\lstinline!entrez\_fetch()!} from the \passthrough{\lstinline!rentrez!} package. Note that to be specific where the function comes from I write it as \passthrough{\lstinline!package::function()!}.
+
+\begin{lstlisting}[language=R]
+dengueseq_fasta <- rentrez::entrez_fetch(db = "nucleotide", 
+                          id = "NC_001477", 
+                          rettype = "fasta")
+\end{lstlisting}
+
+Note that the ``\emph{'' in the name is just an arbitrary way to separate two words. Another common format would be \passthrough{\lstinline!dengueseq.fasta!}. Some people like \passthrough{\lstinline!dengueseqFasta!}, called \textbf{camel case} because the capital letter makes a hump in the middle of the word. Underscores are becoming most common and are favored by developers associated with RStudio and the \textbf{tidyverse} of packages that many data scientists use. I switch between ''.'' and ''}'' as separators, usually favoring ``\_'' for function names and ``.'' for objects; I personally find camel case harder to read and to type.
+
+Ok, so what exactly have we done when we made \passthrough{\lstinline!dengueseq\_fasta!}? We have an R object \passthrough{\lstinline!dengueseq\_fasta!} which has the sequence linked to the accession number ``NC\_001477.'' So where is the sequence, and what is it?
+
+First, what is it?
+
+\begin{lstlisting}[language=R]
+is(dengueseq_fasta)
+\end{lstlisting}
+
+\begin{lstlisting}
+##  [1] "character"               "vector"                 
+##  [3] "data.frameRowLabels"     "SuperClassMethod"       
+##  [5] "EnumerationValue"        "character_OR_connection"
+##  [7] "character_OR_NULL"       "atomic"                 
+##  [9] "vector_OR_Vector"        "vector_OR_factor"
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+class(dengueseq_fasta)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "character"
+\end{lstlisting}
+
+How big is it? Try the \passthrough{\lstinline!dim()!} and \passthrough{\lstinline!length()!} commands and see which one works. Do you know why one works and the other doesn't?
+
+\begin{lstlisting}[language=R]
+dim(dengueseq_fasta)
+\end{lstlisting}
+
+\begin{lstlisting}
+## NULL
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+length(dengueseq_fasta)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 1
+\end{lstlisting}
+
+The size of the object is 1. Why is this? This is the genomic sequence of a virus, so you'd expect it to be fairly large. We'll use another function below to explore that issue. Think about this first: how many pieces of unique information are in the \passthrough{\lstinline!dengueseq!} object? In what sense is there only \emph{one} piece of information?
+
+If we want to actually see the sequence we can type just type \passthrough{\lstinline!dengueseq\_fasta!} and press enter. This will print the WHOLE genomic sequence out but it will probably run of your screen.
+
+\begin{lstlisting}[language=R]
+dengueseq_fasta
+\end{lstlisting}
+
+This is a whole genome sequence, but its stored as single entry in a vector, so the \passthrough{\lstinline!length()!} command just tells us how many entries there are in the vector, which is just one! What this means is that the entire genomic sequence is stored in a single entry of the vector \passthrough{\lstinline!dengueseq\_fasta!}. (If you're not following along with this, no worries - its not essential to actually working with the data)
+
+If we want to actually know how long the sequence is, we need to use the function \passthrough{\lstinline!nchar()!}, which stands for ``number of characters''.
+
+\begin{lstlisting}[language=R]
+nchar(dengueseq_fasta)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 10935
+\end{lstlisting}
+
+The sequence is 10935 bases long. All of these bases are stored as a single \textbf{character string} with no spaces in a single entry of our \passthrough{\lstinline!dengueseq\_fasta!} vector. This isn't actually a useful format for us, so below were' going to convert it to something more useful.
+
+If we want to see just part of the sequence we can use the \passthrough{\lstinline!strtrim()!} function. This stands for ``String trim''. Before you run the code below, predict what the 100 means.
+
+\begin{lstlisting}[language=R]
+strtrim(dengueseq_fasta, 100)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAAC"
+\end{lstlisting}
+
+Note that at the end of the name is a slash followed by an n, which indicates to the computer that this is a \textbf{newline}; this is read by text editor, but is ignored by R in this context.
+
+\begin{lstlisting}[language=R]
+strtrim(dengueseq_fasta, 45)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] ">NC_001477.1 Dengue virus 1, complete genome\nA"
+\end{lstlisting}
+
+After the \passthrough{\lstinline!\\\\n!} begins the sequence, which will continue on for a LOOOOOONG way. Let's just print a little bit.
+
+\begin{lstlisting}[language=R]
+strtrim(dengueseq_fasta, 52)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTA"
+\end{lstlisting}
+
+Let's print some more. Do you notice anything beside A, T, C and G in the sequence?
+
+\begin{lstlisting}[language=R]
+strtrim(dengueseq_fasta, 200)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTAACAGT\nTTTTTATTAGAGAGCAGATCTCTGATGAACAACCAACGGAAAAAGACGGGTCGACCGTCTTTCAATATGC\nTGAAACGCGCGAGAAA"
+\end{lstlisting}
+
+Again, there are the \passthrough{\lstinline!\\\\n!} newline characters, which tell text editors and word processors how to display the file. (note that if you are reading the raw code for this chapter there will be 2 slashes in front of the n in the previous sentence; this is an RMarkdown thing)
+
+Now that we a sense of what we're looking at let's explore the \passthrough{\lstinline!dengueseq\_fasta!} a bit more.
+
+We can find out more information about what it is using the \passthrough{\lstinline!class()!}command.
+
+\begin{lstlisting}[language=R]
+class(dengueseq_fasta)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "character"
+\end{lstlisting}
+
+As noted before, this is character data.
+
+Many things in R are vectors so we can ask \emph{R }\passthrough{\lstinline!is.vector()!}
+
+\begin{lstlisting}[language=R]
+is.vector(dengueseq_fasta)
 \end{lstlisting}
 
 \begin{lstlisting}
 ## [1] TRUE
 \end{lstlisting}
 
-Exponentiation undos logs
+Yup, that's true.
+
+Ok, let's see what else. A handy though often verbose command is \passthrough{\lstinline!is()!}, which tells us what an object, well, what it is:
 
 \begin{lstlisting}[language=R]
-exp(log(m*n))
+is(dengueseq_fasta)
 \end{lstlisting}
 
 \begin{lstlisting}
-## [1] 110
+##  [1] "character"               "vector"                 
+##  [3] "data.frameRowLabels"     "SuperClassMethod"       
+##  [5] "EnumerationValue"        "character_OR_connection"
+##  [7] "character_OR_NULL"       "atomic"                 
+##  [9] "vector_OR_Vector"        "vector_OR_factor"
 \end{lstlisting}
 
+There is a lot here but if you scan for some key words you will see ``character'' and ``vector'' at the top. The other stuff you can ignore. The first two things, though, tell us the dengueseq\_fasta is a \textbf{vector} of the class \textbf{character}: that is, a \textbf{character vector}.
+
+Another handy function is \passthrough{\lstinline!str()!}, which gives us a peak at the context and structure of an \emph{R} object. This is most useful when you are working in the R console or with dataframes, but is a useful function to run on all \emph{R} objects. How does this output differ from other ways we've displayed dengueseq\_fasta?
+
 \begin{lstlisting}[language=R]
-m*n
+str(dengueseq_fasta)
 \end{lstlisting}
 
 \begin{lstlisting}
-## [1] 110
+##  chr ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTA"| __truncated__
 \end{lstlisting}
 
-The key equation in BLAST's E values is
-
-u = ln(K\emph{m}n)/lambda
-
-This can be changed to
-
-{[}ln(K) + ln(mn){]}/lambda
-
-We can check this
+We know it contains character data - how many characters? \passthrough{\lstinline!nchar()!} for ``number of characters'' answers that:
 
 \begin{lstlisting}[language=R]
-K <- 1
-m <- 10
-n <- 11
-lambda <- 110
-
-log(K*m*n)/lambda
+nchar(dengueseq_fasta)
 \end{lstlisting}
 
 \begin{lstlisting}
-## [1] 0.04273164
+## [1] 10935
 \end{lstlisting}
 
+\hypertarget{saving-fasta-files}{%
+\section{Saving FASTA files}\label{saving-fasta-files}}
+
+We can save our data as .fasta file for safe keeping. The \passthrough{\lstinline!write()!} function will save the data we downloaded as a plain text file.
+
+If you do this, you'll need to figure out where \emph{R} is saving things, which requires and understanding \emph{R's} \textbf{file system}, which can take some getting used to, especially if you're new to programming. As a start, you can see where \emph{R} saves things by using the \passthrough{\lstinline!getwd()!} command, which tells you where on your hard drive R currently is using as its home base for files.
+
 \begin{lstlisting}[language=R]
-(log(K) + log(m*n))/lambda
+getwd()
 \end{lstlisting}
 
 \begin{lstlisting}
-## [1] 0.04273164
+## [1] "/Users/nlb24/OneDrive - University of Pittsburgh/0-books/lbrb-bk/lbrb"
 \end{lstlisting}
 
+You can set the working directory to where a script file is from using these steps in RStudio:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Click on ``Session'' (in the middle of the menu on the top of the screen)
+\item
+  Select ``Set Working Directory'' (in the middle of the drop-down menu)
+\item
+  Select ``To source file location'' (2nd option)
+\end{enumerate}
+
+Then, when you things, it will be in that directory.
+
 \begin{lstlisting}[language=R]
-log(K*m*n)/lambda == (log(K) + log(m*n))/lambda
+write(dengueseq_fasta, 
+      file="dengueseq.fasta")
+\end{lstlisting}
+
+You can see what files are in your directory using list.files()
+
+\begin{lstlisting}[language=R]
+list.files()
+\end{lstlisting}
+
+\hypertarget{next-steps}{%
+\section{Next steps}\label{next-steps}}
+
+FASTA files in R typically have to be converted before being used. I made a function called compbio4all::fasta\_cleaner() which takes care of this.
+
+In the optional lesson ``Cleaning and preparing FASTA files for analysis in R'' I process the \passthrough{\lstinline!dengueseq\_fasta!} object step by step so that we can use it in analyses. If you are interested in how that functions works check out that chapter; otherwise, you can skip it.
+
+\hypertarget{exercises}{%
+\section{Exercises}\label{exercises}}
+
+Uncomment the code chunk below to download your own sequence of interest. Change the \passthrough{\lstinline!id =!} to that of your sequence, and change the \passthrough{\lstinline!db =!} to ``protein'' if needed. Change the object name to a descriptive name, such as the name of the gene, e.g.~\passthrough{\lstinline!shroom.fasta!}.
+
+\begin{lstlisting}[language=R]
+# dengueseq.fasta <- rentrez::entrez_fetch(db = "nucleotide",  # set to "protein" if needed
+#                           id = "NC_001477",                  # change accession
+#                           rettype = "fasta")
+\end{lstlisting}
+
+Set your working directory then save the FASTA file to your hard drive using. Be sure to change the name of the object and the file name to be appropriate to your gene.
+
+\begin{lstlisting}[language=R]
+# write(dengueseq.fasta,        # change object name, e.g.  shroom.fasta
+#       file="dengueseq.fasta") # change file name, e.g. shroom.fasta
+\end{lstlisting}
+
+\hypertarget{review-questions-1}{%
+\section{Review questions}\label{review-questions-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What does the nchar() function stand for?
+\item
+  Why does a FASTA file stored in a vector by entrez\_fetch() have a length of 1 and no dimension?
+\item
+  What does strtrim() mean?
+\item
+  If a sequence is stored in object X and you run the code strtrim(x, 10), how many characters are shown?
+\item
+  What is the newline character in a FASTA file?
+\end{enumerate}
+
+\hypertarget{cleaning-and-preparing-fasta-files-for-analysis-in-r}{%
+\chapter{Cleaning and preparing FASTA files for analysis in R}\label{cleaning-and-preparing-fasta-files-for-analysis-in-r}}
+
+This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. Most of the text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
+
+\hypertarget{preliminaries-1}{%
+\section{Preliminaries}\label{preliminaries-1}}
+
+We'll need the \passthrough{\lstinline!dengueseq\_fasta!} FASTA data object, which is in the \passthrough{\lstinline!compbio4all!} package. We'll also use the \passthrough{\lstinline!stringr!} package for cleaning up the FASTA data, which can be downloaded with \passthrough{\lstinline!install.packages("stringr")!}
+
+\begin{lstlisting}[language=R]
+# compbio4all, which has dengueseq_fasta
+library(compbio4all)
+data(dengueseq_fasta)
+
+# stringr, for data cleaning
+library(stringr)
+\end{lstlisting}
+
+\hypertarget{convert-fasta-sequence-to-an-r-variable}{%
+\section{Convert FASTA sequence to an R variable}\label{convert-fasta-sequence-to-an-r-variable}}
+
+We can't actually do much with the contents of the \passthrough{\lstinline!dengueseq\_fasta!} we downloaded with the \passthrough{\lstinline!rentrez!} package except read them. If we want do address some biological questions with the data we need is to convert it into a data structure \emph{R} can work with.
+
+There are several things we need to remove:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The \textbf{meta data} line \passthrough{\lstinline!>NC\_001477.1 Dengue virus 1, complete genome!} (metadata is ``data'' about data, such as where it came from, what it is, who made it, etc.).
+\item
+  All the \passthrough{\lstinline!\\n!} that show up in the file (these are the \textbf{line breaks}).
+\item
+  Put each nucleotide of the sequence into its own spot in a vector.
+\end{enumerate}
+
+There are functions in other packages that can do this automatically, but
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  I haven't found one I like, and
+\item
+  Walking through this will help you understand the types of operations you can do on text data.
+\end{enumerate}
+
+I have my own FASTA cleaning function in compbio4all, fasta\_cleaner(), and the code below breaks down some of the concepts and functions it uses.
+
+The first two steps for cleaning up a FASTAS file involve removing things from the existing \textbf{character string} that contains the sequence. The third step will split the single continuous character string like ``AGTTGTTAGTCTACGT\ldots{}'' into a \textbf{character vector} like \passthrough{\lstinline!c("A","G","T","T","G","T","T","A","G","T","C","T","A","C","G","T"...)!}, where each element of the vector is a single character a stored in a separate slot in the vector.
+
+\hypertarget{removing-unwanted-characters}{%
+\subsection{Removing unwanted characters}\label{removing-unwanted-characters}}
+
+The second item is the easiest to take care of. \emph{R} and many programming languages have tools called \textbf{regular expressions} that allow you to manipulate text. R has a function called \passthrough{\lstinline!gsub()!} which allows you to substitute or delete character data from a string. First I'll remove all those \passthrough{\lstinline!\\n!} values.
+
+The regular expression function \passthrough{\lstinline!gsub()!} takes three arguments:
+1. \passthrough{\lstinline!pattern = ...!}. This is what we need it to find so we can replace it.
+1. \passthrough{\lstinline!replacement = ...!}. The replacement.
+1. \passthrough{\lstinline!x = ...!}. A character string or vector where \passthrough{\lstinline!gsub()!} will do its work.
+
+We need to get rid of the \passthrough{\lstinline!\\n!} so that we are left with only A, T and G, which are the actually information of the sequence. We want \passthrough{\lstinline!\\n!} completely removed, so the replacement will be \passthrough{\lstinline!""!}, which is as set of quotation marks with nothing in the middle, which means ``delete the target pattern and put nothing in its place.''
+
+One thing that is tricky about regular expressions is that many characters have special meaning to the functions, such as slashes, dollar signs, and brackets. So, if you want to find and replace one of these specially designated characters you need to put a slash in front of them. So when we set the pattern, instead of setting the pattern to a slash before an n \passthrough{\lstinline!\\n!}, we have to give it two slashes \passthrough{\lstinline!\\\\n!}.
+
+Here is the regular expression to delete the newline character \textbackslash n.
+
+\begin{lstlisting}[language=R]
+ # note: we want to find all the \n, but need to set the pattern as \\n
+dengueseq_vector <- gsub(pattern = "\\n",  
+                         replacement = "", 
+                         x = dengueseq_fasta)
+\end{lstlisting}
+
+We can use \passthrough{\lstinline!strtrim()!} to see if it worked
+
+\begin{lstlisting}[language=R]
+strtrim(dengueseq_vector, 80)
 \end{lstlisting}
 
 \begin{lstlisting}
-## [1] TRUE
+## [1] ">NC_001477.1 Dengue virus 1, complete genomeAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTC"
 \end{lstlisting}
+
+Now for the metadata header. This is a bit complex, but the following code is going to take all the that occurs before the beginning of the sequence (``AGTTGTTAGTC'') and delete it.
+
+First, I'll define what I want to get rid of in an \emph{R} object. This will make the \textbf{call} to \passthrough{\lstinline!gsub()!} a little cleaner to read
+
+\begin{lstlisting}[language=R]
+seq.header <- ">NC_001477.1 Dengue virus 1, complete genome"
+\end{lstlisting}
+
+Now I'll get rid of the header with with \passthrough{\lstinline!gsub()!}.
+
+\begin{lstlisting}[language=R]
+dengueseq_vector <- gsub(pattern = seq.header, # object defined above
+                         replacement = "", 
+                         x = dengueseq_vector)
+\end{lstlisting}
+
+See if it worked:
+
+\begin{lstlisting}[language=R]
+strtrim(dengueseq_vector, 80)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "AGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTAACAGTTTTTTATTAG"
+\end{lstlisting}
+
+\hypertarget{spliting-unbroken-strings-in-character-vectors}{%
+\subsection{Spliting unbroken strings in character vectors}\label{spliting-unbroken-strings-in-character-vectors}}
+
+Now the more complex part. We need to split up a continuous, unbroken string of letters into a vector where each letter is on its own. This can be done with the \passthrough{\lstinline!str\_split()!} function (``string split'') from the \passthrough{\lstinline!stringr!} package. The notation \passthrough{\lstinline!stringr::str\_split()!} mean ``use the \passthrough{\lstinline!str\_split!} function from from the \passthrough{\lstinline!stringr!} package.'' More specifically, it temporarily loads the \passthrough{\lstinline!stringr!} package and gives R access to just the \passthrough{\lstinline!str\_split!} function. These allows you to call a single function without loading the whole library.
+
+There are several arguments to \passthrough{\lstinline!str\_split!}, and I've tacked a \passthrough{\lstinline![[1]]!} on to the end.
+
+First, run the command
+
+\begin{lstlisting}[language=R]
+dengueseq_vector_split <- stringr::str_split(dengueseq_vector,
+                                       pattern = "",
+                                       simplify = FALSE)[[1]]
+\end{lstlisting}
+
+Look at the output with str()
+
+\begin{lstlisting}[language=R]
+str(dengueseq_vector_split)
+\end{lstlisting}
+
+\begin{lstlisting}
+##  chr [1:10735] "A" "G" "T" "T" "G" "T" "T" "A" "G" "T" "C" "T" "A" "C" "G" ...
+\end{lstlisting}
+
+We can explore what the different arguments do by modifying them. Change \passthrough{\lstinline!pattern = "" to pattern = "A"!}. Can you figure out what happened?
+
+\begin{lstlisting}[language=R]
+# re-run the command with "pattern  = "A"
+dengueseq_vector_split2 <- stringr::str_split(dengueseq_vector,
+                                       pattern = "A",
+                                       simplify = FALSE)[[1]]
+str(dengueseq_vector_split2)
+\end{lstlisting}
+
+\begin{lstlisting}
+##  chr [1:3427] "" "GTTGTT" "GTCT" "CGTGG" "CCG" "C" "" "G" "" "C" "GTTTCG" ...
+\end{lstlisting}
+
+And try it with \passthrough{\lstinline!pattern = "" to pattern = "G"!}.
+
+\begin{lstlisting}[language=R]
+# re-run the command with "pattern  = "G"
+dengueseq_vector_split3 <- stringr::str_split(dengueseq_vector,
+                                       pattern = "G",
+                                       simplify = FALSE)[[1]]
+str(dengueseq_vector_split3)
+\end{lstlisting}
+
+\begin{lstlisting}
+##  chr [1:2771] "A" "TT" "TTA" "TCTAC" "T" "" "ACC" "ACAA" "AACA" "TTTC" ...
+\end{lstlisting}
+
+Run this code to compare the two ways we just used \passthrough{\lstinline!str\_split!} (don't worry what it does). Does this help you see what's up?
+
+\begin{lstlisting}[language=R]
+options(str = strOptions(vec.len = 10))
+str(list(dengueseq_vector_split[1:20],
+     dengueseq_vector_split2[1:10], 
+     dengueseq_vector_split3[1:10]))
+\end{lstlisting}
+
+\begin{lstlisting}
+## List of 3
+##  $ : chr [1:20] "A" "G" "T" "T" "G" "T" "T" "A" "G" "T" ...
+##  $ : chr [1:10] "" "GTTGTT" "GTCT" "CGTGG" "CCG" "C" "" "G" "" "C"
+##  $ : chr [1:10] "A" "TT" "TTA" "TCTAC" "T" "" "ACC" "ACAA" "AACA" "TTTC"
+\end{lstlisting}
+
+So, what does the \passthrough{\lstinline!pattern = ...!} argument do? For more info open up the help file for \passthrough{\lstinline!str\_split!} by calling \passthrough{\lstinline!?str\_split!}.
+
+Something cool which we will explore in the next exercise is that we can do summaries on vectors of nucleotides, like this:
+
+\begin{lstlisting}[language=R]
+table(dengueseq_vector_split)
+\end{lstlisting}
+
+\begin{lstlisting}
+## dengueseq_vector_split
+##    A    C    G    T 
+## 3426 2240 2770 2299
+\end{lstlisting}
+
+\hypertarget{dna-descriptive-statics---part-1}{%
+\chapter{DNA descriptive statics - Part 1}\label{dna-descriptive-statics---part-1}}
+
+\textbf{By}: Avril Coghlan
+
+\textbf{Adapted, edited and expanded}: Nathan Brouwer (\href{mailto:brouwern@gmail.com}{\nolinkurl{brouwern@gmail.com}}) under the Creative Commons 3.0 Attribution License \href{https://creativecommons.org/licenses/by/3.0/}{(CC BY 3.0)}.
+
+\hypertarget{preface-4}{%
+\section{Preface}\label{preface-4}}
+
+This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics (1)''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. The text and code were originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
+
+\hypertarget{introduction-2}{%
+\section{Introduction}\label{introduction-2}}
+
+\hypertarget{vocabulary-1}{%
+\section{Vocabulary}\label{vocabulary-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  GC content
+\item
+  DNA words
+\item
+  scatterplots, histograms, piecharts, and boxplots
+\end{itemize}
+
+\hypertarget{functions-2}{%
+\section{Functions}\label{functions-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  \passthrough{\lstinline!seqinr::GC()!}
+\item
+  \passthrough{\lstinline!seqinr::count()!}
+\end{itemize}
+
+\hypertarget{learning-objectives-1}{%
+\section{Learning objectives}\label{learning-objectives-1}}
+
+By the end of this tutorial you will be able to, among other things
+
+\begin{itemize}
+\tightlist
+\item
+  Determine the GC content using GC() and obtain other summary data with count()
+\end{itemize}
+
+\hypertarget{preliminaries-2}{%
+\section{Preliminaries}\label{preliminaries-2}}
+
+\begin{lstlisting}[language=R]
+library(compbio4all)
+library(seqinr)
+library(seqinr)
+\end{lstlisting}
+
+\hypertarget{converting-dna-from-fasta-format}{%
+\section{Converting DNA from FASTA format}\label{converting-dna-from-fasta-format}}
+
+In a previous exercise we downloaded and examined DNA sequence in the FASTA format. The sequence we worked with is also stored as a data file within the \passthrough{\lstinline!compbio4all!} pa package and can be brought into memory using the \passthrough{\lstinline!data()!} command.
+
+\begin{lstlisting}[language=R]
+data("dengueseq_fasta")
+\end{lstlisting}
+
+We can look at this data object with the \passthrough{\lstinline!str()!} command
+
+\begin{lstlisting}[language=R]
+str(dengueseq_fasta)
+\end{lstlisting}
+
+\begin{lstlisting}
+##  chr ">NC_001477.1 Dengue virus 1, complete genome\nAGTTGTTAGTCTACGTGGACCGACAAGAACAGTTTCGAATCGGAAGCTTGCTTAACGTAGTTCTA"| __truncated__
+\end{lstlisting}
+
+This isn't in a format we can work with directly so we'll use the function fasta\_cleaner() to set it up.
+
+\begin{lstlisting}[language=R]
+header. <- ">NC_001477.1 Dengue virus 1, complete genome"
+dengueseq_vector <- compbio4all::fasta_cleaner(dengueseq_fasta)
+\end{lstlisting}
+
+Now check it out.
+
+\begin{lstlisting}[language=R]
+str(dengueseq_vector)
+\end{lstlisting}
+
+\begin{lstlisting}
+##  chr [1:10735] "A" "G" "T" "T" "G" "T" "T" "A" "G" "T" "C" "T" "A" "C" "G" ...
+\end{lstlisting}
+
+What we have here is each base of the sequence in a seperate slot of our vector.
+
+The first four bases are ``AGTT''
+
+We can see the first one like this
+
+\begin{lstlisting}[language=R]
+dengueseq_vector[1]
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "A"
+\end{lstlisting}
+
+The second one like this
+
+\begin{lstlisting}[language=R]
+dengueseq_vector[2]
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "G"
+\end{lstlisting}
+
+The first and second like this
+
+\begin{lstlisting}[language=R]
+dengueseq_vector[1:2]
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "A" "G"
+\end{lstlisting}
+
+and all four like this
+
+\begin{lstlisting}[language=R]
+dengueseq_vector[1:4]
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] "A" "G" "T" "T"
+\end{lstlisting}
+
+\hypertarget{length-of-a-dna-sequence}{%
+\section{Length of a DNA sequence}\label{length-of-a-dna-sequence}}
+
+Once you have retrieved a DNA sequence, we can obtain some simple statistics to describe that sequence, such as the sequence's total length in nucleotides. In the above example, we retrieved the DEN-1 Dengue virus genome sequence, and stored it in the vector variable dengueseq\_vector To obtain the length of the genome sequence, we would use the length() function, typing:
+
+\begin{lstlisting}[language=R]
+length(dengueseq_vector)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 10735
+\end{lstlisting}
+
+The length() function will give you back the length of the sequence stored in variable dengueseq\_vector, in nucleotides. The length() function actually gives the number of \textbf{elements} (slots) in the input vector that you passed to it, which in this case in the number of elements in the vector dengueseq\_vector. Since each element of the vector dengueseq\_vector contains one nucleotide of the DEN-1 Dengue virus sequence, the result for the DEN-1 Dengue virus genome tells us the length of its genome sequence (ie. 10735 nucleotides long).
+
+\hypertarget{base-composition-of-a-dna-sequence}{%
+\subsection{Base composition of a DNA sequence}\label{base-composition-of-a-dna-sequence}}
+
+An obvious first analysis of any DNA sequence is to count the number of occurrences of the four different nucleotides (``A'', ``C'', ``G'', and ``T'') in the sequence. This can be done using the the table() function. For example, to find the number of As, Cs, Gs, and Ts in the DEN-1 Dengue virus sequence (which you have put into vector variable dengueseq\_vector, using the commands above), you would type:
+
+\begin{lstlisting}[language=R]
+table(dengueseq_vector)
+\end{lstlisting}
+
+\begin{lstlisting}
+## dengueseq_vector
+##    A    C    G    T 
+## 3426 2240 2770 2299
+\end{lstlisting}
+
+This means that the DEN-1 Dengue virus genome sequence has 3426 As occurring throughout the genome, 2240 Cs, and so forth.
+
+\hypertarget{gc-content-of-dna}{%
+\subsection{GC Content of DNA}\label{gc-content-of-dna}}
+
+One of the most fundamental properties of a genome sequence is its \textbf{GC content}, the fraction of the sequence that consists of Gs and Cs, ie. the \%(G+C).
+
+The GC content can be calculated as the percentage of the bases in the genome that are Gs or Cs. That is, GC content = (number of Gs + number of Cs)\emph{100/(genome length). For example, if the genome is 100 bp, and 20 bases are Gs and 21 bases are Cs, then the GC content is (20 + 21)}100/100 = 41\%.
+
+You can easily calculate the GC content based on the number of As, Gs, Cs, and Ts in the genome sequence. For example, for the DEN-1 Dengue virus genome sequence, we know from using the table() function above that the genome contains 3426 As, 2240 Cs, 2770 Gs and 2299 Ts. Therefore, we can calculate the GC content using the command:
+
+\begin{lstlisting}[language=R]
+(2240+2770)*100/(3426+2240+2770+2299)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 46.66977
+\end{lstlisting}
+
+Alternatively, if you are feeling lazy, you can use the GC() function in the SeqinR package, which gives the fraction of bases in the sequence that are Gs or Cs.
+
+\begin{lstlisting}[language=R]
+seqinr::GC(dengueseq_vector)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 0.4666977
+\end{lstlisting}
+
+The result above means that the fraction of bases in the DEN-1 Dengue virus genome that are Gs or Cs is 0.4666977. To convert the fraction to a percentage, we have to multiply by 100, so the GC content as a percentage is 46.66977\%.
+
+\hypertarget{dna-words}{%
+\subsection{DNA words}\label{dna-words}}
+
+As well as the frequency of each of the individual nucleotides (``A'', ``G'', ``T'', ``C'') in a DNA sequence, it is also interesting to know the frequency of longer \textbf{DNA words}, also referred to as \textbf{genomic words}. The individual nucleotides are DNA words that are 1 nucleotide long, but we may also want to find out the frequency of DNA words that are 2 nucleotides long (ie. ``AA'', ``AG'', ``AC'', ``AT'', ``CA'', ``CG'', ``CC'', ``CT'', ``GA'', ``GG'', ``GC'', ``GT'', ``TA'', ``TG'', ``TC'', and ``TT''), 3 nucleotides long (eg. ``AAA'', ``AAT'', ``ACG'', etc.), 4 nucleotides long, etc.
+
+To find the number of occurrences of DNA words of a particular length, we can use the count() function from the R SeqinR package.
+
+The count() function only works with lower-case letters, so first we have to use the tolower() function to convert our upper class genome to lower case
+
+\begin{lstlisting}[language=R]
+dengueseq_vector <-tolower(dengueseq_vector)
+\end{lstlisting}
+
+Now we can look for words. For example, to find the number of occurrences of DNA words that are 1 nucleotide long in the sequence dengueseq\_vector, we type:
+
+\begin{lstlisting}[language=R]
+seqinr::count(dengueseq_vector, 1)
+\end{lstlisting}
+
+\begin{lstlisting}
+## 
+##    a    c    g    t 
+## 3426 2240 2770 2299
+\end{lstlisting}
+
+As expected, this gives us the number of occurrences of the individual nucleotides. To find the number of occurrences of DNA words that are 2 nucleotides long, we type:
+
+\begin{lstlisting}[language=R]
+seqinr::count(dengueseq_vector, 2)
+\end{lstlisting}
+
+\begin{lstlisting}
+## 
+##   aa   ac   ag   at   ca   cc   cg   ct   ga   gc   gg   gt   ta   tc   tg   tt 
+## 1108  720  890  708  901  523  261  555  976  500  787  507  440  497  832  529
+\end{lstlisting}
+
+Note that by default the count() function includes all overlapping DNA words in a sequence. Therefore, for example, the sequence ``ATG'' is considered to contain two words that are two nucleotides long: ``AT'' and ``TG''.
+
+If you type help(`count'), you will see that the result (output) of the function count() is a table object. This means that you can use double square brackets to extract the values of elements from the table. For example, to extract the value of the third element (the number of Gs in the DEN-1 Dengue virus sequence), you can type:
+
+\begin{lstlisting}[language=R]
+denguetable_2 <- seqinr::count(dengueseq_vector,2)
+denguetable_2[[3]]
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 890
+\end{lstlisting}
+
+The command above extracts the third element of the table produced by count(dengueseq\_vector,1), which we have stored in the table variable denguetable.
+
+Alternatively, you can find the value of the element of the table in column ``g'' by typing:
+
+\begin{lstlisting}[language=R]
+denguetable_2[["aa"]]
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 1108
+\end{lstlisting}
+
+Once you have table you can make a basic plot
+
+\begin{lstlisting}[language=R]
+barplot(denguetable_2)
+\end{lstlisting}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-292-1.pdf}
+
+We can sort by the number of words using the sort() command
+
+\begin{lstlisting}[language=R]
+sort(denguetable_2)
+\end{lstlisting}
+
+\begin{lstlisting}
+## 
+##   cg   ta   tc   gc   gt   cc   tt   ct   at   ac   gg   tg   ag   ca   ga   aa 
+##  261  440  497  500  507  523  529  555  708  720  787  832  890  901  976 1108
+\end{lstlisting}
+
+Let's save over the original object
+
+\begin{lstlisting}[language=R]
+denguetable_2 <- sort(denguetable_2)
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+barplot(denguetable_2)
+\end{lstlisting}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-295-1.pdf}
+
+R will automatically try to optimize the appearance of the labels on the graph so you may not see all of them; no worries.
+
+R can also make pie charts. Piecharts only really work when there are a few items being plots, like the four bases.
+
+\begin{lstlisting}[language=R]
+denguetable_1 <- seqinr::count(dengueseq_vector,1)
+\end{lstlisting}
+
+Make a piechart with pie()
+
+\begin{lstlisting}[language=R]
+pie(denguetable_1)
+\end{lstlisting}
+
+\includegraphics{lbrb_files/figure-latex/unnamed-chunk-297-1.pdf}
+
+\hypertarget{summary-2}{%
+\subsection{Summary}\label{summary-2}}
+
+In this practical, have learned to use the following R functions:
+
+length() for finding the length of a vector or list
+table() for printing out a table of the number of occurrences of each type of item in a vector or list.
+These functions belong to the standard installation of R.
+
+You have also learnt the following R functions that belong to the SeqinR package:
+
+GC() for calculating the GC content for a DNA sequence
+count() for calculating the number of occurrences of DNA words of a particular length in a DNA sequence
+
+\hypertarget{acknowledgements}{%
+\section{Acknowledgements}\label{acknowledgements}}
+
+This is a modification of \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/src/chapter1.html}{``DNA Sequence Statistics (1)''} from Avril Coghlan's \href{https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html}{\emph{A little book of R for bioinformatics.}}. Almost all of text and code was originally written by Dr.~Coghlan and distributed under the \href{https://creativecommons.org/licenses/by/3.0/us/}{Creative Commons 3.0} license.
+
+In ``A little book\ldots{}'' Coghlan noted: ``Many of the ideas for the examples and exercises for this chapter were inspired by the Matlab case studies on Haemophilus influenzae (www.computational-genomics.net/case\_studies/haemophilus\_demo.html) and Bacteriophage lambda (\url{http://www.computational-genomics.net/case_studies/lambdaphage_demo.html}) from the website that accompanies the book Introduction to Computational Genomics: a case studies approach by Cristianini and Hahn (Cambridge University Press; www.computational-genomics.net/book/).''
+
+\hypertarget{license}{%
+\subsection{License}\label{license}}
+
+The content in this book is licensed under a Creative Commons Attribution 3.0 License.
+
+\url{https://creativecommons.org/licenses/by/3.0/us/}
+
+\hypertarget{exercises-1}{%
+\subsection{Exercises}\label{exercises-1}}
+
+Answer the following questions, using the R package. For each question, please record your answer, and what you typed into R to get this answer.
+
+Model answers to the exercises are given in Answers to the exercises on DNA Sequence Statistics (1).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  What are the last twenty nucleotides of the Dengue virus genome sequence?
+\item
+  What is the length in nucleotides of the genome sequence for the bacterium Mycobacterium leprae strain TN (accession NC\_002677)?
+  Note: Mycobacterium leprae is a bacterium that is responsible for causing leprosy, which is classified by the WHO as a neglected tropical disease. As the genome sequence is a DNA sequence, if you are retrieving its sequence via the NCBI website, you will need to look for it in the NCBI Nucleotide database.
+\item
+  How many of each of the four nucleotides A, C, T and G, and any other symbols, are there in the Mycobacterium leprae TN genome sequence?
+  Note: other symbols apart from the four nucleotides A/C/T/G may appear in a sequence. They correspond to positions in the sequence that are are not clearly one base or another and they are due, for example, to sequencing uncertainties. or example, the symbol `N' means `aNy base', while `R' means `A or G' (puRine). There is a table of symbols at www.bioinformatics.org/sms/iupac.html.
+\item
+  What is the GC content of the \emph{Mycobacterium leprae TN} genome sequence, when (i) all non-A/C/T/G nucleotides are included, (ii) non-A/C/T/G nucleotides are discarded?
+  Hint: look at the help page for the GC() function to find out how it deals with non-A/C/T/G nucleotides.
+\item
+  How many of each of the four nucleotides A, C, T and G are there in the complement of the Mycobacterium leprae TN genome sequence? \emph{Hint}: you will first need to search for a function to calculate the complement of a sequence. Once you have found out what function to use, remember to use the help() function to find out what are the arguments (inputs) and results (outputs) of that function. How does the function deal with symbols other than the four nucleotides A, C, T and G? Are the numbers of As, Cs, Ts, and Gs in the complementary sequence what you would expect?
+\item
+  How many occurrences of the DNA words CC, CG and GC occur in the Mycobacterium leprae TN genome sequence?
+\item
+  How many occurrences of the DNA words CC, CG and GC occur in the (i) first 1000 and (ii) last 1000 nucleotides of the Mycobacterium leprae TN genome sequence?
+  1.How can you check that the subsequence that you have looked at is 1000 nucleotides long?
+\end{enumerate}
 
 \hypertarget{part-appendices}{%
 \part{Appendices}\label{part-appendices}}
@@ -4061,9 +6007,9 @@ log(K*m*n)/lambda == (log(K) + log(m*n))/lambda
 \subsection*{}\label{section}}
 \addcontentsline{toc}{subsection}{}
 
-\hypertarget{appendix-01-getting-access-to-r}{%
-\chapter*{Appendix 01: Getting access to R}\label{appendix-01-getting-access-to-r}}
-\addcontentsline{toc}{chapter}{Appendix 01: Getting access to R}
+\hypertarget{appendix-02-getting-access-to-r}{%
+\chapter*{Appendix 02: Getting access to R}\label{appendix-02-getting-access-to-r}}
+\addcontentsline{toc}{chapter}{Appendix 02: Getting access to R}
 
 \hypertarget{getting-started-with-r-and-rstudio}{%
 \section{Getting Started With R and RStudio}\label{getting-started-with-r-and-rstudio}}
@@ -4126,8 +6072,8 @@ Both R and RStudio undergo regular updates and you will occasionally have to re-
 \chapter*{Getting started with R itself (or not)}\label{getting-started-with-r-itself-or-not}}
 \addcontentsline{toc}{chapter}{Getting started with R itself (or not)}
 
-\hypertarget{vocabulary-1}{%
-\section*{Vocabulary}\label{vocabulary-1}}
+\hypertarget{vocabulary-2}{%
+\section*{Vocabulary}\label{vocabulary-2}}
 \addcontentsline{toc}{section}{Vocabulary}
 
 \begin{itemize}
@@ -4431,7 +6377,7 @@ date()
 \end{lstlisting}
 
 \begin{lstlisting}
-## [1] "Sat Sep 18 01:23:51 2021"
+## [1] "Tue May 10 14:55:00 2022"
 \end{lstlisting}
 
 \textbf{Exponents}
@@ -4494,6 +6440,98 @@ exp(3.73767)
 sqrt(42)^2
 log(sqrt(42)^2)
 exp(log(sqrt(42)^2))
+\end{lstlisting}
+
+\hypertarget{logarithms-in-r}{%
+\chapter{Logarithms in R}\label{logarithms-in-r}}
+
+\textbf{By} Nathan Brouwer
+
+Logging splits up multiplication into addition. So, log(m*n) is the same as log(m) + log(n)
+
+You can check this
+
+\begin{lstlisting}[language=R]
+m<-10
+n<-11
+log(m*n)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 4.70048
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+log(m)+log(n)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 4.70048
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+log(m*n) == log(m)+log(n)
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] TRUE
+\end{lstlisting}
+
+Exponentiation undos logs
+
+\begin{lstlisting}[language=R]
+exp(log(m*n))
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 110
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+m*n
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 110
+\end{lstlisting}
+
+The key equation in BLAST's E values is
+
+u = ln(K\emph{m}n)/lambda
+
+This can be changed to
+
+{[}ln(K) + ln(mn){]}/lambda
+
+We can check this
+
+\begin{lstlisting}[language=R]
+K <- 1
+m <- 10
+n <- 11
+lambda <- 110
+
+log(K*m*n)/lambda
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 0.04273164
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+(log(K) + log(m*n))/lambda
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] 0.04273164
+\end{lstlisting}
+
+\begin{lstlisting}[language=R]
+log(K*m*n)/lambda == (log(K) + log(m*n))/lambda
+\end{lstlisting}
+
+\begin{lstlisting}
+## [1] TRUE
 \end{lstlisting}
 
   \bibliography{book.bib,packages.bib}

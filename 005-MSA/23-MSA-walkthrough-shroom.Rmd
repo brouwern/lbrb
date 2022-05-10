@@ -36,7 +36,7 @@ Once all of these steps have been carried out, the building of a phylogeny invol
 In this chapter we will work through many of these steps.  In most cases we will pick the easiest or fastest option; in later chapters we will unpack the various options.  This chapter is written as an interactive R session.  You can follow along by opening the .Rmd file of the chapter or typing the appropriate commands into your own script.  I assume that all the necessary packages have been installed and they only need to be loaded into R using the *library()* command.
 
 
-This lesson walks you through and entire workflow for a bioinformatics, including
+This lesson walks you through and entire workflow for a bioinformatics project, including
 
 <!-- check all of this -->
 
